@@ -477,7 +477,7 @@ serve(async (req) => {
 
     const messages = body.messages;
     const aiToolContext = body.aiToolContext;
-    const language = body.language || "pt";
+    const language = (body.language || "pt").split("-")[0].split("_")[0];
 
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
 
