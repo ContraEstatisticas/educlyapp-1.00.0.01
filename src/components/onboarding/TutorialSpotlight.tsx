@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import mascoteEducy from "@/assets/mascote-educy.png";
 import { ChevronRight, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -12,10 +13,13 @@ export interface TutorialStep {
   allowClick?: boolean;
 }
 
+type TutorialVariant = "base" | "freelancer" | "aipack" | "combo";
+
 interface TutorialSpotlightProps {
   steps: TutorialStep[];
   storageKey: string;
-  userId?: string; // <--- NOVO: ID do usuário (opcional, mas recomendado)
+  userId?: string;
+  variant?: TutorialVariant;
   onComplete?: () => void;
   onStepChange?: (stepIndex: number, step: TutorialStep) => void;
   isVisible?: boolean;
@@ -28,10 +32,43 @@ interface TargetRect {
   height: number;
 }
 
+// Variant styling config
+const VARIANT_STYLES: Record<TutorialVariant, { border: string; shadow: string; badgeKey: string; badgeClass: string; spotlightColor: string }> = {
+  base: {
+    border: "",
+    shadow: "",
+    badgeKey: "",
+    badgeClass: "",
+    spotlightColor: "rgba(139, 92, 246, 0.3)",
+  },
+  freelancer: {
+    border: "border-2 border-emerald-400",
+    shadow: "shadow-emerald-400/20",
+    badgeKey: "tutorial.onboarding.badges.freelancer",
+    badgeClass: "bg-emerald-500 text-white border-emerald-600",
+    spotlightColor: "rgba(52, 211, 153, 0.3)",
+  },
+  aipack: {
+    border: "border-2 border-violet-400",
+    shadow: "shadow-violet-400/20",
+    badgeKey: "tutorial.onboarding.badges.aipack",
+    badgeClass: "bg-violet-500 text-white border-violet-600",
+    spotlightColor: "rgba(139, 92, 246, 0.3)",
+  },
+  combo: {
+    border: "border-2 border-amber-400",
+    shadow: "shadow-amber-400/20",
+    badgeKey: "tutorial.onboarding.badges.combo",
+    badgeClass: "bg-gradient-to-r from-amber-400 to-yellow-500 text-white border-amber-500",
+    spotlightColor: "rgba(251, 191, 36, 0.3)",
+  },
+};
+
 export const TutorialSpotlight = ({
   steps,
   storageKey,
-  userId, // Recebendo o ID
+  userId,
+  variant = "base",
   onComplete,
   onStepChange,
   isVisible = true,
@@ -42,11 +79,8 @@ export const TutorialSpotlight = ({
   const [mascotStyle, setMascotStyle] = useState<React.CSSProperties>({});
   const [isMobile, setIsMobile] = useState(false);
 
-  // Gera a chave única combinando o nome do tutorial e o ID do usuário
-  // Ex: "tutorial_dashboard_user123" ou apenas "tutorial_dashboard" se não tiver ID
   const fullStorageKey = userId ? `tutorial_${storageKey}_${userId}` : `tutorial_${storageKey}`;
 
-  // Estado para controlar se já foi completado
   const [hasCompleted, setHasCompleted] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem(fullStorageKey) === "true";
@@ -54,7 +88,6 @@ export const TutorialSpotlight = ({
     return false;
   });
 
-  // Efeito para re-verificar caso o userId mude (ex: login assíncrono)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const isDone = localStorage.getItem(fullStorageKey) === "true";
@@ -65,6 +98,7 @@ export const TutorialSpotlight = ({
   const step = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
   const isCentered = !step?.targetId;
+  const variantStyle = VARIANT_STYLES[variant];
 
   // Check if mobile
   useEffect(() => {
@@ -107,10 +141,7 @@ export const TutorialSpotlight = ({
       return;
     }
 
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
 
     setTimeout(() => {
       const rect = element.getBoundingClientRect();
@@ -128,9 +159,7 @@ export const TutorialSpotlight = ({
   // Update target position on changes
   useEffect(() => {
     if (!isVisible || hasCompleted) return;
-
     updateTargetPosition();
-
     const handleResize = () => updateTargetPosition();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -198,11 +227,7 @@ export const TutorialSpotlight = ({
     left = Math.max(20, Math.min(left, maxLeft));
     top = Math.max(20, Math.min(top, maxTop));
 
-    setMascotStyle({
-      position: "fixed",
-      top: `${top}px`,
-      left: `${left}px`,
-    });
+    setMascotStyle({ position: "fixed", top: `${top}px`, left: `${left}px` });
   }, [targetRect, step?.mascotPosition, isCentered, isMobile, hasCompleted]);
 
   // Notify parent of step change
@@ -221,13 +246,11 @@ export const TutorialSpotlight = ({
   };
 
   const handleClose = () => {
-    // Salva usando a chave completa (com ID)
     localStorage.setItem(fullStorageKey, "true");
     setHasCompleted(true);
     onComplete?.();
   };
 
-  // Se não estiver visível, ou já completou, ou não tem userId (opcional, para evitar salvar undefined), não mostra
   if (!isVisible || hasCompleted || !step) return null;
 
   const message = t(step.messageKey);
@@ -249,7 +272,6 @@ export const TutorialSpotlight = ({
               zIndex: 1,
             }}
           />
-
           <div
             className="fixed border-2 border-primary rounded-2xl pointer-events-none transition-all duration-300 ease-out"
             style={{
@@ -257,7 +279,7 @@ export const TutorialSpotlight = ({
               left: targetRect.left,
               width: targetRect.width,
               height: targetRect.height,
-              boxShadow: "0 0 0 4px rgba(139, 92, 246, 0.3)",
+              boxShadow: `0 0 0 4px ${variantStyle.spotlightColor}`,
               zIndex: 2,
             }}
           />
@@ -280,10 +302,7 @@ export const TutorialSpotlight = ({
 
       <div
         className="pointer-events-auto transition-all duration-300 ease-out"
-        style={{
-          ...mascotStyle,
-          zIndex: 102,
-        }}
+        style={{ ...mascotStyle, zIndex: 102 }}
       >
         <div
           className={`flex ${isMobile ? "flex-row items-end" : isCentered ? "flex-col items-center" : "flex-row items-start"} gap-2 sm:gap-3 max-w-full`}
@@ -297,8 +316,17 @@ export const TutorialSpotlight = ({
           </div>
 
           <div
-            className={`relative bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl ${isMobile ? "flex-1 min-w-0 max-w-[calc(100%-80px)]" : "max-w-[280px] sm:max-w-[320px]"}`}
+            className={`relative bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl ${variantStyle.border} ${variantStyle.shadow} ${isMobile ? "flex-1 min-w-0 max-w-[calc(100%-80px)]" : "max-w-[280px] sm:max-w-[320px]"}`}
           >
+            {/* Badge for premium tiers */}
+            {variant !== "base" && variantStyle.badgeKey && (
+              <div className="mb-2">
+                <Badge className={`text-[10px] sm:text-xs ${variantStyle.badgeClass}`}>
+                  {t(variantStyle.badgeKey)}
+                </Badge>
+              </div>
+            )}
+
             {!isMobile &&
               (isCentered ? (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[12px] border-b-white" />
@@ -324,9 +352,8 @@ export const TutorialSpotlight = ({
                 {steps.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors ${
-                      index === currentStep ? "bg-primary" : index < currentStep ? "bg-primary/50" : "bg-gray-300"
-                    }`}
+                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors ${index === currentStep ? "bg-primary" : index < currentStep ? "bg-primary/50" : "bg-gray-300"
+                      }`}
                   />
                 ))}
               </div>

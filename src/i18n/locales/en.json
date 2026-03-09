@@ -2167,7 +2167,6 @@
       }
     }
   },
-
   "landing": {
     "badge": "The App That Teaches AI in Practice",
     "title": "Learn AI with",
@@ -2256,13 +2255,23 @@
         "title": "Advanced Challenges",
         "description": "Dive into 28-day challenges with daily exercises and progress tracking.",
         "duration": "28 days",
-        "highlights": ["Daily AI challenges", "Interactive exercises", "Gamified progress", "Completion certificates"]
+        "highlights": [
+          "Daily AI challenges",
+          "Interactive exercises",
+          "Gamified progress",
+          "Completion certificates"
+        ]
       },
       "deepLearning": {
         "title": "Personal AI Assistant",
         "description": "Use EDI, your built-in AI assistant, to ask questions and practice prompts.",
         "duration": "Unlimited",
-        "highlights": ["Built-in AI chat", "Prompt trainer", "Real-time answers", "Personalized support in the app"]
+        "highlights": [
+          "Built-in AI chat",
+          "Prompt trainer",
+          "Real-time answers",
+          "Personalized support in the app"
+        ]
       }
     },
     "stats": {
@@ -2469,21 +2478,36 @@
         "subtitle": "4 specialized AIs for different tasks: teaching, prompting, planning, and image creation.",
         "stats": "4 Specialized",
         "button": "Explore Assistants",
-        "features": ["Smart Chat", "Image Generator", "Data Analysis", "AI Tutors"]
+        "features": [
+          "Smart Chat",
+          "Image Generator",
+          "Data Analysis",
+          "AI Tutors"
+        ]
       },
       "freelancer": {
         "title": "Premium Freelancer's",
         "subtitle": "Turn your skills into income. Learn how to prospect clients, price your services, and close contracts.",
         "stats": "Career Guide",
         "button": "Access Area",
-        "features": ["Prospecting", "Pricing", "Sales", "Client Management"]
+        "features": [
+          "Prospecting",
+          "Pricing",
+          "Sales",
+          "Client Management"
+        ]
       },
       "projects": {
         "title": "Hands-on Projects",
         "subtitle": "Learn by doing with real AI projects you can add to your portfolio.",
         "stats": "12 Projects",
         "button": "View Projects",
-        "features": ["AI Portfolio", "Real Cases", "Templates", "Code-along"]
+        "features": [
+          "AI Portfolio",
+          "Real Cases",
+          "Templates",
+          "Code-along"
+        ]
       }
     },
     "missions": {
@@ -2668,13 +2692,47 @@
   "assistants": {
     "title": "AI Assistants",
     "subtitle": "Choose your specialized assistant",
-    "dashboardDesc": "4 specialized AIs for different tasks: teaching, prompts, planning, and image creation.",
+    "dashboardDesc": "6 specialized AIs for different tasks: teaching, prompts, planning, and image creation.",
     "access": "Access Assistants",
     "online": "Online",
     "inputPlaceholder": "Type your message...",
+    "rateLimit": {
+      "counter": "Messages today",
+      "message": "You've reached your daily message limit. Try again tomorrow!"
+    },
     "info": {
       "title": "How Assistants Work",
       "description": "Each assistant was trained for a different specialty. Choose the one most suited to your need and chat naturally."
+    },
+    "chatgpt": {
+      "name": "ChatGPT",
+      "description": "Natural conversation, creative writing and problem solving",
+      "greeting": "Hello! 👋 I'm ChatGPT. I can help you with writing, analysis, programming and more. What would you like to do today?"
+    },
+    "gemini": {
+      "name": "Gemini",
+      "description": "Advanced research, data analysis and Google integration",
+      "greeting": "Hello! 👋 I'm Gemini. I can help with research, information analysis and more. How can I help you?"
+    },
+    "claude": {
+      "name": "Claude",
+      "description": "Deep analysis, complex reasoning and long texts",
+      "greeting": "Hello! 👋 I'm Claude. I specialize in detailed analysis and careful reasoning. What do you need?"
+    },
+    "grok": {
+      "name": "Grok",
+      "description": "Unique perspectives with humor and creativity",
+      "greeting": "Hey! 👋 I'm Grok. I bring a different and creative perspective to any topic. What shall we talk about?"
+    },
+    "edi": {
+      "name": "EDI",
+      "description": "Your personal Educly assistant for questions and guidance",
+      "greeting": "Hi! 👋 I'm EDI, your assistant here at Educly! I'm super happy to help you! What would you like to know?"
+    },
+    "nanobanana": {
+      "name": "NanoBanana",
+      "description": "Amazing image generation with artificial intelligence",
+      "greeting": "Hello! 🎨 I'm NanoBanana! I can create amazing images for you! Describe what you want to see and I'll generate it right away. What would you like to create?"
     },
     "specialist": {
       "name": "Specialist AI",

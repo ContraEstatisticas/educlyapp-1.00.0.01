@@ -1,27 +1,29 @@
-import { LucideIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface AICardProps {
   id: string;
   cardId?: string;
-  icon: LucideIcon;
+  logoSrc: string;
   gradient: { from: string; to: string };
-  color: string;
   onClick: () => void;
   delay?: number;
+  badge?: string;
 }
 
 const AI_TRANSLATIONS: Record<string, { nameKey: string; descKey: string }> = {
-  specialist: { nameKey: "assistants.specialist.name", descKey: "assistants.specialist.description" },
-  "prompt-creator": { nameKey: "assistants.promptCreator.name", descKey: "assistants.promptCreator.description" },
-  planner: { nameKey: "assistants.planner.name", descKey: "assistants.planner.description" },
-  creative: { nameKey: "assistants.creative.name", descKey: "assistants.creative.description" },
+  chatgpt: { nameKey: "assistants.chatgpt.name", descKey: "assistants.chatgpt.description" },
+  gemini: { nameKey: "assistants.gemini.name", descKey: "assistants.gemini.description" },
+  nanobanana: { nameKey: "assistants.nanobanana.name", descKey: "assistants.nanobanana.description" },
+  grok: { nameKey: "assistants.grok.name", descKey: "assistants.grok.description" },
+  claude: { nameKey: "assistants.claude.name", descKey: "assistants.claude.description" },
+  edi: { nameKey: "assistants.edi.name", descKey: "assistants.edi.description" },
 };
 
-export const AICard = ({ id, cardId, icon: Icon, gradient, color, onClick, delay = 0 }: AICardProps) => {
+export const AICard = ({ id, cardId, logoSrc, gradient, onClick, delay = 0, badge }: AICardProps) => {
   const { t } = useTranslation();
-  const keys = AI_TRANSLATIONS[id] || AI_TRANSLATIONS.specialist;
+  const keys = AI_TRANSLATIONS[id] || AI_TRANSLATIONS.chatgpt;
 
   return (
     <div
@@ -44,16 +46,23 @@ export const AICard = ({ id, cardId, icon: Icon, gradient, color, onClick, delay
       </div>
 
       <div className="relative flex items-start gap-4">
-        {/* Icon */}
-        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-          <Icon className="w-6 h-6 text-white" />
+        {/* Logo */}
+        <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0 p-1.5">
+          <img src={logoSrc} alt={t(keys.nameKey)} className="w-full h-full object-contain rounded-lg" />
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-bold text-white mb-1">
-            {t(keys.nameKey)}
-          </h3>
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="text-lg font-bold text-white">
+              {t(keys.nameKey)}
+            </h3>
+            {badge && (
+              <Badge variant="secondary" className="bg-white/25 text-white border-0 text-[10px] px-1.5 py-0">
+                {badge}
+              </Badge>
+            )}
+          </div>
           <p className="text-white/80 text-sm line-clamp-2">
             {t(keys.descKey)}
           </p>
@@ -62,10 +71,10 @@ export const AICard = ({ id, cardId, icon: Icon, gradient, color, onClick, delay
 
       {/* Arrow indicator */}
       <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-        <svg 
-          className="w-4 h-4 text-white" 
-          fill="none" 
-          viewBox="0 0 24 24" 
+        <svg
+          className="w-4 h-4 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

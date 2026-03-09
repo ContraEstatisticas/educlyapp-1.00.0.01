@@ -6,12 +6,12 @@ import { useToast } from "@/hooks/use-toast";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MobileNav } from "@/components/MobileNav";
 import { WeeklyStreakBar } from "@/components/WeeklyStreakBar";
-import { DashboardTutorial } from "@/components/onboarding";
+import { ProductOnboarding } from "@/components/onboarding";
 import { usePremiumAccess } from "@/hooks/usePremiumAccess";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useTranslation } from "react-i18next";
 import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
-import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw } from "lucide-react";
+import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useDailyLoginXP } from "@/hooks/useDailyLoginXP";
@@ -20,6 +20,12 @@ import { Badge } from "@/components/ui/badge";
 import challengeInicianteImg from "@/assets/Edi-dashboard.png";
 import corujaIA from "@/assets/IA.png";
 import corujaFreelancerImg from "@/assets/coruja-freelancer.png";
+import chatgptLogo from "@/assets/ai-logos/chatgpt.png";
+import geminiLogo from "@/assets/ai-logos/gemini.png";
+import claudeLogo from "@/assets/ai-logos/claude.png";
+import grokLogo from "@/assets/ai-logos/grok.png";
+import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
+import ediLogo from "@/assets/edi-mascote.png";
 
 const CHALLENGE_28_DAYS_ID = "dfb76f1b-d272-4e4d-96b2-0bc4d3392489";
 
@@ -92,60 +98,60 @@ const Dashboard = () => {
   };
 
   const featuredCards = [
-  {
-    img: corujaIA,
-    title: t("dashboard.featured.assistants.title"),
-    subtitle: t("dashboard.featured.assistants.subtitle"),
-    link: "/assistentes",
-    gradient: "from-violet-500/20 to-purple-500/10",
-    icon: Brain,
-    stats: t("dashboard.featured.assistants.stats"),
-    buttonText: t("dashboard.featured.assistants.button"),
-    features: getFeaturesArray("dashboard.featured.assistants.features"),
-    productType: "ai_hub" as const
-  },
-  {
-    img: corujaFreelancerImg,
-    title: t("dashboard.featured.freelancer.title"),
-    subtitle: t("dashboard.featured.freelancer.subtitle"),
-    link: "/freelancer",
-    gradient: "from-emerald-500/20 to-teal-500/10",
-    icon: Code,
-    stats: t("dashboard.featured.freelancer.stats"),
-    buttonText: t("dashboard.featured.freelancer.button"),
-    features: getFeaturesArray("dashboard.featured.freelancer.features"),
-    productType: "freelancer" as const
-  }];
+    {
+      img: corujaIA,
+      title: t("dashboard.featured.assistants.title"),
+      subtitle: t("dashboard.featured.assistants.subtitle"),
+      link: "/assistentes",
+      gradient: "from-violet-500/20 to-purple-500/10",
+      icon: Brain,
+      stats: t("dashboard.featured.assistants.stats"),
+      buttonText: t("dashboard.featured.assistants.button"),
+      features: getFeaturesArray("dashboard.featured.assistants.features"),
+      productType: "ai_hub" as const
+    },
+    {
+      img: corujaFreelancerImg,
+      title: t("dashboard.featured.freelancer.title"),
+      subtitle: t("dashboard.featured.freelancer.subtitle"),
+      link: "/freelancer",
+      gradient: "from-emerald-500/20 to-teal-500/10",
+      icon: Code,
+      stats: t("dashboard.featured.freelancer.stats"),
+      buttonText: t("dashboard.featured.freelancer.button"),
+      features: getFeaturesArray("dashboard.featured.freelancer.features"),
+      productType: "freelancer" as const
+    }];
 
 
   const secondaryCards = [
-  {
-    icon: Target,
-    title: t("dashboard.missions.title"),
-    subtitle: t("dashboard.missions.subtitle"),
-    colorClass: "text-rose-500",
-    link: "/dashboard",
-    showFooter: false,
-    gradient: "from-rose-500/20 to-pink-500/10",
-    cta: t("dashboard.missions.cta"),
-    iconBg: "bg-rose-500/10"
-  },
-  {
-    icon: Medal,
-    title: t("dashboard.medals.title"),
-    subtitle: t("dashboard.medals.subtitle"),
-    colorClass: "text-amber-500 dark:text-amber-400",
-    link: "/medalhas",
-    showFooter: false,
-    gradient: "from-amber-500/20 to-yellow-500/10",
-    cta: t("dashboard.medals.cta"),
-    iconBg: "bg-amber-500/10"
-  }];
+    {
+      icon: Target,
+      title: t("dashboard.missions.title"),
+      subtitle: t("dashboard.missions.subtitle"),
+      colorClass: "text-rose-500",
+      link: "/dashboard",
+      showFooter: false,
+      gradient: "from-rose-500/20 to-pink-500/10",
+      cta: t("dashboard.missions.cta"),
+      iconBg: "bg-rose-500/10"
+    },
+    {
+      icon: Medal,
+      title: t("dashboard.medals.title"),
+      subtitle: t("dashboard.medals.subtitle"),
+      colorClass: "text-amber-500 dark:text-amber-400",
+      link: "/medalhas",
+      showFooter: false,
+      gradient: "from-amber-500/20 to-yellow-500/10",
+      cta: t("dashboard.medals.cta"),
+      iconBg: "bg-amber-500/10"
+    }];
 
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground safe-area-inset pb-20 transition-colors duration-300">
-        <style>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
@@ -234,154 +240,185 @@ const Dashboard = () => {
         }
       `}</style>
 
-        <DashboardTutorial />
+      <ProductOnboarding />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4">
-          <DashboardHeader onLogout={handleLogout} />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4">
+        <DashboardHeader onLogout={handleLogout} />
 
-          {/* Welcome Banner */}
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
-              {t("dashboard.welcome_title")}
-            </h1>
-            <p className="text-slate-600 dark:text-muted-foreground">
-              {t("dashboard.welcome_subtitle", { completed: completedDaysCount, total: totalDays })}
-            </p>
+        {/* Welcome Banner */}
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
+            {t("dashboard.welcome_title")}
+          </h1>
+          <p className="text-slate-600 dark:text-muted-foreground">
+            {t("dashboard.welcome_subtitle", { completed: completedDaysCount, total: totalDays })}
+          </p>
+        </div>
+
+        <div className="space-y-10 mt-[10px] my-[3px]">
+          <div id="weekly-streak">
+            <WeeklyStreakBar />
           </div>
 
-          <div className="space-y-10 mt-[10px] my-[3px]">
-            <div id="weekly-streak">
-              <WeeklyStreakBar />
-            </div>
-
-            {/* CARD PRINCIPAL */}
-            <div id="active-challenge" className="card-3d-container">
-              <div
+          {/* CARD PRINCIPAL */}
+          <div id="active-challenge" className="card-3d-container">
+            <div
               onClick={() => navigate(`/desafio/${activeChallenge.slug}`)}
               className="card-surface-3d relative group overflow-hidden rounded-3xl p-6 md:p-8 cursor-pointer">
 
-                {/* Bookmark badge */}
-                <button
-                  className="absolute top-3 right-4 z-20 bg-primary hover:bg-primary/90 active:scale-95 text-primary-foreground px-4 py-2 rounded-xl shadow-lg hover:shadow-xl flex items-center gap-2 transition-all duration-200 font-bold text-xs uppercase tracking-wide"
-                  onClick={(e) => { e.stopPropagation(); navigate(`/desafio/${activeChallenge.slug}`); }}
-                >
-                  {isCompleted ? (
-                    <RotateCcw className="w-3.5 h-3.5" />
-                  ) : hasProgress ? (
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                  ) : (
-                    <Bookmark className="w-3.5 h-3.5 fill-current" />
-                  )}
-                  {bookmarkLabel}
-                </button>
+              {/* Bookmark badge */}
+              <button
+                className="absolute top-3 right-4 z-20 bg-primary hover:bg-primary/90 active:scale-95 text-primary-foreground px-4 py-2 rounded-xl shadow-lg hover:shadow-xl flex items-center gap-2 transition-all duration-200 font-bold text-xs uppercase tracking-wide"
+                onClick={(e) => { e.stopPropagation(); navigate(`/desafio/${activeChallenge.slug}`); }}
+              >
+                {isCompleted ? (
+                  <RotateCcw className="w-3.5 h-3.5" />
+                ) : hasProgress ? (
+                  <Play className="w-3.5 h-3.5 fill-current" />
+                ) : (
+                  <Bookmark className="w-3.5 h-3.5 fill-current" />
+                )}
+                {bookmarkLabel}
+              </button>
 
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-                <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-                <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+              <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
 
-                <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
-                  <div className="w-full md:w-2/5 relative">
-                    <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-black/5 dark:border-white/10 group-hover:shadow-3xl transition-all duration-500">
-                      <img
+              <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
+                <div className="w-full md:w-2/5 relative">
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-black/5 dark:border-white/10 group-hover:shadow-3xl transition-all duration-500">
+                    <img
                       src={challengeInicianteImg}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       alt="Challenge" />
 
-                    </div>
-                    <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-primary to-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                      <Zap className="w-3 h-3" /> {t("dashboard.status_in_progress")}
-                    </div>
                   </div>
-                  <div className="flex-1 w-full space-y-6">
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                          {completedDaysCount}/{totalDays} {t("dashboard.days_label")}
-                        </Badge>
-                        <Badge variant="outline" className="border-emerald-500/30 text-emerald-600">
-                          <Sparkles className="w-3 h-3 mr-1" /> {t("dashboard.status_active")}
-                        </Badge>
-                      </div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight mb-3">
-                        {t("challenges.iniciante-ia.name")}
-                      </h3>
-                      <p className="text-slate-600 dark:text-muted-foreground text-base leading-relaxed">
-                        {t("challenges.iniciante-ia.description")}
-                      </p>
+                  <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-primary to-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
+                    <Zap className="w-3 h-3" /> {t("dashboard.status_in_progress")}
+                  </div>
+                </div>
+                <div className="flex-1 w-full space-y-6">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                        {completedDaysCount}/{totalDays} {t("dashboard.days_label")}
+                      </Badge>
+                      <Badge variant="outline" className="border-emerald-500/30 text-emerald-600">
+                        <Sparkles className="w-3 h-3 mr-1" /> {t("dashboard.status_active")}
+                      </Badge>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between text-sm font-medium text-slate-500 dark:text-muted-foreground/80">
-                        <span className="flex items-center gap-2">
-                          <Play className="w-4 h-4 fill-current text-primary" />
-                          {t("dashboard.challenge_progress")}
-                        </span>
-                        <span className="font-bold">{progressPercentage}%</span>
-                      </div>
-                      <div className="relative">
-                        <Progress
+                    <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight mb-3">
+                      {t("challenges.iniciante-ia.name")}
+                    </h3>
+                    <p className="text-slate-600 dark:text-muted-foreground text-base leading-relaxed">
+                      {t("challenges.iniciante-ia.description")}
+                    </p>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between text-sm font-medium text-slate-500 dark:text-muted-foreground/80">
+                      <span className="flex items-center gap-2">
+                        <Play className="w-4 h-4 fill-current text-primary" />
+                        {t("dashboard.challenge_progress")}
+                      </span>
+                      <span className="font-bold">{progressPercentage}%</span>
+                    </div>
+                    <div className="relative">
+                      <Progress
                         value={progressPercentage}
                         className="h-3 bg-slate-100 dark:bg-secondary/50" />
 
-                        <div className="absolute top-1/2 left-0 right-0 h-1 -translate-y-1/2 bg-gradient-to-r from-transparent via-primary/20 to-transparent shimmer-effect" />
-                      </div>
+                      <div className="absolute top-1/2 left-0 right-0 h-1 -translate-y-1/2 bg-gradient-to-r from-transparent via-primary/20 to-transparent shimmer-effect" />
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                      <Button className="rounded-xl px-8 h-12 bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-600 text-white font-bold shadow-lg shadow-primary/25 transition-all active:scale-95 group/btn">
-                        <span>{t("dashboard.continue_button")}</span>
-                        <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                      <Button
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                    <Button className="rounded-xl px-8 h-12 bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-600 text-white font-bold shadow-lg shadow-primary/25 transition-all active:scale-95 group/btn">
+                      <span>{t("dashboard.continue_button")}</span>
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                    <Button
                       variant="outline"
                       className="rounded-xl px-6 h-12 border-2"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}>
 
-                        {t("dashboard.view_content")}
-                      </Button>
-                    </div>
+                      {t("dashboard.view_content")}
+                    </Button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* GRID DE CARDS DESTAQUE */}
-            <div>
-              <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6">
-                {featuredCards.map((card, index) => {
-                  const hasCardAccess = productAccess.hasAccess(card.productType);
-                  const isAccessLoading = productAccess.isLoading;
-                  return (
-                    <div id={`card-${index}`} key={index} className="card-3d-container h-full">
-                      <div
-                        onClick={() => (!isAccessLoading && !hasCardAccess) ? navigate(card.link) : navigate(card.link)}
-                        className="card-surface-3d group p-6 rounded-3xl h-full flex flex-col cursor-pointer relative overflow-hidden">
+          {/* GRID DE CARDS DESTAQUE */}
+          <div>
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6">
+              {featuredCards.map((card, index) => {
+                const hasCardAccess = productAccess.hasAccess(card.productType);
+                const isAccessLoading = productAccess.isLoading;
+                const isAIPack = card.productType === "ai_hub";
+                const aiLogos = [chatgptLogo, geminiLogo, claudeLogo, grokLogo, nanobananaLogo, ediLogo];
+                return (
+                  <div id={`card-${index}`} key={index} className="card-3d-container h-full">
+                    <div
+                      onClick={() => navigate(card.link)}
+                      className="card-surface-3d group p-6 rounded-3xl h-full flex flex-col cursor-pointer relative overflow-hidden">
 
-                        <div className="flex items-start justify-between mb-6">
-                          <div className="relative">
-                            <div className={`absolute -inset-4 ${card.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity`} />
-                            <div className="relative w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg">
-                              <img src={card.img} className="w-12 h-12 object-contain" alt={card.title} />
-                            </div>
-                          </div>
-                          <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
-                            {hasCardAccess ?
-                              <>
-                                <LockOpen className="w-3 h-3 text-emerald-500" />
-                                {t(`dashboard.premium_labels.${card.productType}`)}
-                              </> :
-                              <>
-                                <Lock className="w-3 h-3 text-amber-500" />
-                                {t(`dashboard.premium_labels.${card.productType}`)}
-                              </>
-                            }
+                      {/* Gradient accent for AI Pack */}
+                      {isAIPack && (
+                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/8 via-transparent to-purple-500/5 pointer-events-none" />
+                      )}
+
+                      <div className="flex items-start justify-between mb-5 relative z-10">
+                        <div className="relative">
+                          <div className={`absolute -inset-4 ${card.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity`} />
+                          <div className="relative w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg">
+                            <img src={card.img} className="w-12 h-12 object-contain" alt={card.title} />
                           </div>
                         </div>
+                        <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                          {hasCardAccess ?
+                            <>
+                              <LockOpen className="w-3 h-3 text-emerald-500" />
+                              {t(`dashboard.premium_labels.${card.productType}`)}
+                            </> :
+                            <>
+                              <Lock className="w-3 h-3 text-amber-500" />
+                              {t(`dashboard.premium_labels.${card.productType}`)}
+                            </>
+                          }
+                        </div>
+                      </div>
 
-                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h3>
-                        <p className="text-slate-600 dark:text-muted-foreground text-sm mb-4 flex-1">{card.subtitle}</p>
+                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 relative z-10">{card.title}</h3>
+                      <p className="text-slate-600 dark:text-muted-foreground text-sm mb-4 flex-1 relative z-10 leading-relaxed">{card.subtitle}</p>
 
-                        <div className="space-y-4">
+                      {/* AI logos strip for AI Pack */}
+                      {isAIPack ? (
+                        <div className="space-y-4 relative z-10">
+                          <div className="flex items-center gap-2">
+                            {aiLogos.map((logo, idx) => (
+                              <div
+                                key={idx}
+                                className="w-9 h-9 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-1.5 shadow-sm group-hover:shadow-md transition-shadow"
+                              >
+                                <img src={logo} alt="" className="w-full h-full object-contain rounded-md" />
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-violet-50 dark:bg-violet-500/10 rounded-xl border border-violet-100 dark:border-violet-500/20">
+                            <div className="flex items-center gap-2">
+                              <Sparkles className="w-4 h-4 text-violet-500" />
+                              <span className="text-sm font-semibold text-violet-700 dark:text-violet-300">
+                                {card.stats}
+                              </span>
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-violet-400 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-4 relative z-10">
                           <div className="flex flex-wrap gap-2 mb-3">
                             {Array.isArray(card.features) && card.features.map((feature, idx) =>
                               <span key={idx} className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300">
@@ -389,7 +426,6 @@ const Dashboard = () => {
                               </span>
                             )}
                           </div>
-
                           <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                             <div className="flex items-center gap-2">
                               <card.icon className="w-4 h-4 text-slate-500" />
@@ -400,60 +436,61 @@ const Dashboard = () => {
                             <ChevronRight className="w-4 h-4 text-slate-400" />
                           </div>
                         </div>
+                      )}
 
-                        {/* Glass lock overlay when user doesn't have this specific product */}
-                        {!isAccessLoading && !hasCardAccess && (
-                          <div className="absolute inset-0 z-30 bg-gray-300/40 dark:bg-gray-700/50 backdrop-blur-[1.5px] flex flex-col items-center justify-center gap-3 rounded-3xl">
-                            <div className="w-14 h-14 rounded-full bg-white/80 dark:bg-slate-800/80 flex items-center justify-center shadow-xl border border-white/50 dark:border-slate-600/50">
-                              <Lock className="w-7 h-7 text-gray-500 dark:text-gray-400" />
-                            </div>
-                            <span className="text-sm font-bold text-white dark:text-white drop-shadow-md">
-                              {t("dashboard.unlock_to_access", "Desbloqueie para acessar")}
-                            </span>
+                      {/* Glass lock overlay */}
+                      {!isAccessLoading && !hasCardAccess && (
+                        <div className="absolute inset-0 z-30 bg-gray-300/40 dark:bg-gray-700/50 backdrop-blur-[1.5px] flex flex-col items-center justify-center gap-3 rounded-3xl">
+                          <div className="w-14 h-14 rounded-full bg-white/80 dark:bg-slate-800/80 flex items-center justify-center shadow-xl border border-white/50 dark:border-slate-600/50">
+                            <Lock className="w-7 h-7 text-gray-500 dark:text-gray-400" />
                           </div>
-                        )}
-                      </div>
-                    </div>
-                );
-                })}
-              </div>
-            </div>
-
-            {/* GRID DE CARDS SECUNDÁRIOS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {secondaryCards.map((card, index) =>
-            <div id={index < 2 ? `card-${index + 2}` : undefined} key={index} className="card-3d-container h-full">
-                    <div
-                onClick={() => navigate(card.link)}
-                className={`card-surface-3d group p-6 rounded-3xl h-full flex flex-col justify-between cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-colors relative overflow-hidden`}>
-
-                      <div className={`absolute -inset-4 ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl`} />
-
-                      <div className="relative z-10">
-                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${card.iconBg}`}>
-                          <card.icon className={`w-6 h-6 ${card.colorClass}`} />
+                          <span className="text-sm font-bold text-white dark:text-white drop-shadow-md">
+                            {t("dashboard.unlock_to_access", "Desbloqueie para acessar")}
+                          </span>
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h3>
-                        <p className="text-slate-600 dark:text-muted-foreground text-sm leading-relaxed mb-4">
-                          {card.subtitle}
-                        </p>
-                      </div>
-
-                      {card.showFooter &&
-                <div className="relative z-10 mt-auto pt-4 flex items-center text-sm font-medium text-primary">
-                            {card.cta} <ChevronRight className="w-4 h-4 ml-1" />
-                          </div>
-                }
+                      )}
                     </div>
                   </div>
-            )}
+                );
+              })}
             </div>
           </div>
 
-          <FloatingEdiChat />
-          <MobileNav />
+          {/* GRID DE CARDS SECUNDÁRIOS */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {secondaryCards.map((card, index) =>
+              <div id={index < 2 ? `card-${index + 2}` : undefined} key={index} className="card-3d-container h-full">
+                <div
+                  onClick={() => navigate(card.link)}
+                  className={`card-surface-3d group p-6 rounded-3xl h-full flex flex-col justify-between cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-colors relative overflow-hidden`}>
+
+                  <div className={`absolute -inset-4 ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl`} />
+
+                  <div className="relative z-10">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${card.iconBg}`}>
+                      <card.icon className={`w-6 h-6 ${card.colorClass}`} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h3>
+                    <p className="text-slate-600 dark:text-muted-foreground text-sm leading-relaxed mb-4">
+                      {card.subtitle}
+                    </p>
+                  </div>
+
+                  {card.showFooter &&
+                    <div className="relative z-10 mt-auto pt-4 flex items-center text-sm font-medium text-primary">
+                      {card.cta} <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  }
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </main>);
+
+        <FloatingEdiChat />
+        <MobileNav />
+      </div>
+    </main>);
 
 };
 
