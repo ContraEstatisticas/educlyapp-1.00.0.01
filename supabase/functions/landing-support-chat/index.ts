@@ -170,8 +170,8 @@ serve(async (req) => {
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
 
     if (!GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY is not configured");
-      throw new Error("GEMINI_API_KEY is not configured");
+      console.error("GEMINI_API_KEY not configured");
+      return buildSseFallbackResponse("Serviço de IA temporariamente indisponível. Tente novamente mais tarde.");
     }
 
     // Update rate limit counter (upsert)
@@ -215,11 +215,7 @@ serve(async (req) => {
       max_tokens: 400,
     };
 
-    const modelCandidates = [
-      "gemini-2.0-flash-lite",
-      "gemini-2.0-flash",
-      "gemini-1.5-flash",
-    ];
+    const modelCandidates = ["gemini-2.5-flash"];
     let selectedModel = modelCandidates[0];
     let response: Response | null = null;
     let lastErrorText = "";
@@ -257,9 +253,7 @@ serve(async (req) => {
       }
 
       // Fallback to a synthetic SSE response to avoid frontend runtime failures/blank screens.
-      const fallbackText = locale.startsWith("pt")
-        ? "Nosso assistente está temporariamente indisponível. Tente novamente em instantes."
-        : "Our assistant is temporarily unavailable. Please try again in a moment.";
+      const fallbackText = "Não foi possível processar sua mensagem no momento. Tente novamente em instantes.";
       return buildSseFallbackResponse(fallbackText);
     }
 
@@ -270,6 +264,6 @@ serve(async (req) => {
     });
   } catch (error) {
     console.error("Support chat error:", error);
-    return buildSseFallbackResponse("Our assistant is temporarily unavailable. Please try again in a moment.");
+    return buildSseFallbackResponse("Ocorreu um erro inesperado. Por favor, tente novamente.");
   }
 });

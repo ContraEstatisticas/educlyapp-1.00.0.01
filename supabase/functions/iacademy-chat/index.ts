@@ -479,19 +479,14 @@ serve(async (req) => {
     const aiToolContext = body.aiToolContext;
     const language = body.language || "pt";
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
-    const useGateway = !!LOVABLE_API_KEY;
-    const apiKey = LOVABLE_API_KEY || GEMINI_API_KEY;
 
-    if (!apiKey) {
-      console.error("No AI API key configured (LOVABLE_API_KEY or GEMINI_API_KEY)");
+    if (!GEMINI_API_KEY) {
+      console.error("GEMINI_API_KEY not configured");
       throw new Error("AI API key is not configured");
     }
 
-    const AI_BASE_URL = useGateway
-      ? "https://ai.gateway.lovable.dev/v1/chat/completions"
-      : "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+    const AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
 
     console.log("Processing chat request with context:", aiToolContext, "language:", language);
     console.log("Number of messages:", messages.length);
@@ -501,11 +496,11 @@ serve(async (req) => {
     const response = await fetch(AI_BASE_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${GEMINI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: useGateway ? "google/gemini-2.5-flash" : "gemini-2.5-flash",
+        model: "gemini-2.5-flash",
         messages: [{ role: "system", content: systemPrompt }, ...messages],
         stream: true,
         max_tokens: 800,
