@@ -336,7 +336,7 @@
 
       // Generate reset link directly from Auth to avoid false negatives on user lookup.
       // If user does not exist, Supabase returns an error and we still answer success.
-      const redirectUrl = "https://educly.lovable.app/update-password";
+      const redirectUrl = "https://educly.app/update-password";
 
       const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
         type: "recovery",
