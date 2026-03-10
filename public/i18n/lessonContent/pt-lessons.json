@@ -2763,118 +2763,126 @@
     "steps": [
       {
         "type": "text",
-        "title": "🚀 Aprofundando sobre Lovable.",
-        "content": "Hoje você deixa de ser apenas um usuário de IA para se tornar um **Criador de Softwares** com visão de produto. O Lovable é uma plataforma de IA que entende o que você quer, gera o código completo e já entrega o site ou aplicativo funcionando para você revisar, ajustar e publicar.\n\n\n\n**A Grande Diferença:**\n* **Antigamente:** Para criar um app funcional, você precisava contratar designer, programador, alguém de infraestrutura, esperar 3 meses e investir R$ 50.000 ou mais em um MVP básico.\n* **Hoje:** Você consegue validar a mesma ideia em 2 horas usando o Lovable, com custo inicial quase zero, podendo iterar várias versões no mesmo dia.\n\nNa prática, você vai aprender a criar páginas de vendas enxutas, painéis de controle (dashboards) conectados a dados reais e sistemas de cadastro completos — tudo isso apenas descrevendo o que precisa em linguagem natural, como se estivesse explicando a um colega de time."
+        "title": "🕰️ História da Lovable",
+        "content": "A Lovable nasceu na Suécia em 2023, fundada por Anton Osika. A ideia central era simples mas ambiciosa: permitir que qualquer pessoa criasse aplicações web completas apenas descrevendo o que queria em linguagem natural.\n\nA empresa foi originalmente chamada de GPT Engineer, um projeto open source que Anton lançou no GitHub e que viralizou rapidamente, tornando-se um dos repositórios mais estrelados do GitHub em 2023. Com base nesse sucesso, a startup foi formalizada, recebeu investimentos e relançou o produto como Lovable em 2024, com foco total em produto, interface e experiência do usuário.\n\nA proposta era democratizar o desenvolvimento de software, tirando o poder das mãos exclusivas dos programadores."
       },
       {
         "type": "text",
-        "title": "🏗️ Como a IA Constrói seu App por Baixo",
-        "content": "Para mandar bem, você precisa entender que a IA divide o trabalho em duas grandes camadas, como se fossem dois times trabalhando em paralelo:\n\n\n\n1. **O que o usuário vê (Frente):** A IA monta a interface usando componentes modernos (como React, Tailwind, etc.), organizados como 'peças de Lego'. Isso inclui botões, tabelas, gráficos, menus, formulários e layouts responsivos para celular e desktop.\n2. **O que o sistema faz (Atrás):** Ao mesmo tempo, ela cria um 'Armazém Digital' com um banco de dados e regras de negócio: onde ficam salvos cadastros, pedidos, tarefas, permissões de usuário e integrações com serviços externos.\n\nQuando você pede um 'App de Tarefas', por exemplo, a IA entende que precisa:\n* Desenhar a lista de tarefas, o formulário de criação e os botões de marcar como concluída (Frente).\n* Criar a tabela de tarefas no banco, com campos como título, descrição, status, data de criação e usuário responsável (Atrás).\n\nSeu papel deixa de ser escrever código e passa a ser **descrever com clareza como essas duas camadas devem se comportar**."
+        "title": "⚙️ Como Funciona",
+        "content": "A Lovable funciona como um agente de IA que transforma prompts em texto simples em aplicações web reais e funcionais. Por baixo dos panos, ela usa modelos de linguagem avançados (como Claude da Anthropic e outros) para gerar código em tempo real.\n\nQuando você descreve o que quer, a Lovable gera automaticamente o frontend em React, estiliza com Tailwind CSS, cria a estrutura de componentes, e pode conectar um backend usando Supabase para banco de dados e autenticação. O resultado é uma aplicação publicada com URL pública em minutos, sem que o usuário precise escrever uma linha de código.\n\nEla também mantém contexto entre as mensagens, ou seja, você pode pedir ajustes, correções e novos recursos ao longo da conversa, e ela vai atualizando o projeto de forma incremental."
       },
       {
         "type": "text",
-        "title": "🎯 O Método B.U.I.L.D. para Apps Perfeitos",
-        "content": "Para o seu app não virar uma bagunça de telas soltas e campos desconexos, use esta 'receita' sempre que for escrever um pedido para a IA:\n\n\n\n* **B - Business (Negócio):** Para quem é e qual problema resolve? Ex: \"Gestores de pequenas lojas de roupas que precisam saber rapidamente o que está em falta no estoque\".\n* **U - User Flow (Fluxo):** O que acontece, passo a passo, quando o usuário entra no app e clica em cada botão? Ex: \"O usuário faz login, vê o resumo do estoque, filtra por categoria e cadastra novas peças em um formulário simples\".\n* **I - Interface:** Como é o visual e a organização da tela? Ex: \"Tela com barra lateral à esquerda, logo no topo, uma tabela central com as peças e um botão grande de 'Adicionar item' no canto superior direito\".\n* **L - Lógica e Dados:** O que precisa ser salvo e quais regras o sistema deve seguir? Ex: \"Salvar nome da peça, código interno, tamanho, cor, quantidade em estoque, preço de custo e preço de venda; não permitir quantidade negativa\".\n* **D - Design:** Quais cores, estilo e sensações o app deve passar? Ex: \"Cores azul e branco, visual limpo e moderno, no estilo de um painel SaaS profissional\".\n\nQuanto mais explícito você for em cada letra do B.U.I.L.D., menos retrabalho terá depois e mais próximo o resultado inicial ficará da sua visão."
+        "title": "📈 Impacto no Mercado",
+        "content": "O crescimento da Lovable foi explosivo. Em fevereiro de 2025, a empresa anunciou que havia atingido 100 milhões de dólares de receita anual recorrente (ARR) em apenas alguns meses de operação, tornando-se uma das startups de crescimento mais rápido da Europa.\n\nO número de usuários cresceu na casa dos milhões, e a ferramenta ficou conhecida como símbolo do movimento 'vibe coding', termo popularizado por Andrej Karpathy para descrever o desenvolvimento de software guiado por IA com pouca ou nenhuma escrita manual de código.\n\nA adoção foi forte entre empreendedores, designers, product managers e pessoas sem background técnico que queriam validar ideias rapidamente."
+      },
+      {
+        "type": "text",
+        "title": "✅ Onde é Boa — 10+ Casos de Uso",
+        "content": "- Criação de landing pages e sites de apresentação de produtos ou serviços.\n- Prototipagem rápida de aplicativos web para validar ideias de negócio.\n- Dashboards com visualização de dados conectados a banco de dados real.\n- Ferramentas internas para times, como painéis de controle e formulários.\n- MVPs (Produto Mínimo Viável) para startups que precisam de velocidade.\n- Aplicações de lista de tarefas, CRMs simples e gestores de projetos.\n- Portfólios interativos para designers, fotógrafos e desenvolvedores.\n- Plataformas de cadastro com autenticação de usuários via Supabase.\n- Calculadoras e ferramentas interativas de nicho.\n- Páginas de captura de leads com formulários e integração de e-mail.\n- Pequenos SaaS com funcionalidades básicas, como agendamentos e checklists.\n- Projetos educacionais e de aprendizado de programação com feedback visual imediato."
+      },
+      {
+        "type": "text",
+        "title": "❌ Onde é Ruim — Limitações Honestas",
+        "content": "A Lovable tem dificuldades com aplicações de alta complexidade, sistemas com muitas regras de negócio interligadas ou arquiteturas muito específicas.\n\nO código gerado pode ficar desorganizado em projetos grandes, e manter consistência em projetos longos é um desafio real. Ela não substitui um desenvolvedor sênior quando o projeto exige performance otimizada, segurança avançada ou integrações complexas com APIs de terceiros.\n\nTambém pode entrar em loops tentando corrigir bugs que ela mesma criou, o que frustra usuários. O custo de créditos pode subir rápido em projetos mais elaborados, e há dependência total da plataforma, dificultando a saída para outro ambiente sem conhecimento técnico."
+      },
+      {
+        "type": "text",
+        "title": "📝 Como Gosta de Receber o Prompt",
+        "content": "A Lovable performa melhor quando o prompt é claro, detalhado e contextualizado. O ideal é descrever o que o produto faz, para quem é, quais telas ou funcionalidades devem existir e qual o visual esperado.\n\nQuanto mais contexto você der de uma vez, melhor o resultado inicial. Em vez de dizer 'crie um app', prefira dizer 'crie um aplicativo web para gerenciar tarefas, com login de usuário, lista de tarefas por categoria, opção de marcar como concluída e visual moderno em tons de azul'.\n\nDescrever o usuário final também ajuda muito."
+      },
+      {
+        "type": "text",
+        "title": "🚀 Como Extrair Mais Resultados",
+        "content": "Para ir além com a Lovable, vale:\n\n- Conectar o projeto ao Supabase logo no início para ter banco de dados real.\n- Usar o GitHub como repositório integrado permite versionar o código e levar o projeto para fora da plataforma se necessário.\n- Pedir para a IA revisar e refatorar o código periodicamente ajuda a manter a qualidade.\n- Dividir pedidos complexos em etapas menores gera resultados mais precisos.\n- Usar designs de referência ou descrever inspirações visuais melhora muito o frontend.\n- Explorar o modo de edição direta de código dentro da plataforma dá mais controle sobre o resultado final."
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Questão 1: Como a Lovable Funciona",
+        "question": "A Lovable é uma ferramenta que permite criar aplicações web completas. Qual das alternativas abaixo descreve MELHOR como ela funciona?",
+        "options": [
+          {
+            "text": "O usuário escreve código em Python e a Lovable converte para JavaScript automaticamente.",
+            "isCorrect": false,
+            "explanation": "Incorreto. A Lovable não exige que o usuário escreva código em nenhuma linguagem."
+          },
+          {
+            "text": "O usuário descreve em linguagem natural o que quer e a IA gera o código, a interface e publica a aplicação.",
+            "isCorrect": true,
+            "explanation": "Correto! A Lovable transforma descrições em texto em aplicações web completas e funcionais."
+          },
+          {
+            "text": "A Lovable é um editor de código com autocomplete inteligente, similar ao VS Code com IA.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela é muito mais que um editor — ela gera o projeto inteiro do zero."
+          },
+          {
+            "text": "A ferramenta baixa templates prontos da internet e os personaliza com as cores escolhidas pelo usuário.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela gera código único para cada projeto, não usa templates prontos."
+          }
+        ]
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "✏️ Questão 2: Origem e Tecnologia",
+          "sentence": "A Lovable foi criada originalmente com o nome ___ e foi fundada pelo empreendedor sueco ___. A ferramenta gera o frontend usando a biblioteca ___ e estiliza com ___, podendo conectar um banco de dados real pelo serviço ___.",
+          "answers": [
+            "GPT Engineer",
+            "Anton Osika",
+            "React",
+            "Tailwind CSS",
+            "Supabase"
+          ],
+          "options": [
+            "GPT Engineer",
+            "Anton Osika",
+            "React",
+            "Tailwind CSS",
+            "Supabase",
+            "Next.js",
+            "Elon Musk",
+            "Firebase"
+          ],
+          "explanation": "GPT Engineer foi o nome original do projeto open-source que viralizou no GitHub antes de se tornar a Lovable."
+        }
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Pilares do App",
-          "description": "Ligue cada parte do método B.U.I.L.D. ao que ela define no seu projeto.",
+          "title": "🔗 Questão 3: Termos Essenciais",
+          "description": "Ligue cada termo à sua definição correta.",
           "pairs": [
             {
-              "left": "B - Business",
-              "right": "O objetivo real do aplicativo"
+              "left": "Vibe Coding",
+              "right": "Estilo de desenvolvimento guiado por IA com pouco código"
             },
             {
-              "left": "U - User Flow",
-              "right": "O caminho que o usuário percorre"
+              "left": "MVP",
+              "right": "Versão mais simples de um produto para testar uma ideia"
             },
             {
-              "left": "I - Interface",
-              "right": "Onde ficam os botões e menus"
+              "left": "Supabase",
+              "right": "Banco de dados e autenticação integrados à Lovable"
             },
             {
-              "left": "L - Lógica",
-              "right": "Como o sistema salva as informações"
+              "left": "React",
+              "right": "Biblioteca JavaScript usada para construir interfaces"
+            },
+            {
+              "left": "Landing Page",
+              "right": "Página única criada para apresentar e vender um produto"
             }
           ]
         }
       },
       {
         "type": "text",
-        "title": "🌐 Casos Reais: Do Papel para a Tela",
-        "content": "Veja o que você pode vender, entregar como serviço ou usar dentro do seu próprio negócio:\n\n* **Agendamento para Médicos:** Um site onde o paciente escolhe o dia e a hora, preenche seus dados e o médico (ou secretária) recebe o aviso por e-mail ou dentro de um painel próprio.\n* **Painel de Vendas:** Um dashboard conectado às suas planilhas ou banco de dados, mostrando em tempo real gráficos de faturamento, ticket médio, produtos mais vendidos e metas do mês.\n* **Sistema de Aprovação:** Um app interno para funcionários pedirem reembolso de viagens, anexando foto do recibo, e gestores aprovando ou rejeitando com um clique.\n* **Controle de Estoque:** Uma aplicação para registrar entrada e saída de produtos, alertar quando um item estiver acabando e gerar relatórios simples para reposição.\n\nO que antes era 'coisa de empresa grande com time de TI', agora cabe no bolso, no navegador e até no celular de qualquer profissional que sabe descrever bem o que quer."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Workflow: O Caminho dos Mestres",
-        "content": "Um profissional não sai 'chutando' comandos na IA e torcendo para dar certo. Ele segue um fluxo claro, quase como uma checklist de projeto:\n\n1. **Desenho (30 min):** Esboce no papel (ou em uma ferramenta simples) como as telas se conectam: tela inicial, cadastros, detalhes, filtros, etc.\n2. **O Pedido (15 min):** Escreva o prompt usando o método B.U.I.L.D., descrevendo negócio, fluxo, interface, lógica de dados e design.\n3. **Ajustes (1h):** Teste o app, anote fricções (campos confusos, botões escondidos, textos pouco claros) e peça para a IA ajustar: mudar cores, reorganizar componentes, criar novos filtros ou relatórios.\n4. **Lançamento (10 min):** Quando estiver aceitável para um MVP, clique no botão de 'Deploy' e coloque o site no ar, compartilhando o link com usuários reais para colher feedback.\n\nEsse ciclo pode ser repetido várias vezes na mesma semana, permitindo que você evolua o produto com base em uso real, e não em suposições."
-      },
-      {
-        "type": "quiz",
-        "title": "🧠 Teste seu Raciocínio",
-        "question": "Qual é a maior vantagem de usar o Lovable em vez de contratar um programador para um projeto inicial (MVP)?",
-        "options": [
-          {
-            "text": "O app nunca terá nenhum erro ou bug",
-            "isCorrect": false,
-            "explanation": "Todo software pode ter erros. A diferença é que, com a IA, você consegue testar e corrigir muito mais rápido, sem depender da fila de um time de desenvolvimento."
-          },
-          {
-            "text": "Você economiza meses de tempo e milhares de reais testando sua ideia rápido",
-            "isCorrect": true,
-            "explanation": "Exato. A maior vantagem é validar a ideia em pouco tempo e baixo custo. Se o MVP funcionar, você decide se investe mais; se não funcionar, você ajusta ou muda de direção sem ter queimado um orçamento enorme."
-          },
-          {
-            "text": "Você não precisa saber o que o app deve fazer",
-            "isCorrect": false,
-            "explanation": "Na verdade, acontece o contrário: quanto mais claro você for sobre o que o app deve fazer, mais forte será o resultado gerado pela IA."
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "title": "💰 Quanto Cobrar por um App Criado com IA?",
-        "content": "Muitas empresas ainda não fazem ideia de que esse tipo de ferramenta existe ou acham que é algo complexo demais. Você pode usar isso a seu favor de forma ética, cobrando pelo valor gerado, não apenas pelas horas trabalhadas:\n\n* **Sites de Vendas (Landing Pages):** De R$ 1.000 a R$ 2.000 por página, incluindo copy básica, layout responsivo e integração com formulário ou WhatsApp.\n* **Sistemas Internos Simples:** De R$ 3.000 a R$ 5.000 por solução, como painéis de controle, sistemas de cadastro ou fluxos de aprovação.\n* **Consultoria No-Code/IA:** A partir de R$ 200/hora para mapear processos, escolher a ferramenta certa e criar automações que tirem trabalho manual da equipe.\n\nComo o custo de produção cai drasticamente, sua margem de lucro é alta, e você pode focar no que realmente importa: entender o negócio do cliente e transformar problemas em soluções digitais rápidas."
-      },
-      {
-        "type": "text",
-        "title": "⚠️ Perigos: Não caia nessas armadilhas!",
-        "content": "* **O 'Só mais uma coisinha':** Clientes vão pedir mudanças infinitas. Evite escopo infinito definindo claramente o que está incluído na primeira versão e o que entra como melhoria ou novo projeto.\n* **Esquecer do Celular:** A maioria dos usuários acessa tudo pelo smartphone. Sempre teste se o site abre bem em telas pequenas, se os botões são clicáveis e se o texto está legível.\n* **Segurança:** Não trate dados sensíveis de forma amadora. Para pagamentos, use soluções profissionais (como Stripe ou similares). Para dados pessoais, pense em permissões, criptografia e boas práticas básicas de proteção.\n* **Dependência Cega da IA:** Não aceite tudo que a IA gera sem revisar. Seu papel é validar regras de negócio, textos, fluxos e se aquilo faz sentido para o usuário final."
-      },
-      {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ Preenchendo as Lacunas",
-          "sentence": "O Lovable transforma ___ em ___, economizando tempo e garantindo o sucesso do seu ___.",
-          "answers": [
-            "palavras",
-            "aplicativos",
-            "negócio"
-          ],
-          "options": [
-            "palavras",
-            "aplicativos",
-            "negócio",
-            "músicas",
-            "desenhos",
-            "almoço"
-          ],
-          "explanation": "Isso mesmo! Ao transformar descrições claras em ferramentas funcionais, você encurta o caminho entre ideia e resultado prático no seu negócio."
-        }
-      },
-      {
-        "type": "text",
-        "title": "📊 Como medir se o app ficou bom?",
-        "content": "Não adianta o app estar 'bonito' se ninguém consegue usar. Use o teste dos 3 usuários para medir, de forma simples, se você acertou na experiência:\n\n1. Peça para 3 pessoas do seu público-alvo usarem o app sem você explicar nada, apenas compartilhando o link.\n2. Observe se elas conseguem completar a tarefa principal (como fazer um cadastro, registrar um pedido ou enviar uma solicitação) sem pedir ajuda.\n3. Se elas travarem, anote onde isso acontece e peça para o Lovable algo como: \"Muitos usuários estão se perdendo na tela X, simplifique o layout e deixe mais evidente o próximo passo\".\n\nSeu objetivo não é ter um app perfeito, e sim um app que **ajuda alguém a fazer uma tarefa importante com o mínimo de atrito possível**."
-      },
-      {
-        "type": "text",
-        "title": "🏆 Conclusão do Dia 19: O Construtor",
-        "content": "**O QUE VOCÊ DOMINOU HOJE:**\n\n1. Como a IA constrói front-end, back-end e banco de dados para sites e sistemas completos, a partir de uma boa descrição.\n2. O método B.U.I.L.D. para criar pedidos profissionais que evitam retrabalho e ajudam a IA a acertar na primeira tentativa.\n3. Como transformar esse conhecimento em serviço pago, oferecendo soluções rápidas para empresas que precisam de agilidade.\n4. Um fluxo de trabalho prático para sair da ideia, passar por desenho e ajustes, e chegar ao site no ar em poucas horas.\n\n**MENTALIDADE:**\nVocê não é mais alguém que \"usa o computador\" ou \"brinca com IA\". Você é alguém que **orquestra a tecnologia** para resolver problemas reais. A partir de agora, você pensa como um desenvolvedor da nova era: menos código, mais resultado, mais foco em negócio."
+        "title": "🏆 Conclusão do Dia 19",
+        "content": "**O QUE VOCÊ APRENDEU HOJE:**\n\n1. A história da Lovable: de GPT Engineer (open-source viral) a startup de $100M ARR.\n2. Como ela funciona: prompts em texto → código React + Tailwind + Supabase → app publicado.\n3. Onde brilha: MVPs, landing pages, dashboards, ferramentas internas.\n4. Onde falha: projetos complexos, código desorganizado em escala, loops de bugs.\n5. Como escrever prompts que geram resultados melhores na primeira tentativa.\n\n**MENTALIDADE:**\nVocê agora entende que não precisa saber programar para criar software. Precisa saber **descrever** o que quer com clareza e estratégia. Isso é o novo 'saber programar'."
       }
     ]
   },
