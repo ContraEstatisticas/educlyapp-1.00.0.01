@@ -3506,118 +3506,128 @@
     "steps": [
       {
         "type": "text",
-        "title": "🚀 Captions: Sua Fábrica de Virais",
-        "content": "O Captions não apenas legenda; ele otimiza cada segundo para manter as pessoas assistindo.\n\n### Por que ele é diferente?\n1. **Ganchos Automáticos:** Sugere o melhor início para o vídeo.\n2. **Ritmo Ágil:** Remove silêncios e pausas desnecessárias.\n3. **Design de Retenção:** Fontes que prendem o olhar.\n4. **IA de Sucesso:** Sugere melhorias baseadas no que está bombando."
+        "title": "🎬 História do Captions",
+        "content": "Captions foi criado como solução para o problema real dos criadores de conteúdo: adicionar legendas em vídeos é chato, manual e consome horas. A ferramenta nasceu apostando em automação – usar IA para gerar legendas sincronizadas palavra por palavra, removendo trabalho repetitivo. Diferente de ferramentas genéricas de edição, Captions focou exclusivamente em legendagem e edição automática para redes sociais.\n\nA empresa cresceu rápido entre criadores de TikTok, Reels e YouTube Shorts. Para quem cria conteúdo curto, legendas são críticas – muitas pessoas assistem sem som. Captions transformou legendagem de tarefa de 30 minutos em automática de 30 segundos. Porém, recentemente sofreu críticas sobre performance, bugs de sincronização e suporte lento. Ainda assim, continua sendo uma ferramenta popular por resolver problemas reais.\n\n💡 **DICA PRÁTICA:** Captions vale a pena se cria múltiplos vídeos por semana. Para um vídeo ocasional, outras ferramentas gratuitas são suficientes."
       },
       {
         "type": "text",
-        "title": "🎣 A Ciência do Gancho (Hook)",
-        "content": "A maioria dos criadores perde **80% do público** nos primeiros 3 segundos.\n\nO Captions ajuda a criar ganchos de **curiosidade, choque ou promessa**. Se o começo for ruim, ninguém vê o resto."
+        "title": "⚙️ Como o Captions Funciona",
+        "content": "Você faz upload do vídeo em Captions. A ferramenta usa Whisper (OpenAI) para transcrever áudio automaticamente. Gera legendas sincronizadas palavra por palavra no vídeo, formatadas dinamicamente. Você valida, edita se necessário, personaliza cores/fontes/posição. Exportar vídeo com legendas queimadas (ou como arquivo SRT para plataformas).\n\nAlém de legendas, Captions oferece AI Edit (analisa script e adiciona automaticamente zooms, transições, B-roll, efeitos sonoros) e AI Shorts (encontra melhores trechos de vídeo longo e corta em clips prontos para viral). Parâmetro de precisão depende da qualidade do áudio – áudio limpo = legendas precisas.\n\nInternamente, combina Whisper para transcrição + modelos de edição próprios para automação visual. Resultado é vídeo pronto em minutos sem edição manual.\n\n💡 **DICA PRÁTICA:** Audio limpo = legendas precisas. Se está em café barulhento, qualidade cai. Fale claro e em ritmo constante para melhor transcrição."
       },
       {
         "type": "text",
-        "title": "🎯 Framework V.I.R.A.L.",
-        "content": "### Os 5 Pilares:\n- **V - Validação:** A ideia tem potencial?\n- **I - Identificação:** O que funcionou nos vídeos anteriores?\n- **R - Roteiro:** Hook (3s) → Retenção (10s) → CTA.\n- **A - Automação:** Legendas dinâmicas e cores de marca.\n- **L - Lançamento:** SEO, hashtags e horários de pico."
+        "title": "📊 Impacto e Adoção no Mercado",
+        "content": "Captions virou padrão entre criadores de conteúdo curto (TikTok, Reels, YouTube Shorts). Reduz tempo de produção drasticamente. Creators que fazem 5+ vídeos por semana usam Captions rotineiramente.\n\nO mercado de legendagem automática explodiu. Alternativas surgiram: Submagic, OpusClip, Zeemo, HeyGen. Competição aumentou. Captions mantém relevância por ser early player e ter boa integração com plataformas sociais. Porém, perdeu parte de market share por problemas técnicos recentes.\n\n💡 **DICA PRÁTICA:** Plano começa grátis com limite. Pago começa ~$10-15/mês dependendo do volume de vídeos."
       },
       {
-        "type": "practical",
-        "title": "🎯 Exercício: Prompt de Produção",
-        "question": "Ordene o prompt para criar seu sistema viral:",
-        "initialWords": [
-          "Analise meus vídeos anteriores",
-          "identifique padrões de sucesso",
-          "sugira ideias virais",
-          "crie roteiro otimizado",
-          "planeje estratégia de lançamento"
-        ],
-        "correctOrder": [
-          "Analise meus vídeos anteriores",
-          "identifique padrões de sucesso",
-          "sugira ideias virais",
-          "crie roteiro otimizado",
-          "planeje estratégia de lançamento"
-        ],
-        "explanation": "Perfeito! Esse fluxo garante que você aprenda com o passado para dominar o futuro."
+        "type": "text",
+        "title": "💪 Onde o Captions é Muito Bom",
+        "content": "- **Legendas automáticas precisas:** Para áudio claro, transcrição é 95%+ correta.\n- **Sincronização palavra por palavra:** Legendas ficam sincronizadas com fala em tempo real.\n- **Edição automática (AI Edit):** Adiciona zooms, transições, B-roll automaticamente.\n- **Extração de clips (AI Shorts):** Encontra melhores trechos de vídeo longo, corta automaticamente.\n- **Múltiplos idiomas:** Gera legendas em 50+ idiomas.\n- **Customização visual:** Fonts, cores, posição, animações personalizáveis.\n- **Integração redes sociais:** Exporta direto em formato otimizado para TikTok, Reels, Shorts.\n- **Teleprompter integrado:** Você lê script enquanto grava, sincroniza com legendas.\n\n💡 **DICA PRÁTICA:** Melhor para criadores que fazem muitos vídeos curtos regularmente. Para conteúdo ocasional, overhead pode não valer."
+      },
+      {
+        "type": "text",
+        "title": "❌ Onde o Captions é Muito Ruim",
+        "content": "- **Bugs de sincronização:** Algumas versões tiveram problemas onde legendas desincronizam do áudio após exportação.\n- **Áudio ruidoso:** Falha em ambientes barulhentos ou com múltiplas vozes simultâneas.\n- **Suporte lento:** Usuários reportam dificuldade em obter ajuda quando bugs ocorrem.\n- **Performance inconsistente:** Algumas edições funcionam perfeito, outras geram resultados erráticos.\n- **Texto em imagem:** Não consegue capturar texto visível em vídeo (lojas, placas).\n- **Edição muito automática:** AI Edit às vezes adiciona efeitos que não combinam com tom do vídeo.\n- **Dependência da plataforma:** Se fechar, você não tem garantia de recuperar vídeos editados.\n- **Custo crescente:** Múltiplos vídeos longos ficam caro.\n\n💡 **DICA PRÁTICA:** Sempre faça backup de vídeo original. Se Captions tiver bug, você consegue regenerar."
+      },
+      {
+        "type": "text",
+        "title": "🎯 Como Extrair Bons Resultados",
+        "content": "A qualidade final depende de áudio limpo. Quanto melhor o áudio, melhor a transcrição. Fale em ritmo constante (não muito rápido), articule bem, minimize ruído de fundo.\n\nUse AI Edit com moderação – pode adicionar efeitos demais. Revise o resultado antes de publicar. Customize fonts/cores para combinar com sua marca. Para vídeos muito longos, considere dividir em partes – Captions funciona melhor em clipes de 3-10 minutos.\n\nEstude o resultado de legendas geradas. Captions às vezes erra nomes próprios ou jargão específico – você edita manualmente em segundos no editor integrado.\n\n💡 **DICA PRÁTICA:** Para máxima eficiência, gere legendas via Captions, valide, edite jargão, customiza design, exporta. Tempo total: 5-10 minutos por vídeo curto."
+      },
+      {
+        "type": "text",
+        "title": "⚠️ Atenção - Características Importantes",
+        "content": "**Dependência de Qualidade de Áudio**\nCaptions usa Whisper (OpenAI) para transcrição. Whisper é excelente, mas áudio ruim → legendas ruins. Se seu estúdio tem eco ou muitos ruídos de fundo, qualidade cai. Invista em microfone bom antes de investir em Captions.\n\n**Bugs Conhecidos Recentes**\nVersões recentes tiveram problemas de sincronização. Sempre teste antes de publicar em produção. Exporte em local seguro, não confie 100% que resultado será perfeito.\n\n**Modelo de Preço**\nPlano free limitado. Plano pago começa ~$10 com quotas mensais. Se cria 50+ vídeos/mês, custo aumenta. Calcule ROI antes de assinar anualmente.\n\n💡 **DICA PRÁTICA:** Teste com plano free primeiro. Só pague quando confirmar que Captions resolve seu problema de verdade."
       },
       {
         "type": "quiz",
-        "title": "🧠 Teste: Viralidade Inteligente",
-        "question": "Qual o maior benefício do Captions na criação de conteúdo?",
+        "title": "🎓 Questão 1 - Avaliação de Diferencial",
+        "question": "Qual é a principal vantagem do Captions para criadores de conteúdo?",
         "options": [
           {
-            "text": "Ele otimiza todo o ritmo do vídeo para máxima retenção",
-            "isCorrect": true,
-            "explanation": "Correto! Retenção é o que faz o algoritmo entregar seu vídeo para mais pessoas."
+            "text": "Cria vídeos originais do zero",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Captions requer um vídeo pré-gravado para adicionar legendas e edições."
           },
           {
-            "text": "Ele apenas coloca legendas coloridas",
+            "text": "Gera legendas automáticas precisas usando Whisper + sincroniza palavra por palavra",
+            "isCorrect": true,
+            "explanation": "Correto! O Captions usa IA (Whisper) para criar legendas automáticas muito precisas e sincronizadas dinamicamente palavra por palavra."
+          },
+          {
+            "text": "Substitui completamente editor de vídeo profissional",
             "isCorrect": false,
-            "explanation": "Legendas são só o começo. O segredo está no ritmo e na estrutura do vídeo."
+            "explanation": "Incorreto. Apesar de ter recursos úteis, edições mais avançadas e específicas ainda dependem de editores tradicionais."
+          },
+          {
+            "text": "É gratuito forever",
+            "isCorrect": false,
+            "explanation": "Incorreto. A versão gratuita é limitada e o app tem focos pagos atrelados a um modelo de assinatura."
           }
         ]
       },
       {
-        "type": "text",
-        "title": "🎬 Produção em Lote (Batch)",
-        "content": "Crie 30 vídeos em 3 horas. Use a IA para gerar 50 ideias, grave tudo de uma vez e use o Captions para editar todos com o mesmo padrão visual rapidamente."
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "🎮 Questão 2 - Ligar Conceitos",
+          "description": "Conecte a situação ao uso apropriado de Captions:",
+          "pairs": [
+            {
+              "left": "Crio 5 vídeos por semana para TikTok",
+              "right": "Sim, economiza horas"
+            },
+            {
+              "left": "Crio 1 vídeo ocasional por mês",
+              "right": "Não vale a pena"
+            },
+            {
+              "left": "Estou em ambiente barulhento",
+              "right": "Captions vai falhar"
+            }
+          ]
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "📝 Questão 3 - Fixando Modelos e Recursos",
+          "sentence": "Captions usa ___ (OpenAI) para transcrever áudio. Gera legendas sincronizadas ___ no vídeo. Oferece também AI Edit (adiciona ___) e AI Shorts (corta ___). Funciona melhor com ___ limpo. Plano ___ é limitado; pago começa ~$10/mês.",
+          "answers": [
+            "Whisper",
+            "palavra por palavra",
+            "zooms e transições",
+            "clips virais",
+            "áudio",
+            "free"
+          ],
+          "options": [
+            "Whisper",
+            "palavra por palavra",
+            "zooms e transições",
+            "clips virais",
+            "áudio",
+            "free",
+            "GPT-4",
+            "por segundo",
+            "efeitos complexos",
+            "qualquer coisa",
+            "vídeo",
+            "premium",
+            "DALL-E",
+            "em tempo real",
+            "filtros"
+          ],
+          "explanation": "Gabarito: Whisper, palavra por palavra, zooms e transições, clips virais, áudio e free."
+        }
       },
       {
         "type": "text",
-        "title": "🎨 Branding nas Legendas",
-        "content": "Crie uma identidade visual única: cores HEX da sua marca, fontes específicas e efeitos de pulso nos momentos chave para destacar palavras importantes."
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Exercício: Sistema de Legendas",
-        "question": "Monte o prompt para criar sua marca visual:",
-        "initialWords": [
-          "Crie sistema de legendas para minha marca",
-          "defina cores e fontes da identidade visual",
-          "crie estilos por tipo de conteúdo",
-          "inclua regras de acessibilidade",
-          "desenvolva templates prontos"
-        ],
-        "correctOrder": [
-          "Crie sistema de legendas para minha marca",
-          "defina cores e fontes da identidade visual",
-          "crie estilos por tipo de conteúdo",
-          "inclua regras de acessibilidade",
-          "desenvolva templates prontos"
-        ],
-        "explanation": "Excelente! Consistência visual gera autoridade e reconhecimento de marca."
-      },
-      {
-        "type": "text",
-        "title": "🚫 Erros que Matam o Alcance",
-        "content": "Evite ganchos lentos, vídeos sem cortes (monótonos) e a falta de uma Chamada para Ação (CTA). A IA ajuda, mas o seu toque humano é o que conecta."
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Exercício Final: Seu Plano",
-        "question": "Ordene seu novo fluxo de trabalho:",
-        "initialWords": [
-          "Nicho: Produtividade com IA",
-          "Frequência: 5 vídeos/semana",
-          "Formatos: Tutoriais e listas",
-          "Duração: 45-60 segundos",
-          "Workflow: Gravar segunda, editar terça, postar o resto"
-        ],
-        "correctOrder": [
-          "Nicho: Produtividade com IA",
-          "Frequência: 5 vídeos/semana",
-          "Formatos: Tutoriais e listas",
-          "Duração: 45-60 segundos",
-          "Workflow: Gravar segunda, editar terça, postar o resto"
-        ],
-        "explanation": "Perfeito! Com organização, você cresce sem ter um burnout."
-      },
-      {
-        "type": "text",
-        "title": "🏆 Conclusão: Fábrica Ativada",
-        "content": "Hoje você construiu seu sistema de vídeos virais. \n\n**Lembre-se:** Viralidade não é sorte, é estrutura + consistência.\n\n**Amanhã:** ElevenLabs — A voz perfeita para seus vídeos! 🎙️"
+        "title": "🎓 Resumo do Dia 24",
+        "content": "**CHEGAMOS AO FIM DO DIA 24!**\n\nHoje descobrimos que o **Captions** foi desenvolvido para solucionar uma dor real de todo criador de vídeo curto: a rotina repetitiva da legendagem dinâmica. Ele usa tecnologias de ponta como Whisper para escutar e renderizar com sincronia.\n\nSua adoção se justifica se você escala a produção de conteúdo (5+ vídeos por semana). Caso contrário, as limitações como bugs recentes, suporte não responsivo ou performance instável em áudios barulhentos podem ser frustrantes.\n\nCom vídeo base bem gravado, ele se mostra absurdamente eficiente. Próxima parada: geração de voz e novas abordagens criativas multimídia!"
       }
-    ],
-    "summary": "Dia 24 finalizado! Aprendemos o framework V.I.R.A.L., produção em massa e como usar o Captions para dominar a retenção nas redes sociais."
+    ]
   },
   "day25": {
     "steps": [
