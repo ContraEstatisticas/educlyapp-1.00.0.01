@@ -49,8 +49,9 @@ export const useTranslatedChallengeContent = () => {
       manus: { start: 17, end: 18 },
       lovable: { start: 19, end: 20 },
       nanobanana: { start: 21, end: 21 },
-      captions: { start: 22, end: 23 },
-      elevenlabs: { start: 24, end: 27 },
+      leonardo: { start: 22, end: 22 },
+      captions: { start: 23, end: 24 },
+      elevenlabs: { start: 25, end: 28 },
     };
 
     const range = aiDayRanges[normalizedSlug];

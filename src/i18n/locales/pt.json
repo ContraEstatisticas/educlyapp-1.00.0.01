@@ -563,6 +563,12 @@
         "description": "Conheça a ferramenta de arte IA do Google (Gemini 2.5 Flash Image) e aprenda edição cirúrgica e criação em camadas."
       }
     },
+    "leonardo": {
+      "1": {
+        "title": "🎨 Domine o Leonardo AI",
+        "description": "Crie assets visuais consistentes e em escala com modelos especializados e ferramentas de edição em batch."
+      }
+    },
     "captions": {
       "1": {
         "title": "Introdução ao Captions",

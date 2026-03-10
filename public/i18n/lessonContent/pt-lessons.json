@@ -3257,122 +3257,120 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎬 Bem-vindo ao Captions: Seu Estúdio de Cinema no Bolso",
-        "content": "Você já domina textos e imagens, agora vai dominar o formato mais poderoso das redes sociais. O **Captions** não é só um app de legendas; é um editor que 'pensa' por você.\n\n\n\n**O que mudou:**\n- **Antes:** Você levava 5 horas para editar um vídeo de 1 minuto.\n- **Agora:** A IA faz o trabalho pesado em 30 segundos. Ela corta os erros, melhora a sua voz e até 'conserta' o seu olhar se você não estiver olhando para a lente."
+        "title": "🎨 História do Leonardo AI",
+        "content": "Leonardo AI foi fundado como plataforma dedicada à criação de ativos visuais profissionais usando IA generativa. Diferente de Midjourney (Discord) ou DALL-E (interface minimalista), Leonardo AI apostou em ser uma suite criativa completa com web e mobile app próprios. O foco foi criar ferramenta acessível mas poderosa, especialmente para criadores, game developers, marketers e designers que precisam de visuals consistentes em escala.\n\nHoje Leonardo tem comunidade de mais de 60 milhões usuários criativos e já geraram 2 bilhões de imagens. Crescimento explosivo porque resolve problema real: gerar múltiplos visuals mantendo consistência de estilo. Oferece preço mais acessível que Midjourney e mais controle que DALL-E. Cada atualização traz modelos melhores – Nano Banana (Google), GPT Image (OpenAI), e seus próprios modelos proprietários.\n\n💡 **DICA PRÁTICA:** Leonardo vale especialmente se precisa gerar muitos visuals regularmente mantendo estilo consistente (campanhas, design systems, game assets)."
       },
       {
         "type": "text",
-        "title": "📊 Por que legendar é obrigatório?",
-        "content": "Você sabia que **85% das pessoas assistem a vídeos no celular SEM SOM?**\n\nSe o seu vídeo não tem legenda, ele é invisível para a maioria do público. Vídeos legendados com IA não apenas ajudam quem não pode ouvir, mas aumentam a retenção (o tempo que a pessoa fica assistindo) em mais de 40%. Hoje, ter legendas dinâmicas que pulam na tela é a diferença entre ser ignorado ou viralizar."
+        "title": "⚙️ Como o Leonardo AI Funciona",
+        "content": "Você escreve prompt em texto. Escolhe um modelo de 7+ opções especializadas em diferentes estilos (photorealism, anime, concept art, etc). Leonardo gera 4 imagens simultaneamente em segundos. Valida as opções. Se gostou, faz upscale (melhora resolução), edita via AI Canvas, ou cria variações. Exporta como JPG.\n\nLeonardo usa neural networks treinadas em vastos datasets multimodais cobrindo fine art, fotografia, texturas, design – aprendendo contexto, composição, relacionamentos de estilo além de formas e cores. Isso permite gerar imagens que parecem intencionais, não aleatórias.\n\nOferece recursos avançados: negative prompts (diz o que NÃO quer), Prompt Magic (ativa para IA entender melhor instruções), geração em batch (4+ imagens por vez), motion feature (transforma imagem estática em clip animado). AI Canvas permite editar e refinar sem começar do zero. Blueprint templates oferece estruturas pré-desenhadas para workflows comuns.\n\n💡 **DICA PRÁTICA:** Use templates (Blueprints) para começar rápido. Depois customize. Salve estilos favoritos (ex: \"flat purple illustration\") e reutilize em múltiplos projetos para consistência."
       },
       {
         "type": "text",
-        "title": "🎯 O Framework L.E.G.E.N.D.A.",
-        "content": "Para suas legendas serem profissionais, siga estas regras simples:\n\n* **L - Legibilidade:** Letras grandes e cores que contrastam com o fundo.\n* **E - Estrutura:** No máximo duas linhas por vez na tela.\n* **G - Ganchos:** Use emojis e cores diferentes nas palavras importantes.\n* **E - Emoção:** A legenda deve seguir o ritmo da sua fala (rápida ou lenta).\n* **A - Atenção:** Coloque as palavras no centro da tela, onde o olho já está."
+        "title": "📊 Impacto e Adoção no Mercado",
+        "content": "Leonardo cresceu porque oferece melhor balanço: qualidade superior a ferramentas gratuitas, preço mais acessível que Midjourney, mais controle que DALL-E. Profissionais de game development usam para concept art. Marketers usam para gerar assets de campanha em escala. Designers usam para prototipagem rápida. Educadores usam para ilustração.\n\n1.2 milhões de artistas usaram Leonardo e combinados geraram 1 bilhão de artworks. Sistema baseado em tokens: cada imagem custa 5-8 tokens, free tier oferece 150 tokens/dia. Planos pagos começam ~$10/mês. Preço transparente, sem contratos.\n\nDiferenciador é biblioteca massiva de modelos especializados. Não são genéricos – cada um é fine-tuned para estilo específico (anime semi-realism, cinematic, photorealistic, etc). Essa variedade permite resultados muito mais consistentes para diferentes necessidades.\n\n💡 **DICA PRÁTICA:** Free tier (150 tokens/dia) é generoso. Gera ~20 imagens/dia. Vale testar antes de pagar. Se precisar mais, plans são progressivos (pague só o que usa)."
+      },
+      {
+        "type": "text",
+        "title": "💪 Onde o Leonardo AI é Muito Bom",
+        "content": "- **Concept art para games:** Game studios usam Leonardo para acelerar pipelines visuais, combinando velocidade generativa com precisão artesanal humana.\n- **Visuals consistentes em estilo:** Salve um preset, aplique em 100 imagens – todas mantêm mesmo aesthetic.\n- **Batch generation:** Gere 4-50 imagens simultaneamente. Perfeito para explorar múltiplas direções criativamente.\n- **Blueprints (templates):** Kick-start projetos com estruturas pré-desenhadas para casos comuns.\n- **AI Canvas edição:** Refine sem começar novo – altere background, objetos, cores mantendo composição base.\n- **Upscaler qualidade:** Universal Upscaler do Leonardo é market leader que pode adicionar definição crispa sem sacrificar detalhe.\n- **Video generation:** Converta imagem estática em clip animado com camera controls e VFX.\n- **Múltiplos modelos:** Escolha o melhor para cada tarefa – photorealism, anime, oil painting, etc.\n- **Múltiplos idiomas:** Comunidade global compartilha prompts. Acesso a 2 bilhões de gerações anteriores como referência.\n\n💡 **DICA PRÁTICA:** Estude galereria comunitária de imagens bem-avaliadas. Procure o modelo/estilo usado. Copie padrão de prompting que funcionou. Isso acelera aprendizado massivamente."
+      },
+      {
+        "type": "text",
+        "title": "❌ Onde o Leonardo AI é Muito Ruim",
+        "content": "- **Texto legível em imagens:** Como outros geradores, falha em gerar texto claro e legível.\n- **Mãos realistas:** Historicamente fraco em anatomia de mãos (melhorou, mas ainda falha ocasionalmente).\n- **Composição muito específica:** Se já sabe exatamente como quer, desenho manual é melhor. Leonardo é melhor para exploração.\n- **Emoções sutis extremas:** Consegue tom geral (feliz, triste), mas nuances emotivas complexas podem não passar.\n- **Objetos muito técnicos precisos:** Engrenagens, circuitos, detalhes técnicos podem ter imprecisões.\n- **Consistência de personagem:** Se precisa do MESMO personagem em múltiplas poses/cenários, múltiplas imagens podem variar. Custom models ajudam, mas é mais trabalho.\n- **Idiomas muito raros:** 50+ idiomas sim, mas idiomas ultra-específicos podem falhar.\n- **API limitations:** Enquanto tem API, é menos robusta que outras plataformas para automação em escala.\n\n💡 **DICA PRÁTICA:** Para anatomia crítica ou texto legível, gere no Leonardo e refine em Photoshop. Não dependa 100% de Leonardo para esses aspectos."
+      },
+      {
+        "type": "text",
+        "title": "🎯 Como Extrair Bons Resultados",
+        "content": "Prompts específicos geram resultados superiores. Inclua: subject (quem/o que), style (referência artística), mood (tom), technical details (iluminação, perspectiva). Exemplo ruim: \"mulher\". Exemplo bom: \"mulher 30 anos, cabelo louro ondulado, estilo pintura óleo, iluminação dourada de entardecer, perspectiva low angle\".\n\nUse modelos apropriados para tarefa. Photorealism model para photos. Anime model para anime. Cinematic model para concept art. Cada um foi fine-tuned para seu contexto específico. Escolher certo = melhor resultado primeiro try.\n\nTeste 3-5 variações do mesmo prompt. Leonardo oferece controle fino (negative prompts, Prompt Magic, aspect ratios). Iterate rapidamente. Upscale o melhor. Edite em AI Canvas se precisa refinar. Tip: teste 3 versões do mesmo prompt e escolha a que melhor combina com sua paleta de cores.\n\n💡 **DICA PRÁTICA:** Batch generate (4-50 imagens de uma vez) economiza tokens vs gerar uma por uma. Deixa gerar durante a noite se tem muitos tokens. Acorda e escolhe melhor."
+      },
+      {
+        "type": "text",
+        "title": "⚠️ Atenção - Características Importantes",
+        "content": "**Sistema de Tokens (Não Assinatura Fixa)**\nLeonardo segue pricing baseado em tokens. Free tier oferece 150 tokens diários (suficiente para ~20 imagens). Cada imagem custa 5-8 tokens. Planos pagos começam $10/mês se pago anualmente. Você paga apenas pelo que usa – sem overhead de assinatura mínima cara.\n\n**Huge Model Library Diferencia**\nEnquanto DALL-E é singular e Midjourney é único modelo evoluindo, Leonardo oferece 7+ modelos especializados. Cada um tem força em domínio específico. Essa variedade permite resultados muito mais precisos para diferentes estilos. É como ter várias ferramentas ao invés de uma martelo para tudo.\n\n**Blueprint Templates Aceleram**\nTemplates pré-desenhados para workflows comuns (social media, game art, product shots, etc) permitem kick-start rápido sem começar blank slate. Especialmente útil para não-designers que querem resultado profissional rapidamente.\n\n**Integração com No-Code**\nLeonardo integra com Make, n8n, Dify e outras plataformas no-code. Formulário recebe pedido → Leonardo gera imagem → envia por email/WhatsApp. Automação em escala é possível sem programação.\n\n💡 **DICA PRÁTICA:** Se quer automação, aprenda Make ou n8n depois de dominar Leonardo direto. Combinação (Leonardo + automação) = super poder."
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Questão 1 - Avaliação de Diferencial",
+        "question": "Qual é o diferencial principal do Leonardo AI em relação a Midjourney e DALL-E?",
+        "options": [
+          {
+            "text": "Leonardo é mais barato e oferece biblioteca de 7+ modelos especializados para diferentes estilos, permitindo consistência em batch generation.",
+            "isCorrect": true,
+            "explanation": "Correto! Ele oferece uma biblioteca rica de modelos focados em estilos específicos, geração otimizada e preço acessível via tokens."
+          },
+          {
+            "text": "Leonardo usa Discord como Midjourney.",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Leonardo AI tem sua própria plataforma web."
+          },
+          {
+            "text": "Leonardo é o único que oferece upscaler.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Upscalers estão disponíveis em outras IA, não sendo exclusividade do Leonardo."
+          },
+          {
+            "text": "Leonardo é gratuito forever sem limitações.",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Leonardo oferece um excelente tier gratuito (150 tokens diários), mas possui limitações em comparação com os planos pagos."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Domine a Retenção",
-          "description": "Ligue o recurso da IA ao benefício que ele traz para o seu vídeo.",
+          "title": "🎮 Questão 2 - Ligar Conceitos",
+          "description": "Conecte o recurso ao seu melhor caso de uso:",
           "pairs": [
             {
-              "left": "Legendas Coloridas",
-              "right": "Mantém o espectador focado no texto"
+              "left": "Blueprints (templates)",
+              "right": "Kick-start rápido sem design experience"
             },
             {
-              "left": "Corte de Silêncios",
-              "right": "Deixa o vídeo rápido e sem enrolação"
+              "left": "Batch generation",
+              "right": "Gerar 50 variações de mesma ideia e escolher melhor"
             },
             {
-              "left": "Correção de Olhar",
-              "right": "Passa mais confiança para quem assiste"
-            },
-            {
-              "left": "Zooms Automáticos",
-              "right": "Dá dinamismo e evita o tédio visual"
+              "left": "Modelo especializado (anime/photorealism)",
+              "right": "Resultado consistente no estilo específico desejado"
             }
           ]
         }
       },
       {
-        "type": "text",
-        "title": "✂️ Edição 'Mágica' com IA",
-        "content": "O Captions faz três coisas que parecem feitiçaria:\n\n\n\n1.  **Remove Silêncios:** Ele detecta aquelas pausas chatas onde você esqueceu o que ia falar e as corta automaticamente.\n2.  **Correção de Olhar:** Se você estava lendo um roteiro e olhou para o lado, a IA ajusta suas pupilas para parecer que você está encarando o espectador nos olhos.\n3.  **Zooms Dinâmicos:** Ele aproxima a imagem nos momentos mais importantes para dar ênfase, sem você precisar mexer na câmera."
-      },
-      {
-        "type": "text",
-        "title": "🎤 Teleprompter Inteligente",
-        "content": "Não precisa mais decorar textos! O Captions tem um teleprompter que rola na velocidade da sua voz. \n\n\n\n**Dica de Pro:** Escreva seu roteiro no ChatGPT antes, cole no Captions e grave. Se você gaguejar, não pare! A IA vai limpar esses erros na edição final. O importante é manter a energia alta."
-      },
-      {
-        "type": "text",
-        "title": "📱 Onde Postar: A Estratégia de Cada Rede",
-        "content": "Nem todo vídeo serve para todo lugar:\n* **TikTok/Reels:** Vídeos verticais, muito rápidos e com ganchos nos primeiros 2 segundos.\n* **LinkedIn:** Tom mais profissional, foco em ensinar algo útil ou dar uma opinião sobre o mercado.\n* **YouTube:** Vídeos mais longos, mas que precisam de uma capa (thumbnail) muito chamativa."
-      },
-      {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Vídeos que Vendem",
-          "sentence": "Para um vídeo ser bom, ele precisa de um ___ nos primeiros 3 segundos e ___ que facilitem a leitura sem som.",
+          "title": "📝 Questão 3 - Fixando Modelos e Recursos",
+          "sentence": "Leonardo AI oferece 7+ ___ especializados para diferentes estilos. Free tier oferece ___ tokens/dia. Cada imagem custa ___ tokens. Blueprints são ___ pré-desenhados. AI Canvas permite ___ sem começar novo. Para consistência visual, salve um preset como 'flat purple illustration' e reutilize em múltiplos projetos.",
           "answers": [
-            "gancho",
-            "legendas"
+            "modelos",
+            "150",
+            "5-8",
+            "templates",
+            "refinar imagens"
           ],
           "options": [
-            "gancho",
-            "legendas",
-            "desenho",
-            "música",
-            "erro",
-            "lento"
+            "modelos",
+            "150",
+            "5-8",
+            "templates",
+            "refinar imagens",
+            "300",
+            "1-3",
+            "estruturas",
+            "regenerar",
+            "músicas"
           ],
-          "explanation": "Isso mesmo! O gancho prende a pessoa e a legenda mantém ela assistindo até o fim."
+          "explanation": "Gabarito: 7+ modelos, 150 tokens/dia, 5-8 tokens/imagem, templates, refinar imagens."
         }
       },
       {
         "type": "text",
-        "title": "⚡ O Workflow de 30 Minutos",
-        "content": "Siga este sistema para não perder o dia inteiro editando:\n1.  **Planeje (5 min):** O que você quer ensinar hoje?\n2.  **Grave (10 min):** Use o teleprompter e faça 2 ou 3 tentativas.\n3.  **Edite (10 min):** Deixe a IA legendar e cortar os silêncios.\n4.  **Publique (5 min):** Escolha uma música de fundo e solte no mundo.\n\nRepetir isso 3x por semana é o segredo para construir uma audiência gigante."
-      },
-      {
-        "type": "text",
-        "title": "📈 As Métricas do Sucesso",
-        "content": "Como saber se o vídeo deu certo?\n\n\n\n* **Retenção de 3 segundos:** Se mais de 60% das pessoas continuam após o início, seu gancho foi ótimo.\n* **Taxa de Conclusão:** Se muita gente assiste até o final, o seu conteúdo é valioso. \nUse o feedback dos comentários para saber o que o seu público quer ouvir amanhã."
-      },
-      {
-        "type": "text",
-        "title": "💰 O Valor da sua Nova Habilidade",
-        "content": "Muitas empresas e influenciadores precisam de editores rápidos. \n- **Mercado:** Editores cobram R$ 500 por um vídeo curto.\n- **Você:** Faz o mesmo trabalho em 30 minutos usando o Captions.\n\nVocê pode criar uma renda extra de **R$ 3.000 a R$ 10.000 por mês** apenas prestando serviço de edição com IA para quem ainda está fazendo tudo do jeito antigo."
-      },
-      {
-        "type": "quiz",
-        "title": "🧠 Teste Final de Vídeo",
-        "question": "Qual é a regra mais importante para vídeos curtos hoje em dia?",
-        "options": [
-          {
-            "text": "Ter uma câmera de R$ 20.000 e iluminação de cinema",
-            "isCorrect": false,
-            "explanation": "O conteúdo e o ritmo são muito mais importantes que o preço do equipamento."
-          },
-          {
-            "text": "Prender a atenção nos primeiros 3 segundos e usar legendas dinâmicas",
-            "isCorrect": true,
-            "explanation": "Exato! A atenção é a moeda mais valiosa da internet hoje."
-          },
-          {
-            "text": "Falar bem devagar para a IA não se confundir",
-            "isCorrect": false,
-            "explanation": "A IA moderna entende falas rápidas e o público prefere vídeos dinâmicos."
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "title": "🏆 Conclusão do Dia 22",
-        "content": "**O QUE VOCÊ DOMINOU HOJE:**\n\n1.  Como criar vídeos profissionais em minutos usando o Captions.\n2.  O segredo das legendas que aumentam o engajamento em 40%.\n3.  Como usar a IA para corrigir seu olhar e remover erros de gravação.\n4.  O fluxo de trabalho para ser um criador de conteúdo constante e lucrativo.\n\n**MENTALIDADE:**\nVocê não é mais um amador tentando entender as redes sociais. Você agora é um **Produtor de Conteúdo de Elite**. Suas mensagens agora têm o impacto visual que merecem.\n\n**AMANHÃ:** Vamos aprender a criar Avatares! Descubra como criar vídeos onde você nem precisa aparecer na frente da câmera!"
+        "title": "🎓 Resumo do Dia 22",
+        "content": "**CHEGAMOS AO FIM DO DIA 22!**\n\nHoje descobrimos que o **Leonardo AI** é uma excelente alternativa ao Midjourney e DALL-E, unindo interface web intuitiva, múltiplos modelos especializados (7+) e um sistema justo de créditos/tokens.\n\nSua verdadeira força não é apenas fazer imagens isoladas, mas criar campanhas, concepts e fluxos de trabalho visuais gerando até dezenas de imagens por vez em estilos idênticos. Ferramentas como Blueprint Templates e AI Canvas tornam as refações muito mais amigáveis.\n\n**AMANHÃ:** Continuaremos a evolução visual e audiovisual com ainda mais ferramentas e técnicas!"
       }
     ]
   },
