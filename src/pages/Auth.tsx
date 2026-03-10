@@ -387,9 +387,9 @@ const Auth = () => {
             <span className="text-sm font-medium text-primary">{t("auth.title")}</span>
           </div>
           <h1 className="text-3xl font-bold text-foreground">
-            {t("thankYou.title")} <span className="text-primary">{t("landing.subtitle")}</span>
+            {t("landing.title")} <span className="text-primary">{t("landing.subtitle")}</span>
           </h1>
-          <p className="text-muted-foreground">{t("auth.title")}</p>
+          <p className="text-muted-foreground">{t("auth.description")}</p>
         </div>
 
         <Card className="p-6 shadow-card border border-border">
