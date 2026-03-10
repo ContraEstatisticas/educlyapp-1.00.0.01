@@ -3633,133 +3633,135 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎙️ ElevenLabs: A Voz Perfeita da IA",
-        "content": "Prepare-se para conhecer a tecnologia que acabou com as vozes de 'robô' do passado. O **ElevenLabs** é o líder mundial em transformar texto em fala natural.\n\n\n\n**O que torna ele especial:**\n- **Realismo:** Ele adiciona respirações, pausas e entonações de acordo com o sentimento do texto.\n- **Clonagem:** Você pode gravar 1 minuto da sua voz e a IA passará a falar qualquer texto com o seu timbre exato.\n- **Multilíngue:** Você pode falar japonês ou alemão sem saber uma palavra desses idiomas."
+        "title": "🎤 História do ElevenLabs",
+        "content": "ElevenLabs foi fundada em 2022 por Piotr Dabkowski e Mati Staniszewski com uma missão clara: criar síntese de voz (text-to-speech) que soa natural, não robótica. Enquanto Google TTS e Amazon Polly soavam artificiais, ElevenLabs apostou em modelos neurais que capturam nuances de voz humana – inflexão, emoção, sotaque.\n\nA empresa lançou também clonagem de voz: você grava 1 minuto de áudio, e ElevenLabs cria modelo de voz que consegue ler qualquer texto com aquela voz.\n\nCrescimento foi explosivo. Criadores de conteúdo, podcasters, game developers, educadores adotaram rapidamente. ElevenLabs tornou-se padrão para audiobooks automáticos, narração em vídeos, criação de personagens de voz. Recebeu investimentos massivos e atingiu avaliação de unicórnio. Hoje processa milhões de caracteres por dia.\n\n💡 **DICA PRÁTICA:** ElevenLabs é essencial se você cria conteúdo que precisa de narração ou voz (vídeos, audiobooks, podcasts, games). Para texto puro, menos importante."
       },
       {
         "type": "text",
-        "title": "🔊 Os 3 Botões do Mestre do Som",
-        "content": "Para a voz soar perfeita, você controla três 'alavancas' técnicas:\n\n1.  **Estabilidade (Stability):** Controla a emoção. Quanto menor, mais a voz 'interpreta' (chora, ri, se empolga). Quanto maior, mais monótona e séria ela fica.\n2.  **Clareza (Clarity):** Remove ruídos e deixa a pronúncia perfeita. Ótimo para tutoriais e treinamentos.\n3.  **Similaridade (Similarity):** No caso de clones, define o quanto a IA deve se esforçar para ser idêntica ao original.\n\n"
+        "title": "⚙️ Como o ElevenLabs Funciona",
+        "content": "Você escreve texto em ElevenLabs. Escolhe uma voz pré-treinada (50+ idiomas, múltiplas vozes por idioma) ou clona sua própria voz. Clica gerar. Segundos depois, áudio é sintetizado com qualidade próxima de humano real. Pode ajustar velocidade, tom, ênfase em palavras específicas. Exporta como MP3 ou integra via API em seu produto.\n\nClonagem de voz funciona gravando ~1 minuto de áudio seu. ElevenLabs analisa características de voz (pitch, timbre, sotaque) e cria modelo que consegue ler qualquer texto mantendo sua voz. Resultado é impressionante – parece você falando.\n\nInternamente, usa redes neurais treinadas em milhões de horas de áudio humano. Modelo entende contexto (sabe quando fazer pausa, quando dar ênfase). Resultado é natural, não robótico. Suporta SSML (markup para controlar inflexão com tags).\n\n💡 **DICA PRÁTICA:** Qualidade melhora drasticamente com texto bem estruturado. Adicione pontuação, quebras de linha – ElevenLabs usa isso para gerar prosódia melhor."
+      },
+      {
+        "type": "text",
+        "title": "📊 Impacto e Adoção no Mercado",
+        "content": "ElevenLabs virou ferramenta padrão para qualquer coisa que precisa de narração. Audiobooks convertidos automaticamente em questão de minutos. YouTubers com voz acelerada/desacelerada agora soam naturais. Game developers criam personagens com vozes únicas sem contratar atores. Educadores criam cursos com narração automática em múltiplos idiomas.\n\nCompetição existe (Google Cloud TTS, Amazon Polly, Microsoft Azure), mas ElevenLabs ganhou por qualidade e facilidade. Empresas relatam 70% de redução no tempo de produção de conteúdo com narração. API integrada em centenas de plataformas (Make, Zapier, etc). Preço é competitivo – começa grátis com quotas.\n\n💡 **DICA PRÁTICA:** Plano free oferece ~10k caracteres/mês. Pago começa ~$5 com 100k caracteres. Para criadores ocasionais, free é suficiente."
+      },
+      {
+        "type": "text",
+        "title": "💪 Onde o ElevenLabs é Muito Bom",
+        "content": "- **Audiobooks automáticos:** Converta livro em áudio em minutos, soa natural.\n- **Narração de vídeos:** YouTube, Reels, Shorts ganham narração profissional.\n- **Clonagem de voz pessoal:** Sua voz lendo qualquer script, para sempre.\n- **Múltiplos idiomas:** Mesmo texto em 50+ idiomas com sotaques naturais.\n- **Personagens de voz:** Games, chatbots, assistentes virtuais ganham vozes únicas.\n- **Podcasts gerados:** Texto de artigo → podcast narrado automaticamente.\n- **Acessibilidade:** Conteúdo visual ganha narração para deficientes visuais.\n- **Dublagem automática:** Vídeo em inglês → dublado automaticamente em português.\n- **Educação:** Cursos online com narração profissional em escala.\n\n💡 **DICA PRÁTICA:** ElevenLabs brilha quando você tem muito texto para virar áudio. Uma narração? Pode valer contratar ator. 100 narrações? ElevenLabs economiza massivamente."
+      },
+      {
+        "type": "text",
+        "title": "❌ Onde o ElevenLabs é Muito Ruim",
+        "content": "- **Emoção extrema:** Consegue tom básico (feliz, triste), mas nuances sutis podem falhar.\n- **Vozes muito específicas:** Sotaque raro, voz muito característica – pode não capturar 100%.\n- **Pausas naturais:** Às vezes lê tudo sem pausas naturais (mesmo com pontuação).\n- **Pronúncia de jargão:** Termos técnicos, nomes próprios podem ser lidos incorretamente.\n- **Contexto muito específico:** Sarcasmo, ironia podem ser lidos literalmente.\n- **Sync perfeito com vídeo:** Para vídeo onde cada palavra precisa sincronizar exatamente, manual é melhor.\n- **Vozes muito jovens/idosas:** Captura melhor vozes adultas normais.\n- **Custo em escala:** Milhões de caracteres por mês podem ficar caro.\n\n💡 **DICA PRÁTICA:** Use SSML (markup) para contolar inflexão onde ElevenLabs falha. `<emphasis level=\"strong\">palavra</emphasis>` força ênfase. Resolve 80% dos problemas."
+      },
+      {
+        "type": "text",
+        "title": "🎯 Como Extrair Bons Resultados",
+        "content": "Qualidade depende de texto bem estruturado. Adicione pontuação (vírgulas, pontos, reticências) – ElevenLabs usa para gerar pausas naturais. Quebras de linha indicam ênfase. Palavras em MAIÚSCULAS ganham ênfase automática.\n\nUse SSML para controle fino. `<break time=\"500ms\"/>` para pausa. `<pitch rate=\"1.5\">texto</pitch>` para mudar pitch. `<emotion name=\"sad\">texto</emotion>` para emoção (experimental). Estude documentação SSML para dominar.\n\nTeste com voz pré-treinada primeiro. Se resultado for bom, pronto – economiza gravação de clonagem. Se precisar de voz específica, grave 1 minuto bem enunciado, clone, teste.\n\n💡 **DICA PRÁTICA:** Para narração longa, divida em capítulos. Cada capítulo gera separado. Junta depois. Evita requests muito grandes que podem dar erro."
+      },
+      {
+        "type": "text",
+        "title": "⚠️ Atenção - Características Importantes",
+        "content": "**API Integrada em Muitas Plataformas**\nElevenLabs não é só website. API permite integração direta em apps, chatbots, games. Make, Zapier, OpenAI integrações. Seu assistente de IA pode falar usando ElevenLabs. Texto gerado por Claude pode virar áudio automaticamente.\n\n**Modelo de Preço Baseado em Caracteres**\nNão paga por minuto de áudio, paga por caracteres processados. 100k caracteres = ~1 hora de áudio. Pague apenas pelo que usa. Free tier é generoso para começar.\n\n**Qualidade Melhorou Drasticamente**\nCada atualização traz qualidade mais próxima de humano. Versão 2.0 foi salto enorme. Agora soa natural mesmo em prosa longa.\n\n💡 **DICA PRÁTICA:** Se já testou ElevenLabs há 1 ano, teste novamente. Qualidade melhorou exponencialmente. Pode não valer há 1 ano, vale agora."
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Questão 1 - Avaliação de Diferencial",
+        "question": "Qual é o principal diferencial do ElevenLabs em relação a Google TTS e Amazon Polly?",
+        "options": [
+          {
+            "text": "ElevenLabs é grátis forever",
+            "isCorrect": false,
+            "explanation": "Incorreto. A versão gratuita é limitada em caracteres mensais."
+          },
+          {
+            "text": "Oferece síntese de voz natural com clonagem de voz pessoal – você grava 1 min e cria sua voz",
+            "isCorrect": true,
+            "explanation": "Correto! O grande diferencial é a IA treinada em inflexões humanas e a facilidade extrema de clonar vozes com menos de um minuto de áudio."
+          },
+          {
+            "text": "Funciona offline sem internet",
+            "isCorrect": false,
+            "explanation": "Incorreto. A plataforma depende de poder de processamento na nuvem via web ou API."
+          },
+          {
+            "text": "Só para idioma inglês",
+            "isCorrect": false,
+            "explanation": "Incorreto. Suporta 50+ idiomas nativamente."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Ajustando o Som",
-          "description": "Ligue o ajuste ao resultado que ele gera na voz.",
+          "title": "🎮 Questão 2 - Ligar Conceitos",
+          "description": "Conecte o caso de uso ao benefício do ElevenLabs:",
           "pairs": [
             {
-              "left": "Estabilidade Baixa",
-              "right": "Voz com muita emoção e variação"
+              "left": "Criar 100 audiobooks",
+              "right": "Reduz tempo de produção em 70%"
             },
             {
-              "left": "Clareza Alta",
-              "right": "Voz limpa, ideal para aulas"
+              "left": "YouTuber quer narração consistente",
+              "right": "Clona sua voz, lê qualquer texto como você"
             },
             {
-              "left": "Estabilidade Alta",
-              "right": "Voz séria, ideal para notícias"
-            },
-            {
-              "left": "Similaridade 100%",
-              "right": "Cópia exata da voz original"
+              "left": "Assistente de IA precisa falar",
+              "right": "API integrada em plataformas de automação"
             }
           ]
         }
       },
       {
-        "type": "text",
-        "title": "🎤 O Método V.O.I.C.E. para Narração",
-        "content": "Para ter um áudio profissional, não basta colar o texto. Use o guia:\n\n* **V - Voz:** Escolha o 'personagem' certo (ex: Narrador Sábio).\n* **O - Output (Saída):** Defina a qualidade (MP3 ou WAV de alta definição).\n* **I - Input (Texto):** Use pontuação extra! Use '...' para pausas e CAPS para palavras importantes.\n* **C - Customização:** Ajuste os botões de emoção.\n* **E - Emoção:** Diga para a IA qual o tom (ex: 'Sussurrando' ou 'Gritando')."
-      },
-      {
-        "type": "text",
-        "title": "👤 Clonagem de Voz: Seu Gêmeo Digital",
-        "content": "A clonagem é o recurso mais poderoso. Você pode criar um 'Gêmeo Digital' da sua voz.\n\n\n\n**Como fazer um clone perfeito:**\n1. Grave 5 minutos de você falando naturalmente (não leia, apenas fale).\n2. Use um microfone bom e um lugar sem eco.\n3. Suba o arquivo e deixe a IA aprender o seu ritmo.\nPronto! Agora você pode criar 10 podcasts por dia sem precisar ir ao estúdio."
-      },
-      {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Criando seu Gêmeo",
-          "sentence": "Para clonar minha voz, eu preciso de um áudio ___ e sem ___, e depois ajusto a ___ para ficar igual ao original.",
+          "title": "📝 Questão 3 - Fixando Modelos e Recursos",
+          "sentence": "ElevenLabs transforma ___ em áudio natural. Oferece clonagem de voz gravando ___. Suporta ___ idiomas. Cobra por ___ (não por minuto). Texto bem estruturado com ___ gera prosódia melhor. Plano ___ é generoso para começar.",
           "answers": [
-            "limpo",
-            "eco",
-            "similaridade"
+            "Texto",
+            "1 minuto",
+            "50+",
+            "caracteres",
+            "pontuação",
+            "free"
           ],
           "options": [
-            "limpo",
-            "eco",
-            "similaridade",
-            "curto",
-            "música",
-            "cor"
+            "Texto",
+            "1 minuto",
+            "50+",
+            "caracteres",
+            "pontuação",
+            "free",
+            "Vídeo",
+            "10 minutos",
+            "20",
+            "segundos",
+            "vírgulas",
+            "premium",
+            "Imagem",
+            "1 hora",
+            "100+",
+            "horas",
+            "espaços",
+            "trial",
+            "Áudio",
+            "30 segundos",
+            "30",
+            "palavras",
+            "maiúsculas",
+            "starter"
           ],
-          "explanation": "Isso mesmo! Qualidade de gravação e ajuste de similaridade são os segredos do clone perfeito."
+          "explanation": "Gabarito: Texto, 1 minuto, 50+, caracteres, pontuação e free."
         }
       },
       {
         "type": "text",
-        "title": "🌐 Dublagem Mágica: Expansão Global",
-        "content": "Imagine transformar seu vídeo de 5 minutos em português em uma versão para o mercado americano ou espanhol em segundos. \n\nO ElevenLabs faz a 'Dublagem com Preservação de Voz'. Ele traduz o que você disse, mas mantém o **seu timbre** na outra língua. Isso economiza R$ 15.000 que você gastaria com estúdios de dublagem profissional."
-      },
-      {
-        "type": "text",
-        "title": "📚 Transformando Livros em Dinheiro (Audiobooks)",
-        "content": "O mercado de audiobooks cresce 300% ao ano. Com a IA, você pode narrar um livro de 300 páginas em 4 horas.\n\n**A Regra do Ouro:** Para audiobooks, use Estabilidade em 65%. Isso mantém a voz constante o suficiente para não cansar o ouvinte, mas com variações leves para não parecer um robô lendo a lista de compras."
-      },
-      {
-        "type": "quiz",
-        "title": "🧠 Teste: O Narrador de Sucesso",
-        "question": "Qual a melhor configuração para narrar um livro de suspense emocionante?",
-        "options": [
-          {
-            "text": "Estabilidade 100% e Clareza baixa",
-            "isCorrect": false,
-            "explanation": "Isso criaria uma voz monótona e difícil de entender."
-          },
-          {
-            "text": "Estabilidade 30% (para ter drama) e Clareza 90%",
-            "isCorrect": true,
-            "explanation": "Exato! Estabilidade baixa permite que a IA sinta o suspense do texto e mude o tom naturalmente."
-          },
-          {
-            "text": "Não precisa configurar nada, a IA decide sozinha",
-            "isCorrect": false,
-            "explanation": "A IA segue seus comandos. Sem configuração, o resultado pode ser aleatório."
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "title": "🎭 Vozes para Personagens",
-        "content": "Você pode criar vozes únicas para cada personagem de uma história:\n- **O Ancião:** Velocidade lenta (0.8x) e tom grave.\n- **O Entusiasta:** Velocidade rápida (1.1x) e estabilidade baixa para muita variação.\n- **O Robô:** Estabilidade 100% e similaridade zero.\n\nIsso permite que você crie rádio-novelas ou vídeos de animação inteiros sozinho."
-      },
-      {
-        "type": "text",
-        "title": "📱 Integração Total: Voz + Vídeo",
-        "content": "Os mestres da produtividade usam o ElevenLabs junto com o Captions e o ChatGPT.\n\n\n\n1.  **ChatGPT:** Escreve o roteiro.\n2.  **ElevenLabs:** Gera a narração profissional.\n3.  **Captions:** Junta o áudio com as legendas e imagens.\nO resultado é um vídeo de alta qualidade feito em 15 minutos."
-      },
-      {
-        "type": "text",
-        "title": "💰 Como Ganhar Dinheiro com Voz IA",
-        "content": "Existem serviços que as empresas precisam desesperadamente:\n* **Clonagem Vocal:** Cobrar R$ 1.000 para criar o clone de um influenciador.\n* **Dublagem de Cursos:** Cobrar R$ 3.000 para traduzir um curso inteiro.\n* **Newsletter em Áudio:** Cobrar R$ 500/mês para transformar os textos de um blog em episódios de podcast automáticos."
-      },
-      {
-        "type": "text",
-        "title": "⚠️ Ética: O Poder traz Responsabilidade",
-        "content": "Nunca use a clonagem para enganar pessoas ou cometer fraudes. \n- **Transparência:** Sempre avise que o áudio foi gerado por IA.\n- **Permissão:** Nunca clone a voz de terceiros sem autorização por escrito.\n- **Legal:** Voz é considerada um dado pessoal sensível. Respeite a privacidade alheia."
-      },
-      {
-        "type": "text",
-        "title": "🚀 Projeto Final: Seu Podcast Automático",
-        "content": "Para fechar o dia, você vai planejar o seu próprio podcast. \nImagine um sistema onde você cola as notícias do dia e a IA gera um áudio de 5 minutos com a sua voz, coloca uma música de fundo e publica no Spotify. \n\nEste projeto custaria R$ 5.000/mês com uma produtora. Para você, custará **R$ 20,00** e **10 minutos** do seu tempo."
-      },
-      {
-        "type": "text",
         "title": "🎓 Resumo do Dia 25",
-        "content": "**HOJE VOCÊ DOMINOU:**\n\n1.  Como gerar vozes humanas perfeitas com o ElevenLabs.\n2.  O segredo dos botões de Estabilidade, Clareza e Similaridade.\n3.  Como clonar sua voz e dublar conteúdos para o mundo todo.\n4.  Como ganhar dinheiro criando audiobooks e podcasts automáticos.\n\n**MENTALIDADE:**\nVocê agora tem o dom da fala digital. Sua mensagem pode ser ouvida em qualquer lugar do planeta, com qualquer voz que você imaginar.\n\n**AMANHÃ:** Integrações Avançadas! Vamos aprender a conectar TODAS as IAs em um único sistema de trabalho superpoderoso."
+        "content": "**CHEGAMOS AO FIM DO DIA 25!**\n\nHoje vimos que o **ElevenLabs** resolveu o grande problema da fala digital robótica. Ele domina o mercado com síntese de voz baseada em redes neurais de contexto.\n\nCom clonagem a partir de 1 minuto de áudio e cobrança justa por caractere, ele desbloqueia narração em escala para YouTube, cursos, podcasts e gamedevs.\n\nAs chaves de ouro: estruture muito bem seus textos (vírgulas, pulos de linha) e utilize a formatação SSML (como `<break time=\"500ms\"/>` ou `<emphasis>`) para sanar falhas específicas de dicção."
       }
     ]
   },

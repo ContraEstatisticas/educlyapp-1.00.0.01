@@ -583,12 +583,26 @@
     },
     "elevenlabs": {
       "1": {
-        "title": "Introdução ao ElevenLabs",
-        "description": "Conheça a ferramenta de voz IA."
-      },
-      "2": {
-        "title": "Clonando Sua Voz",
-        "description": "Crie clones de voz realistas."
+        "title": "🎙️ Domine o ElevenLabs",
+        "description": "Transforme textos em narrações hiper-realistas e crie clones da sua própria voz com precisão absoluta."
+      }
+    },
+    "fal": {
+      "1": {
+        "title": "🖼️ Domine o Fal AI",
+        "description": "Gere imagens e vídeos em tempo real com modelos de difusão de altíssima velocidade."
+      }
+    },
+    "luma": {
+      "1": {
+        "title": "🎥 Domine o Luma AI",
+        "description": "Crie vídeos e modelos 3D hiper-realistas a partir de imagens ou textos com o Dream Machine."
+      }
+    },
+    "suno": {
+      "1": {
+        "title": "🎵 Domine o Suno",
+        "description": "Componha músicas completas, com vocais e instrumentais originais de alta qualidade em segundos."
       }
     }
   },
