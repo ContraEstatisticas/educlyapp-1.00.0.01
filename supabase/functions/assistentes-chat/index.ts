@@ -184,7 +184,7 @@ serve(async (req) => {
 
     const AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
     const TEXT_MODEL = "gemini-2.5-flash";
-    const IMAGEN_URL = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict`;
+    const IMAGE_GEN_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${GEMINI_API_KEY}`;
 
     // --- Handle image generation (nanobanana) ---
     if (isImageType) {
@@ -217,14 +217,14 @@ serve(async (req) => {
       const briefResponse = textData.choices?.[0]?.message?.content || "";
 
       const imagePrompt = `${lastUserMessage}. Ultra high resolution, professional quality, highly detailed.`;
-      const imageResponse = await fetch(`${IMAGEN_URL}?key=${GEMINI_API_KEY}`, {
+      const imageResponse = await fetch(IMAGE_GEN_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          instances: [{ prompt: imagePrompt }],
-          parameters: { sampleCount: 1 },
+          contents: [{ parts: [{ text: imagePrompt }] }],
+          generationConfig: { responseModalities: ["TEXT", "IMAGE"] },
         }),
       });
 
@@ -256,13 +256,17 @@ serve(async (req) => {
       }
 
       const imageData = await imageResponse.json();
-      console.log("Imagen response:", JSON.stringify(imageData).slice(0, 300));
-      const prediction = imageData.predictions?.[0];
+      console.log("Gemini image response:", JSON.stringify(imageData).slice(0, 500));
+
+      // Gemini 2.0 Flash image generation returns inlineData in content parts
+      const parts: Array<{ text?: string; inlineData?: { data: string; mimeType: string } }> =
+        imageData.candidates?.[0]?.content?.parts || [];
+      const imagePart = parts.find((p) => p.inlineData);
       let imageUrl: string | null = null;
 
-      if (prediction?.bytesBase64Encoded) {
-        const b64 = prediction.bytesBase64Encoded;
-        const mimeType = prediction.mimeType || "image/png";
+      if (imagePart?.inlineData) {
+        const b64 = imagePart.inlineData.data;
+        const mimeType = imagePart.inlineData.mimeType || "image/png";
         const ext = mimeType === "image/jpeg" ? "jpg" : "png";
         const fileName = `nanobanana/${user.id}/${Date.now()}.${ext}`;
         const imageBytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
