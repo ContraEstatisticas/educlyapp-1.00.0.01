@@ -42,82 +42,245 @@
     "openChat": "Apri Chat",
     "description": "Fai domande e pratica ciò che hai imparato nelle lezioni con il nostro assistente IA"
   },
-
   "dailyMissions": {
     "title": "Missioni Giornaliere",
     "subtitle": "Guadagna XP e sali di livello"
   },
-
   "challenges": {
     "iniciante-ia": {
       "name": "Sfida IA Principiante",
       "description": "Impara tutto sulle 8 principali IA del mercato in 28 giorni di apprendimento intensivo e pratico.",
       "days": {
-        "1": { "title": "Introduzione a ChatGPT", "description": "Scopri ChatGPT e le sue capacità fondamentali." },
-        "2": { "title": "Creare Prompt Efficaci", "description": "Impara a creare prompt potenti." },
-        "3": { "title": "ChatGPT come Consulente", "description": "Usa ChatGPT come consulente esperto." },
+        "1": {
+          "title": "Introduzione a ChatGPT",
+          "description": "Scopri ChatGPT e le sue capacità fondamentali."
+        },
+        "2": {
+          "title": "Creare Prompt Efficaci",
+          "description": "Impara a creare prompt potenti."
+        },
+        "3": {
+          "title": "ChatGPT come Consulente",
+          "description": "Usa ChatGPT come consulente esperto."
+        },
         "4": {
           "title": "Progetto Pratico ChatGPT",
           "description": "Applica ciò che hai imparato in un progetto reale."
         },
-        "5": { "title": "Introduzione a Claude", "description": "Scopri Claude e i suoi differenziali." },
-        "6": { "title": "Copywriting con Claude", "description": "Crea testi persuasivi con Claude." },
-        "7": { "title": "Progetto Pratico Claude", "description": "Applica ciò che hai imparato da Claude." },
-        "8": { "title": "Introduzione a DeepSeek", "description": "Scopri DeepSeek e i suoi vantaggi." },
-        "9": { "title": "Generazione Codice con IA", "description": "Programmazione assistita da DeepSeek." },
-        "10": { "title": "Progetto Pratico DeepSeek", "description": "Applica ciò che hai imparato da DeepSeek." },
-        "11": { "title": "Introduzione a Gemini", "description": "Scopri Gemini di Google." },
-        "12": { "title": "Ricerca con Gemini", "description": "Usa Gemini per la ricerca." },
-        "13": { "title": "Progetto Pratico Gemini", "description": "Applica ciò che hai imparato da Gemini." },
-        "14": { "title": "Introduzione a NanoBanana", "description": "Scopri lo strumento di arte IA." },
-        "15": { "title": "Creare Arte con IA", "description": "Genera immagini impressionanti." },
-        "16": { "title": "Stili e Tecniche", "description": "Padroneggia gli stili artistici." },
-        "17": { "title": "Progetto Pratico NanoBanana", "description": "Applica ciò che hai imparato." },
-        "18": { "title": "Introduzione a Lovable", "description": "Scopri la piattaforma no-code." },
-        "19": { "title": "Creare Landing Page", "description": "Sviluppa landing page." },
-        "20": { "title": "Sistemi Completi", "description": "Crea applicazioni complete." },
-        "21": { "title": "Progetto Pratico Lovable", "description": "Applica ciò che hai imparato." },
-        "22": { "title": "Introduzione a Captions", "description": "Scopri lo strumento video." },
-        "23": { "title": "Editing Video con IA", "description": "Editing automatizzato." },
-        "24": { "title": "Progetto Pratico Captions", "description": "Applica ciò che hai imparato." },
-        "25": { "title": "Introduzione a ElevenLabs", "description": "Scopri lo strumento vocale." },
-        "26": { "title": "Clonazione Vocale", "description": "Crea cloni vocali realistici." },
-        "27": { "title": "Text-to-Speech Avanzato", "description": "Sintesi vocale professionale." },
-        "28": { "title": "Progetto Pratico ElevenLabs", "description": "Applica ciò che hai imparato." }
+        "5": {
+          "title": "Introduzione a Claude",
+          "description": "Scopri Claude e i suoi differenziali."
+        },
+        "6": {
+          "title": "Copywriting con Claude",
+          "description": "Crea testi persuasivi con Claude."
+        },
+        "7": {
+          "title": "Progetto Pratico Claude",
+          "description": "Applica ciò che hai imparato da Claude."
+        },
+        "8": {
+          "title": "Introduzione a DeepSeek",
+          "description": "Scopri DeepSeek e i suoi vantaggi."
+        },
+        "9": {
+          "title": "Generazione Codice con IA",
+          "description": "Programmazione assistita da DeepSeek."
+        },
+        "10": {
+          "title": "Progetto Pratico DeepSeek",
+          "description": "Applica ciò che hai imparato da DeepSeek."
+        },
+        "11": {
+          "title": "Introduzione a Gemini",
+          "description": "Scopri Gemini di Google."
+        },
+        "12": {
+          "title": "Ricerca con Gemini",
+          "description": "Usa Gemini per la ricerca."
+        },
+        "13": {
+          "title": "Progetto Pratico Gemini",
+          "description": "Applica ciò che hai imparato da Gemini."
+        },
+        "14": {
+          "title": "Introduzione a NanoBanana",
+          "description": "Scopri lo strumento di arte IA."
+        },
+        "15": {
+          "title": "Creare Arte con IA",
+          "description": "Genera immagini impressionanti."
+        },
+        "16": {
+          "title": "Stili e Tecniche",
+          "description": "Padroneggia gli stili artistici."
+        },
+        "17": {
+          "title": "Progetto Pratico NanoBanana",
+          "description": "Applica ciò che hai imparato."
+        },
+        "18": {
+          "title": "Introduzione a Lovable",
+          "description": "Scopri la piattaforma no-code."
+        },
+        "19": {
+          "title": "Creare Landing Page",
+          "description": "Sviluppa landing page."
+        },
+        "20": {
+          "title": "Sistemi Completi",
+          "description": "Crea applicazioni complete."
+        },
+        "21": {
+          "title": "Progetto Pratico Lovable",
+          "description": "Applica ciò che hai imparato."
+        },
+        "22": {
+          "title": "Introduzione a Captions",
+          "description": "Scopri lo strumento video."
+        },
+        "23": {
+          "title": "Editing Video con IA",
+          "description": "Editing automatizzato."
+        },
+        "24": {
+          "title": "Progetto Pratico Captions",
+          "description": "Applica ciò che hai imparato."
+        },
+        "25": {
+          "title": "Introduzione a ElevenLabs",
+          "description": "Scopri lo strumento vocale."
+        },
+        "26": {
+          "title": "Clonazione Vocale",
+          "description": "Crea cloni vocali realistici."
+        },
+        "27": {
+          "title": "Text-to-Speech Avanzato",
+          "description": "Sintesi vocale professionale."
+        },
+        "28": {
+          "title": "Progetto Pratico ElevenLabs",
+          "description": "Applica ciò che hai imparato."
+        }
       }
     },
     "criando-sistema": {
       "name": "Il Tuo Percorso Personalizzato",
       "description": "Rispondi a qualche domanda e lascia che l'IA crei un percorso di 28 giorni perfetto per i tuoi obiettivi.",
       "days": {
-        "1": { "title": "Definire la Tua Idea", "description": "Brainstorming con ChatGPT" },
-        "2": { "title": "Validare il Concetto", "description": "Valida la tua idea con ricerche di mercato" },
-        "3": { "title": "Pianificazione Strategica", "description": "Crea un piano d'azione dettagliato" },
-        "4": { "title": "Definire le Funzionalità", "description": "Elenca le caratteristiche del prodotto" },
-        "5": { "title": "Struttura dei Contenuti", "description": "Organizza i contenuti con l'IA" },
-        "6": { "title": "Creare i Testi Base", "description": "Scrivi i testi principali" },
-        "7": { "title": "Revisione Settimana 1", "description": "Consolida la pianificazione" },
-        "8": { "title": "Headlines e Titoli", "description": "Crea titoli d'impatto con Claude" },
-        "9": { "title": "Copy di Vendita", "description": "Scrivi testi persuasivi" },
-        "10": { "title": "Descrizioni Prodotto", "description": "Descrivi i tuoi prodotti/servizi" },
-        "11": { "title": "CTA e Pulsanti", "description": "Crea call to action efficaci" },
-        "12": { "title": "SEO e Meta Tag", "description": "Ottimizza per i motori di ricerca" },
-        "13": { "title": "FAQ e Supporto", "description": "Crea contenuti di aiuto" },
-        "14": { "title": "Revisione Settimana 2", "description": "Finalizza tutti i testi" },
-        "15": { "title": "Ricerca di Mercato", "description": "Analizza i concorrenti con Gemini" },
-        "16": { "title": "Analisi delle Tendenze", "description": "Identifica le opportunità" },
-        "17": { "title": "Validazione Finale", "description": "Conferma la fattibilità del progetto" },
-        "18": { "title": "Setup del Progetto", "description": "Configura l'ambiente in Lovable" },
-        "19": { "title": "Struttura Base", "description": "Crea la struttura principale" },
-        "20": { "title": "Pagine Principali", "description": "Sviluppa le pagine core" },
-        "21": { "title": "Funzionalità Core", "description": "Implementa le funzionalità essenziali" },
-        "22": { "title": "Design e UX", "description": "Affina l'interfaccia utente" },
-        "23": { "title": "Integrazioni", "description": "Collega servizi esterni" },
-        "24": { "title": "Test e Aggiustamenti", "description": "Testa e correggi i problemi" },
-        "25": { "title": "Deploy e Lancio", "description": "Pubblica il tuo prodotto" },
-        "26": { "title": "Creazione Video Pitch", "description": "Crea video promozionale con Captions" },
-        "27": { "title": "Montaggio Video", "description": "Finalizza il montaggio con IA" },
-        "28": { "title": "Voiceover del Pitch", "description": "Registra audio professionale con ElevenLabs" }
+        "1": {
+          "title": "Definire la Tua Idea",
+          "description": "Brainstorming con ChatGPT"
+        },
+        "2": {
+          "title": "Validare il Concetto",
+          "description": "Valida la tua idea con ricerche di mercato"
+        },
+        "3": {
+          "title": "Pianificazione Strategica",
+          "description": "Crea un piano d'azione dettagliato"
+        },
+        "4": {
+          "title": "Definire le Funzionalità",
+          "description": "Elenca le caratteristiche del prodotto"
+        },
+        "5": {
+          "title": "Struttura dei Contenuti",
+          "description": "Organizza i contenuti con l'IA"
+        },
+        "6": {
+          "title": "Creare i Testi Base",
+          "description": "Scrivi i testi principali"
+        },
+        "7": {
+          "title": "Revisione Settimana 1",
+          "description": "Consolida la pianificazione"
+        },
+        "8": {
+          "title": "Headlines e Titoli",
+          "description": "Crea titoli d'impatto con Claude"
+        },
+        "9": {
+          "title": "Copy di Vendita",
+          "description": "Scrivi testi persuasivi"
+        },
+        "10": {
+          "title": "Descrizioni Prodotto",
+          "description": "Descrivi i tuoi prodotti/servizi"
+        },
+        "11": {
+          "title": "CTA e Pulsanti",
+          "description": "Crea call to action efficaci"
+        },
+        "12": {
+          "title": "SEO e Meta Tag",
+          "description": "Ottimizza per i motori di ricerca"
+        },
+        "13": {
+          "title": "FAQ e Supporto",
+          "description": "Crea contenuti di aiuto"
+        },
+        "14": {
+          "title": "Revisione Settimana 2",
+          "description": "Finalizza tutti i testi"
+        },
+        "15": {
+          "title": "Ricerca di Mercato",
+          "description": "Analizza i concorrenti con Gemini"
+        },
+        "16": {
+          "title": "Analisi delle Tendenze",
+          "description": "Identifica le opportunità"
+        },
+        "17": {
+          "title": "Validazione Finale",
+          "description": "Conferma la fattibilità del progetto"
+        },
+        "18": {
+          "title": "Setup del Progetto",
+          "description": "Configura l'ambiente in Lovable"
+        },
+        "19": {
+          "title": "Struttura Base",
+          "description": "Crea la struttura principale"
+        },
+        "20": {
+          "title": "Pagine Principali",
+          "description": "Sviluppa le pagine core"
+        },
+        "21": {
+          "title": "Funzionalità Core",
+          "description": "Implementa le funzionalità essenziali"
+        },
+        "22": {
+          "title": "Design e UX",
+          "description": "Affina l'interfaccia utente"
+        },
+        "23": {
+          "title": "Integrazioni",
+          "description": "Collega servizi esterni"
+        },
+        "24": {
+          "title": "Test e Aggiustamenti",
+          "description": "Testa e correggi i problemi"
+        },
+        "25": {
+          "title": "Deploy e Lancio",
+          "description": "Pubblica il tuo prodotto"
+        },
+        "26": {
+          "title": "Creazione Video Pitch",
+          "description": "Crea video promozionale con Captions"
+        },
+        "27": {
+          "title": "Montaggio Video",
+          "description": "Finalizza il montaggio con IA"
+        },
+        "28": {
+          "title": "Voiceover del Pitch",
+          "description": "Registra audio professionale con ElevenLabs"
+        }
       }
     },
     "personalizado": {
@@ -127,7 +290,10 @@
   },
   "challengeDays": {
     "chatgpt": {
-      "1": { "title": "Introduzione a ChatGPT", "description": "Scopri ChatGPT e le sue capacità fondamentali." },
+      "1": {
+        "title": "Introduzione a ChatGPT",
+        "description": "Scopri ChatGPT e le sue capacità fondamentali."
+      },
       "2": {
         "title": "Creare Prompt Efficaci",
         "description": "Impara a creare prompt potenti che generano risultati."
@@ -140,63 +306,180 @@
         "title": "Analisi e Sintesi dei Testi",
         "description": "Padroneggia le tecniche di analisi e sintesi con l'IA."
       },
-      "5": { "title": "Creazione di Contenuti", "description": "Crea contenuti incredibili con l'assistenza dell'IA." },
-      "6": { "title": "ChatGPT per Email", "description": "Scrivi email professionali in pochi secondi." },
+      "5": {
+        "title": "Creazione di Contenuti",
+        "description": "Crea contenuti incredibili con l'assistenza dell'IA."
+      },
+      "6": {
+        "title": "ChatGPT per Email",
+        "description": "Scrivi email professionali in pochi secondi."
+      },
       "7": {
         "title": "Revisione Settimana 1",
         "description": "Consolida tutto ciò che hai imparato nella prima settimana."
       },
-      "8": { "title": "Tecniche di Role-Playing", "description": "Fai assumere a ChatGPT diversi ruoli." },
-      "9": { "title": "Chain of Thought", "description": "Impara la tecnica del ragionamento a catena." },
-      "10": { "title": "Few-Shot Learning", "description": "Insegna all'IA con esempi pratici." },
-      "11": { "title": "Formattazione Avanzata", "description": "Controlla il formato delle risposte dell'IA." },
-      "12": { "title": "ChatGPT per la Ricerca", "description": "Usa l'IA per ricerche più efficienti." },
-      "13": { "title": "Brainstorming con IA", "description": "Genera idee creative con assistenza." },
-      "14": { "title": "Revisione Settimana 2", "description": "Consolida le tecniche di base apprese." },
-      "15": { "title": "GPT-4 vs GPT-4o", "description": "Comprendi le differenze tra i modelli." },
-      "16": { "title": "Istruzioni Personalizzate", "description": "Personalizza il comportamento di ChatGPT." },
-      "17": { "title": "Plugin ed Estensioni", "description": "Espandi le capacità con strumenti." },
-      "18": { "title": "Code Interpreter", "description": "Esegui codice e analizza dati." },
-      "19": { "title": "Integrazione DALL-E", "description": "Crea immagini direttamente nella chat." },
-      "20": { "title": "Modalità Vocale", "description": "Conversa a voce con l'IA." },
-      "21": { "title": "Revisione Settimana 3", "description": "Padroneggia le tecniche intermedie." },
-      "22": { "title": "Automazioni con IA", "description": "Crea flussi di lavoro automatizzati." },
-      "23": { "title": "Basi API ChatGPT", "description": "Introduzione all'API di ChatGPT." },
-      "24": { "title": "Integrazione con Altri Strumenti", "description": "Collega ChatGPT ad altre piattaforme." },
-      "25": { "title": "Progetto Finale: Parte 1", "description": "Inizia il tuo progetto applicativo reale." },
-      "26": { "title": "Progetto Finale: Parte 2", "description": "Continua a sviluppare il tuo progetto." },
-      "27": { "title": "Progetto Finale: Parte 3", "description": "Finalizza e testa il tuo progetto." },
-      "28": { "title": "Diploma ChatGPT", "description": "Festeggia il tuo risultato e ricevi il certificato!" }
+      "8": {
+        "title": "Tecniche di Role-Playing",
+        "description": "Fai assumere a ChatGPT diversi ruoli."
+      },
+      "9": {
+        "title": "Chain of Thought",
+        "description": "Impara la tecnica del ragionamento a catena."
+      },
+      "10": {
+        "title": "Few-Shot Learning",
+        "description": "Insegna all'IA con esempi pratici."
+      },
+      "11": {
+        "title": "Formattazione Avanzata",
+        "description": "Controlla il formato delle risposte dell'IA."
+      },
+      "12": {
+        "title": "ChatGPT per la Ricerca",
+        "description": "Usa l'IA per ricerche più efficienti."
+      },
+      "13": {
+        "title": "Brainstorming con IA",
+        "description": "Genera idee creative con assistenza."
+      },
+      "14": {
+        "title": "Revisione Settimana 2",
+        "description": "Consolida le tecniche di base apprese."
+      },
+      "15": {
+        "title": "GPT-4 vs GPT-4o",
+        "description": "Comprendi le differenze tra i modelli."
+      },
+      "16": {
+        "title": "Istruzioni Personalizzate",
+        "description": "Personalizza il comportamento di ChatGPT."
+      },
+      "17": {
+        "title": "Plugin ed Estensioni",
+        "description": "Espandi le capacità con strumenti."
+      },
+      "18": {
+        "title": "Code Interpreter",
+        "description": "Esegui codice e analizza dati."
+      },
+      "19": {
+        "title": "Integrazione DALL-E",
+        "description": "Crea immagini direttamente nella chat."
+      },
+      "20": {
+        "title": "Modalità Vocale",
+        "description": "Conversa a voce con l'IA."
+      },
+      "21": {
+        "title": "Revisione Settimana 3",
+        "description": "Padroneggia le tecniche intermedie."
+      },
+      "22": {
+        "title": "Automazioni con IA",
+        "description": "Crea flussi di lavoro automatizzati."
+      },
+      "23": {
+        "title": "Basi API ChatGPT",
+        "description": "Introduzione all'API di ChatGPT."
+      },
+      "24": {
+        "title": "Integrazione con Altri Strumenti",
+        "description": "Collega ChatGPT ad altre piattaforme."
+      },
+      "25": {
+        "title": "Progetto Finale: Parte 1",
+        "description": "Inizia il tuo progetto applicativo reale."
+      },
+      "26": {
+        "title": "Progetto Finale: Parte 2",
+        "description": "Continua a sviluppare il tuo progetto."
+      },
+      "27": {
+        "title": "Progetto Finale: Parte 3",
+        "description": "Finalizza e testa il tuo progetto."
+      },
+      "28": {
+        "title": "Diploma ChatGPT",
+        "description": "Festeggia il tuo risultato e ricevi il certificato!"
+      }
     },
     "claude": {
-      "1": { "title": "Introduzione a Claude", "description": "Scopri Claude e i suoi punti di forza." },
-      "2": { "title": "Claude per l'Analisi", "description": "Usa Claude per analisi approfondite." },
-      "3": { "title": "Artifacts di Claude", "description": "Padroneggia la funzionalità Artifacts." },
-      "4": { "title": "Claude per la Scrittura", "description": "Crea testi di alta qualità." }
+      "1": {
+        "title": "Introduzione a Claude",
+        "description": "Scopri Claude e i suoi punti di forza."
+      },
+      "2": {
+        "title": "Claude per l'Analisi",
+        "description": "Usa Claude per analisi approfondite."
+      },
+      "3": {
+        "title": "Artifacts di Claude",
+        "description": "Padroneggia la funzionalità Artifacts."
+      },
+      "4": {
+        "title": "Claude per la Scrittura",
+        "description": "Crea testi di alta qualità."
+      }
     },
     "deepseek": {
-      "1": { "title": "Introduzione a DeepSeek", "description": "Scopri DeepSeek e i suoi vantaggi." },
-      "2": { "title": "DeepSeek per il Codice", "description": "Programmazione assistita dall'IA." }
+      "1": {
+        "title": "Introduzione a DeepSeek",
+        "description": "Scopri DeepSeek e i suoi vantaggi."
+      },
+      "2": {
+        "title": "DeepSeek per il Codice",
+        "description": "Programmazione assistita dall'IA."
+      }
     },
     "gemini": {
-      "1": { "title": "Introduzione a Gemini", "description": "Scopri Gemini di Google." },
-      "2": { "title": "Gemini Multimodale", "description": "Lavora con testo e immagini." }
+      "1": {
+        "title": "Introduzione a Gemini",
+        "description": "Scopri Gemini di Google."
+      },
+      "2": {
+        "title": "Gemini Multimodale",
+        "description": "Lavora con testo e immagini."
+      }
     },
     "nanobanana": {
-      "1": { "title": "Introduzione a NanoBanana", "description": "Scopri lo strumento di arte IA." },
-      "2": { "title": "Crea la Tua Prima Opera", "description": "Genera immagini straordinarie." }
+      "1": {
+        "title": "Introduzione a NanoBanana",
+        "description": "Scopri lo strumento di arte IA."
+      },
+      "2": {
+        "title": "Crea la Tua Prima Opera",
+        "description": "Genera immagini straordinarie."
+      }
     },
     "lovable": {
-      "1": { "title": "Introduzione a Lovable", "description": "Scopri la piattaforma no-code con IA." },
-      "2": { "title": "Crea la Tua Prima App", "description": "Sviluppa un'applicazione completa." }
+      "1": {
+        "title": "Introduzione a Lovable",
+        "description": "Scopri la piattaforma no-code con IA."
+      },
+      "2": {
+        "title": "Crea la Tua Prima App",
+        "description": "Sviluppa un'applicazione completa."
+      }
     },
     "captions": {
-      "1": { "title": "Introduzione a Captions", "description": "Scopri lo strumento video IA." },
-      "2": { "title": "Editing Video con IA", "description": "Editing video automatizzato." }
+      "1": {
+        "title": "Introduzione a Captions",
+        "description": "Scopri lo strumento video IA."
+      },
+      "2": {
+        "title": "Editing Video con IA",
+        "description": "Editing video automatizzato."
+      }
     },
     "elevenlabs": {
-      "1": { "title": "Introduzione a ElevenLabs", "description": "Scopri lo strumento voce IA." },
-      "2": { "title": "Clona la Tua Voce", "description": "Crea cloni vocali realistici." }
+      "1": {
+        "title": "Introduzione a ElevenLabs",
+        "description": "Scopri lo strumento voce IA."
+      },
+      "2": {
+        "title": "Clona la Tua Voce",
+        "description": "Crea cloni vocali realistici."
+      }
     }
   },
   "lessonSteps": {
@@ -214,9 +497,18 @@
           "title": "Quiz: Concetti Base",
           "question": "Qual è la funzione principale di ChatGPT?",
           "options": [
-            { "text": "Assistente IA conversazionale", "isCorrect": true },
-            { "text": "Editor di fogli di calcolo", "isCorrect": false },
-            { "text": "Browser internet", "isCorrect": false }
+            {
+              "text": "Assistente IA conversazionale",
+              "isCorrect": true
+            },
+            {
+              "text": "Editor di fogli di calcolo",
+              "isCorrect": false
+            },
+            {
+              "text": "Browser internet",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -233,9 +525,18 @@
           "title": "Quiz: Prompt",
           "question": "Quale elemento NON fa parte di un buon prompt?",
           "options": [
-            { "text": "Contesto", "isCorrect": false },
-            { "text": "Password personale", "isCorrect": true },
-            { "text": "Istruzione chiara", "isCorrect": false }
+            {
+              "text": "Contesto",
+              "isCorrect": false
+            },
+            {
+              "text": "Password personale",
+              "isCorrect": true
+            },
+            {
+              "text": "Istruzione chiara",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -252,9 +553,18 @@
           "title": "Quiz: Consulenza",
           "question": "Qual è la migliore pratica usando ChatGPT come specialista?",
           "options": [
-            { "text": "Fornire contesto dettagliato", "isCorrect": true },
-            { "text": "Usare prompt vaghi", "isCorrect": false },
-            { "text": "Non dare esempi", "isCorrect": false }
+            {
+              "text": "Fornire contesto dettagliato",
+              "isCorrect": true
+            },
+            {
+              "text": "Usare prompt vaghi",
+              "isCorrect": false
+            },
+            {
+              "text": "Non dare esempi",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -271,9 +581,18 @@
           "title": "Quiz: Analisi",
           "question": "Cosa NON è una tecnica valida di analisi con ChatGPT?",
           "options": [
-            { "text": "Sommario esecutivo", "isCorrect": false },
-            { "text": "Generare dati falsi", "isCorrect": true },
-            { "text": "Analisi del sentiment", "isCorrect": false }
+            {
+              "text": "Sommario esecutivo",
+              "isCorrect": false
+            },
+            {
+              "text": "Generare dati falsi",
+              "isCorrect": true
+            },
+            {
+              "text": "Analisi del sentiment",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -290,9 +609,18 @@
           "title": "Quiz: Contenuti",
           "question": "Cosa devi specificare per creare buoni contenuti?",
           "options": [
-            { "text": "Pubblico target e tono", "isCorrect": true },
-            { "text": "Solo l'argomento", "isCorrect": false },
-            { "text": "Nulla di specifico", "isCorrect": false }
+            {
+              "text": "Pubblico target e tono",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo l'argomento",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di specifico",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -309,9 +637,18 @@
           "title": "Quiz: Email",
           "question": "Qual è l'elemento più importante di un'email professionale?",
           "options": [
-            { "text": "Oggetto chiaro e call to action", "isCorrect": true },
-            { "text": "Molti emoji", "isCorrect": false },
-            { "text": "Testo molto lungo", "isCorrect": false }
+            {
+              "text": "Oggetto chiaro e call to action",
+              "isCorrect": true
+            },
+            {
+              "text": "Molti emoji",
+              "isCorrect": false
+            },
+            {
+              "text": "Testo molto lungo",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -328,9 +665,18 @@
           "title": "Quiz: Revisione",
           "question": "Qual è la chiave per padroneggiare ChatGPT?",
           "options": [
-            { "text": "Pratica costante e buoni prompt", "isCorrect": true },
-            { "text": "Usare senza contesto", "isCorrect": false },
-            { "text": "Copiare risposte senza revisionare", "isCorrect": false }
+            {
+              "text": "Pratica costante e buoni prompt",
+              "isCorrect": true
+            },
+            {
+              "text": "Usare senza contesto",
+              "isCorrect": false
+            },
+            {
+              "text": "Copiare risposte senza revisionare",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -349,9 +695,18 @@
           "title": "Quiz: DeepSeek Base",
           "question": "In cosa si specializza DeepSeek?",
           "options": [
-            { "text": "Programmazione e codice", "isCorrect": true },
-            { "text": "Editing immagini", "isCorrect": false },
-            { "text": "Musica", "isCorrect": false }
+            {
+              "text": "Programmazione e codice",
+              "isCorrect": true
+            },
+            {
+              "text": "Editing immagini",
+              "isCorrect": false
+            },
+            {
+              "text": "Musica",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -368,9 +723,18 @@
           "title": "Quiz: Codice",
           "question": "Cosa può fare DeepSeek con il tuo codice?",
           "options": [
-            { "text": "Generare, debuggare e ottimizzare", "isCorrect": true },
-            { "text": "Solo leggere", "isCorrect": false },
-            { "text": "Cancellare", "isCorrect": false }
+            {
+              "text": "Generare, debuggare e ottimizzare",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo leggere",
+              "isCorrect": false
+            },
+            {
+              "text": "Cancellare",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -387,9 +751,18 @@
           "title": "Quiz: Ottimizzazione",
           "question": "Quali aspetti DeepSeek può migliorare nel tuo codice?",
           "options": [
-            { "text": "Performance, leggibilità e sicurezza", "isCorrect": true },
-            { "text": "Solo il colore", "isCorrect": false },
-            { "text": "Il font", "isCorrect": false }
+            {
+              "text": "Performance, leggibilità e sicurezza",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo il colore",
+              "isCorrect": false
+            },
+            {
+              "text": "Il font",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -406,9 +779,18 @@
           "title": "Quiz: Analisi",
           "question": "Per che tipo di documenti è ideale Claude?",
           "options": [
-            { "text": "Documenti estesi e complessi", "isCorrect": true },
-            { "text": "Solo immagini", "isCorrect": false },
-            { "text": "File audio", "isCorrect": false }
+            {
+              "text": "Documenti estesi e complessi",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo immagini",
+              "isCorrect": false
+            },
+            {
+              "text": "File audio",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -425,9 +807,18 @@
           "title": "Quiz: Artifacts",
           "question": "Cosa puoi creare con gli Artifacts di Claude?",
           "options": [
-            { "text": "Codice eseguibile e visualizzazioni", "isCorrect": true },
-            { "text": "Solo testo semplice", "isCorrect": false },
-            { "text": "Nulla di interattivo", "isCorrect": false }
+            {
+              "text": "Codice eseguibile e visualizzazioni",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo testo semplice",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di interattivo",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -444,9 +835,18 @@
           "title": "Quiz: Scrittura",
           "question": "Cosa devi definire per una buona scrittura con Claude?",
           "options": [
-            { "text": "Stile, tono e audience", "isCorrect": true },
-            { "text": "Solo l'argomento", "isCorrect": false },
-            { "text": "Nulla di specifico", "isCorrect": false }
+            {
+              "text": "Stile, tono e audience",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo l'argomento",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di specifico",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -465,9 +865,18 @@
           "title": "Quiz: Claude Base",
           "question": "In cosa eccelle Claude rispetto ad altre IA?",
           "options": [
-            { "text": "Analisi approfondita e testi lunghi", "isCorrect": true },
-            { "text": "Generare immagini", "isCorrect": false },
-            { "text": "Editare video", "isCorrect": false }
+            {
+              "text": "Analisi approfondita e testi lunghi",
+              "isCorrect": true
+            },
+            {
+              "text": "Generare immagini",
+              "isCorrect": false
+            },
+            {
+              "text": "Editare video",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -484,9 +893,18 @@
           "title": "Quiz: Analisi",
           "question": "Per che tipo di documenti è ideale Claude?",
           "options": [
-            { "text": "Documenti estesi e complessi", "isCorrect": true },
-            { "text": "Solo immagini", "isCorrect": false },
-            { "text": "File audio", "isCorrect": false }
+            {
+              "text": "Documenti estesi e complessi",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo immagini",
+              "isCorrect": false
+            },
+            {
+              "text": "File audio",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -503,9 +921,18 @@
           "title": "Quiz: Artifacts",
           "question": "Cosa puoi creare con gli Artifacts di Claude?",
           "options": [
-            { "text": "Codice eseguibile e visualizzazioni", "isCorrect": true },
-            { "text": "Solo testo semplice", "isCorrect": false },
-            { "text": "Nulla di interattivo", "isCorrect": false }
+            {
+              "text": "Codice eseguibile e visualizzazioni",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo testo semplice",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di interattivo",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -522,9 +949,18 @@
           "title": "Quiz: Scrittura",
           "question": "Cosa devi definire per una buona scrittura con Claude?",
           "options": [
-            { "text": "Stile, tono e audience", "isCorrect": true },
-            { "text": "Solo l'argomento", "isCorrect": false },
-            { "text": "Nulla di specifico", "isCorrect": false }
+            {
+              "text": "Stile, tono e audience",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo l'argomento",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di specifico",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -543,9 +979,18 @@
           "title": "Quiz: Gemini Base",
           "question": "Qual è il vantaggio unico di Gemini?",
           "options": [
-            { "text": "Integrazione con servizi Google", "isCorrect": true },
-            { "text": "È più economico", "isCorrect": false },
-            { "text": "Funziona solo offline", "isCorrect": false }
+            {
+              "text": "Integrazione con servizi Google",
+              "isCorrect": true
+            },
+            {
+              "text": "È più economico",
+              "isCorrect": false
+            },
+            {
+              "text": "Funziona solo offline",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -562,9 +1007,18 @@
           "title": "Quiz: Multimodale",
           "question": "Quali tipi di contenuto può elaborare Gemini?",
           "options": [
-            { "text": "Testo, immagini e documenti", "isCorrect": true },
-            { "text": "Solo testo", "isCorrect": false },
-            { "text": "Solo audio", "isCorrect": false }
+            {
+              "text": "Testo, immagini e documenti",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo testo",
+              "isCorrect": false
+            },
+            {
+              "text": "Solo audio",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -581,9 +1035,18 @@
           "title": "Quiz: Report",
           "question": "Perché dividere in passaggi?",
           "options": [
-            { "text": "Permette di affinare ogni parte con qualità", "isCorrect": true },
-            { "text": "È obbligatorio per Gemini", "isCorrect": false },
-            { "text": "Risparmia crediti", "isCorrect": false }
+            {
+              "text": "Permette di affinare ogni parte con qualità",
+              "isCorrect": true
+            },
+            {
+              "text": "È obbligatorio per Gemini",
+              "isCorrect": false
+            },
+            {
+              "text": "Risparmia crediti",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -602,9 +1065,18 @@
           "title": "Quiz: NanoBanana",
           "question": "Che tipo di contenuto genera NanoBanana?",
           "options": [
-            { "text": "Immagini artistiche da testo", "isCorrect": true },
-            { "text": "Video", "isCorrect": false },
-            { "text": "Musica", "isCorrect": false }
+            {
+              "text": "Immagini artistiche da testo",
+              "isCorrect": true
+            },
+            {
+              "text": "Video",
+              "isCorrect": false
+            },
+            {
+              "text": "Musica",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -621,9 +1093,18 @@
           "title": "Quiz: Arte",
           "question": "Cosa rende un prompt d'immagine più efficace?",
           "options": [
-            { "text": "Dettagli di colore, luce e stile", "isCorrect": true },
-            { "text": "Una sola parola", "isCorrect": false },
-            { "text": "Nessuna descrizione", "isCorrect": false }
+            {
+              "text": "Dettagli di colore, luce e stile",
+              "isCorrect": true
+            },
+            {
+              "text": "Una sola parola",
+              "isCorrect": false
+            },
+            {
+              "text": "Nessuna descrizione",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -642,9 +1123,18 @@
           "title": "Quiz: Lovable",
           "question": "Cosa puoi creare con Lovable senza programmare?",
           "options": [
-            { "text": "Applicazioni web complete", "isCorrect": true },
-            { "text": "Solo documenti di testo", "isCorrect": false },
-            { "text": "Nulla di funzionale", "isCorrect": false }
+            {
+              "text": "Applicazioni web complete",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo documenti di testo",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di funzionale",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -661,9 +1151,18 @@
           "title": "Quiz: Sviluppo",
           "question": "Come usare Lovable al meglio?",
           "options": [
-            { "text": "Descrivere chiaramente e iterare", "isCorrect": true },
-            { "text": "Prompt molto vaghi", "isCorrect": false },
-            { "text": "Non specificare il design", "isCorrect": false }
+            {
+              "text": "Descrivere chiaramente e iterare",
+              "isCorrect": true
+            },
+            {
+              "text": "Prompt molto vaghi",
+              "isCorrect": false
+            },
+            {
+              "text": "Non specificare il design",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -682,9 +1181,18 @@
           "title": "Quiz: Captions",
           "question": "Quale funzione principale offre Captions?",
           "options": [
-            { "text": "Sottotitoli e editing video con IA", "isCorrect": true },
-            { "text": "Editing foto", "isCorrect": false },
-            { "text": "Creazione musica", "isCorrect": false }
+            {
+              "text": "Sottotitoli e editing video con IA",
+              "isCorrect": true
+            },
+            {
+              "text": "Editing foto",
+              "isCorrect": false
+            },
+            {
+              "text": "Creazione musica",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -701,9 +1209,18 @@
           "title": "Quiz: Video",
           "question": "Cosa fa Captions per migliorare i video?",
           "options": [
-            { "text": "Tagli, zoom e transizioni automatiche", "isCorrect": true },
-            { "text": "Solo aggiungere testo", "isCorrect": false },
-            { "text": "Nulla di automatico", "isCorrect": false }
+            {
+              "text": "Tagli, zoom e transizioni automatiche",
+              "isCorrect": true
+            },
+            {
+              "text": "Solo aggiungere testo",
+              "isCorrect": false
+            },
+            {
+              "text": "Nulla di automatico",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -722,9 +1239,18 @@
           "title": "Quiz: ElevenLabs",
           "question": "Che tipo di contenuto genera ElevenLabs?",
           "options": [
-            { "text": "Audio e voce sintetizzata", "isCorrect": true },
-            { "text": "Immagini", "isCorrect": false },
-            { "text": "Video", "isCorrect": false }
+            {
+              "text": "Audio e voce sintetizzata",
+              "isCorrect": true
+            },
+            {
+              "text": "Immagini",
+              "isCorrect": false
+            },
+            {
+              "text": "Video",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -741,9 +1267,18 @@
           "title": "Quiz: Clonazione",
           "question": "Cosa serve per clonare una voce?",
           "options": [
-            { "text": "Audio di almeno 30 secondi", "isCorrect": true },
-            { "text": "Ore di registrazioni", "isCorrect": false },
-            { "text": "Studio professionale", "isCorrect": false }
+            {
+              "text": "Audio di almeno 30 secondi",
+              "isCorrect": true
+            },
+            {
+              "text": "Ore di registrazioni",
+              "isCorrect": false
+            },
+            {
+              "text": "Studio professionale",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -1068,21 +1603,36 @@
         "subtitle": "4 IA specializzate per diversi compiti: insegnamento, prompting, pianificazione e creazione di immagini.",
         "stats": "4 Specializzati",
         "button": "Esplora Assistenti",
-        "features": ["Chat Intelligente", "Generatore di Immagini", "Analisi dei Dati", "Tutor IA"]
+        "features": [
+          "Chat Intelligente",
+          "Generatore di Immagini",
+          "Analisi dei Dati",
+          "Tutor IA"
+        ]
       },
       "freelancer": {
         "title": "Premium Freelancer's",
         "subtitle": "Trasforma le tue competenze in reddito. Impara a trovare clienti, fare preventivi e chiudere contratti.",
         "stats": "Guida alla Carriera",
         "button": "Accedi all'Area",
-        "features": ["Prospezione", "Prezzi", "Vendite", "Gestione Clienti"]
+        "features": [
+          "Prospezione",
+          "Prezzi",
+          "Vendite",
+          "Gestione Clienti"
+        ]
       },
       "projects": {
         "title": "Progetti Pratici",
         "subtitle": "Impara facendo con progetti IA reali da aggiungere al tuo portfolio.",
         "stats": "12 Progetti",
         "button": "Visualizza Progetti",
-        "features": ["Portfolio IA", "Casi Reali", "Modelli", "Code-along"]
+        "features": [
+          "Portfolio IA",
+          "Casi Reali",
+          "Modelli",
+          "Code-along"
+        ]
       }
     },
     "missions": {
@@ -1166,7 +1716,7 @@
   },
   "thankYou": {
     "badge": "Benvenuto all'Accademia IA",
-    "title": "Grazie!",
+    "title": "Padroneggia le migliori IA con",
     "subtitle": "Benvenuto nel futuro dell'intelligenza artificiale",
     "description": "Il tuo viaggio di trasformazione digitale inizia ora",
     "ctaButton": "Inizia il Mio Percorso",
@@ -1225,50 +1775,219 @@
     }
   },
   "landing": {
-    "nav": {"home": "Home", "about": "Chi siamo", "programs": "Funzionalità", "testimonials": "Testimonianze", "plan": "Piano", "contact": "Contatti", "login": "Accedi", "startNow": "Scarica App"},
-    "hero": {"badge": "L'app di IA più completa sul mercato", "title": "Padroneggia", "titleHighlight": "l'Intelligenza Artificiale", "titleEnd": "Direttamente dal Tuo Telefono", "subtitle": "Impara l'IA con percorsi interattivi, esercizi pratici e certificati digitali — tutto nell'app. Accesso a +20 strumenti IA, modalità offline e gamification.", "cta": "Scarica gratis", "demo": "Guarda la demo", "students": "download", "rating": "valutazione", "countries": "paesi"},
+    "subtitle": "Percorsi Interattivi",
+    "nav": {
+      "home": "Home",
+      "about": "Chi siamo",
+      "programs": "Funzionalità",
+      "testimonials": "Testimonianze",
+      "plan": "Piano",
+      "contact": "Contatti",
+      "login": "Accedi",
+      "startNow": "Scarica App"
+    },
+    "hero": {
+      "badge": "L'app di IA più completa sul mercato",
+      "title": "Padroneggia",
+      "titleHighlight": "l'Intelligenza Artificiale",
+      "titleEnd": "Direttamente dal Tuo Telefono",
+      "subtitle": "Impara l'IA con percorsi interattivi, esercizi pratici e certificati digitali — tutto nell'app. Accesso a +20 strumenti IA, modalità offline e gamification.",
+      "cta": "Scarica gratis",
+      "demo": "Guarda la demo",
+      "students": "download",
+      "rating": "valutazione",
+      "countries": "paesi"
+    },
     "features": {
-      "sectionLabel": "Funzionalità dell'App", "title": "Tutto Ciò che Serve nella Tua Tasca", "subtitle": "Un'app completa con percorsi interattivi, assistente IA, progresso in tempo reale e certificati.",
-      "curriculum": {"title": "Percorsi Interattivi", "description": "Impara con percorsi gamificati e contenuti sempre aggiornati sui migliori strumenti IA."},
-      "mentoring": {"title": "Assistente IA Integrato", "description": "Ottieni risposte in tempo reale da EDI, il tuo assistente IA personale nell'app."},
-      "community": {"title": "Progresso in Tempo Reale", "description": "Monitora il tuo avanzamento con dashboard dettagliate, serie e statistiche di apprendimento."},
-      "certification": {"title": "Certificati Digitali", "description": "Guadagna certificati completando percorsi e sfide per dimostrare le tue competenze IA."},
-      "practical": {"title": "Modalità Offline", "description": "Scarica le lezioni e studia senza internet — perfetto per imparare ovunque."},
-      "career": {"title": "Gamification", "description": "Guadagna XP, sali di livello, sblocca badge e mantieni la tua serie di studi quotidiana."}
+      "sectionLabel": "Funzionalità dell'App",
+      "title": "Tutto Ciò che Serve nella Tua Tasca",
+      "subtitle": "Un'app completa con percorsi interattivi, assistente IA, progresso in tempo reale e certificati.",
+      "curriculum": {
+        "title": "Percorsi Interattivi",
+        "description": "Impara con percorsi gamificati e contenuti sempre aggiornati sui migliori strumenti IA."
+      },
+      "mentoring": {
+        "title": "Assistente IA Integrato",
+        "description": "Ottieni risposte in tempo reale da EDI, il tuo assistente IA personale nell'app."
+      },
+      "community": {
+        "title": "Progresso in Tempo Reale",
+        "description": "Monitora il tuo avanzamento con dashboard dettagliate, serie e statistiche di apprendimento."
+      },
+      "certification": {
+        "title": "Certificati Digitali",
+        "description": "Guadagna certificati completando percorsi e sfide per dimostrare le tue competenze IA."
+      },
+      "practical": {
+        "title": "Modalità Offline",
+        "description": "Scarica le lezioni e studia senza internet — perfetto per imparare ovunque."
+      },
+      "career": {
+        "title": "Gamification",
+        "description": "Guadagna XP, sali di livello, sblocca badge e mantieni la tua serie di studi quotidiana."
+      }
     },
     "programs": {
-      "sectionLabel": "Funzionalità", "title": "Esplora le funzionalità dell'app", "subtitle": "Funzionalità pensate per tutti i livelli.",
-      "popular": "Più popolare", "startNow": "Scarica App", "beginner": "Principiante", "intermediate": "Intermedio", "advanced": "Avanzato",
-      "fundamentals": {"title": "Percorsi IA", "description": "Inizia il tuo viaggio IA con percorsi interattivi e gamificati nell'app.", "duration": "4 settimane", "highlights": ["Percorsi IA interattivi", "Esercizi pratici con ChatGPT", "Automazione via app", "Certificato digitale"]},
-      "machineLearning": {"title": "Sfide Avanzate", "description": "Immergiti in sfide di 28 giorni con esercizi quotidiani.", "duration": "28 giorni", "highlights": ["Sfide IA quotidiane", "Esercizi interattivi", "Progresso gamificato", "Certificati di completamento"]},
-      "deepLearning": {"title": "Assistente IA Personale", "description": "Usa EDI, il tuo assistente IA integrato, per domande e allenamento prompt.", "duration": "Illimitato", "highlights": ["Chat IA integrata", "Allenatore di prompt", "Risposte in tempo reale", "Supporto personalizzato nell'app"]}
+      "sectionLabel": "Funzionalità",
+      "title": "Esplora le funzionalità dell'app",
+      "subtitle": "Funzionalità pensate per tutti i livelli.",
+      "popular": "Più popolare",
+      "startNow": "Scarica App",
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato",
+      "fundamentals": {
+        "title": "Percorsi IA",
+        "description": "Inizia il tuo viaggio IA con percorsi interattivi e gamificati nell'app.",
+        "duration": "4 settimane",
+        "highlights": [
+          "Percorsi IA interattivi",
+          "Esercizi pratici con ChatGPT",
+          "Automazione via app",
+          "Certificato digitale"
+        ]
+      },
+      "machineLearning": {
+        "title": "Sfide Avanzate",
+        "description": "Immergiti in sfide di 28 giorni con esercizi quotidiani.",
+        "duration": "28 giorni",
+        "highlights": [
+          "Sfide IA quotidiane",
+          "Esercizi interattivi",
+          "Progresso gamificato",
+          "Certificati di completamento"
+        ]
+      },
+      "deepLearning": {
+        "title": "Assistente IA Personale",
+        "description": "Usa EDI, il tuo assistente IA integrato, per domande e allenamento prompt.",
+        "duration": "Illimitato",
+        "highlights": [
+          "Chat IA integrata",
+          "Allenatore di prompt",
+          "Risposte in tempo reale",
+          "Supporto personalizzato nell'app"
+        ]
+      }
     },
-    "pricing": {"badge": "Prezzi", "title": "Sblocca il potenziale dell'app", "subtitle": "Inizia oggi il tuo viaggio di apprendimento IA", "week1": "PIANO 1 SETTIMANA", "week4": "PIANO 4 SETTIMANE", "week12": "PIANO 12 SETTIMANE", "mostPopular": "PIÙ POPOLARE", "from": "DA", "for": "A", "perDay": "al giorno", "getMyPlan": "OTTIENI IL MIO PIANO", "note": "Chi usa il piano 12 settimane ottiene il doppio dei risultati."},
+    "pricing": {
+      "badge": "Prezzi",
+      "title": "Sblocca il potenziale dell'app",
+      "subtitle": "Inizia oggi il tuo viaggio di apprendimento IA",
+      "week1": "PIANO 1 SETTIMANA",
+      "week4": "PIANO 4 SETTIMANE",
+      "week12": "PIANO 12 SETTIMANE",
+      "mostPopular": "PIÙ POPOLARE",
+      "from": "DA",
+      "for": "A",
+      "perDay": "al giorno",
+      "getMyPlan": "OTTIENI IL MIO PIANO",
+      "note": "Chi usa il piano 12 settimane ottiene il doppio dei risultati."
+    },
     "testimonials": {
-      "sectionLabel": "Testimonianze", "title": "Cosa dicono i nostri utenti", "subtitle": "Migliaia di persone hanno già imparato l'IA con l'app Educly.",
+      "sectionLabel": "Testimonianze",
+      "title": "Cosa dicono i nostri utenti",
+      "subtitle": "Migliaia di persone hanno già imparato l'IA con l'app Educly.",
       "items": [
-        {"name": "Maria Silva", "role": "Data Scientist", "country": "Brasile", "text": "L'app Educly ha trasformato il mio modo di imparare l'IA. La uso ogni giorno in autobus e in 3 mesi ho ottenuto il mio primo lavoro."},
-        {"name": "João Santos", "role": "Product Manager", "country": "Portogallo", "text": "L'app è fantastica — i percorsi sono pratici e posso studiare offline. La gamification mi tiene motivato."},
-        {"name": "Ana García", "role": "ML Engineer", "country": "Messico", "text": "Ho completato diverse sfide tramite l'app e i certificati digitali hanno fatto la differenza nel mio CV."},
-        {"name": "Carlos Fernández", "role": "Startup Founder", "country": "Argentina", "text": "Uso l'app quotidianamente per restare aggiornato sull'IA. La modalità offline è perfetta per chi viaggia."}
+        {
+          "name": "Maria Silva",
+          "role": "Data Scientist",
+          "country": "Brasile",
+          "text": "L'app Educly ha trasformato il mio modo di imparare l'IA. La uso ogni giorno in autobus e in 3 mesi ho ottenuto il mio primo lavoro."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portogallo",
+          "text": "L'app è fantastica — i percorsi sono pratici e posso studiare offline. La gamification mi tiene motivato."
+        },
+        {
+          "name": "Ana García",
+          "role": "ML Engineer",
+          "country": "Messico",
+          "text": "Ho completato diverse sfide tramite l'app e i certificati digitali hanno fatto la differenza nel mio CV."
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Startup Founder",
+          "country": "Argentina",
+          "text": "Uso l'app quotidianamente per restare aggiornato sull'IA. La modalità offline è perfetta per chi viaggia."
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "Portata globale", "title": "Presenti in tutto il mondo", "subtitle": "L'app Educly è stata scaricata in oltre 150 paesi.",
-      "regions": {"latinAmerica": "America Latina", "europe": "Europa", "northAmerica": "Nord America", "asiaOceania": "Asia e Oceania"},
-      "features": {"languages": {"title": "15 lingue", "description": "App disponibile in più lingue con traduzione professionale"}, "support": {"title": "Supporto 24/7", "description": "Assistente IA integrato e team di supporto sempre disponibile"}, "community": {"title": "Community nell'App", "description": "Connettiti con utenti di tutto il mondo e condividi i tuoi progressi"}}
+      "sectionLabel": "Portata globale",
+      "title": "Presenti in tutto il mondo",
+      "subtitle": "L'app Educly è stata scaricata in oltre 150 paesi.",
+      "regions": {
+        "latinAmerica": "America Latina",
+        "europe": "Europa",
+        "northAmerica": "Nord America",
+        "asiaOceania": "Asia e Oceania"
+      },
+      "features": {
+        "languages": {
+          "title": "15 lingue",
+          "description": "App disponibile in più lingue con traduzione professionale"
+        },
+        "support": {
+          "title": "Supporto 24/7",
+          "description": "Assistente IA integrato e team di supporto sempre disponibile"
+        },
+        "community": {
+          "title": "Community nell'App",
+          "description": "Connettiti con utenti di tutto il mondo e condividi i tuoi progressi"
+        }
+      }
     },
-    "stats": {"students": "Download", "countries": "Paesi", "satisfaction": "Valutazione Store", "partners": "Strumenti IA"},
+    "stats": {
+      "students": "Download",
+      "countries": "Paesi",
+      "satisfaction": "Valutazione Store",
+      "partners": "Strumenti IA"
+    },
     "cta": {
-      "title": "Pronto a imparare l'IA direttamente dal tuo telefono?", "subtitle": "Unisciti a oltre 50.000 utenti che già padroneggiano l'IA con l'app Educly.",
-      "startFree": "Scarica gratis", "talkConsultant": "Parla con il supporto", "guarantee": "Garanzia 30 giorni", "installments": "Fino a 12 rate",
-      "benefits": ["Accesso completo a tutti i percorsi", "Aggiornamenti gratuiti dell'app", "Assistente IA integrato", "Certificati digitali", "Modalità offline disponibile", "Garanzia soddisfatti 30 giorni"]
+      "title": "Pronto a imparare l'IA direttamente dal tuo telefono?",
+      "subtitle": "Unisciti a oltre 50.000 utenti che già padroneggiano l'IA con l'app Educly.",
+      "startFree": "Scarica gratis",
+      "talkConsultant": "Parla con il supporto",
+      "guarantee": "Garanzia 30 giorni",
+      "installments": "Fino a 12 rate",
+      "benefits": [
+        "Accesso completo a tutti i percorsi",
+        "Aggiornamenti gratuiti dell'app",
+        "Assistente IA integrato",
+        "Certificati digitali",
+        "Modalità offline disponibile",
+        "Garanzia soddisfatti 30 giorni"
+      ]
     },
     "footer": {
       "description": "L'app di Intelligenza Artificiale più completa sul mercato. Impara l'IA nella pratica, dal tuo telefono.",
-      "contact": "Contatto", "programs": "Funzionalità", "resources": "Risorse", "company": "Azienda", "legal": "Legale",
-      "links": {"aiFundamentals": "Percorsi IA", "machineLearning": "Sfide 28 giorni", "deepLearning": "Assistente IA", "aiForBusiness": "Certificati Digitali", "blog": "Blog", "webinars": "Tutorial", "ebooks": "Guide", "community": "Community", "aboutUs": "Chi siamo", "careers": "Carriere", "partnerships": "Partnership", "contact": "Contatti", "terms": "Termini di utilizzo", "privacy": "Privacy", "cookies": "Cookie"},
-      "copyright": "Tutti i diritti riservati.", "madeWith": "Fatto con ❤️ per la community IA globale"
+      "contact": "Contatto",
+      "programs": "Funzionalità",
+      "resources": "Risorse",
+      "company": "Azienda",
+      "legal": "Legale",
+      "links": {
+        "aiFundamentals": "Percorsi IA",
+        "machineLearning": "Sfide 28 giorni",
+        "deepLearning": "Assistente IA",
+        "aiForBusiness": "Certificati Digitali",
+        "blog": "Blog",
+        "webinars": "Tutorial",
+        "ebooks": "Guide",
+        "community": "Community",
+        "aboutUs": "Chi siamo",
+        "careers": "Carriere",
+        "partnerships": "Partnership",
+        "contact": "Contatti",
+        "terms": "Termini di utilizzo",
+        "privacy": "Privacy",
+        "cookies": "Cookie"
+      },
+      "copyright": "Tutti i diritti riservati.",
+      "madeWith": "Fatto con ❤️ per la community IA globale"
     }
   },
   "personalizedBrief": {
@@ -1510,6 +2229,45 @@
       "cards": "Ogni card è un assistente diverso! 🎨 C'è creatore di prompt, pianificatore di progetti, generatore di immagini e altro!",
       "cardClick": "Clicca su un assistente per chattare! 💬 Ti aiuteranno a risolvere problemi reali di tutti i giorni!",
       "finish": "Ora scegline uno e testalo! ✨ Ognuno ha una personalità unica. Divertiti ad esplorare!"
+    },
+    "onboarding": {
+      "base": {
+        "welcome": "Ciao! 👋 Sono EDI, la tua guida su Educly! Benvenuto nel tuo corso di IA!",
+        "streak": "Ecco la tua serie settimanale! 🔥 Studia ogni giorno per guadagnare XP bonus!",
+        "challenge": "Ecco la tua Sfida di 28 Giorni! 🎯 Impara le 8 principali IA del mercato!",
+        "finish": "Pronto! 🎉 Inizia la tua sfida di 28 giorni e padroneggia l'Intelligenza Artificiale. Andiamo!"
+      },
+      "freelancer": {
+        "welcome": "Ciao! 👋 Sono EDI! Complimenti per il Premium Freelancer! 💼 Lascia che ti mostri tutto ciò che hai sbloccato!",
+        "streak": "Ecco la tua serie! 🔥 Mantieni il ritmo per accelerare il tuo apprendimento!",
+        "challenge": "Ecco la tua Sfida di 28 Giorni! 🎯 Padroneggia le principali IA del mercato!",
+        "freelancerCard": "Ed ecco l'Hub Freelancer! 💰 Il tuo accesso esclusivo ai moduli sulla monetizzazione dell'IA: posizionamento, portfolio, prezzi e come acquisire clienti!",
+        "medals": "Guadagna Medaglie! 🏅 Completa i moduli freelancer e guadagna medaglie che dimostrano le tue competenze!",
+        "finish": "Fantastico! 🎉 Hai accesso ai migliori contenuti freelancer! Inizia dalla sfida o immergiti nell'Hub. Andiamo a fatturare!"
+      },
+      "aipack": {
+        "welcome": "Ciao! 👋 Sono EDI! Hai sbloccato l'AI Pack! 🤖 Lascia che ti mostri la potenza che hai ora!",
+        "streak": "Ecco la tua serie settimanale! 🔥 Studia ogni giorno per XP extra!",
+        "challenge": "Inizia dalla Sfida di 28 Giorni! 🎯 Impara le 8 principali IA del mercato!",
+        "assistantsCard": "Ed ecco i tuoi Assistenti IA! 🤖 IA specializzate che rispondono 24h, aiutano con compiti reali e accelerano il tuo apprendimento!",
+        "ediChat": "Ed ecco EDI, il tuo tutor IA! 💬 Cliccaci quando hai bisogno di aiuto — è disponibile 24h!",
+        "finish": "Incredibile! 🎉 Hai la potenza dell'AI Pack! Usa gli assistenti ed EDI quando ne hai bisogno. Padroneggiamo l'IA!"
+      },
+      "combo": {
+        "welcome": "Ciao! 👋 Sono EDI! WOW! Hai il pacchetto completo! 🚀 Lascia che ti mostri tutto ciò che hai sbloccato!",
+        "streak": "La tua serie settimanale è qui! 🔥 Tieni acceso il fuoco e moltiplica i tuoi XP!",
+        "challenge": "La tua Sfida di 28 Giorni! 🎯 La base di tutto: padroneggia le 8 principali IA del mercato!",
+        "assistantsCard": "I tuoi Assistenti IA! 🤖 IA specializzate 24h al giorno per rispondere alle domande e accelerare i tuoi compiti reali!",
+        "freelancerCard": "E l'Hub Freelancer! 💼 Moduli completi sulla monetizzazione dell'IA: posizionamento, portfolio e come acquisire clienti premium!",
+        "ediChat": "Incontra EDI, il tuo tutor personale! 💬 Cliccaci quando hai domande — ti aiuta su qualsiasi argomento di IA, 24h!",
+        "medals": "Ecco le tue Medaglie! 🏅 Completa i moduli e guadagna medaglie esclusive che mostrano la tua evoluzione!",
+        "finish": "Hai TUTTO! 🎉 Assistenti + Freelancer + Sfida + EDI. Questo combo è imbattibile. Trasformiamo la tua carriera!"
+      },
+      "badges": {
+        "combo": "✨ Pacchetto Completo",
+        "aipack": "🤖 AI Pack",
+        "freelancer": "💼 Premium Freelancer"
+      }
     }
   },
   "lesson": {

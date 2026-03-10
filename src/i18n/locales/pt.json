@@ -3079,6 +3079,45 @@
       "cards": "Cada card é um assistente diferente! 🎨 Tem criador de prompts, planejador de projetos, gerador de imagens e mais!",
       "cardClick": "Clica num assistente pra conversar! 💬 Eles vão te ajudar a resolver problemas reais do dia a dia!",
       "finish": "Agora escolhe um e testa! ✨ Cada um tem personalidade única. Divirta-se explorando!"
+    },
+    "onboarding": {
+      "base": {
+        "welcome": "Oi! 👋 Eu sou o EDI, seu guia na Educly! Bem-vindo ao seu curso de IA!",
+        "streak": "Aqui fica sua sequência semanal! 🔥 Estude todos os dias para ganhar XP bônus!",
+        "challenge": "Esse é o seu Desafio de 28 Dias! 🎯 Aprenda as 8 principais ferramentas de IA do mercado!",
+        "finish": "Prontinho! 🎉 Comece seu desafio de 28 dias e domine a Inteligência Artificial. Bora aprender!"
+      },
+      "freelancer": {
+        "welcome": "Oi! 👋 Eu sou o EDI! Parabéns pelo Premium Freelancer! 💼 Vou te mostrar tudo que você desbloqueou!",
+        "streak": "Aqui fica sua sequência! 🔥 Mantenha o ritmo pra acelerar seu aprendizado!",
+        "challenge": "Esse é o seu Desafio de 28 Dias! 🎯 Domine as principais IAs do mercado!",
+        "freelancerCard": "E aqui está o Hub Freelancer! 💰 Seu acesso exclusivo a módulos sobre como monetizar IA: posicionamento, portfólio, precificação e como fechar clientes!",
+        "medals": "Conquiste Medalhas! 🏅 Complete módulos freelancer e ganhe medalhas que comprovam suas habilidades!",
+        "finish": "Show! 🎉 Você tem acesso ao melhor conteúdo freelancer! Comece pelo desafio ou mergulhe no Hub. Bora faturar!"
+      },
+      "aipack": {
+        "welcome": "Oi! 👋 Eu sou o EDI! Você desbloqueou o AI Pack! 🤖 Deixa eu te mostrar o poder que você tem agora!",
+        "streak": "Essa é sua sequência semanal! 🔥 Estude todo dia e ganhe XP extra!",
+        "challenge": "Comece pelo Desafio de 28 Dias! 🎯 Aprenda as 8 principais IAs do mercado!",
+        "assistantsCard": "E aqui estão seus Assistentes de IA! 🤖 IAs especializadas que tiram suas dúvidas 24h, ajudam com tarefas reais e aceleram seu aprendizado!",
+        "ediChat": "E esse é o EDI, seu tutor de IA! 💬 Clique nele sempre que precisar de ajuda — ele tá disponível 24h!",
+        "finish": "Incrível! 🎉 Você tem o poder do AI Pack! Use os assistentes e o EDI sempre que precisar. Bora dominar a IA!"
+      },
+      "combo": {
+        "welcome": "Oi! 👋 Eu sou o EDI! WOW! Você tem o pacote completo! 🚀 Vou te mostrar tudo que você desbloqueou!",
+        "streak": "Sua sequência semanal fica aqui! 🔥 Mantenha o fogo aceso e multiplique seu XP!",
+        "challenge": "Seu Desafio de 28 Dias! 🎯 A base de tudo: domine as 8 principais IAs do mercado!",
+        "assistantsCard": "Seus Assistentes de IA! 🤖 IAs especializadas 24h por dia pra tirar dúvidas e acelerar suas tarefas reais!",
+        "freelancerCard": "E o Hub Freelancer! 💼 Módulos completos sobre como monetizar IA: posicionamento, portfólio e como fechar clientes de alto valor!",
+        "ediChat": "Conheça o EDI, seu tutor pessoal! 💬 Clique aqui sempre que tiver dúvidas — ele te ajuda com qualquer assunto de IA, 24h por dia!",
+        "medals": "Aqui ficam suas Medalhas! 🏅 Complete módulos e conquiste medalhas exclusivas que mostram sua evolução!",
+        "finish": "Você tem TUDO! 🎉 Assistentes + Freelancer + Desafio + EDI. Esse combo é imbatível. Bora transformar sua carreira!"
+      },
+      "badges": {
+        "combo": "✨ Pacote Completo",
+        "aipack": "🤖 AI Pack",
+        "freelancer": "💼 Premium Freelancer"
+      }
     }
   },
   "legal": {
@@ -3572,7 +3611,11 @@
     "settingsSaved": "Configurações salvas!",
     "notificationsUpdated": "Suas preferências de notificação foram atualizadas."
   },
+  "landing": {
+    "subtitle": "Trilhas Interativas"
+  },
   "thankYou": {
+    "title": "Domine as melhores IAs com",
     "registrationSuccess": "Inscrição Confirmada",
     "createAccountTitle": "Crie seu cadastro",
     "createAccountDesc": "Informe seus dados para liberar o acesso agora mesmo.",

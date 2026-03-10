@@ -2623,6 +2623,7 @@
     "unlockButton": "Go to ChatGPT"
   },
   "thankYou": {
+    "title": "Master the best AIs with",
     "registrationSuccess": "Registration confirmed",
     "createAccountTitle": "Create your account",
     "createAccountDesc": "Enter your details to unlock access right now.",
@@ -2910,6 +2911,45 @@
       "cards": "Each card is a different assistant! 🎨 There's a prompt creator, project planner, image generator and more!",
       "cardClick": "Click on an assistant to chat! 💬 They'll help you solve real everyday problems!",
       "finish": "Now pick one and test it! ✨ Each one has a unique personality. Have fun exploring!"
+    },
+    "onboarding": {
+      "base": {
+        "welcome": "Hi! 👋 I'm EDI, your guide at Educly! Welcome to your AI course!",
+        "streak": "Here's your weekly streak! 🔥 Study every day for bonus XP!",
+        "challenge": "This is your 28-Day Challenge! 🎯 Learn the 8 top AI tools on the market!",
+        "finish": "All set! 🎉 Start your 28-day challenge and master Artificial Intelligence. Let's learn!"
+      },
+      "freelancer": {
+        "welcome": "Hi! 👋 I'm EDI! Congrats on Premium Freelancer! 💼 Let me show you everything you unlocked!",
+        "streak": "Here's your streak! 🔥 Keep the pace to accelerate your learning!",
+        "challenge": "This is your 28-Day Challenge! 🎯 Master the top AIs on the market!",
+        "freelancerCard": "And here's the Freelancer Hub! 💰 Your exclusive access to modules on how to monetize AI: positioning, portfolio, pricing and closing clients!",
+        "medals": "Earn Medals! 🏅 Complete freelancer modules and earn medals that prove your skills!",
+        "finish": "Awesome! 🎉 You have access to the best freelancer content! Start with the challenge or dive into the Hub. Let's earn!"
+      },
+      "aipack": {
+        "welcome": "Hi! 👋 I'm EDI! You unlocked the AI Pack! 🤖 Let me show you the power you have now!",
+        "streak": "This is your weekly streak! 🔥 Study every day for extra XP!",
+        "challenge": "Start with the 28-Day Challenge! 🎯 Learn the 8 top AIs on the market!",
+        "assistantsCard": "And here are your AI Assistants! 🤖 Specialized AIs that answer your questions 24/7, help with real tasks and accelerate your learning!",
+        "ediChat": "And this is EDI, your AI tutor! 💬 Click on him whenever you need help — he's available 24/7!",
+        "finish": "Amazing! 🎉 You have the power of the AI Pack! Use the assistants and EDI whenever you need. Let's master AI!"
+      },
+      "combo": {
+        "welcome": "Hi! 👋 I'm EDI! WOW! You have the complete package! 🚀 Let me show you everything you unlocked!",
+        "streak": "Your weekly streak is here! 🔥 Keep the fire burning and multiply your XP!",
+        "challenge": "Your 28-Day Challenge! 🎯 The foundation of everything: master the 8 top AIs on the market!",
+        "assistantsCard": "Your AI Assistants! 🤖 Specialized AIs 24/7 to answer questions and accelerate your real tasks!",
+        "freelancerCard": "And the Freelancer Hub! 💼 Complete modules on how to monetize AI: positioning, portfolio and closing high-value clients!",
+        "ediChat": "Meet EDI, your personal tutor! 💬 Click here whenever you have questions — he helps with any AI topic, 24/7!",
+        "medals": "Here are your Medals! 🏅 Complete modules and earn exclusive medals that show your evolution!",
+        "finish": "You have EVERYTHING! 🎉 Assistants + Freelancer + Challenge + EDI. This combo is unbeatable. Let's transform your career!"
+      },
+      "badges": {
+        "combo": "✨ Complete Package",
+        "aipack": "🤖 AI Pack",
+        "freelancer": "💼 Premium Freelancer"
+      }
     }
   },
   "lesson": {

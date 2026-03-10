@@ -42,12 +42,10 @@
     "openChat": "Chat Öffnen",
     "description": "Stellen Sie Fragen und üben Sie, was Sie in den Lektionen gelernt haben, mit unserem KI-Assistenten"
   },
-
   "dailyMissions": {
     "title": "Tägliche Missionen",
     "subtitle": "Verdiene XP und steige im Level auf"
   },
-
   "challenges": {
     "iniciante-ia": {
       "name": "KI-Einsteiger-Challenge",
@@ -61,69 +59,228 @@
           "title": "Effektive Prompts Erstellen",
           "description": "Lernen Sie, leistungsstarke Prompts zu erstellen."
         },
-        "3": { "title": "ChatGPT als Berater", "description": "Nutzen Sie ChatGPT als Expertenberater." },
+        "3": {
+          "title": "ChatGPT als Berater",
+          "description": "Nutzen Sie ChatGPT als Expertenberater."
+        },
         "4": {
           "title": "Praktisches Projekt ChatGPT",
           "description": "Wenden Sie das Gelernte in einem realen Projekt an."
         },
-        "5": { "title": "Einführung in Claude", "description": "Lernen Sie Claude und seine Unterschiede kennen." },
-        "6": { "title": "Copywriting mit Claude", "description": "Erstellen Sie überzeugende Texte mit Claude." },
-        "7": { "title": "Praktisches Projekt Claude", "description": "Wenden Sie das von Claude Gelernte an." },
-        "8": { "title": "Einführung in DeepSeek", "description": "Lernen Sie DeepSeek und seine Vorteile kennen." },
-        "9": { "title": "Code-Generierung mit KI", "description": "KI-unterstützte Programmierung mit DeepSeek." },
-        "10": { "title": "Praktisches Projekt DeepSeek", "description": "Wenden Sie das von DeepSeek Gelernte an." },
-        "11": { "title": "Einführung in Gemini", "description": "Lernen Sie Gemini von Google kennen." },
-        "12": { "title": "Recherche mit Gemini", "description": "Nutzen Sie Gemini für Recherchen." },
-        "13": { "title": "Praktisches Projekt Gemini", "description": "Wenden Sie das von Gemini Gelernte an." },
-        "14": { "title": "Einführung in NanoBanana", "description": "Lernen Sie das KI-Kunsttool kennen." },
-        "15": { "title": "Kunst mit KI Erstellen", "description": "Generieren Sie beeindruckende Bilder." },
-        "16": { "title": "Stile und Techniken", "description": "Meistern Sie künstlerische Stile." },
-        "17": { "title": "Praktisches Projekt NanoBanana", "description": "Wenden Sie das Gelernte an." },
-        "18": { "title": "Einführung in Lovable", "description": "Lernen Sie die No-Code-Plattform kennen." },
-        "19": { "title": "Landing Pages Erstellen", "description": "Entwickeln Sie Landing Pages." },
-        "20": { "title": "Komplette Systeme", "description": "Erstellen Sie vollständige Anwendungen." },
-        "21": { "title": "Praktisches Projekt Lovable", "description": "Wenden Sie das Gelernte an." },
-        "22": { "title": "Einführung in Captions", "description": "Lernen Sie das Video-Tool kennen." },
-        "23": { "title": "Videos mit KI Bearbeiten", "description": "Automatisierte Bearbeitung." },
-        "24": { "title": "Praktisches Projekt Captions", "description": "Wenden Sie das Gelernte an." },
-        "25": { "title": "Einführung in ElevenLabs", "description": "Lernen Sie das Sprach-Tool kennen." },
-        "26": { "title": "Stimmklonen", "description": "Erstellen Sie realistische Stimmklone." },
-        "27": { "title": "Fortgeschrittenes Text-to-Speech", "description": "Professionelle Sprachsynthese." },
-        "28": { "title": "Praktisches Projekt ElevenLabs", "description": "Wenden Sie das Gelernte an." }
+        "5": {
+          "title": "Einführung in Claude",
+          "description": "Lernen Sie Claude und seine Unterschiede kennen."
+        },
+        "6": {
+          "title": "Copywriting mit Claude",
+          "description": "Erstellen Sie überzeugende Texte mit Claude."
+        },
+        "7": {
+          "title": "Praktisches Projekt Claude",
+          "description": "Wenden Sie das von Claude Gelernte an."
+        },
+        "8": {
+          "title": "Einführung in DeepSeek",
+          "description": "Lernen Sie DeepSeek und seine Vorteile kennen."
+        },
+        "9": {
+          "title": "Code-Generierung mit KI",
+          "description": "KI-unterstützte Programmierung mit DeepSeek."
+        },
+        "10": {
+          "title": "Praktisches Projekt DeepSeek",
+          "description": "Wenden Sie das von DeepSeek Gelernte an."
+        },
+        "11": {
+          "title": "Einführung in Gemini",
+          "description": "Lernen Sie Gemini von Google kennen."
+        },
+        "12": {
+          "title": "Recherche mit Gemini",
+          "description": "Nutzen Sie Gemini für Recherchen."
+        },
+        "13": {
+          "title": "Praktisches Projekt Gemini",
+          "description": "Wenden Sie das von Gemini Gelernte an."
+        },
+        "14": {
+          "title": "Einführung in NanoBanana",
+          "description": "Lernen Sie das KI-Kunsttool kennen."
+        },
+        "15": {
+          "title": "Kunst mit KI Erstellen",
+          "description": "Generieren Sie beeindruckende Bilder."
+        },
+        "16": {
+          "title": "Stile und Techniken",
+          "description": "Meistern Sie künstlerische Stile."
+        },
+        "17": {
+          "title": "Praktisches Projekt NanoBanana",
+          "description": "Wenden Sie das Gelernte an."
+        },
+        "18": {
+          "title": "Einführung in Lovable",
+          "description": "Lernen Sie die No-Code-Plattform kennen."
+        },
+        "19": {
+          "title": "Landing Pages Erstellen",
+          "description": "Entwickeln Sie Landing Pages."
+        },
+        "20": {
+          "title": "Komplette Systeme",
+          "description": "Erstellen Sie vollständige Anwendungen."
+        },
+        "21": {
+          "title": "Praktisches Projekt Lovable",
+          "description": "Wenden Sie das Gelernte an."
+        },
+        "22": {
+          "title": "Einführung in Captions",
+          "description": "Lernen Sie das Video-Tool kennen."
+        },
+        "23": {
+          "title": "Videos mit KI Bearbeiten",
+          "description": "Automatisierte Bearbeitung."
+        },
+        "24": {
+          "title": "Praktisches Projekt Captions",
+          "description": "Wenden Sie das Gelernte an."
+        },
+        "25": {
+          "title": "Einführung in ElevenLabs",
+          "description": "Lernen Sie das Sprach-Tool kennen."
+        },
+        "26": {
+          "title": "Stimmklonen",
+          "description": "Erstellen Sie realistische Stimmklone."
+        },
+        "27": {
+          "title": "Fortgeschrittenes Text-to-Speech",
+          "description": "Professionelle Sprachsynthese."
+        },
+        "28": {
+          "title": "Praktisches Projekt ElevenLabs",
+          "description": "Wenden Sie das Gelernte an."
+        }
       }
     },
     "criando-sistema": {
       "name": "Ihr Personalisierter Lernpfad",
       "description": "Beantworten Sie ein paar Fragen und lassen Sie die KI einen perfekten 28-Tage-Pfad für Ihre Ziele erstellen.",
       "days": {
-        "1": { "title": "Ihre Idee Definieren", "description": "Brainstorming mit ChatGPT" },
-        "2": { "title": "Konzept Validieren", "description": "Validieren Sie Ihre Idee mit Marktforschung" },
-        "3": { "title": "Strategische Planung", "description": "Erstellen Sie einen detaillierten Aktionsplan" },
-        "4": { "title": "Funktionen Definieren", "description": "Listen Sie die Produktmerkmale auf" },
-        "5": { "title": "Inhaltsstruktur", "description": "Organisieren Sie Inhalte mit KI" },
-        "6": { "title": "Basistexte Erstellen", "description": "Schreiben Sie die Haupttexte" },
-        "7": { "title": "Woche 1 Review", "description": "Konsolidieren Sie die Planung" },
-        "8": { "title": "Headlines und Titel", "description": "Erstellen Sie wirkungsvolle Titel mit Claude" },
-        "9": { "title": "Verkaufstext", "description": "Schreiben Sie überzeugende Texte" },
-        "10": { "title": "Produktbeschreibungen", "description": "Beschreiben Sie Ihre Produkte/Dienstleistungen" },
-        "11": { "title": "CTAs und Buttons", "description": "Erstellen Sie effektive Handlungsaufforderungen" },
-        "12": { "title": "SEO und Meta-Tags", "description": "Optimieren Sie für Suchmaschinen" },
-        "13": { "title": "FAQ und Support", "description": "Erstellen Sie Hilfeinhalte" },
-        "14": { "title": "Woche 2 Review", "description": "Finalisieren Sie alle Texte" },
-        "15": { "title": "Marktforschung", "description": "Analysieren Sie Wettbewerber mit Gemini" },
-        "16": { "title": "Trendanalyse", "description": "Identifizieren Sie Chancen" },
-        "17": { "title": "Finale Validierung", "description": "Bestätigen Sie die Projektdurchführbarkeit" },
-        "18": { "title": "Projekt-Setup", "description": "Richten Sie die Umgebung in Lovable ein" },
-        "19": { "title": "Basisstruktur", "description": "Erstellen Sie die Hauptstruktur" },
-        "20": { "title": "Hauptseiten", "description": "Entwickeln Sie die Kernseiten" },
-        "21": { "title": "Kernfunktionen", "description": "Implementieren Sie wesentliche Funktionen" },
-        "22": { "title": "Design und UX", "description": "Verfeinern Sie die Benutzeroberfläche" },
-        "23": { "title": "Integrationen", "description": "Verbinden Sie externe Dienste" },
-        "24": { "title": "Tests und Anpassungen", "description": "Testen und beheben Sie Probleme" },
-        "25": { "title": "Deployment und Launch", "description": "Veröffentlichen Sie Ihr Produkt" },
-        "26": { "title": "Pitch-Video Erstellen", "description": "Erstellen Sie ein Promo-Video mit Captions" },
-        "27": { "title": "Videobearbeitung", "description": "Finalisieren Sie die Bearbeitung mit KI" },
-        "28": { "title": "Pitch-Voiceover", "description": "Nehmen Sie professionelles Audio mit ElevenLabs auf" }
+        "1": {
+          "title": "Ihre Idee Definieren",
+          "description": "Brainstorming mit ChatGPT"
+        },
+        "2": {
+          "title": "Konzept Validieren",
+          "description": "Validieren Sie Ihre Idee mit Marktforschung"
+        },
+        "3": {
+          "title": "Strategische Planung",
+          "description": "Erstellen Sie einen detaillierten Aktionsplan"
+        },
+        "4": {
+          "title": "Funktionen Definieren",
+          "description": "Listen Sie die Produktmerkmale auf"
+        },
+        "5": {
+          "title": "Inhaltsstruktur",
+          "description": "Organisieren Sie Inhalte mit KI"
+        },
+        "6": {
+          "title": "Basistexte Erstellen",
+          "description": "Schreiben Sie die Haupttexte"
+        },
+        "7": {
+          "title": "Woche 1 Review",
+          "description": "Konsolidieren Sie die Planung"
+        },
+        "8": {
+          "title": "Headlines und Titel",
+          "description": "Erstellen Sie wirkungsvolle Titel mit Claude"
+        },
+        "9": {
+          "title": "Verkaufstext",
+          "description": "Schreiben Sie überzeugende Texte"
+        },
+        "10": {
+          "title": "Produktbeschreibungen",
+          "description": "Beschreiben Sie Ihre Produkte/Dienstleistungen"
+        },
+        "11": {
+          "title": "CTAs und Buttons",
+          "description": "Erstellen Sie effektive Handlungsaufforderungen"
+        },
+        "12": {
+          "title": "SEO und Meta-Tags",
+          "description": "Optimieren Sie für Suchmaschinen"
+        },
+        "13": {
+          "title": "FAQ und Support",
+          "description": "Erstellen Sie Hilfeinhalte"
+        },
+        "14": {
+          "title": "Woche 2 Review",
+          "description": "Finalisieren Sie alle Texte"
+        },
+        "15": {
+          "title": "Marktforschung",
+          "description": "Analysieren Sie Wettbewerber mit Gemini"
+        },
+        "16": {
+          "title": "Trendanalyse",
+          "description": "Identifizieren Sie Chancen"
+        },
+        "17": {
+          "title": "Finale Validierung",
+          "description": "Bestätigen Sie die Projektdurchführbarkeit"
+        },
+        "18": {
+          "title": "Projekt-Setup",
+          "description": "Richten Sie die Umgebung in Lovable ein"
+        },
+        "19": {
+          "title": "Basisstruktur",
+          "description": "Erstellen Sie die Hauptstruktur"
+        },
+        "20": {
+          "title": "Hauptseiten",
+          "description": "Entwickeln Sie die Kernseiten"
+        },
+        "21": {
+          "title": "Kernfunktionen",
+          "description": "Implementieren Sie wesentliche Funktionen"
+        },
+        "22": {
+          "title": "Design und UX",
+          "description": "Verfeinern Sie die Benutzeroberfläche"
+        },
+        "23": {
+          "title": "Integrationen",
+          "description": "Verbinden Sie externe Dienste"
+        },
+        "24": {
+          "title": "Tests und Anpassungen",
+          "description": "Testen und beheben Sie Probleme"
+        },
+        "25": {
+          "title": "Deployment und Launch",
+          "description": "Veröffentlichen Sie Ihr Produkt"
+        },
+        "26": {
+          "title": "Pitch-Video Erstellen",
+          "description": "Erstellen Sie ein Promo-Video mit Captions"
+        },
+        "27": {
+          "title": "Videobearbeitung",
+          "description": "Finalisieren Sie die Bearbeitung mit KI"
+        },
+        "28": {
+          "title": "Pitch-Voiceover",
+          "description": "Nehmen Sie professionelles Audio mit ElevenLabs auf"
+        }
       }
     },
     "personalizado": {
@@ -149,66 +306,180 @@
         "title": "Textanalyse und Zusammenfassung",
         "description": "Meistern Sie Analyse- und Synthesetechniken mit KI."
       },
-      "5": { "title": "Content-Erstellung", "description": "Erstellen Sie erstaunliche Inhalte mit KI-Unterstützung." },
-      "6": { "title": "ChatGPT für E-Mails", "description": "Schreiben Sie professionelle E-Mails in Sekunden." },
+      "5": {
+        "title": "Content-Erstellung",
+        "description": "Erstellen Sie erstaunliche Inhalte mit KI-Unterstützung."
+      },
+      "6": {
+        "title": "ChatGPT für E-Mails",
+        "description": "Schreiben Sie professionelle E-Mails in Sekunden."
+      },
       "7": {
         "title": "Woche 1 Rückblick",
         "description": "Festigen Sie alles, was Sie in der ersten Woche gelernt haben."
       },
-      "8": { "title": "Role-Playing Techniken", "description": "Lassen Sie ChatGPT verschiedene Rollen übernehmen." },
-      "9": { "title": "Chain of Thought", "description": "Lernen Sie die Kettendenken-Technik." },
-      "10": { "title": "Few-Shot Learning", "description": "Bringen Sie der KI mit praktischen Beispielen bei." },
-      "11": { "title": "Erweiterte Formatierung", "description": "Kontrollieren Sie das Format der KI-Antworten." },
-      "12": { "title": "ChatGPT für Recherche", "description": "Nutzen Sie KI für effizientere Recherchen." },
-      "13": { "title": "Brainstorming mit KI", "description": "Generieren Sie kreative Ideen mit Unterstützung." },
-      "14": { "title": "Woche 2 Rückblick", "description": "Festigen Sie die erlernten Grundtechniken." },
-      "15": { "title": "GPT-4 vs GPT-4o", "description": "Verstehen Sie die Unterschiede zwischen den Modellen." },
-      "16": { "title": "Benutzerdefinierte Anweisungen", "description": "Passen Sie das Verhalten von ChatGPT an." },
-      "17": { "title": "Plugins und Erweiterungen", "description": "Erweitern Sie die Fähigkeiten mit Tools." },
-      "18": { "title": "Code Interpreter", "description": "Führen Sie Code aus und analysieren Sie Daten." },
-      "19": { "title": "DALL-E Integration", "description": "Erstellen Sie Bilder direkt im Chat." },
-      "20": { "title": "Sprachmodus", "description": "Sprechen Sie per Stimme mit der KI." },
-      "21": { "title": "Woche 3 Rückblick", "description": "Meistern Sie die fortgeschrittenen Techniken." },
-      "22": { "title": "Automatisierungen mit KI", "description": "Erstellen Sie automatisierte Workflows." },
-      "23": { "title": "ChatGPT API Grundlagen", "description": "Einführung in die ChatGPT API." },
+      "8": {
+        "title": "Role-Playing Techniken",
+        "description": "Lassen Sie ChatGPT verschiedene Rollen übernehmen."
+      },
+      "9": {
+        "title": "Chain of Thought",
+        "description": "Lernen Sie die Kettendenken-Technik."
+      },
+      "10": {
+        "title": "Few-Shot Learning",
+        "description": "Bringen Sie der KI mit praktischen Beispielen bei."
+      },
+      "11": {
+        "title": "Erweiterte Formatierung",
+        "description": "Kontrollieren Sie das Format der KI-Antworten."
+      },
+      "12": {
+        "title": "ChatGPT für Recherche",
+        "description": "Nutzen Sie KI für effizientere Recherchen."
+      },
+      "13": {
+        "title": "Brainstorming mit KI",
+        "description": "Generieren Sie kreative Ideen mit Unterstützung."
+      },
+      "14": {
+        "title": "Woche 2 Rückblick",
+        "description": "Festigen Sie die erlernten Grundtechniken."
+      },
+      "15": {
+        "title": "GPT-4 vs GPT-4o",
+        "description": "Verstehen Sie die Unterschiede zwischen den Modellen."
+      },
+      "16": {
+        "title": "Benutzerdefinierte Anweisungen",
+        "description": "Passen Sie das Verhalten von ChatGPT an."
+      },
+      "17": {
+        "title": "Plugins und Erweiterungen",
+        "description": "Erweitern Sie die Fähigkeiten mit Tools."
+      },
+      "18": {
+        "title": "Code Interpreter",
+        "description": "Führen Sie Code aus und analysieren Sie Daten."
+      },
+      "19": {
+        "title": "DALL-E Integration",
+        "description": "Erstellen Sie Bilder direkt im Chat."
+      },
+      "20": {
+        "title": "Sprachmodus",
+        "description": "Sprechen Sie per Stimme mit der KI."
+      },
+      "21": {
+        "title": "Woche 3 Rückblick",
+        "description": "Meistern Sie die fortgeschrittenen Techniken."
+      },
+      "22": {
+        "title": "Automatisierungen mit KI",
+        "description": "Erstellen Sie automatisierte Workflows."
+      },
+      "23": {
+        "title": "ChatGPT API Grundlagen",
+        "description": "Einführung in die ChatGPT API."
+      },
       "24": {
         "title": "Integration mit Anderen Tools",
         "description": "Verbinden Sie ChatGPT mit anderen Plattformen."
       },
-      "25": { "title": "Abschlussprojekt: Teil 1", "description": "Starten Sie Ihr Anwendungsprojekt." },
-      "26": { "title": "Abschlussprojekt: Teil 2", "description": "Entwickeln Sie Ihr Projekt weiter." },
-      "27": { "title": "Abschlussprojekt: Teil 3", "description": "Finalisieren und testen Sie Ihr Projekt." },
-      "28": { "title": "ChatGPT Abschluss", "description": "Feiern Sie Ihren Erfolg und erhalten Sie Ihr Zertifikat!" }
+      "25": {
+        "title": "Abschlussprojekt: Teil 1",
+        "description": "Starten Sie Ihr Anwendungsprojekt."
+      },
+      "26": {
+        "title": "Abschlussprojekt: Teil 2",
+        "description": "Entwickeln Sie Ihr Projekt weiter."
+      },
+      "27": {
+        "title": "Abschlussprojekt: Teil 3",
+        "description": "Finalisieren und testen Sie Ihr Projekt."
+      },
+      "28": {
+        "title": "ChatGPT Abschluss",
+        "description": "Feiern Sie Ihren Erfolg und erhalten Sie Ihr Zertifikat!"
+      }
     },
     "claude": {
-      "1": { "title": "Einführung in Claude", "description": "Lernen Sie Claude und seine Stärken kennen." },
-      "2": { "title": "Claude für Analysen", "description": "Nutzen Sie Claude für tiefgehende Analysen." },
-      "3": { "title": "Claude Artifacts", "description": "Meistern Sie die Artifacts-Funktionalität." },
-      "4": { "title": "Claude für Texte", "description": "Erstellen Sie hochwertige Texte." }
+      "1": {
+        "title": "Einführung in Claude",
+        "description": "Lernen Sie Claude und seine Stärken kennen."
+      },
+      "2": {
+        "title": "Claude für Analysen",
+        "description": "Nutzen Sie Claude für tiefgehende Analysen."
+      },
+      "3": {
+        "title": "Claude Artifacts",
+        "description": "Meistern Sie die Artifacts-Funktionalität."
+      },
+      "4": {
+        "title": "Claude für Texte",
+        "description": "Erstellen Sie hochwertige Texte."
+      }
     },
     "deepseek": {
-      "1": { "title": "Einführung in DeepSeek", "description": "Lernen Sie DeepSeek und seine Vorteile kennen." },
-      "2": { "title": "DeepSeek für Code", "description": "KI-unterstützte Programmierung." }
+      "1": {
+        "title": "Einführung in DeepSeek",
+        "description": "Lernen Sie DeepSeek und seine Vorteile kennen."
+      },
+      "2": {
+        "title": "DeepSeek für Code",
+        "description": "KI-unterstützte Programmierung."
+      }
     },
     "gemini": {
-      "1": { "title": "Einführung in Gemini", "description": "Lernen Sie Gemini von Google kennen." },
-      "2": { "title": "Gemini Multimodal", "description": "Arbeiten Sie mit Text und Bildern." }
+      "1": {
+        "title": "Einführung in Gemini",
+        "description": "Lernen Sie Gemini von Google kennen."
+      },
+      "2": {
+        "title": "Gemini Multimodal",
+        "description": "Arbeiten Sie mit Text und Bildern."
+      }
     },
     "nanobanana": {
-      "1": { "title": "Einführung in NanoBanana", "description": "Lernen Sie das KI-Kunsttool kennen." },
-      "2": { "title": "Erstellen Sie Ihr Erstes Kunstwerk", "description": "Generieren Sie beeindruckende Bilder." }
+      "1": {
+        "title": "Einführung in NanoBanana",
+        "description": "Lernen Sie das KI-Kunsttool kennen."
+      },
+      "2": {
+        "title": "Erstellen Sie Ihr Erstes Kunstwerk",
+        "description": "Generieren Sie beeindruckende Bilder."
+      }
     },
     "lovable": {
-      "1": { "title": "Einführung in Lovable", "description": "Lernen Sie die No-Code-Plattform mit KI kennen." },
-      "2": { "title": "Erstellen Sie Ihre Erste App", "description": "Entwickeln Sie eine vollständige Anwendung." }
+      "1": {
+        "title": "Einführung in Lovable",
+        "description": "Lernen Sie die No-Code-Plattform mit KI kennen."
+      },
+      "2": {
+        "title": "Erstellen Sie Ihre Erste App",
+        "description": "Entwickeln Sie eine vollständige Anwendung."
+      }
     },
     "captions": {
-      "1": { "title": "Einführung in Captions", "description": "Lernen Sie das KI-Videotool kennen." },
-      "2": { "title": "Video-Bearbeitung mit KI", "description": "Automatisierte Videobearbeitung." }
+      "1": {
+        "title": "Einführung in Captions",
+        "description": "Lernen Sie das KI-Videotool kennen."
+      },
+      "2": {
+        "title": "Video-Bearbeitung mit KI",
+        "description": "Automatisierte Videobearbeitung."
+      }
     },
     "elevenlabs": {
-      "1": { "title": "Einführung in ElevenLabs", "description": "Lernen Sie das KI-Sprachtool kennen." },
-      "2": { "title": "Klonen Sie Ihre Stimme", "description": "Erstellen Sie realistische Stimmklone." }
+      "1": {
+        "title": "Einführung in ElevenLabs",
+        "description": "Lernen Sie das KI-Sprachtool kennen."
+      },
+      "2": {
+        "title": "Klonen Sie Ihre Stimme",
+        "description": "Erstellen Sie realistische Stimmklone."
+      }
     }
   },
   "lessonSteps": {
@@ -226,9 +497,18 @@
           "title": "Quiz: Grundkonzepte",
           "question": "Was ist die Hauptfunktion von ChatGPT?",
           "options": [
-            { "text": "Konversations-KI-Assistent", "isCorrect": true },
-            { "text": "Tabellenkalkulation-Editor", "isCorrect": false },
-            { "text": "Internet-Browser", "isCorrect": false }
+            {
+              "text": "Konversations-KI-Assistent",
+              "isCorrect": true
+            },
+            {
+              "text": "Tabellenkalkulation-Editor",
+              "isCorrect": false
+            },
+            {
+              "text": "Internet-Browser",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -245,9 +525,18 @@
           "title": "Quiz: Prompts",
           "question": "Welches Element gehört NICHT zu einem guten Prompt?",
           "options": [
-            { "text": "Kontext", "isCorrect": false },
-            { "text": "Persönliches Passwort", "isCorrect": true },
-            { "text": "Klare Anweisung", "isCorrect": false }
+            {
+              "text": "Kontext",
+              "isCorrect": false
+            },
+            {
+              "text": "Persönliches Passwort",
+              "isCorrect": true
+            },
+            {
+              "text": "Klare Anweisung",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -264,9 +553,18 @@
           "title": "Quiz: Beratung",
           "question": "Was ist die beste Praxis bei der Nutzung von ChatGPT als Spezialist?",
           "options": [
-            { "text": "Detaillierten Kontext liefern", "isCorrect": true },
-            { "text": "Vage Prompts verwenden", "isCorrect": false },
-            { "text": "Keine Beispiele geben", "isCorrect": false }
+            {
+              "text": "Detaillierten Kontext liefern",
+              "isCorrect": true
+            },
+            {
+              "text": "Vage Prompts verwenden",
+              "isCorrect": false
+            },
+            {
+              "text": "Keine Beispiele geben",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -283,9 +581,18 @@
           "title": "Quiz: Analyse",
           "question": "Was ist KEINE gültige Analysetechnik mit ChatGPT?",
           "options": [
-            { "text": "Executive Summary", "isCorrect": false },
-            { "text": "Falsche Daten generieren", "isCorrect": true },
-            { "text": "Stimmungsanalyse", "isCorrect": false }
+            {
+              "text": "Executive Summary",
+              "isCorrect": false
+            },
+            {
+              "text": "Falsche Daten generieren",
+              "isCorrect": true
+            },
+            {
+              "text": "Stimmungsanalyse",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -302,9 +609,18 @@
           "title": "Quiz: Content",
           "question": "Was sollten Sie für guten Content spezifizieren?",
           "options": [
-            { "text": "Zielgruppe und Ton", "isCorrect": true },
-            { "text": "Nur das Thema", "isCorrect": false },
-            { "text": "Nichts Bestimmtes", "isCorrect": false }
+            {
+              "text": "Zielgruppe und Ton",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur das Thema",
+              "isCorrect": false
+            },
+            {
+              "text": "Nichts Bestimmtes",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -321,9 +637,18 @@
           "title": "Quiz: E-Mails",
           "question": "Was ist das wichtigste Element einer professionellen E-Mail?",
           "options": [
-            { "text": "Klarer Betreff und Call-to-Action", "isCorrect": true },
-            { "text": "Viele Emojis", "isCorrect": false },
-            { "text": "Sehr langer Text", "isCorrect": false }
+            {
+              "text": "Klarer Betreff und Call-to-Action",
+              "isCorrect": true
+            },
+            {
+              "text": "Viele Emojis",
+              "isCorrect": false
+            },
+            {
+              "text": "Sehr langer Text",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -340,9 +665,18 @@
           "title": "Quiz: Rückblick",
           "question": "Was ist der Schlüssel zur Beherrschung von ChatGPT?",
           "options": [
-            { "text": "Ständiges Üben und gute Prompts", "isCorrect": true },
-            { "text": "Ohne Kontext nutzen", "isCorrect": false },
-            { "text": "Antworten ohne Überprüfung kopieren", "isCorrect": false }
+            {
+              "text": "Ständiges Üben und gute Prompts",
+              "isCorrect": true
+            },
+            {
+              "text": "Ohne Kontext nutzen",
+              "isCorrect": false
+            },
+            {
+              "text": "Antworten ohne Überprüfung kopieren",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -361,9 +695,18 @@
           "title": "Quiz: DeepSeek Grundlagen",
           "question": "Worauf spezialisiert sich DeepSeek?",
           "options": [
-            { "text": "Programmierung und Code", "isCorrect": true },
-            { "text": "Bildbearbeitung", "isCorrect": false },
-            { "text": "Musik", "isCorrect": false }
+            {
+              "text": "Programmierung und Code",
+              "isCorrect": true
+            },
+            {
+              "text": "Bildbearbeitung",
+              "isCorrect": false
+            },
+            {
+              "text": "Musik",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -380,9 +723,18 @@
           "title": "Quiz: Code",
           "question": "Was kann DeepSeek mit Ihrem Code machen?",
           "options": [
-            { "text": "Generieren, debuggen und optimieren", "isCorrect": true },
-            { "text": "Nur lesen", "isCorrect": false },
-            { "text": "Löschen", "isCorrect": false }
+            {
+              "text": "Generieren, debuggen und optimieren",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur lesen",
+              "isCorrect": false
+            },
+            {
+              "text": "Löschen",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -399,9 +751,18 @@
           "title": "Quiz: Optimierung",
           "question": "Welche Aspekte kann DeepSeek in Ihrem Code verbessern?",
           "options": [
-            { "text": "Performance, Lesbarkeit und Sicherheit", "isCorrect": true },
-            { "text": "Nur die Farbe", "isCorrect": false },
-            { "text": "Die Schriftart", "isCorrect": false }
+            {
+              "text": "Performance, Lesbarkeit und Sicherheit",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur die Farbe",
+              "isCorrect": false
+            },
+            {
+              "text": "Die Schriftart",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -420,9 +781,18 @@
           "title": "Quiz: Claude Grundlagen",
           "question": "Worin glänzt Claude im Vergleich zu anderen KIs?",
           "options": [
-            { "text": "Tiefgehende Analyse und lange Texte", "isCorrect": true },
-            { "text": "Bilder generieren", "isCorrect": false },
-            { "text": "Videos bearbeiten", "isCorrect": false }
+            {
+              "text": "Tiefgehende Analyse und lange Texte",
+              "isCorrect": true
+            },
+            {
+              "text": "Bilder generieren",
+              "isCorrect": false
+            },
+            {
+              "text": "Videos bearbeiten",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -439,9 +809,18 @@
           "title": "Quiz: Analyse",
           "question": "Für welche Art von Dokumenten ist Claude ideal?",
           "options": [
-            { "text": "Umfangreiche und komplexe Dokumente", "isCorrect": true },
-            { "text": "Nur Bilder", "isCorrect": false },
-            { "text": "Audio-Dateien", "isCorrect": false }
+            {
+              "text": "Umfangreiche und komplexe Dokumente",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur Bilder",
+              "isCorrect": false
+            },
+            {
+              "text": "Audio-Dateien",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -458,9 +837,18 @@
           "title": "Quiz: Artifacts",
           "question": "Was können Sie mit Claude Artifacts erstellen?",
           "options": [
-            { "text": "Ausführbaren Code und Visualisierungen", "isCorrect": true },
-            { "text": "Nur einfachen Text", "isCorrect": false },
-            { "text": "Nichts Interaktives", "isCorrect": false }
+            {
+              "text": "Ausführbaren Code und Visualisierungen",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur einfachen Text",
+              "isCorrect": false
+            },
+            {
+              "text": "Nichts Interaktives",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -477,9 +865,18 @@
           "title": "Quiz: Schreiben",
           "question": "Was müssen Sie für gutes Schreiben mit Claude definieren?",
           "options": [
-            { "text": "Stil, Ton und Zielgruppe", "isCorrect": true },
-            { "text": "Nur das Thema", "isCorrect": false },
-            { "text": "Nichts Bestimmtes", "isCorrect": false }
+            {
+              "text": "Stil, Ton und Zielgruppe",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur das Thema",
+              "isCorrect": false
+            },
+            {
+              "text": "Nichts Bestimmtes",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -498,9 +895,18 @@
           "title": "Quiz: Gemini Grundlagen",
           "question": "Was ist der einzigartige Vorteil von Gemini?",
           "options": [
-            { "text": "Integration mit Google-Diensten", "isCorrect": true },
-            { "text": "Es ist günstiger", "isCorrect": false },
-            { "text": "Funktioniert nur offline", "isCorrect": false }
+            {
+              "text": "Integration mit Google-Diensten",
+              "isCorrect": true
+            },
+            {
+              "text": "Es ist günstiger",
+              "isCorrect": false
+            },
+            {
+              "text": "Funktioniert nur offline",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -517,9 +923,18 @@
           "title": "Quiz: Multimodal",
           "question": "Welche Inhaltstypen kann Gemini verarbeiten?",
           "options": [
-            { "text": "Text, Bilder und Dokumente", "isCorrect": true },
-            { "text": "Nur Text", "isCorrect": false },
-            { "text": "Nur Audio", "isCorrect": false }
+            {
+              "text": "Text, Bilder und Dokumente",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur Text",
+              "isCorrect": false
+            },
+            {
+              "text": "Nur Audio",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -536,9 +951,18 @@
           "title": "Quiz: Berichte",
           "question": "Warum in Schritte unterteilen?",
           "options": [
-            { "text": "Ermöglicht Qualitätsverfeinerung jedes Teils", "isCorrect": true },
-            { "text": "Ist für Gemini obligatorisch", "isCorrect": false },
-            { "text": "Spart Credits", "isCorrect": false }
+            {
+              "text": "Ermöglicht Qualitätsverfeinerung jedes Teils",
+              "isCorrect": true
+            },
+            {
+              "text": "Ist für Gemini obligatorisch",
+              "isCorrect": false
+            },
+            {
+              "text": "Spart Credits",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -557,9 +981,18 @@
           "title": "Quiz: NanoBanana",
           "question": "Welche Art von Content generiert NanoBanana?",
           "options": [
-            { "text": "Künstlerische Bilder aus Text", "isCorrect": true },
-            { "text": "Videos", "isCorrect": false },
-            { "text": "Musik", "isCorrect": false }
+            {
+              "text": "Künstlerische Bilder aus Text",
+              "isCorrect": true
+            },
+            {
+              "text": "Videos",
+              "isCorrect": false
+            },
+            {
+              "text": "Musik",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -576,9 +1009,18 @@
           "title": "Quiz: Kunst",
           "question": "Was macht einen Bild-Prompt effektiver?",
           "options": [
-            { "text": "Details zu Farbe, Licht und Stil", "isCorrect": true },
-            { "text": "Ein einzelnes Wort", "isCorrect": false },
-            { "text": "Keine Beschreibung", "isCorrect": false }
+            {
+              "text": "Details zu Farbe, Licht und Stil",
+              "isCorrect": true
+            },
+            {
+              "text": "Ein einzelnes Wort",
+              "isCorrect": false
+            },
+            {
+              "text": "Keine Beschreibung",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -597,9 +1039,18 @@
           "title": "Quiz: Lovable",
           "question": "Was können Sie mit Lovable ohne Programmieren erstellen?",
           "options": [
-            { "text": "Komplette Web-Anwendungen", "isCorrect": true },
-            { "text": "Nur Textdokumente", "isCorrect": false },
-            { "text": "Nichts Funktionales", "isCorrect": false }
+            {
+              "text": "Komplette Web-Anwendungen",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur Textdokumente",
+              "isCorrect": false
+            },
+            {
+              "text": "Nichts Funktionales",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -616,9 +1067,18 @@
           "title": "Quiz: Entwicklung",
           "question": "Wie nutzt man Lovable am besten?",
           "options": [
-            { "text": "Klar beschreiben und iterieren", "isCorrect": true },
-            { "text": "Sehr vage Prompts", "isCorrect": false },
-            { "text": "Design nicht spezifizieren", "isCorrect": false }
+            {
+              "text": "Klar beschreiben und iterieren",
+              "isCorrect": true
+            },
+            {
+              "text": "Sehr vage Prompts",
+              "isCorrect": false
+            },
+            {
+              "text": "Design nicht spezifizieren",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -637,9 +1097,18 @@
           "title": "Quiz: Captions",
           "question": "Welche Hauptfunktion bietet Captions?",
           "options": [
-            { "text": "Untertitel und KI-Video-Bearbeitung", "isCorrect": true },
-            { "text": "Foto-Bearbeitung", "isCorrect": false },
-            { "text": "Musik-Erstellung", "isCorrect": false }
+            {
+              "text": "Untertitel und KI-Video-Bearbeitung",
+              "isCorrect": true
+            },
+            {
+              "text": "Foto-Bearbeitung",
+              "isCorrect": false
+            },
+            {
+              "text": "Musik-Erstellung",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -656,9 +1125,18 @@
           "title": "Quiz: Video",
           "question": "Was macht Captions für bessere Videos?",
           "options": [
-            { "text": "Schnitte, Zooms und Übergänge automatisch", "isCorrect": true },
-            { "text": "Nur Text hinzufügen", "isCorrect": false },
-            { "text": "Nichts Automatisches", "isCorrect": false }
+            {
+              "text": "Schnitte, Zooms und Übergänge automatisch",
+              "isCorrect": true
+            },
+            {
+              "text": "Nur Text hinzufügen",
+              "isCorrect": false
+            },
+            {
+              "text": "Nichts Automatisches",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -677,9 +1155,18 @@
           "title": "Quiz: ElevenLabs",
           "question": "Welche Art von Content generiert ElevenLabs?",
           "options": [
-            { "text": "Audio und synthetisierte Stimme", "isCorrect": true },
-            { "text": "Bilder", "isCorrect": false },
-            { "text": "Videos", "isCorrect": false }
+            {
+              "text": "Audio und synthetisierte Stimme",
+              "isCorrect": true
+            },
+            {
+              "text": "Bilder",
+              "isCorrect": false
+            },
+            {
+              "text": "Videos",
+              "isCorrect": false
+            }
           ]
         }
       },
@@ -696,9 +1183,18 @@
           "title": "Quiz: Klonen",
           "question": "Was wird für Stimm-Klonen benötigt?",
           "options": [
-            { "text": "Audio von mindestens 30 Sekunden", "isCorrect": true },
-            { "text": "Stunden von Aufnahmen", "isCorrect": false },
-            { "text": "Professionelles Studio", "isCorrect": false }
+            {
+              "text": "Audio von mindestens 30 Sekunden",
+              "isCorrect": true
+            },
+            {
+              "text": "Stunden von Aufnahmen",
+              "isCorrect": false
+            },
+            {
+              "text": "Professionelles Studio",
+              "isCorrect": false
+            }
           ]
         }
       }
@@ -1022,21 +1518,36 @@
         "subtitle": "4 spezialisierte KIs für verschiedene Aufgaben: Lehren, Prompting, Planung und Bilderstellung.",
         "stats": "4 Spezialisierte",
         "button": "Assistenten erkunden",
-        "features": ["Smarter Chat", "Bildgenerator", "Datenanalyse", "KI-Tutoren"]
+        "features": [
+          "Smarter Chat",
+          "Bildgenerator",
+          "Datenanalyse",
+          "KI-Tutoren"
+        ]
       },
       "freelancer": {
         "title": "Premium Freelancer's",
         "subtitle": "Verwandle deine Fähigkeiten in Einkommen. Lerne Kundenakquise, Preisgestaltung und Vertragsabschluss.",
         "stats": "Karriere-Guide",
         "button": "Bereich öffnen",
-        "features": ["Akquise", "Preisgestaltung", "Verkauf", "Kundenmanagement"]
+        "features": [
+          "Akquise",
+          "Preisgestaltung",
+          "Verkauf",
+          "Kundenmanagement"
+        ]
       },
       "projects": {
         "title": "Praxisprojekte",
         "subtitle": "Lerne durch Handeln mit echten KI-Projekten für dein Portfolio.",
         "stats": "12 Projekte",
         "button": "Projekte ansehen",
-        "features": ["KI-Portfolio", "Praxisbeispiele", "Vorlagen", "Code-along"]
+        "features": [
+          "KI-Portfolio",
+          "Praxisbeispiele",
+          "Vorlagen",
+          "Code-along"
+        ]
       }
     },
     "missions": {
@@ -1459,53 +1970,218 @@
     }
   },
   "landing": {
-    "nav": {"home": "Startseite", "about": "Über uns", "programs": "Funktionen", "testimonials": "Bewertungen", "plan": "Plan", "contact": "Kontakt", "login": "Anmelden", "startNow": "App herunterladen"},
-    "hero": {"badge": "Die umfassendste KI-App auf dem Markt", "title": "Meistern Sie", "titleHighlight": "Künstliche Intelligenz", "titleEnd": "Direkt von Ihrem Handy", "subtitle": "Lernen Sie KI mit interaktiven Lernpfaden, praktischen Übungen und digitalen Zertifikaten — alles in der App. Zugang zu über 20 KI-Tools, Offline-Modus und Gamification.", "cta": "Kostenlos herunterladen", "demo": "Demo ansehen", "students": "Downloads", "rating": "Bewertung", "countries": "Länder"},
+    "nav": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "programs": "Funktionen",
+      "testimonials": "Bewertungen",
+      "plan": "Plan",
+      "contact": "Kontakt",
+      "login": "Anmelden",
+      "startNow": "App herunterladen"
+    },
+    "hero": {
+      "badge": "Die umfassendste KI-App auf dem Markt",
+      "title": "Meistern Sie",
+      "titleHighlight": "Künstliche Intelligenz",
+      "titleEnd": "Direkt von Ihrem Handy",
+      "subtitle": "Lernen Sie KI mit interaktiven Lernpfaden, praktischen Übungen und digitalen Zertifikaten — alles in der App. Zugang zu über 20 KI-Tools, Offline-Modus und Gamification.",
+      "cta": "Kostenlos herunterladen",
+      "demo": "Demo ansehen",
+      "students": "Downloads",
+      "rating": "Bewertung",
+      "countries": "Länder"
+    },
     "features": {
-      "sectionLabel": "App-Funktionen", "title": "Alles was Sie brauchen in Ihrer Tasche", "subtitle": "Eine komplette App mit interaktiven Lernpfaden, KI-Assistent, Echtzeit-Fortschritt und Zertifikaten.",
-      "curriculum": {"title": "Interaktive Lernpfade", "description": "Lernen Sie mit gamifizierten Pfaden und ständig aktualisierten Inhalten über die besten KI-Tools."},
-      "mentoring": {"title": "Integrierter KI-Assistent", "description": "Erhalten Sie Echtzeit-Antworten von EDI, Ihrem persönlichen KI-Assistenten in der App."},
-      "community": {"title": "Echtzeit-Fortschritt", "description": "Verfolgen Sie Ihren Fortschritt mit detaillierten Dashboards, Streaks und Lernstatistiken."},
-      "certification": {"title": "Digitale Zertifikate", "description": "Verdienen Sie Zertifikate durch Abschluss von Pfaden und Herausforderungen."},
-      "practical": {"title": "Offline-Modus", "description": "Laden Sie Lektionen herunter und lernen Sie ohne Internet — perfekt für unterwegs."},
-      "career": {"title": "Gamification", "description": "Verdienen Sie XP, steigen Sie im Level auf, schalten Sie Abzeichen frei und halten Sie Ihre tägliche Lernserie."}
+      "sectionLabel": "App-Funktionen",
+      "title": "Alles was Sie brauchen in Ihrer Tasche",
+      "subtitle": "Eine komplette App mit interaktiven Lernpfaden, KI-Assistent, Echtzeit-Fortschritt und Zertifikaten.",
+      "curriculum": {
+        "title": "Interaktive Lernpfade",
+        "description": "Lernen Sie mit gamifizierten Pfaden und ständig aktualisierten Inhalten über die besten KI-Tools."
+      },
+      "mentoring": {
+        "title": "Integrierter KI-Assistent",
+        "description": "Erhalten Sie Echtzeit-Antworten von EDI, Ihrem persönlichen KI-Assistenten in der App."
+      },
+      "community": {
+        "title": "Echtzeit-Fortschritt",
+        "description": "Verfolgen Sie Ihren Fortschritt mit detaillierten Dashboards, Streaks und Lernstatistiken."
+      },
+      "certification": {
+        "title": "Digitale Zertifikate",
+        "description": "Verdienen Sie Zertifikate durch Abschluss von Pfaden und Herausforderungen."
+      },
+      "practical": {
+        "title": "Offline-Modus",
+        "description": "Laden Sie Lektionen herunter und lernen Sie ohne Internet — perfekt für unterwegs."
+      },
+      "career": {
+        "title": "Gamification",
+        "description": "Verdienen Sie XP, steigen Sie im Level auf, schalten Sie Abzeichen frei und halten Sie Ihre tägliche Lernserie."
+      }
     },
     "programs": {
-      "sectionLabel": "Funktionen", "title": "Entdecken Sie die App-Funktionen", "subtitle": "Funktionen für alle Niveaus, vom Anfänger bis zum KI-Spezialisten.", "popular": "Beliebteste", "startNow": "App herunterladen", "beginner": "Anfänger", "intermediate": "Fortgeschritten", "advanced": "Experte",
-      "fundamentals": {"title": "KI-Lernpfade", "description": "Starten Sie Ihre KI-Reise mit interaktiven und gamifizierten Pfaden in der App.", "duration": "4 Wochen", "highlights": ["Interaktive KI-Pfade", "Praktische ChatGPT-Übungen", "Aufgabenautomatisierung via App", "Digitales Zertifikat"]},
-      "machineLearning": {"title": "Erweiterte Herausforderungen", "description": "Tauchen Sie ein in 28-Tage-Herausforderungen mit täglichen Übungen.", "duration": "28 Tage", "highlights": ["Tägliche KI-Herausforderungen", "Interaktive Übungen", "Gamifizierter Fortschritt", "Abschlusszertifikate"]},
-      "deepLearning": {"title": "Persönlicher KI-Assistent", "description": "Nutzen Sie EDI, Ihren integrierten KI-Assistenten, für Fragen und Prompt-Training.", "duration": "Unbegrenzt", "highlights": ["Integrierter KI-Chat", "Prompt-Trainer", "Echtzeit-Antworten", "Personalisierter Support in der App"]}
+      "sectionLabel": "Funktionen",
+      "title": "Entdecken Sie die App-Funktionen",
+      "subtitle": "Funktionen für alle Niveaus, vom Anfänger bis zum KI-Spezialisten.",
+      "popular": "Beliebteste",
+      "startNow": "App herunterladen",
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte",
+      "fundamentals": {
+        "title": "KI-Lernpfade",
+        "description": "Starten Sie Ihre KI-Reise mit interaktiven und gamifizierten Pfaden in der App.",
+        "duration": "4 Wochen",
+        "highlights": [
+          "Interaktive KI-Pfade",
+          "Praktische ChatGPT-Übungen",
+          "Aufgabenautomatisierung via App",
+          "Digitales Zertifikat"
+        ]
+      },
+      "machineLearning": {
+        "title": "Erweiterte Herausforderungen",
+        "description": "Tauchen Sie ein in 28-Tage-Herausforderungen mit täglichen Übungen.",
+        "duration": "28 Tage",
+        "highlights": [
+          "Tägliche KI-Herausforderungen",
+          "Interaktive Übungen",
+          "Gamifizierter Fortschritt",
+          "Abschlusszertifikate"
+        ]
+      },
+      "deepLearning": {
+        "title": "Persönlicher KI-Assistent",
+        "description": "Nutzen Sie EDI, Ihren integrierten KI-Assistenten, für Fragen und Prompt-Training.",
+        "duration": "Unbegrenzt",
+        "highlights": [
+          "Integrierter KI-Chat",
+          "Prompt-Trainer",
+          "Echtzeit-Antworten",
+          "Personalisierter Support in der App"
+        ]
+      }
     },
-    "pricing": {"badge": "Preise", "title": "Schalten Sie das volle Potenzial der App frei", "subtitle": "Starten Sie noch heute Ihre KI-Lernreise", "week1": "1-WOCHEN-PLAN", "week4": "4-WOCHEN-PLAN", "week12": "12-WOCHEN-PLAN", "mostPopular": "BELIEBTESTE", "from": "VON", "for": "FÜR", "perDay": "pro Tag", "getMyPlan": "MEINEN PLAN HOLEN", "note": "Menschen, die den 12-Wochen-Plan nutzen, erzielen doppelt so gute Ergebnisse."},
+    "pricing": {
+      "badge": "Preise",
+      "title": "Schalten Sie das volle Potenzial der App frei",
+      "subtitle": "Starten Sie noch heute Ihre KI-Lernreise",
+      "week1": "1-WOCHEN-PLAN",
+      "week4": "4-WOCHEN-PLAN",
+      "week12": "12-WOCHEN-PLAN",
+      "mostPopular": "BELIEBTESTE",
+      "from": "VON",
+      "for": "FÜR",
+      "perDay": "pro Tag",
+      "getMyPlan": "MEINEN PLAN HOLEN",
+      "note": "Menschen, die den 12-Wochen-Plan nutzen, erzielen doppelt so gute Ergebnisse."
+    },
     "testimonials": {
-      "sectionLabel": "Bewertungen", "title": "Was unsere Nutzer sagen", "subtitle": "Tausende Menschen haben bereits KI mit der Educly-App gelernt.",
+      "sectionLabel": "Bewertungen",
+      "title": "Was unsere Nutzer sagen",
+      "subtitle": "Tausende Menschen haben bereits KI mit der Educly-App gelernt.",
       "items": [
-        {"name": "Maria Silva", "role": "Data Scientist", "country": "Brasilien", "text": "Die Educly-App hat meine Art, KI zu lernen, verändert. Ich nutze sie jeden Tag im Bus und habe in 3 Monaten meinen ersten Job bekommen."},
-        {"name": "João Santos", "role": "Product Manager", "country": "Portugal", "text": "Die App ist fantastisch — die Pfade sind praktisch und ich kann offline lernen. Die Gamification hält mich motiviert."},
-        {"name": "Ana García", "role": "ML Engineer", "country": "Mexiko", "text": "Ich habe mehrere Herausforderungen über die App abgeschlossen und die digitalen Zertifikate haben den Unterschied gemacht."},
-        {"name": "Carlos Fernández", "role": "Startup Founder", "country": "Argentinien", "text": "Ich nutze die App täglich, um mich in KI auf dem Laufenden zu halten. Der Offline-Modus ist perfekt für Vielreisende."}
+        {
+          "name": "Maria Silva",
+          "role": "Data Scientist",
+          "country": "Brasilien",
+          "text": "Die Educly-App hat meine Art, KI zu lernen, verändert. Ich nutze sie jeden Tag im Bus und habe in 3 Monaten meinen ersten Job bekommen."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portugal",
+          "text": "Die App ist fantastisch — die Pfade sind praktisch und ich kann offline lernen. Die Gamification hält mich motiviert."
+        },
+        {
+          "name": "Ana García",
+          "role": "ML Engineer",
+          "country": "Mexiko",
+          "text": "Ich habe mehrere Herausforderungen über die App abgeschlossen und die digitalen Zertifikate haben den Unterschied gemacht."
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Startup Founder",
+          "country": "Argentinien",
+          "text": "Ich nutze die App täglich, um mich in KI auf dem Laufenden zu halten. Der Offline-Modus ist perfekt für Vielreisende."
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "Globale Reichweite", "title": "Weltweit präsent", "subtitle": "Die Educly-App wurde in über 150 Ländern heruntergeladen und verbindet eine globale KI-Lerngemeinschaft.",
-      "regions": {"latinAmerica": "Lateinamerika", "europe": "Europa", "northAmerica": "Nordamerika", "asiaOceania": "Asien & Ozeanien"},
+      "sectionLabel": "Globale Reichweite",
+      "title": "Weltweit präsent",
+      "subtitle": "Die Educly-App wurde in über 150 Ländern heruntergeladen und verbindet eine globale KI-Lerngemeinschaft.",
+      "regions": {
+        "latinAmerica": "Lateinamerika",
+        "europe": "Europa",
+        "northAmerica": "Nordamerika",
+        "asiaOceania": "Asien & Ozeanien"
+      },
       "features": {
-        "languages": {"title": "15 Sprachen", "description": "App in mehreren Sprachen mit professioneller Übersetzung"},
-        "support": {"title": "24/7 Support", "description": "Integrierter KI-Assistent und Support-Team jederzeit verfügbar"},
-        "community": {"title": "Community in der App", "description": "Vernetzen Sie sich mit Nutzern weltweit und teilen Sie Ihren Fortschritt"}
+        "languages": {
+          "title": "15 Sprachen",
+          "description": "App in mehreren Sprachen mit professioneller Übersetzung"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "description": "Integrierter KI-Assistent und Support-Team jederzeit verfügbar"
+        },
+        "community": {
+          "title": "Community in der App",
+          "description": "Vernetzen Sie sich mit Nutzern weltweit und teilen Sie Ihren Fortschritt"
+        }
       }
     },
-    "stats": {"students": "Downloads", "countries": "Länder", "satisfaction": "Store-Bewertung", "partners": "KI-Tools"},
+    "stats": {
+      "students": "Downloads",
+      "countries": "Länder",
+      "satisfaction": "Store-Bewertung",
+      "partners": "KI-Tools"
+    },
     "cta": {
-      "title": "Bereit, KI direkt von Ihrem Handy zu lernen?", "subtitle": "Schließen Sie sich über 50.000 Nutzern an, die bereits KI mit der Educly-App meistern.",
-      "startFree": "Kostenlos herunterladen", "talkConsultant": "Mit Support sprechen", "guarantee": "30-Tage-Garantie", "installments": "Bis zu 12 Raten",
-      "benefits": ["Vollständiger Zugang zu allen Pfaden", "Kostenlose App-Updates", "Integrierter KI-Assistent", "Digitale Zertifikate", "Offline-Modus verfügbar", "30-Tage-Zufriedenheitsgarantie"]
+      "title": "Bereit, KI direkt von Ihrem Handy zu lernen?",
+      "subtitle": "Schließen Sie sich über 50.000 Nutzern an, die bereits KI mit der Educly-App meistern.",
+      "startFree": "Kostenlos herunterladen",
+      "talkConsultant": "Mit Support sprechen",
+      "guarantee": "30-Tage-Garantie",
+      "installments": "Bis zu 12 Raten",
+      "benefits": [
+        "Vollständiger Zugang zu allen Pfaden",
+        "Kostenlose App-Updates",
+        "Integrierter KI-Assistent",
+        "Digitale Zertifikate",
+        "Offline-Modus verfügbar",
+        "30-Tage-Zufriedenheitsgarantie"
+      ]
     },
     "footer": {
       "description": "Die umfassendste KI-App auf dem Markt. Lernen Sie KI praktisch, direkt von Ihrem Handy.",
-      "contact": "Kontakt", "programs": "Funktionen", "resources": "Ressourcen", "company": "Unternehmen", "legal": "Rechtliches",
-      "links": {"aiFundamentals": "KI-Lernpfade", "machineLearning": "28-Tage-Herausforderungen", "deepLearning": "KI-Assistent", "aiForBusiness": "Digitale Zertifikate", "blog": "Blog", "webinars": "Tutorials", "ebooks": "Leitfäden", "community": "Community", "aboutUs": "Über uns", "careers": "Karriere", "partnerships": "Partnerschaften", "contact": "Kontakt", "terms": "Nutzungsbedingungen", "privacy": "Datenschutz", "cookies": "Cookies"},
-      "copyright": "Alle Rechte vorbehalten.", "madeWith": "Mit ❤️ für die globale KI-Community erstellt"
+      "contact": "Kontakt",
+      "programs": "Funktionen",
+      "resources": "Ressourcen",
+      "company": "Unternehmen",
+      "legal": "Rechtliches",
+      "links": {
+        "aiFundamentals": "KI-Lernpfade",
+        "machineLearning": "28-Tage-Herausforderungen",
+        "deepLearning": "KI-Assistent",
+        "aiForBusiness": "Digitale Zertifikate",
+        "blog": "Blog",
+        "webinars": "Tutorials",
+        "ebooks": "Leitfäden",
+        "community": "Community",
+        "aboutUs": "Über uns",
+        "careers": "Karriere",
+        "partnerships": "Partnerschaften",
+        "contact": "Kontakt",
+        "terms": "Nutzungsbedingungen",
+        "privacy": "Datenschutz",
+        "cookies": "Cookies"
+      },
+      "copyright": "Alle Rechte vorbehalten.",
+      "madeWith": "Mit ❤️ für die globale KI-Community erstellt"
     }
   },
   "weeklyStreak": {
@@ -1747,6 +2423,45 @@
       "cards": "Jede Karte ist ein anderer Assistent! 🎨 Es gibt Prompt-Ersteller, Projektplaner, Bildgenerator und mehr!",
       "cardClick": "Klicke auf einen Assistenten zum Chatten! 💬 Sie helfen dir, echte Alltagsprobleme zu lösen!",
       "finish": "Jetzt wähle einen aus und teste ihn! ✨ Jeder hat eine einzigartige Persönlichkeit. Viel Spaß beim Erkunden!"
+    },
+    "onboarding": {
+      "base": {
+        "welcome": "Hallo! 👋 Ich bin EDI, dein Guide bei Educly! Willkommen zu deinem KI-Kurs!",
+        "streak": "Hier ist deine wöchentliche Serie! 🔥 Lerne jeden Tag für Bonus-XP!",
+        "challenge": "Hier ist deine 28-Tage-Challenge! 🎯 Lerne die 8 wichtigsten KI-Tools des Marktes!",
+        "finish": "Fertig! 🎉 Starte deine 28-Tage-Challenge und meistere Künstliche Intelligenz. Los geht's!"
+      },
+      "freelancer": {
+        "welcome": "Hallo! 👋 Ich bin EDI! Glückwunsch zum Premium Freelancer! 💼 Lass mich dir zeigen, was du freigeschaltet hast!",
+        "streak": "Hier ist deine Serie! 🔥 Halte den Rhythmus, um dein Lernen zu beschleunigen!",
+        "challenge": "Hier ist deine 28-Tage-Challenge! 🎯 Meistere die wichtigsten KIs des Marktes!",
+        "freelancerCard": "Und hier ist der Freelancer Hub! 💰 Dein exklusiver Zugang zu Modulen über KI-Monetarisierung: Positionierung, Portfolio, Preisgestaltung und Kundengewinnung!",
+        "medals": "Verdiene Medaillen! 🏅 Schließe Freelancer-Module ab und verdiene Medaillen, die deine Fähigkeiten beweisen!",
+        "finish": "Genial! 🎉 Du hast Zugang zum besten Freelancer-Content! Starte mit der Challenge oder tauche in den Hub ein. Lass uns loslegen!"
+      },
+      "aipack": {
+        "welcome": "Hallo! 👋 Ich bin EDI! Du hast das AI Pack freigeschaltet! 🤖 Lass mich dir die Power zeigen, die du jetzt hast!",
+        "streak": "Hier ist deine wöchentliche Serie! 🔥 Lerne jeden Tag für extra XP!",
+        "challenge": "Starte mit der 28-Tage-Challenge! 🎯 Lerne die 8 wichtigsten KI-Tools des Marktes!",
+        "assistantsCard": "Und hier sind deine KI-Assistenten! 🤖 Spezialisierte KIs, die deine Fragen 24h beantworten, bei echten Aufgaben helfen und dein Lernen beschleunigen!",
+        "ediChat": "Und das ist EDI, dein KI-Tutor! 💬 Klicke auf ihn, wenn du Hilfe brauchst — er ist 24h verfügbar!",
+        "finish": "Unglaublich! 🎉 Du hast die Power des AI Packs! Nutze die Assistenten und EDI, wann immer du willst. Lass uns KI meistern!"
+      },
+      "combo": {
+        "welcome": "Hallo! 👋 Ich bin EDI! WOW! Du hast das komplette Paket! 🚀 Lass mich dir alles zeigen, was du freigeschaltet hast!",
+        "streak": "Deine wöchentliche Serie ist hier! 🔥 Halte das Feuer am Brennen und multipliziere deine XP!",
+        "challenge": "Deine 28-Tage-Challenge! 🎯 Die Basis von allem: Meistere die 8 wichtigsten KIs des Marktes!",
+        "assistantsCard": "Deine KI-Assistenten! 🤖 Spezialisierte KIs 24h am Tag, um Fragen zu beantworten und deine echten Aufgaben zu beschleunigen!",
+        "freelancerCard": "Und der Freelancer Hub! 💼 Komplette Module zur KI-Monetarisierung: Positionierung, Portfolio und Premium-Kundengewinnung!",
+        "ediChat": "Triff EDI, deinen persönlichen Tutor! 💬 Klicke hier bei Fragen — er hilft dir bei jedem KI-Thema, 24h am Tag!",
+        "medals": "Hier sind deine Medaillen! 🏅 Schließe Module ab und verdiene exklusive Medaillen, die deine Entwicklung zeigen!",
+        "finish": "Du hast ALLES! 🎉 Assistenten + Freelancer + Challenge + EDI. Dieses Combo ist unschlagbar. Lass uns deine Karriere transformieren!"
+      },
+      "badges": {
+        "combo": "✨ Komplettpaket",
+        "aipack": "🤖 AI Pack",
+        "freelancer": "💼 Premium Freelancer"
+      }
     }
   },
   "lesson": {
@@ -2113,5 +2828,11 @@
     "updateError": "Profil konnte nicht aktualisiert werden.",
     "settingsSaved": "Einstellungen gespeichert!",
     "notificationsUpdated": "Deine Benachrichtigungseinstellungen wurden aktualisiert."
+  },
+  "landing": {
+    "subtitle": "Interaktive Lernpfade"
+  },
+  "thankYou": {
+    "title": "Meistern Sie die besten KIs mit"
   }
 }
