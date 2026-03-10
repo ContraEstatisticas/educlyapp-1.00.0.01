@@ -4190,128 +4190,374 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎉 Missão Cumprida: Você é um Graduado EduclY!",
-        "content": "Parabéns! Você acaba de concluir uma das jornadas mais intensas e transformadoras do mercado digital. Em apenas 28 dias, você percorreu o caminho que muitos levam anos para entender.\n\n\n\nEste certificado que você recebe hoje não é apenas um papel; é a prova de que você domina um arsenal de 8 ferramentas de elite. Você não apenas 'usa' IA, você **constrói soluções**. O mercado agora olha para você de um jeito completamente diferente."
+        "title": "🎬 Dia 28 - Revisão de Vídeo, Áudio e Síntese Final",
+        "content": "Parabéns por chegar ao último dia do nosso desafio! Hoje consolidaremos o conhecimento sobre as ferramentas de mídia e automação final: AssemblyAI, Captions, ElevenLabs, HeyGen, Lovable, Veo e Meta AI.\n\nO objetivo de hoje é aprender a integrar tudo isso em um workflow profissional, escolhendo a ferramenta certa para cada etapa da produção audiovisual e desenvolvimento rápido.\n\n💡 **DICA PRÁTICA:** A produtividade extrema vem da orquestração. Não use uma marreta para apertar um parafuso. Escolha a IA especialista."
       },
       {
         "type": "text",
-        "title": "📊 Suas Estatísticas de Vitória",
-        "content": "Vamos olhar para o tamanho da sua conquista:\n\n| Conquista | Resultado |\n| :--- | :--- |\n| **Ferramentas Masterizadas** | 8 Gigantes da IA |\n| **Casos de Uso Práticos** | 50+ Aplicações Reais |\n| **Tempo Economizado** | 10 a 20 horas por semana |\n| **Sistemas Criados** | Marketing, Vendas e Software |\n\nVocê saiu do patamar de 'interessado' para se tornar um **AI Professional** certificado pela EduclY."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Seu Arsenal Completo",
-          "description": "Ligue cada ferramenta ao superpoder que você dominou.",
-          "pairs": [
-            {
-              "left": "ChatGPT/Claude",
-              "right": "Cérebro e Criatividade"
-            },
-            {
-              "left": "NanoBanana",
-              "right": "Estúdio Visual e Design"
-            },
-            {
-              "left": "Lovable",
-              "right": "Fábrica de Apps e Sites"
-            },
-            {
-              "left": "ElevenLabs/Captions",
-              "right": "Voz e Vídeo de Elite"
-            }
-          ]
-        }
+        "title": "💡 Conceitos-Chave: Áudio e Voz",
+        "content": "O processamento de som mudou drasticamente em 2025:\n\n- **AssemblyAI:** Transcrição em escala industrial (suporte a 99 idiomas), Speech Understanding e agora atua como um gateway de LLM para analisar o que foi dito.\n- **ElevenLabs:** O padrão ouro para síntese de voz. Clona seu timbre com perfeição e lê textos com entonação humana quase indistinguível.\n- **Captions:** Focada em tornar o vídeo acessível e dinâmico através de legendas automáticas sincronizadas em segundos."
       },
       {
         "type": "text",
-        "title": "📜 O Valor do Selo 'EduclY Certified'",
-        "content": "O mercado de trabalho está desesperado por pessoas que saibam o que você sabe. Com esse certificado, você pode atuar como:\n\n* **Consultor de IA:** Cobrando de R$ 150 a R$ 400 por hora.\n* **Freelancer Premium:** Fechando projetos de até R$ 20.000.\n* **Estrategista Corporativo:** Com salários que passam facilmente dos R$ 10.000.\n\n\n\n**Dica:** Atualize seu perfil hoje mesmo. O selo EduclY prova que você tem disciplina, visão prática e capacidade de execução."
-      },
-      {
-        "type": "text",
-        "title": "🔄 A Máquina de Produção Integrada",
-        "content": "O seu maior trunfo é o **Sistema Integrado**. Você aprendeu a fazer as ferramentas conversarem entre si:\n\n**Ideia** → Pesquisa (Gemini) → Roteiro (Claude) → Arte (NanoBanana) → App (Lovable) → Vídeo (Captions) → Voz (ElevenLabs) → **Sucesso.**\n\nEssa esteira de produção permite que você faça em 1 hora o que equipes inteiras levavam semanas para entregar. Você agora é uma agência de um homem só."
-      },
-      {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ O Fluxo do Mestre",
-          "sentence": "Para ser produtivo, eu uso o Gemini para ___, o Claude para escrever ___, e o Lovable para criar ___.",
-          "answers": [
-            "pesquisar",
-            "roteiros",
-            "aplicativos"
-          ],
-          "options": [
-            "pesquisar",
-            "roteiros",
-            "aplicativos",
-            "desenhar",
-            "dormir",
-            "lutar"
-          ],
-          "explanation": "Isso mesmo! Essa integração é o que gera a economia de tempo de 95% que você aprendeu."
-        }
-      },
-      {
-        "type": "text",
-        "title": "🔮 O Seu Plano de 90 Dias",
-        "content": "A formatura é apenas o começo da corrida. Aqui está o seu mapa para o sucesso pós-EduclY:\n\n1.  **Mês 1 (Foco):** Escolha um nicho e crie 3 projetos reais para seu portfólio.\n2.  **Mês 2 (Escala):** Consiga seus primeiros clientes e valide seus preços.\n3.  **Mês 3 (Liberdade):** Automatize sua entrega e comece a escalar seu lucro.\n\n"
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Atividade: Sua Primeira Meta",
-        "question": "Ordene as prioridades para a sua primeira semana como Graduado:",
-        "initialWords": [
-          "Baixar meu certificado,",
-          "Atualizar meu LinkedIn,",
-          "Escolher meu primeiro projeto,",
-          "Entrar na Comunidade VIP,",
-          "Oferecer meu serviço para o 1º cliente."
-        ],
-        "correctOrder": [
-          "Baixar meu certificado,",
-          "Atualizar meu LinkedIn,",
-          "Escolher meu primeiro projeto,",
-          "Entrar na Comunidade VIP,",
-          "Oferecer meu serviço para o 1º cliente."
-        ],
-        "explanation": "Perfeito! Primeiro você se oficializa, depois se posiciona e então parte para a ação!"
-      },
-      {
-        "type": "text",
-        "title": "👥 Comunidade EduclY: Você nunca está sozinho",
-        "content": "Como graduado, você agora tem acesso à **Comunidade Premium**. Lá, você encontrará:\n- Networking com outros especialistas.\n- Vagas de trabalho exclusivas.\n- Mentorias mensais para tirar dúvidas técnicas.\n- Parcerias para projetos de grande porte.\n\n\n\nLembre-se da nossa cultura: 'Cada um ensina um'. O seu crescimento ajuda a fortalecer toda a rede."
+        "title": "💡 Conceitos-Chave: Vídeo e Prototipagem",
+        "content": "A geração visual e o código agora caminham juntos:\n\n- **HeyGen:** Líder em avatares realistas com tradução de lábios (lip-sync) multilíngue.\n- **Veo (Google):** Geração cinematográfica 4K que já traz o áudio nativo sincronizado na própria criação do frame.\n- **Lovable:** A ferramenta definitiva para transformar ideias de software em MVPs funcionais (código + design) em minutos.\n- **Meta AI:** O poder do open-source (Llama) e o acesso massivo integrado diretamente às redes sociais (Instagram/WhatsApp)."
       },
       {
         "type": "quiz",
-        "title": "🎓 Teste Final de Mentalidade",
-        "question": "Qual é a lição mais importante que você leva desses 28 dias?",
+        "title": "🎓 Bloco 1 - Áudio: Questão 1",
+        "question": "Você recebeu uma demanda para transcrever 500 horas de reuniões gravadas em 10 idiomas diferentes. Qual ferramenta tem a melhor infraestrutura para essa escala?",
         "options": [
           {
-            "text": "Que a IA vai fazer todo o meu trabalho e eu não preciso mais pensar",
+            "text": "ElevenLabs",
             "isCorrect": false,
-            "explanation": "Pelo contrário! Você agora precisa pensar de forma mais estratégica, sendo o mestre que guia as ferramentas."
+            "explanation": "Incorreto. ElevenLabs é focada em GERAR voz (síntese), não transcrever volumes massivos."
           },
           {
-            "text": "Que a combinação de metodologia humana com o poder da IA é o que gera valor real no mercado",
+            "text": "AssemblyAI",
             "isCorrect": true,
-            "explanation": "Exatamente! A IA é o motor, mas o seu contexto e a sua visão são o que transformam tecnologia em dinheiro e impacto."
+            "explanation": "Correto! AssemblyAI é feita para escala, transcreve em 99 idiomas e oferece APIs de análise de voz profissionais."
+          },
+          {
+            "text": "Captions",
+            "isCorrect": false,
+            "explanation": "Incorreto. Captions é para edição rápida de vídeos curtos para redes sociais."
+          },
+          {
+            "text": "HeyGen",
+            "isCorrect": false,
+            "explanation": "Incorreto. HeyGen é focado em avatares de vídeo."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 1 - Áudio: Questão 2",
+        "question": "Você quer criar um audiobook lido pela sua própria voz, mas não tem tempo de gravar todas as páginas. Qual IA permite clonar seu timbre e ler o texto por você?",
+        "options": [
+          {
+            "text": "AssemblyAI",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela 'ouve', ela não 'fala'."
+          },
+          {
+            "text": "ElevenLabs",
+            "isCorrect": true,
+            "explanation": "Correto! ElevenLabs é a líder em clonagem vocal e síntese 'text-to-speech'."
+          },
+          {
+            "text": "Captions",
+            "isCorrect": false,
+            "explanation": "Incorreto. Captions gera legendas, não a narração do zero."
+          },
+          {
+            "text": "HeyGen",
+            "isCorrect": false,
+            "explanation": "Incorreto. HeyGen usa vozes (frequentemente da própria ElevenLabs), mas seu foco é o vídeo do avatar."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 1 - Áudio: Questão 3",
+        "question": "Qual foi a principal evolução da AssemblyAI anunciada em 2025?",
+        "options": [
+          {
+            "text": "Ficou mais cara e parou de aceitar MP3",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          },
+          {
+            "text": "Evoluiu de transcrição pura para uma plataforma de Speech Understanding + LLM Gateway",
+            "isCorrect": true,
+            "explanation": "Correto! Agora ela não apenas transcreve, mas também 'entende' e analisa o conteúdo usando camadas de inteligência artificial sobre o áudio."
+          },
+          {
+            "text": "Parou de suportar múltiplos idiomas",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela expandiu seu suporte linguístico."
+          },
+          {
+            "text": "Passou a funcionar apenas offline",
+            "isCorrect": false,
+            "explanation": "Incorreto. É um serviço Cloud de alta performance."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 1 - Áudio: Questão 4",
+        "question": "Apesar de excelente, onde o ElevenLabs ainda pode encontrar dificuldades?",
+        "options": [
+          {
+            "text": "Transcrição de áudio",
+            "isCorrect": false,
+            "explanation": "Falso. Ela integra o Whisper e transcreve muito bem."
+          },
+          {
+            "text": "Capturar emoções extremamente sutis e nuances dramáticas profundas",
+            "isCorrect": true,
+            "explanation": "Correto! Embora soe muito real, tons emocionais extremamente específicos podem soar um pouco planos se comparados a um ator humano de elite."
+          },
+          {
+            "text": "Velocidade de processamento",
+            "isCorrect": false,
+            "explanation": "Incorreto. É uma das mais rápidas do mercado."
+          },
+          {
+            "text": "Qualidade geral do áudio final",
+            "isCorrect": false,
+            "explanation": "Incorreto. A qualidade é cristalina e profissional."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 2 - Vídeo: Questão 5",
+        "question": "Você produziu 50 vídeos explicativos e precisa colocar legendas dinâmicas neles o mais rápido possível. Qual a ferramenta ideal?",
+        "options": [
+          {
+            "text": "Veo",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Veo GERA vídeos do zero."
+          },
+          {
+            "text": "HeyGen",
+            "isCorrect": false,
+            "explanation": "Incorreto. HeyGen é focado em avatares."
+          },
+          {
+            "text": "Captions",
+            "isCorrect": true,
+            "explanation": "Correto! O Captions é especializado na automação e sincronismo de legendas para vídeos prontos."
+          },
+          {
+            "text": "AssemblyAI",
+            "isCorrect": false,
+            "explanation": "Incorreto. AssemblyAI dá o texto da transcrição, mas não a edição visual da legenda fina no vídeo."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 2 - Vídeo: Questão 6",
+        "question": "Você precisa de um vídeo onde um instrutor (avatar) fale em 20 idiomas com sincronia labial perfeita. Qual IA escolher?",
+        "options": [
+          {
+            "text": "Captions",
+            "isCorrect": false,
+            "explanation": "Incorreto. Captions legenda, não cria o avatar falando."
+          },
+          {
+            "text": "HeyGen",
+            "isCorrect": true,
+            "explanation": "Correto! HeyGen é a campeã em avatares com 'multilingual lip-sync'."
+          },
+          {
+            "text": "Veo",
+            "isCorrect": false,
+            "explanation": "Incorreto. Veo gera cenas cinematográficas, não necessariamente avatares de apresentação."
+          },
+          {
+            "text": "Lovable",
+            "isCorrect": false,
+            "explanation": "Incorreto. Lovable faz aplicativos."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 2 - Vídeo: Questão 7",
+        "question": "Qual ferramenta você usaria para gerar um vídeo cinematográfico em 4K que já nasce com o som de passos e ruído ambiente sincronizados?",
+        "options": [
+          {
+            "text": "HeyGen",
+            "isCorrect": false,
+            "explanation": "Incorreto. Foco em porta-vozes e avatares."
+          },
+          {
+            "text": "Captions",
+            "isCorrect": false,
+            "explanation": "Incorreto. Foco em edição e legendagem."
+          },
+          {
+            "text": "Veo",
+            "isCorrect": true,
+            "explanation": "Correto! O Google Veo 3.1 é pioneiro em gerar áudio nativo integrado à visualização cinematográfica."
+          },
+          {
+            "text": "Lovable",
+            "isCorrect": false,
+            "explanation": "Incorreto. Foco em software."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 2 - Vídeo: Questão 8",
+        "question": "O que torna o Veo tecnicamente diferente de geradores como Sora ou Kling na prática?",
+        "options": [
+          {
+            "text": "É significativamente mais barato",
+            "isCorrect": false,
+            "explanation": "Incorreto. O custo é similar às ferramentas de alta performance."
+          },
+          {
+            "text": "Gera áudio nativo sincronizado, eliminando boa parte da pós-produção sonora",
+            "isCorrect": true,
+            "explanation": "Correto! O vídeo já 'nasce' sabendo o som que deve fazer baseado no prompt."
+          },
+          {
+            "text": "Funciona totalmente offline no seu celular",
+            "isCorrect": false,
+            "explanation": "Incorreto. Exige processamento cloud pesado."
+          },
+          {
+            "text": "É a única ferramenta que atinge resolução 4K",
+            "isCorrect": false,
+            "explanation": "Incorreto. Outras ferramentas também atingem 4K hoje."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 2 - Vídeo: Questão 9",
+        "question": "Onde o HeyGen ainda supera o Veo no dia a dia corporativo?",
+        "options": [
+          {
+            "text": "Pela qualidade geral de luz e sombra na cena",
+            "isCorrect": false,
+            "explanation": "Incorreto. Veo tende a ser mais cinematográfico."
+          },
+          {
+            "text": "Na criação de avatares realistas voltados para treinamento e vendas multilíngue",
+            "isCorrect": true,
+            "explanation": "Correto! O propósito do HeyGen é ser o apresentador perfeito, não um diretor de cinema."
+          },
+          {
+            "text": "Duração máxima do clipe gerado",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          },
+          {
+            "text": "Custo por segundo gerado",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 3 - Integração: Questão 10",
+        "question": "Você tem uma ideia para um app de dieta. Precisa prototipar a interface funcionando e com design bonito em menos de 2 horas. Qual IA acionar?",
+        "options": [
+          {
+            "text": "Midjourney",
+            "isCorrect": false,
+            "explanation": "Incorreto. Midjourney apenas desenha o visual, sem código."
+          },
+          {
+            "text": "Lovable",
+            "isCorrect": true,
+            "explanation": "Correto! Lovable é a ferramenta ideal para prototipar apps e MVPs com código e design integrados em minutos."
+          },
+          {
+            "text": "AssemblyAI",
+            "isCorrect": false,
+            "explanation": "Incorreto. Foco em som."
+          },
+          {
+            "text": "Veo",
+            "isCorrect": false,
+            "explanation": "Incorreto. Foco em vídeo."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 3 - Integração: Questão 11",
+        "question": "Qual é o uso ideal da ferramenta Lovable no seu negócio?",
+        "options": [
+          {
+            "text": "Análise profunda de dados contábeis",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          },
+          {
+            "text": "Geração de imagens de arte para quadros",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          },
+          {
+            "text": "Prototipagem rápida de aplicativos, sites e MVPs funcionais",
+            "isCorrect": true,
+            "explanation": "Correto! É onde ela entrega maior valor e velocidade de lançamento."
+          },
+          {
+            "text": "Transcrição de áudio em tempo real",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 3 - Integração: Questão 12",
+        "question": "Qual combo de ferramentas criaria o workflow mais poderoso para: Pesquisar assunto -> Analisar cenário -> Gerar vídeo explicativo?",
+        "options": [
+          {
+            "text": "Usar apenas o Claude para todas as etapas",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Claude não gera o vídeo final finalizado."
+          },
+          {
+            "text": "Perplexity (Pesquisa) → Claude (Análise/Roteiro) → Veo (Vídeo)",
+            "isCorrect": true,
+            "explanation": "Correto! Este é o workflow dos mestres: cada IA faz sua etapa de excelência."
+          },
+          {
+            "text": "Usar apenas o Veo",
+            "isCorrect": false,
+            "explanation": "Incorreto. Falta a base estratégica da pesquisa profunda."
+          },
+          {
+            "text": "Lovable para tudo",
+            "isCorrect": false,
+            "explanation": "Incorreto. Lovable não pesquisa a web atualizada nativamente como o Perplexity."
+          }
+        ]
+      },
+      {
+        "type": "quiz",
+        "title": "🎓 Bloco 4 - Extra: Questão 13",
+        "question": "Em qual quesito o Meta AI Imagine pode ser superior ao Midjourney no uso cotidiano?",
+        "options": [
+          {
+            "text": "Qualidade final da iluminação e realismo",
+            "isCorrect": false,
+            "explanation": "Incorreto. Midjourney ainda lidera em detalhamento."
+          },
+          {
+            "text": "Acessibilidade (Grátis e integrado diretamente no WhatsApp/Instagram)",
+            "isCorrect": true,
+            "explanation": "Correto! O diferencial da Meta AI é o acesso massivo e fluido onde as pessoas já conversam, sem precisar de Discord ou logins complexos."
+          },
+          {
+            "text": "Precisão anatômica complexa",
+            "isCorrect": false,
+            "explanation": "Incorreto."
+          },
+          {
+            "text": "Na verdade, o Midjourney é superior em absolutamente tudo",
+            "isCorrect": false,
+            "explanation": "Incorreto. A conveniência e o custo zero da Meta AI são diferenciais competitivos fundamentais."
           }
         ]
       },
       {
         "type": "text",
-        "title": "🎉 Brinde Virtual: O Mundo é Seu!",
-        "content": "Chegou a hora dos fogos de artifício (mesmo que imaginários!). Imagine 28 explosões de conhecimento, cada uma representando um dia da sua dedicação. \n\nErga sua xícara de café ou sua taça: **Aos novos começos! Às ferramentas que dominamos! E ao futuro que vamos construir!**\n\n"
-      },
-      {
-        "type": "text",
-        "title": "🎬 FIM (Do curso, não da jornada)",
-        "content": "A porta da graduação está aberta à sua frente. Do outro lado estão as oportunidades que você sempre buscou. Você está pronto. A EduclY preparou você. \n\n**Vá e faça história.**\n\n--- \n\n**MENSAGEM FINAL:**\nObrigado por confiar em nós. Nos vemos no topo! 🚀✨"
+        "title": "🏆 A Grande Entrega: O Selo de Mestre em IA",
+        "content": "Você concluiu o Desafio de 28 Dias! Percorreu o caminho que 99% das pessoas sequer sabem que existe.\n\nAgora, você não é apenas um entusiasta; você é alguém que sabe orquestrar uma orquestra de inteligência artificial para produzir resultados que parecem mágica para os outros.\n\n**O SEU PRÓXIMO PASSO:** Aplique isso em um projeto real amanhã. O conhecimento morre se não for praticado. Estaremos aqui para te ajudar no seu próximo grande salto.\n\n**CERTIFICADO EMITIDO COM SUCESSO! 🎓✨**"
       }
     ],
     "terms": {

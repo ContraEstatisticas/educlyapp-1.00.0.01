@@ -55,7 +55,7 @@ export const useTranslatedChallengeContent = () => {
       elevenlabs: { start: 25, end: 25 },
       veo: { start: 26, end: 26 },
       revisao1: { start: 27, end: 27 },
-      suno: { start: 28, end: 28 },
+      revisao2: { start: 28, end: 28 },
     };
 
     const range = aiDayRanges[normalizedSlug];
