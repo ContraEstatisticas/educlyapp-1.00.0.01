@@ -150,8 +150,8 @@
           "description": "Create persuasive texts with Claude."
         },
         "7": {
-          "title": "Practical Project Claude",
-          "description": "Apply what you learned from Claude."
+          "title": "Introduction to DeepSeek",
+          "description": "Discover DeepSeek, its V3 and R1 models, and when to use it."
         },
         "8": {
           "title": "Introduction to DeepSeek",
@@ -479,20 +479,12 @@
     },
     "claude": {
       "1": {
-        "title": "Introduction to Claude",
-        "description": "Discover Claude and its differentiators."
+        "title": "Claude: Reliable, Honest and Strategic",
+        "description": "Discover Claude, its strengths, models and how to use it well."
       },
       "2": {
-        "title": "Claude for Analysis",
-        "description": "Use Claude for deep analysis."
-      },
-      "3": {
-        "title": "Claude Artifacts",
-        "description": "Master the Artifacts functionality."
-      },
-      "4": {
-        "title": "Claude for Writing",
-        "description": "Create high-quality texts."
+        "title": "Advanced Claude: Projects, Artifacts and API",
+        "description": "Master Projects, Artifacts, code execution and Claude's API."
       }
     },
     "deepseek": {

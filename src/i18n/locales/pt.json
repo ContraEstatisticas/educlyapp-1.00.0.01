@@ -130,76 +130,76 @@
           "description": "Conheça o ChatGPT e suas capacidades fundamentais."
         },
         "2": {
-          "title": "Criando Prompts Eficazes",
-          "description": "Aprenda a criar prompts poderosos."
+          "title": "Personalização: fazendo o ChatGPT responder do seu jeito",
+          "description": "Aprenda a personalizar o ChatGPT, entender tokens e os fundamentos de Engenharia de Prompt."
         },
         "3": {
-          "title": "ChatGPT como Consultor",
-          "description": "Use o ChatGPT como um consultor especialista."
+          "title": "Avaliando Respostas e Criando Imagens",
+          "description": "Aprenda a avaliar respostas da IA, criar imagens com prompts e usar o ChatGPT como ferramenta de investigação."
         },
         "4": {
-          "title": "Projeto Prático ChatGPT",
-          "description": "Aplique o que aprendeu em um projeto real."
+          "title": "Extraindo o Máximo do ChatGPT",
+          "description": "Aprenda técnicas avançadas para obter respostas estratégicas e precisas do ChatGPT."
         },
         "5": {
-          "title": "Introdução ao Claude",
-          "description": "Conheça o Claude e seus diferenciais."
+          "title": "Claude: Confiável, Honesto e Estratégico",
+          "description": "Conheça o Claude, seus pontos fortes, modelos e como usá-lo bem."
         },
         "6": {
-          "title": "Copywriting com Claude",
-          "description": "Crie textos persuasivos com Claude."
+          "title": "Claude Avançado: Projects, Artefatos e API",
+          "description": "Domine Projects, Artefatos, execução de código e a API do Claude."
         },
         "7": {
-          "title": "Projeto Prático Claude",
-          "description": "Aplique o que aprendeu com Claude."
+          "title": "Introdução ao DeepSeek",
+          "description": "Conheça o DeepSeek, seus modelos V3 e R1, e quando usá-lo."
         },
         "8": {
-          "title": "Introdução ao DeepSeek",
-          "description": "Conheça o DeepSeek e suas vantagens."
+          "title": "Como Extrair o Máximo do DeepSeek",
+          "description": "Domine os dois modos de raciocínio, busca web, documentos longos e automação com DeepSeek."
         },
         "9": {
-          "title": "Gerando Código com IA",
-          "description": "Programação assistida por IA com DeepSeek."
+          "title": "Introdução ao Gemini",
+          "description": "Conheça o Gemini, seus modelos, ferramentas e integração com Google Workspace."
         },
         "10": {
-          "title": "Projeto Prático DeepSeek",
-          "description": "Aplique o que aprendeu com DeepSeek."
+          "title": "Como Extrair o Máximo do Gemini",
+          "description": "Upload de arquivos, NotebookLM, Deep Research, Imagen e fluxo de trabalho completo."
         },
         "11": {
-          "title": "Introdução ao Gemini",
-          "description": "Conheça o Gemini do Google."
+          "title": "Introdução ao Microsoft Copilot",
+          "description": "Conheça o Copilot integrado no Microsoft 365: Word, Excel, Outlook e PowerPoint."
         },
         "12": {
-          "title": "Pesquisa com Gemini",
-          "description": "Use o Gemini para pesquisas."
+          "title": "Copilot Avançado: Prompts e Casos de Uso",
+          "description": "Técnicas avançadas de prompt, casos de uso por área e fluxo prático diário."
         },
         "13": {
-          "title": "Projeto Prático Gemini",
-          "description": "Aplique o que aprendeu com Gemini."
+          "title": "Introdução ao Grok",
+          "description": "Conheça o Grok da xAI: acesso em tempo real ao X e à web."
         },
         "14": {
-          "title": "Introdução ao NanoBanana",
-          "description": "Conheça a ferramenta de arte IA."
+          "title": "Grok Avançado: Prompts e Casos de Uso",
+          "description": "Técnicas avançadas, casos de uso por área e fluxo prático diário com o Grok."
         },
         "15": {
-          "title": "Criando Arte com IA",
-          "description": "Gere imagens impressionantes."
+          "title": "Introdução ao Perplexity",
+          "description": "Busca com IA: respostas sintetizadas com fontes citadas em tempo real."
         },
         "16": {
-          "title": "Estilos e Técnicas",
-          "description": "Domine estilos artísticos."
+          "title": "Perplexity Avançado: Prompts e Casos de Uso",
+          "description": "Técnicas avançadas, casos de uso por área e fluxo prático diário com Perplexity."
         },
         "17": {
-          "title": "Projeto Prático NanoBanana",
-          "description": "Aplique o que aprendeu."
+          "title": "Introdução ao Manus",
+          "description": "O agente autônomo que executa tarefas completas: web, código, pesquisa e automação."
         },
         "18": {
-          "title": "Introdução ao Lovable",
-          "description": "Conheça a plataforma no-code."
+          "title": "Manus Avançado: Prompts e Casos de Uso",
+          "description": "Fórmula completa, técnicas avançadas e fluxo prático diário com Manus."
         },
         "19": {
-          "title": "Criando Landing Pages",
-          "description": "Desenvolva landing pages."
+          "title": "Introdução ao Lovable",
+          "description": "Crie aplicações web completas descrevendo em linguagem natural, sem escrever código."
         },
         "20": {
           "title": "Sistemas Completos",
@@ -369,28 +369,28 @@
         "description": "Conheça o ChatGPT e suas capacidades fundamentais."
       },
       "2": {
-        "title": "Criando Prompts Eficazes",
-        "description": "Aprenda a criar prompts poderosos que geram resultados."
+        "title": "Personalização: fazendo o ChatGPT responder do seu jeito",
+        "description": "Aprenda a personalizar o ChatGPT, entender tokens e os fundamentos de Engenharia de Prompt."
       },
       "3": {
-        "title": "ChatGPT para Produtividade",
-        "description": "Use o ChatGPT para aumentar sua produtividade diária."
+        "title": "Avaliando Respostas e Criando Imagens",
+        "description": "Aprenda a avaliar respostas da IA, criar imagens com prompts e usar o ChatGPT como ferramenta de investigação."
       },
       "4": {
-        "title": "Análise e Resumo de Textos",
-        "description": "Domine técnicas de análise e síntese com IA."
+        "title": "Extraindo o Máximo do ChatGPT",
+        "description": "Aprenda técnicas avançadas para obter respostas estratégicas e precisas do ChatGPT."
       },
       "5": {
-        "title": "Criação de Conteúdo",
-        "description": "Crie conteúdos incríveis com assistência da IA."
+        "title": "Claude: Confiável, Honesto e Estratégico",
+        "description": "Conheça o Claude, seus pontos fortes, modelos e como usá-lo bem."
       },
       "6": {
-        "title": "ChatGPT para Emails",
-        "description": "Escreva emails profissionais em segundos."
+        "title": "Claude Avançado: Projects, Artefatos e API",
+        "description": "Domine Projects, Artefatos, execução de código e a API do Claude."
       },
       "7": {
-        "title": "Revisão da Semana 1",
-        "description": "Consolide tudo que aprendeu na primeira semana."
+        "title": "DeepSeek: Raciocínio Transparente e Gratuito",
+        "description": "Conheça o DeepSeek, seus modelos V3 e R1, e quando usá-lo."
       },
       "8": {
         "title": "Técnicas de Role-Playing",
@@ -441,8 +441,8 @@
         "description": "Crie imagens diretamente no chat."
       },
       "20": {
-        "title": "Voice Mode",
-        "description": "Converse por voz com a IA."
+        "title": "Lovable Avan\u00e7ado: Fluxo, Integra\u00e7\u00f5es e Resultados",
+        "description": "Domine o fluxo correto, integra\u00e7\u00f5es essenciais e t\u00e9cnicas para extrair os melhores resultados do Lovable."
       },
       "21": {
         "title": "Revisão da Semana 3",
@@ -479,60 +479,88 @@
     },
     "claude": {
       "1": {
-        "title": "Introdução ao Claude",
-        "description": "Conheça o Claude e seus diferenciais."
+        "title": "Claude: Confiável, Honesto e Estratégico",
+        "description": "Conheça o Claude, seus pontos fortes, modelos e como usá-lo bem."
       },
       "2": {
-        "title": "Claude para Análise",
-        "description": "Use Claude para análises profundas."
-      },
-      "3": {
-        "title": "Artifacts do Claude",
-        "description": "Domine a funcionalidade de Artifacts."
-      },
-      "4": {
-        "title": "Claude para Escrita",
-        "description": "Crie textos de alta qualidade."
+        "title": "Claude Avançado: Projects, Artefatos e API",
+        "description": "Domine Projects, Artefatos, execução de código e a API do Claude."
       }
     },
     "deepseek": {
       "1": {
         "title": "Introdução ao DeepSeek",
-        "description": "Conheça o DeepSeek e suas vantagens."
+        "description": "Conheça o DeepSeek, seus modelos V3 e R1, e quando usá-lo."
       },
       "2": {
-        "title": "DeepSeek para Código",
-        "description": "Programação assistida por IA."
+        "title": "Como Extrair o Máximo do DeepSeek",
+        "description": "Domine os dois modos de raciocínio, busca web, documentos longos e automação."
       }
     },
     "gemini": {
       "1": {
         "title": "Introdução ao Gemini",
-        "description": "Conheça o Gemini do Google."
+        "description": "Conheça o Gemini, seus modelos, ferramentas e integração com Google Workspace."
       },
       "2": {
-        "title": "Gemini Multimodal",
-        "description": "Trabalhe com texto e imagens."
+        "title": "Gemini Avançado",
+        "description": "Aprofunde no ecossistema Gemini: Deep Research, NotebookLM, Imagen e muito mais."
       }
     },
-    "nanobanana": {
+    "copilot": {
       "1": {
-        "title": "Introdução ao NanoBanana",
-        "description": "Conheça a ferramenta de arte IA."
+        "title": "Introdução ao Microsoft Copilot",
+        "description": "História, como funciona, onde brilha e onde falha. Integrado no Microsoft 365."
       },
       "2": {
-        "title": "Criando Sua Primeira Arte",
-        "description": "Gere imagens impressionantes."
+        "title": "Copilot Avançado: Prompts e Casos de Uso",
+        "description": "Técnicas avançadas de prompt, casos de uso por área e fluxo prático diário."
+      }
+    },
+    "grok": {
+      "1": {
+        "title": "Introdução ao Grok",
+        "description": "Dados em tempo real do X e da web. O que é, onde brilha, onde falha."
+      },
+      "2": {
+        "title": "Grok Avançado: Prompts e Casos de Uso",
+        "description": "Técnicas avançadas, casos de uso por área e fluxo prático diário com o Grok."
+      }
+    },
+    "perplexity": {
+      "1": {
+        "title": "Introdução ao Perplexity",
+        "description": "Busca com IA: respostas sintetizadas com fontes citadas em tempo real."
+      },
+      "2": {
+        "title": "Perplexity Avançado: Prompts e Casos de Uso",
+        "description": "Técnicas avançadas, casos de uso por área e fluxo prático diário com Perplexity."
+      }
+    },
+    "manus": {
+      "1": {
+        "title": "Introdução ao Manus",
+        "description": "O agente autônomo que executa tarefas completas: web, código, pesquisa e automação."
+      },
+      "2": {
+        "title": "Manus Avançado: Prompts e Casos de Uso",
+        "description": "Fórmula completa, técnicas avançadas e fluxo prático diário com Manus."
       }
     },
     "lovable": {
       "1": {
-        "title": "Introdução ao Lovable",
-        "description": "Conheça a plataforma no-code com IA."
+        "title": "Introdu\u00e7\u00e3o ao Lovable",
+        "description": "Crie aplica\u00e7\u00f5es web completas descrevendo em linguagem natural, sem escrever c\u00f3digo."
       },
       "2": {
-        "title": "Criando Seu Primeiro App",
-        "description": "Desenvolva um aplicativo completo."
+        "title": "Lovable Avan\u00e7ado: Fluxo, Integra\u00e7\u00f5es e Resultados",
+        "description": "Domine o fluxo correto, integra\u00e7\u00f5es essenciais e t\u00e9cnicas para extrair os melhores resultados do Lovable."
+      }
+    },
+    "nanobanana": {
+      "1": {
+        "title": "🚀 A Revolução Visual com NanoBanana",
+        "description": "Conheça a ferramenta de arte IA do Google (Gemini 2.5 Flash Image) e aprenda edição cirúrgica e criação em camadas."
       }
     },
     "captions": {
@@ -844,27 +872,27 @@
     "claude": {
       "1": {
         "1": {
-          "title": "Conhecendo Claude",
-          "content": "Claude é uma IA criada pela Anthropic, conhecida por:\n\n• Respostas mais reflexivas\n• Melhor compreensão de contexto longo\n• Foco em segurança\n• Excelente para análise profunda"
+          "title": "Claude: Confiável e Honesto",
+          "content": "Claude é criado pela Anthropic com foco em segurança e honestidade:\n\n• Reconhece quando não sabe algo\n• Contexto longo (até 200k tokens)\n• Raciocínio detalhado e transparente\n• Excelente para análise e escrita profissional"
         },
         "2": {
-          "title": "Diferenças do ChatGPT",
-          "content": "Claude se destaca em:\n\n✅ Textos mais longos e coerentes\n✅ Análise mais detalhada\n✅ Menor tendência a alucinar\n✅ Melhor para escrita criativa\n\n🎭 *Cada IA tem suas forças.*"
+          "title": "Claude vs ChatGPT",
+          "content": "Quando escolher Claude:\n\n✅ Documentos e contratos longos\n✅ Análise crítica aprofundada\n✅ Respostas mais cautelosas e honestas\n✅ Escrita com tom sofisticado\n\n🎭 *Use o modelo certo para cada tarefa.*"
         },
         "3": {
-          "title": "Quiz: Claude Básico",
-          "question": "Em que Claude se destaca comparado a outras IAs?",
+          "title": "Quiz: Claude",
+          "question": "Qual é o principal diferencial do Claude em relação a outros modelos?",
           "options": [
             {
-              "text": "Análise profunda e textos longos",
+              "text": "Honestidade, segurança e contexto longo",
               "isCorrect": true
             },
             {
-              "text": "Gerar imagens",
+              "text": "Gerar imagens automaticamente",
               "isCorrect": false
             },
             {
-              "text": "Editar vídeos",
+              "text": "Responder apenas em inglês",
               "isCorrect": false
             }
           ]
@@ -872,83 +900,27 @@
       },
       "2": {
         "1": {
-          "title": "Claude para Análise",
-          "content": "Use Claude para análise profunda:\n\n• Documentos extensos\n• Contratos e legais\n• Pesquisa acadêmica\n• Análise de mercado"
+          "title": "Projects e Artefatos",
+          "content": "Recursos avançados do Claude:\n\n• **Projects**: Organize conversas com contexto persistente\n• **Artefatos**: Gere código, HTML e visualizações interativas\n• **Memória de projeto**: Claude lembra o seu contexto\n• **Iteração rápida**: Refine resultados na hora"
         },
         "2": {
-          "title": "Técnicas de Análise",
-          "content": "Maximize a análise:\n\n1. **Faça upload do documento** completo\n2. **Faça perguntas específicas**\n3. **Peça comparações** e conclusões\n4. **Solicite resumos** executivos"
+          "title": "Claude Avançado e API",
+          "content": "Maximize o uso do Claude:\n\n1. **Crie um Project** para cada cliente ou área\n2. **Use Artefatos** para protótipos rápidos\n3. **Acesse via API** para automações\n4. **Combine modelos**: Haiku (rápido), Sonnet (equilibrado), Opus (poderoso)\n\n🚀 *De ideia a entrega em minutos.*"
         },
         "3": {
-          "title": "Quiz: Análise",
-          "question": "Para que tipo de documentos Claude é ideal?",
+          "title": "Quiz: Claude Avançado",
+          "question": "O que são os Artefatos no Claude?",
           "options": [
             {
-              "text": "Documentos extensos e complexos",
+              "text": "Código executável e visualizações interativas geradas pelo Claude",
               "isCorrect": true
             },
             {
-              "text": "Apenas imagens",
+              "text": "Arquivos de imagem enviados ao Claude",
               "isCorrect": false
             },
             {
-              "text": "Arquivos de áudio",
-              "isCorrect": false
-            }
-          ]
-        }
-      },
-      "3": {
-        "1": {
-          "title": "Artifacts do Claude",
-          "content": "Os Artifacts são uma função única do Claude:\n\n• Gera código executável\n• Cria visualizações\n• Documentos interativos\n• Protótipos rápidos"
-        },
-        "2": {
-          "title": "Usando Artifacts",
-          "content": "Como aproveitar Artifacts:\n\n1. **Peça para criar** um componente visual\n2. **Claude gera** o código\n3. **Visualize em tempo real**\n4. **Itere e melhore**\n\n🚀 *De ideia a protótipo em minutos.*"
-        },
-        "3": {
-          "title": "Quiz: Artifacts",
-          "question": "O que você pode criar com Artifacts do Claude?",
-          "options": [
-            {
-              "text": "Código executável e visualizações",
-              "isCorrect": true
-            },
-            {
-              "text": "Apenas texto simples",
-              "isCorrect": false
-            },
-            {
-              "text": "Nada interativo",
-              "isCorrect": false
-            }
-          ]
-        }
-      },
-      "4": {
-        "1": {
-          "title": "Escrita com Claude",
-          "content": "Claude é excelente para escrita:\n\n• **Copywriting**: Textos persuasivos\n• **Conteúdo longo**: Artigos completos\n• **Criatividade**: Histórias e roteiros\n• **Profissional**: Relatórios e propostas"
-        },
-        "2": {
-          "title": "Técnicas de Escrita",
-          "content": "Para melhores resultados:\n\n✅ Defina o estilo e tom\n✅ Especifique a audiência\n✅ Dê exemplos de referência\n✅ Peça múltiplas versões\n\n✍️ *Claude é seu co-escritor ideal.*"
-        },
-        "3": {
-          "title": "Quiz: Escrita",
-          "question": "O que você deve definir para uma boa escrita com Claude?",
-          "options": [
-            {
-              "text": "Estilo, tom e audiência",
-              "isCorrect": true
-            },
-            {
-              "text": "Apenas o tema",
-              "isCorrect": false
-            },
-            {
-              "text": "Nada específico",
+              "text": "Histórico de conversas antigas",
               "isCorrect": false
             }
           ]

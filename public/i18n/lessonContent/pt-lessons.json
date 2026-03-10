@@ -87,9 +87,18 @@
           "title": "🔗 Conceito x Significado",
           "description": "🪡Ligue cada conceito de IA ao significado correto.",
           "pairs": [
-            { "left": "Lanterna Matemática", "right": "Mecanismo que permite focar em palavras-chave relevantes" },
-            { "left": "Alucinação", "right": "Quando a IA inventa informações para parecer convincente" },
-            { "left": "Rascunho Inicial", "right": "Como você deve tratar a resposta da IA - nunca como final" }
+            {
+              "left": "Lanterna Matemática",
+              "right": "Mecanismo que permite focar em palavras-chave relevantes"
+            },
+            {
+              "left": "Alucinação",
+              "right": "Quando a IA inventa informações para parecer convincente"
+            },
+            {
+              "left": "Rascunho Inicial",
+              "right": "Como você deve tratar a resposta da IA - nunca como final"
+            }
           ]
         }
       }
@@ -119,10 +128,22 @@
           "title": "🔗 Domine o C.T.F.D.",
           "description": "Ligue cada letra à sua função no seu pedido.",
           "pairs": [
-            { "left": "C - Contexto", "right": "Quem a IA será" },
-            { "left": "T - Tarefa", "right": "O que será feito" },
-            { "left": "F - Formato", "right": "Como será entregue" },
-            { "left": "D - Detalhes", "right": "Regras e limites" }
+            {
+              "left": "C - Contexto",
+              "right": "Quem a IA será"
+            },
+            {
+              "left": "T - Tarefa",
+              "right": "O que será feito"
+            },
+            {
+              "left": "F - Formato",
+              "right": "Como será entregue"
+            },
+            {
+              "left": "D - Detalhes",
+              "right": "Regras e limites"
+            }
           ]
         }
       },
@@ -152,8 +173,21 @@
         "props": {
           "title": "✏️ Pratique o Framework",
           "sentence": "Um bom prompt precisa de ___ para o papel, ___ para a ação, ___ para a estrutura e ___ para os limites.",
-          "answers": ["Contexto", "Tarefa", "Formato", "Detalhes"],
-          "options": ["Contexto", "Tarefa", "Formato", "Detalhes", "Sorte", "Velocidade", "Dinheiro"],
+          "answers": [
+            "Contexto",
+            "Tarefa",
+            "Formato",
+            "Detalhes"
+          ],
+          "options": [
+            "Contexto",
+            "Tarefa",
+            "Formato",
+            "Detalhes",
+            "Sorte",
+            "Velocidade",
+            "Dinheiro"
+          ],
           "explanation": "Isso aí! Com esses quatro pilares, você domina qualquer IA."
         }
       },
@@ -174,10 +208,22 @@
           "title": "🔗 Técnicas de Elite",
           "description": "Qual técnica usar em cada momento?",
           "pairs": [
-            { "left": "Zero-Shot", "right": "Tarefas rápidas e simples" },
-            { "left": "Few-Shot", "right": "Quando o estilo importa" },
-            { "left": "Passo a Passo", "right": "Para lógica e cálculos" },
-            { "left": "Auto-crítica", "right": "Para revisar erros" }
+            {
+              "left": "Zero-Shot",
+              "right": "Tarefas rápidas e simples"
+            },
+            {
+              "left": "Few-Shot",
+              "right": "Quando o estilo importa"
+            },
+            {
+              "left": "Passo a Passo",
+              "right": "Para lógica e cálculos"
+            },
+            {
+              "left": "Auto-crítica",
+              "right": "Para revisar erros"
+            }
           ]
         }
       },
@@ -252,10 +298,22 @@
           "title": "🔗 Ligue os Pilares da Persona",
           "description": "Combine cada elemento com o que ele define na IA.",
           "pairs": [
-            { "left": "Cargo Específico", "right": "Filtra o vocabulário técnico" },
-            { "left": "Tempo de Experiência", "right": "Define a profundidade do conselho" },
-            { "left": "Estilo/Viés", "right": "Determina se é cautelosa ou ousada" },
-            { "left": "Público-alvo", "right": "Ajusta a facilidade da linguagem" }
+            {
+              "left": "Cargo Específico",
+              "right": "Filtra o vocabulário técnico"
+            },
+            {
+              "left": "Tempo de Experiência",
+              "right": "Define a profundidade do conselho"
+            },
+            {
+              "left": "Estilo/Viés",
+              "right": "Determina se é cautelosa ou ousada"
+            },
+            {
+              "left": "Público-alvo",
+              "right": "Ajusta a facilidade da linguagem"
+            }
           ]
         }
       },
@@ -280,8 +338,19 @@
         "props": {
           "title": "✏️ Teste seu Conhecimento",
           "sentence": "O método ___ faz a IA agir como um professor que te faz ___ em vez de dar ___ prontas.",
-          "answers": ["Socrático", "perguntas", "respostas"],
-          "options": ["Socrático", "perguntas", "respostas", "Direto", "ordens", "listas"],
+          "answers": [
+            "Socrático",
+            "perguntas",
+            "respostas"
+          ],
+          "options": [
+            "Socrático",
+            "perguntas",
+            "respostas",
+            "Direto",
+            "ordens",
+            "listas"
+          ],
           "explanation": "Exato! Isso estimula o raciocínio crítico e melhora o aprendizado."
         }
       },
@@ -322,10 +391,22 @@
           "title": "🔗 Cenários vs. Personas",
           "description": "Qual persona você chamaria para cada situação?",
           "pairs": [
-            { "left": "Entrevista de emprego", "right": "Recrutador rigoroso" },
-            { "left": "Lançar novo produto", "right": "CFO cauteloso" },
-            { "left": "Escrever anúncio", "right": "Copywriter de elite" },
-            { "left": "Dúvida existencial", "right": "Mentor sábio do futuro" }
+            {
+              "left": "Entrevista de emprego",
+              "right": "Recrutador rigoroso"
+            },
+            {
+              "left": "Lançar novo produto",
+              "right": "CFO cauteloso"
+            },
+            {
+              "left": "Escrever anúncio",
+              "right": "Copywriter de elite"
+            },
+            {
+              "left": "Dúvida existencial",
+              "right": "Mentor sábio do futuro"
+            }
           ]
         }
       },
@@ -350,8 +431,19 @@
         "props": {
           "title": "✏️ Recapitulação Final",
           "sentence": "Uma persona deve ter um ___ específico, anos de ___ e um ___ característico.",
-          "answers": ["cargo", "experiência", "estilo"],
-          "options": ["cargo", "experiência", "estilo", "computador", "segredo", "nome"],
+          "answers": [
+            "cargo",
+            "experiência",
+            "estilo"
+          ],
+          "options": [
+            "cargo",
+            "experiência",
+            "estilo",
+            "computador",
+            "segredo",
+            "nome"
+          ],
           "explanation": "Perfeito! Você fechou o Dia 3 com chave de ouro e está pronto para o projeto final!"
         }
       }
@@ -409,10 +501,22 @@
           "title": "🔗 Ligue a Peça ao Objetivo",
           "description": "O que cada parte do projeto busca alcançar?",
           "pairs": [
-            { "left": "Estratégia (CMO)", "right": "Saber onde investir o dinheiro" },
-            { "left": "Landing Page", "right": "Convencer a pessoa a baixar o app" },
-            { "left": "E-mails", "right": "Manter o cliente interessado" },
-            { "left": "Vídeos (TikTok)", "right": "Chamar atenção de novas pessoas" }
+            {
+              "left": "Estratégia (CMO)",
+              "right": "Saber onde investir o dinheiro"
+            },
+            {
+              "left": "Landing Page",
+              "right": "Convencer a pessoa a baixar o app"
+            },
+            {
+              "left": "E-mails",
+              "right": "Manter o cliente interessado"
+            },
+            {
+              "left": "Vídeos (TikTok)",
+              "right": "Chamar atenção de novas pessoas"
+            }
           ]
         }
       },
@@ -437,8 +541,19 @@
         "props": {
           "title": "✏️ O Ciclo de Sucesso",
           "sentence": "A IA gera o ___, o humano faz a ___ e o resultado final é fruto de várias ___.",
-          "answers": ["rascunho", "validação", "interação"],
-          "options": ["rascunho", "validação", "interação", "erro", "venda", "pergunta"],
+          "answers": [
+            "rascunho",
+            "validação",
+            "interação"
+          ],
+          "options": [
+            "rascunho",
+            "validação",
+            "interação",
+            "erro",
+            "venda",
+            "pergunta"
+          ],
           "explanation": "Isso mesmo! O segredo é não aceitar a primeira resposta e sempre conferir tudo."
         }
       },
@@ -515,10 +630,22 @@
           "title": "🔗 Qual Claude escolher?",
           "description": "Ligue o modelo à tarefa ideal.",
           "pairs": [
-            { "left": "Claude Haiku", "right": "Rapidez e baixo custo" },
-            { "left": "Claude Sonnet", "right": "Trabalho profissional diário" },
-            { "left": "Claude Opus", "right": "Decisões críticas e complexas" },
-            { "left": "Anthropic", "right": "Empresa que criou o Claude" }
+            {
+              "left": "Claude Haiku",
+              "right": "Rapidez e baixo custo"
+            },
+            {
+              "left": "Claude Sonnet",
+              "right": "Trabalho profissional diário"
+            },
+            {
+              "left": "Claude Opus",
+              "right": "Decisões críticas e complexas"
+            },
+            {
+              "left": "Anthropic",
+              "right": "Empresa que criou o Claude"
+            }
           ]
         }
       },
@@ -543,8 +670,18 @@
         "props": {
           "title": "✏️ Teste sua Memória",
           "sentence": "O grande diferencial do Claude é sua enorme ___ de contexto, que permite ler documentos de até ___ páginas.",
-          "answers": ["janela", "300"],
-          "options": ["janela", "300", "porta", "50", "velocidade", "10"],
+          "answers": [
+            "janela",
+            "300"
+          ],
+          "options": [
+            "janela",
+            "300",
+            "porta",
+            "50",
+            "velocidade",
+            "10"
+          ],
           "explanation": "Exato! Essa capacidade de 'memória' é o que torna o Claude imbatível para analisar arquivos longos."
         }
       },
@@ -584,8 +721,19 @@
         "props": {
           "title": "✏️ Recapitulação do Dia",
           "sentence": "O Claude é melhor para tarefas ___ e documentos ___, enquanto o ChatGPT brilha na ___.",
-          "answers": ["analíticas", "longos", "criatividade"],
-          "options": ["analíticas", "longos", "criatividade", "rápidas", "curtos", "matemática"],
+          "answers": [
+            "analíticas",
+            "longos",
+            "criatividade"
+          ],
+          "options": [
+            "analíticas",
+            "longos",
+            "criatividade",
+            "rápidas",
+            "curtos",
+            "matemática"
+          ],
           "explanation": "Isso mesmo! O Claude é seu analista focado, o ChatGPT é seu artista criativo."
         }
       },
@@ -620,10 +768,22 @@
           "title": "🔗 Qual é o Estilo?",
           "description": "Ligue cada IA ao seu 'emprego' ideal na escrita.",
           "pairs": [
-            { "left": "ChatGPT", "right": "Vendedor de promoções" },
-            { "left": "Claude", "right": "Mentor e Consultor" },
-            { "left": "Gemini", "right": "Jornalista e Pesquisador" },
-            { "left": "Copywriting", "right": "Escrita que convence" }
+            {
+              "left": "ChatGPT",
+              "right": "Vendedor de promoções"
+            },
+            {
+              "left": "Claude",
+              "right": "Mentor e Consultor"
+            },
+            {
+              "left": "Gemini",
+              "right": "Jornalista e Pesquisador"
+            },
+            {
+              "left": "Copywriting",
+              "right": "Escrita que convence"
+            }
           ]
         }
       },
@@ -648,8 +808,19 @@
         "props": {
           "title": "✏️ Teste sua Lógica",
           "sentence": "O Claude é excelente para textos ___ porque ele usa o tom de um ___ e evita promessas ___.",
-          "answers": ["educativos", "mentor", "exageradas"],
-          "options": ["educativos", "mentor", "exageradas", "curtos", "robô", "reais"],
+          "answers": [
+            "educativos",
+            "mentor",
+            "exageradas"
+          ],
+          "options": [
+            "educativos",
+            "mentor",
+            "exageradas",
+            "curtos",
+            "robô",
+            "reais"
+          ],
           "explanation": "Isso mesmo! Ele foca na confiança e na autoridade, não em truques de venda baratos."
         }
       },
@@ -736,10 +907,22 @@
           "title": "🔗 Qual Persona Usar?",
           "description": "Ligue o tipo de especialista ao seu objetivo.",
           "pairs": [
-            { "left": "Funcional", "right": "Baseada em cargo ou profissão" },
-            { "left": "Cognitiva", "right": "Baseada em um jeito de pensar" },
-            { "left": "Estratégica", "right": "Baseada em um objetivo de negócio" },
-            { "left": "De Nível", "right": "Baseada na experiência (Júnior/Sênior)" }
+            {
+              "left": "Funcional",
+              "right": "Baseada em cargo ou profissão"
+            },
+            {
+              "left": "Cognitiva",
+              "right": "Baseada em um jeito de pensar"
+            },
+            {
+              "left": "Estratégica",
+              "right": "Baseada em um objetivo de negócio"
+            },
+            {
+              "left": "De Nível",
+              "right": "Baseada na experiência (Júnior/Sênior)"
+            }
           ]
         }
       },
@@ -764,8 +947,18 @@
         "props": {
           "title": "✏️ Método Socrático",
           "sentence": "O método socrático usa ___ em vez de respostas prontas, fazendo o aluno desenvolver o ___ crítico.",
-          "answers": ["perguntas", "pensamento"],
-          "options": ["perguntas", "pensamento", "livros", "vídeos", "respostas", "desenho"],
+          "answers": [
+            "perguntas",
+            "pensamento"
+          ],
+          "options": [
+            "perguntas",
+            "pensamento",
+            "livros",
+            "vídeos",
+            "respostas",
+            "desenho"
+          ],
           "explanation": "Correto! O segredo está em guiar o raciocínio através de perguntas inteligentes."
         }
       },
@@ -843,10 +1036,22 @@
           "title": "🔗 Cenários e Personas",
           "description": "Quem você chamaria para estas situações?",
           "pairs": [
-            { "left": "Revisar um contrato", "right": "Advogado de TI detalhista" },
-            { "left": "Treinar para aumento", "right": "Chefe difícil e exigente" },
-            { "left": "Ideia de novo negócio", "right": "Investidor cético (Anjo)" },
-            { "left": "Entender Física", "right": "Professor Socrático" }
+            {
+              "left": "Revisar um contrato",
+              "right": "Advogado de TI detalhista"
+            },
+            {
+              "left": "Treinar para aumento",
+              "right": "Chefe difícil e exigente"
+            },
+            {
+              "left": "Ideia de novo negócio",
+              "right": "Investidor cético (Anjo)"
+            },
+            {
+              "left": "Entender Física",
+              "right": "Professor Socrático"
+            }
           ]
         }
       },
@@ -871,8 +1076,18 @@
         "props": {
           "title": "✏️ Recapitulação do Dia",
           "sentence": "As personas são mecanismos para ativar conhecimentos ___, e o método socrático é focado em ___.",
-          "answers": ["especializados", "perguntas"],
-          "options": ["especializados", "perguntas", "gerais", "músicas", "lentos", "resumos"],
+          "answers": [
+            "especializados",
+            "perguntas"
+          ],
+          "options": [
+            "especializados",
+            "perguntas",
+            "gerais",
+            "músicas",
+            "lentos",
+            "resumos"
+          ],
           "explanation": "Perfeito! Você agora sabe como extrair o máximo de inteligência e aprendizado da IA."
         }
       },
@@ -943,8 +1158,19 @@
         "props": {
           "title": "✏️ Framework T.R.A.C.K.",
           "sentence": "Para falar com o DeepSeek, eu defino o ___ da tarefa e os ___ técnicos para obter uma solução ___.",
-          "answers": ["tipo", "requisitos", "otimizada"],
-          "options": ["tipo", "requisitos", "otimizada", "nome", "desenhos", "lenta"],
+          "answers": [
+            "tipo",
+            "requisitos",
+            "otimizada"
+          ],
+          "options": [
+            "tipo",
+            "requisitos",
+            "otimizada",
+            "nome",
+            "desenhos",
+            "lenta"
+          ],
           "explanation": "Isso mesmo! O foco técnico e os requisitos claros são a chave para o sucesso com o DeepSeek."
         }
       },
@@ -970,10 +1196,22 @@
           "title": "🔗 Quem faz o quê?",
           "description": "Ligue a tarefa à IA que a executa melhor.",
           "pairs": [
-            { "left": "Criar slogan criativo", "right": "ChatGPT" },
-            { "left": "Otimizar código SQL", "right": "DeepSeek" },
-            { "left": "Resumir contrato de 100 páginas", "right": "Claude" },
-            { "left": "Explicar teorema passo a passo", "right": "DeepSeek-R1" }
+            {
+              "left": "Criar slogan criativo",
+              "right": "ChatGPT"
+            },
+            {
+              "left": "Otimizar código SQL",
+              "right": "DeepSeek"
+            },
+            {
+              "left": "Resumir contrato de 100 páginas",
+              "right": "Claude"
+            },
+            {
+              "left": "Explicar teorema passo a passo",
+              "right": "DeepSeek-R1"
+            }
           ]
         }
       },
@@ -1013,10 +1251,22 @@
           "title": "🔗 DeepSeek para Dados",
           "description": "Ligue a tarefa à facilidade que o DeepSeek traz.",
           "pairs": [
-            { "left": "Limpar dados", "right": "Organiza tudo em segundos" },
-            { "left": "Queries SQL", "right": "Cria comandos para bancos de dados" },
-            { "left": "Gráficos", "right": "Cria o código para visualizações" },
-            { "left": "Estatística", "right": "Escolhe o teste matemático correto" }
+            {
+              "left": "Limpar dados",
+              "right": "Organiza tudo em segundos"
+            },
+            {
+              "left": "Queries SQL",
+              "right": "Cria comandos para bancos de dados"
+            },
+            {
+              "left": "Gráficos",
+              "right": "Cria o código para visualizações"
+            },
+            {
+              "left": "Estatística",
+              "right": "Escolhe o teste matemático correto"
+            }
           ]
         }
       },
@@ -1116,8 +1366,18 @@
         "props": {
           "title": "✏️ O Analista Profissional",
           "sentence": "O DeepSeek transforma dados brutos em ___, usando o método ___ para garantir que a análise seja completa.",
-          "answers": ["insights", "D.A.T.A."],
-          "options": ["insights", "D.A.T.A.", "desenhos", "MAPA", "fórmulas", "LÓGICA"],
+          "answers": [
+            "insights",
+            "D.A.T.A."
+          ],
+          "options": [
+            "insights",
+            "D.A.T.A.",
+            "desenhos",
+            "MAPA",
+            "fórmulas",
+            "LÓGICA"
+          ],
           "explanation": "Perfeito! O foco é sempre gerar valor e clareza para a tomada de decisão."
         }
       },
@@ -1184,8 +1444,18 @@
         "props": {
           "title": "✏️ O Coração do Sistema",
           "sentence": "O processo de limpar dados chama-se ___, e o sistema de ___ avisa quando algo sai do normal.",
-          "answers": ["ETL", "alertas"],
-          "options": ["ETL", "alertas", "desenho", "e-mail", "compra", "venda"],
+          "answers": [
+            "ETL",
+            "alertas"
+          ],
+          "options": [
+            "ETL",
+            "alertas",
+            "desenho",
+            "e-mail",
+            "compra",
+            "venda"
+          ],
           "explanation": "Isso mesmo! O ETL organiza e os alertas protegem o seu negócio."
         }
       },
@@ -1284,8 +1554,19 @@
         "props": {
           "title": "✏️ Os Superpoderes do Gemini",
           "sentence": "O Gemini se destaca por ter acesso a dados ___, integração total com o ___ e ser ___ (entender fotos e vídeos).",
-          "answers": ["atualizados", "Google Workspace", "multimodal"],
-          "options": ["atualizados", "Google Workspace", "multimodal", "antigos", "Microsoft", "lento"],
+          "answers": [
+            "atualizados",
+            "Google Workspace",
+            "multimodal"
+          ],
+          "options": [
+            "atualizados",
+            "Google Workspace",
+            "multimodal",
+            "antigos",
+            "Microsoft",
+            "lento"
+          ],
           "explanation": "Isso mesmo! Ele é a IA da produtividade em tempo real dentro do ecossistema Google."
         }
       },
@@ -1361,10 +1642,22 @@
           "title": "🔗 IA no Trabalho",
           "description": "Como o Gemini ajuda no seu ecossistema Google?",
           "pairs": [
-            { "left": "Gmail", "right": "Resumir e-mails e rascunhar respostas" },
-            { "left": "Google Docs", "right": "Melhorar a escrita e estruturar textos" },
-            { "left": "Google Sheets", "right": "Analisar planilhas e criar fórmulas" },
-            { "left": "YouTube", "right": "Resumir vídeos e achar momentos-chave" }
+            {
+              "left": "Gmail",
+              "right": "Resumir e-mails e rascunhar respostas"
+            },
+            {
+              "left": "Google Docs",
+              "right": "Melhorar a escrita e estruturar textos"
+            },
+            {
+              "left": "Google Sheets",
+              "right": "Analisar planilhas e criar fórmulas"
+            },
+            {
+              "left": "YouTube",
+              "right": "Resumir vídeos e achar momentos-chave"
+            }
           ]
         }
       },
@@ -1464,10 +1757,22 @@
           "title": "🔗 Ferramenta e Função",
           "description": "Ligue cada recurso do Gemini ao ganho de produtividade.",
           "pairs": [
-            { "left": "Agenda Inteligente", "right": "Protege tempo de foco" },
-            { "left": "Análise em Lote", "right": "Lê 20 arquivos em segundos" },
-            { "left": "Criação de SOP", "right": "Monta manuais de treinamento" },
-            { "left": "Triagem de E-mail", "right": "Acha o que é urgente na inbox" }
+            {
+              "left": "Agenda Inteligente",
+              "right": "Protege tempo de foco"
+            },
+            {
+              "left": "Análise em Lote",
+              "right": "Lê 20 arquivos em segundos"
+            },
+            {
+              "left": "Criação de SOP",
+              "right": "Monta manuais de treinamento"
+            },
+            {
+              "left": "Triagem de E-mail",
+              "right": "Acha o que é urgente na inbox"
+            }
           ]
         }
       },
@@ -1492,8 +1797,18 @@
         "props": {
           "title": "✏️ Produtividade Ativa",
           "sentence": "O Gemini ajuda a tomar decisões usando o método ___ e transforma dados em relatórios ___.",
-          "answers": ["DECIDE", "executivos"],
-          "options": ["DECIDE", "executivos", "fáceis", "MAPA", "longos", "músicas"],
+          "answers": [
+            "DECIDE",
+            "executivos"
+          ],
+          "options": [
+            "DECIDE",
+            "executivos",
+            "fáceis",
+            "MAPA",
+            "longos",
+            "músicas"
+          ],
           "explanation": "Perfeito! Usar métodos estruturados é o que separa um usuário comum de um mestre da produtividade."
         }
       },
@@ -1565,10 +1880,22 @@
           "title": "🔗 O Poder da Visão",
           "description": "Ligue o arquivo visual à tarefa que o Gemini realiza.",
           "pairs": [
-            { "left": "Foto de Recibo", "right": "Extrair valores para planilha" },
-            { "left": "Vídeo de Reunião", "right": "Criar ata e lista de tarefas" },
-            { "left": "Print de Site", "right": "Sugerir melhorias no visual" },
-            { "left": "PDF Escaneado", "right": "Transformar imagem em texto" }
+            {
+              "left": "Foto de Recibo",
+              "right": "Extrair valores para planilha"
+            },
+            {
+              "left": "Vídeo de Reunião",
+              "right": "Criar ata e lista de tarefas"
+            },
+            {
+              "left": "Print de Site",
+              "right": "Sugerir melhorias no visual"
+            },
+            {
+              "left": "PDF Escaneado",
+              "right": "Transformar imagem em texto"
+            }
           ]
         }
       },
@@ -1653,8 +1980,18 @@
         "props": {
           "title": "✏️ Praticando a Visão",
           "sentence": "Para analisar uma imagem com o Gemini, eu uso o framework ___ e peço para ele extrair ___ úteis.",
-          "answers": ["M.U.L.T.I.", "insights"],
-          "options": ["M.U.L.T.I.", "insights", "músicas", "LÓGICA", "fotos", "desenhos"],
+          "answers": [
+            "M.U.L.T.I.",
+            "insights"
+          ],
+          "options": [
+            "M.U.L.T.I.",
+            "insights",
+            "músicas",
+            "LÓGICA",
+            "fotos",
+            "desenhos"
+          ],
           "explanation": "Perfeito! O objetivo é sempre extrair informação que ajude você a agir."
         }
       },
@@ -1680,10 +2017,22 @@
           "title": "🔗 Cenários e Mídias",
           "description": "Qual arquivo você enviaria para resolver estes problemas?",
           "pairs": [
-            { "left": "Dúvida no Dashboard", "right": "Screenshot do gráfico" },
-            { "left": "Contrato em papel", "right": "PDF escaneado" },
-            { "left": "Ideia de marca", "right": "Foto de rascunho no papel" },
-            { "left": "Estudo de concorrência", "right": "Link de vídeo do YouTube" }
+            {
+              "left": "Dúvida no Dashboard",
+              "right": "Screenshot do gráfico"
+            },
+            {
+              "left": "Contrato em papel",
+              "right": "PDF escaneado"
+            },
+            {
+              "left": "Ideia de marca",
+              "right": "Foto de rascunho no papel"
+            },
+            {
+              "left": "Estudo de concorrência",
+              "right": "Link de vídeo do YouTube"
+            }
           ]
         }
       },
@@ -1739,8 +2088,19 @@
         "props": {
           "title": "✏️ Decorando o Método",
           "sentence": "O método V.I.S.U.A.L ajuda a definir a ___ geral, o ___ artístico e o ___ principal da imagem.",
-          "answers": ["visão", "estilo", "sujeito"],
-          "options": ["visão", "estilo", "sujeito", "comida", "música", "preço"],
+          "answers": [
+            "visão",
+            "estilo",
+            "sujeito"
+          ],
+          "options": [
+            "visão",
+            "estilo",
+            "sujeito",
+            "comida",
+            "música",
+            "preço"
+          ],
           "explanation": "Isso aí! Com esses pilares, você tem controle total sobre o que a IA desenha."
         }
       },
@@ -1774,10 +2134,22 @@
           "title": "🔗 Estilo vs. Uso",
           "description": "Qual estilo combina com cada necessidade?",
           "pairs": [
-            { "left": "Fotorrealismo", "right": "Fotos de produtos e anúncios" },
-            { "left": "Flat Design (Vetor)", "right": "Logos e ícones de aplicativos" },
-            { "left": "Ilustração Digital", "right": "Posts de redes sociais e blogs" },
-            { "left": "3D Render", "right": "Maquetes e conceitos modernos" }
+            {
+              "left": "Fotorrealismo",
+              "right": "Fotos de produtos e anúncios"
+            },
+            {
+              "left": "Flat Design (Vetor)",
+              "right": "Logos e ícones de aplicativos"
+            },
+            {
+              "left": "Ilustração Digital",
+              "right": "Posts de redes sociais e blogs"
+            },
+            {
+              "left": "3D Render",
+              "right": "Maquetes e conceitos modernos"
+            }
           ]
         }
       },
@@ -1802,8 +2174,19 @@
         "props": {
           "title": "✏️ Checklist Comercial",
           "sentence": "Para vender design com IA, eu preciso de um ___ com exemplos, definir meus ___ e usar o método ___ para criar.",
-          "answers": ["portfólio", "preços", "V.I.S.U.A.L."],
-          "options": ["portfólio", "preços", "V.I.S.U.A.L.", "carro", "computador", "música"],
+          "answers": [
+            "portfólio",
+            "preços",
+            "V.I.S.U.A.L."
+          ],
+          "options": [
+            "portfólio",
+            "preços",
+            "V.I.S.U.A.L.",
+            "carro",
+            "computador",
+            "música"
+          ],
           "explanation": "Isso mesmo! Organização comercial é o que transforma o hobby em negócio."
         }
       },
@@ -1843,10 +2226,22 @@
           "title": "🔗 Qual o clima do projeto?",
           "description": "Ligue a necessidade ao melhor estilo artístico.",
           "pairs": [
-            { "left": "Capa de curso de Yoga", "right": "Aquarela (Suavidade)" },
-            { "left": "Site de Relógios Caros", "right": "Fotorrealismo (Luxo)" },
-            { "left": "Post de Tecnologia/Games", "right": "Digital Art (Energia)" },
-            { "left": "Logo de uma Fintech", "right": "Minimalista (Clareza)" }
+            {
+              "left": "Capa de curso de Yoga",
+              "right": "Aquarela (Suavidade)"
+            },
+            {
+              "left": "Site de Relógios Caros",
+              "right": "Fotorrealismo (Luxo)"
+            },
+            {
+              "left": "Post de Tecnologia/Games",
+              "right": "Digital Art (Energia)"
+            },
+            {
+              "left": "Logo de uma Fintech",
+              "right": "Minimalista (Clareza)"
+            }
           ]
         }
       },
@@ -1871,8 +2266,19 @@
         "props": {
           "title": "✏️ Afiando o Pedido",
           "sentence": "Para uma foto de produto premium, eu uso iluminação de ___ e resolução ___, com foco no tipo ___.",
-          "answers": ["estúdio", "8K", "bokeh"],
-          "options": ["estúdio", "8K", "bokeh", "vela", "baixa", "amador"],
+          "answers": [
+            "estúdio",
+            "8K",
+            "bokeh"
+          ],
+          "options": [
+            "estúdio",
+            "8K",
+            "bokeh",
+            "vela",
+            "baixa",
+            "amador"
+          ],
           "explanation": "Isso mesmo! Essas escolhas técnicas dão o acabamento profissional que o mercado exige."
         }
       },
@@ -2050,8 +2456,18 @@
         "props": {
           "title": "✏️ Recapitulação Final",
           "sentence": "Um kit visual profissional garante a ___ da marca e gera ___ no cliente final.",
-          "answers": ["consistência", "confiança"],
-          "options": ["consistência", "confiança", "bagunça", "dúvida", "música", "cor"],
+          "answers": [
+            "consistência",
+            "confiança"
+          ],
+          "options": [
+            "consistência",
+            "confiança",
+            "bagunça",
+            "dúvida",
+            "música",
+            "cor"
+          ],
           "explanation": "Perfeito! Consistência visual é o que separa as marcas amadoras das gigantes do mercado."
         }
       },
@@ -2270,8 +2686,23 @@
         "props": {
           "title": "✏️ Framework B.U.I.L.D. Completo",
           "sentence": "B.U.I.L.D. significa: ___ context, ___ flow, ___ specs, ___ data, e ___ system.",
-          "answers": ["Business", "User", "Interface", "Logic", "Design"],
-          "options": ["Business", "User", "Interface", "Logic", "Design", "Backend", "Usability", "Interaction"],
+          "answers": [
+            "Business",
+            "User",
+            "Interface",
+            "Logic",
+            "Design"
+          ],
+          "options": [
+            "Business",
+            "User",
+            "Interface",
+            "Logic",
+            "Design",
+            "Backend",
+            "Usability",
+            "Interaction"
+          ],
           "explanation": "B.U.I.L.D. é o framework para criação de apps: Business, User, Interface, Logic, Design."
         }
       },
@@ -2352,10 +2783,22 @@
           "title": "🔗 Pilares do App",
           "description": "Ligue cada parte do método B.U.I.L.D. ao que ela define no seu projeto.",
           "pairs": [
-            { "left": "B - Business", "right": "O objetivo real do aplicativo" },
-            { "left": "U - User Flow", "right": "O caminho que o usuário percorre" },
-            { "left": "I - Interface", "right": "Onde ficam os botões e menus" },
-            { "left": "L - Lógica", "right": "Como o sistema salva as informações" }
+            {
+              "left": "B - Business",
+              "right": "O objetivo real do aplicativo"
+            },
+            {
+              "left": "U - User Flow",
+              "right": "O caminho que o usuário percorre"
+            },
+            {
+              "left": "I - Interface",
+              "right": "Onde ficam os botões e menus"
+            },
+            {
+              "left": "L - Lógica",
+              "right": "Como o sistema salva as informações"
+            }
           ]
         }
       },
@@ -2407,8 +2850,19 @@
         "props": {
           "title": "✏️ Preenchendo as Lacunas",
           "sentence": "O Lovable transforma ___ em ___, economizando tempo e garantindo o sucesso do seu ___.",
-          "answers": ["palavras", "aplicativos", "negócio"],
-          "options": ["palavras", "aplicativos", "negócio", "músicas", "desenhos", "almoço"],
+          "answers": [
+            "palavras",
+            "aplicativos",
+            "negócio"
+          ],
+          "options": [
+            "palavras",
+            "aplicativos",
+            "negócio",
+            "músicas",
+            "desenhos",
+            "almoço"
+          ],
           "explanation": "Isso mesmo! Ao transformar descrições claras em ferramentas funcionais, você encurta o caminho entre ideia e resultado prático no seu negócio."
         }
       },
@@ -2438,10 +2892,22 @@
           "title": "🔗 O Lado Invisível do App",
           "description": "Ligue o termo técnico à sua função no 'restaurante' do seu app.",
           "pairs": [
-            { "left": "Interface", "right": "O salão onde o cliente senta" },
-            { "left": "Backend", "right": "A cozinha onde o trabalho é feito" },
-            { "left": "Banco de Dados", "right": "A despensa onde os ingredientes ficam" },
-            { "left": "Autenticação", "right": "O segurança que confere o convite" }
+            {
+              "left": "Interface",
+              "right": "O salão onde o cliente senta"
+            },
+            {
+              "left": "Backend",
+              "right": "A cozinha onde o trabalho é feito"
+            },
+            {
+              "left": "Banco de Dados",
+              "right": "A despensa onde os ingredientes ficam"
+            },
+            {
+              "left": "Autenticação",
+              "right": "O segurança que confere o convite"
+            }
           ]
         }
       },
@@ -2456,8 +2922,18 @@
         "props": {
           "title": "✏️ Organizando as Gavetas",
           "sentence": "O banco de dados guarda as informações em ___, e o Lovable faz a ___ entre elas automaticamente.",
-          "answers": ["tabelas", "conexão"],
-          "options": ["tabelas", "conexão", "músicas", "luzes", "fotos", "lenta"],
+          "answers": [
+            "tabelas",
+            "conexão"
+          ],
+          "options": [
+            "tabelas",
+            "conexão",
+            "músicas",
+            "luzes",
+            "fotos",
+            "lenta"
+          ],
           "explanation": "Isso mesmo! Informações são salvas em tabelas (gavetas) que se conversam para o app funcionar."
         }
       },
@@ -2498,10 +2974,22 @@
           "title": "🔗 Hierarquia de Poder",
           "description": "Ligue cada cargo ao que ele pode fazer no sistema.",
           "pairs": [
-            { "left": "Administrador", "right": "Controle total sobre tudo" },
-            { "left": "Gerente", "right": "Gerencia apenas seu grupo" },
-            { "left": "Usuário Comum", "right": "Acessa só seus próprios dados" },
-            { "left": "Convidado", "right": "Apenas visualiza informações públicas" }
+            {
+              "left": "Administrador",
+              "right": "Controle total sobre tudo"
+            },
+            {
+              "left": "Gerente",
+              "right": "Gerencia apenas seu grupo"
+            },
+            {
+              "left": "Usuário Comum",
+              "right": "Acessa só seus próprios dados"
+            },
+            {
+              "left": "Convidado",
+              "right": "Apenas visualiza informações públicas"
+            }
           ]
         }
       },
@@ -2516,8 +3004,18 @@
         "props": {
           "title": "✏️ Entendendo o C.R.U.D.",
           "sentence": "Quando eu mudo o preço de um produto, estou fazendo um ___. Quando apago um registro, faço um ___.",
-          "answers": ["Update", "Delete"],
-          "options": ["Update", "Delete", "Create", "Read", "Salto", "Giro"],
+          "answers": [
+            "Update",
+            "Delete"
+          ],
+          "options": [
+            "Update",
+            "Delete",
+            "Create",
+            "Read",
+            "Salto",
+            "Giro"
+          ],
           "explanation": "Exato! Update é para atualizar e Delete é para remover."
         }
       },
@@ -2556,10 +3054,22 @@
           "title": "🔗 Dados vs. Visualização",
           "description": "Qual gráfico combina melhor com cada informação?",
           "pairs": [
-            { "left": "Lucro ao longo do tempo", "right": "Gráfico de Linha" },
-            { "left": "Produtos mais vendidos", "right": "Gráfico de Barras" },
-            { "left": "Divisão de gastos", "right": "Gráfico de Pizza" },
-            { "left": "Status do sistema", "right": "Indicadores coloridos (KPIs)" }
+            {
+              "left": "Lucro ao longo do tempo",
+              "right": "Gráfico de Linha"
+            },
+            {
+              "left": "Produtos mais vendidos",
+              "right": "Gráfico de Barras"
+            },
+            {
+              "left": "Divisão de gastos",
+              "right": "Gráfico de Pizza"
+            },
+            {
+              "left": "Status do sistema",
+              "right": "Indicadores coloridos (KPIs)"
+            }
           ]
         }
       },
@@ -2574,8 +3084,18 @@
         "props": {
           "title": "✏️ Segurança e Lançamento",
           "sentence": "O ___ garante que eu não perca dados, e o ambiente de ___ permite testar antes de publicar.",
-          "answers": ["backup", "teste"],
-          "options": ["backup", "teste", "desenho", "e-mail", "vídeo", "clique"],
+          "answers": [
+            "backup",
+            "teste"
+          ],
+          "options": [
+            "backup",
+            "teste",
+            "desenho",
+            "e-mail",
+            "vídeo",
+            "clique"
+          ],
           "explanation": "Isso mesmo! Segurança e testes são os pilares de um desenvolvedor profissional."
         }
       },
@@ -2591,10 +3111,22 @@
           "title": "🔗 Funções de Celular",
           "description": "Ligue a tecnologia à utilidade prática no dia a dia.",
           "pairs": [
-            { "left": "Câmera", "right": "Ler QR Codes ou tirar foto de perfil" },
-            { "left": "GPS", "right": "Localizar o cliente ou traçar rotas" },
-            { "left": "Offline Mode", "right": "Trabalhar em locais sem sinal" },
-            { "left": "Push Notification", "right": "Mandar avisos na tela do celular" }
+            {
+              "left": "Câmera",
+              "right": "Ler QR Codes ou tirar foto de perfil"
+            },
+            {
+              "left": "GPS",
+              "right": "Localizar o cliente ou traçar rotas"
+            },
+            {
+              "left": "Offline Mode",
+              "right": "Trabalhar em locais sem sinal"
+            },
+            {
+              "left": "Push Notification",
+              "right": "Mandar avisos na tela do celular"
+            }
           ]
         }
       },
@@ -2609,162 +3141,117 @@
     "steps": [
       {
         "type": "text",
-        "title": "🚀 Lovable para Negócios: Sua Fábrica de Software",
-        "content": "Parabéns por chegar ao último nível! Hoje, deixamos de criar sites simples para construir **negócios escaláveis**. Enquanto um site apenas informa, um **SaaS (Software como Serviço)** resolve problemas e gera lucro através de assinaturas.\n\n\n\nCom o Lovable, você tem o poder de uma equipe inteira de engenheiros. O que antes exigia 6 meses de trabalho e R$ 100.000 em salários, agora você entrega em 2 dias com precisão profissional."
+        "title": "🕰️ A História da NanoBanana",
+        "content": "A NanoBanana não nasceu com esse nome. Ela é o apelido carinhoso dado pela comunidade ao modelo de geração e edição de imagens do Google, o Gemini 2.5 Flash Image.\n\nO nome surgiu anonimamente na plataforma LMArena, onde usuários testavam e comparavam modelos de IA sem saber qual estavam usando. O modelo impressionou tanto pela consistência, velocidade e qualidade das edições que viralizou rapidamente. Quando a identidade foi revelada, o apelido NanoBanana já havia colado.\n\nHoje a ferramenta está acessível diretamente pelo Gemini, pelo Google AI Studio, pela Vertex AI e por diversas plataformas independentes que usam a API do Google, como nano-banana.ai, Pixlr e EaseMate AI. A versão avançada, chamada NanoBanana Pro, é alimentada pelo Gemini 3 Pro Image e oferece recursos ainda mais poderosos como imagens em 4K e suporte multilíngue."
       },
       {
         "type": "text",
-        "title": "📊 Por Dentro do Motor (Arquitetura)",
-        "content": "Para ser um dono de software, você precisa entender como as peças se encaixam:\n\n1. **A Fachada (Frontend):** O que o cliente vê. Usamos tecnologias como **React** para ser rápido e **Tailwind** para ser bonito e moderno.\n2. **O Cofre (Backend):** Onde os dados moram. O Lovable usa o **Supabase**, um banco de dados profissional que guarda tudo com segurança máxima.\n3. **A Nuvem (Infraestrutura):** Onde o app 'vive'. O deploy é automático: um clique e seu sistema está online com o 'cadeado verde' de segurança (SSL)."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Entendendo a Estrutura",
-          "description": "Ligue cada termo técnico à sua função no seu novo negócio.",
-          "pairs": [
-            { "left": "React/Tailwind", "right": "Visual e botões (Frontend)" },
-            { "left": "Supabase", "right": "Cofre de informações (Backend)" },
-            { "left": "Deploy", "right": "Colocar o sistema no ar" },
-            { "left": "SaaS", "right": "Software vendido como assinatura" }
-          ]
-        }
+        "title": "⚙️ Como Funciona",
+        "content": "A NanoBanana opera com geração e edição de imagens por linguagem natural.\n\nO usuário pode partir do zero com um prompt de texto descrevendo a imagem que quer criar, ou fazer upload de uma imagem existente para editá-la. A IA interpreta o comando, aplica as alterações e entrega o resultado em segundos.\n\nO grande diferencial é a edição cirúrgica, onde é possível modificar apenas um elemento específico da imagem, como trocar o fundo, remover um objeto ou mudar a expressão de um personagem, sem afetar o restante da composição. \n\nA ferramenta também suporta fusão de múltiplas imagens, mantém consistência de personagens entre diferentes cenas e entende comandos complexos de múltiplos passos em uma única instrução. Todas as imagens geradas recebem a marca d'água digital SynthID do Google para identificação de conteúdo gerado por IA."
       },
       {
         "type": "text",
-        "title": "🎯 O Método A.P.P.S. para Prompts de Elite",
-        "content": "Para criar sistemas empresariais, seu pedido precisa ser cirúrgico. Use este guia no Lovable:\n\n* **A - Arquitetura:** 'Crie um app com login, painel de controle e banco de dados'.\n* **P - Páginas:** 'Preciso de uma Home, um Dashboard e uma área de Perfil'.\n* **P - Permissões:** 'Só o administrador pode deletar usuários'.\n* **S - Style (Estilo):** 'Use tons de azul escuro e fontes modernas para passar confiança'."
+        "title": "📈 Impacto no Mercado",
+        "content": "A NanoBanana se destaca por superar concorrentes como Midjourney e Flux Kontext em velocidade, consistência e facilidade de uso, o que gerou grande repercussão na comunidade de criadores digitais.\n\nO modelo ficou famoso ao aparecer anonimamente no LMArena, impressionando usuários com sua consistência, lógica de cena e confiabilidade nas edições.\n\nA adoção cresceu rapidamente entre designers, criadores de conteúdo, profissionais de marketing e empreendedores que precisam de imagens de alta qualidade sem depender de editores tradicionais como Photoshop. O movimento foi tão forte que diversas plataformas independentes passaram a oferecer acesso à API do Google com a marca NanoBanana como produto principal."
       },
       {
         "type": "text",
-        "title": "🗄️ Modelagem de Dados: Criando as Gavetas",
-        "content": "O segredo de um sistema rico é como ele guarda as informações. No Lovable, você cria as 'tabelas' do banco de dados apenas descrevendo-as.\n\n\n\nPeça assim: 'Crie uma tabela de Clientes ligada a uma tabela de Pedidos'. A IA vai entender que cada cliente pode ter várias compras e vai organizar essa fiação invisível para você automaticamente. É o fim das planilhas bagunçadas!"
+        "title": "✅ Onde é Boa — 10+ Casos de Uso",
+        "content": "- Edição precisa de fotos com comandos em texto simples, sem usar máscaras ou pincéis.\n- Criação de imagens de produtos para e-commerce com fundo personalizado.\n- Geração de arte em estilos variados como fotorrealismo, anime, aquarela e ilustração.\n- Criação de personagens consistentes em diferentes cenas para storytelling e storyboards.\n- Transformação de fotos em miniaturas colecionáveis estilo action figure ou LEGO.\n- Criação de artes no estilo Studio Ghibli a partir de fotos reais.\n- Geração de posts e materiais visuais para redes sociais.\n- Edição de expressões faciais e gestos em fotos preservando a identidade do personagem.\n- Criação de memes, wallpapers e artes digitais criativas.\n- Fusão de múltiplas imagens em uma composição nova e coerente.\n- Geração de infográficos e diagramas com IA.\n- Produção de material visual para campanhas de marketing e anúncios."
+      },
+      {
+        "type": "text",
+        "title": "❌ Onde é Ruim — Limitações",
+        "content": "A NanoBanana ainda tem dificuldades com cenas muito complexas envolvendo muitos personagens ao mesmo tempo, podendo perder consistência entre eles.\n\nTextos longos dentro das imagens podem sair distorcidos ou com erros ortográficos, um problema comum em modelos de geração de imagem. \n\nA versão gratuita tem limitações de créditos e resolução, com imagens em alta resolução 4K disponíveis apenas na versão Pro. Imagens com iluminação muito específica ou composições altamente técnicas podem exigir vários ajustes até chegar no resultado desejado. Além disso, por seguir as diretrizes de uso responsável do Google, ela recusa solicitações de conteúdo sensível, o que pode frustrar alguns usuários em contextos criativos mais arrojados."
+      },
+      {
+        "type": "text",
+        "title": "📝 Como Gosta de Receber o Prompt",
+        "content": "A NanoBanana responde muito bem a prompts estruturados que descrevem sujeito, ação, cena, estilo visual e qualidade desejada. \n\nUma fórmula que funciona bem é: crie uma imagem de + **sujeito** + **ação** + **cenário** + **estilo** + **proporção**.\n\nPor exemplo: *\"Crie uma imagem de uma astronauta caminhando em Marte ao entardecer, no estilo de fotografia cinematográfica, proporção 16:9.\"*\n\nPara edições, seja específico sobre o que deve mudar e o que deve permanecer intacto. Por exemplo: *\"Troque o fundo por uma floresta tropical sem alterar a pessoa e a iluminação.\"* Quanto mais detalhes visuais você fornecer, mais preciso e impressionante será o resultado."
+      },
+      {
+        "type": "text",
+        "title": "🚀 Como Extrair o Máximo ao Criar",
+        "content": "- **Use a fórmula base e expanda:** Comece com sujeito + ação + cena e vá adicionando camadas de detalhe. Estilo, iluminação, proporção, paleta de cores e referências visuais fazem enorme diferença no resultado final.\n- **Especifique o estilo artístico:** Dizer \"no estilo de fotografia analógica Fujifilm\" ou \"ilustração aquarela feita à mão\" direciona a IA de forma muito mais eficiente do que simplesmente pedir uma \"imagem bonita\".\n- **Edite de forma cirúrgica:** Ao pedir alterações, sempre indique o que deve mudar E o que deve permanecer. Isso evita que a IA refaça elementos que já estavam certos.\n- **Construa personagens consistentes:** Se precisar do mesmo personagem em várias cenas, faça upload da imagem de referência a cada nova geração e peça explicitamente que a identidade visual seja mantida.\n- **Use proporções e resoluções:** Defina a proporção desde o início: 1:1 para posts, 9:16 para stories/reels, 16:9 para apresentações e YouTube.\n- **Itere em camadas:** Gere uma versão base, aprove a composição geral e depois peça refinamentos específicos. Tentar acertar tudo no primeiro prompt pode gerar resultados inconsistentes.\n- **Combine múltiplas imagens:** Experimente fazer upload de duas fotos e pedir que a IA funda os elementos em uma composição nova.\n- **Peça variações:** Se o resultado ficou bom mas não perfeito, peça: \"Gere mais 3 versões dessa cena com pequenas variações de ângulo e iluminação.\"\n- **Explore os usos criativos:** Transformar fotos em action figures, criar personagens estilo anime, gerar storyboards ou fazer retratos são usos de grande impacto."
       },
       {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Organizando o Cofre",
-          "sentence": "No Lovable, os dados são salvos em ___ que se conectam através de ___, garantindo a organização do sistema.",
-          "answers": ["tabelas", "relacionamentos"],
-          "options": ["tabelas", "relacionamentos", "músicas", "desenhos", "pastas", "fotos"],
-          "explanation": "Isso mesmo! Tabelas e relacionamentos são os pilares de qualquer software profissional."
+          "title": "🔄 Fluxo Ideal de Trabalho",
+          "sentence": "Para trabalhar com a NanoBanana, defina o objetivo, escreva o prompt completo (sujeito, cena, estilo e proporção) e avalie o resultado. Depois faça edições ___ indicando o que muda e o que permanece, e vá refinando em ___ até chegar no resultado final.",
+          "answers": [
+            "cirúrgicas",
+            "camadas"
+          ],
+          "options": [
+            "cirúrgicas",
+            "camadas",
+            "brincadeiras",
+            "telas",
+            "demoradas"
+          ],
+          "explanation": "O segredo da NanoBanana é a edição cirúrgica aliada à iteração por camadas para ajustar somente o necessário."
         }
-      },
-      {
-        "type": "text",
-        "title": "🎨 Design System: Identidade Automática",
-        "content": "Para seu app não parecer 'mais um', você pode definir um **Design System**. \n\nNo Lovable, você estabelece as regras uma única vez: a cor exata dos botões, o arredondamento das bordas e o estilo das fontes. Isso garante que, se você criar 100 novas páginas no futuro, todas elas seguirão o mesmo padrão visual de alta qualidade."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Autenticação: Segurança em Primeiro Lugar",
-        "content": "Segurança não é opcional. O Lovable já entrega sistemas de login prontos:\n- **E-mail e Senha:** O padrão de mercado.\n- **Social Login:** Entrar com Google ou GitHub com um clique.\n- **Magic Link:** Acesso rápido via link no e-mail.\n\nEle cuida de toda a criptografia para que os dados dos seus clientes estejam sempre protegidos."
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Atividade: Configurando o Acesso",
-        "question": "Monte o comando para um sistema de login profissional:",
-        "initialWords": [
-          "Adicione login com Google,",
-          "tela de cadastro rápida,",
-          "proteja as páginas internas",
-          "e crie uma área de perfil",
-          "para cada usuário."
-        ],
-        "correctOrder": [
-          "Adicione login com Google,",
-          "tela de cadastro rápida,",
-          "proteja as páginas internas",
-          "e crie uma área de perfil",
-          "para cada usuário."
-        ],
-        "explanation": "Excelente! Você definiu a entrada, a proteção e a personalização do seu app."
-      },
-      {
-        "type": "text",
-        "title": "🔌 Integrações: O App que faz tudo",
-        "content": "Um SaaS de verdade precisa cobrar e se comunicar. Você pode pedir integrações com as melhores ferramentas do mundo:\n- **Stripe:** Para aceitar pagamentos e assinaturas mensais.\n- **Resend:** Para mandar e-mails automáticos de boas-vindas.\n- **OpenAI:** Para colocar inteligência artificial dentro do seu próprio software.\n\nBasta dizer: 'Integre o pagamento via Stripe no plano Premium' e a mágica acontece."
-      },
-      {
-        "type": "text",
-        "title": "📱 Mobile First: O App no Bolso do Cliente",
-        "content": "Hoje, todo sistema precisa ser perfeito no celular. O Lovable cria aplicações **PWA**.\n\n\n\nIsso significa que seu site pode ser 'instalado' no celular do cliente como se fosse um app da loja, mas sem as taxas e burocracias da Apple ou do Google. É a melhor forma de estar presente no dia a dia do seu usuário."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Parceiros de Integração",
-          "description": "Qual ferramenta você usaria para cada função do seu negócio?",
-          "pairs": [
-            { "left": "Stripe", "right": "Receber pagamentos e assinaturas" },
-            { "left": "Resend/SendGrid", "right": "Enviar e-mails automáticos" },
-            { "left": "PWA", "right": "Instalar o app no celular" },
-            { "left": "OpenAI", "right": "Dar inteligência ao software" }
-          ]
-        }
-      },
-      {
-        "type": "text",
-        "title": "📈 Analytics e Tomada de Decisão",
-        "content": "Como você sabe se seu negócio está indo bem? Através de métricas.\n\nPeça para o Lovable: 'Crie um painel que mostre o faturamento mensal e um gráfico de quantos usuários novos entraram nesta semana'. Ter esses dados visualmente organizados transforma você de um 'programador' em um **Gestor de Negócios**."
-      },
-      {
-        "type": "text",
-        "title": "🔒 Segurança e Regras (LGPD)",
-        "content": "No Brasil, temos a LGPD (Lei Geral de Proteção de Dados). O Lovable te ajuda a cumprir as regras:\n- **Transparência:** Páginas de termos de uso geradas na hora.\n- **Controle:** Botões para o usuário apagar seus dados se desejar.\n- **Consentimento:** Avisos de cookies profissionais.\n\nA segurança e a lei são o que fazem os grandes clientes confiarem no seu produto."
       },
       {
         "type": "quiz",
-        "title": "🧠 Teste de Gestão",
-        "question": "Qual é a principal função de um Dashboard de Analytics em um SaaS?",
+        "title": "🎓 Questão 1: Diferencial da NanoBanana",
+        "question": "Qual das alternativas descreve MELHOR o grande diferencial da NanoBanana em relação a outros geradores de imagem?",
         "options": [
           {
-            "text": "Deixar o site com mais cores e desenhos",
+            "text": "Ela é a única ferramenta que gera imagens completamente gratuitas em 4K sem nenhuma limitação.",
             "isCorrect": false,
-            "explanation": "O visual é importante, mas o objetivo principal é a informação estratégica."
+            "explanation": "Incorreto. A versão gratuita tem limitações de resolução e as imagens 4K são da versão Pro."
           },
           {
-            "text": "Mostrar dados em tempo real para ajudar na tomada de decisões do negócio",
+            "text": "Ela se destaca pela edição cirúrgica, consistência de personagens e velocidade de geração sem perder qualidade.",
             "isCorrect": true,
-            "explanation": "Exato! Dados são o combustível para o crescimento de qualquer empresa de tecnologia."
+            "explanation": "Correto! Você pode editar elementos específicos sem arruinar o resto da imagem."
+          },
+          {
+            "text": "Ela é especializada apenas em arte digital no estilo anime e não suporta fotorrealismo.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela suporta uma grande variedade de estilos, incluindo fotorrealismo."
+          },
+          {
+            "text": "Ela funciona apenas com upload de imagens existentes e não consegue criar imagens do zero.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ela pode tanto usar texto para gerar do zero quanto usar imagens de referência."
           }
         ]
       },
       {
-        "type": "text",
-        "title": "⚡ Templates que Valem Ouro",
-        "content": "Não comece do zero nunca mais. O Lovable permite que você crie 'moldes' para diferentes mercados:\n- **Template de Imobiliária:** Gestão de imóveis e corretores.\n- **Template de Academias:** Controle de alunos e mensalidades.\n- **Template de Vendas:** CRM completo para vendedores.\n\nUma vez que você cria um desses, você pode revendê-lo para dezenas de clientes mudando apenas o logo e as cores. É lucro puro!"
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "🎓 Questão 2: Origem e Tecnologia",
+          "sentence": "A NanoBanana ficou famosa ao aparecer anonimamente na plataforma ___, onde surpreendeu usuários com sua consistência e velocidade. O modelo é desenvolvido pelo ___ e usa a tecnologia ___. Todas as imagens geradas recebem a marca d'água digital chamada ___ para identificar conteúdo criado por IA.",
+          "answers": [
+            "LMArena",
+            "Google",
+            "Gemini 2.5 Flash Image",
+            "SynthID"
+          ],
+          "options": [
+            "LMArena",
+            "Google",
+            "Gemini 2.5 Flash Image",
+            "SynthID",
+            "OpenAI",
+            "DALL-E 3",
+            "Midjourney",
+            "Kaggle"
+          ],
+          "explanation": "A curiosa história da NanoBanana: é na verdade a IA do Google que superou as concorrentes em velocidade e consistência."
+        }
       },
       {
         "type": "text",
-        "title": "🏆 Conclusão da Jornada: O Criador de Produtos",
-        "content": "**VOCÊ CONSTRUIU UM IMPÉRIO HOJE!**\n\n1. Aprendeu a arquitetura de sistemas empresariais reais.\n2. Dominou bancos de dados, logins e pagamentos profissionais.\n3. Descobriu como economizar meses de trabalho com automação inteligente.\n4. Agora é capaz de transformar qualquer ideia em um negócio real no ar.\n\n**O SEU VALOR:** Você não é mais apenas um usuário de IA; você é um **Arquiteto de Soluções**. Suas ideias não morrem mais no papel."
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Atividade Final: O App de Sucesso",
-        "question": "Planeje seu primeiro SaaS monetizável:",
-        "initialWords": [
-          "Nome: Gestão Pro para Salões,",
-          "Problema: Agendamento e estoque,",
-          "Função: Calendário e pagamentos,",
-          "Público: Donos de barbearias,",
-          "Modelo: Assinatura de R$ 49/mês."
-        ],
-        "correctOrder": [
-          "Nome: Gestão Pro para Salões,",
-          "Problema: Agendamento e estoque,",
-          "Função: Calendário e pagamentos,",
-          "Público: Donos de barbearias,",
-          "Modelo: Assinatura de R$ 49/mês."
-        ],
-        "explanation": "Sensacional! Você tem um produto real, um público-alvo e um modelo de lucro. O mundo da tecnologia agora pertence a você!"
+        "title": "🎓 Resumo do Dia 21",
+        "content": "**HOJE VOCÊ APRENDEU:**\n\n🕰️ Que a NanoBanana é o Gemini 2.5 Flash Image do Google que chamou atenção por sua qualidade.\n⚙️ Que a grande força é a edição cirúrgica: mudar apenas parte da foto sem afetar o resto.\n📝 O prompt ideal: sujeito + ação + cenário + estilo + proporção.\n🚀 O segredo do fluxo: não tente tudo no 1º prompt; trabalhe refinando em camadas e pedindo variações.\n\n**AMANHÃ:** Continuaremos explorando mais ferramentas focadas na criação avançada de mídia."
       }
-    ],
-    "summary": "Dia 21 concluído: Do conceito ao SaaS empresarial. Você agora domina o Lovable para criar sistemas completos com banco de dados, login e pagamentos, economizando R$ 100k+ em desenvolvimento tradicional."
+    ]
   },
   "day22": {
     "steps": [
@@ -2790,10 +3277,22 @@
           "title": "🔗 Domine a Retenção",
           "description": "Ligue o recurso da IA ao benefício que ele traz para o seu vídeo.",
           "pairs": [
-            { "left": "Legendas Coloridas", "right": "Mantém o espectador focado no texto" },
-            { "left": "Corte de Silêncios", "right": "Deixa o vídeo rápido e sem enrolação" },
-            { "left": "Correção de Olhar", "right": "Passa mais confiança para quem assiste" },
-            { "left": "Zooms Automáticos", "right": "Dá dinamismo e evita o tédio visual" }
+            {
+              "left": "Legendas Coloridas",
+              "right": "Mantém o espectador focado no texto"
+            },
+            {
+              "left": "Corte de Silêncios",
+              "right": "Deixa o vídeo rápido e sem enrolação"
+            },
+            {
+              "left": "Correção de Olhar",
+              "right": "Passa mais confiança para quem assiste"
+            },
+            {
+              "left": "Zooms Automáticos",
+              "right": "Dá dinamismo e evita o tédio visual"
+            }
           ]
         }
       },
@@ -2818,8 +3317,18 @@
         "props": {
           "title": "✏️ Vídeos que Vendem",
           "sentence": "Para um vídeo ser bom, ele precisa de um ___ nos primeiros 3 segundos e ___ que facilitem a leitura sem som.",
-          "answers": ["gancho", "legendas"],
-          "options": ["gancho", "legendas", "desenho", "música", "erro", "lento"],
+          "answers": [
+            "gancho",
+            "legendas"
+          ],
+          "options": [
+            "gancho",
+            "legendas",
+            "desenho",
+            "música",
+            "erro",
+            "lento"
+          ],
           "explanation": "Isso mesmo! O gancho prende a pessoa e a legenda mantém ela assistindo até o fim."
         }
       },
@@ -2891,10 +3400,22 @@
           "title": "🔗 Escolha o seu Apresentador",
           "description": "Ligue o tipo de avatar ao uso mais inteligente para o seu negócio.",
           "pairs": [
-            { "left": "Avatar Hiper-realista", "right": "Curso de Investimentos Premium" },
-            { "left": "Avatar Estilizado", "right": "Dicas de Higiene para Crianças" },
-            { "left": "Clone Digital", "right": "Escalar sua própria imagem nas redes" },
-            { "left": "Avatar Multilíngue", "right": "Vender seu produto na gringa" }
+            {
+              "left": "Avatar Hiper-realista",
+              "right": "Curso de Investimentos Premium"
+            },
+            {
+              "left": "Avatar Estilizado",
+              "right": "Dicas de Higiene para Crianças"
+            },
+            {
+              "left": "Clone Digital",
+              "right": "Escalar sua própria imagem nas redes"
+            },
+            {
+              "left": "Avatar Multilíngue",
+              "right": "Vender seu produto na gringa"
+            }
           ]
         }
       },
@@ -2919,8 +3440,18 @@
         "props": {
           "title": "✏️ Potencial de Lucro",
           "sentence": "Usar avatares permite ___ a produção de vídeos e economizar até ___ do custo tradicional.",
-          "answers": ["escalar", "90%"],
-          "options": ["escalar", "90%", "parar", "10%", "comprar", "dobrar"],
+          "answers": [
+            "escalar",
+            "90%"
+          ],
+          "options": [
+            "escalar",
+            "90%",
+            "parar",
+            "10%",
+            "comprar",
+            "dobrar"
+          ],
           "explanation": "Isso mesmo! A escalabilidade e a economia de custos são as maiores vantagens dos apresentadores virtuais."
         }
       },
@@ -3114,10 +3645,22 @@
           "title": "🔗 Ajustando o Som",
           "description": "Ligue o ajuste ao resultado que ele gera na voz.",
           "pairs": [
-            { "left": "Estabilidade Baixa", "right": "Voz com muita emoção e variação" },
-            { "left": "Clareza Alta", "right": "Voz limpa, ideal para aulas" },
-            { "left": "Estabilidade Alta", "right": "Voz séria, ideal para notícias" },
-            { "left": "Similaridade 100%", "right": "Cópia exata da voz original" }
+            {
+              "left": "Estabilidade Baixa",
+              "right": "Voz com muita emoção e variação"
+            },
+            {
+              "left": "Clareza Alta",
+              "right": "Voz limpa, ideal para aulas"
+            },
+            {
+              "left": "Estabilidade Alta",
+              "right": "Voz séria, ideal para notícias"
+            },
+            {
+              "left": "Similaridade 100%",
+              "right": "Cópia exata da voz original"
+            }
           ]
         }
       },
@@ -3137,8 +3680,19 @@
         "props": {
           "title": "✏️ Criando seu Gêmeo",
           "sentence": "Para clonar minha voz, eu preciso de um áudio ___ e sem ___, e depois ajusto a ___ para ficar igual ao original.",
-          "answers": ["limpo", "eco", "similaridade"],
-          "options": ["limpo", "eco", "similaridade", "curto", "música", "cor"],
+          "answers": [
+            "limpo",
+            "eco",
+            "similaridade"
+          ],
+          "options": [
+            "limpo",
+            "eco",
+            "similaridade",
+            "curto",
+            "música",
+            "cor"
+          ],
           "explanation": "Isso mesmo! Qualidade de gravação e ajuste de similaridade são os segredos do clone perfeito."
         }
       },
@@ -3265,10 +3819,22 @@
           "title": "🔗 Domine as Configurações",
           "description": "Ligue o ajuste ao resultado que ele gera na voz do seu clone.",
           "pairs": [
-            { "left": "Estabilidade Baixa", "right": "Mais emoção e variação natural" },
-            { "left": "Similarity Boost", "right": "Fica mais idêntico ao áudio original" },
-            { "left": "Speaker Boost", "right": "Aumenta a nitidez e limpa o som" },
-            { "left": "Estabilidade Alta", "right": "Voz mais séria e sem variações" }
+            {
+              "left": "Estabilidade Baixa",
+              "right": "Mais emoção e variação natural"
+            },
+            {
+              "left": "Similarity Boost",
+              "right": "Fica mais idêntico ao áudio original"
+            },
+            {
+              "left": "Speaker Boost",
+              "right": "Aumenta a nitidez e limpa o som"
+            },
+            {
+              "left": "Estabilidade Alta",
+              "right": "Voz mais séria e sem variações"
+            }
           ]
         }
       },
@@ -3293,8 +3859,19 @@
         "props": {
           "title": "✏️ Teste de Conhecimento",
           "sentence": "Para evitar que o clone soe ___ , eu devo diminuir a ___ e garantir um áudio original ___.",
-          "answers": ["robótico", "estabilidade", "limpo"],
-          "options": ["robótico", "estabilidade", "limpo", "rápido", "cor", "música"],
+          "answers": [
+            "robótico",
+            "estabilidade",
+            "limpo"
+          ],
+          "options": [
+            "robótico",
+            "estabilidade",
+            "limpo",
+            "rápido",
+            "cor",
+            "música"
+          ],
           "explanation": "Isso mesmo! Ajustar a estabilidade e ter uma fonte limpa são as chaves para a naturalidade."
         }
       },
@@ -3354,10 +3931,22 @@
           "title": "🔗 Domine o Framework",
           "description": "Ligue a letra do framework C.A.S.A. à sua função principal.",
           "pairs": [
-            { "left": "C (Conceito)", "right": "Achar as melhores ideias e dados" },
-            { "left": "A (Arte)", "right": "Criar a beleza visual do projeto" },
-            { "left": "S (Script)", "right": "Escrever textos e roteiros de mestre" },
-            { "left": "A (Ação)", "right": "Gravar a voz e editar o vídeo final" }
+            {
+              "left": "C (Conceito)",
+              "right": "Achar as melhores ideias e dados"
+            },
+            {
+              "left": "A (Arte)",
+              "right": "Criar a beleza visual do projeto"
+            },
+            {
+              "left": "S (Script)",
+              "right": "Escrever textos e roteiros de mestre"
+            },
+            {
+              "left": "A (Ação)",
+              "right": "Gravar a voz e editar o vídeo final"
+            }
           ]
         }
       },
@@ -3367,8 +3956,18 @@
         "props": {
           "title": "✏️ Economia de Tempo Real",
           "sentence": "Com o sistema integrado, você reduz o trabalho de ___ horas por semana para apenas ___ horas de supervisão.",
-          "answers": ["50", "3"],
-          "options": ["50", "3", "100", "20", "1", "10"],
+          "answers": [
+            "50",
+            "3"
+          ],
+          "options": [
+            "50",
+            "3",
+            "100",
+            "20",
+            "1",
+            "10"
+          ],
           "explanation": "Isso mesmo! A IA faz o trabalho braçal, e você foca apenas na revisão e na estratégia."
         }
       },
@@ -3445,8 +4044,18 @@
         "props": {
           "title": "✏️ O Segredo da Venda",
           "sentence": "O valor real não está na IA que gera o conteúdo, mas no ___ humano que organiza e dá ___ para as informações.",
-          "answers": ["toque", "contexto"],
-          "options": ["toque", "contexto", "robô", "preço", "medo", "clique"],
+          "answers": [
+            "toque",
+            "contexto"
+          ],
+          "options": [
+            "toque",
+            "contexto",
+            "robô",
+            "preço",
+            "medo",
+            "clique"
+          ],
           "explanation": "Exato! A IA é o motor, mas você é o motorista que sabe para onde o negócio deve ir."
         }
       },
@@ -3533,10 +4142,22 @@
           "title": "🔗 Seu Arsenal Completo",
           "description": "Ligue cada ferramenta ao superpoder que você dominou.",
           "pairs": [
-            { "left": "ChatGPT/Claude", "right": "Cérebro e Criatividade" },
-            { "left": "NanoBanana", "right": "Estúdio Visual e Design" },
-            { "left": "Lovable", "right": "Fábrica de Apps e Sites" },
-            { "left": "ElevenLabs/Captions", "right": "Voz e Vídeo de Elite" }
+            {
+              "left": "ChatGPT/Claude",
+              "right": "Cérebro e Criatividade"
+            },
+            {
+              "left": "NanoBanana",
+              "right": "Estúdio Visual e Design"
+            },
+            {
+              "left": "Lovable",
+              "right": "Fábrica de Apps e Sites"
+            },
+            {
+              "left": "ElevenLabs/Captions",
+              "right": "Voz e Vídeo de Elite"
+            }
           ]
         }
       },
@@ -3556,8 +4177,19 @@
         "props": {
           "title": "✏️ O Fluxo do Mestre",
           "sentence": "Para ser produtivo, eu uso o Gemini para ___, o Claude para escrever ___, e o Lovable para criar ___.",
-          "answers": ["pesquisar", "roteiros", "aplicativos"],
-          "options": ["pesquisar", "roteiros", "aplicativos", "desenhar", "dormir", "lutar"],
+          "answers": [
+            "pesquisar",
+            "roteiros",
+            "aplicativos"
+          ],
+          "options": [
+            "pesquisar",
+            "roteiros",
+            "aplicativos",
+            "desenhar",
+            "dormir",
+            "lutar"
+          ],
           "explanation": "Isso mesmo! Essa integração é o que gera a economia de tempo de 95% que você aprendeu."
         }
       },

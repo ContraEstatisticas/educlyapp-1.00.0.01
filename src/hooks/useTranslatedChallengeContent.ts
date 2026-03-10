@@ -40,13 +40,17 @@ export const useTranslatedChallengeContent = () => {
     // Definição dos intervalos de dias para cada IA no desafio de 28 dias
     const aiDayRanges: Record<string, { start: number; end: number }> = {
       chatgpt: { start: 1, end: 4 },
-      claude: { start: 5, end: 7 },
-      deepseek: { start: 8, end: 10 },
-      gemini: { start: 11, end: 13 },
-      nanobanana: { start: 14, end: 17 },
-      lovable: { start: 18, end: 21 },
-      captions: { start: 22, end: 24 },
-      elevenlabs: { start: 25, end: 28 },
+      claude: { start: 5, end: 6 },
+      deepseek: { start: 7, end: 8 },
+      gemini: { start: 9, end: 10 },
+      copilot: { start: 11, end: 12 },
+      grok: { start: 13, end: 14 },
+      perplexity: { start: 15, end: 16 },
+      manus: { start: 17, end: 18 },
+      lovable: { start: 19, end: 20 },
+      nanobanana: { start: 21, end: 21 },
+      captions: { start: 22, end: 23 },
+      elevenlabs: { start: 24, end: 27 },
     };
 
     const range = aiDayRanges[normalizedSlug];
