@@ -184,7 +184,7 @@ serve(async (req) => {
 
     const AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
     const TEXT_MODEL = "gemini-2.5-flash";
-    const IMAGE_GEN_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=${GEMINI_API_KEY}`;
+    const IMAGE_GEN_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=${GEMINI_API_KEY}`;
 
     // --- Handle image generation (nanobanana) ---
     if (isImageType) {
