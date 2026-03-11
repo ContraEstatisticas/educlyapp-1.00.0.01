@@ -31,10 +31,17 @@ const getSystemPrompt = (language: string, aiToolContext?: string): string => {
 | Claude | claude.ai | Copywriting, long texts, analysis |
 | DeepSeek | chat.deepseek.com | Code, technical configurations |
 | Gemini | gemini.google.com | Research, information validation |
+| Copilot | copilot.microsoft.com | Productivity in Office 365, emails, documents |
+| Grok | grok.com | Real-time X/Twitter insights, irreverent analysis |
+| Perplexity | perplexity.ai | Search with verified sources and citations |
+| Manus | manus.im | Autonomous AI agent for complex web tasks |
 | Lovable | lovable.dev | Create websites and systems WITHOUT code |
 | NanoBanana | nanobanana.com | Generate images and AI art |
+| LeonardoAI | leonardo.ai | Creative design and image generation |
+| MidJourney | midjourney.com | High-quality artistic image generation |
 | Captions | captions.ai | Edit videos, automatic subtitles |
-| ElevenLabs | elevenlabs.io | Generate voices and narration |`;
+| ElevenLabs | elevenlabs.io | Generate voices and narration |
+| VEO | deepmind.google/veo | AI video generation by Google DeepMind |`;
 
   // SISTEMA OTIMIZADO DO EDI (MASCOTE DA EDUCLY)
   const ediBasePrompt: Record<string, string> = {
