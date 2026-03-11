@@ -17,116 +17,116 @@
       "description": "Apprenez tout sur les 8 principales IA du marché en 28 jours d'apprentissage intensif et pratique.",
       "days": {
         "1": {
-          "title": "Introduction à ChatGPT",
+          "title": "Qu'est-ce que ChatGPT ?",
           "description": "Découvrez ChatGPT et ses capacités fondamentales."
         },
         "2": {
-          "title": "Création de Prompts Efficaces",
-          "description": "Apprenez à créer des prompts puissants."
+          "title": "Personnalisation de ChatGPT",
+          "description": "Personnalisez ChatGPT et apprenez les tokens et les prompts."
         },
         "3": {
-          "title": "ChatGPT comme Consultant",
-          "description": "Utilisez ChatGPT comme conseiller expert."
+          "title": "Comment savoir si la réponse est bonne ?",
+          "description": "Évaluez les réponses de l'IA, créez des images et utilisez ChatGPT comme outil d'investigation."
         },
         "4": {
-          "title": "Projet Pratique ChatGPT",
-          "description": "Appliquez ce que vous avez appris dans un projet réel."
+          "title": "Tirer le maximum de ChatGPT",
+          "description": "Techniques avancées pour des réponses stratégiques et précises."
         },
         "5": {
-          "title": "Introduction à Claude",
-          "description": "Découvrez Claude et ses différentiateurs."
+          "title": "L'Histoire de Claude",
+          "description": "Découvrez Claude, ses points forts, ses modèles et comment bien l'utiliser."
         },
         "6": {
-          "title": "Copywriting avec Claude",
-          "description": "Créez des textes persuasifs avec Claude."
+          "title": "Maîtriser la fonctionnalité Projects",
+          "description": "Maîtrisez Projects, Artefacts, l'exécution de code et l'API de Claude."
         },
         "7": {
-          "title": "Projet Pratique Claude",
-          "description": "Appliquez ce que vous avez appris de Claude."
+          "title": "L'Histoire de DeepSeek",
+          "description": "Découvrez DeepSeek, ses modèles V3 et R1, et quand l'utiliser."
         },
         "8": {
-          "title": "Introduction à DeepSeek",
-          "description": "Découvrez DeepSeek et ses avantages."
+          "title": "Comment tirer le maximum de DeepSeek",
+          "description": "Maîtrisez les deux modes de raisonnement, la recherche web, les longs documents et l'automatisation."
         },
         "9": {
-          "title": "Génération de Code avec IA",
-          "description": "Programmation assistée par DeepSeek."
+          "title": "L'Histoire de Gemini",
+          "description": "Découvrez Gemini, ses modèles et l'intégration avec Google Workspace."
         },
         "10": {
-          "title": "Projet Pratique DeepSeek",
-          "description": "Appliquez ce que vous avez appris de DeepSeek."
+          "title": "Maîtriser le téléchargement de fichiers et le contexte",
+          "description": "Chargement de fichiers, NotebookLM, Deep Research, Imagen et flux complet."
         },
         "11": {
-          "title": "Introduction à Gemini",
-          "description": "Découvrez Gemini de Google."
+          "title": "L'Histoire de Copilot",
+          "description": "Découvrez Copilot intégré dans Microsoft 365 : Word, Excel, Outlook et PowerPoint."
         },
         "12": {
-          "title": "Recherche avec Gemini",
-          "description": "Utilisez Gemini pour la recherche."
+          "title": "L'art du prompt - du basique à l'avancé",
+          "description": "Techniques avancées de prompt, cas d'usage par domaine et flux pratique quotidien."
         },
         "13": {
-          "title": "Projet Pratique Gemini",
-          "description": "Appliquez ce que vous avez appris de Gemini."
+          "title": "L'Histoire de Grok",
+          "description": "Découvrez Grok de xAI : accès en temps réel à X et au web."
         },
         "14": {
-          "title": "Introduction à NanoBanana",
-          "description": "Découvrez l'outil d'art IA."
+          "title": "Révision rapide de Grok",
+          "description": "Consolidez vos connaissances sur Grok."
         },
         "15": {
-          "title": "Création d'Art avec IA",
-          "description": "Générez des images impressionnantes."
+          "title": "L'Histoire de Perplexity",
+          "description": "Découvrez Perplexity, le moteur de recherche IA."
         },
         "16": {
-          "title": "Styles et Techniques",
-          "description": "Maîtrisez les styles artistiques."
+          "title": "L'art du prompt dans Perplexity - du basique à l'avancé",
+          "description": "Techniques avancées pour obtenir les meilleurs résultats de Perplexity."
         },
         "17": {
-          "title": "Projet Pratique NanoBanana",
-          "description": "Appliquez ce que vous avez appris."
+          "title": "L'Histoire de Manus",
+          "description": "Découvrez Manus, l'agent IA autonome."
         },
         "18": {
-          "title": "Introduction à Lovable",
-          "description": "Découvrez la plateforme no-code."
+          "title": "L'art du prompt dans Manus - du basique à l'avancé",
+          "description": "Maîtrisez les techniques de prompt pour extraire le maximum de Manus."
         },
         "19": {
-          "title": "Création de Landing Pages",
-          "description": "Développez des pages d'atterrissage."
+          "title": "L'Histoire de Lovable",
+          "description": "Découvrez Lovable et comment il transforme les idées en applications web."
         },
         "20": {
-          "title": "Systèmes Complets",
-          "description": "Créez des applications complètes."
+          "title": "Comment le flux correct fonctionne",
+          "description": "Maîtrisez le flux correct, les intégrations et les techniques pour Lovable."
         },
         "21": {
-          "title": "Projet Pratique Lovable",
-          "description": "Appliquez ce que vous avez appris."
+          "title": "L'Histoire de NanoBanana",
+          "description": "Découvrez NanoBanana, le générateur d'images haute qualité de Google."
         },
         "22": {
-          "title": "Introduction à Captions",
-          "description": "Découvrez l'outil vidéo."
+          "title": "L'Histoire de LeonardoAI",
+          "description": "Découvrez LeonardoAI et ses capacités pour la génération d'images cohérente."
         },
         "23": {
-          "title": "Montage Vidéo avec IA",
-          "description": "Édition automatisée."
+          "title": "L'Histoire de MidJourney",
+          "description": "Découvrez MidJourney et son excellence dans la génération artistique d'images."
         },
         "24": {
-          "title": "Projet Pratique Captions",
-          "description": "Appliquez ce que vous avez appris."
+          "title": "L'Histoire de Captions",
+          "description": "Découvrez Captions, l'outil professionnel de montage vidéo par IA."
         },
         "25": {
-          "title": "Introduction à ElevenLabs",
-          "description": "Découvrez l'outil vocal."
+          "title": "L'Histoire de ElevenLabs",
+          "description": "Découvrez ElevenLabs et ses capacités de clonage vocal."
         },
         "26": {
-          "title": "Clonage de Voix",
-          "description": "Créez des clones vocaux réalistes."
+          "title": "L'Histoire de VEO",
+          "description": "Découvrez VEO, l'outil de génération vidéo IA de Google."
         },
         "27": {
-          "title": "Text-to-Speech Avancé",
-          "description": "Synthèse vocale professionnelle."
+          "title": "Jour 1 (Révision Générale)",
+          "description": "Consolidez tous les outils IA appris."
         },
         "28": {
-          "title": "Projet Pratique ElevenLabs",
-          "description": "Appliquez ce que vous avez appris."
+          "title": "Jour 2 (Révision Finale)",
+          "description": "Projet final : intégrer tous les outils."
         }
       }
     },

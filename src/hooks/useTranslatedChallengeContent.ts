@@ -84,12 +84,16 @@ export const useTranslatedChallengeContent = () => {
 
   // Traduz título do dia - com suporte a challenge-specific translations
   const getDayTitle = (challengeSlug: string, dayNumber: number, aiSlug: string, fallback: string) => {
-    // 1. Tenta tradução específica do desafio primeiro (Usa dia Global)
+    // 1. Para PT, banco de dados tem prioridade máxima
+    const lang = i18n.language;
+    if ((lang === "pt" || lang === "pt-BR") && fallback && fallback.trim() !== "") return fallback;
+
+    // 2. Tenta tradução específica do desafio (Usa dia Global)
     const challengeKey = `challenges.${challengeSlug}.days.${dayNumber}.title`;
     let translated = t(challengeKey, { defaultValue: "" });
     if (translated && translated !== challengeKey && translated.trim() !== "") return translated;
 
-    // 2. Fallback para tradução genérica por AI tool (Usa dia Relativo)
+    // 3. Fallback para tradução genérica por AI tool (Usa dia Relativo)
     const relativeDay = getRelativeDayNumber(aiSlug, dayNumber);
     const normalizedSlug = normalizeSlugForTranslation(aiSlug);
     const genericKey = `challengeDays.${normalizedSlug}.${relativeDay}.title`;
@@ -97,7 +101,7 @@ export const useTranslatedChallengeContent = () => {
     translated = t(genericKey, { defaultValue: "" });
     if (translated && translated !== genericKey && translated.trim() !== "") return translated;
 
-    // 3. Try English
+    // 4. Try English
     if (i18n.language !== "en") {
       translated = t(genericKey, { lng: "en", defaultValue: "" });
       if (translated && translated !== genericKey && translated.trim() !== "") return translated;
@@ -108,12 +112,16 @@ export const useTranslatedChallengeContent = () => {
 
   // Traduz descrição do dia - com suporte a challenge-specific translations
   const getDayDescription = (challengeSlug: string, dayNumber: number, aiSlug: string, fallback: string) => {
-    // 1. Tenta tradução específica do desafio primeiro (Usa dia Global)
+    // 1. Para PT, banco de dados tem prioridade máxima
+    const lang = i18n.language;
+    if ((lang === "pt" || lang === "pt-BR") && fallback && fallback.trim() !== "") return fallback;
+
+    // 2. Tenta tradução específica do desafio (Usa dia Global)
     const challengeKey = `challenges.${challengeSlug}.days.${dayNumber}.description`;
     let translated = t(challengeKey, { defaultValue: "" });
     if (translated && translated !== challengeKey && translated.trim() !== "") return translated;
 
-    // 2. Fallback para tradução genérica por AI tool (Usa dia Relativo)
+    // 3. Fallback para tradução genérica por AI tool (Usa dia Relativo)
     const relativeDay = getRelativeDayNumber(aiSlug, dayNumber);
     const normalizedSlug = normalizeSlugForTranslation(aiSlug);
     const genericKey = `challengeDays.${normalizedSlug}.${relativeDay}.description`;
@@ -121,7 +129,7 @@ export const useTranslatedChallengeContent = () => {
     translated = t(genericKey, { defaultValue: "" });
     if (translated && translated !== genericKey && translated.trim() !== "") return translated;
 
-    // 3. Try English
+    // 4. Try English
     if (i18n.language !== "en") {
       translated = t(genericKey, { lng: "en", defaultValue: "" });
       if (translated && translated !== genericKey && translated.trim() !== "") return translated;

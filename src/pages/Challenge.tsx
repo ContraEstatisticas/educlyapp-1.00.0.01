@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { AIToolPopup } from "@/components/challenge/AIToolPopup";
-import { AIToolSelector, aiToolsConfig } from "@/components/lesson/AIToolSelector";
+import { AIToolSelector, aiToolsConfig, aiToolsOrder } from "@/components/lesson/AIToolSelector";
 import { DaysProgressBar } from "@/components/lesson/DaysProgressBar";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
@@ -60,7 +60,7 @@ const Challenge = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getChallengeName, getChallengeDescription, getDayTitle } = useTranslatedChallengeContent();
 
   const [selectedAITool, setSelectedAITool] = useState<string | null>(null);
@@ -105,6 +105,22 @@ const Challenge = () => {
       return data;
     },
     enabled: !!challenge?.id,
+  });
+
+  const { data: dayTranslations } = useQuery({
+    queryKey: ["challenge-day-translations", challenge?.id, i18n.language],
+    queryFn: async () => {
+      const lang = i18n.language.split("-")[0];
+      if (lang === "pt" || !challengeDays?.length) return {};
+      const dayIds = challengeDays.map((d) => d.id);
+      const { data } = await supabase
+        .from("challenge_day_translations")
+        .select("challenge_day_id, title, description")
+        .in("challenge_day_id", dayIds)
+        .eq("language", lang);
+      return Object.fromEntries((data || []).map((row) => [row.challenge_day_id, row]));
+    },
+    enabled: !!challengeDays?.length,
   });
 
   const { data: completedDaysData } = useQuery({
@@ -231,12 +247,15 @@ const Challenge = () => {
             {/* AI Tool Progress Cards */}
             <div id="challenge-tabs" className="mb-6">
               <AIToolSelector
-                tools={Object.entries(aiToolsConfig).map(([slug, config]) => {
-                  const toolDays = challengeDays?.filter((d) => d.ai_tools?.slug === slug) || [];
-                  const completedToolDays = toolDays.filter((d) => completedDayIds.includes(d.id)).length;
-                  const progress = toolDays.length > 0 ? Math.round((completedToolDays / toolDays.length) * 100) : 0;
-                  return { slug, name: config.name, progress };
-                })}
+                tools={aiToolsOrder
+                  .filter((slug) => challengeDays?.some((d) => d.ai_tools?.slug === slug))
+                  .map((slug) => {
+                    const config = aiToolsConfig[slug];
+                    const toolDays = challengeDays?.filter((d) => d.ai_tools?.slug === slug) || [];
+                    const completedToolDays = toolDays.filter((d) => completedDayIds.includes(d.id)).length;
+                    const progress = toolDays.length > 0 ? Math.round((completedToolDays / toolDays.length) * 100) : 0;
+                    return { slug, name: config.name, progress };
+                  })}
                 selectedSlug={selectedAITool}
                 onSelect={(slug) => {
                   setSelectedAITool(slug);
@@ -374,7 +393,7 @@ const Challenge = () => {
                         (isCurrent || isCompleted) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                       )}>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{t("challenge.day")} {day.day_number}</p>
-                        <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">{getDayTitle(slug!, day.day_number, toolSlug, day.title)}</p>
+                        <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">{(dayTranslations as any)?.[day.id]?.title || getDayTitle(slug!, day.day_number, toolSlug, day.title)}</p>
                       </div>
                     </div>
                   );

@@ -17,116 +17,116 @@
       "description": "Lernen Sie alles über die 8 wichtigsten KIs des Marktes in 28 Tagen intensivem und praktischem Lernen.",
       "days": {
         "1": {
-          "title": "Einführung in ChatGPT",
+          "title": "Was ist ChatGPT?",
           "description": "Lernen Sie ChatGPT und seine grundlegenden Fähigkeiten kennen."
         },
         "2": {
-          "title": "Effektive Prompts Erstellen",
-          "description": "Lernen Sie, leistungsstarke Prompts zu erstellen."
+          "title": "ChatGPT personalisieren",
+          "description": "Personalisieren Sie ChatGPT und lernen Sie Tokens und Prompts."
         },
         "3": {
-          "title": "ChatGPT als Berater",
-          "description": "Nutzen Sie ChatGPT als Expertenberater."
+          "title": "Wie erkennt man eine gute Antwort?",
+          "description": "Bewerten Sie KI-Antworten, erstellen Sie Bilder und nutzen Sie ChatGPT als Recherchetool."
         },
         "4": {
-          "title": "Praktisches Projekt ChatGPT",
-          "description": "Wenden Sie das Gelernte in einem realen Projekt an."
+          "title": "Das Maximum aus ChatGPT herausholen",
+          "description": "Fortgeschrittene Techniken für strategische und präzise Antworten."
         },
         "5": {
-          "title": "Einführung in Claude",
-          "description": "Lernen Sie Claude und seine Unterschiede kennen."
+          "title": "Die Geschichte von Claude",
+          "description": "Lernen Sie Claude, seine Stärken, Modelle und wie man es gut nutzt, kennen."
         },
         "6": {
-          "title": "Copywriting mit Claude",
-          "description": "Erstellen Sie überzeugende Texte mit Claude."
+          "title": "Die Projects-Funktion meistern",
+          "description": "Meistern Sie Projects, Artifacts, Code-Ausführung und die Claude-API."
         },
         "7": {
-          "title": "Praktisches Projekt Claude",
-          "description": "Wenden Sie das von Claude Gelernte an."
+          "title": "Die Geschichte von DeepSeek",
+          "description": "Lernen Sie DeepSeek, seine V3- und R1-Modelle und wann man es einsetzt, kennen."
         },
         "8": {
-          "title": "Einführung in DeepSeek",
-          "description": "Lernen Sie DeepSeek und seine Vorteile kennen."
+          "title": "Das Maximum aus DeepSeek herausholen",
+          "description": "Meistern Sie die zwei Denkmodi, Websuche, lange Dokumente und Automatisierung."
         },
         "9": {
-          "title": "Code-Generierung mit KI",
-          "description": "KI-unterstützte Programmierung mit DeepSeek."
+          "title": "Die Geschichte von Gemini",
+          "description": "Lernen Sie Gemini, seine Modelle und die Integration mit Google Workspace kennen."
         },
         "10": {
-          "title": "Praktisches Projekt DeepSeek",
-          "description": "Wenden Sie das von DeepSeek Gelernte an."
+          "title": "Datei-Upload und Kontext meistern",
+          "description": "Datei-Upload, NotebookLM, Deep Research, Imagen und vollständiger Workflow."
         },
         "11": {
-          "title": "Einführung in Gemini",
-          "description": "Lernen Sie Gemini von Google kennen."
+          "title": "Die Geschichte von Copilot",
+          "description": "Lernen Sie Copilot integriert in Microsoft 365: Word, Excel, Outlook und PowerPoint kennen."
         },
         "12": {
-          "title": "Recherche mit Gemini",
-          "description": "Nutzen Sie Gemini für Recherchen."
+          "title": "Die Kunst des Prompts - vom Einsteiger bis Fortgeschrittene",
+          "description": "Fortgeschrittene Prompt-Techniken, Anwendungsfälle nach Bereich und täglicher Praxis-Workflow."
         },
         "13": {
-          "title": "Praktisches Projekt Gemini",
-          "description": "Wenden Sie das von Gemini Gelernte an."
+          "title": "Die Geschichte von Grok",
+          "description": "Lernen Sie Grok von xAI kennen: Echtzeitzugang zu X und dem Web."
         },
         "14": {
-          "title": "Einführung in NanoBanana",
-          "description": "Lernen Sie das KI-Kunsttool kennen."
+          "title": "Schnelle Grok-Überprüfung",
+          "description": "Festigen Sie Ihr Wissen über Grok."
         },
         "15": {
-          "title": "Kunst mit KI Erstellen",
-          "description": "Generieren Sie beeindruckende Bilder."
+          "title": "Die Geschichte von Perplexity",
+          "description": "Lernen Sie Perplexity, die KI-gestützte Suchmaschine, kennen."
         },
         "16": {
-          "title": "Stile und Techniken",
-          "description": "Meistern Sie künstlerische Stile."
+          "title": "Die Kunst des Prompts in Perplexity - vom Einsteiger bis Fortgeschrittene",
+          "description": "Fortgeschrittene Techniken für bessere Ergebnisse mit Perplexity."
         },
         "17": {
-          "title": "Praktisches Projekt NanoBanana",
-          "description": "Wenden Sie das Gelernte an."
+          "title": "Die Geschichte von Manus",
+          "description": "Lernen Sie Manus, den autonomen KI-Agenten, kennen."
         },
         "18": {
-          "title": "Einführung in Lovable",
-          "description": "Lernen Sie die No-Code-Plattform kennen."
+          "title": "Die Kunst des Prompts in Manus - vom Einsteiger bis Fortgeschrittene",
+          "description": "Meistern Sie Prompt-Techniken, um das Maximum aus Manus herauszuholen."
         },
         "19": {
-          "title": "Landing Pages Erstellen",
-          "description": "Entwickeln Sie Landing Pages."
+          "title": "Die Geschichte von Lovable",
+          "description": "Lernen Sie Lovable kennen und wie es Ideen in Web-Anwendungen verwandelt."
         },
         "20": {
-          "title": "Komplette Systeme",
-          "description": "Erstellen Sie vollständige Anwendungen."
+          "title": "Wie der richtige Workflow funktioniert",
+          "description": "Meistern Sie den richtigen Workflow, Integrationen und Techniken für Lovable."
         },
         "21": {
-          "title": "Praktisches Projekt Lovable",
-          "description": "Wenden Sie das Gelernte an."
+          "title": "Die Geschichte von NanoBanana",
+          "description": "Lernen Sie NanoBanana kennen, Googles hochwertigen Bildgenerator."
         },
         "22": {
-          "title": "Einführung in Captions",
-          "description": "Lernen Sie das Video-Tool kennen."
+          "title": "Die Geschichte von LeonardoAI",
+          "description": "Lernen Sie LeonardoAI und seine Fähigkeiten zur konsistenten Bildgenerierung kennen."
         },
         "23": {
-          "title": "Videos mit KI Bearbeiten",
-          "description": "Automatisierte Bearbeitung."
+          "title": "Die Geschichte von MidJourney",
+          "description": "Lernen Sie MidJourney und seine Exzellenz in der künstlerischen Bildgenerierung kennen."
         },
         "24": {
-          "title": "Praktisches Projekt Captions",
-          "description": "Wenden Sie das Gelernte an."
+          "title": "Die Geschichte von Captions",
+          "description": "Lernen Sie Captions kennen, das professionelle KI-Videobearbeitungstool."
         },
         "25": {
-          "title": "Einführung in ElevenLabs",
-          "description": "Lernen Sie das Sprach-Tool kennen."
+          "title": "Die Geschichte von ElevenLabs",
+          "description": "Lernen Sie ElevenLabs und seine Stimmklon-Fähigkeiten kennen."
         },
         "26": {
-          "title": "Stimmklonen",
-          "description": "Erstellen Sie realistische Stimmklone."
+          "title": "Die Geschichte von VEO",
+          "description": "Lernen Sie VEO kennen, Googles KI-Videogenerierungstool."
         },
         "27": {
-          "title": "Fortgeschrittenes Text-to-Speech",
-          "description": "Professionelle Sprachsynthese."
+          "title": "Tag 1 (Allgemeine Überprüfung)",
+          "description": "Festigen Sie alle gelernten KI-Tools."
         },
         "28": {
-          "title": "Praktisches Projekt ElevenLabs",
-          "description": "Wenden Sie das Gelernte an."
+          "title": "Tag 2 (Abschlussüberprüfung)",
+          "description": "Abschlussprojekt: alle Tools integrieren."
         }
       }
     },
