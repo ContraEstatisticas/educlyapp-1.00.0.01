@@ -10,6 +10,12 @@ import lovableLogo from "@/assets/ai-logos/lovable.png";
 import captionsLogo from "@/assets/ai-logos/captions.png";
 import elevenlabsLogo from "@/assets/ai-logos/elevenlabs.png";
 import grokLogo from "@/assets/ai-logos/grok.png";
+import copilotLogo from "@/assets/ai-logos/copilot.png";
+import perplexityLogo from "@/assets/ai-logos/perplexity.png";
+import manusLogo from "@/assets/ai-logos/manus.png";
+import leonardoLogo from "@/assets/ai-logos/leonardo.png";
+import midjourneyLogo from "@/assets/ai-logos/midjourney.png";
+import veoLogo from "@/assets/ai-logos/veo.png";
 
 // Ordered by day range: dias 1-4, 5-6, 7-8, 9-10, 11-12, 13-14, 15-16, 17-18, 19-20, 21, 22, 23, 24, 25, 26, 27-28
 export const aiToolsConfig: Record<string, { logo?: string; color: string; name: string }> = {
@@ -17,17 +23,17 @@ export const aiToolsConfig: Record<string, { logo?: string; color: string; name:
   'claude':     { logo: claudeLogo,     color: '#8b5cf6', name: 'Claude' },
   'deepseek':   { logo: deepseekLogo,   color: '#1e3a8a', name: 'DeepSeek' },
   'gemini':     { logo: geminiLogo,     color: '#4285f4', name: 'Gemini' },
-  'copilot':    {                        color: '#0078d4', name: 'Copilot' },
+  'copilot':    { logo: copilotLogo,    color: '#0078d4', name: 'Copilot' },
   'grok':       { logo: grokLogo,       color: '#e5e7eb', name: 'Grok' },
-  'perplexity': {                        color: '#20b2aa', name: 'Perplexity' },
-  'manus':      {                        color: '#ff6b35', name: 'Manus' },
+  'perplexity': { logo: perplexityLogo, color: '#ffffff', name: 'Perplexity' },
+  'manus':      { logo: manusLogo,      color: '#ff6b35', name: 'Manus' },
   'lovable':    { logo: lovableLogo,    color: '#6366f1', name: 'Lovable' },
   'nanobanana': { logo: nanobananaLogo, color: '#f59e0b', name: 'NanoBanana' },
-  'leonardo':   {                        color: '#7c3aed', name: 'LeonardoAI' },
-  'midjourney': {                        color: '#9ca3af', name: 'MidJourney' },
+  'leonardo':   { logo: leonardoLogo,   color: '#7c3aed', name: 'LeonardoAI' },
+  'midjourney': { logo: midjourneyLogo, color: '#9ca3af', name: 'MidJourney' },
   'captions':   { logo: captionsLogo,   color: '#ec4899', name: 'Captions' },
   'elevenlabs': { logo: elevenlabsLogo, color: '#f97316', name: 'ElevenLabs' },
-  'veo':        {                        color: '#ea4335', name: 'VEO' },
+  'veo':        { logo: veoLogo,        color: '#ea4335', name: 'VEO' },
 };
 
 // Ordered slug list matching day sequence
@@ -79,7 +85,7 @@ export const AIToolSelector = ({ tools, selectedSlug, onSelect }: AIToolSelector
                   "w-12 h-12 rounded-full flex items-center justify-center",
                   isSelected ? "ring-2 ring-primary ring-offset-2" : ""
                 )}
-                style={{ backgroundColor: `${config.color}20` }}
+                style={{ backgroundColor: config.color === '#ffffff' ? '#ffffff' : `${config.color}20` }}
               >
                 {config.logo ? (
                   <img 
