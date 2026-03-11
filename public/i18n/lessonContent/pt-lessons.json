@@ -108,169 +108,101 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎯 Engenharia de Prompt: A Arte de Dar Ordens",
-        "content": "A Engenharia de Prompt não é apenas 'escrever perguntas'. É a nova forma de falar com as máquinas.\n\nAntigamente, para mandar um computador fazer algo, você precisava programar. Hoje, você só precisa saber **explicar**.\n\nPrompt Engineering é o ato de traduzir o que você quer em instruções que a IA entenda perfeitamente. Quem domina isso trabalha mais rápido e erra menos. Quem não domina, fica preso em respostas genéricas e inúteis."
+        "title": "⚙️ Personalização: fazendo o ChatGPT responder do seu jeito",
+        "content": "O ChatGPT não tem um único jeito de responder. Ele se adapta ao contexto que você fornece.\n\nVá em:\nConfigurações → Personalização\n\nNão existe um texto ideal. O melhor texto é o que combina com seu objetivo e seu jeito de aprender ou trabalhar.\n\nVocê pode ajustar:\n– o tom (simples, direto, técnico)\n– o tipo de explicação (curta ou detalhada)\n– o uso principal (estudo, trabalho, criação de conteúdo)\n\nComece simples. Com o tempo, ajuste conforme sentir necessidade."
       },
       {
         "type": "text",
-        "title": "🧠 Por que a IA parece burra para uns e genial para outros?",
-        "content": "O modelo de IA é o mesmo para todo mundo. A diferença está no **operador**.\n\n- **Iniciantes:** Fazem perguntas curtas e sem contexto ('Crie um post').\n- **Profissionais:** Configuram a IA como se fosse um sistema ('Aja como um social media e crie um post para Instagram focado em vendas...').\n\nLembre-se: a IA é um **multiplicador**. Se você der uma ideia nota 0, ela vai multiplicar por 0. Se você der uma ideia nota 10, ela vai te entregar um resultado nota 100."
+        "title": "💡 Prompt-exemplo",
+        "content": "Você pode usar algo assim e adaptar do seu jeito:\n\n'Quero respostas claras, práticas e objetivas. Prefiro linguagem simples e exemplos quando possível. Uso o ChatGPT para aprender, organizar ideias e criar conteúdos. Evite respostas genéricas.'\n\nEsse texto já melhora bastante a qualidade das respostas — e pode ser ajustado ao seu estilo sempre que quiser."
       },
       {
         "type": "text",
-        "title": "📐 O Método C.T.F.D. — Sua Receita de Sucesso",
-        "content": "Para nunca mais receber respostas ruins, use sempre esta estrutura:\n\n**C — CONTEXTO:** Quem a IA deve ser? (Ex: 'Aja como um advogado').\n**T — TAREFA:** O que ela deve fazer? (Ex: 'Revise este contrato').\n**F — FORMATO:** Como deve ser a entrega? (Ex: 'Em uma tabela').\n**D — DETALHES:** Quais as regras? (Ex: 'Destaque cláusulas de multa').\n\n\n\nSeguir esse protocolo é o mínimo para um uso profissional."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Domine o C.T.F.D.",
-          "description": "Ligue cada letra à sua função no seu pedido.",
-          "pairs": [
-            {
-              "left": "C - Contexto",
-              "right": "Quem a IA será"
-            },
-            {
-              "left": "T - Tarefa",
-              "right": "O que será feito"
-            },
-            {
-              "left": "F - Formato",
-              "right": "Como será entregue"
-            },
-            {
-              "left": "D - Detalhes",
-              "right": "Regras e limites"
-            }
-          ]
-        }
+        "title": "🧠 Tokens: A 'Memória' Curta da IA",
+        "content": "A IA não lê palavras como humanos. Ela processa tokens pequenos fragmentos de texto que podem ser partes de palavras, palavras inteiras ou até sinais de pontuação.\n\nCada modelo possui um limite máximo de tokens que consegue analisar ao mesmo tempo. Esse limite é chamado de janela de contexto. Dentro dessa janela entram: sua pergunta, as mensagens anteriores da conversa e a própria resposta que a IA vai gerar.\n\nQuando o total de tokens ultrapassa esse limite, as partes mais antigas da conversa deixam de ser consideradas. Não é que a IA “esquece” como um humano — é uma limitação técnica do sistema.\n\nPor isso, ser claro, objetivo e estratégico ao escrever seus prompts ajuda a preservar contexto relevante e aumenta a qualidade das respostas."
       },
       {
         "type": "text",
-        "title": "🧠 Contexto: O Filtro da Inteligência",
-        "content": "Dar contexto não é 'fingir'. É ajudar a IA a filtrar as palavras certas.\n\nSe você pede 'Explique física', ela dará uma resposta de dicionário. Se pede 'Explique física para uma criança de 5 anos', ela usará analogias com brinquedos.\n\nQuanto mais específico você for no 'quem você é' e 'para quem é o texto', maior será a precisão e menor o risco da IA inventar coisas."
+        "title": "⚠️ Lição: Falar bem não é o mesmo que estar certo",
+        "content": "O ChatGPT escreve muito bem. Isso é uma das maiores forças da ferramenta — e também um dos maiores riscos.\n\nEle domina a forma do texto: estrutura, linguagem, fluidez e tom convincente. Mas isso não significa que tudo o que ele escreve seja verdadeiro.\n\nO ChatGPT não verifica fatos como um humano faria. Ele não checa fontes em tempo real nem confirma se um estudo realmente existe. Ele gera respostas com base em padrões de linguagem que parecem corretos.\n\nPor isso, ele pode criar:\n– artigos bem escritos com dados imprecisos\n– explicações convincentes, porém incompletas\n– citações que soam reais, mas não existem\n\nO texto pode ser elegante. Isso não garante que seja verdade."
       },
       {
         "type": "text",
-        "title": "⚙️ Tarefa: Use Verbos Fortes",
-        "content": "O verbo que você usa muda o 'raciocínio' da IA.\n\n- **Descreva:** Gera uma lista simples.\n- **Analise:** Decompõe o assunto logicamente.\n- **Avalie:** Dá uma nota ou julgamento.\n\nNo trabalho, evite verbos fracos como 'fale sobre'. Prefira 'Compare os custos de X e Y' ou 'Sintetize este relatório em 3 pontos'."
+        "title": "🎯 Engenharia de Prompt",
+        "content": "É aprender a dar comandos claros para a IA. Quanto melhor a instrução, melhor a resposta.\n\nUm prompt direciona a resposta do modelo ao fornecer contexto e instruções específicas. Um prompt é o comando que você dá para a inteligência artificial.\n\nVocê pode pedir para ele agir como um especialista sobre algum assunto antes de pedir o que quer. Tudo o que o ChatGPT responde começa a partir do prompt.\n\nExemplo:\n“Escreva uma história sobre um gato.”\nIsso já é um prompt. A IA usa essa instrução como base para gerar a resposta — neste caso, uma história sobre um gato.\n\nQuanto mais simples o prompt, mais simples tende a ser a resposta. Quanto mais claro e direcionado, mais útil e personalizada ela fica. Você pode também mandar imagens para complementar o prompt."
       },
       {
-        "type": "text",
-        "title": "📊 Formato: Controle o Resultado",
-        "content": "Formato não é frescura, é praticidade.\n\nPedir um 'texto' é arriscado. Peça por:\n- Tabelas comparativas.\n- Checklists acionáveis.\n- E-mails prontos para enviar.\n- Código de programação pronto.\n\nSe você define o formato, você economiza tempo de formatação depois."
-      },
-      {
-        "type": "text",
-        "title": "🔍 Detalhes: A Diferença Profissional",
-        "content": "Os detalhes são as 'grades' que impedem a IA de sair do caminho.\n\nExemplo ruim: 'Crie um plano de dieta'.\nExemplo profissional: 'Crie um plano de dieta de 2.000 kcal, sem lactose, para quem treina à noite e tem apenas R$ 200,00 por semana para gastar'.\n\nNo mundo real, detalhe é necessidade, não excesso."
+        "type": "quiz",
+        "title": "📖 Teste Rápido",
+        "question": "Qual das afirmações abaixo está correta sobre o funcionamento do ChatGPT?",
+        "options": [
+          {
+            "text": "Ele verifica automaticamente todas as fontes antes de responder.",
+            "isCorrect": false,
+            "explanation": "Incorreto. A IA não acessa a internet para checar fatos em tempo real a menos que use ferramentas extras."
+          },
+          {
+            "text": "Ele escreve de forma convincente, mas pode gerar informações imprecisas.",
+            "isCorrect": true,
+            "explanation": "Correto! Ele domina a linguagem, mas não garante a veracidade dos fatos."
+          },
+          {
+            "text": "Ele possui memória ilimitada dentro de uma conversa.",
+            "isCorrect": false,
+            "explanation": "Incorreto. A memória é limitada pela 'janela de contexto' (limite de tokens)."
+          },
+          {
+            "text": "Ele sempre responde da mesma forma, independentemente do contexto.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Ele é altamente adaptável ao contexto fornecido no prompt."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Pratique o Framework",
-          "sentence": "Um bom prompt precisa de ___ para o papel, ___ para a ação, ___ para a estrutura e ___ para os limites.",
+          "title": "✏️ Complete a frase",
+          "sentence": "Cada modelo possui um limite máximo de ___ que consegue analisar ao mesmo tempo. Esse limite é chamado de ___.",
           "answers": [
-            "Contexto",
-            "Tarefa",
-            "Formato",
-            "Detalhes"
+            "tokens",
+            "janela de contexto"
           ],
           "options": [
-            "Contexto",
-            "Tarefa",
-            "Formato",
-            "Detalhes",
-            "Sorte",
-            "Velocidade",
-            "Dinheiro"
+            "tokens",
+            "janela de contexto",
+            "palavras",
+            "memória ilimitada"
           ],
-          "explanation": "Isso aí! Com esses quatro pilares, você domina qualquer IA."
+          "explanation": "Lembre-se: quando a janela de contexto se esgota, a IA perde as informações do começo da conversa."
         }
       },
       {
-        "type": "text",
-        "title": "🧠 Exemplos: O Atalho do Aprendizado",
-        "content": "A forma mais rápida de ensinar a IA é dando exemplos.\n\n**Zero-Shot:** Você pede sem dar exemplo. É bom para coisas simples.\n**Few-Shot:** Você dá 2 ou 3 exemplos do que quer. É perfeito para tarefas difíceis.\n\nSe você quer que a IA escreva como você, cole 2 e-mails seus e diga: 'Baseado no estilo desses exemplos, escreva um novo e-mail sobre X'."
-      },
-      {
-        "type": "text",
-        "title": "🧠 Pensando Passo a Passo",
-        "content": "Uma técnica mágica para evitar erros é pedir para a IA 'pensar passo a passo'.\n\nIsso força o modelo a resolver as partes pequenas do problema antes de dar a resposta final. É excelente para cálculos, lógica ou decisões estratégicas.\n\n\n\nEm vez de 'Quanto é a soma de...', use 'Vamos calcular passo a passo mostrando a fórmula e cada etapa'."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Técnicas de Elite",
-          "description": "Qual técnica usar em cada momento?",
-          "pairs": [
-            {
-              "left": "Zero-Shot",
-              "right": "Tarefas rápidas e simples"
-            },
-            {
-              "left": "Few-Shot",
-              "right": "Quando o estilo importa"
-            },
-            {
-              "left": "Passo a Passo",
-              "right": "Para lógica e cálculos"
-            },
-            {
-              "left": "Auto-crítica",
-              "right": "Para revisar erros"
-            }
-          ]
-        }
-      },
-      {
-        "type": "text",
-        "title": "⚠️ Responsabilidade e Viés",
-        "content": "A IA reflete o mundo, com todas as suas qualidades e preconceitos.\n\nComo profissional, você deve forçar a IA a ver outros lados. Se estiver criando uma política de empresa, peça: 'Quais seriam os pontos negativos dessa regra para funcionários novos?' ou 'Dê 3 argumentos contra essa ideia'.\n\nA neutralidade não vem de fábrica, você precisa exigir."
-      },
-      {
-        "type": "text",
-        "title": "🧠 O Prompt como um Contrato",
-        "content": "Pense no seu pedido como um contrato de trabalho.\n\nSe o contrato for vago, o funcionário faz o que quer. Se o contrato for claro, o resultado é garantido.\n\nDefina o **Escopo** (o que fazer), os **Critérios** (o que é uma resposta boa) e as **Restrições** (o que não fazer). Quanto mais 'contratual' for seu prompt, melhor será a entrega."
-      },
-      {
-        "type": "text",
-        "title": "🔁 Iteração: O Segredo dos Mestres",
-        "content": "Ninguém acerta de primeira. O segredo da IA é a **conversa**.\n\nSe a resposta não ficou boa, não apague tudo. Diga: 'Gostei da parte X, mas mude o tom da parte Y para ser mais formal' ou 'Adicione mais exemplos práticos'.\n\nCada ajuste custa centavos, mas o valor final do texto aumenta mil vezes."
-      },
-      {
-        "type": "text",
-        "title": "🧠 Peça para a IA se Corrigir",
-        "content": "Esta é uma técnica de mestre: peça para a IA criticar o próprio trabalho.\n\nApós ela te dar uma resposta, mande: 'Agora, aja como um crítico rigoroso. Aponte 3 falhas nesta resposta e sugira como melhorá-la'.\n\nVocê vai se surpreender com o quanto a resposta melhora na segunda versão."
-      },
-      {
-        "type": "text",
-        "title": "🧠 O Time de Especialistas (Personas)",
-        "content": "Por que ter uma opinião se você pode ter três?\n\nPeça para a IA simular um debate:\n1. 'Dê a visão de um marqueteiro otimista'.\n2. 'Dê a visão de um financeiro conservador'.\n3. 'Agora, resuma a melhor decisão'.\n\nIsso cria análises muito mais robustas do que perguntar para uma única 'pessoa'."
-      },
-      {
-        "type": "text",
-        "title": "🚫 O Que Nunca Fazer",
-        "content": "1. **Aceitar qualquer coisa:** Se a resposta for vaga, peça para detalhar.\n2. **Confiar 100%:** A IA fala mentiras com cara de verdade.\n3. **Mandar um 'Oi':** Não perca tempo. Já mande o comando completo.\n4. **Não revisar:** Você é o chefe. O erro da IA é responsabilidade SUA."
-      },
-      {
-        "type": "text",
-        "title": "📁 Organize seus Comandos",
-        "content": "Não invente a roda todo dia. Guarde seus melhores prompts em um bloco de notas ou no Notion.\n\nCrie templates prontos:\n- 'Template de Revisão de E-mail'.\n- 'Template de Análise de Dados'.\n- 'Template de Criação de Post'.\n\nProfissionais usam bibliotecas de prompts para ganhar velocidade."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Exemplos Prontos para Você Copiar",
-        "content": "**Para Resumir:** 'Aja como um assistente executivo. Resuma este texto em 5 pontos chave, focando apenas em prazos e custos. Formato: Lista.'\n\n**Para Aprender:** 'Aja como um professor. Explique o conceito X usando uma analogia com futebol. Nível: Iniciante.'\n\n**Para Criar:** 'Aja como um redator criativo. Gere 10 títulos de blog sobre Y. Use um tom provocativo e inclua números no título.'"
-      },
-      {
-        "type": "text",
-        "title": "🎓 Resumo do Dia 2",
-        "content": "**HOJE VOCÊ APRENDEU:**\n\n🎯 Engenharia de Prompt é configurar o sistema, não conversar.\n📐 O Método C.T.F.D. garante que você nunca mais receba respostas ruins.\n🧠 Técnicas como 'Pensar Passo a Passo' aumentam a inteligência da IA.\n🔁 O segredo do sucesso é a iteração (ajustar e melhorar).\n\n**MENTALIDADE:**\nVocê não é mais um usuário comum. Você agora é um **Engenheiro de Prompt**.\n\n**AMANHÃ:** Vamos criar Personas — consultores virtuais que conhecem o seu negócio melhor que ninguém!"
+        "type": "quiz",
+        "title": "🫤 Complete a frase com a palavra correta:",
+        "question": "\"O ChatGPT pode escrever textos muito __________, mas isso não significa que sejam necessariamente __________.\"",
+        "options": [
+          {
+            "text": "Curtos / simples",
+            "isCorrect": false,
+            "explanation": "A questão principal não é o tamanho do texto, e sim sua veracidade."
+          },
+          {
+            "text": "Técnicos / complexos",
+            "isCorrect": false,
+            "explanation": "A IA pode escrever de forma simples ou técnica, dependendo do prompt."
+          },
+          {
+            "text": "Convincentes / verdadeiros",
+            "isCorrect": true,
+            "explanation": "Exatamente! Um texto bonito e bem estruturado não garante que os fatos sejam reais."
+          },
+          {
+            "text": "Rápidos / precisos",
+            "isCorrect": false,
+            "explanation": "Embora seja rápido, o foco da frase é a capacidade de persuasão vs. a verdade."
+          }
+        ]
       }
     ]
   },
@@ -278,174 +210,113 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎭 Personas: Seu Time de Especialistas no Bolso",
-        "content": "Personas não são personagens de teatro. No mundo da IA, elas são como 'filtros' que ajudam a máquina a focar no que importa.\n\nQuando você pede para a IA agir como um 'Chef de Cozinha', ela para de sugerir termos de engenharia e começa a usar palavras como 'refogar' e 'tempero'.\n\nAs personas servem para dar um ponto de vista especializado. Elas não transformam a IA em um humano, mas forçam o modelo a usar o vocabulário e o jeito de pensar de um profissional específico."
+        "title": "📊 Como Saber se a Resposta é boa?",
+        "content": "Sempre faça estas 3 perguntas após receber uma resposta da IA:\n\n1. **Está completo?** Ela respondeu tudo o que eu pedi?\n2. **É verdade?** Os fatos e nomes citados realmente existem?\n3. **É útil?** Isso resolve meu problema ou é apenas 'encheção de linguiça'?\n\nSe não estiver perfeito, não desista: peça para ela ajustar os pontos que faltaram."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "✏️ As 3 Perguntas de Ouro",
+          "sentence": "Para avaliar uma resposta, verifique se ela está ___, se os fatos são ___ e se o conteúdo é ___ para você.",
+          "answers": [
+            "completa",
+            "verdade",
+            "útil"
+          ],
+          "options": [
+            "completa",
+            "verdade",
+            "útil",
+            "longa",
+            "mentira",
+            "rápida"
+          ],
+          "explanation": "Nunca aceite a primeira resposta se ela não passar por esse filtro de qualidade!"
+        }
       },
       {
         "type": "text",
-        "title": "🧠 Por Que as Personas Funcionam?",
-        "content": "A IA leu milhões de textos de médicos, advogados, engenheiros e escritores. Cada profissão tem um 'jeito' de falar e de resolver problemas.\n\nAo criar uma persona, você está dizendo para a IA: 'Vá na gaveta de conhecimentos de Direito e ignore a gaveta de culinária'.\n\nIsso diminui as chances de erro e torna a resposta muito mais profunda. É a diferença entre um conselho genérico de um estranho e a consultoria de um especialista que entende do seu negócio."
+        "title": "🎨 Como a criação de imagens funciona",
+        "content": "Quando você pede uma imagem, a IA interpreta seu texto e transforma isso em elementos visuais.\n\nEla analisa:\n– personagens\n– cenário\n– estilo visual\n– cores\n– clima/emoção\n– enquadramento\n\nSe algo não for dito, a IA assume. E aí surgem imagens genéricas ou fora do esperado."
       },
       {
         "type": "text",
-        "title": "📋 Como Montar uma Persona Perfeita",
-        "content": "Para a persona ser útil, ela precisa de 3 camadas:\n\n1. **O Cargo:** Seja específico. Em vez de 'Advogado', use 'Advogado Tributarista focado em pequenas empresas'.\n\n2. **A Experiência:** Diga quanto tempo ela trabalha com isso. Ex: 'Com 15 anos de experiência no mercado de luxo'.\n\n3. **O Estilo:** Ela é calma? Agressiva? Foca em economizar dinheiro ou em crescer rápido?\n\nExemplo: 'Aja como um diretor financeiro (CFO) com 20 anos de experiência, conhecido por ser muito econômico e odiar riscos'."
+        "title": "📐 Estrutura simples para criar boas imagens",
+        "content": "Use sempre esse raciocínio para não errar:\n\n**O que é a imagem?**\nPessoa, objeto, cena, ilustração, foto, arte digital.\n\n**Onde acontece?**\nAmbiente, fundo, local, contexto.\n\n**Estilo visual**\nRealista, cinematográfico, ilustração, cartoon, 3D, minimalista, artístico.\n\n**Clima ou emoção**\nSério, inspirador, dramático, alegre, misterioso.\n\n**Detalhes importantes**\nCores, roupas, expressão, luz, ângulo da câmera."
+      },
+      {
+        "type": "text",
+        "title": "💡 Exemplos de prompts de imagem",
+        "content": "Crie uma imagem de um jovem usando notebook em um ambiente moderno, com luz natural, estilo realista, clima profissional e cores neutras. (Quanto mais claro, melhor o resultado).\n\n**Exemplo Avançado:**\nUma banana antropomórfica em estilo cartoon, com braços e pernas, relaxando em uma cadeira de praia. A banana está sorrindo, usando óculos escuros pretos, com expressão descontraída e divertida.\n\n– **Cenário:** praia tropical ensolarada, areia clara, mar azul turquesa, céu limpo com poucas nuvens e uma ilha ao fundo.\n– **Estilo visual:** ilustração digital de alta qualidade, cores vibrantes, iluminação suave, clima alegre e descontraído.\n– **Composição:** a banana é o foco principal da imagem, em primeiro plano, sem celular ou outros objetos tecnológicos.\n– **Estética:** limpa, divertida e moderna, ideal para conteúdo criativo e educativo.\n– **Estilo:** cartoon / 3D illustration / Pixar-like\n– **Qualidade:** high detail, ultra quality\n– **Formato:** vertical (9:16) se for usar em stories ou Reels"
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Ligue os Pilares da Persona",
-          "description": "Combine cada elemento com o que ele define na IA.",
+          "title": "🔗 Estrutura do Prompt de Imagem",
+          "description": "Ligue o pilar de criação ao seu respectivo exemplo.",
           "pairs": [
             {
-              "left": "Cargo Específico",
-              "right": "Filtra o vocabulário técnico"
+              "left": "O que é a imagem?",
+              "right": "Pessoa, objeto, arte digital"
             },
             {
-              "left": "Tempo de Experiência",
-              "right": "Define a profundidade do conselho"
+              "left": "Onde acontece?",
+              "right": "Praia tropical, fundo azul"
             },
             {
-              "left": "Estilo/Viés",
-              "right": "Determina se é cautelosa ou ousada"
+              "left": "Estilo visual",
+              "right": "Realista, cartoon, 3D"
             },
             {
-              "left": "Público-alvo",
-              "right": "Ajusta a facilidade da linguagem"
+              "left": "Clima ou emoção",
+              "right": "Sério, dramático, alegre"
             }
           ]
         }
       },
       {
         "type": "text",
-        "title": "🧠 Lentes de Negócio: Vários Ângulos",
-        "content": "Você pode pedir para a IA analisar o mesmo problema com 'óculos' diferentes:\n\n- **CEO:** Foca no futuro e no crescimento da marca.\n- **CFO (Financeiro):** Foca em quanto custa e se vai dar lucro.\n- **CMO (Marketing):** Foca em como atrair clientes e vender.\n\nSe você tiver uma ideia de um novo produto, pergunte para essas três personas. O conflito entre elas vai te mostrar pontos que você não tinha percebido sozinho."
+        "title": "🎙️ Chat de Voz do ChatGPT",
+        "content": "O chat de voz permite falar com o ChatGPT em vez de digitar. Você faz a pergunta falando normalmente e recebe a resposta por áudio.\n\nÉ útil para:\n– dúvidas rápidas\n– organizar ideias\n– pensar em voz alta\n– usar quando não dá para digitar\n\nVocê não precisa falar de forma técnica. Pode conversar de maneira natural e ajustar a resposta durante o diálogo. Assim como no texto, a resposta pode errar. Use o chat de voz para clareza e agilidade, não como fonte final de verdade."
       },
       {
         "type": "text",
-        "title": "🧠 Personas Criativas: Voz Própria",
-        "content": "As personas também ajudam a IA a escrever melhor e sem clichês.\n\n- **Copywriter:** Escreve textos que convencem as pessoas a comprar.\n- **UX Designer:** Foca em deixar o seu site fácil de usar.\n- **Escritor Técnico:** Explica coisas difíceis de um jeito que até uma criança entende.\n\nSem uma persona, a IA escreve 'parecendo uma IA'. Com uma persona, ela ganha uma voz única e interessante."
+        "title": "🔎 ChatGPT como ferramenta de investigação",
+        "content": "O ChatGPT não serve apenas para gerar textos. Ele pode ser usado como ferramenta de investigação estratégica.\n\nQuando bem direcionado, ele ajuda a organizar problemas complexos, levantar hipóteses, comparar cenários e identificar riscos ocultos. Em vez de entregar apenas uma resposta, ele estrutura raciocínio.\n\nO segredo está em como você pergunta."
       },
       {
         "type": "text",
-        "title": "🧠 O Método Socrático: Aprender Pensando",
-        "content": "Esta é a melhor forma de aprender. Em vez de pedir a resposta, peça para a IA te fazer perguntas.\n\nUse este pedido: 'Não me dê a resposta. Aja como um professor e me faça perguntas que me ajudem a descobrir a solução sozinho'.\n\nIsso força o seu cérebro a trabalhar e faz você aprender de verdade, em vez de apenas copiar e colar uma informação que você logo vai esquecer."
+        "title": "🎯 Exemplo prático de investigação",
+        "content": "**Pergunta comum (Ruim):**\n“Vale a pena abrir uma agência de marketing?”\n\n**Pergunta investigativa (Excelente):**\n“Analise a viabilidade de abrir uma agência de marketing digital no Brasil considerando: nível de concorrência, barreiras de entrada, diferenciação, dependência de tráfego pago, previsibilidade de receita e principais riscos nos primeiros 12 meses.”\n\n**O que ele faz nesse caso?**\nEle organiza a análise por critérios, aponta oportunidades, riscos, possíveis gargalos financeiros e ajuda você a enxergar o cenário com mais clareza.\n\n**Mas atenção:** ele estrutura o pensamento — não garante a verdade dos dados. Investigação com IA é inteligência + validação humana."
       },
       {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ Teste seu Conhecimento",
-          "sentence": "O método ___ faz a IA agir como um professor que te faz ___ em vez de dar ___ prontas.",
-          "answers": [
-            "Socrático",
-            "perguntas",
-            "respostas"
-          ],
-          "options": [
-            "Socrático",
-            "perguntas",
-            "respostas",
-            "Direto",
-            "ordens",
-            "listas"
-          ],
-          "explanation": "Exato! Isso estimula o raciocínio crítico e melhora o aprendizado."
-        }
-      },
-      {
-        "type": "text",
-        "title": "🧠 O Advogado do Diabo",
-        "content": "Esta é a ferramenta secreta para não cometer erros bobos.\n\nDepois que você tiver um plano, diga para a IA: 'Agora, aja como o maior crítico desse projeto. Aponte todos os riscos, falhas e motivos pelos quais isso pode dar errado'.\n\nSe a sua ideia sobreviver a esse 'teste de estresse', ela é realmente boa. O 'Advogado do Diabo' não é pessimista, ele é o seu seguro contra falhas."
-      },
-      {
-        "type": "text",
-        "title": "🧠 O Seu 'Eu' do Futuro",
-        "content": "Uma técnica poderosa é pedir conselhos para a sua versão futura.\n\nPeça: 'Aja como se fosse eu daqui a 10 anos, muito bem-sucedido e sábio. O que você me diria hoje sobre essa decisão?'.\n\nIsso ajuda a tirar a emoção do momento e a pensar no impacto que suas escolhas terão daqui a muito tempo. É como um mentor que já conhece o final da história."
-      },
-      {
-        "type": "text",
-        "title": "🧠 Simulando uma Reunião de Diretoria",
-        "content": "Você pode colocar várias personas para debater entre si na mesma tela.\n\n1. Peça a opinião do especialista otimista.\n2. Peça a opinião do especialista cético.\n3. Peça para um 'Moderador' resumir o melhor dos dois mundos.\n\nIsso simula como as grandes empresas tomam decisões difíceis e te dá uma visão completa do problema, protegendo você de ser 'otimista demais'."
-      },
-      {
-        "type": "text",
-        "title": "💼 Treine Sem Riscos (Simuladores)",
-        "content": "Use a IA para treinar para a vida real:\n\n- **Entrevistas:** 'Aja como um recrutador difícil e me entreviste'.\n- **Negociações:** 'Aja como um cliente que quer um desconto absurdo e vamos negociar'.\n- **Conversas Difíceis:** 'Aja como um funcionário desmotivado e vamos conversar'.\n\nO objetivo não é 'ganhar' da IA, mas sim treinar a sua fala e a sua paciência antes do momento real chegar."
-      },
-      {
-        "type": "text",
-        "title": "🧠 Feedback que Realmente Ensina",
-        "content": "Pedir um feedback 'bom' ou 'ruim' não ajuda em nada. Peça um feedback estruturado:\n\n1. O que ficou ótimo?\n2. O que ficou confuso?\n3. Por que isso é um problema?\n4. Como eu posso corrigir agora?\n\nIsso transforma a crítica em um plano de ação imediato para você melhorar seu trabalho, transformando a IA em um Coach de alta performance."
-      },
-      {
-        "type": "text",
-        "title": "⚠️ Os Limites das Personas",
-        "content": "Mesmo com a melhor persona, lembre-se dos limites:\n\n- **Intuição:** Só você tem o 'feeling' do seu negócio.\n- **Responsabilidade:** Se a IA der um conselho jurídico errado, o problema é seu.\n- **Empatia:** A IA sabe descrever sentimentos, mas ela não sente nada.\n\nUse a IA para iluminar o caminho, mas quem dirige o carro é sempre você."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Cenários vs. Personas",
-          "description": "Qual persona você chamaria para cada situação?",
-          "pairs": [
-            {
-              "left": "Entrevista de emprego",
-              "right": "Recrutador rigoroso"
-            },
-            {
-              "left": "Lançar novo produto",
-              "right": "CFO cauteloso"
-            },
-            {
-              "left": "Escrever anúncio",
-              "right": "Copywriter de elite"
-            },
-            {
-              "left": "Dúvida existencial",
-              "right": "Mentor sábio do futuro"
-            }
-          ]
-        }
-      },
-      {
-        "type": "text",
-        "title": "📁 Organize sua Biblioteca de Consultores",
-        "content": "Não precisa inventar a persona toda vez. Guarde os textos que definem seus 'especialistas' em um bloco de notas ou no Notion.\n\nSempre que precisar de uma revisão, basta copiar e colar o seu 'Revisor Sênior'. Isso economiza tempo e garante que o padrão de qualidade das respostas seja sempre o mesmo."
-      },
-      {
-        "type": "text",
-        "title": "🚫 O Que Nunca Fazer com Personas",
-        "content": "- **Ser vago:** Não diga 'seja um médico'. Diga 'seja um cardiologista com 20 anos de prática'.\n- **Crer cegamente:** A persona pode estar errada com muita elegância. Sempre confira fatos importantes.\n- **Ignorar o contexto:** Não adianta ter a melhor persona se você não explicar o seu problema em detalhes."
-      },
-      {
-        "type": "text",
-        "title": "🎓 Resumo Final do Dia 3",
-        "content": "**HOJE VOCÊ APRENDEU QUE:**\n\n1. Personas focam a inteligência da IA em um papel específico.\n2. O segredo está nas 3 camadas: Cargo, Experiência e Estilo.\n3. Você pode usar simuladores para treinar para a vida real sem riscos.\n4. O feedback estruturado é o que te faz crescer profissionalmente.\n\n**MENTALIDADE:**\nVocê agora sabe como montar o seu próprio conselho de especialistas virtuais para te apoiar em qualquer decisão!"
-      },
-      {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ Recapitulação Final",
-          "sentence": "Uma persona deve ter um ___ específico, anos de ___ e um ___ característico.",
-          "answers": [
-            "cargo",
-            "experiência",
-            "estilo"
-          ],
-          "options": [
-            "cargo",
-            "experiência",
-            "estilo",
-            "computador",
-            "segredo",
-            "nome"
-          ],
-          "explanation": "Perfeito! Você fechou o Dia 3 com chave de ouro e está pronto para o projeto final!"
-        }
+        "type": "quiz",
+        "title": "📖 Teste Rápido de Investigação",
+        "question": "Sobre o uso do ChatGPT para investigação estratégica, qual afirmação é correta?",
+        "options": [
+          {
+            "text": "Ele garante 100% da veracidade de todos os dados financeiros e de mercado.",
+            "isCorrect": false,
+            "explanation": "Incorreto. A IA estrutura o raciocínio, mas a validação dos dados deve ser humana."
+          },
+          {
+            "text": "Ele ajuda a organizar problemas complexos, levantar hipóteses e identificar riscos.",
+            "isCorrect": true,
+            "explanation": "Correto! É exatamente assim que se usa a IA como ferramenta estratégica."
+          },
+          {
+            "text": "Ele só consegue investigar se você fizer perguntas curtas e simples.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Perguntas detalhadas geram investigações muito melhores."
+          },
+          {
+            "text": "O Chat de Voz não serve para investigação, apenas o texto.",
+            "isCorrect": false,
+            "explanation": "Incorreto. Você pode usar o chat de voz para pensar em voz alta e organizar ideias."
+          }
+        ]
       }
     ]
   },
@@ -453,156 +324,172 @@
     "steps": [
       {
         "type": "text",
-        "title": "🚀 Projeto Final: Lançando o App 'FitFlow'",
-        "content": "Hoje você vai combinar TUDO o que aprendeu. Imagine que você foi contratado para lançar o **FitFlow**, um app brasileiro que usa IA para criar treinos de apenas 15 minutos para pessoas ocupadas.\n\nSua missão é criar:\n1. O plano de marketing.\n2. O texto do site (Landing Page).\n3. Os e-mails para os clientes.\n4. Os roteiros para vídeos no TikTok/Instagram.\n\nVamos usar o método C.T.F.D. e as Personas que você dominou nos dias anteriores!"
+        "title": "🚀 Extraindo o Máximo do ChatGPT",
+        "content": "O ChatGPT entrega performance quando você pensa antes de perguntar. Não peça “qualquer coisa”. Defina cenário, objetivo e resultado esperado.\n\nSempre inclua contexto suficiente para ele entender o problema e diga exatamente como quer receber a resposta (tópicos, tabela, resumo executivo, passo a passo). Quanto mais direcionado o comando, menos genérica será a resposta.\n\n**Dica prática:** Antes de enviar o prompt, pergunte a si mesmo — “Se eu fosse um funcionário, eu entenderia exatamente o que preciso entregar?”"
       },
       {
         "type": "text",
-        "title": "📊 Etapa 1: O Plano de Guerra (Estratégia)",
-        "content": "Para começar, precisamos de um plano. Vamos pedir para a IA agir como um Diretor de Marketing experiente.\n\n**O Pedido (Prompt):**\n'Aja como um Diretor de Marketing expert. Crie uma estratégia para lançar o app FitFlow. O público são profissionais de 25 a 40 anos que não têm tempo de ir à academia. Diferencial: treinos de 15 min. Formato: Tabela com Canais, Mensagem Principal e Meta'.\n\nEm segundos, você terá um mapa de onde anunciar e o que dizer para cada público."
-      },
-      {
-        "type": "practical",
-        "title": "🎯 Atividade: Montando o Comando",
-        "question": "Coloque as partes do comando na ordem certa do método C.T.F.D.:",
-        "initialWords": [
-          "Crie o plano de vendas",
-          "Aja como Diretor de Marketing",
-          "Formato de Tabela",
-          "Público: pessoas sem tempo"
-        ],
-        "correctOrder": [
-          "Aja como Diretor de Marketing",
-          "Crie o plano de vendas",
-          "Formato de Tabela",
-          "Público: pessoas sem tempo"
-        ],
-        "explanation": "Perfeito! Você definiu: Quem a IA é (Contexto), O que ela faz (Tarefa), Como ela entrega (Formato) e as Regras (Detalhes)."
+        "title": "✍️ Escrevendo com Clareza e Impacto",
+        "content": "O ChatGPT é extremamente forte em estruturar textos, melhorar argumentos e ajustar tom. Para extrair o melhor, peça: público-alvo, objetivo da comunicação e estilo desejado.\n\nSe quiser mais força, peça versões alternativas. Se quiser mais clareza, peça simplificação mantendo a ideia central.\n\n**Dica prática:** Use comandos como “reorganize para ficar mais persuasivo”, “reduza 30% sem perder impacto” ou “deixe mais direto e menos genérico”."
       },
       {
         "type": "text",
-        "title": "✍️ Etapa 2: O Texto que Vende (Landing Page)",
-        "content": "Com o plano pronto, precisamos do texto para o site. Vamos usar a técnica de 'Dançar com a IA' (Few-Shot).\n\n**O Pedido:**\n'Aja como um redator de vendas (Copywriter). Escreva o texto principal do site do FitFlow. Use um tom direto e empático. Exemplo de frase que eu gosto: Sua saúde não pode esperar o fim do expediente. Inclua uma promessa forte, 3 benefícios e um botão de baixar'.\n\nIsso garante que o texto não pareça um robô falando, mas sim alguém que entende a dor do cliente."
+        "title": "📊 Planejamento Estratégico",
+        "content": "Ele é excelente para transformar metas vagas em planos estruturados. Sempre peça divisão por etapas, prioridade e prazo.\n\nSe o planejamento envolve risco financeiro ou posicionamento, peça também uma análise de gargalos e possíveis falhas.\n\n**Dica prática:** Finalize o pedido com “inclua os principais riscos e como mitigá-los”. Isso eleva o nível da resposta."
       },
       {
         "type": "text",
-        "title": "📧 Etapa 3: E-mails que os Clientes Abrem",
-        "content": "Depois que a pessoa se interessa, precisamos manter o contato. Vamos criar uma sequência de 3 e-mails automáticos.\n\n1. **Boas-vindas:** Explicando como o app funciona.\n2. **Prova Social:** Contando a história de alguém que emagreceu em 15 min.\n3. **Oferta:** Um desconto para as primeiras 500 pessoas.\n\nPedir isso para a IA economiza horas de 'bloqueio criativo' na frente da tela em branco."
+        "title": "🔎 Análise e Comparação de Cenários",
+        "content": "O ChatGPT organiza raciocínio com muita eficiência quando você fornece critérios. Não peça apenas opinião.\n\nPeça comparação baseada em fatores claros como custo, escalabilidade, risco e retorno. Se quiser profundidade, peça contra-argumentos e pontos cegos.\n\n**Dica prática:** Use perguntas como “qual o pior cenário possível?” e “quais premissas podem estar erradas nessa análise?”."
       },
       {
         "type": "text",
-        "title": "🎬 Etapa 4: Vídeos para Redes Sociais",
-        "content": "Para atrair gente nova, precisamos de vídeos curtos (Reels/TikTok).\n\nVamos pedir: 'Crie 3 roteiros de 30 segundos para o TikTok do FitFlow. O primeiro vídeo deve focar no problema (falta de tempo). O segundo na solução (treino rápido). O terceiro em um depoimento. Inclua o que deve aparecer na tela e o que a pessoa deve falar'.\n\nAgora você tem scripts profissionais prontos para gravar!"
+        "title": "📈 Estruturação de Planilhas",
+        "content": "Ele é forte em organizar dados em formato lógico. Para extrair o máximo, explique o objetivo da planilha: controle, análise ou projeção.\n\nPeça sugestão de colunas estratégicas e indicadores de desempenho relevantes.\n\n**Dica prática:** Peça sempre “organize em formato de tabela com colunas claras e indicadores recomendados”."
+      },
+      {
+        "type": "text",
+        "title": "📚 Resumos Inteligentes",
+        "content": "O ChatGPT é muito eficiente em condensar informação, mas você precisa dizer o foco do resumo.\n\nQuer foco em decisão? Quer foco em aprendizado? Quer apenas os principais argumentos? Especifique isso.\n\n**Dica prática:** Use comandos como “resuma em 5 pontos acionáveis” ou “transforme em resumo executivo para tomada de decisão”."
+      },
+      {
+        "type": "text",
+        "title": "🎯 A Regra de Ouro",
+        "content": "Quanto mais contexto, objetivo claro e formato definido você fornecer, melhor será o resultado.\n\nO ChatGPT não lê sua intenção. Ele responde ao que você especifica. Quem aprende a pedir com precisão extrai respostas acima da média."
+      },
+      {
+        "type": "quiz",
+        "title": "🖊️ Exercício 1: Estratégia",
+        "question": "Qual prompt extrai melhor o potencial do ChatGPT para planejamento estratégico?",
+        "options": [
+          {
+            "text": "Me ajude com marketing.",
+            "isCorrect": false,
+            "explanation": "Muito vago, vai gerar uma resposta genérica."
+          },
+          {
+            "text": "Explique marketing digital.",
+            "isCorrect": false,
+            "explanation": "Isso vai gerar apenas um conceito de dicionário."
+          },
+          {
+            "text": "Crie um planejamento de marketing digital para 30 dias, focado em geração de leads, dividido por etapas do funil e incluindo possíveis riscos.",
+            "isCorrect": true,
+            "explanation": "Perfeito! Define contexto, formato, objetivo e variáveis importantes."
+          },
+          {
+            "text": "Fale algo sobre vendas online.",
+            "isCorrect": false,
+            "explanation": "Não tem um objetivo ou tarefa claros."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Ligue a Peça ao Objetivo",
-          "description": "O que cada parte do projeto busca alcançar?",
+          "title": "🔗 Exercício 2: Funções da IA",
+          "description": "Ligue cada função do ChatGPT ao que ela faz de melhor:",
           "pairs": [
             {
-              "left": "Estratégia (CMO)",
-              "right": "Saber onde investir o dinheiro"
+              "left": "Reescrita",
+              "right": "Melhorar clareza e ajustar tom"
             },
             {
-              "left": "Landing Page",
-              "right": "Convencer a pessoa a baixar o app"
+              "left": "Planejamento",
+              "right": "Organizar etapas e prioridades"
             },
             {
-              "left": "E-mails",
-              "right": "Manter o cliente interessado"
+              "left": "Análise",
+              "right": "Comparar cenários e identificar riscos"
             },
             {
-              "left": "Vídeos (TikTok)",
-              "right": "Chamar atenção de novas pessoas"
+              "left": "Resumo",
+              "right": "Sintetizar conteúdo longo"
             }
           ]
         }
       },
       {
-        "type": "text",
-        "title": "💰 IA vs. Humano: A Economia Real",
-        "content": "Vamos falar de valores. Se você contratasse profissionais para fazer tudo isso:\n- Estrategista: R$ 5.000\n- Redator: R$ 3.000\n- E-mail Marketing: R$ 2.000\n- Roteirista: R$ 2.000\n**Total: R$ 12.000**\n\nCom o ChatGPT, você gastou cerca de **R$ 0,50** em créditos de processamento e **20 minutos** do seu tempo.\n\nA IA não substitui esses profissionais, mas dá ao pequeno empreendedor o poder de ter uma agência inteira dentro do seu computador."
-      },
-      {
-        "type": "text",
-        "title": "🔍 O Checklist da Verdade (Validação)",
-        "content": "Antes de publicar, você precisa ser o 'Filtro Humano'. Verifique:\n\n1. **Os links e dados:** A IA inventou algum valor ou estatística?\n2. **O tom de voz:** O texto soa amigável ou está formal demais?\n3. **Clareza:** Uma pessoa que nunca ouviu falar do app entenderia o que ele faz?\n\nLembre-se: A IA gera o rascunho, mas você é quem assina a obra final."
-      },
-      {
-        "type": "text",
-        "title": "🔄 Iteração: A Segunda Versão é Melhor",
-        "content": "Nunca use a primeira resposta da IA de olhos fechados. Peça ajustes!\n\nSe o texto do site ficou longo, diga: 'Ficou bom, mas resuma em metade do tamanho'. Se os vídeos ficaram sérios demais, peça: 'Use uma linguagem mais jovem e engraçada'.\n\nÉ na segunda ou terceira conversa que a 'mágica' do conteúdo profissional realmente acontece."
-      },
-      {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ O Ciclo de Sucesso",
-          "sentence": "A IA gera o ___, o humano faz a ___ e o resultado final é fruto de várias ___.",
-          "answers": [
-            "rascunho",
-            "validação",
-            "interação"
-          ],
-          "options": [
-            "rascunho",
-            "validação",
-            "interação",
-            "erro",
-            "venda",
-            "pergunta"
-          ],
-          "explanation": "Isso mesmo! O segredo é não aceitar a primeira resposta e sempre conferir tudo."
-        }
-      },
-      {
-        "type": "text",
-        "title": "🚨 Riscos: O que pode dar errado?",
-        "content": "Cuidado com as armadilhas:\n\n- **Cópia Genérica:** Se você não der detalhes, seu site vai parecer igual a todos os outros.\n- **Promessas Falsas:** A IA pode escrever que o app faz milagres. Garanta que o texto condiz com a realidade do seu produto.\n- **Preguiça Mental:** Não deixe de pensar. Use a IA para acelerar, não para desligar o seu cérebro."
-      },
-      {
-        "type": "text",
-        "title": "🤝 O Trabalho Híbrido",
-        "content": "O futuro do trabalho não é 'IA contra Humanos', mas 'Humanos com IA'.\n\nNesse projeto, você foi o **Diretor Criativo**. Você deu o caminho, escolheu o tom e aprovou os textos. A IA foi apenas a sua mão de obra super rápida.\n\nDominar essa parceria é o que vai te destacar no mercado de trabalho nos próximos anos."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Guarde seus Moldes (Templates)",
-        "content": "Depois de terminar o projeto do FitFlow, salve os comandos que funcionaram bem.\n\nCrie uma pasta de 'Prompts de Ouro'. Da próxima vez que precisar lançar um produto (seja um app, um curso ou uma loja), você já terá 80% do caminho andado. Basta trocar o nome do produto e os detalhes."
+        "type": "practical",
+        "title": "🧩 Exercício 3: Monte o Prompt",
+        "question": "Organize os termos abaixo para montar um prompt estratégico completo e lógico:",
+        "initialWords": [
+          "de 15 dias",
+          "voltado para público iniciante em IA",
+          "Crie um planejamento de conteúdo",
+          "dividido por etapas do funil",
+          "para Instagram",
+          "com foco em conversão"
+        ],
+        "correctOrder": [
+          "Crie um planejamento de conteúdo",
+          "para Instagram",
+          "de 15 dias",
+          "voltado para público iniciante em IA",
+          "com foco em conversão",
+          "dividido por etapas do funil"
+        ],
+        "explanation": "Excelente! Esta ordem respeita a clareza: Tarefa + Canal + Prazo + Público + Objetivo + Formato."
       },
       {
         "type": "quiz",
-        "title": "📊 Avaliação Final do Projeto",
-        "question": "Qual é a maior vantagem de usar IA em um projeto de marketing como o FitFlow?",
+        "title": "🖊️ Exercício 4: Viabilidade",
+        "question": "Você quer analisar se deve lançar um novo curso online. Qual prompt gera uma análise mais estratégica?",
         "options": [
           {
-            "text": "Não precisar mais revisar nada",
+            "text": "Vale a pena lançar um curso?",
             "isCorrect": false,
-            "explanation": "Errado! Revisar é a parte mais importante do seu trabalho agora."
+            "explanation": "Falta contexto para a IA avaliar."
           },
           {
-            "text": "Substituir todos os funcionários da empresa",
+            "text": "Você acha que é uma boa ideia criar um curso online?",
             "isCorrect": false,
-            "explanation": "IA substitui tarefas, mas o julgamento humano ainda é essencial."
+            "explanation": "A IA não tem opinião, ela precisa de critérios."
           },
           {
-            "text": "Ganhar velocidade e ter rascunhos profissionais em minutos",
+            "text": "Analise a viabilidade de lançar um curso online considerando demanda de mercado, concorrência, custo de aquisição, margem de lucro e riscos nos primeiros 6 meses.",
             "isCorrect": true,
-            "explanation": "Exatamente! A IA remove o bloqueio criativo e acelera a execução."
+            "explanation": "Exato! Fornecer os critérios de avaliação (concorrência, margem de lucro) eleva a resposta."
+          },
+          {
+            "text": "Fale sobre cursos online.",
+            "isCorrect": false,
+            "explanation": "Comando muito amplo e sem direcionamento."
           }
         ]
       },
       {
         "type": "text",
-        "title": "🎓 Resumo do Módulo ChatGPT",
-        "content": "Parabéns! Você concluiu o treinamento intensivo de ChatGPT.\n\nVocê aprendeu que:\n- IA é matemática, não mágica.\n- O segredo de uma boa resposta é um bom pedido (C.T.F.D.).\n- Personas ajudam a IA a falar como um especialista.\n- Você é o responsável final por tudo o que a máquina produz.\n\nAgora você faz parte do grupo de pessoas que realmente sabe usar a inteligência artificial para produzir valor."
+        "title": "🛠️ Exercício 5: Melhorando Prompts Fracos",
+        "content": "Transformar pedidos ruins em estratégicos faz toda a diferença.\n\n**❌ Prompt Fraco:**\n“Faça uma planilha de vendas.”\n\n**✅ Prompt Estratégico:**\n“Crie uma planilha de controle de vendas mensal em formato de tabela, incluindo colunas para data, produto, valor, canal de venda, custo de aquisição e lucro líquido. Sugira também indicadores importantes para análise de desempenho.”\n\nEssa é a aplicação prática da regra de ouro: **Contexto + Objetivo + Formato Definido**."
       },
       {
-        "type": "text",
-        "title": "🚀 Próximo Passo: Conheça o Claude",
-        "content": "O ChatGPT é incrível, mas não é o único. Amanhã vamos conhecer o **Claude**.\n\nO Claude é o 'irmão mais calmo e inteligente' do ChatGPT. Ele é muito melhor para ler documentos gigantes, escrever textos que parecem mais humanos e cometer menos erros de lógica.\n\nSe o ChatGPT é o seu estagiário rápido, o Claude será o seu analista detalhista. Nos vemos amanhã!"
+        "type": "quiz",
+        "title": "🖼️ Exercício 6: Prompt Exato para Imagem",
+        "question": "Avaliando a riqueza de detalhes e a 'Regra de Ouro', qual dos comandos abaixo é o mais exato e completo para criar uma imagem?",
+        "options": [
+          {
+            "text": "Uma coruja realista usando óculos aviador e camisa havaiana vermelha, dirigindo um carro conversível clássico em uma estrada à beira-mar ao pôr do sol, palmeiras ao fundo, iluminação dourada cinematográfica, estilo fotográfico ultra detalhado.",
+            "isCorrect": false,
+            "explanation": "Ótimo prompt, mas falta o detalhe do enquadramento/formato."
+          },
+          {
+            "text": "Um gato rajado realista usando óculos escuros azuis e jaqueta, andando de bicicleta vermelha em um parque ensolarado, fundo com árvores verdes desfocadas, efeito de movimento, fotografia nítida e detalhada.",
+            "isCorrect": false,
+            "explanation": "Bom, mas ainda perde em detalhamento de ambiente e composição de formato."
+          },
+          {
+            "text": "Uma coruja realista usando óculos aviador e camisa havaiana vermelha, em pé sobre um tronco na praia tropical ao pôr do sol, mar azul e palmeiras ao fundo, coco com canudo e conchas na areia, iluminação dourada cinematográfica, fotografia ultra detalhada, formato quadrado.",
+            "isCorrect": true,
+            "explanation": "Correto! Ele descreve o Sujeito + Ação + Local + Elementos extras + Iluminação + Estilo + Formato."
+          },
+          {
+            "text": "Um golden retriever realista usando bandana azul, em pé na pia da cozinha lavando um prato com esponja cheia de espuma, água corrente da torneira, cozinha iluminada por luz natural, fotografia detalhada e vibrante.",
+            "isCorrect": false,
+            "explanation": "É um prompt divertido, mas a opção C é tecnicamente mais estruturada."
+          }
+        ]
       }
     ]
   },
@@ -610,137 +497,108 @@
     "steps": [
       {
         "type": "text",
-        "title": "🤖 Bem-vindo ao Claude: O Conselheiro Sábio",
-        "content": "Você já domina o ChatGPT. Agora, vai conhecer seu maior rival: o **Claude**, criado pela empresa Anthropic.\n\nEnquanto o ChatGPT é como um gênio criativo e às vezes rebelde, o Claude é como aquele **conselheiro experiente e ponderado**. Ele foi treinado com uma 'Constituição' (ética) própria para ser mais honesto, seguro e bom em seguir regras.\n\n\n\nHoje você vai descobrir que, para muitas tarefas profissionais, o Claude não é apenas uma alternativa — ele é a melhor escolha."
+        "title": "🕐 A História do Claude",
+        "content": "Claude é uma inteligência artificial desenvolvida pela Anthropic, uma empresa focada em segurança de IA. Nasceu como resposta à necessidade de criar um assistente mais seguro, alinhado com valores humanos e menos propenso a gerar conteúdo prejudicial. Diferente de outras IA disponíveis no mercado, Claude foi construído com uma abordagem centrada em confiabilidade e transparência. A Anthropic investiu pesadamente em técnicas de treinamento que permitem ao Claude ser honesto sobre suas limitações, admitir quando não sabe algo e recusar tarefas prejudiciais de forma respeitosa.\n\nDica prática: ao usar Claude, você está interagindo com uma IA que foi deliberadamente treinada para ser mais cautelosa e honesta — isso significa que às vezes ela dirá \"não posso fazer isso\" de forma clara, o que é na verdade um sinal de qualidade."
       },
       {
         "type": "text",
-        "title": "📊 Claude vs ChatGPT: Quando trocar um pelo outro?",
-        "content": "Não existe uma IA 'melhor' para tudo. Existe a ferramenta certa para o trabalho certo.\n\n**Use o Claude quando:**\n- Tiver documentos gigantes para ler (contratos, livros, relatórios).\n- Precisar de um texto que mantenha o mesmo tom do começo ao fim.\n- Quiser uma análise mais realista e menos 'otimista demais'.\n- Precisar que a IA admita quando não sabe algo em vez de inventar.\n\n**Use o ChatGPT quando:**\n- Precisar de ideias malucas e criatividade pura.\n- Quiser criar imagens ou analisar fotos detalhadamente.\n- Precisar usar ferramentas externas e automações complexas."
+        "title": "✅ Onde Claude é Muito Bom",
+        "content": "Claude se destaca em escrita profissional, análise profunda de textos, estruturação de ideias complexas e criação de conteúdo criativo que exige nuance. É excelente para revisar e melhorar argumentos, estruturar projetos, analisar documentos longos, gerar código bem explicado e pensar através de problemas éticos ou nuançados. Se você precisa de um assistente que faça perguntas esclarecedoras antes de responder, que considere múltiplas perspectivas e que entregue respostas bem fundamentadas, Claude é sua ferramenta ideal.\n\nDica prática: use Claude quando precisar de análise profunda — ele é particularmente eficaz em ler documentos inteiros, identificar padrões e sintetizar insights complexos de forma clara."
       },
       {
         "type": "text",
-        "title": "👥 Os Três Irmãos Claude: Haiku, Sonnet e Opus",
-        "content": "O Claude vem em três 'tamanhos', cada um com um preço e uma velocidade:\n\n1. ⚡ **Haiku (O Ligeirinho):** Barato e super rápido. Ótimo para tarefas simples em grande volume (ex: ler 100 comentários de clientes).\n2. 🎯 **Sonnet (O Equilibrado):** É o modelo padrão. É inteligente, rápido e excelente para o dia a dia. Supera o ChatGPT em muitos testes.\n3. 🏆 **Opus (O Gênio):** O mais inteligente de todos. Use para decisões que valem muito dinheiro ou problemas de lógica muito difíceis."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Qual Claude escolher?",
-          "description": "Ligue o modelo à tarefa ideal.",
-          "pairs": [
-            {
-              "left": "Claude Haiku",
-              "right": "Rapidez e baixo custo"
-            },
-            {
-              "left": "Claude Sonnet",
-              "right": "Trabalho profissional diário"
-            },
-            {
-              "left": "Claude Opus",
-              "right": "Decisões críticas e complexas"
-            },
-            {
-              "left": "Anthropic",
-              "right": "Empresa que criou o Claude"
-            }
-          ]
-        }
+        "title": "❌ Quando Não Usar Claude",
+        "content": "Claude não é a melhor escolha para tarefas que exigem informações em tempo real — como cotações de bolsa do momento, notícias do dia ou status de pessoas públicas atuais. Também não substitui pesquisas acadêmicas especialistas e não deve ser seu único recurso para decisões críticas de saúde, jurídicas ou financeiras. Quando você precisa de respostas ultra-rápidas e superficiais, sem profundidade, outras ferramentas podem ser mais eficientes. Claude também tem cuidados deliberados com certos tipos de conteúdo por razões éticas, o que significa que pode recusar algumas solicitações que outras IA aceitariam.\n\nDica prática: se sua pergunta é sobre \"o que aconteceu ontem na política?\" ou \"qual é o preço do Bitcoin agora?\", use busca web ou ferramentas especializadas — não confie apenas em Claude para esses dados."
       },
       {
         "type": "text",
-        "title": "📚 Memória de Elefante: O Superpoder do Claude",
-        "content": "A maior vantagem do Claude é a sua 'janela de contexto'. Imagine que a memória de curto prazo dele é gigante.\n\n\n\n- **ChatGPT:** Consegue ler um livro médio.\n- **Claude:** Consegue ler **três livros inteiros** de uma vez só!\n\nIsso significa que você pode subir um arquivo PDF de 300 páginas (como um contrato ou manual técnico) e fazer perguntas específicas sobre qualquer detalhe. Ele não 'esquece' o início do arquivo enquanto lê o final."
+        "title": "🤖 Os Modelos do Claude",
+        "content": "Claude está disponível em três versões principais: Claude Opus, o modelo mais poderoso e capaz; Claude Sonnet, o modelo equilibrado que oferece bom desempenho com velocidade; e Claude Haiku, o modelo mais rápido e leve para consultas simples. Cada versão foi otimizada para diferentes necessidades — quanto mais sofisticado seu problema, mais robusto o modelo que você deve usar. A Anthropic atualiza regularmente essas versões, então sempre há uma iteração mais recente disponível.\n\nDica prática: comece com Claude Sonnet para a maioria das tarefas — ele oferece o melhor equilíbrio entre qualidade e velocidade sem ser overkill para consultas simples."
       },
       {
         "type": "text",
-        "title": "🔍 IA com Bússola Ética (Constitutional AI)",
-        "content": "O Claude foi treinado de um jeito diferente: ele tem uma 'bússola ética' interna.\n\nIsso faz com que ele seja:\n- **Mais honesto:** Ele prefere dizer 'não sei' do que inventar uma mentira bonita.\n- **Mais seguro:** Ele evita dar conselhos perigosos ou ilegais.\n- **Mais equilibrado:** Ele sempre tenta ver os dois lados de uma moeda.\n\nPara empresas, essa previsibilidade é valiosa porque evita que a IA 'alucine' e crie problemas jurídicos."
+        "title": "💬 Como Claude Gosta que Seus Usuários Mandem Prompts",
+        "content": "Claude funciona melhor quando você é claro, específico e direto. Não precisa ser educado demais — seja natural. Explique o contexto e o objetivo: \"Quero um email para cliente insatisfeito\" é melhor que apenas \"escreva um email\". Se quer um estilo específico, mencione: \"tom profissional mas amigável\" ou \"como se fosse uma conversa entre amigos\". Claude aprecia quando você pede iterações e refinamentos — diga exatamente o que não gostou para que ele ajuste. Fazer perguntas esclarecedoras é encorajado, então se Claude pediu contexto adicional, responda com detalhe.\n\nDica prática: antes de enviar seu prompt, faça a si mesmo: \"Se eu fosse explicar isso para um colega de trabalho, o que eu diria?\" — essa é a clareza que Claude aprecia."
       },
       {
         "type": "text",
-        "title": "📝 A 'Receita' de Prompt para o Claude",
-        "content": "O Claude adora ordem. Enquanto o ChatGPT entende frases soltas, o Claude brilha quando você usa uma estrutura clara:\n\n1. **Dê o papel:** 'Aja como um advogado sênior'.\n2. **Dê os dados:** 'Aqui está o contrato: [cole o texto]'.\n3. **Dê o passo a passo:** 'Primeiro, liste os riscos. Depois, sugira mudanças'.\n4. **Dê o formato:** 'Entregue em uma tabela'.\n\nQuanto mais organizado você for, mais 'perfeccionista' o Claude será na resposta."
+        "title": "⚖️ Claude vs ChatGPT",
+        "content": "Enquanto ChatGPT é mais popular e tem integração com web em tempo real, Claude tende a fornecer respostas mais estruturadas e reflexivas. ChatGPT é mais rápido em gerar conteúdo genérico, mas Claude é mais cuidadoso ao revisar argumentos e mais propenso a questionar premissas antes de responder. Em termos de criatividade pura, ambos são capazes, mas Claude frequentemente oferece perspectivas mais matizadas. ChatGPT é melhor para buscar informações recentes, enquanto Claude é superior em análise profunda, revisão de textos complexos e tarefas que exigem raciocínio ético. A escolha real é: prefere velocidade ou profundidade? Prefere respostas diretas ou quer que a IA questione sua pergunta primeiro?\n\nDica prática: use ChatGPT para \"gere-me 10 ideias rápidas\" e Claude para \"ajude-me a refinar essa estratégia complexa\" — cada um tem seu lugar."
       },
       {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ Teste sua Memória",
-          "sentence": "O grande diferencial do Claude é sua enorme ___ de contexto, que permite ler documentos de até ___ páginas.",
-          "answers": [
-            "janela",
-            "300"
-          ],
-          "options": [
-            "janela",
-            "300",
-            "porta",
-            "50",
-            "velocidade",
-            "10"
-          ],
-          "explanation": "Exato! Essa capacidade de 'memória' é o que torna o Claude imbatível para analisar arquivos longos."
-        }
-      },
-      {
-        "type": "text",
-        "title": "💼 Onde o Claude Brilha no Trabalho?",
-        "content": "Aqui estão 3 situações onde você deve abrir o Claude imediatamente:\n\n1. **Due Diligence:** Analisar 15 contratos de uma vez para achar riscos.\n2. **Resumo de Reunião:** Colar a transcrição de uma reunião de 2 horas e pedir os pontos principais.\n3. **Revisão de Código:** Subir milhares de linhas de programação para encontrar erros de segurança.\n\nEle é o seu 'Analista Sênior' que nunca se cansa de ler letras miúdas."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Economizando Dinheiro com IA",
-        "content": "Usar a versão mais cara para tudo é jogar dinheiro fora. Aprenda a gerenciar:\n\n- Use o **Haiku** para tarefas 'burras' e repetitivas (separar e-mails, classificar nomes).\n- Use o **Sonnet** para 90% do seu dia (escrever textos, analisar relatórios).\n- Guarde o **Opus** apenas para quando sua cabeça estiver 'fritando' com um problema que ninguém resolve.\n\nNo mundo profissional, eficiência de custo é tão importante quanto a qualidade da resposta."
-      },
-      {
-        "type": "text",
-        "title": "🔧 O Time Perfeito (Workflow Híbrido)",
-        "content": "Os melhores profissionais usam as duas IAs juntas. Veja este fluxo:\n\n1. **No ChatGPT:** Peça 50 ideias malucas para um novo projeto.\n2. **No Claude:** Cole as 50 ideias e peça para ele filtrar as 5 mais realistas e seguras, apontando os riscos de cada uma.\n\n\n\nChatGPT cria, Claude organiza e critica. É o equilíbrio perfeito entre ousadia e prudência."
-      },
-      {
-        "type": "text",
-        "title": "🚫 As Armadilhas do Claude",
-        "content": "Nem tudo é perfeito. O Claude tem alguns 'defeitos' que você precisa conhecer:\n\n- **Excesso de Cautela:** Às vezes ele se recusa a responder algo simples por achar que pode ser 'perigoso'. Se isso acontecer, diga: 'Pode responder, é para fins educacionais e eu assumo o risco'.\n- **Papo Furado:** Ele pode ser muito educado e escrever demais. Peça: 'Seja direto e use poucos adjetivos'.\n- **Menos 'Brilhante':** Para slogans publicitários ou poesias, ele costuma ser mais sem graça que o ChatGPT."
-      },
-      {
-        "type": "text",
-        "title": "📊 Comparativo Real de Notas",
-        "content": "Baseado em milhares de testes profissionais:\n\n- **Ler documentos longos:** Claude 10/10 | ChatGPT 7/10\n- **Criatividade Radical:** Claude 6/10 | ChatGPT 9/10\n- **Honestidade (não mentir):** Claude 9/10 | ChatGPT 6/10\n- **Seguir regras chatas:** Claude 9/10 | ChatGPT 8/10\n\nConhecer essas notas ajuda você a decidir qual aba do navegador abrir em cada momento do dia."
-      },
-      {
-        "type": "text",
-        "title": "🚀 Seu Plano de Ação",
-        "content": "Para os próximos dias, faça o seguinte:\n1. Crie uma conta no Claude.ai.\n2. Pegue aquele arquivo PDF longo que você está adiando para ler e peça um resumo para ele.\n3. Compare a resposta dele com a do ChatGPT para o mesmo arquivo.\n\nVocê vai perceber a diferença na 'paciência' e no detalhamento do Claude rapidamente."
+        "type": "quiz",
+        "title": "📝 1. Múltipla Escolha",
+        "question": "Qual é a principal característica que diferencia Claude de outras inteligências artificiais no mercado?",
+        "options": [
+          {
+            "text": "Claude é a IA mais rápida disponível atualmente.",
+            "isCorrect": false,
+            "explanation": "Embora seja rápido, esse não é o seu principal diferencial."
+          },
+          {
+            "text": "Claude foi desenvolvido com foco em segurança, confiabilidade e honestidade sobre suas limitações.",
+            "isCorrect": true,
+            "explanation": "Correto! A Anthropic focou fortemente em uma IA alinhada com segurança e transparência."
+          },
+          {
+            "text": "Claude é a única IA que consegue acessar informações em tempo real.",
+            "isCorrect": false,
+            "explanation": "Na verdade, o Claude não é a melhor opção para informações em tempo real."
+          },
+          {
+            "text": "Claude é gratuito para todos os usuários sem limitações.",
+            "isCorrect": false,
+            "explanation": "O uso do Claude possui limites e versões pagas."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Recapitulação do Dia",
-          "sentence": "O Claude é melhor para tarefas ___ e documentos ___, enquanto o ChatGPT brilha na ___.",
+          "title": "✏️ 2. Complete a Frase",
+          "sentence": "Claude é excelente para ___ profunda de textos, estruturação de ideias complexas e criação de conteúdo que exige ___.",
           "answers": [
-            "analíticas",
-            "longos",
-            "criatividade"
+            "análise",
+            "nuance"
           ],
           "options": [
-            "analíticas",
-            "longos",
-            "criatividade",
-            "rápidas",
-            "curtos",
-            "matemática"
+            "análise",
+            "nuance",
+            "leitura",
+            "rapidez",
+            "programação",
+            "notícias"
           ],
-          "explanation": "Isso mesmo! O Claude é seu analista focado, o ChatGPT é seu artista criativo."
+          "explanation": "Isso aí! Se você precisa de um assistente que questione premissas, o Claude é ideal."
         }
       },
       {
-        "type": "text",
-        "title": "🎓 Resumo Final do Dia 5",
-        "content": "**HOJE VOCÊ APRENDEU:**\n\n1. O Claude é a IA da ética, consistência e memória gigante.\n2. Use o Claude para analisar arquivos longos e manter o tom de voz.\n3. Haiku é rápido, Sonnet é o padrão e Opus é o gênio.\n4. O segredo profissional é usar o ChatGPT para criar e o Claude para revisar e estruturar.\n\n**AMANHÃ:** Vamos aprender a usar o Claude especificamente para escrever textos que vendem (Copywriting)!"
+        "type": "quiz",
+        "title": "🧠 3. Discursiva (Teste Rápido)",
+        "question": "Em que situações seria inadequado usar Claude como sua única fonte de informação, e por quê?",
+        "options": [
+          {
+            "text": "Ao revisar textos complexos e argumentos éticos.",
+            "isCorrect": false,
+            "explanation": "Incorreto. O Claude é excelente exatamente para esse tipo de tarefa."
+          },
+          {
+            "text": "Para informações em tempo real (cotações, notícias) ou decisões críticas de saúde e jurídicas.",
+            "isCorrect": true,
+            "explanation": "Exato! Nesses casos, ele deve ser apenas um apoio para estruturação, exigindo checagem com fontes atualizadas."
+          },
+          {
+            "text": "Para criar e estruturar um projeto do zero a partir de ideias soltas.",
+            "isCorrect": false,
+            "explanation": "Ele desempenha muito bem a estruturação de ideias complexas."
+          },
+          {
+            "text": "Quando você precisa que a IA faça perguntas esclarecedoras antes de te dar uma resposta.",
+            "isCorrect": false,
+            "explanation": "Fazer perguntas para refinar o contexto é uma das forças do Claude."
+          }
+        ]
       }
     ]
   },
@@ -748,138 +606,139 @@
     "steps": [
       {
         "type": "text",
-        "title": "✍️ Claude para Copy: O Escritor que Pensa",
-        "content": "O Claude tem uma 'personalidade' diferente na hora de escrever. Enquanto o ChatGPT é o vendedor animado de shopping, o Claude é o **Mentor Sábio**.\n\n\n\nEle prefere convencer pelo raciocínio e pela empatia do que por gritos e promessas exageradas. Se você precisa de um texto que passe autoridade e confiança, o Claude é a sua ferramenta definitiva."
+        "title": "📁 Dominando a Funcionalidade Projects",
+        "content": "Projects é a ferramenta de organização que transforma Claude de um simples chat em um espaço de trabalho colaborativo estruturado. Quando você cria um Project, você está criando um espaço centralizado onde pode reunir conversas, documentos, arquivos e conhecimento relacionado a um tema específico. Cada Project possui um contexto de 200 mil tokens — o equivalente a um livro de 500 páginas — permitindo que você carregue documentos, código, diretrizes de marca, ou qualquer informação relevante para que Claude tenha compreensão profunda do seu trabalho. Projects são disponíveis para usuários Pro e Team, e ideais para equipes que trabalham em projetos de longo prazo, desenvolvimento de produtos ou pesquisa estratégica. Você pode compartilhar snapshots de suas melhores conversas com toda a equipe através de um activity feed, inspirando colegas e elevando a qualidade geral do trabalho colaborativo.\n\nDica prática: crie Projects por tipo de trabalho — um para brand voice da sua empresa, outro para documentação técnica, outro para planejamento estratégico — assim quando você trocar de contexto, toda a informação está organizada e acessível."
       },
       {
         "type": "text",
-        "title": "🧠 Como o Claude Planeja o Texto",
-        "content": "O segredo do Claude é que ele 'lê o roteiro inteiro' antes de começar a digitar. \n\n\n\n1. **Ele entende o clima:** Ele percebe se você está triste, animado ou sério e adapta a escrita.\n2. **Ele monta o esqueleto:** Ele cria uma ordem lógica para que o leitor não se perca.\n3. **Ele revisa enquanto escreve:** Ele garante que o final do texto combine perfeitamente com o começo."
+        "title": "✨ Artefatos: Criando Sem Código",
+        "content": "Artefatos são janelas dedicadas onde Claude cria conteúdo substancial e autossuficiente — código, websites, gráficos, documentos, diagramas — tudo ao lado da sua conversa. Quando você pede para Claude \"crie um dashboard interativo\" ou \"faça um site responsivo\", em vez de aparecer tudo no chat, o código aparece em uma janela separada onde você vê a visualização em tempo real. Você pode testar imediatamente, pedir ajustes conversacionalmente (\"deixa mais colorido\", \"adiciona um botão aqui\"), e Claude itera na hora. Artefatos suportam React, HTML/CSS/JavaScript, SVG, Markdown, Mermaid diagrams, e muito mais. O melhor? Você pode compartilhar esses artefatos com qualquer pessoa que tenha conta Claude, e quando eles usam, a contagem de tokens vai contra a assinatura deles, não a sua — elimina custos de API e complexidade de deployment.\n\nDica prática: use artefatos para criar ferramentas internas — calculadoras customizadas, analisadores de dados, geradores de templates — e compartilhe com seu time sem se preocupar com infraestrutura ou limites de uso."
       },
       {
         "type": "text",
-        "title": "📊 Comparando os Escritores",
-        "content": "Cada IA tem um estilo de 'venda' diferente:\n\n* **ChatGPT:** O vendedor agressivo. Ótimo para urgência e impacto rápido.\n* **Claude:** O especialista sênior. Perfeito para explicar coisas complexas e criar conexão real.\n* **Gemini:** O pesquisador. Excelente para incluir dados atuais e fatos novos.\n\nSe você quer que seu cliente sinta que está conversando com um profissional de verdade, escolha o Claude."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Qual é o Estilo?",
-          "description": "Ligue cada IA ao seu 'emprego' ideal na escrita.",
-          "pairs": [
-            {
-              "left": "ChatGPT",
-              "right": "Vendedor de promoções"
-            },
-            {
-              "left": "Claude",
-              "right": "Mentor e Consultor"
-            },
-            {
-              "left": "Gemini",
-              "right": "Jornalista e Pesquisador"
-            },
-            {
-              "left": "Copywriting",
-              "right": "Escrita que convence"
-            }
-          ]
-        }
+        "title": "💻 Código: Execução em Tempo Real",
+        "content": "Claude não apenas escreve código — ele cria artefatos executáveis onde você vê o resultado funcionando enquanto conversa. Se pedir um gráfico interativo, ele aparece vivo. Um jogo? Já está jogável. Uma calculadora? Clica e testa. A execução acontece imediatamente, sem necessidade de terminal, compilação ou setup. Claude também pode integrar chamadas para sua própria API diretamente dentro dos artefatos — sem API keys expostas, sem custos adicionais por chamada, usando sua assinatura existente. Isso significa que você pode criar aplicações AI-powered funcionais em minutos, não semanas. Para debugging, basta descrever o problema em linguagem natural (\"a calculadora não funciona com decimais\") e Claude entende e corrige. Você também pode \"forquear\" — voltar a qualquer mensagem anterior, editar, e explorar uma direção completamente diferente sem perder seu trabalho original.\n\nDica prática: quando algo quebra, use \"Fix with Claude\" ou simplesmente descreva o erro como você falaria com um colega — Claude traduz feedback natural em correções de código automaticamente."
       },
       {
         "type": "text",
-        "title": "🎯 O Método C.E.R.T.O. para Copy",
-        "content": "Para tirar o melhor texto do Claude, use este guia:\n\n\n\n* **C - Contexto:** Não diga apenas quem compra, diga o que essa pessoa está sentindo.\n* **E - Estrutura:** Diga a ordem das ideias (ex: Problema primeiro, solução depois).\n* **R - Regras:** Peça para ele não exagerar ou não usar palavras difíceis.\n* **T - Tom:** Defina se ele deve ser um 'amigo experiente' ou um 'professor paciente'.\n* **O - Objeções:** Peça para ele já responder às dúvidas do cliente no texto."
+        "title": "🔗 API do Claude: Potência e Flexibilidade",
+        "content": "A API do Claude permite que desenvolvedores integrem sua inteligência em aplicações próprias, chatbots, sistemas automatizados ou workflows complexos. Você acessa três modelos principais: Claude Opus (mais poderoso, ideal para tarefas complexas), Claude Sonnet (melhor custo-benefício), e Claude Haiku (ultra-rápido para consultas simples). A API opera com modelo de pagamento por token — você paga apenas pelo que usa, tanto para input quanto output. Oferece contexto de até 1 milhão de tokens em alguns modelos, permitindo analisar documentos enormes. Suporta function calling para integração com suas ferramentas, web search para dados atualizados, e processing de imagens. A Anthropic oferece SDKs em Python, JavaScript/TypeScript e outras linguagens, facilitando integração.\n\nDica prática: se sua aplicação precisa de respostas rápidas e custos baixos, comece com Haiku; se precisa de nuance e qualidade superior, invista em Opus. Teste Sonnet primeiro — geralmente atinge o equilíbrio perfeito."
       },
       {
         "type": "text",
-        "title": "📝 Fórmulas que o Claude Ama",
-        "content": "Existem 'receitas' de escrita que funcionam muito bem com ele:\n\n1. **PASTOR:** Ele foca no problema, explica as consequências e termina com uma recomendação honesta.\n2. **QUEST:** Ele educa o leitor antes de oferecer a solução.\n\n**Atenção:** O Claude não gosta de mentir sobre 'vagas limitadas' se for mentira. Ele prefere uma urgência baseada no valor real do produto."
+        "title": "💪 Forças da API do Claude",
+        "content": "A API do Claude se destaca em tarefas que exigem análise profunda, escrita de qualidade, e raciocínio complexo. Seu contexto gigantesco (até 1M tokens) permite processar documentos inteiros, múltiplas PDFs, ou longas conversas em uma única chamada — algo que competitors levam muito mais tiempo ou cobram mais caro. Claude é particularmente excelente em codificação, estruturação de informações complexas, análise de sentimento nuançada, e geração de conteúdo que requer consistência de voz. A plataforma oferece transparência ética integrada — Claude avisa quando está incerto, recusa tarefas prejudiciais, e é honesto sobre limitações. Para equipes, a integração com Projects e a capacidade de compartilhar artefatos sem custos de API transformam a forma como trabalham. O modelo de pricing é previsível — você não paga por requisições falhadas, e uso compartilhado não gera custos para o criador."
       },
       {
         "type": "text",
-        "title": "✉️ O Rei dos E-mails",
-        "content": "O Claude é imbatível em sequências de e-mails. Como ele tem muita memória, ele não se perde.\n\nSe você pedir 7 e-mails, o e-mail nº 7 vai fazer todo o sentido com o que foi dito no e-mail nº 1. Ele consegue criar um relacionamento verdadeiro com quem está lendo, sem parecer aquele spam chato que todo mundo apaga."
+        "title": "⚠️ Fraquezas da API do Claude",
+        "content": "Claude não gera imagens — se sua aplicação precisa criar visuais, você terá que integrar DALL-E, Midjourney ou outra ferramenta de imagem. Seu conhecimento tem data de corte (janeiro de 2025), então para dados em tempo real, você precisa combinar com web search ou suas próprias fontes de dados atualizados. A API é mais cara por token que algumas competitors (ChatGPT oferece preços mais baixos em alguns modelos), embora Claude entregue mais qualidade, então é uma questão de trade-off. Rate limits podem ser restritivos se sua aplicação espera volume altíssimo no free tier. Claude também não tem acesso a plugin ecosystem tão vasto quanto OpenAI, então algumas integrações específicas podem requerer trabalho customizado. Por fim, modelos muito novos podem ter latência maior enquanto a infraestrutura escala — durante picos de demanda, respostas podem demorar mais que ChatGPT em certos momentos.\n\nDica prática: combine Claude com outras ferramentas — use Claude para análise/escrita, integre imagens de terceiros, puxe dados em tempo real de suas bases — isso cria uma solução mais robusta que tentar fazer tudo com uma API só"
+      },
+      {
+        "type": "quiz",
+        "title": "🧾 QUESTÃO 1",
+        "question": "Qual alternativa melhor descreve a principal diferença entre Claude e ChatGPT em relação ao tipo de resposta oferecida?",
+        "options": [
+          {
+            "text": "Claude é mais rápido em gerar conteúdo genérico, enquanto ChatGPT é mais reflexivo.",
+            "isCorrect": false,
+            "explanation": "Na verdade, é o oposto. O ChatGPT costuma ser mais rápido para gerar conteúdo genérico."
+          },
+          {
+            "text": "ChatGPT é mais popular e tem integração com web, enquanto Claude oferece respostas mais estruturadas, reflexivas e questiona premissas antes de responder.",
+            "isCorrect": true,
+            "explanation": "Correto! O Claude destaca-se por sua capacidade reflexiva e estrutural."
+          },
+          {
+            "text": "Claude nunca consegue acessar informações em tempo real, enquanto ChatGPT sempre consegue.",
+            "isCorrect": false,
+            "explanation": "Claude pode ter acesso à web (como Web Search na API) dependendo de como é implementado."
+          },
+          {
+            "text": "Ambas são idênticas, a escolha é apenas por preferência pessoal de interface.",
+            "isCorrect": false,
+            "explanation": "Elas possuem forças e limitações bem diferentes."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Teste sua Lógica",
-          "sentence": "O Claude é excelente para textos ___ porque ele usa o tom de um ___ e evita promessas ___.",
+          "title": "🧾 QUESTÃO 2",
+          "sentence": "A API do Claude permite que desenvolvedores integrem sua inteligência em aplicações próprias usando ___ em linguagens como Python e JavaScript. Oferece contexto de até ___ tokens, permitindo analisar documentos enormes. Ela suporta ___ para integração com ferramentas externas, e os usuários também podem utilizar ___ dentro da plataforma para criar e compartilhar conteúdo substancial. Para organização em equipes, ___ é o espaço ideal para centralizar conversas, documentos e arquivos de um projeto.",
           "answers": [
-            "educativos",
-            "mentor",
-            "exageradas"
+            "SDKs",
+            "1 milhão",
+            "função calling",
+            "artefatos",
+            "Projects"
           ],
           "options": [
-            "educativos",
-            "mentor",
-            "exageradas",
-            "curtos",
-            "robô",
-            "reais"
+            "SDKs",
+            "1 milhão",
+            "função calling",
+            "artefatos",
+            "Projects",
+            "ChatGPT",
+            "200 mil",
+            "imagens"
           ],
-          "explanation": "Isso mesmo! Ele foca na confiança e na autoridade, não em truques de venda baratos."
+          "explanation": "Você completou corretamente os principais recursos técnicos e de colaboração do Claude."
         }
       },
       {
-        "type": "text",
-        "title": "🌐 Sites que Educam e Vendem",
-        "content": "Nas páginas de vendas (Landing Pages), o Claude brilha ao explicar o 'PORQUÊ'.\n\nEm vez de apenas listar funções do produto, ele cria uma narrativa: mostra o problema que o cliente tem, explica por que as outras soluções falharam e apresenta a sua de um jeito lógico e impossível de ignorar."
-      },
-      {
-        "type": "text",
-        "title": "🔍 Use o Claude como seu 'Crítico'",
-        "content": "Você já tem um texto pronto? Peça para o Claude revisar.\n\n\n\nUse este pedido: 'Aja como um crítico rigoroso. Aponte onde meu texto está confuso, onde soa falso e como posso deixar o convite final mais atraente'. Ele é um dos melhores revisores do mundo."
-      },
-      {
-        "type": "text",
-        "title": "📈 O Texto Certo para Cada Momento",
-        "content": "A IA muda de papel conforme a jornada do cliente:\n\n* **No Início:** Ela age como **Professor** (ensina algo novo).\n* **No Meio:** Ela age como **Consultor** (compara opções).\n* **No Fim:** Ela age como **Parceiro** (ajuda na decisão final).\n\nSaber pedir essa mudança de tom é o que separa um amador de um profissional."
-      },
-      {
-        "type": "text",
-        "title": "🎭 Personas que Funcionam com o Claude",
-        "content": "Alguns 'personagens' trazem os melhores resultados:\n\n* **O Professor Aposentado:** Paciente e mestre em simplificar coisas difíceis.\n* **O Consultor Ético:** Aquele que prefere perder a venda do que enganar o cliente.\n* **O Mentor de Startups:** Alguém que já errou muito e quer te poupar tempo.\n\nEvite pedir para ele ser um 'Vendedor Lobo de Wall Street' – o Claude não se sente confortável nesse papel e o texto ficará estranho."
-      },
-      {
-        "type": "text",
-        "title": "📊 Como Saber se o Texto Ficou Bom?",
-        "content": "O teste de ouro do Claude é: **Leia o texto em voz alta.**\n\nSe parecer uma pessoa conversando com você, está perfeito. Se parecer um comercial de TV antigo, peça para ele 'humanizar mais e usar frases mais curtas'. A copy do Claude deve soar como um conselho de alguém que você respeita."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Sonnet ou Opus para Escrever?",
-        "content": "Qual versão usar?\n\n* **Sonnet:** Perfeito para posts de redes sociais, e-mails diários e descrições de produtos. É rápido e barato.\n* **Opus:** Use para o texto principal do seu site ou para um e-book importante. Ele traz ideias muito mais profundas e originais que valem o investimento."
-      },
-      {
         "type": "quiz",
-        "title": "🧠 Avaliação de Tom",
-        "question": "Qual dessas opções descreve melhor o 'superpoder' de escrita do Claude?",
+        "title": "✅ QUESTÃO 3 - Verdadeiro ou Falso",
+        "question": "Sobre os recursos do Claude (Projects, Artefatos e API), qual das afirmações abaixo é VERDADEIRA?",
         "options": [
           {
-            "text": "Usar muito CAPS LOCK e exclamações para chamar atenção",
+            "text": "A API do Claude pode gerar imagens nativamente sem precisar de ferramentas de terceiros.",
             "isCorrect": false,
-            "explanation": "Isso é o oposto do que o Claude faz bem."
+            "explanation": "Falso. O Claude não gera imagens nativamente."
           },
           {
-            "text": "Criar textos que parecem uma conversa honesta e autoritativa",
+            "text": "Ao compartilhar um Artefato, o criador dele paga o custo dos tokens de quem o acessa.",
+            "isCorrect": false,
+            "explanation": "Falso. A contagem de tokens vai contra a assinatura de quem acessa, não do criador."
+          },
+          {
+            "text": "Claude é excelente para tarefas que exigem informações em tempo real, como cotações da bolsa do momento.",
+            "isCorrect": false,
+            "explanation": "Falso. Ele não é ideal para cotações exatas em tempo real de forma isolada."
+          },
+          {
+            "text": "Projects possui contexto de 200 mil tokens, equivalente a um livro de 500 páginas.",
             "isCorrect": true,
-            "explanation": "Exatamente! Ele brilha na honestidade e na autoridade natural."
-          },
-          {
-            "text": "Inventar dados falsos para convencer o cliente a qualquer custo",
-            "isCorrect": false,
-            "explanation": "O Claude é treinado para ser ético e evitar mentiras."
+            "explanation": "Verdadeiro! Essa é uma das principais vantagens do Claude para equipes."
           }
         ]
       },
       {
-        "type": "text",
-        "title": "🎓 Resumo do Dia 6",
-        "content": "**O QUE VOCÊ APRENDEU HOJE:**\n\n1. O Claude escreve de forma lógica, humana e consistente.\n2. O método C.E.R.T.O. ajuda a guiar a IA para textos profissionais.\n3. Ele é o rei das sequências de e-mails e das explicações complexas.\n4. Usar o Claude como revisor é o atalho para uma copy de alta qualidade.\n\n**MENTALIDADE:**\nVocê não tem apenas um gerador de textos; você tem um parceiro que pensa na estratégia junto com você.\n\n**AMANHÃ:** Vamos para o projeto prático! Criaremos todo o material de venda para um produto real usando o Claude."
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "🧾 QUESTÃO 4 - Complete com Contexto",
+          "sentence": "Claude é excelente para ___ profunda de textos e ___ de ideias complexas. Diferente de outras IA, foi construído com abordagem centrada em ___ e ___. Quando você usa Claude, está interagindo com uma IA que deliberadamente diz 'não posso fazer isso' em situações prejudiciais — isso é um sinal de ___, não fraqueza.",
+          "answers": [
+            "análise",
+            "estruturação",
+            "confiabilidade",
+            "transparência",
+            "qualidade"
+          ],
+          "options": [
+            "análise",
+            "estruturação",
+            "confiabilidade",
+            "transparência",
+            "qualidade",
+            "rapidez",
+            "desenho",
+            "erro"
+          ],
+          "explanation": "Exatamente! A segurança e a recusa ética são diferenciais de qualidade do Claude."
+        }
       }
     ]
   },
@@ -887,214 +746,113 @@
     "steps": [
       {
         "type": "text",
-        "title": "🎭 Personas: Contrate Especialistas Virtuais",
-        "content": "Criar uma persona não é 'brincar de teatrinho'. É uma técnica para fazer a IA acessar apenas os conhecimentos mais avançados de uma área específica.\n\nQuando você diz 'Aja como um Diretor Financeiro', a IA deixa de lado conversas genéricas e foca em termos como ROI, fluxo de caixa e cortes de custos. É como se ela estivesse 'vestindo o uniforme' daquela profissão para te dar uma resposta muito mais séria e precisa."
+        "title": "🕐 A História do DeepSeek",
+        "content": "DeepSeek é uma inteligência artificial desenvolvida pela 深度求索 (DeepSeek), empresa chinesa focada em pesquisa de IA. Ganhou destaque global por oferecer modelos poderosos gratuitamente, com contexto imenso (até 1 milhão de tokens) e custo de desenvolvimento baixo. Sua abordagem prioriza a transparência no raciocínio muitos modelos mostram como chegaram às respostas.\n\nAo usar DeepSeek, você vê a \"linha de pensamento\" da IA, entendendo o porquê da resposta, não só o resultado."
       },
       {
         "type": "text",
-        "title": "⚙️ Como a IA 'Vira' um Especialista",
-        "content": "A IA não tem consciência, mas ela leu milhões de livros e relatórios escritos por profissionais reais. \n\n\n\nAo pedir uma persona, você está filtrando a 'memória' dela. Em vez de dar uma resposta média, ela busca os padrões de fala e de decisão de quem realmente entende do assunto. Isso diminui as chances de erros bobos e faz com que a IA pare de 'enrolar' e vá direto ao ponto técnico."
+        "title": "✅ Onde DeepSeek é Muito Bom",
+        "content": "DeepSeek é excelente em processamento de documentos enormes (livros inteiros), programação complexa, matemática e raciocínio lógico passo a passo. É gratuito, tem contexto gigantesco e é imbatível para análises profundas de contratos, artigos acadêmicos e depuração de código.\n\nDica prática: use para tarefas que exigem raciocínio profundo — peça para \"pensar passo a passo\" e ele mostrará todo o caminho lógico"
       },
       {
         "type": "text",
-        "title": "📊 Tipos de Especialistas que Você Pode Criar",
-        "content": "Existem várias formas de configurar sua IA:\n\n1. **Pelo Cargo:** 'Advogado tributarista com 15 anos de B3'.\n2. **Pelo Estilo Mental:** 'Um pensador criativo que vê conexões onde ninguém vê'.\n3. **Pelo Objetivo:** 'Um consultor focado em dobrar as vendas em 6 meses'.\n4. **Pelo Nível:** 'Um estagiário curioso' ou 'Um Diretor de Tecnologia calejado'."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Qual Persona Usar?",
-          "description": "Ligue o tipo de especialista ao seu objetivo.",
-          "pairs": [
-            {
-              "left": "Funcional",
-              "right": "Baseada em cargo ou profissão"
-            },
-            {
-              "left": "Cognitiva",
-              "right": "Baseada em um jeito de pensar"
-            },
-            {
-              "left": "Estratégica",
-              "right": "Baseada em um objetivo de negócio"
-            },
-            {
-              "left": "De Nível",
-              "right": "Baseada na experiência (Júnior/Sênior)"
-            }
-          ]
-        }
+        "title": "❌ Quando Não Usar DeepSeek",
+        "content": "Não use para informações em tempo real (notícias, clima, bolsa) — ele não tem navegação web por padrão. Também não é ideal para criatividade \"solta\" ou conversas muito casuais, pois prioriza precisão e lógica.\n\nDica prática: DeepSeek é para pensar, não para te informar sobre o presente. Para notícias, use busca web"
       },
       {
         "type": "text",
-        "title": "🎯 A Receita da Persona Perfeita",
-        "content": "Para a IA realmente 'entrar no personagem', você precisa de 4 camadas:\n\n1. **Quem?** O cargo específico e tempo de carreira.\n2. **Por que confiar?** Cite grandes conquistas (ex: 'já fez 3 empresas crescerem 300%').\n3. **Como vê o mundo?** Qual o viés? (ex: 'conservador com riscos, mas focado em inovação').\n4. **Como fala?** O tom da conversa (ex: 'direto e baseado em dados')."
+        "title": "🤖 Os Modelos do DeepSeek",
+        "content": "DeepSeek-V3: Modelo de propósito geral. Rápido, ótimo para conversas, escrita, tradução e tarefas cotidianas.\n\nDeepSeek-R1: Modelo de raciocínio puro. Pensa antes de responder, mostrando cadeias de pensamento. Ideal para matemática, lógica e problemas complexos.\n\nDica prática: use R1 para problemas difíceis (código, matemática) e V3 para tarefas gerais (e-mails, artigos)"
       },
       {
         "type": "text",
-        "title": "🧠 Método Socrático: Aprender Fazendo",
-        "content": "O método socrático transforma a IA de um 'Google que dá respostas' em um **professor particular**.\n\n\n\nEm vez de pedir: 'Explique o que é inflação', você pede: 'Não me dê a resposta. Faça perguntas que me levem a descobrir sozinho como a inflação funciona'. Isso faz você aprender de verdade, criando conexões no seu cérebro em vez de apenas ler e esquecer 5 minutos depois."
+        "title": "💬 Como DeepSeek Gosta que Seus Usuários Mandem Prompts",
+        "content": "Seja direto e específico. Para o R1, não precisa dizer \"pense passo a passo\" — ele já faz isso. Defina claramente o resultado esperado e o formato (lista, JSON, etc). Para o V3, contexto e objetivo claros são suficientes.\n\nDica prática: \"Resolva essa equação\" (R1) ou \"Escreva um e-mail profissional sobre [assunto]\" (V3) funcionam melhor que prompts genéricos."
       },
       {
         "type": "text",
-        "title": "🔍 Por Que Perguntas Funcionam Melhor Que Respostas?",
-        "content": "A ciência mostra que aprendemos 75% mais quando participamos ativamente da descoberta. \n\nQuando a IA te desafia com uma pergunta, seu cérebro precisa buscar informações e criar pontes. Isso gera um aprendizado muito mais profundo e duradouro. É a diferença entre ganhar o peixe e aprender a pescar com a ajuda de um mentor paciente."
-      },
-      {
-        "type": "component",
-        "componentName": "FillBlanks",
-        "props": {
-          "title": "✏️ Método Socrático",
-          "sentence": "O método socrático usa ___ em vez de respostas prontas, fazendo o aluno desenvolver o ___ crítico.",
-          "answers": [
-            "perguntas",
-            "pensamento"
-          ],
-          "options": [
-            "perguntas",
-            "pensamento",
-            "livros",
-            "vídeos",
-            "respostas",
-            "desenho"
-          ],
-          "explanation": "Correto! O segredo está em guiar o raciocínio através de perguntas inteligentes."
-        }
-      },
-      {
-        "type": "text",
-        "title": "💼 Usando Perguntas no Trabalho",
-        "content": "Você pode usar essa técnica para resolver problemas difíceis:\n\n- **Consultor Socrático:** 'Faça perguntas que me ajudem a achar a causa real da queda de vendas'.\n- **Mentor de Carreira:** 'Me ajude a decidir se mudo de emprego fazendo perguntas sobre meus valores'.\n- **Tutor Técnico:** 'Me ensine a programar me fazendo comparar o que eu já sei com os novos conceitos'."
-      },
-      {
-        "type": "text",
-        "title": "🧪 Personas com Conflito Interno",
-        "content": "Personas perfeitas dão respostas irreais. Para ter conselhos de verdade, dê um dilema para a IA.\n\nExemplo: 'Aja como um CEO que quer salvar o planeta, mas precisa bater a meta de lucro do mês para não ser demitido'. Isso gera respostas muito mais 'pé no chão' e realistas, que levam em conta as dificuldades que você enfrenta no dia a dia."
-      },
-      {
-        "type": "text",
-        "title": "⚖️ O Advogado do Diabo",
-        "content": "Sempre peça para a IA criticar você. É a melhor forma de evitar erros.\n\nDepois de criar um plano, diga: 'Agora, aja como o maior crítico desse projeto. Ache falhas na minha lógica, riscos que eu não vi e me diga por que isso pode dar errado'. Se sua ideia sobreviver a esse 'interrogatório', ela está pronta para o mundo real."
-      },
-      {
-        "type": "text",
-        "title": "👥 Reunião de Diretoria Virtual",
-        "content": "Por que ter uma opinião se você pode ter cinco? Você pode simular um debate inteiro.\n\n\n\nPeça para o **CEO** dar a visão de futuro, o **Financeiro** falar dos custos e o **Marketing** falar dos clientes. No final, peça para um 'Moderador' resumir tudo. Isso simula como as grandes empresas tomam decisões e protege você de ser otimista demais."
-      },
-      {
-        "type": "text",
-        "title": "🧠 Conselhos do Seu 'Eu' de 2036",
-        "content": "Peça conselhos para a sua versão do futuro. Isso ajuda a diminuir o estresse do agora.\n\n'Imagine que você é eu daqui a 10 anos, muito sábio e bem-sucedido. O que você me diria sobre essa decisão que estou tomando hoje?'. Essa técnica ajuda a focar no que realmente importa no longo prazo, evitando decisões por impulso ou medo."
-      },
-      {
-        "type": "text",
-        "title": "💼 Treine Para Entrevistas e Negociações",
-        "content": "Use a IA como um simulador sem riscos. \n\nPeça para ela ser um recrutador difícil de uma empresa que você quer trabalhar e te entrevistar. Peça feedback após cada resposta: 'O que eu disse foi bom? Como eu poderia ter sido mais convincente?'. É como ter um técnico de carreira disponível 24 horas por dia para você treinar."
+        "title": "⚖️ DeepSeek vs ChatGPT",
+        "content": "ChatGPT é mais versátil, tem ecossistema de plugins e integração com outras ferramentas. DeepSeek é gratuito, tem contexto muito maior e mostra seu raciocínio. ChatGPT é melhor para tarefas criativas e busca web; DeepSeek é imbatível para análise profunda, documentos longos e problemas de lógica.\n\nDica prática: Use ChatGPT para \"crie 10 ideias criativas\". Use DeepSeek para \"analise este contrato de 300 páginas\" ou \"explique esta teoria científica com detalhes\"."
       },
       {
         "type": "quiz",
-        "title": "🧠 Qual Técnica Usar?",
-        "question": "Você quer aprender um assunto novo do zero e quer que o conhecimento 'grude' na sua cabeça. Qual o melhor caminho?",
+        "title": "🧾 QUESTÃO 1 - Múltipla Escolha",
+        "question": "Qual é a principal diferença entre os modelos DeepSeek-V3 e DeepSeek-R1?",
         "options": [
           {
-            "text": "Pedir para um especialista me dar um resumo pronto",
+            "text": "DeepSeek-V3 é mais barato e DeepSeek-R1 é pago.",
             "isCorrect": false,
-            "explanation": "Resumos são bons, mas você esquece rápido se não participar do processo."
+            "explanation": "Ambos os modelos são amplamente conhecidos por seu acesso gratuito e baixo custo."
           },
           {
-            "text": "Usar o Método Socrático para descobrir o conceito através de perguntas",
+            "text": "DeepSeek-V3 é otimizado para propósito geral (conversas, escrita, tradução), enquanto DeepSeek-R1 é especializado em raciocínio puro, mostrando cadeias de pensamento antes de responder.",
             "isCorrect": true,
-            "explanation": "Exato! Participar ativamente da descoberta cria memórias muito mais fortes."
+            "explanation": "Correto! O R1 foca em lógica e expõe sua \"linha de pensamento\"."
           },
           {
-            "text": "Pedir para a IA escrever uma música sobre o assunto",
+            "text": "DeepSeek-R1 é gratuito e DeepSeek-V3 requer assinatura.",
             "isCorrect": false,
-            "explanation": "Pode ser divertido, mas não garante que você entendeu a lógica por trás do conceito."
+            "explanation": "Essa divisão de preços não corresponde à diferença técnica entre os dois."
+          },
+          {
+            "text": "Ambos fazem a mesma coisa, apenas com nomes diferentes.",
+            "isCorrect": false,
+            "explanation": "Eles possuem arquiteturas e focos de uso bem distintos."
           }
         ]
       },
       {
-        "type": "text",
-        "title": "📈 Feedback que Realmente Funciona",
-        "content": "Pedir 'está bom?' não serve para nada. Peça um feedback estruturado:\n\n1. **Pontos Fortes:** O que realmente funcionou?\n2. **Pontos de Melhoria:** O que está confuso ou errado?\n3. **Como fazer:** Peça um exemplo prático de como o texto ficaria melhor. \n\nIsso transforma a crítica em um plano de ação imediato."
-      },
-      {
-        "type": "text",
-        "title": "⚠️ O Que a IA Nunca Vai Ser",
-        "content": "Lembre-se: as personas são ferramentas, não pessoas. \n\nA IA não assume riscos jurídicos por você e não tem a intuição que só anos de prática trazem. Use o especialista virtual para te dar ideias e revisar, mas a palavra final e a responsabilidade pelo que acontece no mundo real são sempre **suas**."
-      },
-      {
-        "type": "text",
-        "title": "🚫 Erros para Evitar",
-        "content": "- **Personas Genéricas:** Dizer 'seja um médico' gera respostas rasas. Diga a especialidade e os anos de prática.\n- **Acreditar em Tudo:** Mesmo um 'especialista' de IA pode inventar fatos com muita elegância. Sempre confira dados críticos.\n- **Ignorar seu próprio julgamento:** Se o conselho da IA parece estranho para você, questione. O mestre é você."
-      },
-      {
-        "type": "component",
-        "componentName": "MatchWords",
-        "props": {
-          "title": "🔗 Cenários e Personas",
-          "description": "Quem você chamaria para estas situações?",
-          "pairs": [
-            {
-              "left": "Revisar um contrato",
-              "right": "Advogado de TI detalhista"
-            },
-            {
-              "left": "Treinar para aumento",
-              "right": "Chefe difícil e exigente"
-            },
-            {
-              "left": "Ideia de novo negócio",
-              "right": "Investidor cético (Anjo)"
-            },
-            {
-              "left": "Entender Física",
-              "right": "Professor Socrático"
-            }
-          ]
-        }
-      },
-      {
-        "type": "text",
-        "title": "📁 Sua Biblioteca de Consultores",
-        "content": "Não invente a roda todo dia. Guarde seus melhores prompts de persona em um lugar organizado (como o Notion ou um bloco de notas).\n\nTenha o seu 'Time de Ouro' pronto para ser copiado e colado sempre que um desafio aparecer. Isso transforma o uso da IA de uma curiosidade em um sistema de produtividade profissional."
-      },
-      {
-        "type": "text",
-        "title": "⚡ Copie e Use: Modelos Prontos",
-        "content": "**Para Negócios:** 'Aja como um analista de investimentos cético, focado em lucro real e riscos ocultos'.\n\n**Para Escrita:** 'Aja como um redator de vendas que já vendeu milhões, focado em benefícios reais e honestidade'.\n\n**Para Carreira:** 'Aja como um mentor que já ajudou centenas de pessoas a mudarem de área com sucesso'."
-      },
-      {
-        "type": "text",
-        "title": "📊 Como Medir o Sucesso?",
-        "content": "Uma persona funcionou bem se:\n1. Ela usou termos técnicos corretos da área.\n2. Ela te deu um conselho que você não tinha pensado sozinho.\n3. Ela criticou seu plano de forma construtiva.\n\nSe a resposta for igual a uma conversa comum, seu pedido (prompt) precisa de mais camadas de senioridade e estilo."
-      },
-      {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Recapitulação do Dia",
-          "sentence": "As personas são mecanismos para ativar conhecimentos ___, e o método socrático é focado em ___.",
+          "title": "🧾 QUESTÃO 2 - Completar a Frase",
+          "sentence": "DeepSeek é excelente em ___ de documentos enormes, programação complexa e ___ lógico passo a passo. Sua abordagem prioriza a ___ no raciocínio, mostrando aos usuários como chegou nas respostas através da '___' da IA. Ao contrário de outras ferramentas, DeepSeek não é ideal para ___ em tempo real como notícias ou clima.",
           "answers": [
-            "especializados",
-            "perguntas"
+            "processamento",
+            "raciocínio",
+            "transparência",
+            "linha de pensamento",
+            "informações"
           ],
           "options": [
-            "especializados",
-            "perguntas",
-            "gerais",
-            "músicas",
-            "lentos",
-            "resumos"
+            "processamento",
+            "raciocínio",
+            "transparência",
+            "linha de pensamento",
+            "informações",
+            "mágica",
+            "cotações",
+            "rapidez"
           ],
-          "explanation": "Perfeito! Você agora sabe como extrair o máximo de inteligência e aprendizado da IA."
+          "explanation": "Muito bem! Você captou exatamente os pontos fortes e as limitações do modelo."
         }
       },
       {
-        "type": "text",
-        "title": "🎓 Resumo Final do Dia 7",
-        "content": "**HOJE VOCÊ DOMINOU:**\n\n1. Como criar personas que realmente pensam como especialistas.\n2. O método socrático para aprender qualquer coisa de forma profunda.\n3. Como simular reuniões de conselho e críticas para não cometer erros.\n4. O uso de simuladores para treinar para os desafios da vida real.\n\n**MENTALIDADE:**\nVocê não está apenas usando um chat. Você aprendeu a **orquestrar inteligências especializadas** para trabalhar para você.\n\n**AMANHÃ:** Vamos colocar tudo isso em prática com um projeto estratégico completo!"
+        "type": "quiz",
+        "title": "✅ QUESTÃO 3 - Verdadeiro ou Falso",
+        "question": "Sobre as características e o uso do DeepSeek, qual das afirmações abaixo é FALSA?",
+        "options": [
+          {
+            "text": "DeepSeek oferece contexto de até 1 milhão de tokens, permitindo processar livros inteiros em uma única conversa.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          },
+          {
+            "text": "DeepSeek-R1 não precisa ser instruído a 'pensar passo a passo' porque já faz isso automaticamente.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          },
+          {
+            "text": "DeepSeek tem navegação web integrada por padrão para acessar informações em tempo real.",
+            "isCorrect": true,
+            "explanation": "Falso! Ele não tem navegação web por padrão e não deve ser usado para notícias em tempo real."
+          },
+          {
+            "text": "Para prompts no DeepSeek-V3, contexto e objetivo claros são suficientes sem necessidade de instruções complexas.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          }
+        ]
       }
     ]
   },
@@ -1102,141 +860,155 @@
     "steps": [
       {
         "type": "text",
-        "title": "🤖 Bem-vindo ao DeepSeek: A IA que Surpreendeu o Mundo",
-        "content": "Depois de dominar o ChatGPT e o Claude, é hora de conhecer o fenômeno vindo da China: o **DeepSeek**.\n\nO que torna essa IA especial não é apenas o nome, mas os números. Ela consegue superar o GPT-4 em tarefas de matemática e programação, gastando apenas 5% do valor que a OpenAI gastou para treinar seus modelos. \n\nPara você, isso significa uma coisa: **IA de altíssimo nível por um preço quase simbólico.** Hoje, o DeepSeek é a ferramenta favorita de programadores, engenheiros e analistas de dados."
+        "title": "🚀 Como Extrair o Máximo do DeepSeek",
+        "content": "Domine os Dois Modos de Raciocínio\nO DeepSeek oferece dois modos complementares que você precisa saber alternar:\n\n**Modo DeepThink (R1):** Ative o botão \"DeepThink\" para problemas complexos. O modelo faz um raciocínio profundo passo a passo e mostra toda a cadeia de pensamento. Use para matemática, lógica, depuração de código e análises que exigem reflexão.\n\n**Modo padrão (V3):** Para respostas rápidas, tarefas cotidianas, escrita e conversas gerais. É mais ágil e direto.\n\nDica prática: comece sempre com o modo padrão. Se a resposta não for satisfatória, ative o DeepThink e peça: \"Agora pense melhor sobre isso\"."
       },
       {
         "type": "text",
-        "title": "🧠 O Segredo: Uma Equipe de Especialistas (MoE)",
-        "content": "Por que o DeepSeek é tão barato e rápido? O segredo está na arquitetura chamada **MoE (Mixture of Experts)**.\n\nImagine que o ChatGPT é um único gênio que tenta saber tudo. Já o DeepSeek funciona como uma **equipe de especialistas**. \n\n\n\nQuando você faz uma pergunta de matemática, a IA 'ativa' apenas os neurônios especialistas em cálculos. Se for código, ela ativa os especialistas em programação. Isso economiza energia e aumenta a precisão técnica."
+        "title": "🔍 Use a Busca na Web com Inteligência",
+        "content": "O DeepSeek tem base de conhecimento até julho de 2024. Para informações atualizadas:\n\n- Ative o botão \"Search\" (ícone de busca) antes de enviar sua pergunta\n- Combine busca com DeepThink para análises profundas baseadas em dados recentes\n- Use para notícias, cotações, eventos atuais e pesquisas de mercado\n\nDica prática: a busca web transforma o DeepSeek em uma ferramenta de pesquisa poderosa use sempre que precisar de informações frescas."
       },
       {
         "type": "text",
-        "title": "📊 Quando Usar o DeepSeek?",
-        "content": "Cada ferramenta tem seu lugar na sua caixa de ferramentas:\n\n* **Use DeepSeek para:** Programação, cálculos matemáticos complexos, criar fórmulas de Excel/Google Sheets e análises de dados pesadas.\n* **Use ChatGPT para:** Brainstorming de ideias, criatividade e conversas naturais.\n* **Use Claude para:** Ler documentos gigantes e escrever textos profissionais com tom humano.\n\n**Regra de Ouro:** Se a resposta for um número ou um código, pergunte primeiro ao DeepSeek."
+        "title": "📖 Estratégia para Documentos Longos",
+        "content": "O DeepSeek tem contexto gigantesco (até 1 milhão de tokens) — suficiente para ler livros inteiros de uma vez. Para extrair máximo proveito:\n\n- Faça upload de PDFs, planilhas, textos ou DOCX diretamente\n- Para documentos muito extensos, peça resumos parciais antes de uma síntese geral\n- Ative o DeepThink para análises jurídicas, contratos ou artigos acadêmicos\n\nDica prática: é como ter um assistente que leu todo o documento e pode responder qualquer pergunta sobre ele instantaneamente."
+      },
+      {
+        "type": "text",
+        "title": "✅ Técnicas de Prompt",
+        "content": "Seja direto e específico: defina claramente o resultado esperado e o formato (lista, JSON, tabela).\n\nPeça iterações: \"Refine isso\", \"Faça uma versão mais profissional\", \"Explique como se eu tivesse 10 anos\".\n\nUse exemplos: mostre como você quer que a resposta seja estruturada.\n\nDica prática: prompts bons geram respostas boas — invista 10 segundos a mais para ser claro."
+      },
+      {
+        "type": "text",
+        "title": "🧑‍💻 DeepSeek Coder",
+        "content": "Versão especializada para programação que domina mais de 80 linguagens. Serve como copiloto para:\n\n- Gerar código a partir de descrições em linguagem natural\n- Completar funções inacabadas\n- Criar testes automatizados\n- Explicar trechos de código complexos\n\nDica prática: cole um código que você não entende e peça: \"Explique linha por linha o que isso faz\"."
+      },
+      {
+        "type": "text",
+        "title": "🤖 Automação com Agentes de IA",
+        "content": "DeepSeek permite criar agentes autônomos para automatizar fluxos de trabalho:\n\n- Revisão automatizada de código no GitHub\n- Geração de relatórios periódicos\n- Triagem de chamados de suporte\n- Análise de documentos jurídicos em lote\n\nDica prática: integre com ferramentas como n8n ou Make para criar automações poderosas sem programação."
+      },
+      {
+        "type": "text",
+        "title": "🛜 Chamada de Funções (Function Calling)",
+        "content": "Permite integração com ferramentas externas como APIs, bancos de dados e executores de código. O modelo pode \"planejar → chamar ferramentas → verificar resultados → resumir\" de forma autônoma.\n\nDica prática: use para criar assistentes que buscam informações em sistemas internos da sua empresa."
+      },
+      {
+        "type": "text",
+        "title": "⚠️ Cuidados Importantes",
+        "content": "Privacidade: DeepSeek tem servidores na China. Nunca envie dados sensíveis, médicos, financeiros ou estratégicos se estiver usando a versão online. Para informações confidenciais, use execução local.\n\nVerificação humana: Sempre revise respostas para decisões críticas. DeepSeek é uma ferramenta de apoio, não substitui especialistas.\n\nBusca web: Pode ter instabilidade ocasional — tenha alternativas para informações urgentes."
       },
       {
         "type": "quiz",
-        "title": "🧠 Teste de Decisão",
-        "question": "Você precisa criar um script em Python para automatizar uma planilha financeira complexa. Qual IA é a mais indicada?",
+        "title": "🧾 QUESTÃO 1",
+        "question": "Qual é a principal diferença entre os dois modos de raciocínio disponíveis no DeepSeek e quando cada um deve ser usado?",
         "options": [
           {
-            "text": "DeepSeek - Especializado em lógica e código eficiente",
+            "text": "DeepThink é mais lento e caro; o modo padrão é gratuito e rápido.",
+            "isCorrect": false,
+            "explanation": "Incorreto. A principal diferença não está no preço, mas sim na forma de processar a informação."
+          },
+          {
+            "text": "DeepThink (R1) faz raciocínio profundo passo a passo mostrando a cadeia de pensamento para problemas complexos, enquanto o padrão (V3) oferece respostas rápidas.",
             "isCorrect": true,
-            "explanation": "Correto! O DeepSeek brilha justamente em tarefas técnicas onde a lógica precisa ser perfeita."
+            "explanation": "Correto! O R1 é para lógica e matemática, o V3 é para o dia a dia."
           },
           {
-            "text": "ChatGPT - Porque ele é mais famoso",
+            "text": "São idênticos — DeepThink é apenas um nome alternativo para o mesmo modelo.",
             "isCorrect": false,
-            "explanation": "O ChatGPT é bom, mas o DeepSeek foi otimizado especificamente para superar concorrentes em programação."
+            "explanation": "São modelos com funcionamentos bem diferentes."
           },
           {
-            "text": "Claude - Porque ele escreve textos bonitos",
+            "text": "DeepThink é apenas para criatividade; o modo padrão é apenas para lógica.",
             "isCorrect": false,
-            "explanation": "O Claude é ótimo para relatórios, mas para 'mão na massa' no código, o DeepSeek leva a melhor."
+            "explanation": "Na verdade, é o oposto: o DeepThink foca em lógica profunda."
           }
         ]
-      },
-      {
-        "type": "text",
-        "title": "💻 Escolhendo sua Versão do DeepSeek",
-        "content": "Assim como o Claude, o DeepSeek tem versões para diferentes necessidades:\n\n* 🚀 **DeepSeek Coder:** O paraíso dos programadores. Treinado quase exclusivamente em código.\n* 🧮 **DeepSeek Math:** O terror das calculadoras. Focado em resolver problemas matemáticos de nível universitário.\n* 🌐 **DeepSeek Chat:** O generalista inteligente. Ótimo para o dia a dia, mas ainda com aquele 'toque' de engenheiro.\n* 🔧 **DeepSeek-R1:** A versão focada em **Raciocínio**. Ele mostra o passo a passo de como chegou à resposta."
-      },
-      {
-        "type": "text",
-        "title": "📝 O Método T.R.A.C.K. para Prompts Técnicos",
-        "content": "O DeepSeek é 'direto ao ponto'. Ele não gosta de muita conversa fiada. Use esta estrutura:\n\n* **T - Tipo:** 'Esta é uma tarefa de Python'.\n* **R - Requisitos:** 'Preciso que o código seja rápido e use a biblioteca Pandas'.\n* **A - Abordagem:** 'Use loops simples em vez de funções complexas'.\n* **C - Critérios:** 'O resultado deve ser um arquivo CSV'.\n* **K - Conhecimento:** 'Assuma que eu já sou um desenvolvedor júnior'.\n\nQuanto mais técnico você for no pedido, mais impressionante será a resposta."
-      },
-      {
-        "type": "text",
-        "title": "⚡ A Economia que Assusta as Gigantes",
-        "content": "O custo de usar o DeepSeek é absurdamente baixo. \n\nEnquanto o GPT-4 pode custar cerca de 30 dólares por cada 1 milhão de palavras processadas, o DeepSeek custa cerca de **0,14 centavos de dólar**.\n\nPara uma empresa que usa muita IA, essa troca pode significar uma economia de milhares de reais por mês sem perder a qualidade técnica. É por isso que o DeepSeek é chamado de 'a democratização da IA'."
       },
       {
         "type": "component",
         "componentName": "FillBlanks",
         "props": {
-          "title": "✏️ Framework T.R.A.C.K.",
-          "sentence": "Para falar com o DeepSeek, eu defino o ___ da tarefa e os ___ técnicos para obter uma solução ___.",
+          "title": "🧾 QUESTÃO 2 - Completar a Frase",
+          "sentence": "O DeepSeek tem contexto gigantesco de até ___ tokens, permitindo ler livros inteiros de uma vez. Para extrair máximo proveito de documentos longos, você pode fazer upload direto e ativar ___ para análises jurídicas ou acadêmicas profundas. Você também pode fazer ___ pedindo 'Refine isso'. Porém, é crucial nunca enviar dados ___ como informações médicas ou financeiras através da versão online.",
           "answers": [
-            "tipo",
-            "requisitos",
-            "otimizada"
+            "1 milhão",
+            "DeepThink",
+            "iterações",
+            "sensíveis"
           ],
           "options": [
-            "tipo",
-            "requisitos",
-            "otimizada",
-            "nome",
-            "desenhos",
-            "lenta"
+            "1 milhão",
+            "DeepThink",
+            "iterações",
+            "sensíveis",
+            "busca web",
+            "rápidas",
+            "200 mil",
+            "públicos"
           ],
-          "explanation": "Isso mesmo! O foco técnico e os requisitos claros são a chave para o sucesso com o DeepSeek."
+          "explanation": "Perfeito! Você dominou os limites técnicos e de segurança da ferramenta."
         }
       },
       {
-        "type": "text",
-        "title": "🔧 Integrando a IA no seu Trabalho",
-        "content": "Você não precisa usar o DeepSeek apenas no navegador. Ele pode ser instalado diretamente no seu editor de código (como o VS Code).\n\n\n\nImagine estar escrevendo um código e a IA sugerir a próxima linha, corrigir um erro em tempo real ou criar um teste para ver se tudo está funcionando. Ele se torna um 'copiloto' que trabalha por centavos."
-      },
-      {
-        "type": "text",
-        "title": "🚫 As Limitações do Engenheiro",
-        "content": "O DeepSeek é incrível, mas tem seus pontos fracos:\n\n* **Falta de Emoção:** Não peça para ele escrever um poema de amor ou um e-mail super sensível. Ele vai soar como um robô.\n* **Criatividade Limitada:** Ele é ótimo para resolver problemas, mas não é tão bom para 'inventar' coisas do zero sem uma base lógica.\n* **Contexto:** Ele tem uma memória de curto prazo menor que a do Claude. Se o arquivo for muito grande (centenas de páginas), ele pode se perder."
-      },
-      {
-        "type": "text",
-        "title": "🔁 O Time Perfeito (Workflow Híbrido)",
-        "content": "Os mestres da IA usam os três gigantes juntos:\n\n1. **ChatGPT:** Cria a ideia e a estratégia do projeto.\n2. **DeepSeek:** Escreve o código e faz os cálculos matemáticos.\n3. **Claude:** Revisa tudo, cria a documentação e escreve o relatório final.\n\n[Image comparing dense AI models vs Mixture of Experts specialists]\n\nAo usar cada um no que eles são melhores, você atinge um nível de produtividade impossível para um humano sozinho."
+        "type": "quiz",
+        "title": "✅ QUESTÃO 3 - Verdadeiro ou Falso",
+        "question": "Sobre as funcionalidades e cuidados com o DeepSeek, qual das afirmações abaixo é FALSA?",
+        "options": [
+          {
+            "text": "A combinação de busca web + DeepThink permite análises profundas baseadas em dados recentes.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          },
+          {
+            "text": "Function Calling permite que DeepSeek integre com APIs, bancos de dados e executores de código de forma autônoma.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          },
+          {
+            "text": "É seguro enviar dados médicos e financeiros confidenciais através da versão online do DeepSeek.",
+            "isCorrect": true,
+            "explanation": "Falso! Nunca envie dados sensíveis para a versão online, pois os servidores ficam na China."
+          },
+          {
+            "text": "Ao usar DeepSeek para decisões críticas, é essencial sempre ter revisão humana.",
+            "isCorrect": false,
+            "explanation": "Esta afirmação é Verdadeira."
+          }
+        ]
       },
       {
         "type": "component",
         "componentName": "MatchWords",
         "props": {
-          "title": "🔗 Quem faz o quê?",
-          "description": "Ligue a tarefa à IA que a executa melhor.",
+          "title": "🔗 QUESTÃO 4 - Correspondência",
+          "description": "Associe cada funcionalidade do DeepSeek ao seu melhor caso de uso:",
           "pairs": [
             {
-              "left": "Criar slogan criativo",
-              "right": "ChatGPT"
+              "left": "Modo DeepThink (R1)",
+              "right": "Problemas complexos que exigem raciocínio passo a passo"
             },
             {
-              "left": "Otimizar código SQL",
-              "right": "DeepSeek"
+              "left": "Busca Web Integrada",
+              "right": "Pesquisa de mercado, notícias e eventos recentes"
             },
             {
-              "left": "Resumir contrato de 100 páginas",
-              "right": "Claude"
+              "left": "Upload de Documentos Longos",
+              "right": "Análise de contrato ou síntese de um livro inteiro"
             },
             {
-              "left": "Explicar teorema passo a passo",
-              "right": "DeepSeek-R1"
+              "left": "DeepSeek Coder",
+              "right": "Gerar código a partir de descrições naturais"
+            },
+            {
+              "left": "Agentes de IA/Automação",
+              "right": "Analisar documentos jurídicos em lote"
             }
           ]
         }
-      },
-      {
-        "type": "text",
-        "title": "🎯 Projeto Prático: Analisador de Performance",
-        "content": "Vamos testar o poder do DeepSeek. Imagine que o site da sua empresa está lento.\n\nVocê pode colar os logs do servidor no DeepSeek e usar o método **T.R.A.C.K.**:\n'Esta é uma tarefa de análise de performance (T). Analise estes logs e identifique os 3 pontos de maior lentidão (R). Sugira o código para corrigir (A) focado em baixo consumo de memória (C)'.\n\nEm segundos, o DeepSeek fará uma análise que levaria horas para um engenheiro sênior."
-      },
-      {
-        "type": "text",
-        "title": "📈 Como Medir seu Sucesso com o DeepSeek",
-        "content": "Você saberá que está dominando o DeepSeek quando:\n\n1. O tempo que você gasta corrigindo erros de código cair pela metade.\n2. Suas planilhas de Excel começarem a fazer 'mágica' com fórmulas complexas que você não sabia criar.\n3. Suas análises de dados forem baseadas em lógica sólida e não em 'achismos'.\n\nO DeepSeek transforma você em um profissional muito mais técnico e eficiente."
-      },
-      {
-        "type": "text",
-        "title": "🚀 Seu Plano de 7 Dias",
-        "content": "Quer dominar o DeepSeek? Siga este plano:\n\n* **Dias 1-2:** Use para tarefas simples (fórmulas de Excel, scripts básicos).\n* **Dias 3-4:** Tente resolver um erro (bug) que você não está conseguindo consertar sozinho.\n* **Dias 5-6:** Integre o DeepSeek no seu fluxo (se você programa, use extensões de IDE).\n* **Dia 7:** Revise seus prompts usando o T.R.A.C.K. e veja a diferença na qualidade."
-      },
-      {
-        "type": "text",
-        "title": "🎓 Resumo Final do Dia 8",
-        "content": "**O QUE VOCÊ APRENDEU HOJE:**\n\n1. O DeepSeek é a revolução da IA técnica e de baixo custo.\n2. A arquitetura MoE permite que ele use 'especialistas' para cada pergunta.\n3. O método T.R.A.C.K. é o segredo para extrair o melhor dele.\n4. Ele é o parceiro ideal para quem lida com código, números e dados.\n\n**MENTALIDADE:**\nVocê agora tem acesso à inteligência de um engenheiro de elite por um custo quase zero.\n\n**AMANHÃ:** Vamos focar no DeepSeek especificamente para Análise de Dados – de planilhas a previsões matemáticas!"
       }
     ]
-  },
+  },  
   "day9": {
     "steps": [
       {
