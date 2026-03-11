@@ -60,7 +60,7 @@ export const PWAInstallPrompt = () => {
   if (!showPrompt || isInstalled) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 animate-fade-in-up md:left-auto md:right-4 md:w-96">
+    <div className="fixed top-4 left-4 right-4 z-50 animate-fade-in md:left-auto md:right-4 md:w-96">
       <div className="bg-card border border-border rounded-2xl p-4 shadow-2xl backdrop-blur-sm">
         <button
           onClick={handleDismiss}
