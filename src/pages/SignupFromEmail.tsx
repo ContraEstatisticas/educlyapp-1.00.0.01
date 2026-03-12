@@ -144,9 +144,13 @@ const SignupFromEmail = () => {
 
       // NO welcome email sent here - already sent on purchase
 
-      // If no session was created (email confirmation required), sign in explicitly
-      if (!data.session) {
-        await supabase.auth.signInWithPassword({ email, password });
+      // Always sign in explicitly after signup to guarantee an active session
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      if (signInError) {
+        setIsLoading(false);
+        toast({ title: t("auth.signupSuccess"), description: t("auth.loginTab") });
+        navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
+        return;
       }
 
       setIsLoading(false);
@@ -195,7 +199,7 @@ const SignupFromEmail = () => {
           <h2 className="text-2xl font-bold text-foreground">{t("signupFromEmail.alreadyHaveAccount", "Você já tem uma conta!")}</h2>
           <p className="text-muted-foreground">{t("signupFromEmail.loginInstead", "Entre com seu email e senha para acessar a plataforma.")}</p>
           <p className="text-sm font-medium text-primary">{emailParam}</p>
-          <Button onClick={() => navigate("/auth")} className="w-full" size="lg">
+          <Button onClick={() => navigate(`/auth?email=${encodeURIComponent(emailParam)}&tab=login`)} className="w-full" size="lg">
             {t("signupFromEmail.goToLogin", "Acessar minha conta")}
           </Button>
         </Card>
