@@ -40,35 +40,42 @@ export const StatsSection = () => {
 
   return (
     <section ref={ref} className="py-20 md:py-28 ld-cream relative overflow-hidden">
-      {/* Decorative circles */}
       <div className="absolute -top-20 -left-20 w-60 h-60 border border-[hsl(25,90%,55%,0.08)] rounded-full" />
       <div className="absolute -bottom-10 -right-10 w-40 h-40 border border-[hsl(25,90%,55%,0.06)] rounded-full" />
-
       <div className="max-w-[87.5rem] mx-auto px-6 md:px-10 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat, index) => {
-            const [anim, setAnim] = useState(false);
-            const count = useCountUp(stat.value, 2000, anim);
-            useEffect(() => { if (isVisible) { const t = setTimeout(() => setAnim(true), index * 200); return () => clearTimeout(t); } }, [isVisible]);
-
-            return (
-              <motion.div
-                key={stat.labelKey}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease }}
-                className="text-center"
-              >
-                <div className="font-display ld-h1 text-4xl md:text-5xl lg:text-[3.5rem] text-[#111827] dark:text-white mb-2">
-                  {count.toLocaleString()}{stat.suffix}
-                </div>
-                <div className="text-[#111827]/50 dark:text-white/50 text-sm md:text-base font-medium">{t(stat.labelKey)}</div>
-              </motion.div>
-            );
-          })}
+          {stats.map((stat, index) => (
+            <StatCard key={stat.labelKey} stat={stat} index={index} isVisible={isVisible} t={t} />
+          ))}
         </div>
       </div>
     </section>
+  );
+};
+
+const StatCard = ({ stat, index, isVisible, t }: { stat: { value: number; labelKey: string; suffix: string }; index: number; isVisible: boolean; t: (k: string) => string }) => {
+  const [anim, setAnim] = useState(false);
+  const count = useCountUp(stat.value, 2000, anim);
+
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => setAnim(true), index * 200);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, index]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease }}
+      className="text-center"
+    >
+      <div className="font-display ld-h1 text-4xl md:text-5xl lg:text-[3.5rem] text-[#111827] dark:text-white mb-2">
+        {count.toLocaleString()}{stat.suffix}
+      </div>
+      <div className="text-[#111827]/50 dark:text-white/50 text-sm md:text-base font-medium">{t(stat.labelKey)}</div>
+    </motion.div>
   );
 };
