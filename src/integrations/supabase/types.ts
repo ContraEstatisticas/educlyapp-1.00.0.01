@@ -1465,6 +1465,54 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_failure_logs: {
+        Row: {
+          created_at: string | null
+          error_message: string
+          error_stack: string | null
+          event_id: string | null
+          event_type: string | null
+          http_status_returned: number | null
+          id: string
+          next_retry_at: string | null
+          raw_payload: Json | null
+          retry_count: number | null
+          status: string | null
+          updated_at: string | null
+          webhook_source: string
+        }
+        Insert: {
+          created_at?: string | null
+          error_message: string
+          error_stack?: string | null
+          event_id?: string | null
+          event_type?: string | null
+          http_status_returned?: number | null
+          id?: string
+          next_retry_at?: string | null
+          raw_payload?: Json | null
+          retry_count?: number | null
+          status?: string | null
+          updated_at?: string | null
+          webhook_source: string
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string
+          error_stack?: string | null
+          event_id?: string | null
+          event_type?: string | null
+          http_status_returned?: number | null
+          id?: string
+          next_retry_at?: string | null
+          raw_payload?: Json | null
+          retry_count?: number | null
+          status?: string | null
+          updated_at?: string | null
+          webhook_source?: string
+        }
+        Relationships: []
+      }
       webhook_logs: {
         Row: {
           created_at: string

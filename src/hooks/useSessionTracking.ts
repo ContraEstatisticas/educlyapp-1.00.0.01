@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
  */
 export const useSessionTracking = () => {
   const sessionIdRef = useRef<string | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const startSession = async () => {

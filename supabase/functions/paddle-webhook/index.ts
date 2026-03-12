@@ -8,7 +8,7 @@ const corsHeaders = {
 
 // ---------- ✅ WEBHOOK FAILURE LOGGING (non-blocking) ----------
 async function logWebhookFailure(
-  supabase: ReturnType<typeof createClient>,
+  supabase: any,
   params: {
     webhookSource: string;
     eventType?: string;
