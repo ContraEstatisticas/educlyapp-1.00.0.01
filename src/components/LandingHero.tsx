@@ -19,7 +19,7 @@ export const LandingHero = () => {
                 <StatsSection />
                 <PricingSection />
                 <TestimonialsSection />
-                <GlobalReachSection />
+                <AppDemoSection />
                 <CTASection />
             </main>
             <Footer />
