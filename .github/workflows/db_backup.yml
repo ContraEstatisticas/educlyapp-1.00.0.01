@@ -1,0 +1,41 @@
+name: Automatic Database Backup
+
+on:
+  schedule:
+    # Roda diariamente às 03:00 h (UTC)
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Permite rodar o workflow manualmente apertando um botão no Github
+
+jobs:
+  db-backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Dump Database (Schema and Data)
+        env:
+          # É preciso setar as credenciais como variável protegida no Github Secrets
+          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          if [ -z "$DB_URL" ]; then
+            echo "A variável secrets.SUPABASE_DB_URL não foi definida!"
+            exit 1
+          fi
+          
+          echo "Iniciando processo de dump dos dados..."
+          # Realiza o dump do banco de dados (ignorando a tabela de logs que pode ser gigantesca se quiser)
+          supabase db dump --db-url "$DB_URL" -f database_backup.sql
+          
+      - name: Upload Backup as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ github.run_id }}
+          path: database_backup.sql
+          retention-days: 30 # O Github vai reter esse backup por 30 dias automaticamente
