@@ -19,19 +19,14 @@ jobs:
 
       - name: Dump Database (Schema and Data)
         env:
-          # É preciso setar as credenciais como variável protegida no Github Secrets
-          DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          PGHOST: aws-0-sa-east-1.pooler.supabase.com
+          PGPORT: 5432
+          PGDATABASE: postgres
+          PGUSER: ${{ secrets.SUPABASE_DB_USER }}
+          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
         run: |
-          if [ -z "$DB_URL" ]; then
-            echo "A variável secrets.SUPABASE_DB_URL não foi definida!"
-            exit 1
-          fi
-          
           echo "Iniciando processo de dump dos dados..."
-          # Debug: mostra o username da URL sem expor a senha
-          echo "Username extraído da URL:"
-          echo "$DB_URL" | python3 -c "import sys, urllib.parse; u = urllib.parse.urlparse(sys.stdin.read().strip()); print(u.username)"
-          pg_dump "$DB_URL" -f database_backup.sql
+          pg_dump -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" --no-password -f database_backup.sql
           
       - name: Upload Backup as Artifact
         uses: actions/upload-artifact@v4
