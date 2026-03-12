@@ -4,7 +4,7 @@ import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
-import { GlobalReachSection } from "@/components/landing/GlobalReachSection";
+import { AppDemoSection } from "@/components/landing/AppDemoSection";
 import { CTASection } from "@/components/landing/CTASection";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingSupportChat } from "@/components/landing/FloatingSupportChat";
@@ -19,7 +19,7 @@ export const LandingHero = () => {
                 <StatsSection />
                 <PricingSection />
                 <TestimonialsSection />
-                <GlobalReachSection />
+                <AppDemoSection />
                 <CTASection />
             </main>
             <Footer />
