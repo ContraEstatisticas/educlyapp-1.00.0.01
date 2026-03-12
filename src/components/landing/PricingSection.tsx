@@ -8,7 +8,7 @@ import { CreditCardLogos } from "@/components/landing/CreditCardLogos";
 import { RecurringBillingDisclosure } from "@/components/checkout/RecurringBillingDisclosure";
 import { motion } from "framer-motion";
 
-const ease = [0.165, 0.84, 0.44, 1];
+const ease = [0.165, 0.84, 0.44, 1] as const;
 
 export const PricingSection = () => {
   const { t } = useTranslation();

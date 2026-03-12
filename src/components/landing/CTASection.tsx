@@ -2,7 +2,7 @@ import { ArrowRight, Check, Shield, CreditCard } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
-const ease = [0.165, 0.84, 0.44, 1];
+const ease = [0.165, 0.84, 0.44, 1] as const;
 
 export const CTASection = () => {
   const { t } = useTranslation();

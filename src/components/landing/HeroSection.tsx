@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const ease = [0.165, 0.84, 0.44, 1];
+const ease = [0.165, 0.84, 0.44, 1] as const;
 
 export const HeroSection = () => {
   const { t } = useTranslation();
