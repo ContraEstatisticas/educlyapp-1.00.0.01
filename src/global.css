@@ -108,21 +108,7 @@
 }
 
 /* ── Hero glow (half-sphere) ──────────────────── */
-.ld-hero-glow {
-  position: absolute;
-  bottom: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120%;
-  height: 60vw;
-  max-height: 700px;
-  border-radius: 50% 50% 0 0;
-  background: hsl(25 90% 55%);
-  box-shadow: 0 0 36rem 10rem hsl(25 90% 55% / 0.35);
-  filter: blur(3rem);
-  pointer-events: none;
-  z-index: 0;
-}
+/* hero glow removed — replaced by inline conic-gradient light cone */
 
 /* ── Gradient text ────────────────────────────── */
 .ld-gradient-text {
