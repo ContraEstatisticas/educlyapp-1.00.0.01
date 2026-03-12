@@ -1,0 +1,146 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - main [ref=e3]:
+    - generic [ref=e6]:
+      - img "Educy - Assistente" [ref=e8]
+      - generic [ref=e9]:
+        - button [ref=e11] [cursor=pointer]:
+          - img [ref=e12]
+        - paragraph [ref=e15]: Hi! 👋 I'm EDI, your guide at Educly! Welcome to your AI course!
+        - button "Next" [ref=e22] [cursor=pointer]:
+          - text: Next
+          - img
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - heading "Hello, Felipe Nunes Campos ! 👋" [level=1] [ref=e26]:
+          - generic [ref=e27]: Hello,
+          - generic [ref=e28]: Felipe Nunes Campos
+          - generic [ref=e29]: "! 👋"
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - img [ref=e32]
+            - generic [ref=e34]: "4"
+          - button "Trocar tema" [ref=e35] [cursor=pointer]:
+            - img
+            - img
+            - generic [ref=e36]: Trocar tema
+          - combobox [ref=e37] [cursor=pointer]:
+            - generic [ref=e38]:
+              - img [ref=e39]
+              - generic:
+                - generic:
+                  - generic: 🇧🇷
+                  - generic: Português
+            - img [ref=e42]
+          - button [ref=e44] [cursor=pointer]:
+            - img [ref=e46]
+          - button [ref=e47] [cursor=pointer]:
+            - img
+      - generic [ref=e48]:
+        - heading "Your AI Journey Continues! 🚀" [level=1] [ref=e49]
+        - paragraph [ref=e50]: You have completed 0 of 28 days. Keep moving forward!
+      - generic [ref=e51]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - heading "Weekly streak" [level=3] [ref=e56]
+              - paragraph [ref=e57]: Keep the learning habit
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - generic [ref=e61]: 4 days
+          - img "Corredor" [ref=e66]
+          - generic [ref=e74]:
+            - img [ref=e77]
+            - img [ref=e81]
+            - img [ref=e85]
+            - img [ref=e89]
+            - generic [ref=e93]: Fri
+            - generic [ref=e96]: Sat
+            - generic [ref=e99]: Sun
+        - generic [ref=e101] [cursor=pointer]:
+          - button "Iniciar" [ref=e102]:
+            - img [ref=e103]
+            - text: Iniciar
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - img "Challenge" [ref=e111]
+              - generic [ref=e112]:
+                - img [ref=e113]
+                - text: In Progress
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic [ref=e117]:
+                  - generic [ref=e118]: 0/28 Days
+                  - generic [ref=e119]:
+                    - img [ref=e120]
+                    - text: Active
+                - heading "AI Beginner Challenge" [level=3] [ref=e122]
+                - paragraph [ref=e123]: Learn all about the 8 main AIs on the market in 28 days of intensive and practical learning.
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - generic [ref=e126]:
+                    - img [ref=e127]
+                    - text: Challenge Progress
+                  - generic [ref=e129]: 0%
+                - progressbar [ref=e131]
+              - generic [ref=e134]:
+                - button "Continue Challenge" [ref=e135]:
+                  - generic [ref=e136]: Continue Challenge
+                  - img
+                - button "View Content" [ref=e137]
+        - generic [ref=e139]:
+          - generic [ref=e141] [cursor=pointer]:
+            - generic [ref=e142]:
+              - img "AI Pack" [ref=e146]
+              - generic [ref=e147]:
+                - img [ref=e148]
+                - text: AI Pack
+            - heading "AI Pack" [level=3] [ref=e151]
+            - paragraph [ref=e152]: "4 specialized AIs for different tasks: teaching, prompting, planning, and image creation."
+            - generic [ref=e161]:
+              - generic [ref=e162]:
+                - img [ref=e163]
+                - generic [ref=e165]: 4 Specialized
+              - img [ref=e166]
+            - generic [ref=e168]:
+              - img [ref=e170]
+              - generic [ref=e173]: Desbloqueie para acessar
+          - generic [ref=e175] [cursor=pointer]:
+            - generic [ref=e176]:
+              - img "Premium Freelancer's" [ref=e180]
+              - generic [ref=e181]:
+                - img [ref=e182]
+                - text: Premium Freelancer
+            - heading "Premium Freelancer's" [level=3] [ref=e185]
+            - paragraph [ref=e186]: Turn your skills into income. Learn how to prospect clients, price your services, and close contracts.
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - generic [ref=e189]: Prospecting
+                - generic [ref=e190]: Pricing
+                - generic [ref=e191]: Sales
+                - generic [ref=e192]: Client Management
+              - generic [ref=e193]:
+                - generic [ref=e194]:
+                  - img [ref=e195]
+                  - generic [ref=e198]: Career Guide
+                - img [ref=e199]
+            - generic [ref=e201]:
+              - img [ref=e203]
+              - generic [ref=e206]: Desbloqueie para acessar
+        - generic [ref=e207]:
+          - generic [ref=e211] [cursor=pointer]:
+            - img [ref=e213]
+            - heading "Daily Missions" [level=3] [ref=e217]
+            - paragraph [ref=e218]: Complete daily missions to earn XP and exclusive rewards.
+          - generic [ref=e222] [cursor=pointer]:
+            - img [ref=e224]
+            - heading "Medals" [level=3] [ref=e230]
+            - paragraph [ref=e231]: Earn medals for your achievements and show off your progress.
+      - button "Open Educy chat" [ref=e232] [cursor=pointer]:
+        - img "Educy" [ref=e233]
+```

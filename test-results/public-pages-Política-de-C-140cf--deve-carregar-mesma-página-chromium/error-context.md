@@ -1,0 +1,227 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - navigation [ref=e4]:
+      - generic [ref=e6]:
+        - link "Educy" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Educy" [ref=e8]
+        - generic [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: /#inicio
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: /#sobre
+          - link "Testimonials" [ref=e12] [cursor=pointer]:
+            - /url: /#depoimentos
+          - link "Plan" [ref=e13] [cursor=pointer]:
+            - /url: /#plano
+          - link "Contact" [ref=e14] [cursor=pointer]:
+            - /url: /contato
+          - link "Login" [ref=e15] [cursor=pointer]:
+            - /url: /auth
+            - button "Login" [ref=e16]
+    - main [ref=e17]:
+      - button "Back" [ref=e18] [cursor=pointer]:
+        - img [ref=e19]
+        - text: Back
+      - generic [ref=e21]:
+        - heading "Cancellation Policy" [level=1] [ref=e22]
+        - paragraph [ref=e23]: Transparency and trust come first. Learn about our terms.
+      - generic [ref=e24]:
+        - generic [ref=e26]:
+          - img [ref=e28]
+          - generic [ref=e30]:
+            - heading "14 Day Guarantee" [level=2] [ref=e31]
+            - paragraph [ref=e32]: We offer an unconditional 7-day guarantee. If you're not satisfied with the course, request a full refund within this period.
+        - generic [ref=e33]:
+          - heading "Refund Eligibility" [level=2] [ref=e34]:
+            - img [ref=e35]
+            - text: Refund Eligibility
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - img [ref=e40]
+              - paragraph [ref=e43]: Request made within 14 days of purchase.
+            - generic [ref=e44]:
+              - img [ref=e45]
+              - paragraph [ref=e48]: First purchase of the product (not valid for repurchases)
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - paragraph [ref=e53]: Request email sent to contact@educly.app
+        - generic [ref=e54]:
+          - heading "Non-Eligible Cases" [level=2] [ref=e55]:
+            - img [ref=e56]
+            - text: Non-Eligible Cases
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - img [ref=e62]
+              - paragraph [ref=e66]: Requests after 14 days from purchase
+            - generic [ref=e67]:
+              - img [ref=e68]
+              - paragraph [ref=e72]: Customers who have previously requested a refund
+        - generic [ref=e73]:
+          - heading "How to Request" [level=2] [ref=e74]:
+            - img [ref=e75]
+            - text: How to Request
+          - generic [ref=e78]:
+            - paragraph [ref=e79]: "To request cancellation or refund, send an email with the following information:"
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: "Subject: Cancellation Request"
+              - list [ref=e82]:
+                - listitem [ref=e83]: • Email registered at purchase
+                - listitem [ref=e84]: • Purchase date
+                - listitem [ref=e85]: • Reason for cancellation (optional)
+            - paragraph [ref=e86]:
+              - generic [ref=e87]: "Contact email:"
+              - link "contact@educly.app" [ref=e88] [cursor=pointer]:
+                - /url: mailto:contact@educly.app
+        - generic [ref=e89]:
+          - heading "Subscription Cancellation" [level=2] [ref=e90]:
+            - img [ref=e91]
+            - text: Subscription Cancellation
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: You can cancel your subscription at any time. Cancellation stops future charges but does not refund already paid periods.
+            - paragraph [ref=e95]: To cancel, send an email to contact@educly.app with the subject 'Subscription Cancellation'.
+        - generic [ref=e96]:
+          - heading "Processing Times" [level=2] [ref=e97]:
+            - img [ref=e98]
+            - text: Processing Times
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - paragraph [ref=e103]: Response Time
+              - paragraph [ref=e104]: Up to 48 business hours
+            - generic [ref=e105]:
+              - paragraph [ref=e106]: Refund Processing
+              - paragraph [ref=e107]: 5 days after approval. Timeframe for the refund to appear on your credit card statement is one to two billing cycles after your next statement.
+        - paragraph [ref=e109]:
+          - generic [ref=e110]: "Statement identifier:"
+          - text: EDUCLY.APP
+        - generic [ref=e111]:
+          - heading "Company Information" [level=3] [ref=e112]:
+            - img [ref=e113]
+            - text: Company Information
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - paragraph [ref=e119]: "Services provided by:"
+              - generic [ref=e120]:
+                - img [ref=e121]
+                - generic [ref=e124]:
+                  - paragraph [ref=e125]: Contra Estatistica Digital Marketers LLC
+                  - paragraph [ref=e126]: "EIN: 39-4917931 • United States"
+              - generic [ref=e127]:
+                - img [ref=e128]
+                - paragraph [ref=e131]: 1209 Mountain Road Pl NE, Ste R, Albuquerque, NM 87110, United States
+            - generic [ref=e133]:
+              - paragraph [ref=e134]: "Corporate Headquarter:"
+              - generic [ref=e135]:
+                - img [ref=e136]
+                - generic [ref=e139]:
+                  - paragraph [ref=e140]: SELLCORE LTD.
+                  - paragraph [ref=e141]: C 62598 • Saint Kitts and Nevis
+              - generic [ref=e142]:
+                - img [ref=e143]
+                - paragraph [ref=e146]: Suite 5, Horsford's Business Centre, Long Point Road, Charlestown, Nevis
+            - generic [ref=e147]:
+              - generic [ref=e148]:
+                - img [ref=e150]
+                - link "+5562991874867" [ref=e152] [cursor=pointer]:
+                  - /url: tel:+5562991874867
+              - generic [ref=e153]:
+                - img [ref=e155]
+                - link "contact@educly.app" [ref=e158] [cursor=pointer]:
+                  - /url: mailto:contact@educly.app
+    - contentinfo [ref=e159]:
+      - generic [ref=e160]:
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - link "Educy" [ref=e163] [cursor=pointer]:
+              - /url: /
+              - img "Educy" [ref=e164]
+            - paragraph [ref=e165]: The most complete AI app on the market. Learn AI hands-on, right from your phone.
+            - paragraph [ref=e166]:
+              - generic [ref=e167]: "Contact:"
+              - link "contact@educly.app" [ref=e168] [cursor=pointer]:
+                - /url: mailto:contact@educly.app
+          - generic [ref=e169]:
+            - heading "Features" [level=4] [ref=e170]
+            - list [ref=e171]:
+              - listitem [ref=e172]:
+                - link "AI Trails" [ref=e173] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e174]:
+                - link "28-Day Challenges" [ref=e175] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e176]:
+                - link "AI Assistant" [ref=e177] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e178]:
+                - link "Digital Certificates" [ref=e179] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e180]:
+            - heading "Resources" [level=4] [ref=e181]
+            - list [ref=e182]:
+              - listitem [ref=e183]:
+                - link "Blog" [ref=e184] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e185]:
+                - link "Tutorials" [ref=e186] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e187]:
+                - link "Guides" [ref=e188] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e189]:
+                - link "Community" [ref=e190] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e191]:
+            - heading "Company" [level=4] [ref=e192]
+            - list [ref=e193]:
+              - listitem [ref=e194]:
+                - link "About Us" [ref=e195] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e196]:
+                - link "Careers" [ref=e197] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e198]:
+                - link "Partnerships" [ref=e199] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e200]:
+                - link "Contact" [ref=e201] [cursor=pointer]:
+                  - /url: /contato
+          - generic [ref=e202]:
+            - heading "Legal" [level=4] [ref=e203]
+            - list [ref=e204]:
+              - listitem [ref=e205]:
+                - link "Terms of Use" [ref=e206] [cursor=pointer]:
+                  - /url: /termos
+              - listitem [ref=e207]:
+                - link "Privacy" [ref=e208] [cursor=pointer]:
+                  - /url: /privacidade
+              - listitem [ref=e209]:
+                - link "Cookies" [ref=e210] [cursor=pointer]:
+                  - /url: /cookies
+              - listitem [ref=e211]:
+                - link "Cancellation" [ref=e212] [cursor=pointer]:
+                  - /url: /cancelamento
+              - listitem [ref=e213]:
+                - link "Subscription Terms" [ref=e214] [cursor=pointer]:
+                  - /url: /termos-assinatura
+        - generic [ref=e215]:
+          - generic [ref=e216]:
+            - paragraph [ref=e217]: Educly is a product of the companies
+            - generic [ref=e218]:
+              - generic [ref=e219]:
+                - paragraph [ref=e220]: Contra Estatistica Digital Marketers LLC
+                - paragraph [ref=e221]:
+                  - text: 1209 Mountain Road Pl NE, Ste R, Albuquerque, NM 87110, United States
+                  - text: "EIN: 39-4917931"
+              - generic [ref=e223]:
+                - paragraph [ref=e224]: SELLCORE LTD.
+                - paragraph [ref=e225]:
+                  - text: "empresasRegistration: C 62598 • Saint Kitts and Nevis"
+                  - text: Suites 5 Horsford's Business Centre, Long Point Road, Charlestown, Nevis
+          - paragraph [ref=e226]: © 2026 Educly. All rights reserved.
+```

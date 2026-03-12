@@ -1,0 +1,79 @@
+{
+  "cookies": [
+    {
+      "name": "_fbp",
+      "value": "fb.0.1773321342310.79588625846169548",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1781097344,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ttp",
+      "value": "3AqXzt71Povx6Q6y22r4n6jnWHe",
+      "domain": ".tiktok.com",
+      "path": "/",
+      "expires": 1807017342.353695,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_tt_enable_cookie",
+      "value": "1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1807017342,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ttp",
+      "value": "01KKH30KKYDF73RMYKW307MCW2_.tt.0",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1807017342,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:8080",
+      "localStorage": [
+        {
+          "name": "i18nextLng",
+          "value": "en-US"
+        },
+        {
+          "name": "lastExternalReferrer",
+          "value": "empty"
+        },
+        {
+          "name": "iacademy_sound_settings",
+          "value": "{\"soundEnabled\":true,\"volume\":0.5}"
+        },
+        {
+          "name": "lastExternalReferrerTime",
+          "value": "1773321342299"
+        },
+        {
+          "name": "last_xp_login_date",
+          "value": "2026-03-12"
+        },
+        {
+          "name": "sb-dqlcxpbfemhzzetwaxsa-auth-token",
+          "value": "{\"access_token\":\"eyJhbGciOiJIUzI1NiIsImtpZCI6IjJMclROY0kxZHBtZnh5TGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2RxbGN4cGJmZW1oenpldHdheHNhLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJkMjhiZTVmZS01Y2ViLTQ1Y2MtOTQ1YS1lNmNhOWQ4OGI0MDAiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzczMzI0OTQxLCJpYXQiOjE3NzMzMjEzNDEsImVtYWlsIjoiZmVsaXBlQGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJmZWxpcGVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZ1bGxfbmFtZSI6IkZlbGlwZSBOdW5lcyBDYW1wb3MiLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImQyOGJlNWZlLTVjZWItNDVjYy05NDVhLWU2Y2E5ZDg4YjQwMCJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzczMzIxMzQxfV0sInNlc3Npb25faWQiOiJkNDNlY2QzOS0zNzQ5LTQ4YzctYWRjMy04Yjk4MWM2ZDU4OTAiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.io2pSKhIfIZPeHrqQMytMEA6LIFq0rVnVybj-fl-Xwg\",\"token_type\":\"bearer\",\"expires_in\":3600,\"expires_at\":1773324941,\"refresh_token\":\"o3w7nehnybkq\",\"user\":{\"id\":\"d28be5fe-5ceb-45cc-945a-e6ca9d88b400\",\"aud\":\"authenticated\",\"role\":\"authenticated\",\"email\":\"felipe@gmail.com\",\"email_confirmed_at\":\"2026-02-13T13:16:46.663225Z\",\"phone\":\"\",\"confirmed_at\":\"2026-02-13T13:16:46.663225Z\",\"last_sign_in_at\":\"2026-03-12T13:15:41.283961625Z\",\"app_metadata\":{\"provider\":\"email\",\"providers\":[\"email\"]},\"user_metadata\":{\"email\":\"felipe@gmail.com\",\"email_verified\":true,\"full_name\":\"Felipe Nunes Campos\",\"phone_verified\":false,\"sub\":\"d28be5fe-5ceb-45cc-945a-e6ca9d88b400\"},\"identities\":[{\"identity_id\":\"4954b03b-2ba2-4129-b603-39850351c59b\",\"id\":\"d28be5fe-5ceb-45cc-945a-e6ca9d88b400\",\"user_id\":\"d28be5fe-5ceb-45cc-945a-e6ca9d88b400\",\"identity_data\":{\"email\":\"felipe@gmail.com\",\"email_verified\":true,\"sub\":\"d28be5fe-5ceb-45cc-945a-e6ca9d88b400\"},\"provider\":\"email\",\"last_sign_in_at\":\"2026-03-06T15:29:49.205266Z\",\"created_at\":\"2026-02-13T13:16:46.637657Z\",\"updated_at\":\"2026-03-06T16:27:52.684319Z\",\"email\":\"felipe@gmail.com\"}],\"created_at\":\"2026-02-13T13:16:46.637657Z\",\"updated_at\":\"2026-03-12T13:15:41.32328Z\",\"is_anonymous\":false},\"weak_password\":null}"
+        },
+        {
+          "name": "clearSessionOnLogout",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

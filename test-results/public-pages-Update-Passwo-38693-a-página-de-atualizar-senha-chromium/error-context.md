@@ -1,0 +1,49 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - combobox [ref=e5] [cursor=pointer]:
+      - generic [ref=e6]:
+        - img [ref=e7]
+        - generic:
+          - generic:
+            - generic: 🇧🇷
+            - generic: Português
+      - img [ref=e10]
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - img [ref=e15]
+          - generic [ref=e18]: Reset Password
+        - heading "Create your new password" [level=1] [ref=e19]
+        - paragraph [ref=e20]: Enter your new password below.
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - img [ref=e25]
+            - text: New password
+          - generic [ref=e28]:
+            - textbox "New password" [ref=e29]:
+              - /placeholder: Your password
+            - button [ref=e30] [cursor=pointer]:
+              - img
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - img [ref=e33]
+            - text: Confirm Password
+          - generic [ref=e36]:
+            - textbox "Confirm Password" [ref=e37]:
+              - /placeholder: Confirm your password
+            - button [ref=e38] [cursor=pointer]:
+              - img
+          - paragraph [ref=e39]: Minimum 6 characters
+        - button "Update password" [ref=e40] [cursor=pointer]
+      - paragraph [ref=e41]:
+        - button "Back to login" [ref=e42] [cursor=pointer]:
+          - img
+          - text: Back to login
+```

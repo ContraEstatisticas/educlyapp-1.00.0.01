@@ -241,17 +241,25 @@ serve(async (req) => {
       console.log(`[primer-webhook] Billing event logged for ${email}, type=${eventType}`);
     }
 
-    // NEW: Try to find existing user and grant access in real-time
-    const GRANT_EVENT_TYPES = [
+    // Try to find existing user and process billing event in real-time
+    const BILLING_ACTION_EVENTS = [
+      // Acréscimo / Concessão
       'SETTLED', 'STARTING_TRIAL', 'SUBSCRIPTION_SETTLED',
       'SUBSCRIPTION_TRIAL_STARTED', 'GRANTED',
       'CONVERTION', 'RENEWING', 'RESUMING',
       'RECOVERING', 'RECOVERING_AUTORENEW',
       'PURCHASE_COMPLETE', 'PURCHASE_APPROVED',
       'PURCHASE_PROTEST', 'PURCHASE_DELAYED',
+      
+      // Decréscimo / Revogação
+      'SUBSCRIPTION_CANCELLATION', 'PAUSING',
+      'CANCELED', 'CANCELED_ADVANCED',
+      'REFUNDED', 'REFUNDED_ADVANCED',
+      'CHARGEBACK', 'CHARGEBACK_ADVANCED',
+      'OVERDUE', 'EXPIRED'
     ];
 
-    if (GRANT_EVENT_TYPES.includes(eventType)) {
+    if (BILLING_ACTION_EVENTS.includes(eventType)) {
       try {
         const foundUserId = await findUserIdByEmail(supabase, email);
 
@@ -265,7 +273,7 @@ serve(async (req) => {
           if (rpcError) {
             console.error(`[primer-webhook] RPC error:`, rpcError);
           } else {
-            console.log(`[primer-webhook] Access granted in real-time for ${email}`);
+            console.log(`[primer-webhook] Billing correctly validated/revoked in real-time for ${email}`);
           }
         } else {
           console.log(`[primer-webhook] User not found for ${email}, will reconcile on signup`);

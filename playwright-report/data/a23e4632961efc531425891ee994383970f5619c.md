@@ -1,0 +1,234 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - navigation [ref=e4]:
+      - generic [ref=e6]:
+        - link "Educy" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Educy" [ref=e8]
+        - generic [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: /#inicio
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: /#sobre
+          - link "Testimonials" [ref=e12] [cursor=pointer]:
+            - /url: /#depoimentos
+          - link "Plan" [ref=e13] [cursor=pointer]:
+            - /url: /#plano
+          - link "Contact" [ref=e14] [cursor=pointer]:
+            - /url: /contato
+          - link "Login" [ref=e15] [cursor=pointer]:
+            - /url: /auth
+            - button "Login" [ref=e16]
+    - main [ref=e17]:
+      - button "Back" [ref=e18] [cursor=pointer]:
+        - img [ref=e19]
+        - text: Back
+      - generic [ref=e21]:
+        - heading "Contact Us" [level=1] [ref=e22]
+        - paragraph [ref=e23]: Choose the best way to get in touch with us
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - img [ref=e28]
+            - heading "AI Chat Support" [level=3] [ref=e30]
+            - paragraph [ref=e31]: Get instant answers to your questions about our platform, pricing, and courses with our intelligent assistant.
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - img [ref=e34]
+              - text: Available 24/7
+            - button "Open AI Chat" [ref=e36] [cursor=pointer]:
+              - img
+              - text: Open AI Chat
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - img [ref=e40]
+            - heading "Human Support" [level=3] [ref=e43]
+            - paragraph [ref=e44]: For more personalized assistance, complex questions, or business partnerships, reach out via email.
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - img [ref=e47]
+              - text: Response within 24-48 hours
+            - button "Send Email" [ref=e50] [cursor=pointer]:
+              - img
+              - text: Send Email
+            - paragraph [ref=e51]: contact@educly.app
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - img [ref=e55]
+            - heading "Request Refund" [level=3] [ref=e60]
+            - paragraph [ref=e61]: 30-day refund policy. Send your request via email with your purchase details.
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - img [ref=e64]
+              - text: Processing within 48 hours
+            - button "Request Refund" [ref=e67] [cursor=pointer]:
+              - img
+              - text: Request Refund
+            - paragraph [ref=e68]: contact@educly.app
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - img [ref=e72]
+            - heading "Report Bug or Suggestion" [level=3] [ref=e74]
+            - paragraph [ref=e75]: Found an error or have an idea to improve the platform? We love hearing from our users!
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - img [ref=e78]
+              - text: Response within 48 hours
+            - button "Send Feedback" [ref=e81] [cursor=pointer]:
+              - img
+              - text: Send Feedback
+            - paragraph [ref=e82]: contact@educly.app
+      - generic [ref=e83]:
+        - heading "What our AI chat can help with" [level=2] [ref=e84]
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - img [ref=e87]
+            - generic [ref=e90]: Information about our 8 AI tools (ChatGPT, Claude, Gemini, etc.)
+          - generic [ref=e91]:
+            - img [ref=e92]
+            - generic [ref=e95]: Pricing and subscription plans
+          - generic [ref=e96]:
+            - img [ref=e97]
+            - generic [ref=e100]: 28-day challenge details
+          - generic [ref=e101]:
+            - img [ref=e102]
+            - generic [ref=e105]: How the platform works
+          - generic [ref=e106]:
+            - img [ref=e107]
+            - generic [ref=e110]: Certification process
+          - generic [ref=e111]:
+            - img [ref=e112]
+            - generic [ref=e115]: Technical requirements
+      - generic [ref=e117]:
+        - heading "Company Information" [level=3] [ref=e118]:
+          - img [ref=e119]
+          - text: Company Information
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - paragraph [ref=e125]: "Services provided by:"
+            - generic [ref=e126]:
+              - img [ref=e127]
+              - generic [ref=e130]:
+                - paragraph [ref=e131]: Contra Estatistica Digital Marketers LLC
+                - paragraph [ref=e132]: "EIN: 39-4917931 • United States"
+            - generic [ref=e133]:
+              - img [ref=e134]
+              - paragraph [ref=e137]: 1209 Mountain Road Pl NE, Ste R, Albuquerque, NM 87110, United States
+          - generic [ref=e139]:
+            - paragraph [ref=e140]: "Corporate Headquarter:"
+            - generic [ref=e141]:
+              - img [ref=e142]
+              - generic [ref=e145]:
+                - paragraph [ref=e146]: SELLCORE LTD.
+                - paragraph [ref=e147]: C 62598 • Saint Kitts and Nevis
+            - generic [ref=e148]:
+              - img [ref=e149]
+              - paragraph [ref=e152]: Suite 5, Horsford's Business Centre, Long Point Road, Charlestown, Nevis
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - img [ref=e156]
+              - link "+5562991874867" [ref=e158] [cursor=pointer]:
+                - /url: tel:+5562991874867
+            - generic [ref=e159]:
+              - img [ref=e161]
+              - link "contact@educly.app" [ref=e164] [cursor=pointer]:
+                - /url: mailto:contact@educly.app
+    - contentinfo [ref=e165]:
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - generic [ref=e168]:
+            - link "Educy" [ref=e169] [cursor=pointer]:
+              - /url: /
+              - img "Educy" [ref=e170]
+            - paragraph [ref=e171]: The most complete AI app on the market. Learn AI hands-on, right from your phone.
+            - paragraph [ref=e172]:
+              - generic [ref=e173]: "Contact:"
+              - link "contact@educly.app" [ref=e174] [cursor=pointer]:
+                - /url: mailto:contact@educly.app
+          - generic [ref=e175]:
+            - heading "Features" [level=4] [ref=e176]
+            - list [ref=e177]:
+              - listitem [ref=e178]:
+                - link "AI Trails" [ref=e179] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e180]:
+                - link "28-Day Challenges" [ref=e181] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e182]:
+                - link "AI Assistant" [ref=e183] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e184]:
+                - link "Digital Certificates" [ref=e185] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e186]:
+            - heading "Resources" [level=4] [ref=e187]
+            - list [ref=e188]:
+              - listitem [ref=e189]:
+                - link "Blog" [ref=e190] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e191]:
+                - link "Tutorials" [ref=e192] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e193]:
+                - link "Guides" [ref=e194] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e195]:
+                - link "Community" [ref=e196] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e197]:
+            - heading "Company" [level=4] [ref=e198]
+            - list [ref=e199]:
+              - listitem [ref=e200]:
+                - link "About Us" [ref=e201] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e202]:
+                - link "Careers" [ref=e203] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e204]:
+                - link "Partnerships" [ref=e205] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e206]:
+                - link "Contact" [ref=e207] [cursor=pointer]:
+                  - /url: /contato
+          - generic [ref=e208]:
+            - heading "Legal" [level=4] [ref=e209]
+            - list [ref=e210]:
+              - listitem [ref=e211]:
+                - link "Terms of Use" [ref=e212] [cursor=pointer]:
+                  - /url: /termos
+              - listitem [ref=e213]:
+                - link "Privacy" [ref=e214] [cursor=pointer]:
+                  - /url: /privacidade
+              - listitem [ref=e215]:
+                - link "Cookies" [ref=e216] [cursor=pointer]:
+                  - /url: /cookies
+              - listitem [ref=e217]:
+                - link "Cancellation" [ref=e218] [cursor=pointer]:
+                  - /url: /cancelamento
+              - listitem [ref=e219]:
+                - link "Subscription Terms" [ref=e220] [cursor=pointer]:
+                  - /url: /termos-assinatura
+        - generic [ref=e221]:
+          - generic [ref=e222]:
+            - paragraph [ref=e223]: Educly is a product of the companies
+            - generic [ref=e224]:
+              - generic [ref=e225]:
+                - paragraph [ref=e226]: Contra Estatistica Digital Marketers LLC
+                - paragraph [ref=e227]:
+                  - text: 1209 Mountain Road Pl NE, Ste R, Albuquerque, NM 87110, United States
+                  - text: "EIN: 39-4917931"
+              - generic [ref=e229]:
+                - paragraph [ref=e230]: SELLCORE LTD.
+                - paragraph [ref=e231]:
+                  - text: "empresasRegistration: C 62598 • Saint Kitts and Nevis"
+                  - text: Suites 5 Horsford's Business Centre, Long Point Road, Charlestown, Nevis
+          - paragraph [ref=e232]: © 2026 Educly. All rights reserved.
+    - button "Open support chat" [ref=e233] [cursor=pointer]:
+      - img "Educy" [ref=e234]
+```

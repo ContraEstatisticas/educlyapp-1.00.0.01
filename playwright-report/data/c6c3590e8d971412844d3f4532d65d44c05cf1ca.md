@@ -1,0 +1,68 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e3]:
+    - generic:
+      - generic:
+        - generic:
+          - generic: 🤖
+      - generic:
+        - generic:
+          - generic: 🤖
+      - generic:
+        - generic:
+          - generic: 🤖
+    - main [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - img [ref=e7]
+          - generic [ref=e10]: Registration confirmed
+        - generic [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+          - img [ref=e16]
+      - generic [ref=e22]:
+        - heading "Your journey as an AI Specialist starts here" [level=1] [ref=e23]:
+          - text: Your journey as an
+          - text: AI Specialist starts here
+        - paragraph [ref=e24]: "We are incredibly happy to have you here. We've prepared the best environment for your growth: master the right tools and transform your career in the next 28 days."
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - heading "Create your account" [level=3] [ref=e29]
+          - paragraph [ref=e30]: Enter your details to unlock access right now.
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - img [ref=e34]
+              - text: Full Name
+            - textbox "Full Name" [ref=e37]:
+              - /placeholder: Enter your full name
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - img [ref=e40]
+              - text: Email
+            - textbox "Email" [ref=e43]:
+              - /placeholder: your@email.com
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - text: Password
+            - generic [ref=e49]:
+              - textbox "Password" [ref=e50]:
+                - /placeholder: Your password
+              - button [ref=e51] [cursor=pointer]:
+                - img
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - img [ref=e54]
+              - text: Confirm Password
+            - generic [ref=e57]:
+              - textbox "Confirm Password" [ref=e58]:
+                - /placeholder: Confirm your password
+              - button [ref=e59] [cursor=pointer]:
+                - img
+          - button "Create account and access" [ref=e60] [cursor=pointer]
+```

@@ -53,16 +53,26 @@ const EVENT_MAP: Record<string, string> = {
   "subscription.canceled": "SUBSCRIPTION_CANCELLATION",
   "subscription.paused": "PAUSING",
   "subscription.resumed": "RESUMING",
+  "subscription.past_due": "OVERDUE",
+  "transaction.refunded": "REFUNDED",
+  "transaction.canceled": "CANCELED"
 };
 
 // Events that should be ignored
 const IGNORE_EVENTS = ["transaction.payment_failed"];
 
-// Events that grant access
-const GRANT_EVENT_TYPES = ["PURCHASE_COMPLETE", "SUBSCRIPTION_SETTLED", "RESUMING"];
-
 const CUSTOMER_CREATED_EVENTS = ["customer.created", "customer.create"];
-const TRANSACTION_PAID_EVENTS = ["transaction.paid"];
+// Traz para a fila (billing) eventos de entrada e de saída
+const BILLING_ACTION_EVENTS = [
+  "transaction.paid", 
+  "transaction.completed", 
+  "subscription.activated", 
+  "subscription.canceled", 
+  "subscription.paused", 
+  "subscription.resumed", 
+  "transaction.refunded",
+  "subscription.past_due"
+];
 
 function normalizeEmail(rawEmail: unknown): string | null {
   if (typeof rawEmail !== "string") return null;
@@ -180,7 +190,7 @@ async function enqueueWelcomeEmail(params: {
 
 // ---------------------------------------------------------------------------
 
-async function grantRealtimeAccessByEmail(supabase: any, email: string) {
+async function processRealtimeBillingByEmail(supabase: any, email: string) {
   try {
     let foundUserId: string | null = null;
     let page = 1;
@@ -207,7 +217,7 @@ async function grantRealtimeAccessByEmail(supabase: any, email: string) {
     }
 
     if (foundUserId) {
-      console.log(`[paddle-webhook] User found: ${foundUserId}, granting access`);
+      console.log(`[paddle-webhook] User found: ${foundUserId}, processing billing sync...`);
       const { error: rpcError } = await (supabase as any).rpc("process_pending_billing_events", {
         p_user_id: foundUserId,
         p_email: email,
@@ -216,7 +226,7 @@ async function grantRealtimeAccessByEmail(supabase: any, email: string) {
       if (rpcError) {
         console.error("[paddle-webhook] RPC error:", rpcError);
       } else {
-        console.log(`[paddle-webhook] Access granted in real-time for ${email}`);
+        console.log(`[paddle-webhook] Billing correctly validated/revoked in real-time for ${email}`);
       }
     } else {
       console.log(`[paddle-webhook] User not found for ${email}, will reconcile on signup`);
@@ -428,12 +438,12 @@ serve(async (req) => {
       });
     }
 
-    // 6. Process transaction.paid using customer_id -> paddle_customer(email)
-    if (TRANSACTION_PAID_EVENTS.includes(paddleEventType)) {
+    // 6. Process billing action using customer_id -> paddle_customer(email)
+    if (BILLING_ACTION_EVENTS.includes(paddleEventType)) {
       const customerId = extractCustomerId(payload);
       if (!customerId) {
-        console.error("[paddle-webhook] transaction.paid without customer_id");
-        return new Response(JSON.stringify({ error: "transaction.paid missing customer_id" }), {
+        console.error(`[paddle-webhook] ${paddleEventType} without customer_id`);
+        return new Response(JSON.stringify({ error: `${paddleEventType} missing customer_id` }), {
           status: 400,
           headers: corsHeaders,
         });
@@ -489,7 +499,7 @@ serve(async (req) => {
       const productId = payload.data?.items?.[0]?.price?.product_id || payload.data?.items?.[0]?.product?.id || "";
 
       console.log(
-        `[paddle-webhook] Processing transaction.paid: email=${email}, event=${eventType}, product=${productId}`,
+        `[paddle-webhook] Processing billing action: email=${email}, event=${eventType}, product=${productId}`,
       );
 
       const payloadWithCustomer = {
@@ -516,31 +526,33 @@ serve(async (req) => {
 
       console.log(`[paddle-webhook] Billing event logged for ${email}`);
 
-      if (GRANT_EVENT_TYPES.includes(eventType)) {
-        await grantRealtimeAccessByEmail(supabase, email);
+      if (BILLING_ACTION_EVENTS.includes(paddleEventType)) {
+        await processRealtimeBillingByEmail(supabase, email);
       }
 
-      // ✅ enfileirar e-mail pós-compra (sem quebrar o resto)
+      // ✅ enfileirar e-mail pós-compra (apenas para novas compras)
       try {
-        const buyerName = (customerRow as any)?.name || payload?.data?.customer?.name || "Aluno";
-        const buyerLocale = (customerRow as any)?.locale || payload?.data?.customer?.locale || "es";
+        if (["PURCHASE_COMPLETE", "SUBSCRIPTION_SETTLED"].includes(eventType)) {
+          const buyerName = (customerRow as any)?.name || payload?.data?.customer?.name || "Aluno";
+          const buyerLocale = (customerRow as any)?.locale || payload?.data?.customer?.locale || "es";
 
-        console.log("[paddle-webhook] About to enqueue welcome email:", {
-          email,
-          buyerName,
-          buyerLocale,
-          productId: productId || "unknown",
-        });
+          console.log("[paddle-webhook] About to enqueue welcome email:", {
+            email,
+            buyerName,
+            buyerLocale,
+            productId: productId || "unknown",
+          });
 
-        await enqueueWelcomeEmail({
-          supabase,
-          email,
-          buyerName,
-          locale: buyerLocale,
-          productId: productId || "unknown",
-        });
+          await enqueueWelcomeEmail({
+            supabase,
+            email,
+            buyerName,
+            locale: buyerLocale,
+            productId: productId || "unknown",
+          });
 
-        console.log("[paddle-webhook] enqueueWelcomeEmail completed successfully for:", email);
+          console.log("[paddle-webhook] enqueueWelcomeEmail completed successfully for:", email);
+        }
       } catch (e) {
         console.error("[paddle-webhook] enqueue welcome failed (non-blocking):", e);
       }
