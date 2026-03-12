@@ -8,7 +8,7 @@ import confetti from "canvas-confetti";
 import { LanguageSelectionModal } from "@/components/LanguageSelectionModal";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { createPurchasedAccount } from "@/lib/purchasedSignup";
+import { createPendingAccount, createPurchasedAccount } from "@/lib/purchasedSignup";
 import i18n from "i18next";
 import {
   Dialog,
@@ -207,6 +207,7 @@ const ThankYou = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
+  const [lastPurchaseCheck, setLastPurchaseCheck] = useState<boolean>(false);
   const isPurchaseFlow = Boolean(searchParams.get("email"));
   const supportEmail = "contact@educly.app";
   const noPurchaseDescription = t(
@@ -231,9 +232,16 @@ const ThankYou = () => {
     });
   }, []);
 
-  const performSignup = async () => {
+  const performSignup = async (hasPurchase: boolean) => {
     const currentLanguage = navigator.language || i18n.language || "en";
-    const signupResult = await createPurchasedAccount({
+    const signupResult = hasPurchase
+      ? await createPurchasedAccount({
+        email,
+        password,
+        fullName: fullName.trim(),
+        preferredLanguage: currentLanguage,
+      })
+      : await createPendingAccount({
       email,
       password,
       fullName: fullName.trim(),
@@ -257,6 +265,19 @@ const ThankYou = () => {
         description: signupResult.message,
         variant: "destructive",
       });
+      return;
+    }
+
+    if (!hasPurchase) {
+      setIsLoading(false);
+      toast({
+        title: t("auth.signupSuccess"),
+        description: t(
+          "auth.pendingAccessMessage",
+          "Conta criada com sucesso. O acesso sera liberado automaticamente apos a compra.",
+        ),
+      });
+      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
       return;
     }
 
@@ -328,18 +349,41 @@ const ThankYou = () => {
 
       if (purchaseError) {
         console.error("Error checking purchase status:", purchaseError);
+        setIsLoading(false);
+        toast({
+          title: t("auth.signupError"),
+          description: t("common.error"),
+          variant: "destructive",
+        });
+        return;
       }
 
-      if (!purchaseError && hasPurchase === false) {
+      if (hasPurchase === false) {
+        setLastPurchaseCheck(false);
         setIsLoading(false);
         setIsNoPurchaseDialogOpen(true);
         return;
       }
+
+      setLastPurchaseCheck(true);
     } catch (purchaseErr) {
       console.error("Exception checking purchase status:", purchaseErr);
+      setIsLoading(false);
+      toast({
+        title: t("auth.signupError"),
+        description: t("common.error"),
+        variant: "destructive",
+      });
+      return;
     }
 
-    await performSignup();
+    await performSignup(true);
+  };
+
+  const handleContinueSignup = async () => {
+    setIsNoPurchaseDialogOpen(false);
+    setIsLoading(true);
+    await performSignup(lastPurchaseCheck);
   };
 
   return (
@@ -589,8 +633,8 @@ const ThankYou = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex flex-col sm:flex-row gap-2">
-            <Button type="button" variant="outline" onClick={() => setIsNoPurchaseDialogOpen(false)} className="w-full">
-              {t("common.ok", "OK")}
+            <Button type="button" variant="outline" onClick={handleContinueSignup} className="w-full">
+              {t("auth.noPurchaseContinue", "Continuar cadastro")}
             </Button>
           </DialogFooter>
         </DialogContent>
