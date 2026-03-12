@@ -142,7 +142,12 @@ const SignupFromEmail = () => {
         await supabase.rpc("process_pending_billing_events", { p_user_id: data.user.id, p_email: email });
       } catch { }
 
-      // NO welcome email sent here - already sent on purchase
+      // Auto-confirm email since purchase already validated the email
+      try {
+        await supabase.functions.invoke("confirm-signup-email", {
+          body: { user_id: data.user.id },
+        });
+      } catch { }
 
       // Always sign in explicitly after signup to guarantee an active session
       const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
