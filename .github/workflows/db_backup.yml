@@ -14,25 +14,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install PostgreSQL client
-        run: sudo apt-get install -y postgresql-client
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
 
-      - name: Dump Database (Schema and Data)
+      - name: Dump Database via Supabase API
         env:
-          PGHOST: db.dqlcxpbfemhzzetwaxsa.supabase.co
-          PGPORT: 5432
-          PGDATABASE: postgres
-          PGUSER: postgres
-          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-          PGSSLMODE: require
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
-          # Resolve para IPv4 apenas (GitHub Actions não tem IPv6)
-          IPV4=$(getent ahostsv4 "$PGHOST" | awk 'NR==1{print $1}')
-          echo "Conectando via IPv4: $IPV4"
-          export PGHOSTADDR="$IPV4"
-          
-          echo "Iniciando processo de dump dos dados..."
-          pg_dump -f database_backup.sql
+          supabase link --project-ref dqlcxpbfemhzzetwaxsa
+          supabase db dump --linked -f database_backup.sql
           
       - name: Upload Backup as Artifact
         uses: actions/upload-artifact@v4
