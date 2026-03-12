@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scripts locais com credenciais
+send-maintenance-notification.ps1
