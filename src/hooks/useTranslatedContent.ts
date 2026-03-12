@@ -12,11 +12,15 @@ export const useTranslatedContent = () => {
   };
 
   const getPhaseTitle = (slug: string, phaseNumber: number): string => {
-    return t(`aiTools.${slug}.phases.${phaseNumber}.title`, { defaultValue: '' });
+    const aiToolTitle = t(`aiTools.${slug}.phases.${phaseNumber}.title`, { defaultValue: '' });
+    if (aiToolTitle) return aiToolTitle;
+    return t(`challenges.${slug}.days.${phaseNumber}.title`, { defaultValue: '' });
   };
 
   const getPhaseDescription = (slug: string, phaseNumber: number): string => {
-    return t(`aiTools.${slug}.phases.${phaseNumber}.description`, { defaultValue: '' });
+    const aiToolDesc = t(`aiTools.${slug}.phases.${phaseNumber}.description`, { defaultValue: '' });
+    if (aiToolDesc) return aiToolDesc;
+    return t(`challenges.${slug}.days.${phaseNumber}.description`, { defaultValue: '' });
   };
 
   const getPhaseTask = (slug: string, phaseNumber: number): string => {
