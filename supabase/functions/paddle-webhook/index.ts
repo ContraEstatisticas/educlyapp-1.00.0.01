@@ -192,11 +192,11 @@ async function enqueueWelcomeEmail(params: {
 
 async function processRealtimeBillingByEmail(supabase: any, email: string) {
   try {
-    let foundUserId: string | null = null;
+    let foundUser: { id: string; email_confirmed_at?: string | null } | null = null;
     let page = 1;
     const perPage = 1000;
 
-    while (!foundUserId) {
+    while (!foundUser) {
       const { data: listData, error: listError } = await supabase.auth.admin.listUsers({
         page,
         perPage,
@@ -207,7 +207,10 @@ async function processRealtimeBillingByEmail(supabase: any, email: string) {
       const match = listData.users.find((u: { email?: string }) => normalizeEmail(u.email) === email);
 
       if (match) {
-        foundUserId = match.id;
+        foundUser = {
+          id: match.id,
+          email_confirmed_at: match.email_confirmed_at ?? null,
+        };
         break;
       }
 
@@ -216,10 +219,22 @@ async function processRealtimeBillingByEmail(supabase: any, email: string) {
       if (page > 10) break;
     }
 
-    if (foundUserId) {
-      console.log(`[paddle-webhook] User found: ${foundUserId}, processing billing sync...`);
+    if (foundUser) {
+      if (!foundUser.email_confirmed_at) {
+        const { error: confirmError } = await supabase.auth.admin.updateUserById(foundUser.id, {
+          email_confirm: true,
+        });
+
+        if (confirmError) {
+          console.error("[paddle-webhook] Failed to auto-confirm user after purchase:", confirmError);
+        } else {
+          console.log(`[paddle-webhook] User auto-confirmed after purchase: ${foundUser.id}`);
+        }
+      }
+
+      console.log(`[paddle-webhook] User found: ${foundUser.id}, processing billing sync...`);
       const { error: rpcError } = await (supabase as any).rpc("process_pending_billing_events", {
-        p_user_id: foundUserId,
+        p_user_id: foundUser.id,
         p_email: email,
       });
 

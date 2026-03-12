@@ -207,7 +207,6 @@ const ThankYou = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
-  const [skipNoPurchaseCheck, setSkipNoPurchaseCheck] = useState(false);
   const isPurchaseFlow = Boolean(searchParams.get("email"));
   const supportEmail = "contact@educly.app";
   const noPurchaseDescription = t(
@@ -234,108 +233,41 @@ const ThankYou = () => {
 
   const performSignup = async () => {
     const currentLanguage = navigator.language || i18n.language || "en";
+    const signupResult = await createPurchasedAccount({
+      email,
+      password,
+      fullName: fullName.trim(),
+      preferredLanguage: currentLanguage,
+    });
 
-    if (isPurchaseFlow) {
-      const signupResult = await createPurchasedAccount({
-        email,
-        password,
-        fullName: fullName.trim(),
-        preferredLanguage: currentLanguage,
-      });
-
-      if (!signupResult.ok) {
-        setIsLoading(false);
-        if (signupResult.code === "ALREADY_EXISTS") {
-          toast({
-            title: t("auth.signupError"),
-            description: t("signupFromEmail.alreadyHaveAccount", "Você já tem uma conta!"),
-            variant: "destructive",
-          });
-          navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
-          return;
-        }
-
+    if (!signupResult.ok) {
+      setIsLoading(false);
+      if (signupResult.code === "ALREADY_EXISTS") {
         toast({
           title: t("auth.signupError"),
-          description: signupResult.message,
+          description: t("signupFromEmail.alreadyHaveAccount", "Você já tem uma conta!"),
           variant: "destructive",
-        });
-        return;
-      }
-
-      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-      if (signInError) {
-        setIsLoading(false);
-        toast({
-          title: t("auth.signupSuccess"),
-          description: t("auth.loginTab"),
         });
         navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
         return;
       }
 
-      setIsLoading(false);
-
-      toast({
-        title: t("auth.signupSuccess"),
-        description: t("common.loading"),
-      });
-
-      navigate("/dashboard", { replace: true });
-      return;
-    }
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/dashboard`,
-        data: {
-          full_name: fullName.trim(),
-        },
-      },
-    });
-
-    if (error) {
-      setIsLoading(false);
       toast({
         title: t("auth.signupError"),
-        description: error.message === "User already registered" ? t("auth.signupError") : error.message,
+        description: signupResult.message,
         variant: "destructive",
       });
       return;
     }
 
-    if (data.user) {
-      try {
-        await supabase.from("profiles").update({ preferred_language: currentLanguage }).eq("id", data.user.id);
-      } catch (langErr) {
-        console.error("Error updating language preference:", langErr);
-      }
-
-      try {
-        const { error: rpcError } = await supabase.rpc("process_pending_billing_events", {
-          p_user_id: data.user.id,
-          p_email: email,
-        });
-
-        if (rpcError) {
-          console.error("Error processing billing events:", rpcError);
-        }
-      } catch (rpcErr) {
-        console.error("Exception in billing reconciliation:", rpcErr);
-      }
-
-      // Email de boas-vindas removido do signup - agora enviado apenas na compra/liberação manual
-
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    if (signInError) {
       setIsLoading(false);
-
       toast({
         title: t("auth.signupSuccess"),
-        description: t("common.loading"),
+        description: t("auth.loginTab"),
       });
-
-      navigate("/dashboard", { replace: true });
+      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
       return;
     }
 
@@ -389,33 +321,24 @@ const ThankYou = () => {
 
     setIsLoading(true);
 
-    if (!skipNoPurchaseCheck) {
-      try {
-        const { data: hasPurchase, error: purchaseError } = await supabase.rpc("check_purchase_exists" as any, {
-          p_email: email,
-        });
+    try {
+      const { data: hasPurchase, error: purchaseError } = await supabase.rpc("check_purchase_exists" as any, {
+        p_email: email,
+      });
 
-        if (purchaseError) {
-          console.error("Error checking purchase status:", purchaseError);
-        }
-
-        if (!purchaseError && hasPurchase === false) {
-          setIsLoading(false);
-          setIsNoPurchaseDialogOpen(true);
-          return;
-        }
-      } catch (purchaseErr) {
-        console.error("Exception checking purchase status:", purchaseErr);
+      if (purchaseError) {
+        console.error("Error checking purchase status:", purchaseError);
       }
+
+      if (!purchaseError && hasPurchase === false) {
+        setIsLoading(false);
+        setIsNoPurchaseDialogOpen(true);
+        return;
+      }
+    } catch (purchaseErr) {
+      console.error("Exception checking purchase status:", purchaseErr);
     }
 
-    await performSignup();
-  };
-
-  const handleContinueSignup = async () => {
-    setIsNoPurchaseDialogOpen(false);
-    setSkipNoPurchaseCheck(true);
-    setIsLoading(true);
     await performSignup();
   };
 
@@ -666,8 +589,8 @@ const ThankYou = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex flex-col sm:flex-row gap-2">
-            <Button type="button" variant="outline" onClick={handleContinueSignup} className="w-full">
-              {t("auth.noPurchaseContinue", "Continuar cadastro")}
+            <Button type="button" variant="outline" onClick={() => setIsNoPurchaseDialogOpen(false)} className="w-full">
+              {t("common.ok", "OK")}
             </Button>
           </DialogFooter>
         </DialogContent>
