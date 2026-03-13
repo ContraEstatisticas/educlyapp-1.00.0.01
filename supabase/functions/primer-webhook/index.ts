@@ -193,12 +193,13 @@ serve(async (req) => {
     console.log(`[primer-webhook] Queuing: email=${email}, name=${buyerName}, product=${productId}, lang=${language}`);
 
     // Extract event_type from payload
-    const eventType = (
+    const rawEventType = (
       payload.data?.event_type ||
       payload.event_type ||
       payload.event ||
       'PURCHASE_COMPLETE'
-    )?.toString().toUpperCase();
+    )?.toString();
+    const eventType = rawEventType ? rawEventType.trim().toUpperCase().replace(/[.\s-]+/g, '_') : 'PURCHASE_COMPLETE';
 
     // ALWAYS insert billing_event_logs FIRST (before email dedup)
     const { error: billingError } = await supabase
