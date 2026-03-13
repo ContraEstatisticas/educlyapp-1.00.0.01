@@ -208,8 +208,13 @@ function isValidAuthorizationHeader(authHeader: string, expectedApiKey: string):
 async function verifyPaddleSignature(rawBody: string, signatureHeader: string, secret: string): Promise<boolean> {
   try {
     const parts: Record<string, string> = {};
-    for (const part of signatureHeader.split(";")) {
-      const [key, value] = part.split("=");
+    for (const part of signatureHeader.split(/[;,]/)) {
+      const trimmedPart = part.trim();
+      const separatorIndex = trimmedPart.indexOf("=");
+      if (separatorIndex <= 0) continue;
+
+      const key = trimmedPart.slice(0, separatorIndex).trim().toLowerCase();
+      const value = trimmedPart.slice(separatorIndex + 1).trim();
       if (key && value) parts[key] = value;
     }
 
@@ -229,7 +234,7 @@ async function verifyPaddleSignature(rawBody: string, signatureHeader: string, s
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
 
-    return computedHex === h1;
+    return computedHex === h1.toLowerCase();
   } catch (err) {
     console.error("[paddle-webhook] Signature verification error:", err);
     return false;
@@ -266,7 +271,7 @@ serve(async (req) => {
     }
 
     const authorizationHeader = req.headers.get("authorization") || "";
-    const signatureHeader = req.headers.get("paddle-signature") || "";
+    const signatureHeader = req.headers.get("paddle-signature") || req.headers.get("Paddle-Signature") || "";
     const paddleApiKey = Deno.env.get("PADDLE_API_KEY")?.trim() || "";
     const webhookSecret = Deno.env.get("PADDLE_WEBHOOK_SECRET")?.trim() || "";
 
