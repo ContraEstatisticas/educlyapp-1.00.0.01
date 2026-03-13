@@ -81,6 +81,20 @@ Deno.serve(async (req) => {
 
     const existingUser = await findUserByEmail(supabaseAdmin, email);
     if (existingUser) {
+      const { data: hasPremiumAccess } = await supabaseAdmin.rpc("check_premium_access", {
+        user_email: email,
+      });
+
+      if (hasPremiumAccess) {
+        const { error: confirmExistingError } = await supabaseAdmin.auth.admin.updateUserById(existingUser.id, {
+          email_confirm: true,
+        });
+
+        if (confirmExistingError) {
+          console.warn("[pending-signup] existing premium user email auto-confirm failed:", confirmExistingError);
+        }
+      }
+
       return jsonResponse({ error: "User already registered", code: "ALREADY_EXISTS" }, 409);
     }
 

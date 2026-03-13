@@ -94,6 +94,14 @@ Deno.serve(async (req) => {
 
     const existingUser = await findUserByEmail(supabaseAdmin, email);
     if (existingUser) {
+      const { error: confirmExistingError } = await supabaseAdmin.auth.admin.updateUserById(existingUser.id, {
+        email_confirm: true,
+      });
+
+      if (confirmExistingError) {
+        console.warn("[purchased-signup] existing user email auto-confirm failed:", confirmExistingError);
+      }
+
       return jsonResponse({ error: "User already registered", code: "ALREADY_EXISTS" }, 409);
     }
 

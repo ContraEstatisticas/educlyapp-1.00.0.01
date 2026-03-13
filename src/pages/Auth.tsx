@@ -50,7 +50,7 @@ const Auth = () => {
   const [isResetLoading, setIsResetLoading] = useState(false);
 
   const [isLoginErrorDialogOpen, setIsLoginErrorDialogOpen] = useState(false);
-  const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService">("invalid");
+  const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService" | "unconfirmed">("invalid");
   const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
   const [lastPurchaseCheck, setLastPurchaseCheck] = useState<boolean>(false);
 
@@ -122,8 +122,10 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
+      const normalizedLoginEmail = email.trim().toLowerCase().replace(/\.+$/, "");
+
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: normalizedLoginEmail,
         password,
       });
 
@@ -134,7 +136,10 @@ const Auth = () => {
       }
 
       if (error) {
-        setLoginErrorType("invalid");
+        const message = String(error.message || "").toLowerCase();
+        const isUnconfirmed = message.includes("email not confirmed") || message.includes("not confirmed");
+
+        setLoginErrorType(isUnconfirmed ? "unconfirmed" : "invalid");
         setIsLoginErrorDialogOpen(true);
         return;
       }
@@ -145,9 +150,9 @@ const Auth = () => {
         if (user) {
           await supabase.rpc("process_pending_billing_events", {
             p_user_id: user.id,
-            p_email: email,
+            p_email: normalizedLoginEmail,
           });
-          console.log("Billing reconciliation on login completed for:", email);
+          console.log("Billing reconciliation on login completed for:", normalizedLoginEmail);
         }
       } catch (rpcErr) {
         console.error("Billing reconciliation on login error:", rpcErr);
@@ -159,7 +164,7 @@ const Auth = () => {
         let isPremium = false;
         for (let attempt = 0; attempt < 3; attempt++) {
           const { data, error } = await supabase.rpc("check_premium_access", {
-            user_email: email
+            user_email: normalizedLoginEmail
           });
           if (!error && data === true) {
             isPremium = true;
@@ -355,17 +360,24 @@ const Auth = () => {
   const loginErrorTitle =
     loginErrorType === "noService"
       ? t("auth.noActiveServiceTitle", "Sem servico ativo")
-      : t("auth.invalidLoginTitle");
+      : loginErrorType === "unconfirmed"
+        ? t("auth.emailNotConfirmedTitle", "Conta criada, mas ainda não ativada")
+        : t("auth.invalidLoginTitle");
   const loginErrorDescription =
     loginErrorType === "noService"
       ? t(
         "auth.noActiveServiceDescription",
         "Nao ha servico ativo para este email. Verifique se a compra foi feita com o mesmo email cadastrado."
       )
-      : t(
-        "auth.accountNotFoundDescription",
-        "Nao localizamos a sua conta"
-      );
+      : loginErrorType === "unconfirmed"
+        ? t(
+          "auth.emailNotConfirmedDescription",
+          "Detectamos sua conta, mas o email ainda não foi confirmado. Use o botão de redefinir senha para ativar e acessar."
+        )
+        : t(
+          "auth.accountNotFoundDescription",
+          "Nao localizamos a sua conta"
+        );
   const supportEmail = "contact@educly.app";
   const noPurchaseDescription = t(
     "auth.noPurchaseDescription",
@@ -377,11 +389,17 @@ const Auth = () => {
         .split("\n")
         .map((line) => line.trim())
         .filter(Boolean)
-      : [
-        t("auth.accountNotFoundStep1"),
-        t("auth.accountNotFoundStep2"),
-        t("auth.accountNotFoundStep3")
-      ];
+      : loginErrorType === "unconfirmed"
+        ? [
+          t("auth.emailNotConfirmedStep1", "A conta foi encontrada para este e-mail."),
+          t("auth.emailNotConfirmedStep2", "Toque em 'Esqueceu a senha?' para ativar e definir uma nova senha."),
+          t("auth.emailNotConfirmedStep3", `Se continuar com problema, fale com ${supportEmail}`),
+        ]
+        : [
+          t("auth.accountNotFoundStep1"),
+          t("auth.accountNotFoundStep2"),
+          t("auth.accountNotFoundStep3")
+        ];
   const noPurchaseLines = noPurchaseDescription
     .split("\n")
     .map((line) => line.trim())
@@ -716,7 +734,21 @@ const Auth = () => {
               </ol>
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="flex-col gap-2 sm:flex-col">
+            {loginErrorType !== "noService" && (
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setResetEmail(email.trim());
+                  setIsLoginErrorDialogOpen(false);
+                  setIsResetDialogOpen(true);
+                }}
+              >
+                {t("auth.forgotPassword", "Esqueceu a senha?")}
+              </Button>
+            )}
             <Button
               type="button"
               onClick={() => setIsLoginErrorDialogOpen(false)}

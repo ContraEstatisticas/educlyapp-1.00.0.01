@@ -106,6 +106,16 @@ Deno.serve(async (req) => {
     }
 
     const userId = user.id;
+
+    // Manual grants should never leave users blocked by unconfirmed email.
+    const { error: confirmEmailError } = await supabase.auth.admin.updateUserById(userId, {
+      email_confirm: true,
+    });
+
+    if (confirmEmailError) {
+      console.warn("Could not auto-confirm user email:", confirmEmailError);
+    }
+
     const now = new Date();
     const expiresAt = duration_days
       ? new Date(now.getTime() + duration_days * 24 * 60 * 60 * 1000).toISOString()
