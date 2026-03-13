@@ -4,22 +4,22 @@ import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
-import { AppDemoSection } from "@/components/landing/AppDemoSection";
+import { GlobalReachSection } from "@/components/landing/GlobalReachSection";
 import { CTASection } from "@/components/landing/CTASection";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingSupportChat } from "@/components/landing/FloatingSupportChat";
 
 export const LandingHero = () => {
     return (
-        <div className="min-h-screen overflow-x-clip">
+        <div className="min-h-screen bg-background text-foreground">
             <LandingNavbar />
-            <main>
+            <main className="text-slate-900 dark:text-white">
                 <HeroSection />
                 <FeaturesSection />
-                <StatsSection />
                 <PricingSection />
+                <StatsSection />
                 <TestimonialsSection />
-                <AppDemoSection />
+                <GlobalReachSection />
                 <CTASection />
             </main>
             <Footer />

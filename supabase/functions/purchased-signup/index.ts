@@ -25,7 +25,7 @@ const normalizeLanguage = (value: unknown) => {
   return normalized || "en";
 };
 
-async function findUserByEmail(supabaseAdmin: any, email: string) {
+async function findUserByEmail(supabaseAdmin: ReturnType<typeof createClient>, email: string) {
   let page = 1;
   const perPage = 1000;
 

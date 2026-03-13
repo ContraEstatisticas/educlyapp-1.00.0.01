@@ -1,132 +1,67 @@
-import { Star, Users, Globe, ArrowRight } from "lucide-react";
+import { Star, Users, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-
-const ease = [0.165, 0.84, 0.44, 1] as const;
 
 export const HeroSection = () => {
-  const { t } = useTranslation();
+    const { t } = useTranslation();
 
-  return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden ld-navy">
-      {/* Sky light — subtle beam from top center */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none z-0"
-        style={{
-          width: '600px',
-          height: '100%',
-          background: 'linear-gradient(180deg, hsl(25 90% 55% / 0.07) 0%, hsl(25 90% 55% / 0.03) 30%, transparent 60%)',
-          filter: 'blur(80px)',
-        }}
-      />
+    return (
+        <section id="inicio" className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden bg-white dark:bg-slate-900">
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
 
-      {/* Very subtle warm radial ambient */}
-      <div
-        className="absolute top-[10%] left-1/2 -translate-x-1/2 pointer-events-none z-0"
-        style={{
-          width: '800px',
-          height: '400px',
-          borderRadius: '50%',
-          background: 'radial-gradient(ellipse at center, hsl(25 90% 55% / 0.04) 0%, transparent 70%)',
-        }}
-      />
+            {/* Floating Elements */}
+            <div className="absolute top-32 right-[15%] w-16 h-16 bg-orange-500/20 rounded-2xl rotate-12 animate-float hidden lg:block" />
+            <div className="absolute top-48 left-[10%] w-12 h-12 bg-blue-500/20 rounded-full animate-float-delayed hidden lg:block" />
+            <div className="absolute bottom-32 right-[25%] w-10 h-10 bg-slate-500/20 rounded-lg rotate-45 animate-float hidden lg:block" />
 
-      {/* Floating elements */}
-      <div className="absolute top-32 right-[15%] w-20 h-20 border border-white/10 rounded-2xl rotate-12 ld-float hidden lg:block" />
-      <div className="absolute top-48 left-[12%] w-14 h-14 bg-[hsl(25,90%,55%,0.08)] rounded-full ld-float-d1 hidden lg:block" />
-      <div className="absolute bottom-40 right-[22%] w-10 h-10 border border-white/5 rounded-lg rotate-45 ld-float-d2 hidden lg:block" />
-
-      <div className="max-w-[87.5rem] mx-auto px-6 md:px-10 relative z-10 pt-32 pb-20 md:pt-40 md:pb-32">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="mb-6"
-          >
-            <span className="ld-eyebrow text-[hsl(25,90%,55%)] tracking-widest text-xs">
-              🚀 {t("landing.features.sectionLabel")}
+            <div className="container mx-auto px-4 relative z-10">
+                <div className="max-w-4xl mx-auto text-center">
+                    {/* Title */}
+                    <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in-up stagger-1 text-slate-900 dark:text-white">
+                        {t('landing.hero.title')}{" "}
+                        <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+              {t('landing.hero.titleHighlight')}
             </span>
-          </motion.div>
+                        {" "}{t('landing.hero.titleEnd')}
+                    </h1>
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.1, ease }}
-            className="font-display ld-h1 text-4xl md:text-6xl lg:text-[5.75rem] text-white mb-8"
-          >
-            {t("landing.hero.title")}{" "}
-            <span className="ld-gradient-text">{t("landing.hero.titleHighlight")}</span>
-            {" "}{t("landing.hero.titleEnd")}
-          </motion.h1>
+                    {/* Subtitle */}
+                    <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto animate-fade-in-up stagger-2">
+                        {t('landing.hero.subtitle')}
+                    </p>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease }}
-            className="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed"
-          >
-            {t("landing.hero.subtitle")}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-          >
-            <a href="/#plano">
-              <button className="ld-btn-pill bg-[hsl(25,90%,55%)] text-white px-8 py-4 text-lg flex items-center gap-2 ld-shadow-glow">
-                {t("landing.pricing.ctaButton", "Começar Agora")}
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </a>
-            <Link to="/auth">
-              <button className="ld-btn-pill border-2 border-white/20 text-white px-8 py-4 text-lg hover:border-white/40 bg-transparent">
-                {t("landing.nav.login", "Login")}
-              </button>
-            </Link>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6, ease }}
-            className="flex flex-wrap justify-center gap-8 md:gap-12"
-          >
-            {[
-              { icon: Users, value: "50.000+", label: t("landing.hero.students") },
-              { icon: Star, value: "4.9", label: t("landing.hero.rating"), stars: true },
-              { icon: Globe, value: "150+", label: t("landing.hero.countries") },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2">
-                {item.stars ? (
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    ))}
-                  </div>
-                ) : (
-                  <item.icon className="w-5 h-5 text-[hsl(25,90%,55%)]" />
-                )}
-                <span className="text-sm md:text-base">
-                  <strong className="text-white">{item.value}</strong>
-                  <span className="text-white/50 ml-1">{item.label}</span>
-                </span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Bottom fade to cream */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fff7ed] to-transparent dark:from-[hsl(223,25%,14%)]" />
-    </section>
-  );
+                    {/* Trust Indicators */}
+                    <div className="flex flex-wrap justify-center gap-8 md:gap-12 animate-fade-in-up stagger-4">
+                        <div className="flex items-center gap-2">
+                            <Users className="w-5 h-5 text-orange-500" />
+                            <span className="text-sm md:text-base">
+                <strong className="text-slate-900 dark:text-white">50.000+</strong>
+                <span className="text-slate-600 dark:text-slate-400 ml-1">{t('landing.hero.students')}</span>
+              </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="flex">
+                                {[1, 2, 3, 4, 5].map((i) => (
+                                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                                ))}
+                            </div>
+                            <span className="text-sm md:text-base">
+                <strong className="text-slate-900 dark:text-white">4.9</strong>
+                <span className="text-slate-600 dark:text-slate-400 ml-1">{t('landing.hero.rating')}</span>
+              </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Globe className="w-5 h-5 text-orange-500" />
+                            <span className="text-sm md:text-base">
+                <strong className="text-slate-900 dark:text-white">150+</strong>
+                <span className="text-slate-600 dark:text-slate-400 ml-1">{t('landing.hero.countries')}</span>
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
