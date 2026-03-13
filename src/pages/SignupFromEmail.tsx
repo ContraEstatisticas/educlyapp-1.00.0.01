@@ -201,11 +201,13 @@ const SignupFromEmail = () => {
           <p className="text-muted-foreground">{t("signupFromEmail.purchaseNotFoundDesc", "Não localizamos uma compra vinculada a este email. Verifique se usou o email correto.")}</p>
           <p className="text-sm font-medium text-primary">{emailParam}</p>
           <div className="space-y-2">
-            <Button onClick={() => window.location.href = "mailto:contact@educly.app"} variant="outline" className="w-full">
-              {t("signupFromEmail.contactSupport", "Contatar suporte")}
+            <Button asChild variant="outline" className="w-full">
+              <a href="mailto:contact@educly.app">
+                {t("signupFromEmail.contactSupport", "Contatar suporte")}
+              </a>
             </Button>
-            <Button onClick={() => navigate("/")} variant="ghost" className="w-full">
-              {t("common.back")}
+            <Button onClick={() => navigate("/auth")} variant="ghost" className="w-full">
+              {t("auth.loginTab")}
             </Button>
           </div>
         </Card>
