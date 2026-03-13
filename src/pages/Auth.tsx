@@ -50,7 +50,7 @@ const Auth = () => {
   const [isResetLoading, setIsResetLoading] = useState(false);
 
   const [isLoginErrorDialogOpen, setIsLoginErrorDialogOpen] = useState(false);
-  const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService">("invalid");
+  const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService" | "unconfirmed">("invalid");
   const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
   const [lastPurchaseCheck, setLastPurchaseCheck] = useState<boolean>(false);
 
