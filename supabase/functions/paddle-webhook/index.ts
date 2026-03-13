@@ -99,6 +99,36 @@ function headersToObject(headers: Headers): Record<string, string> {
   return result;
 }
 
+async function fetchCustomerFromPaddleAPI(customerId: string): Promise<{email: string; name: string|null; locale: string|null} | null> {
+  const apiKey = Deno.env.get("PADDLE_API_KEY")?.trim();
+  if (!apiKey) {
+    console.warn("[paddle-webhook] PADDLE_API_KEY not set, cannot fetch customer from API");
+    return null;
+  }
+  try {
+    console.log(`[paddle-webhook] Fetching customer ${customerId} from Paddle API...`);
+    const resp = await fetch(`https://api.paddle.com/customers/${customerId}`, {
+      headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" }
+    });
+    if (!resp.ok) {
+      const body = await resp.text();
+      console.error(`[paddle-webhook] Paddle API returned ${resp.status}: ${body}`);
+      return null;
+    }
+    const json = await resp.json();
+    const email = json?.data?.email;
+    if (!email) {
+      console.warn("[paddle-webhook] Paddle API returned no email for customer:", customerId);
+      return null;
+    }
+    console.log(`[paddle-webhook] Paddle API resolved customer ${customerId} -> ${email}`);
+    return { email, name: json.data.name ?? null, locale: json.data.locale ?? null };
+  } catch (err: any) {
+    console.error("[paddle-webhook] Paddle API fetch error:", err);
+    return null;
+  }
+}
+
 function maskSecret(value: string, visibleChars = 6): string {
   if (!value) return "";
   if (value.length <= visibleChars) return "*".repeat(value.length);
@@ -453,6 +483,35 @@ serve(async (req) => {
 
       console.log("[paddle-webhook] paddle_customer upsert successful:", customerUpsertData ?? null);
 
+      // Reconcile CUSTOMER_PENDING events for this customer
+      if (customerEmail) {
+        try {
+          const { data: pendingEvents, error: pendingErr } = await supabase
+            .from("billing_event_logs")
+            .select("id, email, event_type, payload")
+            .eq("status", "CUSTOMER_PENDING")
+            .eq("email", `pending_${customerId}`)
+            .eq("processed", false);
+
+          if (!pendingErr && pendingEvents && pendingEvents.length > 0) {
+            console.log(`[paddle-webhook] Found ${pendingEvents.length} CUSTOMER_PENDING events for ${customerEmail}`);
+            
+            for (const pe of pendingEvents) {
+              await supabase
+                .from("billing_event_logs")
+                .update({ email: customerEmail, status: "pending" })
+                .eq("id", (pe as any).id);
+            }
+            
+            // Process all now-ready events
+            await processRealtimeBillingByEmail(supabase, customerEmail);
+            console.log(`[paddle-webhook] Reconciled CUSTOMER_PENDING events for ${customerEmail}`);
+          }
+        } catch (reconcileErr) {
+          console.error("[paddle-webhook] CUSTOMER_PENDING reconciliation error (non-blocking):", reconcileErr);
+        }
+      }
+
       return new Response(JSON.stringify({ success: true, event: paddleEventType, customer_id: customerId }), {
         headers: corsHeaders,
       });
@@ -507,12 +566,62 @@ serve(async (req) => {
         });
       }
 
-      const email = normalizeEmail(customerRow?.email);
+      let email = normalizeEmail(customerRow?.email);
+      let resolvedName = (customerRow as any)?.name ?? null;
+      let resolvedLocale = (customerRow as any)?.locale ?? null;
+
       if (!email) {
-        console.warn(`[paddle-webhook] Customer ${customerId} not found yet. Requesting retry.`);
+        console.warn(`[paddle-webhook] Customer ${customerId} not in paddle_customer, trying Paddle API...`);
+        
+        const apiResult = await fetchCustomerFromPaddleAPI(customerId);
+        
+        if (apiResult) {
+          email = normalizeEmail(apiResult.email);
+          resolvedName = apiResult.name;
+          resolvedLocale = apiResult.locale;
+          
+          if (email) {
+            // Upsert into paddle_customer for future lookups
+            const { error: upsertErr } = await supabase
+              .from("paddle_customer")
+              .upsert({
+                customer_id: customerId,
+                email,
+                name: resolvedName,
+                locale: resolvedLocale,
+                last_payload: payload,
+                last_event_id: eventId ?? null,
+                last_notification_id: notificationId ?? null,
+              }, { onConflict: "customer_id" });
+            
+            if (upsertErr) {
+              console.error("[paddle-webhook] Failed to upsert customer from API:", upsertErr);
+            } else {
+              console.log(`[paddle-webhook] Customer ${customerId} synced from Paddle API: ${email}`);
+            }
+          }
+        }
+      }
+
+      if (!email) {
+        // Last resort: save as CUSTOMER_PENDING and return 200
+        console.warn(`[paddle-webhook] Could not resolve email for ${customerId}. Saving as CUSTOMER_PENDING.`);
+        
+        const { error: pendingErr } = await supabase.from("billing_event_logs").insert({
+          email: `pending_${customerId}`,
+          event_type: eventType,
+          payload: { ...payload, resolved_customer_id: customerId },
+          status: "CUSTOMER_PENDING",
+          processed: false,
+        });
+        
+        if (pendingErr) {
+          console.error("[paddle-webhook] Failed to save CUSTOMER_PENDING event:", pendingErr);
+        }
+        
         return new Response(
-          JSON.stringify({ error: "Customer not synced yet, retry later", customer_id: customerId }),
-          { status: 409, headers: corsHeaders },
+          JSON.stringify({ success: true, pending: true, customer_id: customerId }),
+          { headers: corsHeaders },
         );
       }
 
@@ -553,8 +662,8 @@ serve(async (req) => {
       // ✅ enfileirar e-mail pós-compra (apenas para novas compras)
       try {
         if (["PURCHASE_COMPLETE", "SUBSCRIPTION_SETTLED"].includes(eventType)) {
-          const buyerName = (customerRow as any)?.name || payload?.data?.customer?.name || "Aluno";
-          const buyerLocale = (customerRow as any)?.locale || payload?.data?.customer?.locale || "es";
+      const buyerName = resolvedName || payload?.data?.customer?.name || "Aluno";
+          const buyerLocale = resolvedLocale || payload?.data?.customer?.locale || "es";
 
           console.log("[paddle-webhook] About to enqueue welcome email:", {
             email,
