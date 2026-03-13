@@ -143,14 +143,27 @@ const SignupFromEmail = () => {
     );
   }
 
-  // No email in URL
+  // No email or invalid email (e.g. unresolved template %email%)
   if (!emailParam) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-background">
-        <Card className="p-8 max-w-md w-full text-center space-y-4">
+        <div className="absolute top-4 right-4 z-50"><LanguageSelector /></div>
+        <Card className="p-8 max-w-md w-full text-center space-y-6">
           <h2 className="text-xl font-bold text-foreground">{t("signupFromEmail.invalidLink", "Link inválido")}</h2>
-          <p className="text-muted-foreground">{t("signupFromEmail.useEmailLink", "Use o link enviado no seu email de compra.")}</p>
-          <Button onClick={() => navigate("/auth")} className="w-full">{t("auth.loginTab")}</Button>
+          <p className="text-muted-foreground">
+            {t("signupFromEmail.useEmailLink", "Use o link enviado no seu email de compra.")}
+          </p>
+          {rawEmailParam && !isValidEmail(rawEmailParam) && (
+            <p className="text-sm text-destructive">
+              {t("signupFromEmail.invalidEmail", "O email no link não é válido. Verifique o link original.")}
+            </p>
+          )}
+          <div className="space-y-2">
+            <Button onClick={() => navigate("/auth")} className="w-full" size="lg">{t("auth.loginTab")}</Button>
+            <Button asChild variant="outline" className="w-full">
+              <a href="mailto:contact@educly.app">{t("signupFromEmail.contactSupport", "Contatar suporte")}</a>
+            </Button>
+          </div>
         </Card>
       </div>
     );
