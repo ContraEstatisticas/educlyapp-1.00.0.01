@@ -12,13 +12,20 @@ import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
+const isValidEmail = (email: string) => {
+  if (!email) return false;
+  if (email.includes('%') || email.includes('{{') || email.includes('{')) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
 const SignupFromEmail = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
 
-  const emailParam = searchParams.get("email") || "";
+  const rawEmailParam = searchParams.get("email") || "";
+  const emailParam = isValidEmail(rawEmailParam) ? rawEmailParam : "";
   const langParam = searchParams.get("lang");
 
   const [fullName, setFullName] = useState("");
