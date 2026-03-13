@@ -122,8 +122,10 @@ const Auth = () => {
     setIsLoading(true);
 
     try {
+      const normalizedLoginEmail = email.trim().toLowerCase().replace(/\.+$/, "");
+
       const { error } = await supabase.auth.signInWithPassword({
-        email,
+        email: normalizedLoginEmail,
         password,
       });
 
@@ -134,7 +136,10 @@ const Auth = () => {
       }
 
       if (error) {
-        setLoginErrorType("invalid");
+        const message = String(error.message || "").toLowerCase();
+        const isUnconfirmed = message.includes("email not confirmed") || message.includes("not confirmed");
+
+        setLoginErrorType(isUnconfirmed ? "unconfirmed" : "invalid");
         setIsLoginErrorDialogOpen(true);
         return;
       }
