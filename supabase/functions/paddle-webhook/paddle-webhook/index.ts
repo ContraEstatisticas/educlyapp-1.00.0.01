@@ -139,6 +139,49 @@ async function enqueueWelcomeEmail(params: {
   }
 }
 
+// ---------- Paddle API fallback for customer lookup ----------
+
+async function fetchCustomerFromPaddleAPI(customerId: string): Promise<{ email: string; name: string | null; locale: string | null } | null> {
+  const paddleApiKey = Deno.env.get("PADDLE_API_KEY")?.trim();
+  if (!paddleApiKey) {
+    console.warn("[paddle-webhook] PADDLE_API_KEY not set, cannot fetch customer from API");
+    return null;
+  }
+
+  try {
+    const res = await fetch(`https://api.paddle.com/customers/${customerId}`, {
+      headers: {
+        "Authorization": `Bearer ${paddleApiKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      console.error(`[paddle-webhook] Paddle API error: ${res.status} ${res.statusText}`);
+      return null;
+    }
+
+    const json = await res.json();
+    const data = json?.data;
+    if (!data?.email) {
+      console.warn("[paddle-webhook] Paddle API returned no email for customer:", customerId);
+      return null;
+    }
+
+    const email = normalizeEmail(data.email);
+    if (!email) return null;
+
+    return {
+      email,
+      name: data.name ?? null,
+      locale: data.locale ?? null,
+    };
+  } catch (err) {
+    console.error("[paddle-webhook] Paddle API fetch error:", err);
+    return null;
+  }
+}
+
 // ---------------------------------------------------------------------------
 
 async function grantRealtimeAccessByEmail(supabase: any, email: string) {
