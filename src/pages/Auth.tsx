@@ -72,6 +72,12 @@ const Auth = () => {
     if (emailParam) {
       setEmail(emailParam);
     }
+
+    // Auto-open reset dialog if redirected from ALREADY_EXISTS
+    if (searchParams.get("showReset") === "true" && emailParam) {
+      setResetEmail(emailParam);
+      setIsResetDialogOpen(true);
+    }
   }, [navigate, searchParams]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
