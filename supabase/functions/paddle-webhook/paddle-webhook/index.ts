@@ -593,8 +593,8 @@ serve(async (req) => {
 
       // ✅ enfileirar e-mail pós-compra (sem quebrar o resto)
       try {
-        const buyerName = (customerRow as any)?.name || payload?.data?.customer?.name || "Aluno";
-        const buyerLocale = (customerRow as any)?.locale || payload?.data?.customer?.locale || "es";
+        const buyerName = resolvedName || payload?.data?.customer?.name || "Aluno";
+        const buyerLocale = resolvedLocale || payload?.data?.customer?.locale || "es";
 
         console.log("[paddle-webhook] About to enqueue welcome email:", {
           email,
