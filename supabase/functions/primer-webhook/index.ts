@@ -63,7 +63,10 @@ function normalizeEmail(raw: string | undefined | null): string {
   return (raw || '').toLowerCase().trim().replace(/\.+$/, '');
 }
 
-async function findUserIdByEmail(supabase: any, normalizedEmail: string): Promise<string | null> {
+async function findUserByEmail(
+  supabase: any,
+  normalizedEmail: string,
+): Promise<{ id: string; email_confirmed_at?: string | null } | null> {
   const perPage = 200;
 
   for (let page = 1; page <= 20; page++) {
@@ -73,8 +76,16 @@ async function findUserIdByEmail(supabase: any, normalizedEmail: string): Promis
       return null;
     }
 
-    const match = listData.users.find((u: { id: string; email?: string }) => normalizeEmail(u.email) === normalizedEmail);
-    if (match) return match.id;
+    const match = listData.users.find(
+      (u: { id: string; email?: string; email_confirmed_at?: string | null }) =>
+        normalizeEmail(u.email) === normalizedEmail,
+    );
+    if (match) {
+      return {
+        id: match.id,
+        email_confirmed_at: match.email_confirmed_at ?? null,
+      };
+    }
 
     if (listData.users.length < perPage) break;
   }
@@ -224,14 +235,35 @@ serve(async (req) => {
       'OVERDUE', 'EXPIRED'
     ];
 
+    const AUTO_CONFIRM_EVENTS = [
+      'SETTLED', 'STARTING_TRIAL', 'SUBSCRIPTION_SETTLED',
+      'SUBSCRIPTION_TRIAL_STARTED', 'GRANTED',
+      'CONVERTION', 'RENEWING', 'RESUMING',
+      'RECOVERING', 'RECOVERING_AUTORENEW',
+      'PURCHASE_COMPLETE', 'PURCHASE_APPROVED',
+      'PURCHASE_PROTEST', 'PURCHASE_DELAYED',
+    ];
+
     if (BILLING_ACTION_EVENTS.includes(eventType)) {
       try {
-        const foundUserId = await findUserIdByEmail(supabase, email);
+        const foundUser = await findUserByEmail(supabase, email);
 
-        if (foundUserId) {
-          console.log(`[primer-webhook] User found: ${foundUserId}, calling process_pending_billing_events`);
+        if (foundUser) {
+          if (AUTO_CONFIRM_EVENTS.includes(eventType) && !foundUser.email_confirmed_at) {
+            const { error: confirmError } = await supabase.auth.admin.updateUserById(foundUser.id, {
+              email_confirm: true,
+            });
+
+            if (confirmError) {
+              console.error('[primer-webhook] Failed to auto-confirm user after purchase:', confirmError);
+            } else {
+              console.log(`[primer-webhook] User auto-confirmed after purchase: ${foundUser.id}`);
+            }
+          }
+
+          console.log(`[primer-webhook] User found: ${foundUser.id}, calling process_pending_billing_events`);
           const { error: rpcError } = await supabase.rpc('process_pending_billing_events', {
-            p_user_id: foundUserId,
+            p_user_id: foundUser.id,
             p_email: email,
           });
 
