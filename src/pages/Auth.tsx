@@ -360,17 +360,24 @@ const Auth = () => {
   const loginErrorTitle =
     loginErrorType === "noService"
       ? t("auth.noActiveServiceTitle", "Sem servico ativo")
-      : t("auth.invalidLoginTitle");
+      : loginErrorType === "unconfirmed"
+        ? t("auth.emailNotConfirmedTitle", "Conta criada, mas ainda não ativada")
+        : t("auth.invalidLoginTitle");
   const loginErrorDescription =
     loginErrorType === "noService"
       ? t(
         "auth.noActiveServiceDescription",
         "Nao ha servico ativo para este email. Verifique se a compra foi feita com o mesmo email cadastrado."
       )
-      : t(
-        "auth.accountNotFoundDescription",
-        "Nao localizamos a sua conta"
-      );
+      : loginErrorType === "unconfirmed"
+        ? t(
+          "auth.emailNotConfirmedDescription",
+          "Detectamos sua conta, mas o email ainda não foi confirmado. Use o botão de redefinir senha para ativar e acessar."
+        )
+        : t(
+          "auth.accountNotFoundDescription",
+          "Nao localizamos a sua conta"
+        );
   const supportEmail = "contact@educly.app";
   const noPurchaseDescription = t(
     "auth.noPurchaseDescription",
@@ -382,11 +389,17 @@ const Auth = () => {
         .split("\n")
         .map((line) => line.trim())
         .filter(Boolean)
-      : [
-        t("auth.accountNotFoundStep1"),
-        t("auth.accountNotFoundStep2"),
-        t("auth.accountNotFoundStep3")
-      ];
+      : loginErrorType === "unconfirmed"
+        ? [
+          t("auth.emailNotConfirmedStep1", "A conta foi encontrada para este e-mail."),
+          t("auth.emailNotConfirmedStep2", "Toque em 'Esqueceu a senha?' para ativar e definir uma nova senha."),
+          t("auth.emailNotConfirmedStep3", `Se continuar com problema, fale com ${supportEmail}`),
+        ]
+        : [
+          t("auth.accountNotFoundStep1"),
+          t("auth.accountNotFoundStep2"),
+          t("auth.accountNotFoundStep3")
+        ];
   const noPurchaseLines = noPurchaseDescription
     .split("\n")
     .map((line) => line.trim())
