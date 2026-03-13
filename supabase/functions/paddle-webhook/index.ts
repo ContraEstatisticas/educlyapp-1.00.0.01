@@ -483,6 +483,35 @@ serve(async (req) => {
 
       console.log("[paddle-webhook] paddle_customer upsert successful:", customerUpsertData ?? null);
 
+      // Reconcile CUSTOMER_PENDING events for this customer
+      if (customerEmail) {
+        try {
+          const { data: pendingEvents, error: pendingErr } = await supabase
+            .from("billing_event_logs")
+            .select("id, email, event_type, payload")
+            .eq("status", "CUSTOMER_PENDING")
+            .eq("email", `pending_${customerId}`)
+            .eq("processed", false);
+
+          if (!pendingErr && pendingEvents && pendingEvents.length > 0) {
+            console.log(`[paddle-webhook] Found ${pendingEvents.length} CUSTOMER_PENDING events for ${customerEmail}`);
+            
+            for (const pe of pendingEvents) {
+              await supabase
+                .from("billing_event_logs")
+                .update({ email: customerEmail, status: "pending" })
+                .eq("id", (pe as any).id);
+            }
+            
+            // Process all now-ready events
+            await processRealtimeBillingByEmail(supabase, customerEmail);
+            console.log(`[paddle-webhook] Reconciled CUSTOMER_PENDING events for ${customerEmail}`);
+          }
+        } catch (reconcileErr) {
+          console.error("[paddle-webhook] CUSTOMER_PENDING reconciliation error (non-blocking):", reconcileErr);
+        }
+      }
+
       return new Response(JSON.stringify({ success: true, event: paddleEventType, customer_id: customerId }), {
         headers: corsHeaders,
       });
