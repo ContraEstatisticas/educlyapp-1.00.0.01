@@ -150,9 +150,9 @@ const Auth = () => {
         if (user) {
           await supabase.rpc("process_pending_billing_events", {
             p_user_id: user.id,
-            p_email: email,
+            p_email: normalizedLoginEmail,
           });
-          console.log("Billing reconciliation on login completed for:", email);
+          console.log("Billing reconciliation on login completed for:", normalizedLoginEmail);
         }
       } catch (rpcErr) {
         console.error("Billing reconciliation on login error:", rpcErr);
@@ -164,7 +164,7 @@ const Auth = () => {
         let isPremium = false;
         for (let attempt = 0; attempt < 3; attempt++) {
           const { data, error } = await supabase.rpc("check_premium_access", {
-            user_email: email
+            user_email: normalizedLoginEmail
           });
           if (!error && data === true) {
             isPremium = true;
