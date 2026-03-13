@@ -347,7 +347,7 @@ const Auth = () => {
         )
         : t(
           "auth.accountNotFoundDescription",
-          "Nao localizamos a sua conta"
+          "E-mail ou senha incorretos. Verifique os dados ou redefina sua senha."
         );
   const supportEmail = "contact@educly.app";
   const noPurchaseDescription = t(
