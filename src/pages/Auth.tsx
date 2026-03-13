@@ -734,7 +734,21 @@ const Auth = () => {
               </ol>
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
+          <DialogFooter className="flex-col gap-2 sm:flex-col">
+            {loginErrorType !== "noService" && (
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setResetEmail(email.trim());
+                  setIsLoginErrorDialogOpen(false);
+                  setIsResetDialogOpen(true);
+                }}
+              >
+                {t("auth.forgotPassword", "Esqueceu a senha?")}
+              </Button>
+            )}
             <Button
               type="button"
               onClick={() => setIsLoginErrorDialogOpen(false)}
