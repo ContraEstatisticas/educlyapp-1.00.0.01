@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatPremiumGate } from "@/components/chat/ChatPremiumGate";
-import { usePremiumAccess } from "@/hooks/usePremiumAccess";
+import { useProductAccess } from "@/hooks/useProductAccess";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import ediMascote from "@/assets/edi-mascote.png";
