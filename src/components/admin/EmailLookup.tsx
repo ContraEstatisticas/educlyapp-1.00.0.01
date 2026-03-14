@@ -59,6 +59,10 @@ export const EmailLookup = () => {
         p_email: email.trim(),
       });
       if (error) throw error;
+      if ((data as any)?.error) {
+        toast.error("Erro: " + (data as any).error);
+        return;
+      }
       setResult(data as unknown as LookupResult);
     } catch (err: any) {
       toast.error("Erro ao pesquisar: " + err.message);
