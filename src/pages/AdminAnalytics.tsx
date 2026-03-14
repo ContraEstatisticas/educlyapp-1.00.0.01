@@ -18,6 +18,7 @@ import { PremiumUsersTable } from "@/components/admin/PremiumUsersTable";
 import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
 import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { EmailLookup } from "@/components/admin/EmailLookup";
+import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
@@ -102,7 +103,7 @@ const AdminAnalyticsContent = () => {
 
         {/* Tables with Tabs */}
         <Tabs defaultValue="billing" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 h-12 p-1 bg-muted/50 rounded-xl">
+          <TabsList className="grid w-full grid-cols-6 h-12 p-1 bg-muted/50 rounded-xl">
             <TabsTrigger 
               value="billing" 
               className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
@@ -133,6 +134,12 @@ const AdminAnalyticsContent = () => {
             >
               🔓 Liberar Acesso
             </TabsTrigger>
+            <TabsTrigger 
+              value="bulk-grant" 
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+            >
+              📦 Bulk Import
+            </TabsTrigger>
           </TabsList>
           <div className="mt-4">
             <TabsContent value="billing" className="m-0">
@@ -149,6 +156,9 @@ const AdminAnalyticsContent = () => {
             </TabsContent>
             <TabsContent value="grant-access" className="m-0">
               <ManualAccessGrant />
+            </TabsContent>
+            <TabsContent value="bulk-grant" className="m-0">
+              <BulkGrantAccess />
             </TabsContent>
           </div>
         </Tabs>
