@@ -222,7 +222,7 @@ const Chat = () => {
     );
   }
 
-  if (!isPremium) {
+  if (!hasChatAccess) {
     return (
       <div className="min-h-screen bg-background">
         <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
@@ -241,7 +241,7 @@ const Chat = () => {
             </div>
           </div>
         </header>
-        <ChatPremiumGate checkoutUrl={checkoutUrl} />
+        <ChatPremiumGate />
       </div>
     );
   }
