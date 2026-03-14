@@ -210,9 +210,9 @@
                         ${t.footer}
                       </p>
                       <p style="margin: 0; font-size: 13px;">
-                        <a href="https://educly.lovable.app/privacy-policy" style="color: #D96A2B; text-decoration: none;">${t.privacyPolicy}</a>
+                        <a href="https://educly.app/politica-privacidade" style="color: #D96A2B; text-decoration: none;">${t.privacyPolicy}</a>
                         <span style="color: #d1d5db; margin: 0 8px;">|</span>
-                        <a href="https://educly.lovable.app/terms-of-use" style="color: #D96A2B; text-decoration: none;">${t.termsOfUse}</a>
+                        <a href="https://educly.app/termos-uso" style="color: #D96A2B; text-decoration: none;">${t.termsOfUse}</a>
                       </p>
                     </td>
                   </tr>

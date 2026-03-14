@@ -107,7 +107,7 @@ serve(async (req) => {
   </p>
   
   <div style="text-align: center; margin: 30px 0;">
-    <a href="https://educly.lovable.app/auth" 
+    <a href="https://educly.app/auth" 
        style="display: inline-block; background-color: #7c3aed; color: white; padding: 14px 32px; 
               text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: bold;">
       Acceder a Mi Cuenta →
