@@ -111,6 +111,7 @@ import DownsellEsp from "./pages/DownsellEsp";
 import ResetCache from "./pages/ResetCache";
 import SignupFromEmail from "./pages/SignupFromEmail";
 import Billing from "./pages/Billing";
+import MagicLogin from "./pages/MagicLogin";
 
 // Inicialização do Query Client para cache de requisições
 const queryClient = new QueryClient({
@@ -188,6 +189,7 @@ const App = () => {
               <Route path="/reset-cache.html" element={<ResetCache />} />
               <Route path="/cache" element={<ResetCache />} />
               <Route path="/cadastro" element={<SignupFromEmail />} />
+              <Route path="/magic-login" element={<MagicLogin />} />
 
                   {/* Rotas de Upsell e Downsell Específicas */}
                   <Route path="/upsell-1-esp" element={<UpsellEsp />} />

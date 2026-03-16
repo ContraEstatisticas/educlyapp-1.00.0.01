@@ -31,7 +31,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Senha",
     credentialsNote: "Você pode alterar sua senha a qualquer momento dentro do app.",
-    linkExpiry: "Este link é válido por 24 horas.",
     // Existing user mode
     newPurchaseTitle: "Nova compra ativada! 🎉",
     newPurchaseBody: "Seu novo pacote já está disponível na sua conta <strong>{email}</strong>.",
@@ -59,7 +58,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "Email",
     credentialsPassword: "Password",
     credentialsNote: "You can change your password anytime inside the app.",
-    linkExpiry: "This link is valid for 24 hours.",
     newPurchaseTitle: "New purchase activated! 🎉",
     newPurchaseBody: "Your new package is now available in your account <strong>{email}</strong>.",
   },
@@ -86,7 +84,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "Correo",
     credentialsPassword: "Contraseña",
     credentialsNote: "Puedes cambiar tu contraseña en cualquier momento dentro de la app.",
-    linkExpiry: "Este enlace es válido por 24 horas.",
     newPurchaseTitle: "¡Nueva compra activada! 🎉",
     newPurchaseBody: "Tu nuevo paquete ya está disponible en tu cuenta <strong>{email}</strong>.",
   },
@@ -113,7 +110,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Mot de passe",
     credentialsNote: "Vous pouvez modifier votre mot de passe à tout moment dans l'application.",
-    linkExpiry: "Ce lien est valide pendant 24 heures.",
     newPurchaseTitle: "Nouvel achat activé ! 🎉",
     newPurchaseBody: "Votre nouveau forfait est désormais disponible dans votre compte <strong>{email}</strong>.",
   },
@@ -140,7 +136,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-Mail",
     credentialsPassword: "Passwort",
     credentialsNote: "Sie können Ihr Passwort jederzeit in der App ändern.",
-    linkExpiry: "Dieser Link ist 24 Stunden gültig.",
     newPurchaseTitle: "Neuer Kauf aktiviert! 🎉",
     newPurchaseBody: "Ihr neues Paket ist jetzt in Ihrem Konto <strong>{email}</strong> verfügbar.",
   },
@@ -167,7 +162,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Password",
     credentialsNote: "Puoi cambiare la password in qualsiasi momento nell'app.",
-    linkExpiry: "Questo link è valido per 24 ore.",
     newPurchaseTitle: "Nuovo acquisto attivato! 🎉",
     newPurchaseBody: "Il tuo nuovo pacchetto è ora disponibile nel tuo account <strong>{email}</strong>.",
   },
@@ -194,7 +188,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Пароль",
     credentialsNote: "Вы можете изменить пароль в любое время в приложении.",
-    linkExpiry: "Эта ссылка действительна 24 часа.",
     newPurchaseTitle: "Новая покупка активирована! 🎉",
     newPurchaseBody: "Ваш новый пакет теперь доступен в вашем аккаунте <strong>{email}</strong>.",
   },
@@ -211,16 +204,16 @@ function getEmailHtml(params: {
   userEmail: string;
   language: string;
   mode: string;
-  magicLinkUrl?: string;
+  accessUrl?: string;
   generatedPassword?: string;
 }): string {
-  const { userName, userEmail, language, mode, magicLinkUrl, generatedPassword } = params;
+  const { userName, userEmail, language, mode, accessUrl, generatedPassword } = params;
   const lang = language.toLowerCase().split("-")[0];
 
-  // CTA URL: magic link or legacy signup link
+  // CTA URL: permanent access link or legacy signup link
   const ctaUrl = mode === 'legacy'
     ? `https://educly.app/cadastro?email=${encodeURIComponent(userEmail)}&lang=${lang}`
-    : (magicLinkUrl || `https://educly.app/auth?email=${encodeURIComponent(userEmail)}`);
+    : (accessUrl || `https://educly.app/auth?email=${encodeURIComponent(userEmail)}`);
 
   const isExisting = mode === 'magic_link_existing';
   const successTitle = isExisting ? t(lang, "newPurchaseTitle") : t(lang, "successTitle");
@@ -234,10 +227,9 @@ function getEmailHtml(params: {
     credentialsBlock = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4ff;border-radius:12px;border:1px solid #c7d2fe;margin-bottom:28px;"><tr><td style="padding:18px 22px;"><p style="font-size:14px;font-weight:700;color:#1e3a8a;margin:0 0 12px;">🔐 ${t(lang,"credentialsTitle")}</p><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:4px 0;font-size:13px;color:#374151;"><strong>${t(lang,"credentialsEmail")}:</strong> ${userEmail}</td></tr><tr><td style="padding:4px 0;font-size:13px;color:#374151;"><strong>${t(lang,"credentialsPassword")}:</strong> <code style="background:#e0e7ff;padding:2px 8px;border-radius:4px;font-family:monospace;">${generatedPassword}</code></td></tr></table><p style="font-size:11px;color:#6b7280;margin:10px 0 0;">${t(lang,"credentialsNote")}</p></td></tr></table>`;
   }
 
-  // Link expiry note for magic link modes
-  const expiryNote = mode !== 'legacy' ? `<tr><td style="text-align:center;padding-top:8px;font-size:11px;color:#9ca3af;">${t(lang,"linkExpiry")}</td></tr>` : '';
+  // No expiry note — permanent access links don't expire
 
-  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><!-- HERO --><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 18px;"><tr><td style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:#bfdbfe;letter-spacing:0.5px;text-transform:uppercase;">✦ ${t(lang,"badge")}</td></tr></table><h1 style="font-size:32px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${t(lang,"heroTitle").replace("Educly!","Educly,")} ${userName}!</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${t(lang,"heroSubtitle")}</p></td></tr><!-- BODY --><tr><td style="background:#ffffff;padding:40px 40px 32px;"><!-- Success Box --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:12px;border:1px solid #a7f3d0;margin-bottom:28px;"><tr><td style="padding:18px 22px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="width:28px;height:28px;background:#10b981;border-radius:50%;text-align:center;vertical-align:top;color:#fff;font-size:14px;font-weight:700;line-height:28px;padding-right:12px;">✓</td><td style="font-size:14px;color:#065f46;line-height:1.6;"><strong style="display:block;margin-bottom:2px;font-size:15px;">${successTitle}</strong>${successBodyText}</td></tr></table></td></tr></table>${credentialsBlock}<!-- Features --><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6366f1;margin:0 0 14px;">${t(lang,"sectionLabel")}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td width="50%" style="padding:0 6px 12px 0;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">🤖</span>${t(lang,"feature1")}</td></tr></table></td><td width="50%" style="padding:0 0 12px 6px;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">🎨</span>${t(lang,"feature2")}</td></tr></table></td></tr><tr><td width="50%" style="padding:0 6px 0 0;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">⚡</span>${t(lang,"feature3")}</td></tr></table></td><td width="50%" style="padding:0 0 0 6px;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">💰</span>${t(lang,"feature4")}</td></tr></table></td></tr></table><!-- CTA --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${ctaUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;letter-spacing:0.3px;">${t(lang,"cta")}</a></td></tr>${expiryNote}<tr><td style="text-align:center;padding-top:10px;font-size:12px;color:#9ca3af;">${t(lang,"ctaNote")} &nbsp;·&nbsp; <strong>${t(lang,"team")}</strong></td></tr></table><!-- Support Block --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9fafb;border-radius:12px;border:1px solid #f0f0f0;margin-top:24px;"><tr><td style="padding:20px 24px;"><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9ca3af;text-align:center;margin:0 0 14px;">Suporte / Soporte / Support</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇧🇷</span>Ficou com dúvidas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇪🇸</span>¿Tienes dudas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇫🇷</span>Vous avez des questions? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr></table></td></tr></table></td></tr><!-- FOOTER --><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;line-height:1.8;margin:0;">© 2025 Educly. ${t(lang,"rights")}<br/><a href="https://educly.app/politica-privacidade" style="color:#6366f1;text-decoration:none;font-weight:500;">${t(lang,"privacy")}</a> &nbsp;·&nbsp; <a href="https://educly.app/termos-uso" style="color:#6366f1;text-decoration:none;font-weight:500;">${t(lang,"terms")}</a></p></td></tr></table></td></tr></table></body></html>`;
+  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><!-- HERO --><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 18px;"><tr><td style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:#bfdbfe;letter-spacing:0.5px;text-transform:uppercase;">✦ ${t(lang,"badge")}</td></tr></table><h1 style="font-size:32px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${t(lang,"heroTitle").replace("Educly!","Educly,")} ${userName}!</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${t(lang,"heroSubtitle")}</p></td></tr><!-- BODY --><tr><td style="background:#ffffff;padding:40px 40px 32px;"><!-- Success Box --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:12px;border:1px solid #a7f3d0;margin-bottom:28px;"><tr><td style="padding:18px 22px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="width:28px;height:28px;background:#10b981;border-radius:50%;text-align:center;vertical-align:top;color:#fff;font-size:14px;font-weight:700;line-height:28px;padding-right:12px;">✓</td><td style="font-size:14px;color:#065f46;line-height:1.6;"><strong style="display:block;margin-bottom:2px;font-size:15px;">${successTitle}</strong>${successBodyText}</td></tr></table></td></tr></table>${credentialsBlock}<!-- Features --><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6366f1;margin:0 0 14px;">${t(lang,"sectionLabel")}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td width="50%" style="padding:0 6px 12px 0;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">🤖</span>${t(lang,"feature1")}</td></tr></table></td><td width="50%" style="padding:0 0 12px 6px;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">🎨</span>${t(lang,"feature2")}</td></tr></table></td></tr><tr><td width="50%" style="padding:0 6px 0 0;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">⚡</span>${t(lang,"feature3")}</td></tr></table></td><td width="50%" style="padding:0 0 0 6px;vertical-align:top;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;line-height:1.4;"><span style="font-size:20px;margin-right:8px;">💰</span>${t(lang,"feature4")}</td></tr></table></td></tr></table><!-- CTA --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${ctaUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;letter-spacing:0.3px;">${t(lang,"cta")}</a></td></tr><tr><td style="text-align:center;padding-top:10px;font-size:12px;color:#9ca3af;">${t(lang,"ctaNote")} &nbsp;·&nbsp; <strong>${t(lang,"team")}</strong></td></tr></table><!-- Support Block --><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9fafb;border-radius:12px;border:1px solid #f0f0f0;margin-top:24px;"><tr><td style="padding:20px 24px;"><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9ca3af;text-align:center;margin:0 0 14px;">Suporte / Soporte / Support</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇧🇷</span>Ficou com dúvidas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇪🇸</span>¿Tienes dudas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;font-size:13px;color:#6b7280;font-weight:500;"><span style="font-size:18px;margin-right:8px;">🇫🇷</span>Vous avez des questions? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;background:#eef2ff;padding:4px 12px;border-radius:100px;">contact@educly.app</a></td></tr></table></td></tr></table></td></tr><!-- FOOTER --><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;line-height:1.8;margin:0;">© 2025 Educly. ${t(lang,"rights")}<br/><a href="https://educly.app/politica-privacidade" style="color:#6366f1;text-decoration:none;font-weight:500;">${t(lang,"privacy")}</a> &nbsp;·&nbsp; <a href="https://educly.app/termos-uso" style="color:#6366f1;text-decoration:none;font-weight:500;">${t(lang,"terms")}</a></p></td></tr></table></td></tr></table></body></html>`;
 }
 
 async function sendEmailViaSMTP(to: string, subject: string, html: string): Promise<void> {
@@ -262,9 +254,9 @@ serve(async (req) => {
     const supabaseAdmin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const body = await req.json();
     const { email, userName, language } = body;
-    // New fields for magic link mode
+    // New fields for permanent access token mode
     const mode: string = body.mode || 'legacy'; // 'legacy' | 'magic_link' | 'magic_link_existing'
-    const magicLinkUrl: string | undefined = body.magic_link_url;
+    const accessToken: string | undefined = body.access_token;
     const generatedPassword: string | undefined = body.generated_password;
 
     if (!email || !userName) {
@@ -298,12 +290,15 @@ serve(async (req) => {
 
     const normalizedLang = (language || "en").toLowerCase().split("-")[0];
     const subject = t(normalizedLang, "subject");
+    const accessUrl = accessToken
+      ? `https://educly.app/magic-login?token=${accessToken}`
+      : undefined;
     const html = getEmailHtml({
       userName,
       userEmail: email,
       language: normalizedLang,
       mode,
-      magicLinkUrl,
+      accessUrl,
       generatedPassword,
     });
 

@@ -350,6 +350,13 @@ const Profile = () => {
     }
     try {
       setIsSendingEmail(true);
+      // Refresh session to ensure valid token
+      const { error: refreshError } = await supabase.auth.refreshSession();
+      if (refreshError) {
+        toast({ variant: "destructive", title: t('profile.error'), description: t('profile.sessionExpired', 'Sua sessão expirou. Faça login novamente.') });
+        setIsSendingEmail(false);
+        return;
+      }
       const { error } = await supabase.auth.updateUser({ password: newPassword });
       if (error) {
         toast({ variant: "destructive", title: t('profile.sendError'), description: error.message });

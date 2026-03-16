@@ -14,7 +14,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Novo link de acesso',
     heroSubtitle: 'Clique no botão abaixo para entrar diretamente na sua conta Educly.',
     cta: 'Entrar na Minha Conta',
-    expiry: 'Este link é válido por 24 horas.',
     team: 'Equipe Educly',
   },
   en: {
@@ -22,7 +21,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'New access link',
     heroSubtitle: 'Click the button below to sign in directly to your Educly account.',
     cta: 'Sign In to My Account',
-    expiry: 'This link is valid for 24 hours.',
     team: 'Educly Team',
   },
   es: {
@@ -30,7 +28,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Nuevo enlace de acceso',
     heroSubtitle: 'Haz clic en el botón de abajo para entrar directamente a tu cuenta Educly.',
     cta: 'Entrar a Mi Cuenta',
-    expiry: 'Este enlace es válido por 24 horas.',
     team: 'Equipo Educly',
   },
   fr: {
@@ -38,7 +35,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Nouveau lien d\'accès',
     heroSubtitle: 'Cliquez sur le bouton ci-dessous pour accéder directement à votre compte Educly.',
     cta: 'Accéder à Mon Compte',
-    expiry: 'Ce lien est valide pendant 24 heures.',
     team: 'Équipe Educly',
   },
   de: {
@@ -46,7 +42,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Neuer Zugangslink',
     heroSubtitle: 'Klicken Sie auf die Schaltfläche unten, um sich direkt bei Ihrem Educly-Konto anzumelden.',
     cta: 'Auf Mein Konto Zugreifen',
-    expiry: 'Dieser Link ist 24 Stunden gültig.',
     team: 'Educly Team',
   },
   it: {
@@ -54,7 +49,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Nuovo link di accesso',
     heroSubtitle: 'Clicca sul pulsante qui sotto per accedere direttamente al tuo account Educly.',
     cta: 'Accedi al Mio Account',
-    expiry: 'Questo link è valido per 24 ore.',
     team: 'Team Educly',
   },
   ru: {
@@ -62,7 +56,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Новая ссылка для входа',
     heroSubtitle: 'Нажмите кнопку ниже, чтобы войти в свой аккаунт Educly.',
     cta: 'Войти в Мой Аккаунт',
-    expiry: 'Эта ссылка действительна 24 часа.',
     team: 'Команда Educly',
   },
 };
@@ -72,8 +65,8 @@ function tr(lang: string, key: string): string {
   return TRANSLATIONS[n]?.[key] || TRANSLATIONS['en']?.[key] || '';
 }
 
-function getMagicLinkEmailHtml(magicLinkUrl: string, lang: string): string {
-  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><h1 style="font-size:28px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${tr(lang,'heroTitle')}</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${tr(lang,'heroSubtitle')}</p></td></tr><tr><td style="background:#ffffff;padding:40px 40px 32px;text-align:center;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${magicLinkUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;">${tr(lang,'cta')}</a></td></tr><tr><td style="text-align:center;padding-top:14px;font-size:12px;color:#9ca3af;">${tr(lang,'expiry')}</td></tr></table></td></tr><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;margin:0;">© 2025 Educly</p></td></tr></table></td></tr></table></body></html>`;
+function getMagicLinkEmailHtml(accessUrl: string, lang: string): string {
+  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><h1 style="font-size:28px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${tr(lang,'heroTitle')}</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${tr(lang,'heroSubtitle')}</p></td></tr><tr><td style="background:#ffffff;padding:40px 40px 32px;text-align:center;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${accessUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;">${tr(lang,'cta')}</a></td></tr></table></td></tr><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;margin:0;">© 2025 Educly</p></td></tr></table></td></tr></table></body></html>`;
 }
 
 serve(async (req) => {
@@ -140,28 +133,40 @@ serve(async (req) => {
       .maybeSingle();
     const lang = (profile?.preferred_language || 'en').toLowerCase().split('-')[0];
 
-    // Generate magic link
-    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
-      type: 'magiclink',
-      email,
-      options: { redirectTo: 'https://educly.app/auth' },
-    });
+    // Get or create permanent access token
+    let accessToken: string | null = null;
+    const { data: existingToken } = await supabase
+      .from('user_access_tokens')
+      .select('token')
+      .eq('user_id', userId)
+      .maybeSingle();
 
-    if (linkError || !linkData?.properties?.action_link) {
-      console.error(`[resend-magic-link] Failed to generate link:`, linkError);
-      return new Response(JSON.stringify({ error: 'failed_to_generate_link' }), {
-        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+    if (existingToken?.token) {
+      accessToken = existingToken.token;
+    } else {
+      const { data: newToken, error: tokenError } = await supabase
+        .from('user_access_tokens')
+        .insert({ user_id: userId })
+        .select('token')
+        .single();
+
+      if (tokenError) {
+        console.error(`[resend-magic-link] Failed to create token:`, tokenError);
+        return new Response(JSON.stringify({ error: 'failed_to_create_token' }), {
+          status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      accessToken = newToken.token;
     }
 
-    const magicLinkUrl = linkData.properties.action_link;
+    const accessUrl = `https://educly.app/magic-login?token=${accessToken}`;
 
     // Send email via Resend
     const apiKey = Deno.env.get('RESEND_API_KEY');
     if (!apiKey) throw new Error('RESEND_API_KEY not configured');
 
     const subject = tr(lang, 'subject');
-    const html = getMagicLinkEmailHtml(magicLinkUrl, lang);
+    const html = getMagicLinkEmailHtml(accessUrl, lang);
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -184,7 +189,7 @@ serve(async (req) => {
       user_id: userId,
     });
 
-    console.log(`[resend-magic-link] Magic link sent to ${email}`);
+    console.log(`[resend-magic-link] Permanent access link sent to ${email}`);
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

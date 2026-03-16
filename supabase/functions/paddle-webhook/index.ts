@@ -268,7 +268,7 @@ async function autoCreateAndSendMagicLink(params: {
         userName: buyerName,
         language,
         mode,
-        magic_link_url: autoCreateResult?.magic_link_url,
+        access_token: autoCreateResult?.access_token,
         generated_password: autoCreateResult?.generated_password,
       }),
     });

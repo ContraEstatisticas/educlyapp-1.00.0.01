@@ -270,7 +270,7 @@ serve(async (req) => {
         // Try to generate magic link for retry sends
         const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
         const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-        let magicLinkUrl: string | null = null;
+        let accessToken: string | null = null;
         let alreadyExisted = false;
 
         try {
@@ -284,7 +284,7 @@ serve(async (req) => {
           });
           const result = await resp.json();
           if (resp.ok && !result.error) {
-            magicLinkUrl = result.magic_link_url;
+            accessToken = result.access_token;
             alreadyExisted = result.already_existed;
           }
         } catch (autoErr) {
@@ -292,7 +292,7 @@ serve(async (req) => {
         }
 
         // Determine mode and send via send-welcome-email
-        const mode = magicLinkUrl
+        const mode = accessToken
           ? (alreadyExisted ? 'magic_link_existing' : 'magic_link')
           : 'legacy';
 
@@ -308,8 +308,7 @@ serve(async (req) => {
               userName: buyerName,
               language: lang,
               mode,
-              magic_link_url: magicLinkUrl,
-              // No password on retries — it was never persisted
+              access_token: accessToken,
             }),
           });
 
