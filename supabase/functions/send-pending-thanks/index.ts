@@ -284,7 +284,7 @@ serve(async (req) => {
           });
           const result = await resp.json();
           if (resp.ok && !result.error) {
-            magicLinkUrl = result.magic_link_url;
+            accessToken = result.access_token;
             alreadyExisted = result.already_existed;
           }
         } catch (autoErr) {
