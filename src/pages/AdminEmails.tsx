@@ -67,18 +67,56 @@ const AdminEmails = () => {
 
       setLogs(data || []);
 
-      // Stats from all records (not filtered)
-      const { data: allLogs } = await supabase.from("email_logs").select("status");
+      // Real stats: aggregated counts with applied date filters
+      const startFilter = startDate ? startDate : undefined;
+      const endFilter = endDate ? `${endDate}T23:59:59` : undefined;
 
-      if (allLogs) {
-        setStats({
-          total: allLogs.length,
-          sent: allLogs.filter((l) => l.status === "sent").length,
-          opened: allLogs.filter((l) => l.status === "opened").length,
-          failed: allLogs.filter((l) => l.status === "failed" || l.status === "error").length,
-          pending: allLogs.filter((l) => l.status === "pending").length,
-        });
-      }
+      // Total
+      let totalQuery = supabase.from("email_logs").select("id", { count: "exact", head: true });
+      if (startFilter) totalQuery = totalQuery.gte("created_at", startFilter);
+      if (endFilter) totalQuery = totalQuery.lte("created_at", endFilter);
+      const { count: totalCount = 0 } = await totalQuery;
+
+      // Sent
+      let sentQuery = supabase.from("email_logs").select("id", { count: "exact", head: true }).eq("status", "sent");
+      if (startFilter) sentQuery = sentQuery.gte("created_at", startFilter);
+      if (endFilter) sentQuery = sentQuery.lte("created_at", endFilter);
+      const { count: sentCount = 0 } = await sentQuery;
+
+      // Opened (status opened OR opened_at not null)
+      let openedQuery = supabase
+        .from("email_logs")
+        .select("id", { count: "exact", head: true })
+        .or("status.eq.opened,opened_at.not.is.null");
+      if (startFilter) openedQuery = openedQuery.gte("created_at", startFilter);
+      if (endFilter) openedQuery = openedQuery.lte("created_at", endFilter);
+      const { count: openedCount = 0 } = await openedQuery;
+
+      // Failed (failed OR error)
+      let failedQuery = supabase.from("email_logs").select("id", { count: "exact", head: true }).or("status.eq.failed,status.eq.error");
+      if (startFilter) failedQuery = failedQuery.gte("created_at", startFilter);
+      if (endFilter) failedQuery = failedQuery.lte("created_at", endFilter);
+      const { count: failedCount = 0 } = await failedQuery;
+
+      // Pending (email_logs pending) + queue pending_thank_you_emails
+      let pendingLogsQuery = supabase.from("email_logs").select("id", { count: "exact", head: true }).eq("status", "pending");
+      if (startFilter) pendingLogsQuery = pendingLogsQuery.gte("created_at", startFilter);
+      if (endFilter) pendingLogsQuery = pendingLogsQuery.lte("created_at", endFilter);
+      const { count: pendingLogsCount = 0 } = await pendingLogsQuery;
+
+      // pending_thank_you_emails queue (not filtered by date to reflect backlog)
+      const { count: pendingQueueCount = 0 } = await supabase
+        .from("pending_thank_you_emails")
+        .select("id", { count: "exact", head: true })
+        .eq("sent", false);
+
+      setStats({
+        total: totalCount,
+        sent: sentCount,
+        opened: openedCount,
+        failed: failedCount,
+        pending: (pendingLogsCount || 0) + (pendingQueueCount || 0),
+      });
     } catch (err) {
       console.error("Error fetching email logs:", err);
     } finally {

@@ -175,7 +175,23 @@ Deno.serve(async (req) => {
 
         const lang = defaultLang;
         const t = translations[lang];
-        const html = buildEmailHtml(t, email, lang);
+        const htmlBase = buildEmailHtml(t, email, lang);
+        // Create log first
+        const { data: logEntry } = await supabase
+          .from("email_logs")
+          .insert({
+            recipient_email: email,
+            email_type: "signup_invite",
+            subject: t.subject,
+            status: "pending",
+            metadata: { language: lang },
+          })
+          .select("id")
+          .single();
+
+        const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+        const pixel = logEntry ? `<img src="${supabaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
+        const html = htmlBase.includes("</body>") ? htmlBase.replace("</body>", `${pixel}</body>`) : (htmlBase + pixel);
 
         const resendRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -197,15 +213,12 @@ Deno.serve(async (req) => {
           continue;
         }
 
-        // Log the sent email
-        await supabase.from("email_logs").insert({
-          recipient_email: email,
-          email_type: "signup_invite",
-          subject: t.subject,
-          status: "sent",
-          sent_at: new Date().toISOString(),
-          metadata: { language: lang },
-        });
+        if (logEntry) {
+          await supabase
+            .from("email_logs")
+            .update({ status: "sent", sent_at: new Date().toISOString() })
+            .eq("id", logEntry.id);
+        }
 
         sent++;
       } catch (err: any) {

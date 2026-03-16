@@ -43,6 +43,7 @@ serve(async (req) => {
     let sentCount = 0;
 
     const resendApiKey = Deno.env.get('RESEND_API_KEY')!;
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 
     // Get all auth users to match emails
     const { data: authData, error: authError } = await supabase.auth.admin.listUsers({ perPage: 1000 });
@@ -144,15 +145,49 @@ serve(async (req) => {
           throw new Error(`Resend error: ${res.status} - ${err}`);
         }
 
-        // Log the email
-        await supabase.from('email_logs').insert({
-          recipient_email: user.email!,
-          user_id: user.id,
-          email_type: 'incident_notification',
-          subject,
-          status: 'sent',
-          sent_at: new Date().toISOString(),
+        // Create log entry first
+        const { data: logEntry } = await supabase
+          .from('email_logs')
+          .insert({
+            recipient_email: user.email!,
+            user_id: user.id,
+            email_type: 'incident_notification',
+            subject,
+            status: 'pending',
+          })
+          .select('id')
+          .single();
+
+        const pixel = logEntry ? `<img src="${supabaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : '';
+        const htmlWithPixel = htmlContent.replace('</body>', `${pixel}</body>`);
+
+        // Send with tracking pixel
+        const resendRes = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'Educly <noreply@educly.app>',
+            to: [user.email!],
+            subject,
+            html: htmlWithPixel,
+          }),
         });
+
+        if (!resendRes.ok) {
+          const err = await resendRes.text();
+          throw new Error(`Resend error: ${resendRes.status} - ${err}`);
+        }
+
+        // Update log
+        if (logEntry) {
+          await supabase
+            .from('email_logs')
+            .update({ status: 'sent', sent_at: new Date().toISOString() })
+            .eq('id', logEntry.id);
+        }
 
         sentCount++;
         results.push({ email: user.email, status: 'sent' });
@@ -164,14 +199,16 @@ serve(async (req) => {
         console.error(`[incident-notification] Error sending to ${user.email}:`, sendErr);
         errors.push({ email: user.email, error: sendErr.message });
 
-        await supabase.from('email_logs').insert({
-          recipient_email: user.email!,
-          user_id: user.id,
-          email_type: 'incident_notification',
-          subject,
-          status: 'error',
-          error_message: sendErr.message,
-        });
+        await supabase
+          .from('email_logs')
+          .insert({
+            recipient_email: user.email!,
+            user_id: user.id,
+            email_type: 'incident_notification',
+            subject,
+            status: 'error',
+            error_message: sendErr.message,
+          });
       }
     }
 

@@ -128,18 +128,32 @@ serve(async (req) => {
     }
 
     const subject = tr(language, "subject");
-    const html = emailHtml(profile?.full_name || email.split("@")[0], language, target);
+    // Create log entry first to get id
+    const { data: logEntry } = await service
+      .from("email_logs")
+      .insert({
+        recipient_email: email.toLowerCase(),
+        user_id: userId,
+        email_type: "upsell_day5",
+        subject,
+        status: "pending",
+        metadata: { target },
+      })
+      .select("id")
+      .single();
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const pixel = logEntry ? `<img src="${supabaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
+    const htmlBase = emailHtml(profile?.full_name || email.split("@")[0], language, target);
+    const html = htmlBase.includes("</body>") ? htmlBase.replace("</body>", `${pixel}</body>`) : (htmlBase + pixel);
     await sendEmailViaResend(email, subject, html);
 
-    await service.from("email_logs").insert({
-      recipient_email: email.toLowerCase(),
-      user_id: userId,
-      email_type: "upsell_day5",
-      subject,
-      status: "sent",
-      sent_at: new Date().toISOString(),
-      metadata: { target },
-    });
+    if (logEntry) {
+      await service
+        .from("email_logs")
+        .update({ status: "sent", sent_at: new Date().toISOString() })
+        .eq("id", logEntry.id);
+    }
 
     return new Response(JSON.stringify({ success: true, sent: true, target }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (error: unknown) {
