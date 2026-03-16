@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import logoEducy from "@/assets/logo-educy.png";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 type NavbarVariant = "default" | "white";
 
@@ -62,6 +63,7 @@ export const LandingNavbar = ({ variant = "default" }: { variant?: NavbarVariant
                 </a>
               )
             ))}
+            <LanguageSelector />
             <Link to="/auth">
               <Button className="bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-semibold px-6">
                 {t('landing.nav.login', 'Login')}
@@ -79,6 +81,9 @@ export const LandingNavbar = ({ variant = "default" }: { variant?: NavbarVariant
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-in max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden">
             <div className="flex flex-col gap-4">
+              <div className="px-2">
+                <LanguageSelector />
+              </div>
               {navLinks.map(link => (
                 link.isRoute ? (
                   <Link 

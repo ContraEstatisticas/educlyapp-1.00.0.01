@@ -1891,8 +1891,197 @@
     }
   },
   "landing": {
+    "badge": "Die App, die KI in der Praxis lehrt",
     "title": "Lerne KI mit",
-    "subtitle": "Interaktive Lernpfade"
+    "subtitle": "Interaktive Lernpfade",
+    "description": "Meistere die wichtigsten KI‑Werkzeuge direkt auf deinem Handy mit gamifizierten Pfaden und praktischen Übungen",
+    "ctaPrimary": "Gratis herunterladen",
+    "ctaSecondary": "So funktioniert es",
+    "feature1": "100% Praxis",
+    "feature2": "Zertifikat",
+    "feature3": "Gamifiziert",
+    "stat1": "KI‑Tools",
+    "stat2": "Downloads",
+    "stat3": "Bewertung im Store",
+    "nav": {
+      "home": "Start",
+      "about": "Über uns",
+      "programs": "Funktionen",
+      "testimonials": "Referenzen",
+      "plan": "Plan",
+      "contact": "Kontakt",
+      "login": "Anmelden",
+      "startNow": "App herunterladen"
+    },
+    "hero": {
+      "badge": "Die umfassendste KI‑App auf dem Markt",
+      "title": "Meistere",
+      "titleHighlight": "Künstliche Intelligenz",
+      "titleEnd": "direkt auf deinem Handy",
+      "subtitle": "Lerne KI mit interaktiven Pfaden, praktischen Übungen und digitalen Zertifikaten — alles in der App. Zugriff auf 20+ KI‑Tools, Offline‑Modus und Gamification.",
+      "cta": "Gratis herunterladen",
+      "demo": "Demo ansehen",
+      "students": "Downloads",
+      "rating": "Bewertung",
+      "countries": "Länder"
+    },
+    "features": {
+      "sectionLabel": "App‑Funktionen",
+      "title": "Alles, was du brauchst, in deiner Tasche",
+      "subtitle": "Eine komplette App mit interaktiven Pfaden, KI‑Assistentin, Fortschritt in Echtzeit und Zertifikaten — lerne in deinem Tempo, wo du willst.",
+      "curriculum": {
+        "title": "Interaktive Lernpfade",
+        "description": "Lerne mit gamifizierten Pfaden und stets aktualisierten Inhalten zu den wichtigsten KI‑Tools."
+      },
+      "mentoring": {
+        "title": "Integrierte KI‑Assistentin",
+        "description": "Erhalte Echtzeit‑Antworten mit EDI, deiner persönlichen KI‑Assistentin in der App."
+      },
+      "community": {
+        "title": "Fortschritt in Echtzeit",
+        "description": "Verfolge deine Entwicklung mit detaillierten Dashboards, Streaks und Lernstatistiken."
+      },
+      "certification": {
+        "title": "Digitale Zertifikate",
+        "description": "Erhalte Zertifikate, indem du Pfade und Challenges abschließt — beweise deine KI‑Skills."
+      },
+      "practical": {
+        "title": "Offline‑Modus",
+        "description": "Lade Lektionen herunter und lerne ohne Internet — perfekt für unterwegs."
+      },
+      "career": {
+        "title": "Gamification",
+        "description": "Sammle XP, steige im Level auf, schalte Badges frei und halte deine tägliche Lernserie."
+      }
+    },
+    "stats": {
+      "students": "Downloads",
+      "countries": "Länder",
+      "satisfaction": "Bewertung im Store",
+      "partners": "KI‑Tools"
+    },
+    "testimonials": {
+      "sectionLabel": "Referenzen",
+      "title": "Was unsere Nutzer sagen",
+      "subtitle": "Tausende Menschen haben bereits mit der Educly‑App KI gelernt. Das sagen sie dazu.",
+      "items": [
+        {
+          "name": "Maria Silva",
+          "role": "Data Scientist",
+          "country": "Brasilien",
+          "text": "Die Educly‑App hat meine Art, KI zu lernen, verändert. Ich nutze sie täglich und habe nach 3 Monaten meinen ersten Job im Bereich bekommen."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portugal",
+          "text": "Die App ist großartig — die Pfade sind praxisnah und ich kann offline lernen. Die Gamification motiviert und die KI‑Assistentin beantwortet alle Fragen."
+        },
+        {
+          "name": "Ana García",
+          "role": "ML‑Ingenieurin",
+          "country": "Mexiko",
+          "text": "Ich habe mehrere Challenges in der App abgeschlossen und die digitalen Zertifikate haben meinen Lebenslauf stark verbessert. Ich erhielt 3 Jobangebote!"
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Startup‑Gründer",
+          "country": "Argentinien",
+          "text": "Ich nutze die App täglich, um bei KI auf dem Laufenden zu bleiben. Die Pfade sind sehr praxisorientiert und der Offline‑Modus ist perfekt für Reisende."
+        }
+      ]
+    },
+    "globalReach": {
+      "title": "WELTWEITE REICHWEITE",
+      "subtitle": "Leben weltweit verändern",
+      "description": "Die Educly‑App wurde in über 150 Ländern heruntergeladen und verbindet eine globale Community von KI‑Lernenden.",
+      "regions": {
+        "latinAmerica": "Lateinamerika",
+        "europe": "Europa",
+        "asiaOceania": "Asien & Ozeanien",
+        "northAmerica": "Nordamerika"
+      },
+      "features": {
+        "languages": {
+          "title": "15 Sprachen",
+          "description": "App in mehreren Sprachen mit professioneller Übersetzung"
+        },
+        "support": {
+          "title": "Support 24/7",
+          "description": "Integrierte KI‑Assistentin und Support‑Team jederzeit verfügbar"
+        },
+        "community": {
+          "title": "Community in der App",
+          "description": "Vernetze dich weltweit und teile deinen Fortschritt"
+        }
+      }
+    },
+    "cta": {
+      "title": "Bereit, KI direkt auf deinem Handy zu lernen?",
+      "subtitle": "Schließe dich über 50.000 Nutzern an, die KI bereits mit der Educly‑App meistern.",
+      "startFree": "Gratis herunterladen",
+      "talkConsultant": "Support kontaktieren",
+      "guarantee": "30‑Tage‑Garantie",
+      "installments": "Bis zu 12 Raten",
+      "benefits": [
+        "Vollzugriff auf alle Pfade",
+        "Kostenlose App‑Updates",
+        "Integrierte KI‑Assistentin",
+        "Digitale Zertifikate",
+        "Offline‑Modus verfügbar",
+        "30‑Tage‑Zufriedenheitsgarantie"
+      ]
+    },
+    "footer": {
+      "description": "Die umfassendste KI‑App auf dem Markt. Lerne KI praxisnah, direkt auf deinem Handy.",
+      "contact": "Kontakt",
+      "programs": "Funktionen",
+      "resources": "Ressourcen",
+      "company": "Unternehmen",
+      "legal": "Rechtliches",
+      "links": {
+        "aiFundamentals": "KI‑Lernpfade",
+        "machineLearning": "28‑Tage‑Challenges",
+        "deepLearning": "KI‑Assistentin",
+        "aiForBusiness": "Digitale Zertifikate",
+        "blog": "Blog",
+        "webinars": "Tutorials",
+        "ebooks": "Guides",
+        "community": "Community",
+        "aboutUs": "Über uns",
+        "careers": "Karriere",
+        "partnerships": "Partnerschaften",
+        "contact": "Kontakt",
+        "terms": "Nutzungsbedingungen",
+        "privacy": "Datenschutz",
+        "cookies": "Cookies",
+        "refund": "Stornierung",
+        "subscriptionTerms": "Abonnement‑Bedingungen"
+      },
+      "copyright": "Alle Rechte vorbehalten.",
+      "madeWith": "Mit ❤️ für die weltweite KI‑Community"
+    },
+    "pricing": {
+      "title": "Schalte die volle Power der App frei",
+      "subtitle": "Beginne deine KI‑Reise heute mit einer einmaligen Investition",
+      "offerBadge": "Tagesangebot",
+      "productName": "Vollzugriff auf die KI‑App",
+      "pricePrefix": "FÜR NUR",
+      "perDay": "pro Tag",
+      "ctaButton": "MEINEN ZUGANG JETZT SICHERN",
+      "securePayment": "Sichere Zahlung über Stripe",
+      "quizDiscountNotice": "🎁 WILLST DU MEHR RABATT? SCHLIESSE DAS QUIZ UNTEN AB!",
+      "quizBadge": "EXKLUSIVER ZUGANG",
+      "quizTitle": "Beschleunige dein KI‑Lernen mit der App",
+      "quizSubtitle": "Entdecke deinen personalisierten Pfad mit Einführungspreis.",
+      "quizButton": "Quiz aufrufen und Rabatt freischalten"
+    },
+    "quiz": {
+      "link": {
+        "name": "Quiz aufrufen"
+      },
+      "url": "https://start.educly.app/english"
+    }
   },
   "weeklyStreak": {
     "title": "Wöchentliche Serie",
