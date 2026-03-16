@@ -32,9 +32,9 @@ type UserLookup = {
 };
 
 const PRODUCTS = [
-  { id: "base", label: "Base", color: "bg-green-100 text-green-700" },
-  { id: "freelancer", label: "Freelancer", color: "bg-blue-100 text-blue-700" },
-  { id: "ai_hub", label: "AI Hub", color: "bg-purple-100 text-purple-700" },
+  { id: "base", label: "Base", color: "bg-green-50 text-green-700 dark:bg-green-500/10 dark:text-green-300" },
+  { id: "freelancer", label: "Freelancer", color: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300" },
+  { id: "ai_hub", label: "AI Hub", color: "bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300" },
 ];
 
 const DURATIONS = [
@@ -138,19 +138,19 @@ export const ManualAccessGrant = () => {
   const planLabel = (info: UserLookup) => {
     const active = info.products?.filter((p) => p.is_active).map((p) => p.product_type) || [];
     if (active.includes("base") && active.includes("freelancer") && active.includes("ai_hub"))
-      return { label: "Combo", color: "text-amber-600 bg-amber-50" };
+      return { label: "Combo", color: "text-amber-600 bg-amber-50 dark:text-amber-300 dark:bg-amber-500/15" };
     if (active.includes("freelancer"))
-      return { label: "Premium Freelancer", color: "text-blue-600 bg-blue-50" };
+      return { label: "Premium Freelancer", color: "text-blue-600 bg-blue-50 dark:text-blue-300 dark:bg-blue-500/15" };
     if (active.includes("ai_hub"))
-      return { label: "AI Pack", color: "text-purple-600 bg-purple-50" };
+      return { label: "AI Pack", color: "text-purple-600 bg-purple-50 dark:text-purple-300 dark:bg-purple-500/15" };
     if (active.includes("base"))
-      return { label: "Base", color: "text-green-600 bg-green-50" };
-    if (info.is_premium) return { label: "Premium (legacy)", color: "text-yellow-600 bg-yellow-50" };
+      return { label: "Base", color: "text-green-600 bg-green-50 dark:text-green-300 dark:bg-green-500/15" };
+    if (info.is_premium) return { label: "Premium (legacy)", color: "text-yellow-600 bg-yellow-50 dark:text-yellow-300 dark:bg-yellow-500/15" };
     return { label: "Free", color: "text-muted-foreground bg-muted" };
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-border/50 shadow-sm p-6 space-y-6">
+    <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6 space-y-6">
       <div className="flex items-center gap-3">
         <div className="p-2 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl">
           <ShieldCheck className="h-5 w-5 text-white" />
@@ -165,13 +165,14 @@ export const ManualAccessGrant = () => {
 
       {/* Email lookup */}
       <div className="space-y-2">
-        <Label>Email do usuário</Label>
+        <Label className="text-foreground">Email do usuário</Label>
         <div className="flex gap-2">
           <Input
             placeholder="email@exemplo.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && lookupUser()}
+            className="bg-muted text-foreground placeholder:text-muted-foreground"
           />
           <Button onClick={lookupUser} disabled={looking || !email.trim()} size="sm">
             {looking ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
@@ -183,14 +184,16 @@ export const ManualAccessGrant = () => {
       {userInfo && (
         <div
           className={`p-4 rounded-xl border ${
-            userInfo.has_account ? "border-green-200 bg-green-50/50" : "border-red-200 bg-red-50/50"
+            userInfo.has_account
+              ? "border-green-200 bg-green-50/50 dark:border-green-500/30 dark:bg-green-500/10"
+              : "border-red-200 bg-red-50/50 dark:border-red-500/30 dark:bg-red-500/10"
           }`}
         >
           <div className="flex items-center gap-2 mb-2">
             {userInfo.has_account ? (
-              <UserCheck className="h-4 w-4 text-green-600" />
+              <UserCheck className="h-4 w-4 text-green-600 dark:text-green-400" />
             ) : (
-              <UserX className="h-4 w-4 text-red-600" />
+              <UserX className="h-4 w-4 text-red-600 dark:text-red-400" />
             )}
             <span className="font-medium text-sm">
               {userInfo.has_account ? "Conta encontrada" : "Sem conta registrada"}

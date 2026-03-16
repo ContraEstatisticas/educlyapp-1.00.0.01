@@ -25,46 +25,46 @@ export const AdminKPICard = ({
 }: AdminKPICardProps) => {
   const colorConfig = {
     default: {
-      bg: "bg-gradient-to-br from-slate-50 to-slate-100/80",
-      border: "border-slate-200/60",
-      iconBg: "bg-slate-100",
-      iconColor: "text-slate-600",
-      valueColor: "text-slate-900",
+      bg: "bg-card",
+      border: "border-border",
+      iconBg: "bg-muted",
+      iconColor: "text-muted-foreground",
+      valueColor: "text-foreground",
     },
     success: {
-      bg: "bg-gradient-to-br from-emerald-50 to-emerald-100/80",
-      border: "border-emerald-200/60",
-      iconBg: "bg-emerald-100",
-      iconColor: "text-emerald-600",
-      valueColor: "text-emerald-700",
+      bg: "bg-card",
+      border: "border-emerald-500/30",
+      iconBg: "bg-emerald-500/10",
+      iconColor: "text-emerald-500",
+      valueColor: "text-foreground",
     },
     warning: {
-      bg: "bg-gradient-to-br from-amber-50 to-amber-100/80",
-      border: "border-amber-200/60",
-      iconBg: "bg-amber-100",
+      bg: "bg-card",
+      border: "border-amber-500/30",
+      iconBg: "bg-amber-500/10",
       iconColor: "text-amber-600",
-      valueColor: "text-amber-700",
+      valueColor: "text-foreground",
     },
     danger: {
-      bg: "bg-gradient-to-br from-red-50 to-red-100/80",
-      border: "border-red-200/60",
-      iconBg: "bg-red-100",
+      bg: "bg-card",
+      border: "border-red-500/30",
+      iconBg: "bg-red-500/10",
       iconColor: "text-red-600",
-      valueColor: "text-red-700",
+      valueColor: "text-foreground",
     },
     info: {
-      bg: "bg-gradient-to-br from-blue-50 to-blue-100/80",
-      border: "border-blue-200/60",
-      iconBg: "bg-blue-100",
+      bg: "bg-card",
+      border: "border-blue-500/30",
+      iconBg: "bg-blue-500/10",
       iconColor: "text-blue-600",
-      valueColor: "text-blue-700",
+      valueColor: "text-foreground",
     },
     purple: {
-      bg: "bg-gradient-to-br from-purple-50 to-purple-100/80",
-      border: "border-purple-200/60",
-      iconBg: "bg-purple-100",
+      bg: "bg-card",
+      border: "border-purple-500/30",
+      iconBg: "bg-purple-500/10",
       iconColor: "text-purple-600",
-      valueColor: "text-purple-700",
+      valueColor: "text-foreground",
     },
   };
 
@@ -81,7 +81,7 @@ export const AdminKPICard = ({
       )}
     >
       {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 dark:from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="relative flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0 space-y-2">
