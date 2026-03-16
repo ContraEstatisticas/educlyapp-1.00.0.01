@@ -308,8 +308,7 @@ serve(async (req) => {
               userName: buyerName,
               language: lang,
               mode,
-              magic_link_url: magicLinkUrl,
-              // No password on retries — it was never persisted
+              access_token: accessToken,
             }),
           });
 
