@@ -8,7 +8,7 @@ const corsHeaders = {
 
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   pt: {
-    subject: "🎉 Bem-vindo à Educly!",
+    subject: "🔓 Acesso Liberado — Educly",
     heroTitle: "Sua conta está pronta.",
     heroSubtitle: "Clique no botão abaixo para entrar direto na sua conta, sem precisar de senha.",
     cta: "Entrar na Minha Conta",
@@ -25,7 +25,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Privacidade",
   },
   en: {
-    subject: "🎉 Welcome to Educly!",
+    subject: "🔓 Access Granted — Educly",
     heroTitle: "Your account is ready to go.",
     heroSubtitle: "Click the button below to sign in instantly, no password needed.",
     cta: "Sign In to My Account",
@@ -42,7 +42,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Privacy",
   },
   es: {
-    subject: "🎉 ¡Bienvenido a Educly!",
+    subject: "🔓 Acceso Liberado — Educly",
     heroTitle: "Tu cuenta está lista.",
     heroSubtitle: "Haz clic en el botón de abajo para entrar directamente, sin necesidad de contraseña.",
     cta: "Entrar a Mi Cuenta",
@@ -59,7 +59,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Privacidad",
   },
   fr: {
-    subject: "🎉 Bienvenue chez Educly !",
+    subject: "🔓 Accès Accordé — Educly",
     heroTitle: "Votre compte est prêt.",
     heroSubtitle: "Cliquez sur le bouton ci-dessous pour vous connecter instantanément.",
     cta: "Accéder à Mon Compte",
@@ -76,7 +76,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Confidentialité",
   },
   de: {
-    subject: "🎉 Willkommen bei Educly!",
+    subject: "🔓 Zugang Freigeschaltet — Educly",
     heroTitle: "Ihr Konto ist bereit.",
     heroSubtitle: "Klicken Sie auf die Schaltfläche unten, um sich sofort anzumelden.",
     cta: "Auf Mein Konto Zugreifen",
@@ -93,7 +93,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Datenschutz",
   },
   it: {
-    subject: "🎉 Benvenuto su Educly!",
+    subject: "🔓 Accesso Sbloccato — Educly",
     heroTitle: "Il tuo account è pronto.",
     heroSubtitle: "Clicca sul pulsante qui sotto per accedere direttamente, senza password.",
     cta: "Accedi al Mio Account",
@@ -110,7 +110,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Privacy",
   },
   ru: {
-    subject: "🎉 Добро пожаловать в Educly!",
+    subject: "🔓 Доступ Открыт — Educly",
     heroTitle: "Ваш аккаунт готов.",
     heroSubtitle: "Нажмите кнопку ниже, чтобы войти мгновенно, без пароля.",
     cta: "Войти в Мой Аккаунт",
