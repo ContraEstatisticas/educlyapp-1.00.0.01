@@ -81,12 +81,31 @@ export default defineConfig(({ mode }) => ({
         clientsClaim: true,
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-        globIgnores: ['**/reset-cache.html', '**/cache.html'],
+        globIgnores: [
+          '**/reset-cache.html',
+          '**/cache.html',
+          '**/reset-cache/**',
+          '**/cache/**',
+          'reset-cache.html',
+          'cache.html',
+          'reset-cache/index.html',
+          'cache/index.html',
+        ],
+        // Extra safety: strip any reset/cache pages from the final precache manifest
+        manifestTransforms: [
+          (entries: Array<{url: string; revision: string | null; size: number}>) => {
+            const blocked = ['reset-cache.html', 'cache.html', 'reset-cache/index.html', 'cache/index.html'];
+            const manifest = entries.filter(e => !blocked.some(b => e.url === b || e.url.endsWith('/' + b)));
+            return { manifest, warnings: [] };
+          }
+        ],
       navigateFallback: '/index.html',
       navigateFallbackAllowlist: [/^\/(?!api|supabase)/],
       navigateFallbackDenylist: [
         /^\/reset-cache(\.html)?(\/)?(\?.*)?$/,
         /^\/cache(\.html)?(\/)?(\?.*)?$/,
+        /^\/reset-cache\//,
+        /^\/cache\//,
       ],
         runtimeCaching: [
           {

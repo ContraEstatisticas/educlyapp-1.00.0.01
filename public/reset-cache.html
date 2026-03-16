@@ -35,14 +35,11 @@
   <script>
     (function() {
       var statusEl = document.getElementById('status');
-
-      // Keys to preserve across cache reset
       var PRESERVED_PREFIXES = ['has_seen_dashboard_tutorial', 'tutorial_dashboard'];
 
-      function run() {
+      function preserveKeys() {
+        var preserved = {};
         try {
-          // 1. Preserve tutorial keys
-          var preserved = {};
           for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i);
             for (var j = 0; j < PRESERVED_PREFIXES.length; j++) {
@@ -52,52 +49,49 @@
               }
             }
           }
+        } catch(e) {}
+        return preserved;
+      }
 
-          // 2. Unregister ALL service workers
-          var swPromise = Promise.resolve();
-          if ('serviceWorker' in navigator) {
-            swPromise = navigator.serviceWorker.getRegistrations().then(function(regs) {
+      function restoreKeys(preserved) {
+        for (var key in preserved) {
+          if (preserved.hasOwnProperty(key)) {
+            try { localStorage.setItem(key, preserved[key]); } catch(e) {}
+          }
+        }
+      }
+
+      function run() {
+        var preserved = preserveKeys();
+        var promises = [];
+
+        if ('serviceWorker' in navigator) {
+          promises.push(
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
               return Promise.all(regs.map(function(r) { return r.unregister(); }));
-            });
-          }
+            }).catch(function() {})
+          );
+        }
 
-          // 3. Clear Cache Storage
-          var cachePromise = Promise.resolve();
-          if ('caches' in window) {
-            cachePromise = caches.keys().then(function(keys) {
+        if ('caches' in window) {
+          promises.push(
+            caches.keys().then(function(keys) {
               return Promise.all(keys.map(function(k) { return caches.delete(k); }));
-            });
-          }
+            }).catch(function() {})
+          );
+        }
 
-          Promise.all([swPromise, cachePromise]).then(function() {
-            // 4. Clear all storage
-            localStorage.clear();
-            sessionStorage.clear();
+        (promises.length ? Promise.allSettled(promises) : Promise.resolve()).then(function() {
+          try { localStorage.clear(); } catch(e) {}
+          try { sessionStorage.clear(); } catch(e) {}
+          restoreKeys(preserved);
+          try { localStorage.setItem('__educly_force_reset_v', '2'); } catch(e) {}
 
-            // 5. Restore preserved keys
-            for (var key in preserved) {
-              if (preserved.hasOwnProperty(key)) {
-                localStorage.setItem(key, preserved[key]);
-              }
-            }
-
-            statusEl.textContent = 'Cache limpo! Redirecionando...';
-            setTimeout(function() {
-              window.location.replace('/auth?cache_reset=1');
-            }, 1200);
-          }).catch(function() {
-            statusEl.textContent = 'Erro parcial. Redirecionando...';
-            setTimeout(function() {
-              window.location.replace('/auth?cache_reset=1');
-            }, 1200);
-          });
-
-        } catch(e) {
-          statusEl.textContent = 'Erro ao limpar. Redirecionando...';
+          statusEl.textContent = 'Cache limpo! Redirecionando...';
           setTimeout(function() {
             window.location.replace('/auth?cache_reset=1');
-          }, 1500);
-        }
+          }, 1200);
+        });
       }
 
       run();
