@@ -19,6 +19,7 @@ import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
 import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
+import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
