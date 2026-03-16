@@ -1292,7 +1292,8 @@
     "error": "Ein Fehler ist aufgetreten",
     "of": "von",
     "progress": "Fortschritt",
-    "seeAll": "Alles anzeigen"
+    "seeAll": "Alles anzeigen",
+    "cancel": "Abbrechen"
   },
   "settings": {
     "soundOn": "Ton ein",
@@ -2082,7 +2083,8 @@
       "title": "Rückerstattung Anfordern",
       "description": "30-Tage-Rückerstattungsrichtlinie. Senden Sie Ihre Anfrage per E-Mail mit den Kaufdetails.",
       "button": "Rückerstattung Anfordern",
-      "responseTime": "Bearbeitung innerhalb von 48 Stunden"
+      "responseTime": "Bearbeitung innerhalb von 48 Stunden",
+      "subject": "Stornierungsanfrage"
     },
     "feedback": {
       "title": "Fehler oder Vorschlag melden",

@@ -5,7 +5,9 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import logoEducy from "@/assets/logo-educy.png";
 
-export const LandingNavbar = () => {
+type NavbarVariant = "default" | "white";
+
+export const LandingNavbar = ({ variant = "default" }: { variant?: NavbarVariant }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
   
@@ -27,8 +29,11 @@ export const LandingNavbar = () => {
     isRoute: true
   }];
 
+  const baseClass = "fixed top-0 left-0 right-0 z-50 border-b border-border";
+  const bgClass = variant === "white" ? "bg-white" : "bg-background/80 backdrop-blur-md";
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className={`${baseClass} ${bgClass}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}

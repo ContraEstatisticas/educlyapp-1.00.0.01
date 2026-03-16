@@ -28,7 +28,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <LandingNavbar />
+      <LandingNavbar variant="white" />
       
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Back button */}
@@ -112,7 +112,7 @@ const Contact = () => {
               <div className="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <RefreshCcw className="w-8 h-8 text-orange-500" />
               </div>
-              <CardTitle className="text-2xl">Solicitar Cancelamento</CardTitle>
+              <CardTitle className="text-2xl">{t('contactPage.refund.title')}</CardTitle>
               <CardDescription className="text-base">
                 {t('contactPage.refund.description')}
               </CardDescription>
@@ -123,12 +123,16 @@ const Contact = () => {
                 {t('contactPage.refund.responseTime')}
               </div>
               <Button 
-                onClick={() => window.open('https://mail.google.com/mail/?view=cm&to=contact@educly.app&su=Solicitação de Cancelamento', '_blank')}
+                onClick={() => {
+                  const subject = encodeURIComponent(t('contactPage.refund.subject', 'Cancellation Request'));
+                  const url = `https://mail.google.com/mail/?view=cm&to=contact@educly.app&su=${subject}`;
+                  window.open(url, '_blank');
+                }}
                 className="w-full" 
                 size="lg"
               >
                 <RefreshCcw className="w-4 h-4 mr-2" />
-                Solicitar Cancelamento
+                {t('contactPage.refund.button')}
               </Button>
               
               <p className="text-sm text-muted-foreground font-mono">

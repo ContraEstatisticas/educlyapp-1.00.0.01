@@ -23,6 +23,8 @@ export const useTranslatedChallengeContent = () => {
   const normalizeSlugForTranslation = (slug: string): string => {
     const slugMap: Record<string, string> = {
       "captions-ai": "captions",
+      // Mapeia o slug do desafio de 28 dias (rota usa "chatgpt") para a chave de tradução do desafio
+      "chatgpt": "iniciante-ia",
       // Adicione outros mapeamentos aqui se necessário
     };
     return slugMap[slug] || slug;
@@ -72,13 +74,13 @@ export const useTranslatedChallengeContent = () => {
 
   // Traduz nome do desafio
   const getChallengeName = (slug: string, fallback: string) => {
-    const key = `challenges.${slug}.name`;
+    const key = `challenges.${normalizeSlugForTranslation(slug)}.name`;
     return tryTranslation(key, fallback);
   };
 
   // Traduz descrição do desafio
   const getChallengeDescription = (slug: string, fallback: string) => {
-    const key = `challenges.${slug}.description`;
+    const key = `challenges.${normalizeSlugForTranslation(slug)}.description`;
     return tryTranslation(key, fallback);
   };
 

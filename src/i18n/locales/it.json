@@ -1320,7 +1320,8 @@
     "error": "Si è verificato un errore",
     "of": "di",
     "progress": "Progresso",
-    "seeAll": "Vedi tutto"
+    "seeAll": "Vedi tutto",
+    "cancel": "Annulla"
   },
   "settings": {
     "soundOn": "Audio attivato",
@@ -2043,7 +2044,8 @@
       "title": "Richiedi Rimborso",
       "description": "Politica di rimborso di 30 giorni. Invia la tua richiesta via email con i dettagli dell'acquisto.",
       "button": "Richiedi Rimborso",
-      "responseTime": "Elaborazione entro 48 ore"
+      "responseTime": "Elaborazione entro 48 ore",
+      "subject": "Richiesta di cancellazione"
     },
     "feedback": {
       "title": "Segnala Bug o Suggerimento",

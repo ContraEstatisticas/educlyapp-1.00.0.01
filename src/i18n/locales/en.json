@@ -2034,7 +2034,8 @@
     "of": "of",
     "progress": "Progress",
     "seeAll": "See all",
-    "ok": "OK"
+    "ok": "OK",
+    "cancel": "Cancel"
   },
   "settings": {
     "soundOn": "Sound on",
@@ -2853,7 +2854,8 @@
       "title": "Request Cancellation",
       "description": "30-day cancellation policy. Send your request via email with your purchase details.",
       "button": "Request Cancellation",
-      "responseTime": "Processing within 48 hours"
+      "responseTime": "Processing within 48 hours",
+      "subject": "Cancellation Request"
     },
     "feedback": {
       "title": "Report Bug or Suggestion",

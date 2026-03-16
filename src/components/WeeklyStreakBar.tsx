@@ -210,17 +210,17 @@ export const WeeklyStreakBar = () => {
         </div>
       </div>
 
-      <div className="relative mb-8 mt-2 mx-4 h-1.5 bg-muted rounded-full">
+      <div className="relative mb-8 mt-2 h-1.5 bg-muted rounded-full">
         <div
           className="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-1000 ease-out"
           style={{ width: `${progressPercentage}%` }}
         />
 
         <div
-          className="absolute top-1/2 -translate-y-1/2 transition-all duration-1000 ease-out z-10"
+          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-1000 ease-out z-10"
           style={{ left: `${progressPercentage}%` }}
         >
-          <div className="relative -ml-3 -mt-6">
+          <div className="relative -mt-6">
             <img
               src="https://em-content.zobj.net/source/microsoft-teams/400/person-running_1f3c3.png"
               alt="Corredor"

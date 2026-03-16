@@ -1616,7 +1616,8 @@
     "of": "de",
     "progress": "Progresso",
     "seeAll": "Ver tudo",
-    "ok": "OK"
+    "ok": "OK",
+    "cancel": "Cancelar"
   },
   "quiz": {
     "selectAllAnswers": "Selecione todas as respostas corretas",
@@ -2791,7 +2792,8 @@
       "title": "Solicitar Cancelamento",
       "description": "Política de cancelamento de 30 dias. Envie sua solicitação por email com os dados da compra.",
       "button": "Solicitar Cancelamento",
-      "responseTime": "Processamento em até 48 horas"
+      "responseTime": "Processamento em até 48 horas",
+      "subject": "Solicitação de Cancelamento"
     },
     "feedback": {
       "title": "Reportar Bug ou Sugestão",

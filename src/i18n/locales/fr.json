@@ -1293,7 +1293,8 @@
     "of": "sur",
     "progress": "Progrès",
     "seeAll": "Voir tout",
-    "ok": "OK"
+    "ok": "OK",
+    "cancel": "Annuler"
   },
   "settings": {
     "soundOn": "Son activé",
@@ -2367,7 +2368,8 @@
       "title": "Demander un Remboursement",
       "description": "Politique de remboursement de 30 jours. Envoyez votre demande par email avec les détails d'achat.",
       "button": "Demander un Remboursement",
-      "responseTime": "Traitement sous 48 heures"
+      "responseTime": "Traitement sous 48 heures",
+      "subject": "Demande d’annulation"
     },
     "feedback": {
       "title": "Signaler un Bug ou Suggestion",

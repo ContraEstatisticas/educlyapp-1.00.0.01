@@ -1288,7 +1288,8 @@
     "of": "de",
     "progress": "Progreso",
     "seeAll": "Ver todo",
-    "ok": "OK"
+    "ok": "OK",
+    "cancel": "Cancelar"
   },
   "settings": {
     "soundOn": "Sonido activado",
@@ -3276,10 +3277,11 @@
       "responseTime": "Respuesta en 24-48 horas"
     },
     "refund": {
-      "title": "Solicitar Cancelamento",
+      "title": "Solicitud de Cancelación",
       "description": "Política de cancelamento de 30 días. Envía tu solicitud por email con los datos de compra.",
-      "button": "Solicitar Cancelamento",
-      "responseTime": "Procesamiento en hasta 48 horas"
+      "button": "Solicitar Cancelación",
+      "responseTime": "Procesamiento en hasta 48 horas",
+      "subject": "Solicitud de Cancelación"
     },
     "feedback": {
       "title": "Reportar Bug o Sugerencia",

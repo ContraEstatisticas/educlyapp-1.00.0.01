@@ -647,7 +647,7 @@ const Profile = () => {
                       className="text-muted-foreground hover:text-foreground"
                       onClick={() => setIsPasswordOpen(false)}
                     >
-                      {t('common.cancel')}
+                      {t('common.cancel', 'Cancelar')}
                     </Button>
                     <Button
                       onClick={handleSendResetEmail}
