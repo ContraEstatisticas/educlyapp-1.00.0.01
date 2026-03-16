@@ -1,27 +1,47 @@
-## Separação Base vs Premium — Implementado ✅
+## Sistema de Acesso Automático via Magic Link — Implementado ✅
 
-### O que foi corrigido
+### Novo fluxo (compras após deploy)
 
-1. **`process_pending_billing_events()`**: Compras `base` agora inserem `is_premium = false`. Apenas `freelancer`, `ai_hub` e `combo` setam `is_premium = true`.
+1. **Compra chega** → webhook insere `billing_event_logs` (sem mudança)
+2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera magic link
+3. **`send-welcome-email` (mode=magic_link)** envia email com magic link + credenciais de referência
+4. Usuário clica no link → entra direto no dashboard, autenticado
+5. Troca de senha via modal interno no `Profile.tsx` → `supabase.auth.updateUser({ password })`
+6. Após troca, `resend-magic-link` envia novo link de acesso por email
 
-2. **Dados existentes**: Usuários base-only que estavam com `is_premium = true` foram corrigidos para `false`.
+### Fallback cirúrgico
 
-3. **Chat.tsx**: Agora usa `useProductAccess` ao invés de `usePremiumAccess`. O chat EDI só é acessível para quem tem `freelancer` ou `ai_hub`.
+- Se `auto-create-account` falha **antes** de criar conta → fluxo legado (link `/cadastro`)
+- Se falha **depois** de criar conta → enfileira para retry (sem senha, só magic link)
+- Usuário existente → processa billing + envia magic link (mode=`magic_link_existing`)
 
-4. **ChatPremiumGate**: Removida prop `checkoutUrl`, agora redireciona para `/upgrade`.
+### Magic link expirado
 
-### Arquitetura de acesso atual
+- `Auth.tsx` detecta `error=access_denied` / `error_code=otp_expired` no hash
+- Mostra UI de "link expirado" com campo de email + botão para reenviar
+- Chama `resend-magic-link` (rate limit: 1/min)
 
-| Guard | Função | Onde é usado |
-|---|---|---|
-| `PremiumGuard` | Qualquer produto ativo (base, freelancer, ai_hub) OU whitelist | Rotas autenticadas |
-| `ProductGuard` | Produto específico (`freelancer`, `ai_hub`) | `/freelancer`, `/assistentes` |
-| `useProductAccess` | Hook para verificar produto específico | `Chat.tsx`, componentes internos |
+### Senha NÃO persiste no banco
 
-### Tiers
+- Gerada em memória, passada diretamente ao email, nunca salva em tabela
+- Retries não incluem senha (apenas magic link)
 
-- **BASE**: Acesso ao dashboard, desafios. Sem chat EDI, sem freelancer, sem AI Hub.
-- **PREMIUM (Freelancer)**: Base + `/freelancer` + chat EDI
-- **AI PACK**: Base + `/assistentes` + chat EDI  
-- **COMBO**: Tudo (freelancer + ai_hub ativos)
-- **WHITELIST**: Acesso total via `premium_whitelist`
+### Compatibilidade retroativa
+
+- `Auth.tsx` login/signup: mantido intacto
+- `purchased-signup`, `pending-signup`, `SignupFromEmail.tsx`: mantidos
+- Usuários antigos continuam acessando normalmente
+
+### Arquivos criados/modificados
+
+| Arquivo | Ação |
+|---|---|
+| `supabase/functions/auto-create-account/index.ts` | ✅ Criado |
+| `supabase/functions/resend-magic-link/index.ts` | ✅ Criado |
+| `supabase/functions/send-welcome-email/index.ts` | ✅ Modificado (3 modes) |
+| `supabase/functions/paddle-webhook/index.ts` | ✅ Modificado |
+| `supabase/functions/primer-webhook/index.ts` | ✅ Modificado |
+| `supabase/functions/send-pending-thanks/index.ts` | ✅ Modificado |
+| `supabase/config.toml` | ✅ Novas functions registradas |
+| `src/pages/Auth.tsx` | ✅ Expired magic link UI |
+| `src/pages/Profile.tsx` | ✅ Modal de troca de senha inline |
