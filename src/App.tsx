@@ -111,6 +111,7 @@ import DownsellEsp from "./pages/DownsellEsp";
 import ResetCache from "./pages/ResetCache";
 import SignupFromEmail from "./pages/SignupFromEmail";
 import Billing from "./pages/Billing";
+import MagicLogin from "./pages/MagicLogin";
 
 // Inicialização do Query Client para cache de requisições
 const queryClient = new QueryClient({
