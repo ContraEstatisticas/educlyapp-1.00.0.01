@@ -281,38 +281,96 @@ serve(async (req) => {
       }
     }
 
-    // Check if welcome email was already sent (dedup against email_logs)
+    // === AUTO-CREATE ACCOUNT + MAGIC LINK (replaces legacy welcome email queue) ===
+    // Check dedup: welcome OR magic_link already sent
     const { data: existingLog } = await supabase
       .from('email_logs')
       .select('id')
       .eq('recipient_email', email)
-      .eq('email_type', 'welcome')
-      .maybeSingle();
+      .in('email_type', ['welcome', 'magic_link'])
+      .limit(1);
 
-    if (existingLog) {
-      console.log(`[primer-webhook] Welcome email already sent to ${email}, skipping queue`);
+    if (existingLog && existingLog.length > 0) {
+      console.log(`[primer-webhook] Welcome/magic_link already sent to ${email}, skipping`);
       return new Response(JSON.stringify({ success: true, skipped: true, billing_logged: !billingError }), { headers: corsHeaders });
     }
 
-    // Insert into pending queue (send_after = now + 5 min, fixed timer)
-    const { error: insertError } = await supabase
-      .from('pending_thank_you_emails')
-      .insert({
+    // Call auto-create-account
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    let autoCreateResult: any = null;
+    let autoCreateFailed = false;
+
+    try {
+      const resp = await fetch(`${supabaseUrl}/functions/v1/auto-create-account`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${serviceKey}`,
+        },
+        body: JSON.stringify({ email, buyer_name: buyerName, language }),
+      });
+      autoCreateResult = await resp.json();
+      if (!resp.ok || autoCreateResult.error) {
+        console.error('[primer-webhook] auto-create-account failed:', autoCreateResult);
+        autoCreateFailed = true;
+      }
+    } catch (err) {
+      console.error('[primer-webhook] auto-create-account fetch error:', err);
+      autoCreateFailed = true;
+    }
+
+    if (autoCreateFailed && !autoCreateResult?.account_created) {
+      // Failed BEFORE creating account → fall back to legacy signup queue
+      console.log(`[primer-webhook] Falling back to legacy queue for ${email}`);
+      await supabase.from('pending_thank_you_emails').insert({
         email,
         buyer_name: buyerName,
         product_id: productId || null,
         product_type: productType,
         language,
       });
-
-    if (insertError) {
-      console.error(`[primer-webhook] Error queuing email:`, insertError);
-      throw new Error(insertError.message);
+      return new Response(JSON.stringify({ success: true, queued: true, legacy: true }), { headers: corsHeaders });
     }
 
-    console.log(`[primer-webhook] Queued thank-you email for ${email}, will send after 5 min`);
+    // Send magic link email
+    const mode = autoCreateResult?.already_existed ? 'magic_link_existing' : 'magic_link';
+    try {
+      const resp = await fetch(`${supabaseUrl}/functions/v1/send-welcome-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${serviceKey}`,
+        },
+        body: JSON.stringify({
+          email,
+          userName: buyerName,
+          language,
+          mode,
+          magic_link_url: autoCreateResult?.magic_link_url,
+          generated_password: autoCreateResult?.generated_password,
+        }),
+      });
+      if (!resp.ok) {
+        console.error('[primer-webhook] send-welcome-email failed:', await resp.text());
+        // Enqueue for retry (without password)
+        await supabase.from('pending_thank_you_emails').insert({
+          email, buyer_name: buyerName, product_id: productId || null,
+          product_type: productType, language,
+        });
+      } else {
+        console.log(`[primer-webhook] Magic link email sent to ${email}, mode: ${mode}`);
+      }
+    } catch (sendErr) {
+      console.error('[primer-webhook] send-welcome-email fetch error:', sendErr);
+      await supabase.from('pending_thank_you_emails').insert({
+        email, buyer_name: buyerName, product_id: productId || null,
+        product_type: productType, language,
+      });
+    }
 
-    return new Response(JSON.stringify({ success: true, queued: true }), { headers: corsHeaders });
+    console.log(`[primer-webhook] Completed for ${email}`);
+    return new Response(JSON.stringify({ success: true, magic_link: !autoCreateFailed }), { headers: corsHeaders });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     console.error("[primer-webhook] Error:", error);
