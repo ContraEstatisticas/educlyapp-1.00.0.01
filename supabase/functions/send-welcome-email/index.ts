@@ -93,7 +93,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Datenschutz",
   },
   it: {
-    subject: "🎉 Benvenuto su Educly!",
+    subject: "🔓 Accesso Sbloccato — Educly",
     heroTitle: "Il tuo account è pronto.",
     heroSubtitle: "Clicca sul pulsante qui sotto per accedere direttamente, senza password.",
     cta: "Accedi al Mio Account",
