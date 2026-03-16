@@ -626,17 +626,28 @@ const Profile = () => {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <div className="py-4 space-y-4 flex flex-col items-center text-center">
-                    <div className="p-4 bg-blue-100 dark:bg-blue-500/10 rounded-full">
-                      <Mail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        {t('profile.linkSentTo')}
-                      </p>
-                      <p className="text-base font-bold text-foreground">
-                        {getDisplayEmail()}
-                      </p>
+                  <div className="py-4 space-y-4">
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-muted-foreground text-sm">{t('profile.newPassword', 'Nova senha')}</Label>
+                        <Input
+                          type="password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="••••••••"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-muted-foreground text-sm">{t('profile.confirmNewPassword', 'Confirmar nova senha')}</Label>
+                        <Input
+                          type="password"
+                          value={confirmNewPassword}
+                          onChange={(e) => setConfirmNewPassword(e.target.value)}
+                          placeholder="••••••••"
+                          className="mt-1"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -645,17 +656,17 @@ const Profile = () => {
                       type="button"
                       variant="ghost"
                       className="text-muted-foreground hover:text-foreground"
-                      onClick={() => setIsPasswordOpen(false)}
+                      onClick={() => { setIsPasswordOpen(false); setNewPassword(""); setConfirmNewPassword(""); }}
                     >
                       {t('common.cancel', 'Cancelar')}
                     </Button>
                     <Button
-                      onClick={handleSendResetEmail}
+                      onClick={handleChangePassword}
                       disabled={isSendingEmail}
                       className="bg-primary hover:bg-primary/90 text-white"
                     >
                       {isSendingEmail && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      {t('profile.sendEmail')}
+                      {t('profile.savePassword', 'Salvar senha')}
                     </Button>
                   </DialogFooter>
                 </DialogContent>
