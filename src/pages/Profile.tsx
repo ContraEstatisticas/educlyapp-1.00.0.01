@@ -336,43 +336,43 @@ const Profile = () => {
     }
   };
 
-  const handleSendResetEmail = async () => {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const handleChangePassword = async () => {
+    if (!newPassword || newPassword.length < 6) {
+      toast({ variant: "destructive", title: t('profile.error'), description: t('profile.passwordTooShort', 'A senha deve ter pelo menos 6 caracteres.') });
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      toast({ variant: "destructive", title: t('profile.error'), description: t('profile.passwordMismatch', 'As senhas não coincidem.') });
+      return;
+    }
     try {
       setIsSendingEmail(true);
-      const email = getFullEmail();
-      if (!email) {
-        toast({
-          variant: "destructive",
-          title: t('profile.error'),
-          description: t('profile.emailNotFound')
-        });
-        return;
-      }
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/update-password`,
-      });
-
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
       if (error) {
-        toast({
-          variant: "destructive",
-          title: t('profile.sendError'),
-          description: error.message
-        });
+        toast({ variant: "destructive", title: t('profile.sendError'), description: error.message });
         return;
       }
-
-      toast({
-        title: t('profile.emailSent'),
-        description: t('profile.emailSentDesc', { email: getDisplayEmail() })
-      });
+      // Send new magic link after password change
+      try {
+        const email = getFullEmail();
+        if (email) {
+          const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+          await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+        }
+      } catch { /* non-blocking */ }
+      toast({ title: t('profile.passwordChanged', 'Senha alterada!'), description: t('profile.passwordChangedDesc', 'Sua senha foi alterada com sucesso. Um novo link de acesso foi enviado ao seu e-mail.') });
+      setNewPassword("");
+      setConfirmNewPassword("");
       setIsPasswordOpen(false);
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: t('profile.sendError'),
-        description: t('profile.unexpectedError')
-      });
+      toast({ variant: "destructive", title: t('profile.sendError'), description: t('profile.unexpectedError') });
     } finally {
       setIsSendingEmail(false);
     }
@@ -626,17 +626,28 @@ const Profile = () => {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <div className="py-4 space-y-4 flex flex-col items-center text-center">
-                    <div className="p-4 bg-blue-100 dark:bg-blue-500/10 rounded-full">
-                      <Mail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        {t('profile.linkSentTo')}
-                      </p>
-                      <p className="text-base font-bold text-foreground">
-                        {getDisplayEmail()}
-                      </p>
+                  <div className="py-4 space-y-4">
+                    <div className="space-y-3">
+                      <div>
+                        <Label className="text-muted-foreground text-sm">{t('profile.newPassword', 'Nova senha')}</Label>
+                        <Input
+                          type="password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="••••••••"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-muted-foreground text-sm">{t('profile.confirmNewPassword', 'Confirmar nova senha')}</Label>
+                        <Input
+                          type="password"
+                          value={confirmNewPassword}
+                          onChange={(e) => setConfirmNewPassword(e.target.value)}
+                          placeholder="••••••••"
+                          className="mt-1"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -645,17 +656,17 @@ const Profile = () => {
                       type="button"
                       variant="ghost"
                       className="text-muted-foreground hover:text-foreground"
-                      onClick={() => setIsPasswordOpen(false)}
+                      onClick={() => { setIsPasswordOpen(false); setNewPassword(""); setConfirmNewPassword(""); }}
                     >
                       {t('common.cancel', 'Cancelar')}
                     </Button>
                     <Button
-                      onClick={handleSendResetEmail}
+                      onClick={handleChangePassword}
                       disabled={isSendingEmail}
                       className="bg-primary hover:bg-primary/90 text-white"
                     >
                       {isSendingEmail && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      {t('profile.sendEmail')}
+                      {t('profile.savePassword', 'Salvar senha')}
                     </Button>
                   </DialogFooter>
                 </DialogContent>
