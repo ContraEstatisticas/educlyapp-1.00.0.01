@@ -9,106 +9,6 @@ const corsHeaders = {
 const BATCH_SIZE = 15;
 const DELAY_BETWEEN_EMAILS_MS = 5000;
 
-const TRANSLATIONS: Record<string, Record<string, string>> = {
-  pt: {
-    subject: '🎉 Bem-vindo à Educly!',
-    badge: 'Acesso Liberado', heroTitle: 'Bem-vindo à Educly! 🎉',
-    heroSubtitle: 'Você deu o primeiro passo para dominar a Inteligência Artificial e transformar sua carreira para sempre.',
-    successTitle: 'Conta ativa e pronta!',
-    successBody: 'Sua conta foi criada com o e-mail <strong>{email}</strong>. Você já pode acessar e começar agora mesmo.',
-    sectionLabel: 'O QUE VOCÊ VAI APRENDER',
-    feature1: 'ChatGPT, Claude e outras IAs', feature2: 'Imagens incríveis com IA',
-    feature3: 'Automatizar tarefas do dia a dia', feature4: 'Ganhar dinheiro com IA',
-    cta: 'Acessar Minha Conta', ctaNote: 'Bons estudos!', team: 'Equipe Educly',
-    rights: 'Todos os direitos reservados.', privacy: 'Política de Privacidade', terms: 'Termos de Uso',
-  },
-  en: {
-    subject: '🎉 Welcome to Educly!',
-    badge: 'Access Granted', heroTitle: 'Welcome to Educly! 🎉',
-    heroSubtitle: 'You have taken the first step to master Artificial Intelligence and transform your career forever.',
-    successTitle: 'Account active and ready!',
-    successBody: 'Your account was created with <strong>{email}</strong>. You can access and start right now.',
-    sectionLabel: 'WHAT YOU WILL LEARN',
-    feature1: 'ChatGPT, Claude and other AIs', feature2: 'Create amazing images with AI',
-    feature3: 'Automate daily tasks', feature4: 'Earn money with AI',
-    cta: 'Access My Account', ctaNote: 'Happy learning!', team: 'Educly Team',
-    rights: 'All rights reserved.', privacy: 'Privacy Policy', terms: 'Terms of Use',
-  },
-  es: {
-    subject: '🎉 ¡Bienvenido a Educly!',
-    badge: 'Acceso Liberado', heroTitle: '¡Bienvenido a Educly! 🎉',
-    heroSubtitle: 'Has dado el primer paso para dominar la Inteligencia Artificial y transformar tu carrera para siempre.',
-    successTitle: '¡Cuenta activa y lista!',
-    successBody: 'Tu cuenta fue creada con el correo <strong>{email}</strong>. Ya puedes acceder y comenzar ahora mismo.',
-    sectionLabel: 'LO QUE APRENDERÁS',
-    feature1: 'ChatGPT, Claude y otras IAs', feature2: 'Imágenes increíbles con IA',
-    feature3: 'Automatizar tareas diarias', feature4: 'Ganar dinero con IA',
-    cta: 'Acceder a Mi Cuenta', ctaNote: '¡Buen aprendizaje!', team: 'Equipo Educly',
-    rights: 'Todos los derechos reservados.', privacy: 'Política de Privacidad', terms: 'Términos de Uso',
-  },
-  fr: {
-    subject: '🎉 Bienvenue chez Educly !',
-    badge: 'Accès Libéré', heroTitle: 'Bienvenue chez Educly ! 🎉',
-    heroSubtitle: "Vous avez fait le premier pas pour maîtriser l'IA et transformer votre carrière.",
-    successTitle: 'Compte actif et prêt !',
-    successBody: 'Votre compte a été créé avec <strong>{email}</strong>.',
-    sectionLabel: 'CE QUE VOUS ALLEZ APPRENDRE',
-    feature1: "ChatGPT, Claude et d'autres IAs", feature2: "Créer des images incroyables avec l'IA",
-    feature3: 'Automatiser les tâches quotidiennes', feature4: "Gagner de l'argent avec l'IA",
-    cta: 'Accéder à Mon Compte', ctaNote: 'Bon apprentissage !', team: 'Équipe Educly',
-    rights: 'Tous droits réservés.', privacy: 'Politique de Confidentialité', terms: "Conditions d'Utilisation",
-  },
-  de: {
-    subject: '🎉 Willkommen bei Educly!',
-    badge: 'Zugang Freigeschaltet', heroTitle: 'Willkommen bei Educly! 🎉',
-    heroSubtitle: 'Sie haben den ersten Schritt gemacht, um KI zu meistern.',
-    successTitle: 'Konto aktiv und bereit!',
-    successBody: 'Ihr Konto wurde mit <strong>{email}</strong> erstellt.',
-    sectionLabel: 'WAS SIE LERNEN WERDEN',
-    feature1: 'ChatGPT, Claude und andere KIs', feature2: 'Erstaunliche Bilder mit KI',
-    feature3: 'Tägliche Aufgaben automatisieren', feature4: 'Geld mit KI verdienen',
-    cta: 'Auf Mein Konto Zugreifen', ctaNote: 'Viel Erfolg!', team: 'Educly Team',
-    rights: 'Alle Rechte vorbehalten.', privacy: 'Datenschutzrichtlinie', terms: 'Nutzungsbedingungen',
-  },
-  it: {
-    subject: '🎉 Benvenuto su Educly!',
-    badge: 'Accesso Sbloccato', heroTitle: 'Benvenuto su Educly! 🎉',
-    heroSubtitle: "Hai fatto il primo passo per padroneggiare l'IA.",
-    successTitle: 'Account attivo e pronto!',
-    successBody: 'Il tuo account è stato creato con <strong>{email}</strong>.',
-    sectionLabel: 'COSA IMPARERAI',
-    feature1: 'ChatGPT, Claude e altre IA', feature2: "Immagini incredibili con l'IA",
-    feature3: 'Automatizzare le attività quotidiane', feature4: "Guadagnare con l'IA",
-    cta: 'Accedi al Mio Account', ctaNote: 'Buon apprendimento!', team: 'Team Educly',
-    rights: 'Tutti i diritti riservati.', privacy: 'Politica sulla Privacy', terms: 'Termini di Utilizzo',
-  },
-  ru: {
-    subject: '🎉 Добро пожаловать в Educly!',
-    badge: 'Доступ Открыт', heroTitle: 'Добро пожаловать в Educly! 🎉',
-    heroSubtitle: 'Вы сделали первый шаг к освоению ИИ.',
-    successTitle: 'Аккаунт активен и готов!',
-    successBody: 'Ваш аккаунт создан с <strong>{email}</strong>.',
-    sectionLabel: 'ЧТО ВЫ УЗНАЕТЕ',
-    feature1: 'ChatGPT, Claude и другие ИИ', feature2: 'Потрясающие изображения с ИИ',
-    feature3: 'Автоматизировать задачи', feature4: 'Зарабатывать с ИИ',
-    cta: 'Войти в Мой Аккаунт', ctaNote: 'Успешного обучения!', team: 'Команда Educly',
-    rights: 'Все права защищены.', privacy: 'Политика Конфиденциальности', terms: 'Условия Использования',
-  },
-};
-
-function tr(lang: string, key: string): string {
-  const n = lang.toLowerCase().split('-')[0];
-  return TRANSLATIONS[n]?.[key] || TRANSLATIONS['en']?.[key] || '';
-}
-
-function getEmailHtml(userName: string, userEmail: string, language: string, trackingPixelUrl: string): string {
-  const lang = language.toLowerCase().split('-')[0];
-  const ctaUrl = `https://educly.app/cadastro?email=${encodeURIComponent(userEmail)}&lang=${lang}`;
-  const successBodyText = tr(lang, 'successBody').replace('{email}', userEmail);
-
-  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 18px;"><tr><td style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:#bfdbfe;letter-spacing:0.5px;text-transform:uppercase;">✦ ${tr(lang,'badge')}</td></tr></table><h1 style="font-size:32px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${tr(lang,'heroTitle').replace('Educly!','Educly,')} ${userName}!</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${tr(lang,'heroSubtitle')}</p></td></tr><tr><td style="background:#ffffff;padding:40px 40px 32px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:12px;border:1px solid #a7f3d0;margin-bottom:28px;"><tr><td style="padding:18px 22px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="width:28px;height:28px;background:#10b981;border-radius:50%;text-align:center;vertical-align:top;color:#fff;font-size:14px;font-weight:700;line-height:28px;padding-right:12px;">✓</td><td style="font-size:14px;color:#065f46;line-height:1.6;"><strong style="display:block;margin-bottom:2px;font-size:15px;">${tr(lang,'successTitle')}</strong>${successBodyText}</td></tr></table></td></tr></table><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6366f1;margin:0 0 14px;">${tr(lang,'sectionLabel')}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td width="50%" style="padding:0 6px 12px 0;vertical-align:top;"><table role="presentation" width="100%" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;"><span style="font-size:20px;margin-right:8px;">🤖</span>${tr(lang,'feature1')}</td></tr></table></td><td width="50%" style="padding:0 0 12px 6px;vertical-align:top;"><table role="presentation" width="100%" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;"><span style="font-size:20px;margin-right:8px;">🎨</span>${tr(lang,'feature2')}</td></tr></table></td></tr><tr><td width="50%" style="padding:0 6px 0 0;vertical-align:top;"><table role="presentation" width="100%" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;"><span style="font-size:20px;margin-right:8px;">⚡</span>${tr(lang,'feature3')}</td></tr></table></td><td width="50%" style="padding:0 0 0 6px;vertical-align:top;"><table role="presentation" width="100%" style="background:#f8faff;border:1px solid #e0e7ff;border-radius:10px;"><tr><td style="padding:14px 16px;font-size:13px;color:#374151;font-weight:500;"><span style="font-size:20px;margin-right:8px;">💰</span>${tr(lang,'feature4')}</td></tr></table></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${ctaUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;">${tr(lang,'cta')}</a></td></tr><tr><td style="text-align:center;padding-top:10px;font-size:12px;color:#9ca3af;">${tr(lang,'ctaNote')} &nbsp;·&nbsp; <strong>${tr(lang,'team')}</strong></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9fafb;border-radius:12px;border:1px solid #f0f0f0;margin-top:24px;"><tr><td style="padding:20px 24px;"><p style="font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9ca3af;text-align:center;margin:0 0 14px;">Suporte / Soporte / Support</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;">🇧🇷 Ficou com dúvidas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#6b7280;">🇪🇸 ¿Tienes dudas? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;">contact@educly.app</a></td></tr><tr><td style="padding:10px 0;font-size:13px;color:#6b7280;">🇫🇷 Vous avez des questions? <a href="mailto:contact@educly.app" style="color:#4f46e5;text-decoration:none;font-weight:600;">contact@educly.app</a></td></tr></table></td></tr></table></td></tr><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;line-height:1.8;margin:0;">© 2025 Educly. ${tr(lang,'rights')}<br/><a href="https://educly.app/politica-privacidade" style="color:#6366f1;text-decoration:none;">${tr(lang,'privacy')}</a> &nbsp;·&nbsp; <a href="https://educly.app/termos-uso" style="color:#6366f1;text-decoration:none;">${tr(lang,'terms')}</a></p></td></tr></table></td></tr></table>${trackingPixelUrl ? `<img src="${trackingPixelUrl}" width="1" height="1" style="display:none" alt=""/>` : ''}</body></html>`;
-}
-
 function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -124,11 +24,11 @@ serve(async (req) => {
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-    const token = authHeader.replace('Bearer ', '');
 
     const anonClient = createClient(supabaseUrl, anonKey, {
       global: { headers: { Authorization: authHeader } },
     });
+    const token = authHeader.replace('Bearer ', '');
     const { data: claims, error: claimsError } = await anonClient.auth.getClaims(token);
     if (claimsError || !claims?.claims?.sub) {
       return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
@@ -140,20 +40,9 @@ serve(async (req) => {
     }
 
     const supabase = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-
     console.log("[send-pending-welcome-batch] Starting batch...");
 
-    // Flow 1: Registered users who haven't received welcome email
-    const { data: billingEvents, error: billingError } = await supabase
-      .from('billing_event_logs')
-      .select('email, user_id, payload')
-      .eq('processed', true)
-      .eq('status', 'success')
-      .not('user_id', 'is', null);
-
-    if (billingError) throw new Error(`Failed to fetch billing events: ${billingError.message}`);
-
-    // Flow 2: Unregistered buyers (USER_NOT_FOUND)
+    // Get purchase event types
     const purchaseEventTypes = [
       'SETTLED', 'STARTING_TRIAL', 'SUBSCRIPTION_SETTLED',
       'SUBSCRIPTION_TRIAL_STARTED', 'GRANTED', 'CONVERTION',
@@ -161,147 +50,142 @@ serve(async (req) => {
       'PURCHASE_COMPLETE', 'PURCHASE_APPROVED', 'PURCHASE_PROTEST', 'PURCHASE_DELAYED'
     ];
 
-    const { data: unregisteredEvents, error: unregError } = await supabase
+    // Find unprocessed billing events
+    const { data: pendingEvents, error: pendingError } = await supabase
       .from('billing_event_logs')
       .select('id, email, payload, event_type')
-      .eq('status', 'USER_NOT_FOUND')
+      .in('status', ['pending', 'USER_NOT_FOUND'])
       .eq('processed', false)
-      .in('event_type', purchaseEventTypes);
+      .order('created_at', { ascending: true })
+      .limit(200);
 
-    if (unregError) throw new Error(`Failed to fetch unregistered events: ${unregError.message}`);
+    if (pendingError) throw new Error(`Failed to fetch pending events: ${pendingError.message}`);
 
-    const { data: unregisteredEventsLower } = await supabase
-      .from('billing_event_logs')
-      .select('id, email, payload, event_type')
-      .eq('status', 'USER_NOT_FOUND')
-      .eq('processed', false)
-      .in('event_type', purchaseEventTypes.map(e => e.toLowerCase()));
+    // Filter to purchase event types (case-insensitive) and deduplicate by email
+    const filteredEvents = (pendingEvents || []).filter((e: any) =>
+      purchaseEventTypes.some(t => t.toLowerCase() === (e.event_type || '').toLowerCase())
+    );
 
-    const allUnregistered = [...(unregisteredEvents || []), ...(unregisteredEventsLower || [])];
-    const unregMap = new Map(allUnregistered.map((e: any) => [e.id, e]));
-    const uniqueUnregistered = Array.from(unregMap.values());
+    const emailMap = new Map<string, any>();
+    for (const event of filteredEvents) {
+      const email = (event.email || '').toLowerCase().trim().replace(/\.+$/, '');
+      if (!email || emailMap.has(email)) continue;
+      emailMap.set(email, event);
+    }
 
-    // Get already sent emails for dedup
-    const { data: sentEmails, error: sentError } = await supabase
+    // Check which already got a welcome/magic_link email
+    const allEmails = Array.from(emailMap.keys());
+    if (allEmails.length === 0) {
+      return new Response(JSON.stringify({ sent: 0, remaining: 0, message: "No pending emails" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const { data: sentEmails } = await supabase
       .from('email_logs')
       .select('recipient_email')
-      .eq('email_type', 'welcome');
+      .in('email_type', ['welcome', 'magic_link'])
+      .in('recipient_email', allEmails);
 
-    if (sentError) throw new Error(`Failed to fetch email logs: ${sentError.message}`);
+    const sentSet = new Set((sentEmails || []).map((e: any) => e.recipient_email.toLowerCase()));
 
-    const sentEmailSet = new Set((sentEmails || []).map((e: any) => e.recipient_email.toLowerCase()));
-
-    type PendingEmail = { email: string; userId: string | null; payload: any; type: 'registered' | 'recovery'; billingEventId?: string };
-    const pendingMap = new Map<string, PendingEmail>();
-
-    for (const event of billingEvents || []) {
-      const email = (event as any).email?.toLowerCase().trim().replace(/\.+$/, '');
-      if (!email || sentEmailSet.has(email) || pendingMap.has(email)) continue;
-      pendingMap.set(email, { email, userId: (event as any).user_id, payload: (event as any).payload, type: 'registered' });
-    }
-
-    for (const event of uniqueUnregistered) {
-      const email = (event as any).email?.toLowerCase().trim().replace(/\.+$/, '');
-      if (!email || sentEmailSet.has(email) || pendingMap.has(email)) continue;
-      pendingMap.set(email, { email, userId: null, payload: (event as any).payload, type: 'recovery', billingEventId: (event as any).id });
-    }
-
-    const pendingList = Array.from(pendingMap.values()).slice(0, BATCH_SIZE);
-    const totalRemaining = pendingMap.size;
+    const pendingList = allEmails
+      .filter(email => !sentSet.has(email))
+      .slice(0, BATCH_SIZE)
+      .map(email => ({ email, event: emailMap.get(email)! }));
 
     if (pendingList.length === 0) {
-      return new Response(JSON.stringify({ sent: 0, remaining: 0, message: "No pending emails" }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      return new Response(JSON.stringify({ sent: 0, remaining: 0, message: "All emails already sent" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    // Get profiles for registered users
-    const registeredUserIds = pendingList.filter(p => p.userId).map(p => p.userId!);
-    const { data: profiles } = registeredUserIds.length > 0
-      ? await supabase.from('profiles').select('id, full_name, preferred_language').in('id', registeredUserIds)
-      : { data: [] };
-
-    const profileMap = new Map((profiles as any[])?.map((p: any) => [p.id, p]) || []);
-
-    const productIds = pendingList
-      .map(p => p.payload?.product_id || p.payload?.data?.product?.id || p.payload?.oneoff?.product_id)
-      .filter(Boolean);
-
-    const { data: productDefs } = productIds.length > 0
-      ? await supabase.from('product_definitions').select('product_id, language').in('product_id', productIds)
-      : { data: [] };
-
-    const productLangMap = new Map((productDefs as any[])?.map((p: any) => [p.product_id, p.language]) || []);
-
-    const results: Array<{ email: string; success: boolean; type: string; error?: string }> = [];
+    const results: Array<{ email: string; success: boolean; account_created?: boolean; error?: string }> = [];
     let successCount = 0;
 
-    for (const pending of pendingList) {
+    for (const { email, event } of pendingList) {
       try {
-        let userName: string;
-        if (pending.userId && profileMap.has(pending.userId)) {
-          userName = (profileMap.get(pending.userId) as any)!.full_name || pending.email.split('@')[0];
-        } else {
-          userName = pending.payload?.buyer_name
-            || pending.payload?.data?.buyer?.name
-            || pending.payload?.buyer?.name
-            || pending.payload?.subscriber?.name
-            || pending.email.split('@')[0];
+        const buyerName = event.payload?.buyer_name
+          || event.payload?.data?.buyer?.name
+          || event.payload?.buyer?.name
+          || event.payload?.subscriber?.name
+          || email.split('@')[0];
+
+        // Detect language from product or default to 'es'
+        const productId = event.payload?.product_id || event.payload?.data?.product?.id || event.payload?.oneoff?.product_id;
+        let language = 'es';
+        if (productId) {
+          const { data: prodDef } = await supabase
+            .from('product_definitions')
+            .select('language')
+            .eq('product_id', productId)
+            .maybeSingle();
+          if (prodDef?.language) language = prodDef.language;
         }
 
-        const productId = pending.payload?.product_id || pending.payload?.data?.product?.id || pending.payload?.oneoff?.product_id;
-        const productLang = productId ? productLangMap.get(productId) : null;
-        const profileLang = pending.userId ? (profileMap.get(pending.userId) as any)?.preferred_language : null;
-        const language = (productLang || profileLang || 'es').toLowerCase().split('-')[0];
-
-        const subject = tr(language, 'subject');
-
-        const { data: logEntry, error: logError } = await supabase
-          .from('email_logs')
-          .insert({
-            recipient_email: pending.email,
-            email_type: 'welcome',
-            subject,
-            status: 'pending',
-            user_id: pending.userId,
-            metadata: { source: pending.type === 'recovery' ? 'batch_recovery_unregistered' : 'batch_recovery_registered' },
-          })
-          .select('id')
-          .single();
-
-        if (logError) throw new Error(`Failed to create email log: ${logError.message}`);
-
-        const trackingUrl = `${supabaseUrl}/functions/v1/track-email-open?id=${(logEntry as any).id}`;
-        const html = getEmailHtml(userName, pending.email, language, trackingUrl);
-
-        const apiKey = Deno.env.get("RESEND_API_KEY");
-        if (!apiKey) throw new Error("RESEND_API_KEY not configured");
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: "Educly <noreply@educly.app>", to: [pending.email], subject, html }),
+        // Call auto-create-account to create account + token
+        console.log(`[batch] Creating account for ${email}...`);
+        const createRes = await fetch(`${supabaseUrl}/functions/v1/auto-create-account`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          },
+          body: JSON.stringify({ email, buyer_name: buyerName, language }),
         });
-        if (!res.ok) {
-          const err = await res.text();
-          throw new Error(`Resend error: ${res.status} - ${err}`);
+
+        const createData = await createRes.json();
+        if (!createRes.ok && !createData.already_existed) {
+          throw new Error(createData.error || `auto-create-account failed: ${createRes.status}`);
         }
 
-        await supabase.from('email_logs').update({ status: 'sent', sent_at: new Date().toISOString() }).eq('id', (logEntry as any).id);
+        const accessToken = createData.access_token;
+        const generatedPassword = createData.generated_password; // only for new accounts
+        const mode = createData.already_existed ? 'magic_link_existing' : 'magic_link';
 
-        results.push({ email: pending.email, success: true, type: pending.type });
+        // Call send-welcome-email
+        console.log(`[batch] Sending welcome email to ${email} (mode=${mode})...`);
+        const emailRes = await fetch(`${supabaseUrl}/functions/v1/send-welcome-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+          },
+          body: JSON.stringify({
+            email,
+            userName: buyerName,
+            language,
+            mode,
+            access_token: accessToken,
+            generated_password: generatedPassword,
+          }),
+        });
+
+        const emailData = await emailRes.json();
+        if (!emailRes.ok) {
+          throw new Error(emailData.error || `send-welcome-email failed: ${emailRes.status}`);
+        }
+
+        results.push({ email, success: true, account_created: createData.account_created });
         successCount++;
-        console.log(`[batch] ✓ ${pending.email} (${language}) [${pending.type}]`);
+        console.log(`[batch] ✓ ${email} (created=${createData.account_created})`);
+
       } catch (error) {
         const msg = error instanceof Error ? error.message : "Unknown";
-        results.push({ email: pending.email, success: false, type: pending.type, error: msg });
-        console.error(`[batch] ✗ ${pending.email}:`, msg);
+        results.push({ email, success: false, error: msg });
+        console.error(`[batch] ✗ ${email}:`, msg);
       }
 
       await delay(DELAY_BETWEEN_EMAILS_MS);
     }
 
-    const remaining = totalRemaining - successCount;
+    const remaining = allEmails.filter(e => !sentSet.has(e)).length - successCount;
 
     return new Response(JSON.stringify({
-      sent: successCount, failed: pendingList.length - successCount, remaining, results,
+      sent: successCount,
+      failed: pendingList.length - successCount,
+      remaining: Math.max(0, remaining),
+      results,
     }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   } catch (error) {

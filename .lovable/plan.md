@@ -1,67 +1,56 @@
+## Sistema de Acesso Automático via Token Permanente — Implementado ✅
 
+### Fluxo principal (compras após deploy)
 
-## Plano: Redesign dos emails + credenciais + disparo em massa
+1. **Compra chega** → webhook insere `billing_event_logs`
+2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera token permanente em `user_access_tokens`
+3. **`send-welcome-email` (mode=magic_link)** envia email dark theme com link permanente + credenciais (email + senha)
+4. Usuário clica no link → `/magic-login?token=UUID` → edge function gera magic link fresco → redirect → autenticado
+5. Troca de senha via modal interno no `Profile.tsx` → `refreshSession()` + `updateUser({ password })`
+6. Após troca, `resend-magic-link` envia novo link de acesso por email (dark theme, com email do usuário)
 
-### 3 problemas a resolver
+### Token permanente
 
-1. **Email `resend-magic-link` não inclui email/senha** — o template atual (`getMagicLinkEmailHtml`) é minimalista e não recebe nem mostra credenciais
-2. **Design dos emails está feio** — o screenshot mostra o template atual (azul escuro com texto escuro, sem personalidade). O usuário forneceu um HTML de referência com design dark/moderno que deve ser a base
-3. **Usuários com compra pendente precisam receber email com link de acesso** — há dezenas de `billing_event_logs` com `status=pending` e `processed=false` para emails sem conta criada
+- Tabela `user_access_tokens` (user_id UNIQUE, token UUID UNIQUE)
+- Link no email: `https://educly.app/magic-login?token=UUID` (nunca expira)
+- Edge function `magic-login` valida token → `auth.admin.generateLink({ type: 'magiclink' })` → redirect
+- Rate limit: 10 requests/min por token
 
----
+### Design dos emails (dark theme) ✅
 
-### Etapa 1: Novo template HTML base (dark design)
+- Fundo escuro (#07080f), card (#0f1120), bordas sutis
+- Logo Educly com ícone gradiente + ponto laranja
+- Headline em #e8eaf0, subtítulo em #6b7280
+- Botão CTA gradiente azul/indigo (#4f6ef7 → #6366f1)
+- Bloco de credenciais dark (email + senha para contas novas)
+- Footer minimalista (© 2025, Help, Privacy)
+- 7 idiomas: pt, en, es, fr, de, it, ru
 
-Converter o HTML fornecido pelo usuário em um template email-safe (tabelas, inline styles, sem CSS vars, sem animations, sem pseudo-elements) que funcione em todos os clientes de email. O design mantém:
+### Batch processing ✅
 
-- Fundo escuro (#07080f)
-- Card com borda sutil e gradiente accent
-- Logo Educly com ícone
-- Headline em gradiente
-- Botão CTA com gradiente azul/indigo
-- Bloco de credenciais (email + senha) com estilo dark
-- Footer minimalista
+- `send-pending-welcome-batch` busca billing_event_logs pendentes
+- Para cada: chama `auto-create-account` + `send-welcome-email`
+- Rate limit: 1 email a cada 5s, batch de 15
+- Admin-only (verifica is_admin via RPC)
 
-Esse template será usado em **ambas** as edge functions:
-- `send-welcome-email` (email de boas-vindas após compra)
-- `resend-magic-link` (reenvio de link de acesso)
+### Compatibilidade retroativa
 
-### Etapa 2: Modificar `resend-magic-link`
+- `Auth.tsx` login/signup: mantido intacto
+- `purchased-signup`, `pending-signup`, `SignupFromEmail.tsx`: mantidos
+- Usuários antigos continuam acessando normalmente
 
-- Buscar as credenciais do usuário (email já temos, senha não é armazenada)
-- Como a senha não é persistida, o bloco de credenciais no resend mostrará **apenas o email** com nota "Use sua senha cadastrada ou clique no botão para entrar direto"
-- Aplicar o novo template dark no `getMagicLinkEmailHtml`
+### Arquivos
 
-### Etapa 3: Modificar `send-welcome-email`
-
-- Substituir `getEmailHtml` pelo novo template dark
-- Manter o bloco de credenciais (email + senha) para contas novas (`mode === 'magic_link'` com `generatedPassword`)
-- Para contas existentes (`magic_link_existing`), mostrar apenas email
-- Manter tracking pixel e dedup
-
-### Etapa 4: Criar edge function `send-pending-welcome-batch`
-
-Uma edge function que:
-1. Busca todos os emails com `billing_event_logs` pendentes (`PURCHASE_COMPLETE`, `PURCHASE_APPROVED`, etc.) que **não têm conta** em `auth.users`
-2. Para cada email: chama `auto-create-account` (cria conta + token permanente)
-3. Envia `send-welcome-email` com credenciais e link permanente
-4. Marca os eventos como processados
-5. Rate limit: 1 email a cada 5 segundos para não estourar o Resend
-
-**Nota:** A função `send-pending-welcome-batch` já existe na pasta `supabase/functions`. Vou verificar e reutilizar/atualizar.
-
-### Arquivos modificados
-
-| Arquivo | Ação |
+| Arquivo | Status |
 |---|---|
-| `supabase/functions/send-welcome-email/index.ts` | Redesign completo do template HTML (dark theme) |
-| `supabase/functions/resend-magic-link/index.ts` | Redesign do template + incluir email no corpo |
-| `supabase/functions/send-pending-welcome-batch/index.ts` | Atualizar para usar auto-create-account + send-welcome-email com link permanente |
-
-### O que NÃO muda
-
-- `auto-create-account` — já retorna `access_token` e `generated_password`
-- `paddle-webhook` / `primer-webhook` — já passam as credenciais para `send-welcome-email`
-- `magic-login` edge function — intacta
-- Frontend (Auth.tsx, MagicLogin.tsx) — intacto
-
+| `user_access_tokens` (tabela) | ✅ Criada |
+| `supabase/functions/magic-login/index.ts` | ✅ Criado |
+| `supabase/functions/auto-create-account/index.ts` | ✅ Modificado |
+| `supabase/functions/resend-magic-link/index.ts` | ✅ Redesign dark theme |
+| `supabase/functions/send-welcome-email/index.ts` | ✅ Redesign dark theme + credenciais |
+| `supabase/functions/send-pending-welcome-batch/index.ts` | ✅ Usa auto-create-account + send-welcome-email |
+| `supabase/functions/paddle-webhook/index.ts` | ✅ Passa token permanente |
+| `supabase/functions/primer-webhook/index.ts` | ✅ Passa token permanente |
+| `src/pages/MagicLogin.tsx` | ✅ Criado |
+| `src/pages/Profile.tsx` | ✅ refreshSession antes de updateUser |
+| `src/pages/Auth.tsx` | ✅ Expired magic link UI |
