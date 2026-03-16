@@ -37,7 +37,7 @@ serve(async (req) => {
     const email = normalizeEmail(rawEmail);
     const name = buyer_name || 'Aluno';
     const lang = (language || 'es').toLowerCase().split('-')[0];
-    const redirectTo = 'https://educly.app/dashboard';
+    const redirectTo = 'https://educly.app/auth';
 
     console.log(`[auto-create-account] Processing: email=${email}, name=${name}, lang=${lang}`);
 

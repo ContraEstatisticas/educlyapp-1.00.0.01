@@ -144,7 +144,7 @@ serve(async (req) => {
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'magiclink',
       email,
-      options: { redirectTo: 'https://educly.app/dashboard' },
+      options: { redirectTo: 'https://educly.app/auth' },
     });
 
     if (linkError || !linkData?.properties?.action_link) {

@@ -61,6 +61,17 @@ const Auth = () => {
 
   const defaultTab = searchParams.get("tab") === "signup" ? "signup" : "login";
 
+  // Magic link session listener — must run before any conditional render
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        console.log('[Auth] onAuthStateChange SIGNED_IN detected, redirecting to /dashboard');
+        navigate('/dashboard', { replace: true });
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
   useEffect(() => {
     const checkUser = async () => {
       const {
