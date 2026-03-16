@@ -182,7 +182,7 @@ async function alreadySentWelcome(supabase: any, email: string): Promise<boolean
   return alreadySent;
 }
 
-async function enqueueWelcomeEmail(params: {
+async function autoCreateAndSendMagicLink(params: {
   supabase: any;
   email: string;
   buyerName: string;
@@ -190,31 +190,115 @@ async function enqueueWelcomeEmail(params: {
   productId: string;
 }) {
   const { supabase } = params;
-  const email = params.email; // já normalizado
+  const email = params.email;
   const buyerName = params.buyerName || "Aluno";
   const language = localeToLanguage(params.locale ?? "es");
   const productId = params.productId || "unknown";
 
-  // 1) dedupe: se já enviou welcome, não enfileira
-  const sent = await alreadySentWelcome(supabase, email);
-  if (sent) return;
+  // 1) Check dedup: welcome OR magic_link already sent
+  const alreadySent = await alreadySentWelcome(supabase, email);
+  // Also check magic_link dedup
+  const { data: mlSent } = await supabase
+    .from("email_logs")
+    .select("id")
+    .eq("recipient_email", email)
+    .eq("email_type", "magic_link")
+    .limit(1);
+  
+  if (alreadySent || (mlSent && mlSent.length > 0)) {
+    console.log("[paddle-webhook] Welcome/magic_link already sent to", email, "- skipping");
+    return;
+  }
 
-  // 2) lookup product_type
-  const productType = await getProductType(supabase, productId);
+  // 2) Call auto-create-account
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-  // 3) insert na fila
-  const { error: insertErr } = await supabase.from("pending_thank_you_emails").insert({
-    email,
-    buyer_name: buyerName,
-    product_id: productId,
-    product_type: productType,
-    language,
-  });
+  let autoCreateResult: any = null;
+  let autoCreateFailed = false;
 
-  if (insertErr) {
-    console.error("[paddle-webhook] pending_thank_you_emails insert error (non-blocking):", insertErr);
-  } else {
-    console.log("[paddle-webhook] queued welcome email:", { email, productId, productType, language });
+  try {
+    const resp = await fetch(`${supabaseUrl}/functions/v1/auto-create-account`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${serviceKey}`,
+      },
+      body: JSON.stringify({ email, buyer_name: buyerName, language }),
+    });
+
+    autoCreateResult = await resp.json();
+
+    if (!resp.ok || autoCreateResult.error) {
+      console.error("[paddle-webhook] auto-create-account failed:", autoCreateResult);
+      autoCreateFailed = true;
+    }
+  } catch (err) {
+    console.error("[paddle-webhook] auto-create-account fetch error:", err);
+    autoCreateFailed = true;
+  }
+
+  // 3) Decide what to do based on result
+  if (autoCreateFailed && !autoCreateResult?.account_created) {
+    // Failed BEFORE creating account → fall back to legacy signup link
+    console.log("[paddle-webhook] Falling back to legacy signup link for", email);
+    const productType = await getProductType(supabase, productId);
+    await supabase.from("pending_thank_you_emails").insert({
+      email,
+      buyer_name: buyerName,
+      product_id: productId,
+      product_type: productType,
+      language,
+    });
+    return;
+  }
+
+  // Account was created (or already existed) — send magic link email
+  const mode = autoCreateResult?.already_existed ? "magic_link_existing" : "magic_link";
+  
+  try {
+    const resp = await fetch(`${supabaseUrl}/functions/v1/send-welcome-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${serviceKey}`,
+      },
+      body: JSON.stringify({
+        email,
+        userName: buyerName,
+        language,
+        mode,
+        magic_link_url: autoCreateResult?.magic_link_url,
+        generated_password: autoCreateResult?.generated_password,
+      }),
+    });
+
+    if (!resp.ok) {
+      const err = await resp.text();
+      console.error("[paddle-webhook] send-welcome-email failed:", err);
+      // Email failed but account exists — enqueue for retry (without password)
+      const productType = await getProductType(supabase, productId);
+      await supabase.from("pending_thank_you_emails").insert({
+        email,
+        buyer_name: buyerName,
+        product_id: productId,
+        product_type: productType,
+        language,
+      });
+    } else {
+      console.log("[paddle-webhook] Magic link email sent to", email, "mode:", mode);
+    }
+  } catch (sendErr) {
+    console.error("[paddle-webhook] send-welcome-email fetch error:", sendErr);
+    // Enqueue for retry
+    const productType = await getProductType(supabase, productId);
+    await supabase.from("pending_thank_you_emails").insert({
+      email,
+      buyer_name: buyerName,
+      product_id: productId,
+      product_type: productType,
+      language,
+    });
   }
 }
 
