@@ -33,6 +33,11 @@ const Auth = () => {
   // Determina se é fluxo de compra baseado se existe 'email' na URL
   const isPurchaseFlow = !!searchParams.get("email");
 
+  // Magic link expired detection
+  const [showExpiredLink, setShowExpiredLink] = useState(false);
+  const [expiredEmail, setExpiredEmail] = useState("");
+  const [isResendingLink, setIsResendingLink] = useState(false);
+
   // Form States
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
