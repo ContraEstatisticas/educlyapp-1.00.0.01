@@ -85,6 +85,52 @@ const Auth = () => {
     }
   }, [navigate, searchParams]);
 
+  // Detect expired magic link from URL hash params
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const hashParams = new URLSearchParams(hash.replace('#', ''));
+      const error = hashParams.get('error');
+      const errorCode = hashParams.get('error_code');
+      const errorDesc = hashParams.get('error_description');
+      if (error === 'access_denied' || errorCode === 'otp_expired' || 
+          (errorDesc && errorDesc.toLowerCase().includes('expired'))) {
+        setShowExpiredLink(true);
+        const emailParam = searchParams.get('email') || '';
+        if (emailParam) setExpiredEmail(emailParam);
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+  }, [searchParams]);
+
+  const handleResendMagicLink = async () => {
+    if (!expiredEmail) {
+      toast({ title: t("common.error"), description: t("auth.emailRequired", "Por favor, digite seu e-mail."), variant: "destructive" });
+      return;
+    }
+    setIsResendingLink(true);
+    try {
+      const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+      const resp = await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: expiredEmail.toLowerCase().trim() }),
+      });
+      const result = await resp.json();
+      if (resp.status === 429) {
+        toast({ title: t("auth.rateLimited", "Aguarde um momento"), description: t("auth.rateLimitedDesc", "Já enviamos um link recentemente. Tente novamente em 1 minuto."), variant: "destructive" });
+        return;
+      }
+      if (!resp.ok) throw new Error(result.error || 'Failed to resend');
+      toast({ title: t("auth.emailSent", "E-mail enviado!"), description: t("auth.magicLinkSent", "Verifique sua caixa de entrada para acessar sua conta.") });
+      setShowExpiredLink(false);
+    } catch (error: any) {
+      toast({ title: t("common.error"), description: error.message, variant: "destructive" });
+    } finally {
+      setIsResendingLink(false);
+    }
+  };
+
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!resetEmail) {
