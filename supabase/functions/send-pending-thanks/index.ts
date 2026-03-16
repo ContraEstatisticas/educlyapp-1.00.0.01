@@ -248,14 +248,15 @@ serve(async (req) => {
 
     for (const [email, rows] of Object.entries(emailGroups)) {
       try {
+        // Check dedup for both welcome AND magic_link
         const { data: existingLog } = await supabase
           .from('email_logs')
           .select('id')
           .eq('recipient_email', email)
-          .eq('email_type', 'welcome')
-          .maybeSingle();
+          .in('email_type', ['welcome', 'magic_link'])
+          .limit(1);
 
-        if (existingLog) {
+        if (existingLog && existingLog.length > 0) {
           const ids = rows.map(r => r.id);
           await supabase.from('pending_thank_you_emails').update({ sent: true, sent_at: new Date().toISOString() }).in('id', ids);
           results.push({ email, products: rows.length, status: 'skipped_already_sent' });
@@ -265,34 +266,68 @@ serve(async (req) => {
         const buyerName = rows[0].buyer_name || 'Aluno';
         const lang = (rows[0].language || 'es').toLowerCase().split('-')[0];
         const products = rows.map(r => ({ product_type: r.product_type || 'base' }));
-        const isMulti = products.length > 1;
 
-        const subject = isMulti ? tr(lang, 'subject_multi') : tr(lang, 'subject_single');
-        const html = getUnifiedEmailHtml(buyerName, email, lang, products);
+        // Try to generate magic link for retry sends
+        const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+        const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+        let magicLinkUrl: string | null = null;
+        let alreadyExisted = false;
 
-        const apiKey = Deno.env.get("RESEND_API_KEY");
-        if (!apiKey) throw new Error("RESEND_API_KEY not configured");
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: "Educly <noreply@educly.app>", to: [email], subject, html }),
-        });
-        if (!res.ok) {
-          const err = await res.text();
-          throw new Error(`Resend error: ${res.status} - ${err}`);
+        try {
+          const resp = await fetch(`${supabaseUrl}/functions/v1/auto-create-account`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${serviceKey}`,
+            },
+            body: JSON.stringify({ email, buyer_name: buyerName, language: lang }),
+          });
+          const result = await resp.json();
+          if (resp.ok && !result.error) {
+            magicLinkUrl = result.magic_link_url;
+            alreadyExisted = result.already_existed;
+          }
+        } catch (autoErr) {
+          console.error(`[send-pending-thanks] auto-create-account error for ${email}:`, autoErr);
         }
 
-        await supabase.from('email_logs').insert({
-          recipient_email: email, email_type: 'welcome', subject, status: 'sent',
-          sent_at: new Date().toISOString(),
-          metadata: { products_count: products.length, product_types: products.map(p => p.product_type) },
-        });
+        // Determine mode and send via send-welcome-email
+        const mode = magicLinkUrl
+          ? (alreadyExisted ? 'magic_link_existing' : 'magic_link')
+          : 'legacy';
+
+        try {
+          const resp = await fetch(`${supabaseUrl}/functions/v1/send-welcome-email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${serviceKey}`,
+            },
+            body: JSON.stringify({
+              email,
+              userName: buyerName,
+              language: lang,
+              mode,
+              magic_link_url: magicLinkUrl,
+              // No password on retries — it was never persisted
+            }),
+          });
+
+          if (!resp.ok) {
+            const err = await resp.text();
+            throw new Error(`send-welcome-email error: ${err}`);
+          }
+        } catch (sendErr) {
+          console.error(`[send-pending-thanks] send-welcome-email error for ${email}:`, sendErr);
+          results.push({ email, products: rows.length, status: 'error' });
+          continue;
+        }
 
         const ids = rows.map(r => r.id);
         await supabase.from('pending_thank_you_emails').update({ sent: true, sent_at: new Date().toISOString() }).in('id', ids);
 
         processed++;
-        results.push({ email, products: products.length, status: 'sent' });
+        results.push({ email, products: products.length, status: `sent_${mode}` });
 
         if (Object.keys(emailGroups).length > 1) {
           await new Promise(resolve => setTimeout(resolve, 5000));
