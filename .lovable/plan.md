@@ -1,33 +1,56 @@
+## Sistema de Acesso Automático via Token Permanente — Implementado ✅
 
+### Fluxo principal (compras após deploy)
 
-## Plano: Criar conta + magic link manual para compradores antigos
+1. **Compra chega** → webhook insere `billing_event_logs`
+2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera token permanente em `user_access_tokens`
+3. **`send-welcome-email` (mode=magic_link)** envia email dark theme com link permanente + credenciais (email + senha)
+4. Usuário clica no link → `/magic-login?token=UUID` → edge function gera magic link fresco → redirect → autenticado
+5. Troca de senha via modal interno no `Profile.tsx` → `refreshSession()` + `updateUser({ password })`
+6. Após troca, `resend-magic-link` envia novo link de acesso por email (dark theme, com email do usuário)
 
-### Problema
-Compradores antigos que nunca receberam email de cadastro precisam ser atendidos manualmente. Hoje o admin precisa de vários passos separados.
+### Token permanente
 
-### Solução
-Criar um novo componente **"Criar Conta Manual"** no admin que, ao inserir um email:
-1. Chama `auto-create-account` (que já faz tudo: cria conta se não existe, processa billing pendente, gera token permanente)
-2. Depois chama `resend-magic-link` para enviar o email com o link de acesso
-3. Mostra o resultado (conta criada ou já existente, link enviado)
+- Tabela `user_access_tokens` (user_id UNIQUE, token UUID UNIQUE)
+- Link no email: `https://educly.app/magic-login?token=UUID` (nunca expira)
+- Edge function `magic-login` valida token → `auth.admin.generateLink({ type: 'magiclink' })` → redirect
+- Rate limit: 10 requests/min por token
 
-### Componente: `src/components/admin/ManualAccountCreator.tsx`
-- Campo de email + seletor de idioma (es/pt/en/fr) + nome opcional
-- Botão "Criar e Enviar Acesso"
-- Ao clicar:
-  - POST para `auto-create-account` com `{ email, buyer_name, language }`
-  - Se sucesso, POST para `resend-magic-link` com `{ email }`
-  - Exibe resultado: conta criada/já existente, link enviado, token gerado
-- Design consistente com os outros cards do admin (gradiente, ícones)
+### Design dos emails (dark theme) ✅
 
-### Integração: `src/pages/AdminAnalytics.tsx`
-- Adicionar o componente na grid do topo, junto com EmailLookup e ResendAccessLink (grid 3 colunas)
+- Fundo escuro (#07080f), card (#0f1120), bordas sutis
+- Logo Educly com ícone gradiente + ponto laranja
+- Headline em #e8eaf0, subtítulo em #6b7280
+- Botão CTA gradiente azul/indigo (#4f6ef7 → #6366f1)
+- Bloco de credenciais dark (email + senha para contas novas)
+- Footer minimalista (© 2025, Help, Privacy)
+- 7 idiomas: pt, en, es, fr, de, it, ru
 
-### Nenhuma mudança em edge functions
-As funções `auto-create-account` e `resend-magic-link` já existem e fazem exatamente o necessário.
+### Batch processing ✅
 
-| Arquivo | Ação |
+- `send-pending-welcome-batch` busca billing_event_logs pendentes
+- Para cada: chama `auto-create-account` + `send-welcome-email`
+- Rate limit: 1 email a cada 5s, batch de 15
+- Admin-only (verifica is_admin via RPC)
+
+### Compatibilidade retroativa
+
+- `Auth.tsx` login/signup: mantido intacto
+- `purchased-signup`, `pending-signup`, `SignupFromEmail.tsx`: mantidos
+- Usuários antigos continuam acessando normalmente
+
+### Arquivos
+
+| Arquivo | Status |
 |---|---|
-| `src/components/admin/ManualAccountCreator.tsx` | Novo componente |
-| `src/pages/AdminAnalytics.tsx` | Adicionar na grid do topo |
-
+| `user_access_tokens` (tabela) | ✅ Criada |
+| `supabase/functions/magic-login/index.ts` | ✅ Criado |
+| `supabase/functions/auto-create-account/index.ts` | ✅ Modificado |
+| `supabase/functions/resend-magic-link/index.ts` | ✅ Redesign dark theme |
+| `supabase/functions/send-welcome-email/index.ts` | ✅ Redesign dark theme + credenciais |
+| `supabase/functions/send-pending-welcome-batch/index.ts` | ✅ Usa auto-create-account + send-welcome-email |
+| `supabase/functions/paddle-webhook/index.ts` | ✅ Passa token permanente |
+| `supabase/functions/primer-webhook/index.ts` | ✅ Passa token permanente |
+| `src/pages/MagicLogin.tsx` | ✅ Criado |
+| `src/pages/Profile.tsx` | ✅ refreshSession antes de updateUser |
+| `src/pages/Auth.tsx` | ✅ Expired magic link UI |

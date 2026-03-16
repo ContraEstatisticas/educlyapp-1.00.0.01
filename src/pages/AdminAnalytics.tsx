@@ -24,6 +24,7 @@ import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
 import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
+import { ManualAccountCreator } from "@/components/admin/ManualAccountCreator";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
@@ -131,9 +132,10 @@ const AdminAnalyticsContent = () => {
       {/* Content */}
       <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Email Lookup + Resend Access */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <EmailLookup />
           <ResendAccessLink />
+          <ManualAccountCreator />
         </div>
 
         {/* KPI Cards */}
