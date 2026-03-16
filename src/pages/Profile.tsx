@@ -913,40 +913,6 @@ const Profile = () => {
             </TabsContent>
           </Tabs>
 
-          {/* Payment Statement Card com bg-card */}
-          <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-bold flex items-center gap-3 text-foreground">
-                <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-500" />
-                {t('profile.paymentStatement')}
-              </h3>
-              <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 border-emerald-500/20">
-                <Award className="w-3 h-3 mr-1" />
-                {t('profile.statusActive')}
-              </Badge>
-            </div>
-
-            <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mb-4">
-                <FileText className="w-8 h-8 text-muted-foreground" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground mb-2">
-                {t('profile.noPayments')}
-              </p>
-              <p className="text-xs text-muted-foreground mb-4">
-                {t('profile.noPaymentsDesc')}
-              </p>
-              <div className="flex gap-3">
-                <Button
-                  onClick={() => navigate('/settings/billing')}
-                  className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white"
-                >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  {t('profile.manageSubscription')}
-                </Button>
-              </div>
-            </div>
-          </Card>
         </div>
       </main>
       <MobileNav />

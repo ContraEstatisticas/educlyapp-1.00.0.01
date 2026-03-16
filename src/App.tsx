@@ -110,6 +110,7 @@ import UpsellEspDois from "./pages/UpsellEspDois";
 import DownsellEsp from "./pages/DownsellEsp";
 import ResetCache from "./pages/ResetCache";
 import SignupFromEmail from "./pages/SignupFromEmail";
+import Billing from "./pages/Billing";
 
 // Inicialização do Query Client para cache de requisições
 const queryClient = new QueryClient({
@@ -207,6 +208,7 @@ const App = () => {
                   <Route path="/freelancer/:moduleId" element={<PremiumGuard><FreelancerLesson /></PremiumGuard>} />
                   <Route path="/medalhas" element={<PremiumGuard><Medals /></PremiumGuard>} />
                   <Route path="/profile" element={<PremiumGuard><Profile /></PremiumGuard>} />
+                  <Route path="/settings/billing" element={<PremiumGuard><Billing /></PremiumGuard>} />
 
                   {/* --- ADMINISTRAÇÃO --- */}
                   <Route path="/admin/analytics" element={<AdminAnalytics />} />

@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 
 export const PWAInstallPrompt = () => {
   const { t } = useTranslation();
-  const { isInstallable, isInstalled, isIOS, isAndroid, promptInstall } = usePWAInstall();
+  const { isInstallable, isInstalled, isIOS, isAndroid, isMobileOrTablet, promptInstall } = usePWAInstall();
   const location = useLocation();
   const [showPrompt, setShowPrompt] = useState(false);
   const [dismissed, setDismissed] = useState(false);
@@ -36,13 +36,13 @@ export const PWAInstallPrompt = () => {
 
     // Show prompt after 3 seconds if installable
     const timer = setTimeout(() => {
-      if ((isInstallable || isIOS) && !isInstalled && !dismissed) {
+      if (isMobileOrTablet && (isInstallable || isIOS || isAndroid) && !isInstalled && !dismissed) {
         setShowPrompt(true);
       }
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [isInstallable, isInstalled, isIOS, dismissed, location.pathname]);
+  }, [isInstallable, isInstalled, isIOS, isAndroid, isMobileOrTablet, dismissed, location.pathname]);
 
   const handleInstall = async () => {
     const success = await promptInstall();
@@ -57,10 +57,10 @@ export const PWAInstallPrompt = () => {
     localStorage.setItem('pwa-install-dismissed', new Date().toISOString());
   };
 
-  if (!showPrompt || isInstalled) return null;
+  if (!showPrompt || isInstalled || !isMobileOrTablet) return null;
 
   return (
-    <div className="fixed top-4 left-4 right-4 z-50 animate-fade-in md:left-auto md:right-4 md:w-96">
+    <div className="fixed top-4 left-4 right-4 z-[10000] animate-fade-in md:left-auto md:right-4 md:w-96">
       <div className="bg-card border border-border rounded-2xl p-4 shadow-2xl backdrop-blur-sm">
         <button
           onClick={handleDismiss}
