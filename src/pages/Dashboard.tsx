@@ -12,6 +12,7 @@ import { useProductAccess } from "@/hooks/useProductAccess";
 import { useTranslation } from "react-i18next";
 import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
 import { TrailContentModal } from "@/components/dashboard/TrailContentModal";
+import { DailyMissionsModal } from "@/components/dashboard/DailyMissionsModal";
 import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -49,6 +50,7 @@ const Dashboard = () => {
   const productAccess = useProductAccess();
   const [userId, setUserId] = useState<string | undefined>();
   const [trailModalOpen, setTrailModalOpen] = useState(false);
+  const [missionsOpen, setMissionsOpen] = useState(false);
 
   useDailyLoginXP();
 
@@ -133,7 +135,7 @@ const Dashboard = () => {
       subtitle: t("dashboard.missions.subtitle"),
       colorClass: "text-rose-500",
       link: "/dashboard",
-      showFooter: false,
+      showFooter: true,
       gradient: "from-rose-500/20 to-pink-500/10",
       cta: t("dashboard.missions.cta"),
       iconBg: "bg-rose-500/10"
@@ -463,7 +465,13 @@ const Dashboard = () => {
             {secondaryCards.map((card, index) =>
               <div id={index < 2 ? `card-${index + 2}` : undefined} key={index} className="card-3d-container h-full">
                 <div
-                  onClick={() => navigate(card.link)}
+                  onClick={() => {
+                    if (card.title === t("dashboard.missions.title")) {
+                      setMissionsOpen(true);
+                    } else {
+                      navigate(card.link);
+                    }
+                  }}
                   className={`card-surface-3d group p-6 rounded-3xl h-full flex flex-col justify-between cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-colors relative overflow-hidden`}>
 
                   <div className={`absolute -inset-4 ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl`} />
@@ -494,6 +502,7 @@ const Dashboard = () => {
       </div>
 
       <TrailContentModal open={trailModalOpen} onOpenChange={setTrailModalOpen} />
+      <DailyMissionsModal open={missionsOpen} onOpenChange={setMissionsOpen} />
     </main>);
 
 };
