@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.send-signup-invite]
 verify_jwt = false
+
+[functions.magic-login]
+verify_jwt = false
