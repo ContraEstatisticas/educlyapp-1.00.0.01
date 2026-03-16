@@ -108,28 +108,41 @@ serve(async (req) => {
       console.error(`[auto-create-account] Billing exception (non-blocking):`, billingErr);
     }
 
-    // 4. Generate magic link
-    let magicLinkUrl: string | null = null;
+    // 4. Generate or fetch permanent access token
+    let accessToken: string | null = null;
     try {
-      const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
-        type: 'magiclink',
-        email,
-        options: { redirectTo },
-      });
+      // Try to get existing token first
+      const { data: existingToken } = await supabase
+        .from('user_access_tokens')
+        .select('token')
+        .eq('user_id', userId)
+        .maybeSingle();
 
-      if (linkError) {
-        console.error(`[auto-create-account] Magic link error:`, linkError);
+      if (existingToken?.token) {
+        accessToken = existingToken.token;
+        console.log(`[auto-create-account] Existing permanent token found for ${userId}`);
       } else {
-        magicLinkUrl = linkData?.properties?.action_link || null;
-        console.log(`[auto-create-account] Magic link generated for ${email}`);
+        // Create new permanent token
+        const { data: newToken, error: tokenError } = await supabase
+          .from('user_access_tokens')
+          .insert({ user_id: userId })
+          .select('token')
+          .single();
+
+        if (tokenError) {
+          console.error(`[auto-create-account] Token creation error:`, tokenError);
+        } else {
+          accessToken = newToken.token;
+          console.log(`[auto-create-account] Permanent token created for ${userId}`);
+        }
       }
-    } catch (linkErr) {
-      console.error(`[auto-create-account] Magic link exception:`, linkErr);
+    } catch (tokenErr) {
+      console.error(`[auto-create-account] Token exception (non-blocking):`, tokenErr);
     }
 
     return new Response(JSON.stringify({
       user_id: userId,
-      magic_link_url: magicLinkUrl,
+      access_token: accessToken, // permanent UUID token
       generated_password: generatedPassword, // only present for new accounts, never persisted
       account_created: accountCreated,
       already_existed: !!existingUserId,
