@@ -756,7 +756,7 @@ serve(async (req) => {
             productId: productId || "unknown",
           });
 
-          await enqueueWelcomeEmail({
+          await autoCreateAndSendMagicLink({
             supabase,
             email,
             buyerName,
@@ -764,7 +764,7 @@ serve(async (req) => {
             productId: productId || "unknown",
           });
 
-          console.log("[paddle-webhook] enqueueWelcomeEmail completed successfully for:", email);
+          console.log("[paddle-webhook] autoCreateAndSendMagicLink completed for:", email);
         }
       } catch (e) {
         console.error("[paddle-webhook] enqueue welcome failed (non-blocking):", e);
