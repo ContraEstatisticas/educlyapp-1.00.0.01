@@ -67,8 +67,8 @@
     "progress": "Progress",
     "viewTrail": "View trail",
     "aiChallenges": "AI Challenges",
-    "master8AI": "Master 8 AIs in 28 days",
-    "master8AIDesc": "Each challenge is designed to teach the main AI tools on the market: ChatGPT, Claude, DeepSeek, Gemini, NanoBanana, Lovable, Captions and ElevenLabs.",
+    "master8AI": "Master 15 AIs in 28 days",
+    "master8AIDesc": "Each challenge is designed to teach the main AI tools on the market: ChatGPT, Claude, DeepSeek, Gemini, Copilot, Grok, Perplexity, Manus, Lovable, NanoBanana, LeonardoAI, MidJourney, Captions, ElevenLabs and VEO.",
     "toolAdvantages": "Model advantages",
     "generateCertificate": "Generate Certificate",
     "completeToCertificate": "Complete 100% for certificate",
@@ -2865,7 +2865,7 @@
     },
     "aiCapabilities": {
       "title": "What our AI chat can help with",
-      "item1": "Information about our 8 AI tools (ChatGPT, Claude, Gemini, etc.)",
+      "item1": "Information about our 15 AI tools (ChatGPT, Claude, Gemini, etc.)",
       "item2": "Pricing and subscription plans",
       "item3": "28-day challenge details",
       "item4": "How the platform works",
@@ -2910,7 +2910,7 @@
       "base": {
         "welcome": "Hi! 👋 I'm EDI, your guide at Educly! Welcome to your AI course!",
         "streak": "Here's your weekly streak! 🔥 Study every day for bonus XP!",
-        "challenge": "This is your 28-Day Challenge! 🎯 Learn the 8 top AI tools on the market!",
+        "challenge": "This is your 28-Day Challenge! 🎯 Learn the 15 top AI tools on the market!",
         "finish": "All set! 🎉 Start your 28-day challenge and master Artificial Intelligence. Let's learn!"
       },
       "freelancer": {
@@ -2924,7 +2924,7 @@
       "aipack": {
         "welcome": "Hi! 👋 I'm EDI! You unlocked the AI Pack! 🤖 Let me show you the power you have now!",
         "streak": "This is your weekly streak! 🔥 Study every day for extra XP!",
-        "challenge": "Start with the 28-Day Challenge! 🎯 Learn the 8 top AIs on the market!",
+        "challenge": "Start with the 28-Day Challenge! 🎯 Learn the 15 top AIs on the market!",
         "assistantsCard": "And here are your AI Assistants! 🤖 Specialized AIs that answer your questions 24/7, help with real tasks and accelerate your learning!",
         "ediChat": "And this is EDI, your AI tutor! 💬 Click on him whenever you need help — he's available 24/7!",
         "finish": "Amazing! 🎉 You have the power of the AI Pack! Use the assistants and EDI whenever you need. Let's master AI!"
@@ -2932,7 +2932,7 @@
       "combo": {
         "welcome": "Hi! 👋 I'm EDI! WOW! You have the complete package! 🚀 Let me show you everything you unlocked!",
         "streak": "Your weekly streak is here! 🔥 Keep the fire burning and multiply your XP!",
-        "challenge": "Your 28-Day Challenge! 🎯 The foundation of everything: master the 8 top AIs on the market!",
+        "challenge": "Your 28-Day Challenge! 🎯 The foundation of everything: master the 15 top AIs on the market!",
         "assistantsCard": "Your AI Assistants! 🤖 Specialized AIs 24/7 to answer questions and accelerate your real tasks!",
         "freelancerCard": "And the Freelancer Hub! 💼 Complete modules on how to monetize AI: positioning, portfolio and closing high-value clients!",
         "ediChat": "Meet EDI, your personal tutor! 💬 Click here whenever you have questions — he helps with any AI topic, 24/7!",

@@ -1469,7 +1469,7 @@
         },
         "2": {
           "title": "Parabéns!",
-          "content": "🎉 Você completou o Desafio IA Iniciante!\n\nVocê aprendeu a usar 8 ferramentas poderosas de IA:\n• ChatGPT, Claude, DeepSeek, Gemini\n• NanoBanana, Lovable, Captions, ElevenLabs\n\nContinue praticando e explore outros desafios!"
+          "content": "🎉 Você completou o Desafio IA Iniciante!\n\nVocê aprendeu a usar 15 ferramentas poderosas de IA:\n• ChatGPT, Claude, DeepSeek, Gemini, Copilot\n• Grok, Perplexity, Manus, Lovable, NanoBanana\n• LeonardoAI, MidJourney, Captions, ElevenLabs, VEO\n\nContinue praticando e explore outros desafios!"
         },
         "3": {
           "title": "Quiz Final",
@@ -2992,7 +2992,7 @@
     },
     "aiCapabilities": {
       "title": "O que nosso chat IA pode ajudar",
-      "item1": "Informações sobre as 8 ferramentas de IA (ChatGPT, Claude, Gemini, etc.)",
+      "item1": "Informações sobre as 15 ferramentas de IA (ChatGPT, Claude, Gemini, etc.)",
       "item2": "Preços e planos de assinatura",
       "item3": "Detalhes do desafio de 28 dias",
       "item4": "Como a plataforma funciona",

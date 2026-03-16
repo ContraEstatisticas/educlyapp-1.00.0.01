@@ -14,7 +14,7 @@
   "challenges": {
     "iniciante-ia": {
       "name": "Sfida IA Principiante",
-      "description": "Impara tutto sulle 8 principali IA del mercato in 28 giorni di apprendimento intensivo e pratico.",
+      "description": "Impara tutto sulle 15 principali IA del mercato in 28 giorni di apprendimento intensivo e pratico.",
       "days": {
         "1": {
           "title": "Introduzione a ChatGPT",
@@ -1215,7 +1215,7 @@
     "viewAll": "Vedi tutto",
     "continueFromWhere": "Continua da dove eri rimasto",
     "aiChallenges": "Sfide IA",
-    "master8AI": "Padroneggia 8 IA in 28 giorni",
+    "master8AI": "Padroneggia 15 IA in 28 giorni",
     "master8AIDesc": "Ogni sfida è progettata per insegnarti i principali strumenti IA del mercato: ChatGPT, Claude, DeepSeek, Gemini, NanoBanana, Lovable, Captions ed ElevenLabs.",
     "completed": "Sfida completata"
   },
@@ -2055,7 +2055,7 @@
     },
     "aiCapabilities": {
       "title": "In cosa può aiutarti la nostra chat IA",
-      "item1": "Informazioni sui nostri 8 strumenti IA (ChatGPT, Claude, Gemini, etc.)",
+      "item1": "Informazioni sui nostri 15 strumenti IA (ChatGPT, Claude, Gemini, etc.)",
       "item2": "Prezzi e piani di abbonamento",
       "item3": "Dettagli della sfida di 28 giorni",
       "item4": "Come funziona la piattaforma",
@@ -2100,7 +2100,7 @@
       "base": {
         "welcome": "Ciao! 👋 Sono EDI, la tua guida su Educly! Benvenuto nel tuo corso di IA!",
         "streak": "Ecco la tua serie settimanale! 🔥 Studia ogni giorno per guadagnare XP bonus!",
-        "challenge": "Ecco la tua Sfida di 28 Giorni! 🎯 Impara le 8 principali IA del mercato!",
+        "challenge": "Ecco la tua Sfida di 28 Giorni! 🎯 Impara le 15 principali IA del mercato!",
         "finish": "Pronto! 🎉 Inizia la tua sfida di 28 giorni e padroneggia l'Intelligenza Artificiale. Andiamo!"
       },
       "freelancer": {
@@ -2114,7 +2114,7 @@
       "aipack": {
         "welcome": "Ciao! 👋 Sono EDI! Hai sbloccato l'AI Pack! 🤖 Lascia che ti mostri la potenza che hai ora!",
         "streak": "Ecco la tua serie settimanale! 🔥 Studia ogni giorno per XP extra!",
-        "challenge": "Inizia dalla Sfida di 28 Giorni! 🎯 Impara le 8 principali IA del mercato!",
+        "challenge": "Inizia dalla Sfida di 28 Giorni! 🎯 Impara le 15 principali IA del mercato!",
         "assistantsCard": "Ed ecco i tuoi Assistenti IA! 🤖 IA specializzate che rispondono 24h, aiutano con compiti reali e accelerano il tuo apprendimento!",
         "ediChat": "Ed ecco EDI, il tuo tutor IA! 💬 Cliccaci quando hai bisogno di aiuto — è disponibile 24h!",
         "finish": "Incredibile! 🎉 Hai la potenza dell'AI Pack! Usa gli assistenti ed EDI quando ne hai bisogno. Padroneggiamo l'IA!"
@@ -2122,7 +2122,7 @@
       "combo": {
         "welcome": "Ciao! 👋 Sono EDI! WOW! Hai il pacchetto completo! 🚀 Lascia che ti mostri tutto ciò che hai sbloccato!",
         "streak": "La tua serie settimanale è qui! 🔥 Tieni acceso il fuoco e moltiplica i tuoi XP!",
-        "challenge": "La tua Sfida di 28 Giorni! 🎯 La base di tutto: padroneggia le 8 principali IA del mercato!",
+        "challenge": "La tua Sfida di 28 Giorni! 🎯 La base di tutto: padroneggia le 15 principali IA del mercato!",
         "assistantsCard": "I tuoi Assistenti IA! 🤖 IA specializzate 24h al giorno per rispondere alle domande e accelerare i tuoi compiti reali!",
         "freelancerCard": "E l'Hub Freelancer! 💼 Moduli completi sulla monetizzazione dell'IA: posizionamento, portfolio e come acquisire clienti premium!",
         "ediChat": "Incontra EDI, il tuo tutor personale! 💬 Cliccaci quando hai domande — ti aiuta su qualsiasi argomento di IA, 24h!",
