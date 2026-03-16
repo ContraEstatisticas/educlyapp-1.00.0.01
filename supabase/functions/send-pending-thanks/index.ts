@@ -292,7 +292,7 @@ serve(async (req) => {
         }
 
         // Determine mode and send via send-welcome-email
-        const mode = magicLinkUrl
+        const mode = accessToken
           ? (alreadyExisted ? 'magic_link_existing' : 'magic_link')
           : 'legacy';
 
