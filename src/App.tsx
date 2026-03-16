@@ -185,6 +185,8 @@ const App = () => {
               <Route path="/contato" element={<Contact />} />
               <Route path="/termos-assinatura" element={<SubscriptionTerms />} />
               <Route path="/reset-cache" element={<ResetCache />} />
+              <Route path="/reset-cache.html" element={<ResetCache />} />
+              <Route path="/cache" element={<ResetCache />} />
               <Route path="/cadastro" element={<SignupFromEmail />} />
 
                   {/* Rotas de Upsell e Downsell Específicas */}

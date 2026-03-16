@@ -2,11 +2,20 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 
+const CACHE_PATTERNS = ['cache', 'reset-cache', 'resetcache', 'limpar-cache', 'clear-cache'];
+
 const NotFound = () => {
   const location = useLocation();
   const { t } = useTranslation();
 
   useEffect(() => {
+    // Auto-recover: if user tried to access a cache-reset URL variant, redirect to static page
+    const path = location.pathname.toLowerCase().replace(/^\//, '').replace(/\/$/, '');
+    if (CACHE_PATTERNS.some(p => path === p || path.startsWith(p))) {
+      window.location.replace('/reset-cache.html?from=404');
+      return;
+    }
+
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
