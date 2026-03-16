@@ -2,9 +2,105 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=/reset-cache.html">
-  <title>Redirecionando...</title>
-  <script>window.location.replace('/reset-cache.html');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educy – Limpando cache</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, sans-serif;
+      gap: 16px;
+    }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(99,102,241,0.3);
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { font-size: 18px; }
+  </style>
 </head>
-<body></body>
+<body>
+  <div class="spinner"></div>
+  <p id="status">Limpando cache...</p>
+
+  <script>
+    (function() {
+      var statusEl = document.getElementById('status');
+      var PRESERVED_PREFIXES = ['has_seen_dashboard_tutorial', 'tutorial_dashboard'];
+
+      function preserveKeys() {
+        var preserved = {};
+        try {
+          for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            for (var j = 0; j < PRESERVED_PREFIXES.length; j++) {
+              if (key && key.indexOf(PRESERVED_PREFIXES[j]) === 0) {
+                preserved[key] = localStorage.getItem(key);
+                break;
+              }
+            }
+          }
+        } catch(e) {}
+        return preserved;
+      }
+
+      function restoreKeys(preserved) {
+        for (var key in preserved) {
+          if (preserved.hasOwnProperty(key)) {
+            try { localStorage.setItem(key, preserved[key]); } catch(e) {}
+          }
+        }
+      }
+
+      function run() {
+        var preserved = preserveKeys();
+        var promises = [];
+
+        // 1. Unregister ALL service workers
+        if ('serviceWorker' in navigator) {
+          promises.push(
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+              return Promise.all(regs.map(function(r) { return r.unregister(); }));
+            }).catch(function() {})
+          );
+        }
+
+        // 2. Clear ALL Cache Storage
+        if ('caches' in window) {
+          promises.push(
+            caches.keys().then(function(keys) {
+              return Promise.all(keys.map(function(k) { return caches.delete(k); }));
+            }).catch(function() {})
+          );
+        }
+
+        // Wait for async cleanup, then clear storage
+        (promises.length ? Promise.allSettled(promises) : Promise.resolve()).then(function() {
+          try { localStorage.clear(); } catch(e) {}
+          try { sessionStorage.clear(); } catch(e) {}
+          restoreKeys(preserved);
+
+          // Mark force reset as done so index.html doesn't loop
+          try { localStorage.setItem('__educly_force_reset_v', '2'); } catch(e) {}
+
+          statusEl.textContent = 'Cache limpo! Redirecionando...';
+          setTimeout(function() {
+            window.location.replace('/auth?cache_reset=1');
+          }, 1200);
+        });
+      }
+
+      run();
+    })();
+  </script>
+</body>
 </html>
