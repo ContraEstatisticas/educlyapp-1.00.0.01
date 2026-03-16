@@ -270,7 +270,7 @@ serve(async (req) => {
         // Try to generate magic link for retry sends
         const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
         const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-        let magicLinkUrl: string | null = null;
+        let accessToken: string | null = null;
         let alreadyExisted = false;
 
         try {
