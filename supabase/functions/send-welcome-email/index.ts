@@ -290,12 +290,15 @@ serve(async (req) => {
 
     const normalizedLang = (language || "en").toLowerCase().split("-")[0];
     const subject = t(normalizedLang, "subject");
+    const accessUrl = accessToken
+      ? `https://educly.app/magic-login?token=${accessToken}`
+      : undefined;
     const html = getEmailHtml({
       userName,
       userEmail: email,
       language: normalizedLang,
       mode,
-      magicLinkUrl,
+      accessUrl,
       generatedPassword,
     });
 
