@@ -188,7 +188,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Пароль",
     credentialsNote: "Вы можете изменить пароль в любое время в приложении.",
-    linkExpiry: "Эта ссылка действительна 24 часа.",
     newPurchaseTitle: "Новая покупка активирована! 🎉",
     newPurchaseBody: "Ваш новый пакет теперь доступен в вашем аккаунте <strong>{email}</strong>.",
   },
