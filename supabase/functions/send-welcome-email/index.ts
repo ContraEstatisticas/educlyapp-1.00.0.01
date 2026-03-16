@@ -204,16 +204,16 @@ function getEmailHtml(params: {
   userEmail: string;
   language: string;
   mode: string;
-  magicLinkUrl?: string;
+  accessUrl?: string;
   generatedPassword?: string;
 }): string {
-  const { userName, userEmail, language, mode, magicLinkUrl, generatedPassword } = params;
+  const { userName, userEmail, language, mode, accessUrl, generatedPassword } = params;
   const lang = language.toLowerCase().split("-")[0];
 
-  // CTA URL: magic link or legacy signup link
+  // CTA URL: permanent access link or legacy signup link
   const ctaUrl = mode === 'legacy'
     ? `https://educly.app/cadastro?email=${encodeURIComponent(userEmail)}&lang=${lang}`
-    : (magicLinkUrl || `https://educly.app/auth?email=${encodeURIComponent(userEmail)}`);
+    : (accessUrl || `https://educly.app/auth?email=${encodeURIComponent(userEmail)}`);
 
   const isExisting = mode === 'magic_link_existing';
   const successTitle = isExisting ? t(lang, "newPurchaseTitle") : t(lang, "successTitle");
