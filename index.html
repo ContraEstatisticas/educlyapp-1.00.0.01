@@ -76,6 +76,58 @@
     </noscript>
     
     <div id="root" translate="no"></div>
+
+    <script>
+    // === FORCE RESET UNIVERSAL ===
+    // Incrementar este número para forçar reset de cache em TODOS os usuários
+    (function(){
+      var FORCE_RESET_V = '1';
+      var KEY = '__educly_force_reset_v';
+      try {
+        if (localStorage.getItem(KEY) === FORCE_RESET_V) return;
+
+        // Preserve tutorial keys
+        var preserved = {};
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          if (k && (k.indexOf('has_seen_dashboard_tutorial') === 0 || k.indexOf('tutorial_dashboard') === 0)) {
+            preserved[k] = localStorage.getItem(k);
+          }
+        }
+
+        // Unregister all service workers
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            regs.forEach(function(r) { r.unregister(); });
+          });
+        }
+
+        // Clear Cache Storage
+        if ('caches' in window) {
+          caches.keys().then(function(keys) {
+            keys.forEach(function(k) { caches.delete(k); });
+          });
+        }
+
+        // Clear storage
+        localStorage.clear();
+        sessionStorage.clear();
+
+        // Restore preserved + set version
+        for (var p in preserved) {
+          if (preserved.hasOwnProperty(p)) localStorage.setItem(p, preserved[p]);
+        }
+        localStorage.setItem(KEY, FORCE_RESET_V);
+
+        // Reload to get fresh assets
+        setTimeout(function() { location.reload(); }, 300);
+      } catch(e) {
+        // Fail silently, set version to avoid loop
+        try { localStorage.setItem(KEY, FORCE_RESET_V); } catch(x) {}
+      }
+    })();
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
