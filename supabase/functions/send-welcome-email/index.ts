@@ -31,7 +31,6 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: "E-mail",
     credentialsPassword: "Senha",
     credentialsNote: "Você pode alterar sua senha a qualquer momento dentro do app.",
-    linkExpiry: "Este link é válido por 24 horas.",
     // Existing user mode
     newPurchaseTitle: "Nova compra ativada! 🎉",
     newPurchaseBody: "Seu novo pacote já está disponível na sua conta <strong>{email}</strong>.",
