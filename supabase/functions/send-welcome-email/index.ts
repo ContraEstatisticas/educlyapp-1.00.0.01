@@ -254,9 +254,9 @@ serve(async (req) => {
     const supabaseAdmin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
     const body = await req.json();
     const { email, userName, language } = body;
-    // New fields for magic link mode
+    // New fields for permanent access token mode
     const mode: string = body.mode || 'legacy'; // 'legacy' | 'magic_link' | 'magic_link_existing'
-    const magicLinkUrl: string | undefined = body.magic_link_url;
+    const accessToken: string | undefined = body.access_token;
     const generatedPassword: string | undefined = body.generated_password;
 
     if (!email || !userName) {
