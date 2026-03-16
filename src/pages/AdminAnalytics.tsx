@@ -195,7 +195,7 @@ const AdminAnalyticsContent = () => {
               value="migration" 
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              🧭 Migração
+              🧭 Filtro de dados
             </TabsTrigger>
           </TabsList>
           <div className="mt-4">
@@ -261,10 +261,10 @@ const MigrationReport = () => {
     queryKey: ['migration-users-premium', startISO],
     queryFn: async () => {
       const { count } = await supabase
-        .from('user_premium_access')
-        .select('user_id', { count: 'exact', head: true })
-        .eq('is_premium', true)
-        .gte('purchased_at', startISO);
+        .from('billing_event_logs')
+        .select('id', { count: 'exact', head: true })
+        .gte('created_at', startISO)
+        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled']);
       return count || 0;
     },
     refetchOnWindowFocus: false,
@@ -285,10 +285,10 @@ const MigrationReport = () => {
     queryKey: ['migration-purchases-granted', startISO],
     queryFn: async () => {
       const { count } = await supabase
-        .from('user_premium_access')
-        .select('user_id', { count: 'exact', head: true })
-        .eq('is_premium', true)
-        .gte('purchased_at', startISO);
+        .from('billing_event_logs')
+        .select('id', { count: 'exact', head: true })
+        .gte('created_at', startISO)
+        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled']);
       return count || 0;
     },
     refetchOnWindowFocus: false,
@@ -301,7 +301,7 @@ const MigrationReport = () => {
         .from('billing_event_logs')
         .select('id', { count: 'exact', head: true })
         .gte('created_at', startISO)
-        .in('event_type', actions)
+        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
         .eq('status', 'USER_NOT_FOUND');
       return count || 0;
     },
@@ -315,7 +315,7 @@ const MigrationReport = () => {
         .from('billing_event_logs')
         .select('email,user_id,created_at,status')
         .gte('created_at', startISO)
-        .in('event_type', actions)
+        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
         .not('user_id', 'is', null)
         .order('created_at', { ascending: false })
         .limit(50);
@@ -331,7 +331,7 @@ const MigrationReport = () => {
         .from('billing_event_logs')
         .select('email,user_id,created_at,status')
         .gte('created_at', startISO)
-        .in('event_type', actions)
+        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
         .eq('status', 'USER_NOT_FOUND')
         .order('created_at', { ascending: false })
         .limit(50);
@@ -347,12 +347,6 @@ const MigrationReport = () => {
   const notRegisteredList = useMemo(() => {
     return (recentNoSignup || []);
   }, [recentNoSignup]);
-  const conversion = useMemo(() => {
-    const total = accountsCreated || 0;
-    const paid = purchasesTotal || 0;
-    if (!total || total <= 0) return 0;
-    return Math.round((paid / total) * 10000) / 100;
-  }, [accountsCreated, purchasesTotal]);
 
   return (
     <Card className="p-6">
@@ -388,10 +382,6 @@ const MigrationReport = () => {
         <div className="bg-card border border-border rounded-xl p-4">
           <div className="text-sm text-muted-foreground">Compras sem cadastro</div>
           <div className="text-3xl font-bold mt-1">{eventsWithoutSignup ?? '—'}</div>
-        </div>
-        <div className="bg-card border border-border rounded-xl p-4 md:col-span-2">
-          <div className="text-sm text-muted-foreground">Conversão</div>
-          <div className="text-3xl font-bold mt-1">{conversion ? `${conversion}%` : '—'}</div>
         </div>
       </div>
 
