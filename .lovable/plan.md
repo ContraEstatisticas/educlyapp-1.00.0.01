@@ -1,30 +1,37 @@
-## Sistema de Acesso Automático via Magic Link — Implementado ✅
+## Sistema de Acesso Automático via Token Permanente — Implementado ✅
 
-### Novo fluxo (compras após deploy)
+### Fluxo principal (compras após deploy)
 
-1. **Compra chega** → webhook insere `billing_event_logs` (sem mudança)
-2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera magic link
-3. **`send-welcome-email` (mode=magic_link)** envia email com magic link + credenciais de referência
-4. Usuário clica no link → entra direto no dashboard, autenticado
-5. Troca de senha via modal interno no `Profile.tsx` → `supabase.auth.updateUser({ password })`
-6. Após troca, `resend-magic-link` envia novo link de acesso por email
+1. **Compra chega** → webhook insere `billing_event_logs`
+2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera token permanente em `user_access_tokens`
+3. **`send-welcome-email` (mode=magic_link)** envia email dark theme com link permanente + credenciais (email + senha)
+4. Usuário clica no link → `/magic-login?token=UUID` → edge function gera magic link fresco → redirect → autenticado
+5. Troca de senha via modal interno no `Profile.tsx` → `refreshSession()` + `updateUser({ password })`
+6. Após troca, `resend-magic-link` envia novo link de acesso por email (dark theme, com email do usuário)
 
-### Fallback cirúrgico
+### Token permanente
 
-- Se `auto-create-account` falha **antes** de criar conta → fluxo legado (link `/cadastro`)
-- Se falha **depois** de criar conta → enfileira para retry (sem senha, só magic link)
-- Usuário existente → processa billing + envia magic link (mode=`magic_link_existing`)
+- Tabela `user_access_tokens` (user_id UNIQUE, token UUID UNIQUE)
+- Link no email: `https://educly.app/magic-login?token=UUID` (nunca expira)
+- Edge function `magic-login` valida token → `auth.admin.generateLink({ type: 'magiclink' })` → redirect
+- Rate limit: 10 requests/min por token
 
-### Magic link expirado
+### Design dos emails (dark theme) ✅
 
-- `Auth.tsx` detecta `error=access_denied` / `error_code=otp_expired` no hash
-- Mostra UI de "link expirado" com campo de email + botão para reenviar
-- Chama `resend-magic-link` (rate limit: 1/min)
+- Fundo escuro (#07080f), card (#0f1120), bordas sutis
+- Logo Educly com ícone gradiente + ponto laranja
+- Headline em #e8eaf0, subtítulo em #6b7280
+- Botão CTA gradiente azul/indigo (#4f6ef7 → #6366f1)
+- Bloco de credenciais dark (email + senha para contas novas)
+- Footer minimalista (© 2025, Help, Privacy)
+- 7 idiomas: pt, en, es, fr, de, it, ru
 
-### Senha NÃO persiste no banco
+### Batch processing ✅
 
-- Gerada em memória, passada diretamente ao email, nunca salva em tabela
-- Retries não incluem senha (apenas magic link)
+- `send-pending-welcome-batch` busca billing_event_logs pendentes
+- Para cada: chama `auto-create-account` + `send-welcome-email`
+- Rate limit: 1 email a cada 5s, batch de 15
+- Admin-only (verifica is_admin via RPC)
 
 ### Compatibilidade retroativa
 
@@ -32,16 +39,18 @@
 - `purchased-signup`, `pending-signup`, `SignupFromEmail.tsx`: mantidos
 - Usuários antigos continuam acessando normalmente
 
-### Arquivos criados/modificados
+### Arquivos
 
-| Arquivo | Ação |
+| Arquivo | Status |
 |---|---|
-| `supabase/functions/auto-create-account/index.ts` | ✅ Criado |
-| `supabase/functions/resend-magic-link/index.ts` | ✅ Criado |
-| `supabase/functions/send-welcome-email/index.ts` | ✅ Modificado (3 modes) |
-| `supabase/functions/paddle-webhook/index.ts` | ✅ Modificado |
-| `supabase/functions/primer-webhook/index.ts` | ✅ Modificado |
-| `supabase/functions/send-pending-thanks/index.ts` | ✅ Modificado |
-| `supabase/config.toml` | ✅ Novas functions registradas |
+| `user_access_tokens` (tabela) | ✅ Criada |
+| `supabase/functions/magic-login/index.ts` | ✅ Criado |
+| `supabase/functions/auto-create-account/index.ts` | ✅ Modificado |
+| `supabase/functions/resend-magic-link/index.ts` | ✅ Redesign dark theme |
+| `supabase/functions/send-welcome-email/index.ts` | ✅ Redesign dark theme + credenciais |
+| `supabase/functions/send-pending-welcome-batch/index.ts` | ✅ Usa auto-create-account + send-welcome-email |
+| `supabase/functions/paddle-webhook/index.ts` | ✅ Passa token permanente |
+| `supabase/functions/primer-webhook/index.ts` | ✅ Passa token permanente |
+| `src/pages/MagicLogin.tsx` | ✅ Criado |
+| `src/pages/Profile.tsx` | ✅ refreshSession antes de updateUser |
 | `src/pages/Auth.tsx` | ✅ Expired magic link UI |
-| `src/pages/Profile.tsx` | ✅ Modal de troca de senha inline |

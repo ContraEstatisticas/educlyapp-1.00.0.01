@@ -14,49 +14,77 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Novo link de acesso',
     heroSubtitle: 'Clique no botão abaixo para entrar diretamente na sua conta Educly.',
     cta: 'Entrar na Minha Conta',
-    team: 'Equipe Educly',
+    credentialsTitle: 'SUA CONTA',
+    credentialsNote: 'Use sua senha cadastrada ou clique no botão acima para entrar direto.',
+    credentialsEmail: 'E-mail',
+    help: 'Ajuda',
+    privacy: 'Privacidade',
   },
   en: {
     subject: '🔑 Your new access link — Educly',
     heroTitle: 'New access link',
     heroSubtitle: 'Click the button below to sign in directly to your Educly account.',
     cta: 'Sign In to My Account',
-    team: 'Educly Team',
+    credentialsTitle: 'YOUR ACCOUNT',
+    credentialsNote: 'Use your registered password or click the button above to sign in directly.',
+    credentialsEmail: 'Email',
+    help: 'Help',
+    privacy: 'Privacy',
   },
   es: {
     subject: '🔑 Tu nuevo enlace de acceso — Educly',
     heroTitle: 'Nuevo enlace de acceso',
     heroSubtitle: 'Haz clic en el botón de abajo para entrar directamente a tu cuenta Educly.',
     cta: 'Entrar a Mi Cuenta',
-    team: 'Equipo Educly',
+    credentialsTitle: 'TU CUENTA',
+    credentialsNote: 'Usa tu contraseña registrada o haz clic en el botón de arriba para entrar directo.',
+    credentialsEmail: 'Correo',
+    help: 'Ayuda',
+    privacy: 'Privacidad',
   },
   fr: {
     subject: '🔑 Votre nouveau lien d\'accès — Educly',
     heroTitle: 'Nouveau lien d\'accès',
     heroSubtitle: 'Cliquez sur le bouton ci-dessous pour accéder directement à votre compte Educly.',
     cta: 'Accéder à Mon Compte',
-    team: 'Équipe Educly',
+    credentialsTitle: 'VOTRE COMPTE',
+    credentialsNote: 'Utilisez votre mot de passe enregistré ou cliquez sur le bouton ci-dessus.',
+    credentialsEmail: 'E-mail',
+    help: 'Aide',
+    privacy: 'Confidentialité',
   },
   de: {
     subject: '🔑 Ihr neuer Zugangslink — Educly',
     heroTitle: 'Neuer Zugangslink',
     heroSubtitle: 'Klicken Sie auf die Schaltfläche unten, um sich direkt bei Ihrem Educly-Konto anzumelden.',
     cta: 'Auf Mein Konto Zugreifen',
-    team: 'Educly Team',
+    credentialsTitle: 'IHR KONTO',
+    credentialsNote: 'Verwenden Sie Ihr registriertes Passwort oder klicken Sie oben auf die Schaltfläche.',
+    credentialsEmail: 'E-Mail',
+    help: 'Hilfe',
+    privacy: 'Datenschutz',
   },
   it: {
     subject: '🔑 Il tuo nuovo link di accesso — Educly',
     heroTitle: 'Nuovo link di accesso',
     heroSubtitle: 'Clicca sul pulsante qui sotto per accedere direttamente al tuo account Educly.',
     cta: 'Accedi al Mio Account',
-    team: 'Team Educly',
+    credentialsTitle: 'IL TUO ACCOUNT',
+    credentialsNote: 'Usa la tua password registrata o clicca sul pulsante sopra per accedere direttamente.',
+    credentialsEmail: 'E-mail',
+    help: 'Aiuto',
+    privacy: 'Privacy',
   },
   ru: {
     subject: '🔑 Ваша новая ссылка для входа — Educly',
     heroTitle: 'Новая ссылка для входа',
     heroSubtitle: 'Нажмите кнопку ниже, чтобы войти в свой аккаунт Educly.',
     cta: 'Войти в Мой Аккаунт',
-    team: 'Команда Educly',
+    credentialsTitle: 'ВАШ АККАУНТ',
+    credentialsNote: 'Используйте зарегистрированный пароль или нажмите кнопку выше для входа.',
+    credentialsEmail: 'E-mail',
+    help: 'Помощь',
+    privacy: 'Конфиденциальность',
   },
 };
 
@@ -65,8 +93,79 @@ function tr(lang: string, key: string): string {
   return TRANSLATIONS[n]?.[key] || TRANSLATIONS['en']?.[key] || '';
 }
 
-function getMagicLinkEmailHtml(accessUrl: string, lang: string): string {
-  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0f0c29 0%,#1a1060 50%,#24243e 100%);"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:48px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;"><tr><td style="background:linear-gradient(145deg,#1e3a8a 0%,#1d4ed8 40%,#2563eb 100%);border-radius:20px 20px 0 0;padding:44px 40px 36px;text-align:center;"><img src="https://educly.app/logo-educly.png" width="140" height="46" alt="Educly" style="filter:brightness(0) invert(1);opacity:0.95;margin-bottom:28px;"/><h1 style="font-size:28px;font-weight:800;color:#fff;line-height:1.2;margin:0 0 14px;">${tr(lang,'heroTitle')}</h1><p style="font-size:15px;color:#bfdbfe;line-height:1.7;max-width:420px;margin:0 auto;">${tr(lang,'heroSubtitle')}</p></td></tr><tr><td style="background:#ffffff;padding:40px 40px 32px;text-align:center;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 24px;"><tr><td style="text-align:center;"><a href="${accessUrl}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8 0%,#4f46e5 100%);color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 44px;border-radius:12px;">${tr(lang,'cta')}</a></td></tr></table></td></tr><tr><td style="background:#0f172a;border-radius:0 0 20px 20px;padding:24px 40px;text-align:center;"><p style="font-size:13px;font-weight:700;color:#fff;margin:0 0 6px;">Educly</p><p style="font-size:12px;color:#475569;margin:0;">© 2025 Educly</p></td></tr></table></td></tr></table></body></html>`;
+function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): string {
+  return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#07080f;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#07080f;">
+<tr><td style="padding:48px 20px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;margin:0 auto;">
+
+<!-- Card -->
+<tr><td>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0f1120;border:1px solid rgba(255,255,255,0.07);border-radius:20px;overflow:hidden;">
+
+<!-- Header -->
+<tr><td style="padding:40px 40px 36px;border-bottom:1px solid rgba(255,255,255,0.07);background:linear-gradient(135deg,rgba(79,110,247,0.12) 0%,transparent 60%);">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr>
+    <td style="width:36px;height:36px;background:linear-gradient(135deg,#4f6ef7,#7c3aed);border-radius:10px;text-align:center;vertical-align:middle;font-size:16px;">🎓</td>
+    <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#e8eaf0;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
+  </tr></table>
+  <h1 style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:28px;font-weight:800;color:#e8eaf0;line-height:1.15;letter-spacing:-0.03em;margin:0 0 10px;">${tr(lang,'heroTitle')}</h1>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;color:#6b7280;line-height:1.6;margin:0;">${tr(lang,'heroSubtitle')}</p>
+</td></tr>
+
+<!-- Body -->
+<tr><td style="padding:36px 40px 32px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td>
+    <a href="${accessUrl}" style="display:block;text-align:center;background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;border-radius:14px;letter-spacing:0.01em;">${tr(lang,'cta')} →</a>
+  </td></tr></table>
+</td></tr>
+
+<!-- Divider -->
+<tr><td style="padding:0 40px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td style="height:1px;background:rgba(255,255,255,0.07);"></td>
+  </tr></table>
+</td></tr>
+
+<!-- Account info -->
+<tr><td style="padding:24px 40px 0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+    <tr><td style="padding:12px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);">
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#6b7280;margin:0;">${tr(lang,'credentialsTitle')}</p>
+    </td></tr>
+    <tr><td style="padding:13px 16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;font-weight:500;width:70px;">${tr(lang,'credentialsEmail')}</td>
+        <td style="font-family:'Courier New',monospace;font-size:13px;color:#e8eaf0;text-align:right;">${email}</td>
+      </tr></table>
+    </td></tr>
+  </table>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;margin:10px 0 0;line-height:1.5;">${tr(lang,'credentialsNote')}</p>
+</td></tr>
+
+<!-- Spacer -->
+<tr><td style="height:24px;"></td></tr>
+
+<!-- Footer -->
+<tr><td style="padding:20px 40px;border-top:1px solid rgba(255,255,255,0.07);">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;">© 2025 Educly</td>
+    <td style="text-align:right;">
+      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;text-decoration:none;">${tr(lang,'help')}</a>
+      <span style="color:#6b7280;font-size:12px;padding:0 8px;">·</span>
+      <a href="https://educly.app/politica-privacidade" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;text-decoration:none;">${tr(lang,'privacy')}</a>
+    </td>
+  </tr></table>
+</td></tr>
+
+</table>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body></html>`;
 }
 
 serve(async (req) => {
@@ -89,7 +188,6 @@ serve(async (req) => {
     const email = rawEmail.toLowerCase().trim().replace(/\.+$/, '');
     console.log(`[resend-magic-link] Request for: ${email}`);
 
-    // Rate limit: check if magic_link email sent in last 60s
     const cutoff = new Date(Date.now() - RATE_LIMIT_SECONDS * 1000).toISOString();
     const { data: recentLog } = await supabase
       .from('email_logs')
@@ -106,7 +204,6 @@ serve(async (req) => {
       });
     }
 
-    // Verify user exists
     let userId: string | null = null;
     const perPage = 1000;
     for (let page = 1; page <= 10; page++) {
@@ -125,7 +222,6 @@ serve(async (req) => {
       });
     }
 
-    // Get user's preferred language
     const { data: profile } = await supabase
       .from('profiles')
       .select('preferred_language')
@@ -133,7 +229,6 @@ serve(async (req) => {
       .maybeSingle();
     const lang = (profile?.preferred_language || 'en').toLowerCase().split('-')[0];
 
-    // Get or create permanent access token
     let accessToken: string | null = null;
     const { data: existingToken } = await supabase
       .from('user_access_tokens')
@@ -161,12 +256,11 @@ serve(async (req) => {
 
     const accessUrl = `https://educly.app/magic-login?token=${accessToken}`;
 
-    // Send email via Resend
     const apiKey = Deno.env.get('RESEND_API_KEY');
     if (!apiKey) throw new Error('RESEND_API_KEY not configured');
 
     const subject = tr(lang, 'subject');
-    const html = getMagicLinkEmailHtml(accessUrl, lang);
+    const html = getMagicLinkEmailHtml(accessUrl, email, lang);
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -179,7 +273,6 @@ serve(async (req) => {
       throw new Error(`Resend error: ${res.status} - ${err}`);
     }
 
-    // Log in email_logs
     await supabase.from('email_logs').insert({
       recipient_email: email,
       email_type: 'magic_link',
