@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -100,16 +100,16 @@ serve(async (req) => {
     const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const token = authHeader.replace("Bearer ", "");
     const anonClient = createClient(supabaseUrl, anonKey, { global: { headers: { Authorization: authHeader } } });
-    const { data: claims, error: claimsError } = await anonClient.auth.getClaims(token);
-    if (claimsError || !claims?.claims?.sub) {
+    const { data: { user }, error: userError } = await anonClient.auth.getUser(token);
+    if (userError || !user) {
       return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-    const userId = claims.claims.sub as string;
+    const userId = user.id;
+    const userEmail = user.email || "";
     const service = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 
     const { data: profile } = await service.from("profiles").select("id, full_name, preferred_language").eq("id", userId).maybeSingle();
-    const { data: authList } = await service.auth.admin.listUsers({ perPage: 1, page: 1, filter: { user_id: userId } });
-    const email = authList?.users?.[0]?.email || "";
+    const email = userEmail;
     const language = (profile?.preferred_language || "pt").toLowerCase();
 
     const { data: existingLog } = await service.from("email_logs").select("id").eq("recipient_email", email.toLowerCase()).eq("email_type", "upsell_day5").maybeSingle();
@@ -142,8 +142,8 @@ serve(async (req) => {
       .select("id")
       .single();
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const pixel = logEntry ? `<img src="${supabaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
+    const pixelBaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const pixel = logEntry ? `<img src="${pixelBaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
     const htmlBase = emailHtml(profile?.full_name || email.split("@")[0], language, target);
     const html = htmlBase.includes("</body>") ? htmlBase.replace("</body>", `${pixel}</body>`) : (htmlBase + pixel);
     await sendEmailViaResend(email, subject, html);
