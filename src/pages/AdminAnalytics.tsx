@@ -43,9 +43,9 @@ const AdminAnalyticsContent = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50/80">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl border-b border-border/50 shadow-sm">
+      <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -53,7 +53,7 @@ const AdminAnalyticsContent = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => navigate("/dashboard")}
-                className="rounded-xl hover:bg-slate-100"
+                className="rounded-xl hover:bg-muted"
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
@@ -75,7 +75,7 @@ const AdminAnalyticsContent = () => {
               variant="outline" 
               size="sm" 
               onClick={refreshAll}
-              className="rounded-xl border-border/50 hover:bg-slate-50"
+              className="rounded-xl border-border/50 hover:bg-muted"
             >
               <RefreshCw className="h-4 w-4 mr-2" />
               Atualizar
@@ -106,37 +106,37 @@ const AdminAnalyticsContent = () => {
           <TabsList className="grid w-full grid-cols-6 h-12 p-1 bg-muted/50 rounded-xl">
             <TabsTrigger 
               value="billing" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               📋 Billing Logs
             </TabsTrigger>
             <TabsTrigger 
               value="cancellations" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               ⚠️ Cancelamentos
             </TabsTrigger>
             <TabsTrigger 
               value="streaks" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               🏆 Top Streaks
             </TabsTrigger>
             <TabsTrigger 
               value="premium" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               👑 Premium
             </TabsTrigger>
             <TabsTrigger 
               value="grant-access" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               🔓 Liberar Acesso
             </TabsTrigger>
             <TabsTrigger 
               value="bulk-grant" 
-              className="rounded-lg text-xs font-medium data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               📦 Bulk Import
             </TabsTrigger>
