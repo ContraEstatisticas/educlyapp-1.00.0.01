@@ -336,43 +336,43 @@ const Profile = () => {
     }
   };
 
-  const handleSendResetEmail = async () => {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const handleChangePassword = async () => {
+    if (!newPassword || newPassword.length < 6) {
+      toast({ variant: "destructive", title: t('profile.error'), description: t('profile.passwordTooShort', 'A senha deve ter pelo menos 6 caracteres.') });
+      return;
+    }
+    if (newPassword !== confirmNewPassword) {
+      toast({ variant: "destructive", title: t('profile.error'), description: t('profile.passwordMismatch', 'As senhas não coincidem.') });
+      return;
+    }
     try {
       setIsSendingEmail(true);
-      const email = getFullEmail();
-      if (!email) {
-        toast({
-          variant: "destructive",
-          title: t('profile.error'),
-          description: t('profile.emailNotFound')
-        });
-        return;
-      }
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/update-password`,
-      });
-
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
       if (error) {
-        toast({
-          variant: "destructive",
-          title: t('profile.sendError'),
-          description: error.message
-        });
+        toast({ variant: "destructive", title: t('profile.sendError'), description: error.message });
         return;
       }
-
-      toast({
-        title: t('profile.emailSent'),
-        description: t('profile.emailSentDesc', { email: getDisplayEmail() })
-      });
+      // Send new magic link after password change
+      try {
+        const email = getFullEmail();
+        if (email) {
+          const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+          await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+        }
+      } catch { /* non-blocking */ }
+      toast({ title: t('profile.passwordChanged', 'Senha alterada!'), description: t('profile.passwordChangedDesc', 'Sua senha foi alterada com sucesso. Um novo link de acesso foi enviado ao seu e-mail.') });
+      setNewPassword("");
+      setConfirmNewPassword("");
       setIsPasswordOpen(false);
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: t('profile.sendError'),
-        description: t('profile.unexpectedError')
-      });
+      toast({ variant: "destructive", title: t('profile.sendError'), description: t('profile.unexpectedError') });
     } finally {
       setIsSendingEmail(false);
     }
