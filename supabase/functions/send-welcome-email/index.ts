@@ -76,7 +76,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     privacy: "Confidentialité",
   },
   de: {
-    subject: "🎉 Willkommen bei Educly!",
+    subject: "🔓 Zugang Freigeschaltet — Educly",
     heroTitle: "Ihr Konto ist bereit.",
     heroSubtitle: "Klicken Sie auf die Schaltfläche unten, um sich sofort anzumelden.",
     cta: "Auf Mein Konto Zugreifen",
