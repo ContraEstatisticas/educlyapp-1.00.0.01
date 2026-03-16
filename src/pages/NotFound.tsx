@@ -2,17 +2,25 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 
-const CACHE_PATTERNS = ['cache', 'reset-cache', 'resetcache', 'limpar-cache', 'clear-cache'];
+const CACHE_PATTERNS = [
+  'cache', 'cache.html',
+  'reset-cache', 'reset-cache.html',
+  'resetcache', 'resetcache.html',
+  'limpar-cache', 'limpar-cache.html',
+  'clear-cache', 'clear-cache.html',
+];
 
 const NotFound = () => {
   const location = useLocation();
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Auto-recover: if user tried to access a cache-reset URL variant, redirect to static page
     const path = location.pathname.toLowerCase().replace(/^\//, '').replace(/\/$/, '');
-    if (CACHE_PATTERNS.some(p => path === p || path.startsWith(p))) {
-      window.location.replace('/reset-cache.html?from=404');
+    
+    // If user tried any cache-reset URL variant, hard-redirect to static page
+    if (CACHE_PATTERNS.some(p => path === p || path.startsWith(p + '/'))) {
+      // Use cache.html as canonical — it's a standalone static page
+      window.location.replace('/cache.html?from=404');
       return;
     }
 
