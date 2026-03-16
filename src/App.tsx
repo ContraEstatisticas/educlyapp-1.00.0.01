@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 import { PWARedirect } from "@/components/PWARedirect";
 import { SoundSettingsProvider } from "@/contexts/SoundSettingsContext";
 import { PremiumGuard } from "@/components/PremiumGuard";
@@ -170,7 +169,6 @@ const App = () => {
                 <SessionTracker />
                 <UpdateNotification autoReloadSeconds={15} />
                 <PWARedirect />
-                <PWAInstallPrompt />
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}
                   <Route path="/" element={<Index />} />
