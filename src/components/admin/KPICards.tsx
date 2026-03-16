@@ -92,24 +92,27 @@ export const KPICards = () => {
   const { data: kpis, isLoading } = useQuery({
     queryKey: ["admin-kpis", errorRangeDays],
     queryFn: async () => {
+      // Boundaries (UTC)
+      const now = new Date();
+      const todayStartUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0)).toISOString();
+      const sevenDaysAgoUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 7, 0, 0, 0, 0)).toISOString();
+
       // Total users
       const { count: totalUsers } = await supabase
         .from("profiles")
-        .select("*", { count: "exact", head: true });
+        .select("id", { count: "exact", head: true });
 
       // New users today
-      const today = new Date().toISOString().split("T")[0];
       const { count: newToday } = await supabase
         .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .gte("created_at", today);
+        .select("id", { count: "exact", head: true })
+        .gte("created_at", todayStartUTC);
 
       // New users this week
-      const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
       const { count: newWeek } = await supabase
         .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .gte("created_at", weekAgo);
+        .select("id", { count: "exact", head: true })
+        .gte("created_at", sevenDaysAgoUTC);
 
       // Streak stats
       const { data: streakData } = await supabase
@@ -133,21 +136,21 @@ export const KPICards = () => {
         : 0;
 
       // Active users (7 dias) - using filter on the streakData we already have
-      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
       const activeUsers = streakData?.filter(s =>
-        s.last_activity_date && s.last_activity_date >= sevenDaysAgo
+        s.last_activity_date && s.last_activity_date >= sevenDaysAgoUTC.split("T")[0]
       ).length || 0;
 
       // Premium users
       const { count: premiumUsers } = await supabase
         .from("user_premium_access")
-        .select("*", { count: "exact", head: true })
+        .select("user_id", { count: "exact", head: true })
         .eq("is_premium", true);
 
       // Billing events - include payload for iteration/recurrence detection
       const { data: billingEvents } = await supabase
         .from("billing_event_logs")
-        .select("event_type, created_at, payload, status");
+        .select("event_type, created_at, payload, status")
+        .gte("created_at", sevenDaysAgoUTC);
 
       const chargebacks = billingEvents?.filter((e) =>
         e.event_type.toUpperCase().includes("CHARGEBACK")
@@ -171,7 +174,7 @@ export const KPICards = () => {
         const isPaymentEvent = eventType.includes("SETTLED") ||
           eventType.includes("APPROVED") ||
           eventType.includes("COMPLETE");
-        return eventDate === today && isPaymentEvent;
+        return eventDate === todayStartUTC.split("T")[0] && isPaymentEvent;
       }) || [];
 
       // New purchases today (iteration = 1 OR oneoff OR Hotmart recurrence_number = 1)
@@ -240,7 +243,7 @@ export const KPICards = () => {
       // Completed days
       const { count: completedDays } = await supabase
         .from("user_day_progress")
-        .select("*", { count: "exact", head: true })
+        .select("id", { count: "exact", head: true })
         .eq("completed", true);
 
       // Retention rate
@@ -256,9 +259,12 @@ export const KPICards = () => {
         ? Number(avgFirstSession).toFixed(1)
         : 0;
 
-      const errorRangeStart = new Date(
-        Date.now() - errorRangeValue * 24 * 60 * 60 * 1000
-      ).toISOString();
+      const errorRangeStart = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() - errorRangeValue,
+        0, 0, 0, 0
+      )).toISOString();
       const errorsInRange = billingEvents?.filter((event) => {
         if (!event.created_at) return false;
         if (event.status !== "error") return false;
