@@ -335,6 +335,22 @@ const DayLesson = () => {
             current_day: nextDayNumber,
             is_active: true,
           }, { onConflict: 'user_id,challenge_id' });
+
+          if (dayInfo.dayNumber === 5) {
+            try {
+              const { data: sessionData } = await supabase.auth.getSession();
+              const token = sessionData?.session?.access_token;
+              if (token) {
+                await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-upsell-day5`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                });
+              }
+            } catch {}
+          }
         }
         navigate("/dashboard");
       } catch (error) {

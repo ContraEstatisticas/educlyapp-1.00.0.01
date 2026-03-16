@@ -2332,8 +2332,197 @@
     }
   },
   "landing": {
+    "badge": "La app que enseña IA en la práctica",
     "title": "Aprende IA con",
-    "subtitle": "Senderos Interactivos"
+    "subtitle": "Senderos Interactivos",
+    "description": "Domina las principales herramientas de IA directamente desde tu teléfono con rutas gamificadas y ejercicios prácticos",
+    "ctaPrimary": "Descargar gratis",
+    "ctaSecondary": "Ver cómo funciona",
+    "feature1": "100% Práctico",
+    "feature2": "Certificado",
+    "feature3": "Gamificado",
+    "stat1": "Herramientas de IA",
+    "stat2": "Descargas",
+    "stat3": "Valoración en la tienda",
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre",
+      "programs": "Funciones",
+      "testimonials": "Testimonios",
+      "plan": "Plan",
+      "contact": "Contacto",
+      "login": "Iniciar Sesión",
+      "startNow": "Descargar App"
+    },
+    "hero": {
+      "badge": "La app de IA más completa del mercado",
+      "title": "Domina",
+      "titleHighlight": "la Inteligencia Artificial",
+      "titleEnd": "directamente desde tu teléfono",
+      "subtitle": "Aprende IA con rutas interactivas, ejercicios prácticos y certificados digitales — todo dentro del app. Accede a 20+ herramientas de IA, modo offline y gamificación.",
+      "cta": "Descargar gratis",
+      "demo": "Ver demo",
+      "students": "descargas",
+      "rating": "valoración",
+      "countries": "países"
+    },
+    "features": {
+      "sectionLabel": "Funciones del App",
+      "title": "Todo lo que necesitas en tu bolsillo",
+      "subtitle": "Un app completo con rutas interactivas, asistente de IA, progreso en tiempo real y certificados — aprende a tu ritmo, donde estés.",
+      "curriculum": {
+        "title": "Senderos Interactivos",
+        "description": "Aprende con rutas gamificadas y contenido siempre actualizado sobre las principales herramientas de IA del mercado."
+      },
+      "mentoring": {
+        "title": "Asistente de IA Integrado",
+        "description": "Obtén respuestas en tiempo real con EDI, tu asistente de IA personal dentro del app."
+      },
+      "community": {
+        "title": "Progreso en Tiempo Real",
+        "description": "Sigue tu avance con paneles detallados, streaks y estadísticas de aprendizaje."
+      },
+      "certification": {
+        "title": "Certificados Digitales",
+        "description": "Consigue certificados al completar rutas y desafíos para comprobar tus habilidades en IA."
+      },
+      "practical": {
+        "title": "Modo Offline",
+        "description": "Descarga lecciones y estudia sin internet — perfecto para aprender en cualquier lugar."
+      },
+      "career": {
+        "title": "Gamificación",
+        "description": "Gana XP, sube de nivel, desbloquea insignias y mantiene tu racha diaria de estudio."
+      }
+    },
+    "stats": {
+      "students": "Descargas",
+      "countries": "Países",
+      "satisfaction": "Valoración en la tienda",
+      "partners": "Herramientas de IA"
+    },
+    "testimonials": {
+      "sectionLabel": "Testimonios",
+      "title": "Lo que dicen nuestros usuarios",
+      "subtitle": "Miles de personas ya han aprendido IA con la app Educly. Mira lo que tienen para decir.",
+      "items": [
+        {
+          "name": "María Silva",
+          "role": "Científica de Datos",
+          "country": "Brasil",
+          "text": "La app de Educly transformó mi forma de aprender IA. La uso todos los días y en 3 meses conseguí mi primer trabajo en el área."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portugal",
+          "text": "La app es increíble — las rutas son prácticas y puedo estudiar offline. La gamificación me mantiene motivado y la asistente de IA responde todas mis dudas."
+        },
+        {
+          "name": "Ana García",
+          "role": "Ingeniera de ML",
+          "country": "México",
+          "text": "Completé varios desafíos con la app y los certificados digitales hicieron toda la diferencia en mi CV. ¡Recibí 3 ofertas de trabajo!"
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Fundador de Startup",
+          "country": "Argentina",
+          "text": "Uso la app a diario para mantenerme actualizado en IA. Las rutas son súper prácticas y el modo offline es perfecto para quienes viajan frecuentemente."
+        }
+      ]
+    },
+    "globalReach": {
+      "title": "ALCANCE GLOBAL",
+      "subtitle": "Transformando vidas en todo el mundo",
+      "description": "La app Educly ha sido descargada en más de 150 países, conectando una comunidad global de estudiantes de IA.",
+      "regions": {
+        "latinAmerica": "América Latina",
+        "europe": "Europa",
+        "asiaOceania": "Asia y Oceanía",
+        "northAmerica": "Norteamérica"
+      },
+      "features": {
+        "languages": {
+          "title": "15 Idiomas",
+          "description": "App disponible en múltiples idiomas con traducción profesional"
+        },
+        "support": {
+          "title": "Soporte 24/7",
+          "description": "Asistente de IA integrada y equipo de soporte disponible en todo momento"
+        },
+        "community": {
+          "title": "Comunidad en la App",
+          "description": "Conéctate con usuarios de todo el mundo y comparte tu progreso"
+        }
+      }
+    },
+    "cta": {
+      "title": "¿Listo para aprender IA directamente desde tu teléfono?",
+      "subtitle": "Únete a más de 50.000 usuarios que ya dominan IA con la app Educly.",
+      "startFree": "Descargar gratis",
+      "talkConsultant": "Hablar con soporte",
+      "guarantee": "Garantía de 30 días",
+      "installments": "Hasta 12 cuotas",
+      "benefits": [
+        "Acceso completo a todas las rutas",
+        "Actualizaciones gratuitas del app",
+        "Asistente de IA integrada",
+        "Certificados digitales",
+        "Modo offline disponible",
+        "Garantía de satisfacción de 30 días"
+      ]
+    },
+    "footer": {
+      "description": "La app de IA más completa del mercado. Aprende IA en la práctica, directamente desde tu teléfono.",
+      "contact": "Contacto",
+      "programs": "Funciones",
+      "resources": "Recursos",
+      "company": "Empresa",
+      "legal": "Legal",
+      "links": {
+        "aiFundamentals": "Rutas de IA",
+        "machineLearning": "Desafíos de 28 días",
+        "deepLearning": "Asistente de IA",
+        "aiForBusiness": "Certificados digitales",
+        "blog": "Blog",
+        "webinars": "Tutoriales",
+        "ebooks": "Guías",
+        "community": "Comunidad",
+        "aboutUs": "Sobre nosotros",
+        "careers": "Carreras",
+        "partnerships": "Alianzas",
+        "contact": "Contacto",
+        "terms": "Términos de uso",
+        "privacy": "Privacidad",
+        "cookies": "Cookies",
+        "refund": "Cancelación",
+        "subscriptionTerms": "Términos de suscripción"
+      },
+      "copyright": "Todos los derechos reservados.",
+      "madeWith": "Hecho con ❤️ para la comunidad global de IA"
+    },
+    "pricing": {
+      "title": "Desbloquea todo el poder del app",
+      "subtitle": "Comienza tu viaje en IA hoy con una inversión única",
+      "offerBadge": "Oferta de hoy",
+      "productName": "Acceso total a la App de IA",
+      "pricePrefix": "POR SOLO",
+      "perDay": "por día",
+      "ctaButton": "ASEGURAR MI ACCESO AHORA",
+      "securePayment": "Pago seguro vía Stripe",
+      "quizDiscountNotice": "🎁 ¿QUIERES UN DESCUENTO MAYOR? ¡COMPLETA EL QUIZ ABAJO!",
+      "quizBadge": "ACCESO EXCLUSIVO",
+      "quizTitle": "Acelera tu aprendizaje de IA con la app",
+      "quizSubtitle": "Descubre tu ruta personalizada con precio especial de lanzamiento.",
+      "quizButton": "Acceder al quiz y desbloquear descuento"
+    },
+    "quiz": {
+      "link": {
+        "name": "Acceder al quiz"
+      },
+      "url": "https://start.educly.app/english"
+    }
   },
   "auth": {
     "title": "Accede a tu Cuenta",

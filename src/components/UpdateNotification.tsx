@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { RefreshCw, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAppUpdate } from '@/hooks/useAppUpdate';
@@ -14,19 +14,39 @@ interface UpdateNotificationProps {
 export const UpdateNotification = ({ autoReloadSeconds }: UpdateNotificationProps) => {
   const { t } = useTranslation();
   const location = useLocation();
-  const { needRefresh, updateApp } = useAppUpdate();
+  const navigate = useNavigate();
+  const { needRefresh } = useAppUpdate();
   const [countdown, setCountdown] = useState(autoReloadSeconds || 0);
   const [dismissed, setDismissed] = useState(false);
+  const [eligible, setEligible] = useState(true);
 
-  const shouldAutoReload = Boolean(autoReloadSeconds) && needRefresh;
-  const shouldShow = needRefresh && !dismissed;
+  // Elegibilidade: mostrar no máximo 1x a cada 15 dias
+  useEffect(() => {
+    const LAST_KEY = 'cache-reset-prompt-last-shown';
+    try {
+      const last = localStorage.getItem(LAST_KEY);
+      if (last) {
+        const lastDate = new Date(last).getTime();
+        const now = Date.now();
+        const fifteenDaysMs = 15 * 24 * 60 * 60 * 1000;
+        if (now - lastDate < fifteenDaysMs) {
+          setEligible(false);
+        }
+      }
+    } catch {
+      setEligible(true);
+    }
+  }, [location.pathname]);
+
+  const shouldAutoReload = Boolean(autoReloadSeconds) && needRefresh && eligible;
+  const shouldShow = needRefresh && !dismissed && eligible;
 
   const titleText = t("update.newVersionAvailable", "Nova versao disponivel!");
   const descriptionText = t("update.clickToUpdate", "Clique para obter as ultimas melhorias.");
   const buttonLabel = t("update.updateNow", "Atualizar Agora");
 
   const handleUpdateClick = () => {
-    updateApp();
+    navigate('/reset-cache');
   };
 
   useEffect(() => {
@@ -38,7 +58,7 @@ export const UpdateNotification = ({ autoReloadSeconds }: UpdateNotificationProp
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          updateApp();
+          navigate('/reset-cache');
           return 0;
         }
         return prev - 1;
@@ -46,7 +66,16 @@ export const UpdateNotification = ({ autoReloadSeconds }: UpdateNotificationProp
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [shouldAutoReload, autoReloadSeconds, updateApp, dismissed]);
+  }, [shouldAutoReload, autoReloadSeconds, navigate, dismissed]);
+
+  // Registrar exibição para controle de 15 dias
+  useEffect(() => {
+    if (shouldShow) {
+      try {
+        localStorage.setItem('cache-reset-prompt-last-shown', new Date().toISOString());
+      } catch {}
+    }
+  }, [shouldShow]);
 
   if (!shouldShow) return null;
 

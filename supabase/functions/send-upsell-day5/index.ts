@@ -1,0 +1,149 @@
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
+const TRANSLATIONS: Record<string, { subject: string; title: string; body: string; cta: string }> = {
+  pt: {
+    subject: "🔥 Desbloqueie recursos avançados com o AI Hub ou Freelancer",
+    title: "Você está indo muito bem! Que tal avançar para o próximo nível?",
+    body: "Ao chegar ao dia 05, você já domina os fundamentos. Desbloqueie recursos avançados com acesso ilimitado aos assistentes de IA, tutoriais premium e ferramentas profissionais.",
+    cta: "Desbloquear agora",
+  },
+  es: {
+    subject: "🔥 Desbloquea funciones avanzadas con AI Hub o Freelancer",
+    title: "¡Vas muy bien! ¿Avanzamos al siguiente nivel?",
+    body: "Al llegar al día 05 ya dominas los fundamentos. Desbloquea funciones avanzadas con acceso ilimitado a asistentes de IA, tutoriales premium y herramientas profesionales.",
+    cta: "Desbloquear ahora",
+  },
+  fr: {
+    subject: "🔥 Débloquez des fonctionnalités avancées avec AI Hub ou Freelancer",
+    title: "Vous progressez très bien ! Passons au niveau supérieur",
+    body: "Au jour 05, vous maîtrisez déjà les bases. Débloquez des fonctionnalités avancées avec un accès illimité aux assistants IA, des tutoriels premium et des outils professionnels.",
+    cta: "Débloquer maintenant",
+  },
+  de: {
+    subject: "🔥 Schalte erweiterte Funktionen mit AI Hub oder Freelancer frei",
+    title: "Du machst das großartig! Auf zum nächsten Level",
+    body: "Am Tag 05 beherrschst du bereits die Grundlagen. Schalte erweiterte Funktionen frei mit unbegrenztem Zugriff auf KI‑Assistenten, Premium‑Tutorials und Profi‑Tools.",
+    cta: "Jetzt freischalten",
+  },
+};
+
+function tr(lang: string, key: keyof typeof TRANSLATIONS["pt"]): string {
+  const n = lang.toLowerCase().split("-")[0];
+  return TRANSLATIONS[n]?.[key] || TRANSLATIONS["pt"][key];
+}
+
+function getCheckoutUrl(product: "ai_hub" | "freelancer"): string {
+  if (product === "ai_hub") return "https://pay.hotmart.com/P104360708Q?off=nnp1mth1";
+  return "https://pay.hotmart.com/F103975080O?off=dcrrw2vo";
+}
+
+function emailHtml(userName: string, language: string, product: "ai_hub" | "freelancer"): string {
+  const checkoutUrl = getCheckoutUrl(product);
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
+<body style="font-family: Arial, sans-serif; margin:0; padding:0; background:#0f172a;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;">
+    <tr><td style="background:#7c3aed;color:#fff;padding:26px 28px;font-weight:800;font-size:20px;">Educly</td></tr>
+    <tr><td style="padding:26px 28px;">
+      <h1 style="margin:0 0 8px;font-size:20px;color:#111827;">${tr(language,'title')}</h1>
+      <p style="margin:0 0 16px;color:#374151;font-size:15px;">${tr(language,'body')}</p>
+      <p style="margin:0 0 16px;color:#374151;font-size:14px;">${userName ? "@" + userName : ""}</p>
+      <div style="text-align:center;margin:24px 0;">
+        <a href="${checkoutUrl}" style="display:inline-block;background:#7c3aed;color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700;">
+          ${tr(language,'cta')}
+        </a>
+      </div>
+      <p style="margin:0;color:#6b7280;font-size:12px;">Se já possui acesso, ignore este email.</p>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendEmailViaResend(to: string, subject: string, html: string) {
+  const apiKey = Deno.env.get("RESEND_API_KEY");
+  if (!apiKey) throw new Error("Missing RESEND_API_KEY");
+  const resp = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Educly <noreply@educly.app>",
+      to,
+      subject,
+      html,
+    }),
+  });
+  if (!resp.ok) {
+    const text = await resp.text();
+    throw new Error(`Resend error: ${resp.status} - ${text}`);
+  }
+}
+
+serve(async (req) => {
+  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  try {
+    const authHeader = req.headers.get("Authorization") || "";
+    if (!authHeader.startsWith("Bearer ")) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const token = authHeader.replace("Bearer ", "");
+    const anonClient = createClient(supabaseUrl, anonKey, { global: { headers: { Authorization: authHeader } } });
+    const { data: claims, error: claimsError } = await anonClient.auth.getClaims(token);
+    if (claimsError || !claims?.claims?.sub) {
+      return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+    const userId = claims.claims.sub as string;
+    const service = createClient(supabaseUrl, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
+
+    const { data: profile } = await service.from("profiles").select("id, full_name, preferred_language").eq("id", userId).maybeSingle();
+    const { data: authList } = await service.auth.admin.listUsers({ perPage: 1, page: 1, filter: { user_id: userId } });
+    const email = authList?.users?.[0]?.email || "";
+    const language = (profile?.preferred_language || "pt").toLowerCase();
+
+    const { data: existingLog } = await service.from("email_logs").select("id").eq("recipient_email", email.toLowerCase()).eq("email_type", "upsell_day5").maybeSingle();
+    if (existingLog) {
+      return new Response(JSON.stringify({ success: true, skipped: true, reason: "already_sent" }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    const { data: products } = await service.from("user_product_access").select("product_type,is_active").eq("user_id", userId).eq("is_active", true);
+    const hasAiHub = (products || []).some(p => p.product_type === "ai_hub");
+    const hasFreelancer = (products || []).some(p => p.product_type === "freelancer");
+    let target: "ai_hub" | "freelancer" | null = null;
+    if (!hasAiHub) target = "ai_hub";
+    else if (!hasFreelancer) target = "freelancer";
+    if (!target) {
+      return new Response(JSON.stringify({ success: true, skipped: true, reason: "already_has_products" }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    const subject = tr(language, "subject");
+    const html = emailHtml(profile?.full_name || email.split("@")[0], language, target);
+    await sendEmailViaResend(email, subject, html);
+
+    await service.from("email_logs").insert({
+      recipient_email: email.toLowerCase(),
+      user_id: userId,
+      email_type: "upsell_day5",
+      subject,
+      status: "sent",
+      sent_at: new Date().toISOString(),
+      metadata: { target },
+    });
+
+    return new Response(JSON.stringify({ success: true, sent: true, target }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    return new Response(JSON.stringify({ error: message }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+  }
+});

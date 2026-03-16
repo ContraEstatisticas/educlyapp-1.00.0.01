@@ -44,66 +44,35 @@ const timezoneDetector = {
   lookup() {
     try {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      // Brazilian timezones
-      const brazilTimezones = [
-        'America/Sao_Paulo',
-        'America/Rio_Branco',
-        'America/Manaus',
-        'America/Cuiaba',
-        'America/Fortaleza',
-        'America/Recife',
-        'America/Belem',
-        'America/Bahia',
-        'America/Maceio',
-        'America/Campo_Grande',
-        'America/Porto_Velho',
-        'America/Boa_Vista',
-        'America/Noronha',
-        'America/Araguaina',
-        'America/Santarem',
-        'America/Eirunepe',
+      const brazil = [
+        'America/Sao_Paulo','America/Rio_Branco','America/Manaus','America/Cuiaba','America/Fortaleza','America/Recife','America/Belem','America/Bahia','America/Maceio','America/Campo_Grande','America/Porto_Velho','America/Boa_Vista','America/Noronha','America/Araguaina','America/Santarem','America/Eirunepe',
       ];
-      
-      if (brazilTimezones.includes(timezone)) {
-        console.log('🌎 Brazilian timezone detected:', timezone, '→ Using Portuguese');
-        return 'pt';
-      }
-      
-      // Spanish-speaking countries
-      const spanishTimezones = [
-        'America/Mexico_City', 'America/Buenos_Aires', 'America/Bogota',
-        'America/Lima', 'America/Santiago', 'Europe/Madrid', 'America/Caracas',
-        'America/Montevideo', 'America/Guayaquil', 'America/La_Paz',
+      const spanish = [
+        'Europe/Madrid','Atlantic/Canary','Africa/Ceuta',
+        'America/Mexico_City','America/Bogota','America/Lima','America/Santiago','America/Caracas','America/Montevideo','America/Guayaquil','America/La_Paz','America/Havana','America/Tegucigalpa','America/Managua','America/Santo_Domingo','America/Asuncion','America/San_Juan',
       ];
-      
-      if (spanishTimezones.some(tz => timezone.includes(tz.split('/')[1]))) {
-        console.log('🌎 Spanish timezone detected:', timezone, '→ Using Spanish');
-        return 'es';
-      }
-      
-      // French timezones
-      if (timezone === 'Europe/Paris' || timezone.includes('Africa/')) {
-        const frenchAfricanCountries = ['Dakar', 'Abidjan', 'Casablanca', 'Tunis', 'Algiers'];
-        if (timezone === 'Europe/Paris' || frenchAfricanCountries.some(c => timezone.includes(c))) {
-          console.log('🌎 French timezone detected:', timezone, '→ Using French');
-          return 'fr';
-        }
-      }
-      
-      // Portuguese Portugal
-      if (timezone === 'Europe/Lisbon') {
-        console.log('🌎 Portuguese timezone detected:', timezone, '→ Using Portuguese');
-        return 'pt';
-      }
-      
-    } catch (e) {
-      console.warn('Timezone detection failed:', e);
+      const french = [
+        'Europe/Paris','America/Toronto','America/Montreal','Europe/Brussels','Europe/Luxembourg',
+        'Africa/Abidjan','Africa/Dakar','Africa/Casablanca','Africa/Tunis','Africa/Algiers','Indian/Reunion',
+      ];
+      const german = [
+        'Europe/Berlin','Europe/Vienna','Europe/Zurich',
+      ];
+      if (brazil.includes(timezone)) return 'pt';
+      if (spanish.includes(timezone)) return 'es';
+      if (french.includes(timezone)) return 'fr';
+      if (german.includes(timezone)) return 'de';
+      const nav = navigator.language || '';
+      if (nav.startsWith('pt')) return 'pt';
+      if (nav.startsWith('es')) return 'es';
+      if (nav.startsWith('fr')) return 'fr';
+      if (nav.startsWith('de')) return 'de';
+    } catch {
+      return undefined;
     }
-    return undefined; // Let other detectors handle it
+    return undefined;
   },
-  cacheUserLanguage() {
-    // Don't cache - let localStorage handle caching
-  },
+  cacheUserLanguage() {},
 };
 
 // Add custom detector to LanguageDetector
@@ -120,8 +89,7 @@ if (!i18n.isInitialized) {
       fallbackLng: 'en',
       load: 'languageOnly', // This ensures pt-BR loads pt translations
       detection: {
-        // Priority: URL param > localStorage > browser language (navigator)
-        order: ['querystring', 'localStorage', 'navigator'],
+        order: ['querystring', 'localStorage', 'timezoneDetector', 'navigator'],
         lookupQuerystring: 'lang',
         lookupLocalStorage: 'i18nextLng',
         caches: ['localStorage'],
