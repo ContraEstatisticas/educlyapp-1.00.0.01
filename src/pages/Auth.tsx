@@ -434,6 +434,34 @@ const Auth = () => {
         <LanguageSelector />
       </div>
 
+      {/* Expired Magic Link UI */}
+      {showExpiredLink && (
+        <Card className="w-full max-w-md p-6 space-y-4 animate-fade-in-up mb-4">
+          <div className="text-center space-y-3">
+            <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
+              <Lock className="w-6 h-6 text-destructive" />
+            </div>
+            <h2 className="text-xl font-bold text-foreground">{t("auth.linkExpired", "Seu link expirou")}</h2>
+            <p className="text-sm text-muted-foreground">{t("auth.linkExpiredDesc", "O link de acesso que você clicou já expirou. Digite seu e-mail para receber um novo.")}</p>
+          </div>
+          <div className="space-y-3">
+            <Input
+              type="email"
+              placeholder={t("auth.emailPlaceholder", "seu@email.com")}
+              value={expiredEmail}
+              onChange={(e) => setExpiredEmail(e.target.value)}
+            />
+            <Button onClick={handleResendMagicLink} disabled={isResendingLink} className="w-full">
+              {isResendingLink ? <Sparkles className="w-4 h-4 mr-2 animate-spin" /> : <Mail className="w-4 h-4 mr-2" />}
+              {t("auth.resendLink", "Enviar novo link")}
+            </Button>
+            <Button variant="ghost" className="w-full" onClick={() => setShowExpiredLink(false)}>
+              {t("auth.loginInstead", "Entrar com senha")}
+            </Button>
+          </div>
+        </Card>
+      )}
+
       <div className="w-full max-w-md space-y-4 sm:space-y-6 animate-fade-in-up">
         <Button variant="ghost" onClick={() => navigate("/")} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
