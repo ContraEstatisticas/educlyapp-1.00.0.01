@@ -19,6 +19,7 @@ import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
 import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
+import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
@@ -86,8 +87,11 @@ const AdminAnalyticsContent = () => {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-8 space-y-8">
-        {/* Email Lookup */}
-        <EmailLookup />
+        {/* Email Lookup + Resend Access */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <EmailLookup />
+          <ResendAccessLink />
+        </div>
 
         {/* KPI Cards */}
         <KPICards />

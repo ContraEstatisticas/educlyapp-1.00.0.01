@@ -1,64 +1,14 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import confetti from "canvas-confetti";
 import { LanguageSelectionModal } from "@/components/LanguageSelectionModal";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { createPendingAccount, createPurchasedAccount } from "@/lib/purchasedSignup";
-import i18n from "i18next";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   Heart,
   CheckCircle2,
   Sparkles,
-  PlayCircle,
-  Brain,
-  Briefcase,
-  Laptop,
   Mail,
-  Lock,
-  User,
-  Eye,
-  EyeOff,
 } from "lucide-react";
-
-// ==========================================
-// TYPES & INTERFACES
-// ==========================================
-
-interface Benefit {
-  icon: React.ElementType;
-  title: string;
-  desc: string;
-  color: string;
-  lightColor: string;
-}
-
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  time: string;
-}
-
-interface Testimonial {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-}
 
 // ==========================================
 // CUSTOM HOOKS
@@ -187,41 +137,20 @@ const TiltCard = ({ children, className = "" }: { children: React.ReactNode; cla
     </div>
   );
 };
+
 // ==========================================
 // MAIN COMPONENT
 // ==========================================
 
 const ThankYou = () => {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { t } = useTranslation();
-  const { toast } = useToast();
   const mousePosition = useMousePosition();
   const [isReady, setIsReady] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState(searchParams.get("email") || "");
-  const [confirmEmail, setConfirmEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
-  const [lastPurchaseCheck, setLastPurchaseCheck] = useState<boolean>(false);
-  const isPurchaseFlow = Boolean(searchParams.get("email"));
-  const supportEmail = "contact@educly.app";
-  const noPurchaseDescription = t(
-    "auth.noPurchaseDescription",
-    "Nao localizamos uma compra vinculada a este e-mail. Verifique se voce informou o mesmo e-mail usado na compra. Se ainda nao comprou, acesse o link abaixo.",
-  );
-  const noPurchaseLines = noPurchaseDescription
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
+  const userEmail = searchParams.get("email") || "";
 
   useEffect(() => {
     setTimeout(() => setIsReady(true), 100);
-    // Confetes apenas na inicialização
     confetti({
       particleCount: 50,
       spread: 70,
@@ -232,165 +161,10 @@ const ThankYou = () => {
     });
   }, []);
 
-  const performSignup = async (hasPurchase: boolean) => {
-    const currentLanguage = navigator.language || i18n.language || "en";
-    const signupResult = hasPurchase
-      ? await createPurchasedAccount({
-        email,
-        password,
-        fullName: fullName.trim(),
-        preferredLanguage: currentLanguage,
-      })
-      : await createPendingAccount({
-      email,
-      password,
-      fullName: fullName.trim(),
-      preferredLanguage: currentLanguage,
-    });
-
-    if (!signupResult.ok) {
-      setIsLoading(false);
-      if (signupResult.code === "ALREADY_EXISTS") {
-        toast({
-          title: t("auth.signupError"),
-          description: t("auth.alreadyExistsResetHint", "Você já tem uma conta! Se não lembra a senha, use a opção 'Esqueceu a senha?' abaixo."),
-          variant: "destructive",
-        });
-        navigate(`/auth?email=${encodeURIComponent(email)}&tab=login&showReset=true`, { replace: true });
-        return;
-      }
-
-      toast({
-        title: t("auth.signupError"),
-        description: signupResult.message,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (!hasPurchase) {
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupSuccess"),
-        description: t(
-          "auth.pendingAccessMessage",
-          "Conta criada com sucesso. O acesso sera liberado automaticamente apos a compra.",
-        ),
-      });
-      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
-      return;
-    }
-
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-    if (signInError) {
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupSuccess"),
-        description: t("auth.loginTab"),
-      });
-      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
-      return;
-    }
-
-    setIsLoading(false);
-
-    toast({
-      title: t("auth.signupSuccess"),
-      description: t("common.loading"),
-    });
-    navigate("/dashboard", { replace: true });
-  };
-
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!fullName.trim()) {
-      toast({
-        title: t("auth.signupError"),
-        description: t("auth.nameRequired"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (isPurchaseFlow && email !== confirmEmail) {
-      toast({
-        title: t("auth.signupError", "Erro no cadastro"),
-        description: t("auth.emailMismatch", "Os e-mails digitados não coincidem."),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast({
-        title: t("auth.loginError"),
-        description: t("auth.passwordMismatch"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (password.length < 6) {
-      toast({
-        title: t("auth.loginError"),
-        description: t("auth.passwordTooShort"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const { data: hasPurchase, error: purchaseError } = await supabase.rpc("check_purchase_exists" as any, {
-        p_email: email,
-      });
-
-      if (purchaseError) {
-        console.error("Error checking purchase status:", purchaseError);
-        setIsLoading(false);
-        toast({
-          title: t("auth.signupError"),
-          description: t("common.error"),
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (hasPurchase === false) {
-        setLastPurchaseCheck(false);
-        setIsLoading(false);
-        setIsNoPurchaseDialogOpen(true);
-        return;
-      }
-
-      setLastPurchaseCheck(true);
-    } catch (purchaseErr) {
-      console.error("Exception checking purchase status:", purchaseErr);
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupError"),
-        description: t("common.error"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    await performSignup(true);
-  };
-
-  const handleContinueSignup = async () => {
-    setIsNoPurchaseDialogOpen(false);
-    setIsLoading(true);
-    await performSignup(lastPurchaseCheck);
-  };
-
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col font-sans selection:bg-orange-200 selection:text-orange-900 bg-[#fafafc]">
       <LanguageSelectionModal />
 
-      {/* CENA DO TOPO */}
       <CinematicRobotsAndRockets />
 
       <AmbientBackground mousePosition={mousePosition} />
@@ -439,206 +213,44 @@ const ThankYou = () => {
           </p>
         </div>
 
-        {/* CADASTRO DIRETO */}
+        {/* ACCESS SENT CONFIRMATION */}
         <div
           className={`mb-32 w-full max-w-md mx-auto relative group transition-all duration-1000 delay-300 transform ${isReady ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-rose-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500" />
 
-          <div className="bg-white/80 backdrop-blur-xl border border-white/50 p-6 rounded-3xl shadow-xl space-y-4">
-            <div className="text-center space-y-1">
-              <h3 className="text-lg font-semibold text-slate-800">
-                {t("thankYou.createAccountTitle", "Crie seu cadastro")}
-              </h3>
-              <p className="text-sm text-slate-500">
-                {t("thankYou.createAccountDesc", "Informe seus dados para liberar o acesso agora mesmo.")}
-              </p>
+          <div className="bg-white/80 backdrop-blur-xl border border-white/50 p-8 rounded-3xl shadow-xl space-y-5 text-center">
+            <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+              <Mail className="w-7 h-7 text-white" />
             </div>
 
-            <form onSubmit={handleSignup} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-name" className="flex items-center gap-2 text-sm text-slate-600">
-                  <User className="w-4 h-4 text-slate-400" />
-                  {t("auth.fullName")}
-                </Label>
-                <Input
-                  id="signup-name"
-                  type="text"
-                  placeholder={t("auth.fullNamePlaceholder")}
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="h-11 bg-white border-slate-200 focus:border-orange-500"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="signup-email" className="flex items-center gap-2 text-sm text-slate-600">
-                  <Mail className="w-4 h-4 text-slate-400" />
-                  {t("auth.email")}
-                </Label>
-                <Input
-                  id="signup-email"
-                  type="email"
-                  placeholder={t("auth.emailPlaceholder")}
-                  required
-                  readOnly={isPurchaseFlow}
-                  className={`h-11 border-slate-200 focus:border-orange-500 ${isPurchaseFlow ? "bg-slate-100 cursor-not-allowed opacity-80" : "bg-white"}`}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              {isPurchaseFlow && (
+            {userEmail ? (
+              <>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-confirm-email" className="flex items-center gap-2 text-sm text-slate-600">
-                    <Mail className="w-4 h-4 text-slate-400" />
-                    {t("auth.confirmEmail", "Confirme seu e-mail")}
-                  </Label>
-                  <Input
-                    id="signup-confirm-email"
-                    type="email"
-                    placeholder={t("auth.emailPlaceholder", "Digite seu e-mail novamente")}
-                    required
-                    value={confirmEmail}
-                    onChange={(e) => setConfirmEmail(e.target.value)}
-                    className="h-11 bg-white border-slate-200 focus:border-orange-500"
-                  />
+                  <h3 className="text-lg font-semibold text-slate-800">
+                    {t("thankYou.accessSentTitle", "Seu acesso foi enviado para o e-mail:")}
+                  </h3>
+                  <p className="text-base font-medium text-orange-600 bg-orange-50 px-4 py-2.5 rounded-xl break-all">
+                    {userEmail}
+                  </p>
                 </div>
-              )}
-
-              <div className="space-y-2">
-                <Label htmlFor="signup-password" className="flex items-center gap-2 text-sm text-slate-600">
-                  <Lock className="w-4 h-4 text-slate-400" />
-                  {t("auth.password")}
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="signup-password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder={t("auth.passwordPlaceholder")}
-                    required
-                    minLength={6}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="h-11 bg-white border-slate-200 focus:border-orange-500 pr-10"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-400" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-slate-400" />
-                    )}
-                  </Button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="signup-confirm" className="flex items-center gap-2 text-sm text-slate-600">
-                  <Lock className="w-4 h-4 text-slate-400" />
-                  {t("auth.confirmPassword")}
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="signup-confirm"
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder={t("auth.confirmPasswordPlaceholder")}
-                    required
-                    minLength={6}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="h-11 bg-white border-slate-200 focus:border-orange-500 pr-10"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 text-slate-400" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-slate-400" />
-                    )}
-                  </Button>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-11 text-base font-semibold rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/20 transition-all duration-300"
-              >
-                {isLoading ? t("common.loading") : t("thankYou.createAccountButton", "Criar cadastro e acessar")}
-              </Button>
-            </form>
+                <p className="text-sm text-slate-500">
+                  {t("thankYou.accessSentHint", "Verifique sua caixa de entrada e spam. Clique no link do e-mail para acessar a plataforma.")}
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="text-lg font-semibold text-slate-800">
+                  {t("thankYou.checkEmailTitle", "Verifique seu e-mail")}
+                </h3>
+                <p className="text-sm text-slate-500">
+                  {t("thankYou.checkEmailDesc", "Enviamos um link de acesso para o e-mail utilizado na compra. Verifique sua caixa de entrada e spam.")}
+                </p>
+              </>
+            )}
           </div>
         </div>
       </main>
-
-      <Dialog open={isNoPurchaseDialogOpen} onOpenChange={setIsNoPurchaseDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div style={{ height: "15px", width: "100%" }}></div>
-            <DialogTitle className="text-base font-semibold leading-snug">
-              {t("auth.noPurchaseTitle", "Compra nao identificada")}
-            </DialogTitle>
-            <DialogDescription className="text-sm leading-relaxed">
-              <ol className="mt-2 space-y-4">
-                {noPurchaseLines.map((line, index) => {
-                  const isLast = index === noPurchaseLines.length - 1;
-                  const isBreak = index === noPurchaseLines.length - 2;
-
-                  return (
-                    <li key={index} className="relative pl-8">
-                      <span className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-xs font-medium text-primary">
-                        {index + 1}
-                      </span>
-                      {!isLast && (
-                        <span
-                          className={`absolute left-3 top-7 h-full w-px ${
-                            isBreak
-                              ? "border-l-2 border-dashed border-muted-foreground/40"
-                              : "border-l-2 border-solid border-muted-foreground/25"
-                          }`}
-                        />
-                      )}
-                      {isBreak && (
-                        <span className="absolute left-2.5 top-[2.25rem] h-2 w-2 rounded-full border border-muted-foreground/40 bg-background" />
-                      )}
-                      <p className="text-sm text-muted-foreground">
-                        {line.includes(supportEmail) ? (
-                          <>
-                            {line.split(supportEmail)[0]}
-                            <a href={`mailto:${supportEmail}`} className="text-primary underline underline-offset-4">
-                              {supportEmail}
-                            </a>
-                            {line.split(supportEmail)[1] ?? ""}
-                          </>
-                        ) : (
-                          line
-                        )}
-                      </p>
-                    </li>
-                  );
-                })}
-              </ol>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex flex-col sm:flex-row gap-2">
-            <Button type="button" variant="outline" onClick={handleContinueSignup} className="w-full">
-              {t("auth.noPurchaseContinue", "Continuar cadastro")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       <style>{`
         @keyframes shimmer {
@@ -652,7 +264,6 @@ const ThankYou = () => {
           animation: gradient-x 6s ease infinite;
         }
 
-        /* Robô flutuando com Aceleração de Hardware */
         @keyframes robot-float {
           0%, 100% { transform: translate3d(0, 0, 0); }
           50% { transform: translate3d(0, -10px, 0); }
@@ -661,9 +272,6 @@ const ThankYou = () => {
           animation: robot-float 5s ease-in-out infinite;
         }
 
-        /* -------------------------------------------------------------
-           FOGUETE 1: O Clássico (Pouso inclinado padrão à esquerda)
-           ------------------------------------------------------------- */
         @keyframes rocket-1 {
           0%, 3% { transform: translate3d(-150vw, 30vh, 0) scale(3.5) rotate(45deg); opacity: 0; }
           4% { opacity: 1; }
@@ -672,10 +280,8 @@ const ThankYou = () => {
           19% { transform: translate3d(50vw, -120vh, 0) scale(1.5) rotate(-135deg); opacity: 0; }
           20% { opacity: 1; } 
           25% { transform: translate3d(0, -200px, 0) scale(1.2) rotate(-135deg); }
-          /* Pouso e freada */
           28% { transform: translate3d(0, -80px, 0) scale(1.05) rotate(-45deg); }
           30%, 85% { transform: translate3d(-8px, -42px, 0) scale(1) rotate(-35deg); opacity: 1;}
-          /* Decolagem */
           86% { transform: translate3d(-8px, -65px, 0) scale(1) rotate(-45deg); }
           91% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-45deg); opacity: 1; }
           92%, 100% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-45deg); opacity: 0; }
@@ -684,9 +290,6 @@ const ThankYou = () => {
           animation: rocket-1 40s ease-in-out infinite;
         }
 
-        /* -------------------------------------------------------------
-           FOGUETES 2: O Apressado (Pouso torto para a DIREITA)
-           ------------------------------------------------------------- */
         @keyframes rocket-2 {
           0%, 3% { transform: translate3d(-150vw, 30vh, 0) scale(3.5) rotate(45deg); opacity: 0; }
           4% { opacity: 1; }
@@ -695,10 +298,8 @@ const ThankYou = () => {
           19% { transform: translate3d(50vw, -120vh, 0) scale(1.5) rotate(-135deg); opacity: 0; }
           20% { opacity: 1; } 
           25% { transform: translate3d(0, -200px, 0) scale(1.2) rotate(-135deg); }
-          /* Pouso diferente: Freia mais torto e encosta a barriga na cabeça do robô */
           28% { transform: translate3d(0, -80px, 0) scale(1.05) rotate(-10deg); }
           30%, 85% { transform: translate3d(10px, -35px, 0) scale(0.95) rotate(20deg); opacity: 1;}
-          /* Decolagem */
           86% { transform: translate3d(10px, -65px, 0) scale(0.95) rotate(0deg); }
           91% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-20deg); opacity: 1; }
           92%, 100% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-20deg); opacity: 0; }
@@ -707,9 +308,6 @@ const ThankYou = () => {
           animation: rocket-2 40s ease-in-out infinite;
         }
 
-        /* -------------------------------------------------------------
-           FOGUETE 3: O Pesadão (Pouso vertical firme)
-           ------------------------------------------------------------- */
         @keyframes rocket-3 {
           0%, 3% { transform: translate3d(-150vw, 30vh, 0) scale(3.5) rotate(45deg); opacity: 0; }
           4% { opacity: 1; }
@@ -718,10 +316,8 @@ const ThankYou = () => {
           19% { transform: translate3d(50vw, -120vh, 0) scale(1.5) rotate(-135deg); opacity: 0; }
           20% { opacity: 1; } 
           25% { transform: translate3d(0, -200px, 0) scale(1.2) rotate(-135deg); }
-          /* Pouso diferente: Vem reto de cima e quase levanta o bico totalmente */
           28% { transform: translate3d(0, -90px, 0) scale(1.1) rotate(-60deg); }
           30%, 85% { transform: translate3d(0, -48px, 0) scale(1.05) rotate(-5deg); opacity: 1;}
-          /* Decolagem */
           86% { transform: translate3d(0, -65px, 0) scale(1.05) rotate(-45deg); }
           91% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-45deg); opacity: 1; }
           92%, 100% { transform: translate3d(0, -150vh, 0) scale(1.2) rotate(-45deg); opacity: 0; }
