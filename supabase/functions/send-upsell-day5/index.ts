@@ -142,8 +142,8 @@ serve(async (req) => {
       .select("id")
       .single();
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const pixel = logEntry ? `<img src="${supabaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
+    const pixelBaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const pixel = logEntry ? `<img src="${pixelBaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>` : "";
     const htmlBase = emailHtml(profile?.full_name || email.split("@")[0], language, target);
     const html = htmlBase.includes("</body>") ? htmlBase.replace("</body>", `${pixel}</body>`) : (htmlBase + pixel);
     await sendEmailViaResend(email, subject, html);
