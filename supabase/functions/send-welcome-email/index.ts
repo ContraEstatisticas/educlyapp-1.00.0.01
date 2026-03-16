@@ -8,7 +8,7 @@ const corsHeaders = {
 
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   pt: {
-    subject: "🎉 Bem-vindo à Educly!",
+    subject: "🔓 Acesso Liberado — Educly",
     heroTitle: "Sua conta está pronta.",
     heroSubtitle: "Clique no botão abaixo para entrar direto na sua conta, sem precisar de senha.",
     cta: "Entrar na Minha Conta",
