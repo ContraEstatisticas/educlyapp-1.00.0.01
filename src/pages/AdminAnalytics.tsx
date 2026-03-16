@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Shield, RefreshCw, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { Card } from "@/components/ui/card";
+import { Calendar } from "@/components/ui/calendar";
 import { AdminGuard } from "@/components/AdminGuard";
 import { KPICards } from "@/components/admin/KPICards";
 import { UserGrowthChart } from "@/components/admin/UserGrowthChart";
@@ -19,6 +23,7 @@ import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
 import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
+import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
