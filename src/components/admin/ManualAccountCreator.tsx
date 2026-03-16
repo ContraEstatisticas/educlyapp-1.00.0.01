@@ -45,13 +45,30 @@ export const ManualAccountCreator = () => {
         return;
       }
 
-      // Step 2: Send magic link
-      const linkResp = await fetch(`${base}/functions/v1/resend-magic-link`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({ email: email.trim() }),
-      });
-      const linkData = await linkResp.json();
+      // Step 2: Send email (with password for new accounts, just link for existing)
+      let linkData: any;
+      if (createData.account_created && createData.generated_password) {
+        const welcomeResp = await fetch(`${base}/functions/v1/send-welcome-email`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({
+            email: email.trim(),
+            userName: name.trim() || "Aluno",
+            language,
+            mode: "magic_link",
+            access_token: createData.access_token,
+            generated_password: createData.generated_password,
+          }),
+        });
+        linkData = await welcomeResp.json();
+      } else {
+        const linkResp = await fetch(`${base}/functions/v1/resend-magic-link`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ email: email.trim() }),
+        });
+        linkData = await linkResp.json();
+      }
 
       setResult({
         success: true,
