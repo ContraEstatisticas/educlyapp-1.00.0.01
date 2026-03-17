@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Bot, User, Download } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 
 interface ChatMessageProps {
@@ -72,7 +73,24 @@ export const ChatMessage = ({ role, content, isStreaming, imageUrl: propImageUrl
           <p className="text-sm whitespace-pre-wrap leading-relaxed break-words">{content}</p>
         ) : (
           <div className="text-sm leading-relaxed prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-headings:my-2 prose-strong:text-foreground prose-p:text-foreground break-words overflow-hidden">
-            <ReactMarkdown>{text}</ReactMarkdown>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                a: ({ href, children, ...props }) => (
+                  <a
+                    {...props}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-primary underline underline-offset-2 break-all"
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {text}
+            </ReactMarkdown>
             {isStreaming && (
               <span className="inline-block w-1.5 h-4 ml-0.5 bg-current animate-pulse rounded" />
             )}
