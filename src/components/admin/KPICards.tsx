@@ -190,7 +190,7 @@ export const KPICards = () => {
       const { count: premiumUsers } = await supabase
         .from("user_premium_access")
         .select("user_id", { count: "exact", head: true })
-        .eq("is_premium", true);
+        .in("plan_type", ["premium", "base"]);
 
       // Billing events - include payload for iteration/recurrence detection
       const { data: billingEvents } = await supabase
@@ -222,31 +222,6 @@ export const KPICards = () => {
           eventType.includes("COMPLETE");
         return eventDate === todayKey && isPaymentEvent;
       }) || [];
-
-      // New purchases today (iteration = 1 OR oneoff OR Hotmart recurrence_number = 1)
-      const newPurchasesToday = purchasesTodayData.filter((e) => {
-        const payload = e.payload as Record<string, unknown> | null;
-        if (!payload) return true; // If no payload, count as new
-
-        // Funnelfox: subscription with iteration = 1 (initial trial)
-        const subscription = payload.subscription as Record<string, unknown> | undefined;
-        const ffIteration = subscription?.iteration;
-        if (ffIteration === 1) return true;
-
-        // Funnelfox: oneoff (upsell/one-time purchase)
-        if (payload.oneoff) return true;
-
-        // Hotmart: recurrence_number = 1
-        const data = payload.data as Record<string, unknown> | undefined;
-        const purchase = data?.purchase as Record<string, unknown> | undefined;
-        const hotmartRecurrence = purchase?.recurrence_number;
-        if (hotmartRecurrence === 1) return true;
-
-        // If no iteration/recurrence info, assume it's new
-        if (!ffIteration && !hotmartRecurrence) return true;
-
-        return false;
-      }).length;
 
       // Renewals today (iteration > 1 OR Hotmart recurrence_number > 1)
       const renewalsTodayCount = purchasesTodayData.filter((e) => {
@@ -328,7 +303,6 @@ export const KPICards = () => {
         refunds,
 
         settled,
-        newPurchasesToday,
         renewalsTodayCount,
         baseUsers,
         freelancerUsers,
@@ -464,21 +438,13 @@ export const KPICards = () => {
           title="Financeiro"
           description="Receita e transações"
         />
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <AdminKPICard
             title="Usuários Premium"
             value={kpis?.premiumUsers || 0}
             icon={<Crown className="h-5 w-5" />}
             color="success"
-            tooltip="Total de registros com is_premium=true em user_premium_access"
-          />
-          <AdminKPICard
-            title="Novos Hoje"
-            value={kpis?.newPurchasesToday || 0}
-            icon={<DollarSign className="h-5 w-5" />}
-            description="Trials + upsells"
-            color="success"
-            tooltip="Pagamentos iniciais hoje: trials pagos (iteration=1), compras únicas (oneoff), ou primeira compra Hotmart (recurrence_number=1)"
+            tooltip="Total de usuários em user_premium_access com plan_type igual a premium ou base"
           />
           <AdminKPICard
             title="Renovações Hoje"
@@ -600,3 +566,4 @@ export const KPICards = () => {
     </div>
   );
 };
+
