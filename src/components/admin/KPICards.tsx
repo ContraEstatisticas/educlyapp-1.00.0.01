@@ -37,6 +37,118 @@ import {
   getAdminTodayKey,
 } from "@/lib/adminTimeZone";
 
+type BillingMetricEvent = {
+  email: string;
+  event_type: string;
+  created_at: string | null;
+  payload: Record<string, unknown> | null;
+  status: string;
+};
+
+const normalizeBillingEmail = (email: string | null | undefined) =>
+  (email || "").trim().replace(/\.+$/, "").toLowerCase();
+
+const getBillingWebhookSource = (payload: Record<string, unknown> | null | undefined) =>
+  typeof payload?._webhook_source === "string" ? payload._webhook_source.toLowerCase() : null;
+
+const getBillingSubscription = (payload: Record<string, unknown> | null | undefined) =>
+  (payload?.subscription as Record<string, unknown> | undefined) || undefined;
+
+const getHotmartPurchase = (payload: Record<string, unknown> | null | undefined) => {
+  const data = payload?.data as Record<string, unknown> | undefined;
+  return (data?.purchase as Record<string, unknown> | undefined) || undefined;
+};
+
+const getFunnelfoxIteration = (payload: Record<string, unknown> | null | undefined) => {
+  const iteration = getBillingSubscription(payload)?.iteration;
+  return typeof iteration === "number"
+    ? iteration
+    : typeof iteration === "string"
+      ? Number(iteration)
+      : null;
+};
+
+const getHotmartRecurrenceNumber = (payload: Record<string, unknown> | null | undefined) => {
+  const recurrenceNumber = getHotmartPurchase(payload)?.recurrence_number;
+  return typeof recurrenceNumber === "number"
+    ? recurrenceNumber
+    : typeof recurrenceNumber === "string"
+      ? Number(recurrenceNumber)
+      : null;
+};
+
+const getHotmartTransactionId = (payload: Record<string, unknown> | null | undefined) => {
+  const transactionId = getHotmartPurchase(payload)?.transaction;
+  return typeof transactionId === "string" && transactionId.length > 0 ? transactionId : null;
+};
+
+const getHotmartApprovedDate = (payload: Record<string, unknown> | null | undefined) => {
+  const approvedDate = getHotmartPurchase(payload)?.approved_date;
+  return typeof approvedDate === "string" && approvedDate.length > 0 ? approvedDate : null;
+};
+
+const getHotmartOrderDate = (payload: Record<string, unknown> | null | undefined) => {
+  const orderDate = getHotmartPurchase(payload)?.order_date;
+  return typeof orderDate === "string" && orderDate.length > 0 ? orderDate : null;
+};
+
+const isBillingPaymentEvent = (eventType: string) => {
+  const normalizedType = eventType.toUpperCase();
+  return normalizedType.includes("SETTLED") ||
+    normalizedType.includes("APPROVED") ||
+    normalizedType.includes("COMPLETE");
+};
+
+const isManualBillingImport = (payload: Record<string, unknown> | null | undefined) =>
+  getBillingWebhookSource(payload) === "manual_csv_import";
+
+const isHotmartBillingEvent = (event: BillingMetricEvent) => {
+  const payload = event.payload;
+  const source = getBillingWebhookSource(payload);
+  const purchase = getHotmartPurchase(payload);
+  const normalizedType = event.event_type.toUpperCase();
+
+  return !isManualBillingImport(payload) && (
+    source === "hotmart" ||
+    normalizedType.startsWith("PURCHASE_") ||
+    !!purchase
+  );
+};
+
+const getRenewalDedupKey = (event: BillingMetricEvent, todayKey: string) => {
+  const payload = event.payload;
+  const normalizedEmail = normalizeBillingEmail(event.email);
+  const source = getBillingWebhookSource(payload);
+
+  if (isHotmartBillingEvent(event)) {
+    const transactionId = getHotmartTransactionId(payload);
+    if (transactionId) return `hotmart:tx:${transactionId}`;
+
+    const approvedDate = getHotmartApprovedDate(payload);
+    if (approvedDate) return `hotmart:approved:${normalizedEmail}:${approvedDate}`;
+
+    const orderDate = getHotmartOrderDate(payload);
+    if (orderDate) return `hotmart:order:${normalizedEmail}:${orderDate}`;
+
+    const recurrenceNumber = getHotmartRecurrenceNumber(payload);
+    if (recurrenceNumber) return `hotmart:email-recurrence:${normalizedEmail}:${recurrenceNumber}:${todayKey}`;
+
+    return `hotmart:email-day:${normalizedEmail}:${todayKey}`;
+  }
+
+  const subscriptionId = getBillingSubscription(payload)?.id;
+  if (typeof subscriptionId === "string" && subscriptionId.length > 0) {
+    return `${source || "billing"}:subscription:${subscriptionId}`;
+  }
+
+  const iteration = getFunnelfoxIteration(payload);
+  if (iteration) {
+    return `${source || "billing"}:email-iteration:${normalizedEmail}:${iteration}:${todayKey}`;
+  }
+
+  return `${source || "billing"}:email-event:${normalizedEmail}:${event.event_type}:${todayKey}`;
+};
+
 export const KPICards = () => {
   const { toast } = useToast();
   const [errorRangeDays, setErrorRangeDays] = useState("7");
@@ -195,7 +307,7 @@ export const KPICards = () => {
       // Billing events - include payload for iteration/recurrence detection
       const { data: billingEvents } = await supabase
         .from("billing_event_logs")
-        .select("event_type, created_at, payload, status")
+        .select("email, event_type, created_at, payload, status")
         .gte("created_at", sevenDaysAgoStartSaoPaulo);
 
       const chargebacks = billingEvents?.filter((e) =>
@@ -208,39 +320,70 @@ export const KPICards = () => {
 
 
       const settled = billingEvents?.filter((e) =>
-        e.event_type.toUpperCase().includes("SETTLED") ||
-        e.event_type.toUpperCase().includes("APPROVED") ||
-        e.event_type.toUpperCase().includes("COMPLETE")
+        isBillingPaymentEvent(e.event_type)
       ).length || 0;
 
       // Filter payment events for today
-      const purchasesTodayData = billingEvents?.filter((e) => {
+      const purchasesTodayData: BillingMetricEvent[] = (billingEvents?.filter((e) => {
         const eventDate = e.created_at ? getAdminDateKey(e.created_at) : null;
-        const eventType = e.event_type.toUpperCase();
-        const isPaymentEvent = eventType.includes("SETTLED") ||
-          eventType.includes("APPROVED") ||
-          eventType.includes("COMPLETE");
-        return eventDate === todayKey && isPaymentEvent;
-      }) || [];
+        return eventDate === todayKey && isBillingPaymentEvent(e.event_type);
+      }) as BillingMetricEvent[]) || [];
 
-      // Renewals today (iteration > 1 OR Hotmart recurrence_number > 1)
-      const renewalsTodayCount = purchasesTodayData.filter((e) => {
-        const payload = e.payload as Record<string, unknown> | null;
-        if (!payload) return false;
+      const todayHotmartEvents = purchasesTodayData.filter((event) => isHotmartBillingEvent(event));
+      const todayHotmartRawEmails = Array.from(new Set(
+        todayHotmartEvents
+          .map((event) => event.email)
+          .filter((email): email is string => typeof email === "string" && email.length > 0)
+      ));
 
-        // Funnelfox: iteration > 1 (renewal after trial)
-        const subscription = payload.subscription as Record<string, unknown> | undefined;
-        const ffIteration = subscription?.iteration as number | undefined;
-        if (ffIteration && ffIteration > 1) return true;
+      let priorHotmartPaymentEmails = new Set<string>();
 
-        // Hotmart: recurrence_number > 1
-        const data = payload.data as Record<string, unknown> | undefined;
-        const purchase = data?.purchase as Record<string, unknown> | undefined;
-        const hotmartRecurrence = purchase?.recurrence_number as number | undefined;
-        if (hotmartRecurrence && hotmartRecurrence > 1) return true;
+      if (todayHotmartRawEmails.length > 0) {
+        const hotmartHistoryLookbackStart = getAdminDaysAgoStartIso(365);
+        const { data: priorHotmartEvents } = await supabase
+          .from("billing_event_logs")
+          .select("email, event_type, created_at, payload, status")
+          .in("email", todayHotmartRawEmails)
+          .lt("created_at", todayStartSaoPaulo)
+          .gte("created_at", hotmartHistoryLookbackStart);
 
-        return false;
-      }).length;
+        priorHotmartPaymentEmails = new Set(
+          ((priorHotmartEvents as BillingMetricEvent[] | null) || [])
+            .filter((event) => isHotmartBillingEvent(event) && isBillingPaymentEvent(event.event_type))
+            .map((event) => normalizeBillingEmail(event.email))
+            .filter(Boolean)
+        );
+      }
+
+      const renewalKeys = new Set<string>();
+
+      purchasesTodayData.forEach((event) => {
+        const payload = event.payload;
+        if (isManualBillingImport(payload)) return;
+
+        const ffIteration = getFunnelfoxIteration(payload);
+        if (ffIteration && ffIteration > 1) {
+          renewalKeys.add(getRenewalDedupKey(event, todayKey));
+          return;
+        }
+
+        if (!isHotmartBillingEvent(event)) return;
+
+        const hotmartRecurrence = getHotmartRecurrenceNumber(payload);
+        if (hotmartRecurrence && hotmartRecurrence > 1) {
+          renewalKeys.add(getRenewalDedupKey(event, todayKey));
+          return;
+        }
+
+        if (
+          hotmartRecurrence == null &&
+          priorHotmartPaymentEmails.has(normalizeBillingEmail(event.email))
+        ) {
+          renewalKeys.add(getRenewalDedupKey(event, todayKey));
+        }
+      });
+
+      const renewalsTodayCount = renewalKeys.size;
 
       // Product access - count UNIQUE users per product type
       const { data: productAccess } = await supabase
@@ -450,9 +593,9 @@ export const KPICards = () => {
             title="Renovações Hoje"
             value={kpis?.renewalsTodayCount || 0}
             icon={<DollarSign className="h-5 w-5" />}
-            description="Trials convertidos"
+            description="Confirmadas + inferidas"
             color="info"
-            tooltip="Renovações hoje: pagamentos onde iteration>1 (Funnelfox) ou recurrence_number>1 (Hotmart) - trials que converteram para preço cheio"
+            tooltip="Renovacoes hoje: Funnelfox com iteration>1 e Hotmart com recurrence_number>1. Quando a Hotmart nao envia recurrence_number, o sistema infere renovacao pelo historico anterior do mesmo email e deduplica eventos repetidos."
           />
           <AdminKPICard
             title="Pagamentos"
@@ -566,4 +709,6 @@ export const KPICards = () => {
     </div>
   );
 };
+
+
 
