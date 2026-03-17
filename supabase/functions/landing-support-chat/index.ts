@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+﻿import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -12,21 +12,168 @@ const MAX_REQUESTS_PER_WINDOW = 15; // Max requests per IP per hour
 
 // Language names for instruction
 const languageNames: Record<string, string> = {
-  pt: 'Português',
+  pt: 'PortuguÃªs',
   en: 'English',
-  es: 'Español',
-  fr: 'Français',
+  es: 'EspaÃ±ol',
+  fr: 'FranÃ§ais',
   de: 'Deutsch',
   it: 'Italiano',
-  ru: 'Русский',
-  zh: '中文',
-  ja: '日本語',
-  ko: '한국어',
-  ar: 'العربية',
-  hi: 'हिन्दी',
-  tr: 'Türkçe',
+  ru: 'Ð ÑƒÑÑÐºÐ¸Ð¹',
+  zh: 'ä¸­æ–‡',
+  ja: 'æ—¥æœ¬èªž',
+  ko: 'í•œêµ­ì–´',
+  ar: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©',
+  hi: 'à¤¹à¤¿à¤¨à¥à¤¦à¥€',
+  tr: 'TÃ¼rkÃ§e',
   pl: 'Polski',
   nl: 'Nederlands'
+};
+
+const QUICK_REPLY_SUPPORTED_LANGS = [
+  "pt",
+  "en",
+  "es",
+  "fr",
+  "de",
+  "it",
+  "ru",
+  "zh",
+  "ja",
+  "ko",
+  "ar",
+  "hi",
+  "tr",
+  "pl",
+  "nl",
+] as const;
+
+type QuickReplyLang = (typeof QUICK_REPLY_SUPPORTED_LANGS)[number];
+
+type QuickReplyRule = {
+  id: string;
+  keywords: string[];
+  responses: Record<QuickReplyLang, string>;
+};
+
+const buildQuickReplyResponses = (
+  partial: Partial<Record<QuickReplyLang, string>> & Pick<Record<QuickReplyLang, string>, "pt" | "en" | "es">
+): Record<QuickReplyLang, string> => {
+  const output = {} as Record<QuickReplyLang, string>;
+  for (const lang of QUICK_REPLY_SUPPORTED_LANGS) {
+    output[lang] = partial[lang] || partial.en;
+  }
+  return output;
+};
+
+const LANDING_QUICK_REPLY_RULES: QuickReplyRule[] = [
+  {
+    id: "cancel_refund_billing",
+    keywords: [
+      "cancelamento",
+      "cancelar",
+      "reembolso",
+      "refund",
+      "chargeback",
+      "cobranca",
+      "assinatura",
+      "unsubscribe",
+      "billing",
+      "pagamento",
+    ],
+    responses: buildQuickReplyResponses({
+      pt: "Para cancelamento, reembolso ou cobranca, fale com nosso suporte humano: https://educly.app/contato . Se preferir, envie email para contact@educly.app.",
+      en: "For cancellation, refunds, or billing, please contact our human support: https://educly.app/contato . You can also email contact@educly.app.",
+      es: "Para cancelacion, reembolso o cobros, contacta con soporte humano: https://educly.app/contato . Tambien puedes escribir a contact@educly.app.",
+      fr: "Pour annulation, remboursement ou facturation, contactez notre support humain: https://educly.app/contato . Vous pouvez aussi ecrire a contact@educly.app.",
+      de: "Fur Kundigung, Erstattung oder Abrechnung kontaktieren Sie bitte unseren Support: https://educly.app/contato . Sie konnen auch an contact@educly.app schreiben.",
+      it: "Per cancellazione, rimborso o fatturazione, contatta il nostro supporto: https://educly.app/contato . Puoi anche scrivere a contact@educly.app.",
+      ru: "Po voprosam otmeny, vozvrata ili oplaty obratites v podderzhku: https://educly.app/contato . Takzhe mozhno napisat na contact@educly.app.",
+      tr: "Iptal, iade veya faturalama icin lutfen destek ekibimizle iletisime gecin: https://educly.app/contato . Ayrica contact@educly.app adresine yazabilirsiniz.",
+      pl: "W sprawie anulowania, zwrotu lub platnosci skontaktuj sie z naszym wsparciem: https://educly.app/contato . Mozesz tez napisac na contact@educly.app.",
+      nl: "Voor annulering, terugbetaling of facturatie neem contact op met support: https://educly.app/contato . Je kunt ook mailen naar contact@educly.app.",
+    }),
+  },
+  {
+    id: "pricing_plan",
+    keywords: ["preco", "precos", "valor", "plano", "planos", "price", "pricing", "cost", "cuanto cuesta"],
+    responses: buildQuickReplyResponses({
+      pt: "Os valores e planos ficam em https://educly.app/plan . Se quiser, eu te explico qual plano combina melhor com seu objetivo.",
+      en: "You can check pricing and plans at https://educly.app/plan . If you want, I can help you choose the best plan for your goal.",
+      es: "Puedes ver precios y planes en https://educly.app/plan . Si quieres, tambien puedo ayudarte a elegir el mejor plan para tu objetivo.",
+    }),
+  },
+  {
+    id: "support_contact",
+    keywords: ["suporte", "support", "atendente", "humano", "email", "contato", "contact", "ajuda humana"],
+    responses: buildQuickReplyResponses({
+      pt: "Voce pode falar com nosso suporte em https://educly.app/contato ou por email em contact@educly.app.",
+      en: "You can reach our support team at https://educly.app/contato or by email at contact@educly.app.",
+      es: "Puedes hablar con soporte en https://educly.app/contato o por email en contact@educly.app.",
+    }),
+  },
+  {
+    id: "greeting",
+    keywords: ["oi", "ola", "hello", "hi", "hey", "e ai", "eai", "buenas", "hola"],
+    responses: buildQuickReplyResponses({
+      pt: "Oi! Eu sou o EDI. Posso te ajudar com planos, suporte e duvidas sobre a plataforma. Me diz o que voce precisa.",
+      en: "Hi! I am EDI. I can help with plans, support, and platform questions. Tell me what you need.",
+      es: "Hola! Soy EDI. Puedo ayudarte con planes, soporte y dudas de la plataforma. Dime que necesitas.",
+    }),
+  },
+];
+
+const normalizeKeywordText = (text: string): string =>
+  text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const getQuickReplyLanguage = (locale: string): QuickReplyLang => {
+  const normalized = locale.toLowerCase().split("-")[0].split("_")[0];
+  if ((QUICK_REPLY_SUPPORTED_LANGS as readonly string[]).includes(normalized)) return normalized as QuickReplyLang;
+  return "en";
+};
+
+const getLandingKeywordQuickReply = (
+  userMessagesText: string,
+  locale: string
+): { ruleId: string; response: string } | null => {
+  if (!userMessagesText) return null;
+
+  const normalizedMessage = normalizeKeywordText(userMessagesText);
+  if (!normalizedMessage) return null;
+
+  const quickReplyLanguage = getQuickReplyLanguage(locale);
+
+  for (const rule of LANDING_QUICK_REPLY_RULES) {
+    const matched = rule.keywords.some((keyword) => {
+      const normalizedKeyword = normalizeKeywordText(keyword);
+      if (!normalizedKeyword) return false;
+
+      const keywordPattern = normalizedKeyword
+        .split(" ")
+        .filter(Boolean)
+        .map((token) => escapeRegExp(token))
+        .join("\\s+");
+      const boundaryRegex = new RegExp(`(^|\\s)${keywordPattern}(?=\\s|$)`);
+
+      return boundaryRegex.test(normalizedMessage) || normalizedMessage.includes(normalizedKeyword);
+    });
+
+    if (matched) {
+      return {
+        ruleId: rule.id,
+        response: rule.responses[quickReplyLanguage] || rule.responses.en,
+      };
+    }
+  }
+
+  return null;
 };
 
 const getSystemPrompt = (language: string): string => {
@@ -51,24 +198,24 @@ Help visitors understand Educly and guide them to become students.
 - We always prioritize student development and encourage evolution
 
 ## RULES
-✅ Be friendly, helpful and human-like
-✅ Answer clearly and concisely
-✅ Highlight Educly benefits
-✅ If asked about pricing, tell them to check the bottom of the landing page for plans
-✅ Encourage starting the challenge
-✅ CRITICAL: Always detect the user's language from their message OR from the browser detection
-✅ CRITICAL: Always respond in the SAME LANGUAGE the user writes to you - if they write in English, respond in English; if they write in Spanish, respond in Spanish; etc.
-✅ Avoid being pushy - make it clear you're support for questions. Sell as a last resort!
-✅ Talk about our AI hub and premium area with AI jobs
+âœ… Be friendly, helpful and human-like
+âœ… Answer clearly and concisely
+âœ… Highlight Educly benefits
+âœ… If asked about pricing, tell them to check the bottom of the landing page for plans
+âœ… Encourage starting the challenge
+âœ… CRITICAL: Always detect the user's language from their message OR from the browser detection
+âœ… CRITICAL: Always respond in the SAME LANGUAGE the user writes to you - if they write in English, respond in English; if they write in Spanish, respond in Spanish; etc.
+âœ… Avoid being pushy - make it clear you're support for questions. Sell as a last resort!
+âœ… Talk about our AI hub and premium area with AI jobs
 
 ## HUMAN CONTACT
-⚠️ If the user wants to talk to a human, personalized service, or more detailed support, direct them to email: contact@educly.app
+âš ï¸ If the user wants to talk to a human, personalized service, or more detailed support, direct them to email: contact@educly.app
 - Say something like: "To speak with our human support team, send an email to contact@educly.app and we'll respond within 24-48 hours."
 
-❌ NEVER make up information
-❌ NEVER talk about tools outside Educly
-❌ NEVER be aggressive in selling
-❌ NEVER mention competitors or similar apps
+âŒ NEVER make up information
+âŒ NEVER talk about tools outside Educly
+âŒ NEVER be aggressive in selling
+âŒ NEVER mention competitors or similar apps
 
 **CRITICAL LANGUAGE RULE: The user's browser language is ${langName}, but MORE IMPORTANTLY, you MUST respond in whatever language the user actually writes their message in. If they write in Portuguese, respond in Portuguese. If they write in French, respond in French. Always match the user's message language.**`;
 };
@@ -169,11 +316,6 @@ serve(async (req) => {
     
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
 
-    if (!GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY not configured");
-      return buildSseFallbackResponse("Serviço de IA temporariamente indisponível. Tente novamente mais tarde.");
-    }
-
     // Update rate limit counter (upsert)
     if (rateLimitData) {
       // Update existing record
@@ -194,6 +336,23 @@ serve(async (req) => {
         }, {
           onConflict: 'ip_address'
         });
+    }
+
+    const recentUserMessagesText = messages
+      .filter((m: { role: string; content: string }) => m.role === "user")
+      .slice(-3)
+      .map((m: { content: string }) => m.content)
+      .join(" ");
+
+    const quickReplyMatch = getLandingKeywordQuickReply(recentUserMessagesText, locale);
+    if (quickReplyMatch) {
+      console.log(`Returning landing quick reply rule=${quickReplyMatch.ruleId} locale=${locale} ip=${clientIP}`);
+      return buildSseFallbackResponse(quickReplyMatch.response);
+    }
+
+    if (!GEMINI_API_KEY) {
+      console.error("GEMINI_API_KEY not configured");
+      return buildSseFallbackResponse("Servico de IA temporariamente indisponivel. Tente novamente mais tarde.");
     }
 
     console.log("Processing support chat request with locale:", locale, "from IP:", clientIP);
@@ -253,7 +412,7 @@ serve(async (req) => {
       }
 
       // Fallback to a synthetic SSE response to avoid frontend runtime failures/blank screens.
-      const fallbackText = "Não foi possível processar sua mensagem no momento. Tente novamente em instantes.";
+      const fallbackText = "NÃ£o foi possÃ­vel processar sua mensagem no momento. Tente novamente em instantes.";
       return buildSseFallbackResponse(fallbackText);
     }
 
@@ -267,3 +426,4 @@ serve(async (req) => {
     return buildSseFallbackResponse("Ocorreu um erro inesperado. Por favor, tente novamente.");
   }
 });
+
