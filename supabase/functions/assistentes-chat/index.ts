@@ -251,6 +251,8 @@ const normalizeKeywordText = (text: string): string =>
     .replace(/\s+/g, " ")
     .trim();
 
+const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 const getQuickReplyLanguage = (language: string): QuickReplyLang => {
   const normalized = language.toLowerCase().split("-")[0].split("_")[0];
   if ((QUICK_REPLY_SUPPORTED_LANGS as readonly string[]).includes(normalized)) return normalized as QuickReplyLang;
@@ -261,14 +263,23 @@ const getEdiKeywordQuickReply = (lastUserMessage: string, language: string): str
   if (!lastUserMessage) return null;
   const normalizedMessage = normalizeKeywordText(lastUserMessage);
   if (!normalizedMessage) return null;
-  const paddedMessage = ` ${normalizedMessage} `;
 
   const quickReplyLanguage = getQuickReplyLanguage(language);
 
   for (const rule of EDI_QUICK_REPLY_RULES) {
     const matched = rule.keywords.some((keyword) => {
       const normalizedKeyword = normalizeKeywordText(keyword);
-      return paddedMessage.includes(` ${normalizedKeyword} `);
+      if (!normalizedKeyword) return false;
+
+      // Prefer exact word/phrase boundaries, but keep a substring fallback for resilience.
+      const keywordPattern = normalizedKeyword
+        .split(" ")
+        .filter(Boolean)
+        .map((token) => escapeRegExp(token))
+        .join("\\s+");
+      const boundaryRegex = new RegExp(`(^|\\s)${keywordPattern}(?=\\s|$)`);
+
+      return boundaryRegex.test(normalizedMessage) || normalizedMessage.includes(normalizedKeyword);
     });
     if (matched) {
       return rule.responses[quickReplyLanguage] || rule.responses.en;
@@ -370,12 +381,16 @@ serve(async (req) => {
     }
 
     const messages = body.messages;
-    const aiType = body.aiType || "chatgpt";
+    const aiType = String(body.aiType || "chatgpt").toLowerCase();
     const language = body.language || "pt";
-    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
+    const recentUserMessagesText = messages
+      .filter((m) => m.role === "user")
+      .slice(-3)
+      .map((m) => m.content)
+      .join(" ");
 
     if (aiType === "edi") {
-      const quickReply = getEdiKeywordQuickReply(lastUserMessage, language);
+      const quickReply = getEdiKeywordQuickReply(recentUserMessagesText, language);
       if (quickReply) {
         console.log("Returning quick EDI reply without AI token usage");
         return createStreamingQuickReplyResponse(quickReply);
