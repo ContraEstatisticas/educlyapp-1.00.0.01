@@ -8,7 +8,7 @@ const corsHeaders = {
 
 // Rate limiting configuration
 const RATE_LIMIT_WINDOW_MS = 3600000; // 1 hour in milliseconds
-const MAX_REQUESTS_PER_WINDOW = 15; // Max requests per IP per hour
+const MAX_REQUESTS_PER_WINDOW = 60; // Max AI requests per IP per hour
 
 // Language names for instruction
 const languageNames: Record<string, string> = {
@@ -522,29 +522,6 @@ serve(async (req) => {
                      req.headers.get('x-real-ip') || 
                      'unknown';
 
-    // Check rate limit
-    const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
-    
-    const { data: rateLimitData, error: rateLimitError } = await supabase
-      .from('landing_chat_rate_limits')
-      .select('request_count, window_start')
-      .eq('ip_address', clientIP)
-      .gte('window_start', windowStart)
-      .maybeSingle();
-
-    if (rateLimitError) {
-      console.error("Rate limit check error:", rateLimitError);
-      // Continue without rate limiting if there's an error checking
-    } else if (rateLimitData && rateLimitData.request_count >= MAX_REQUESTS_PER_WINDOW) {
-      console.log(`Rate limit exceeded for IP: ${clientIP}`);
-      return new Response(JSON.stringify({ 
-        error: "Too many requests. Please try again later." 
-      }), {
-        status: 429,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
     // Parse and validate request body
     const body = await req.json();
 
@@ -585,6 +562,38 @@ serve(async (req) => {
     
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
 
+    const lastUserMessage =
+      [...messages].reverse().find((m: { role: string; content: string }) => m.role === "user")?.content || "";
+
+    const quickReplyMatch = getLandingKeywordQuickReply(lastUserMessage, locale);
+    if (quickReplyMatch) {
+      console.log(`Returning landing quick reply rule=${quickReplyMatch.ruleId} locale=${locale} ip=${clientIP}`);
+      return buildSseFallbackResponse(quickReplyMatch.response);
+    }
+
+    // Check rate limit only for requests that will actually hit the AI provider.
+    const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
+
+    const { data: rateLimitData, error: rateLimitError } = await supabase
+      .from('landing_chat_rate_limits')
+      .select('request_count, window_start')
+      .eq('ip_address', clientIP)
+      .gte('window_start', windowStart)
+      .maybeSingle();
+
+    if (rateLimitError) {
+      console.error("Rate limit check error:", rateLimitError);
+      // Continue without rate limiting if there's an error checking
+    } else if (rateLimitData && rateLimitData.request_count >= MAX_REQUESTS_PER_WINDOW) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(JSON.stringify({ 
+        error: "Too many AI requests. Please try again later." 
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Update rate limit counter (upsert)
     if (rateLimitData) {
       // Update existing record
@@ -605,15 +614,6 @@ serve(async (req) => {
         }, {
           onConflict: 'ip_address'
         });
-    }
-
-    const lastUserMessage =
-      [...messages].reverse().find((m: { role: string; content: string }) => m.role === "user")?.content || "";
-
-    const quickReplyMatch = getLandingKeywordQuickReply(lastUserMessage, locale);
-    if (quickReplyMatch) {
-      console.log(`Returning landing quick reply rule=${quickReplyMatch.ruleId} locale=${locale} ip=${clientIP}`);
-      return buildSseFallbackResponse(quickReplyMatch.response);
     }
 
     if (!GEMINI_API_KEY) {

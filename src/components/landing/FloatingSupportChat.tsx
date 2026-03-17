@@ -78,8 +78,12 @@ export const FloatingSupportChat = () => {
 
       if (!resp.ok) {
         const errorData = await resp.json().catch(() => ({}));
+        const errorReply =
+          typeof errorData?.error === "string" && errorData.error.trim().length > 0
+            ? errorData.error
+            : fallbackReply;
         console.error("Support chat backend error:", resp.status, errorData);
-        setMessages((prev) => [...prev, { role: "assistant", content: fallbackReply }]);
+        setMessages((prev) => [...prev, { role: "assistant", content: errorReply }]);
         toast.error(errorData.error || t("supportChat.error") || "Error sending message");
         return;
       }
