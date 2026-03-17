@@ -63,6 +63,7 @@ export const FloatingEdiChat = () => {
 
     try {
       const conversationMessages = [...messages.filter((m, i) => !(i === 0 && m.role === "assistant")), userMessage];
+      let streamFinished = false;
 
       // Refresh token as fallback for long sessions
       const { refreshSession } = await import("@/hooks/useRefreshSession");
@@ -116,7 +117,10 @@ export const FloatingEdiChat = () => {
           if (!line.startsWith("data:")) continue;
 
           const json = line.replace("data:", "").trim();
-          if (json === "[DONE]") return;
+          if (json === "[DONE]") {
+            streamFinished = true;
+            break;
+          }
 
           try {
             const parsed = JSON.parse(json);
@@ -126,6 +130,25 @@ export const FloatingEdiChat = () => {
             /* ignore */
           }
         }
+
+        if (streamFinished) break;
+      }
+
+      if (assistantContent.trim()) {
+        await supabase.from("chat_messages").insert([
+          {
+            user_id: session.user.id,
+            role: "user",
+            content: message,
+            ai_assistant_type: "edi",
+          },
+          {
+            user_id: session.user.id,
+            role: "assistant",
+            content: assistantContent,
+            ai_assistant_type: "edi",
+          },
+        ]);
       }
     } catch (error) {
       console.error("EDI chat error:", error);

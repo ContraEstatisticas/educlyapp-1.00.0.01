@@ -182,8 +182,8 @@ const Chat = () => {
       } = await supabase.auth.getUser();
       if (user) {
         await supabase.from("chat_messages").insert([
-          { user_id: user.id, role: "user", content: input, ai_tool_context: aiToolContext },
-          { user_id: user.id, role: "assistant", content: assistantContent, ai_tool_context: aiToolContext },
+          { user_id: user.id, role: "user", content: input, ai_tool_context: aiToolContext, ai_assistant_type: "edi" },
+          { user_id: user.id, role: "assistant", content: assistantContent, ai_tool_context: aiToolContext, ai_assistant_type: "edi" },
         ]);
       }
     } catch (error) {

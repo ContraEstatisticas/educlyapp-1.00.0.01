@@ -264,9 +264,17 @@ const normalizeLocale = (language?: string): SupportedLocale => {
   return FALLBACK_COPY_BY_LANG[normalized] ? normalized : "en";
 };
 
-const isoStartOfTodayUTC = () => {
+const startOfTodayLocal = () => {
   const now = new Date();
-  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0)).toISOString();
+  now.setHours(0, 0, 0, 0);
+  return now;
+};
+
+const toLocalDayKey = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 export function DailyMissionsModal({ open, onOpenChange }: DailyMissionsModalProps) {
@@ -280,8 +288,9 @@ export function DailyMissionsModal({ open, onOpenChange }: DailyMissionsModalPro
 
   const locale = normalizeLocale(i18n.resolvedLanguage || i18n.language);
   const copy = FALLBACK_COPY_BY_LANG[locale];
-  const todayIso = useMemo(() => isoStartOfTodayUTC(), []);
-  const todayKey = useMemo(() => todayIso.split("T")[0], [todayIso]);
+  const todayStart = useMemo(() => startOfTodayLocal(), []);
+  const todayIso = useMemo(() => todayStart.toISOString(), [todayStart]);
+  const todayKey = useMemo(() => toLocalDayKey(todayStart), [todayStart]);
 
   useEffect(() => {
     const keys = ["mission_day", "mission_chat", "mission_streak"].reduce((acc, k) => {
@@ -314,10 +323,12 @@ export function DailyMissionsModal({ open, onOpenChange }: DailyMissionsModalPro
         .from("chat_messages")
         .select("id", { count: "exact", head: true })
         .eq("user_id", user.id)
+        .eq("role", "user")
+        .eq("ai_assistant_type", "edi")
         .gte("created_at", todayIso);
       setChatDone((chatCount || 0) > 0);
 
-      const todayDate = todayIso.split("T")[0];
+      const todayDate = todayKey;
       const { data: streak } = await supabase
         .from("user_streaks")
         .select("*")
