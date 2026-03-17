@@ -3,12 +3,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { Check, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export const WeeklyStreakBar = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
+  const alignmentRef = useRef<HTMLDivElement | null>(null);
+  const dayCellRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [dayCenters, setDayCenters] = useState<number[]>([]);
 
   const resetTime = (date: Date) => {
     const d = new Date(date);
@@ -192,8 +195,55 @@ export const WeeklyStreakBar = () => {
     { key: "sun", label: t("weeklyStreak.days.sun") },
   ];
 
-  const progressPercentage = (currentDayIndex / (weekDays.length - 1)) * 100;
   const currentStreak = streakData?.current_streak || 0;
+
+  useLayoutEffect(() => {
+    const measureDayCenters = () => {
+      if (!alignmentRef.current) return;
+
+      const alignmentRect = alignmentRef.current.getBoundingClientRect();
+      const nextCenters = dayCellRefs.current
+        .map((node) => {
+          if (!node) return null;
+          const rect = node.getBoundingClientRect();
+          return rect.left - alignmentRect.left + rect.width / 2;
+        })
+        .filter((value): value is number => value !== null);
+
+      if (nextCenters.length === weekDays.length) {
+        setDayCenters(nextCenters);
+      }
+    };
+
+    measureDayCenters();
+
+    const resizeObserver = new ResizeObserver(() => {
+      measureDayCenters();
+    });
+
+    if (alignmentRef.current) {
+      resizeObserver.observe(alignmentRef.current);
+    }
+
+    dayCellRefs.current.forEach((node) => {
+      if (node) {
+        resizeObserver.observe(node);
+      }
+    });
+
+    window.addEventListener("resize", measureDayCenters);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measureDayCenters);
+    };
+  }, [currentDayIndex, weekDays.length]);
+
+  const firstCenter = dayCenters[0] ?? 0;
+  const lastCenter = dayCenters[weekDays.length - 1] ?? 0;
+  const currentCenter = dayCenters[currentDayIndex] ?? firstCenter;
+  const trackWidth = Math.max(lastCenter - firstCenter, 0);
+  const progressWidth = Math.max(currentCenter - firstCenter, 0);
 
   return (
     <div className="bg-card border border-border rounded-xl p-4 sm:p-6 mb-6">
@@ -210,70 +260,79 @@ export const WeeklyStreakBar = () => {
         </div>
       </div>
 
-      <div className="relative mb-8 mt-2 h-1.5 bg-muted rounded-full">
-        <div
-          className="absolute top-0 left-0 h-full bg-primary rounded-full transition-all duration-1000 ease-out"
-          style={{ width: `${progressPercentage}%` }}
-        />
+      <div ref={alignmentRef} className="relative">
+        <div className="relative mb-8 mt-2 h-10">
+          <div
+            className="absolute top-1/2 -translate-y-1/2 h-1.5 bg-muted rounded-full"
+            style={{ left: firstCenter, width: trackWidth }}
+          />
+          <div
+            className="absolute top-1/2 -translate-y-1/2 h-1.5 bg-primary rounded-full transition-all duration-1000 ease-out"
+            style={{ left: firstCenter, width: progressWidth }}
+          />
 
-        <div
-          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-1000 ease-out z-10"
-          style={{ left: `${progressPercentage}%` }}
-        >
-          <div className="relative -mt-6">
-            <img
-              src="https://em-content.zobj.net/source/microsoft-teams/400/person-running_1f3c3.png"
-              alt="Corredor"
-              className="w-6 h-6 sm:w-8 sm:h-8 transform -scale-x-100 filter drop-shadow-md"
-            />
+          <div
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-1000 ease-out z-10"
+            style={{ left: currentCenter }}
+          >
+            <div className="relative -mt-6">
+              <img
+                src="https://em-content.zobj.net/source/microsoft-teams/400/person-running_1f3c3.png"
+                alt="Corredor"
+                className="w-6 h-6 sm:w-8 sm:h-8 transform -scale-x-100 filter drop-shadow-md"
+              />
+            </div>
           </div>
+
+          {dayCenters.map((center, index) => (
+            <div
+              key={weekDays[index]?.key ?? index}
+              className={cn(
+                "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 h-2 rounded-full transition-colors duration-300",
+                index <= currentDayIndex ? "bg-primary" : "bg-muted-foreground/30",
+              )}
+              style={{ left: center }}
+            />
+          ))}
         </div>
 
-        {weekDays.map((_, index) => (
-          <div
-            key={index}
-            className={cn(
-              "absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-colors duration-300",
-              index <= currentDayIndex ? "bg-primary" : "bg-muted-foreground/30",
-            )}
-            style={{
-              left: `${(index / (weekDays.length - 1)) * 100}%`,
-              marginLeft: index === 0 ? "0" : index === 6 ? "-8px" : "-4px",
-            }}
-          />
-        ))}
-      </div>
+        <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center">
+          {weekDays.map((day, index) => {
+            const isCompleted = weeklyActivity?.includes(index);
+            const isToday = index === currentDayIndex;
 
-      <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center">
-        {weekDays.map((day, index) => {
-          const isCompleted = weeklyActivity?.includes(index);
-          const isToday = index === currentDayIndex;
-
-          return (
-            <div key={day.key} className="flex flex-col items-center gap-2">
+            return (
               <div
-                className={cn(
-                  "w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 relative",
-                  isToday
-                    ? "bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 z-10 shadow-lg"
-                    : isCompleted
-                      ? "bg-green-500 text-white"
-                      : "bg-muted/50 text-muted-foreground",
-                )}
+                key={day.key}
+                ref={(node) => {
+                  dayCellRefs.current[index] = node;
+                }}
+                className="flex flex-col items-center gap-2"
               >
-                {isCompleted ? (
-                  <Check className="w-5 h-5" />
-                ) : (
-                  <span className="uppercase tracking-tighter">{day.label}</span>
-                )}
+                <div
+                  className={cn(
+                    "w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 relative",
+                    isToday
+                      ? "bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 z-10 shadow-lg"
+                      : isCompleted
+                        ? "bg-green-500 text-white"
+                        : "bg-muted/50 text-muted-foreground",
+                  )}
+                >
+                  {isCompleted ? (
+                    <Check className="w-5 h-5" />
+                  ) : (
+                    <span className="uppercase tracking-tighter">{day.label}</span>
+                  )}
 
-                {isToday && !isCompleted && (
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-background animate-pulse" />
-                )}
+                  {isToday && !isCompleted && (
+                    <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-background animate-pulse" />
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
