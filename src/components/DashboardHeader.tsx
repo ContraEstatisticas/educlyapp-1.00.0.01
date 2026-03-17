@@ -69,6 +69,28 @@ export const DashboardHeader = ({ onLogout }: DashboardHeaderProps) => {
 
       {/* Desktop: full controls grid */}
       <div className="hidden md:flex items-center gap-3">
+        {isAdmin && (
+          <>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => navigate("/admin/analytics")}
+              className="text-muted-foreground hover:text-primary"
+              title="Admin Analytics"
+            >
+              <Shield className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => navigate("/admin/emails")}
+              className="text-muted-foreground hover:text-primary"
+              title="Admin Emails"
+            >
+              <Mail className="w-4 h-4" />
+            </Button>
+          </>
+        )}
         <StreakBadge />
         <ModeToggle />
         <LanguageSelector />
