@@ -47,6 +47,26 @@ const QUICK_REPLY_SUPPORTED_LANGS = [
   "nl",
 ] as const;
 
+const EDUCLY_AI_TOOLS = [
+  "ChatGPT",
+  "Claude",
+  "DeepSeek",
+  "Gemini",
+  "Copilot",
+  "Grok",
+  "Perplexity",
+  "Manus",
+  "Lovable",
+  "NanoBanana",
+  "LeonardoAI",
+  "MidJourney",
+  "Captions",
+  "ElevenLabs",
+  "VEO",
+];
+
+const EDUCLY_AI_TOOLS_TEXT = EDUCLY_AI_TOOLS.join(", ");
+
 type QuickReplyLang = (typeof QUICK_REPLY_SUPPORTED_LANGS)[number];
 
 type QuickReplyRule = {
@@ -242,6 +262,32 @@ const LANDING_QUICK_REPLY_RULES: QuickReplyRule[] = [
       pt: "Os valores e planos ficam em https://educly.app/plan . Se quiser, eu te explico qual plano combina melhor com seu objetivo.",
       en: "You can check pricing and plans at https://educly.app/plan . If you want, I can help you choose the best plan for your goal.",
       es: "Puedes ver precios y planes en https://educly.app/plan . Si quieres, tambien puedo ayudarte a elegir el mejor plan para tu objetivo.",
+    }),
+  },
+  {
+    id: "ai_tools_catalog",
+    keywords: [
+      "quais ias",
+      "quais ia",
+      "quais ferramentas de ia",
+      "quais ferramentas voces tem",
+      "quais ferramentas vocês tem",
+      "quais ferramentas voces ensinam",
+      "quais ferramentas vocês ensinam",
+      "which ai tools",
+      "what ai tools",
+      "what ais",
+      "what tools do you teach",
+      "which tools do you teach",
+      "que ias tienen",
+      "que herramientas de ia tienen",
+      "que herramientas ensenan",
+      "que herramientas enseñan",
+    ],
+    responses: buildQuickReplyResponses({
+      pt: `Hoje a Educly ensina 15 IAs nas trilhas: ${EDUCLY_AI_TOOLS_TEXT}. Nosso desafio de 28 dias guia voce por todas elas com licoes curtas e praticas.`,
+      en: `Educly currently teaches 15 AI tools in its learning paths: ${EDUCLY_AI_TOOLS_TEXT}. Our 28-day challenge guides you through all of them with short, practical lessons.`,
+      es: `Hoy Educly ensena 15 herramientas de IA en sus rutas: ${EDUCLY_AI_TOOLS_TEXT}. Nuestro desafio de 28 dias te guia por todas con lecciones cortas y practicas.`,
     }),
   },
   {
@@ -454,9 +500,9 @@ const getSystemPrompt = (language: string): string => {
 Help visitors understand Educly and guide them to become students.
 
 ## WHAT IS EDUCLY
-- Practical teaching platform for 8 AI tools
+- Practical teaching platform for 15 AI tools
 - 28-day challenge with 10-15 minute daily lessons
-- Tools: ChatGPT, Claude, DeepSeek, Gemini, NanoBanana, Lovable, Captions, ElevenLabs
+- Tools: ${EDUCLY_AI_TOOLS_TEXT}
 - Over 50,000 students in 150+ countries
 - 4.9/5 star rating
 - We teach how to use AI and also show where to find AI jobs

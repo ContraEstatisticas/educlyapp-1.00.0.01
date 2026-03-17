@@ -1187,8 +1187,8 @@
     "viewAll": "Voir tout",
     "continueFromWhere": "Continuez où vous en étiez",
     "aiChallenges": "Défis IA",
-    "master8AI": "Maîtrisez 8 IAs en 28 jours",
-    "master8AIDesc": "Chaque défi est conçu pour vous enseigner les principaux outils d'IA du marché: ChatGPT, Claude, DeepSeek, Gemini, NanoBanana, Lovable, Captions et ElevenLabs.",
+    "master8AI": "Maîtrisez 15 IAs en 28 jours",
+    "master8AIDesc": "Chaque défi est conçu pour vous enseigner les 15 principaux outils d'IA du marché : ChatGPT, Claude, DeepSeek, Gemini, Copilot, Grok, Perplexity, Manus, Lovable, NanoBanana, LeonardoAI, MidJourney, Captions, ElevenLabs et VEO.",
     "completed": "Défi terminé"
   },
   "difficulty": {
