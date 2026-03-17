@@ -1,76 +1,94 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useRef } from "react";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  getLevelRewardsCopy,
+  getLevelTitle,
+  getLevelUpToastDescription,
+  getLevelUpToastTitle,
+  getRewardTitleList,
+  type LevelRewardKey,
+} from "@/lib/levelRewards";
+import { getNewsletterRequiresFreelancerDescription } from "@/lib/levelRewardMarketing";
 
-// XP necessário para cada nível (progressão exponencial suave)
 const XP_PER_LEVEL = [
-  0,      // Level 1: 0 XP
-  100,    // Level 2: 100 XP
-  250,    // Level 3: 250 XP
-  500,    // Level 4: 500 XP
-  800,    // Level 5: 800 XP
-  1200,   // Level 6: 1200 XP
-  1700,   // Level 7: 1700 XP
-  2300,   // Level 8: 2300 XP
-  3000,   // Level 9: 3000 XP
-  4000,   // Level 10: 4000 XP
-  5500,   // Level 11
-  7500,   // Level 12
-  10000,  // Level 13
-  13000,  // Level 14
-  17000,  // Level 15
-  22000,  // Level 16
-  28000,  // Level 17
-  35000,  // Level 18
-  45000,  // Level 19
-  60000,  // Level 20 (máximo)
+  0,
+  100,
+  250,
+  500,
+  800,
+  1200,
+  1700,
+  2300,
+  3000,
+  4000,
+  5500,
+  7500,
+  10000,
+  13000,
+  17000,
+  22000,
+  28000,
+  35000,
+  45000,
+  60000,
 ];
 
-// Títulos para cada nível
-export const LEVEL_TITLES: Record<number, string> = {
-  1: "Novato",
-  2: "Aprendiz",
-  3: "Estudante",
-  4: "Praticante",
-  5: "Conhecedor",
-  6: "Habilidoso",
-  7: "Competente",
-  8: "Proficiente",
-  9: "Especialista",
-  10: "Veterano",
-  11: "Mestre",
-  12: "Grão-Mestre",
-  13: "Sábio",
-  14: "Iluminado",
-  15: "Visionário",
-  16: "Lendário",
-  17: "Mítico",
-  18: "Transcendente",
-  19: "Supremo",
-  20: "Ascendido",
-};
-
-// XP rewards for different actions
 export const XP_REWARDS = {
   LESSON_COMPLETE: 25,
   DAY_COMPLETE: 50,
   QUIZ_CORRECT: 10,
-  STREAK_BONUS: 5, // Per day of streak
+  STREAK_BONUS: 5,
   MODULE_COMPLETE: 100,
   MEDAL_EARNED: 75,
   DAILY_LOGIN: 15,
 };
 
+interface GrantedReward {
+  metadata: Record<string, unknown> | null;
+  reward_key: LevelRewardKey;
+  source_level: number;
+}
+
+const getGrantedRewardsToastDescription = (
+  grantedRewards: GrantedReward[],
+  unlockedTitles: string[],
+  language: string,
+  rewardUnlockedPrefix: string,
+) => {
+  const newsletterPendingReward = grantedRewards.find(
+    (reward) =>
+      reward.reward_key === "newsletter_access" &&
+      reward.metadata &&
+      typeof reward.metadata.status === "string" &&
+      reward.metadata.status === "requires_freelancer",
+  );
+
+  if (newsletterPendingReward) {
+    return getNewsletterRequiresFreelancerDescription(language);
+  }
+
+  return `${rewardUnlockedPrefix}: ${unlockedTitles.join(", ")}.`;
+};
+
+const dispatchProductAccessRefresh = () => {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("educly:product-access-refresh"));
+};
+
 export const calculateLevelFromXP = (totalXP: number) => {
   let level = 1;
-  for (let i = 1; i < XP_PER_LEVEL.length; i++) {
-    if (totalXP >= XP_PER_LEVEL[i]) {
-      level = i + 1;
+
+  for (let index = 1; index < XP_PER_LEVEL.length; index += 1) {
+    if (totalXP >= XP_PER_LEVEL[index]) {
+      level = index + 1;
     } else {
       break;
     }
   }
+
   return Math.min(level, 20);
 };
 
@@ -85,13 +103,48 @@ export const getXPForNextLevel = (level: number) => {
 
 export const useUserLevel = () => {
   const { toast } = useToast();
+  const { i18n } = useTranslation();
   const queryClient = useQueryClient();
-  const previousLevelRef = useRef<number | null>(null);
+
+  const language = i18n.resolvedLanguage || i18n.language;
+  const rewardCopy = getLevelRewardsCopy(language);
+
+  const grantLevelRewards = useCallback(
+    async (userId: string, currentLevel: number) => {
+      if (currentLevel < 3) return [] as GrantedReward[];
+
+      const { data, error } = await supabase.rpc("apply_level_rewards", {
+        p_current_level: currentLevel,
+        p_user_id: userId,
+      });
+
+      if (error) {
+        console.error("Error applying level rewards:", error);
+        return [] as GrantedReward[];
+      }
+
+      const grantedRewards = (data || []) as GrantedReward[];
+
+      if (grantedRewards.length > 0) {
+        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      }
+
+      if (grantedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+        dispatchProductAccessRefresh();
+      }
+
+      return grantedRewards;
+    },
+    [queryClient],
+  );
 
   const { data: levelData, isLoading } = useQuery({
     queryKey: ["user-level"],
     queryFn: async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) return null;
 
       const { data, error } = await supabase
@@ -102,7 +155,6 @@ export const useUserLevel = () => {
 
       if (error) throw error;
 
-      // Se não existe, criar registro inicial
       if (!data) {
         const { data: newData, error: insertError } = await supabase
           .from("user_levels")
@@ -120,19 +172,37 @@ export const useUserLevel = () => {
 
   const addXPMutation = useMutation({
     mutationFn: async ({ amount, reason }: { amount: number; reason: string }) => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) throw new Error("User not authenticated");
 
-      // Buscar dados atuais
       const { data: currentData, error: fetchError } = await supabase
         .from("user_levels")
         .select("*")
         .eq("user_id", user.id)
         .maybeSingle();
 
-      if (fetchError || !currentData) throw new Error("User level not found");
+      if (fetchError) throw fetchError;
 
-      const newTotalXP = (currentData?.total_xp_earned || 0) + amount;
+      let baseData = currentData;
+
+      if (!baseData) {
+        const { data: insertedData, error: insertError } = await supabase
+          .from("user_levels")
+          .insert({ user_id: user.id })
+          .select()
+          .single();
+
+        if (insertError) throw insertError;
+        baseData = insertedData;
+      }
+
+      if (!baseData) throw new Error("User level not found");
+
+      const previousLevel = baseData.current_level || 1;
+      const newTotalXP = (baseData.total_xp_earned || 0) + amount;
       const newLevel = calculateLevelFromXP(newTotalXP);
       const xpForCurrentLevel = getXPForLevel(newLevel);
       const currentXPInLevel = newTotalXP - xpForCurrentLevel;
@@ -150,40 +220,71 @@ export const useUserLevel = () => {
 
       if (error) throw error;
 
+      const grantedRewards = await grantLevelRewards(user.id, newLevel);
+
       return {
         data,
-        previousLevel: currentData?.current_level || 1,
+        grantedRewards,
         newLevel,
-        xpGained: amount,
+        previousLevel,
         reason,
+        xpGained: amount,
       };
     },
     onSuccess: (result) => {
       queryClient.invalidateQueries({ queryKey: ["user-level"] });
 
-      // Notificação de XP ganho
       toast({
-        title: `+${result.xpGained} XP! 🎯`,
+        title: `+${result.xpGained} XP!`,
         description: result.reason,
         duration: 3000,
       });
 
-      // Notificação de level up
       if (result.newLevel > result.previousLevel) {
+        const unlockedTitles = getRewardTitleList(
+          result.grantedRewards.map((reward) => reward.reward_key),
+          language,
+        );
+
         setTimeout(() => {
           toast({
-            title: `🎉 LEVEL UP! Nível ${result.newLevel}`,
-            description: `Parabéns! Você agora é ${LEVEL_TITLES[result.newLevel]}!`,
-            duration: 5000,
+            title: getLevelUpToastTitle(result.newLevel, language),
+            description:
+              unlockedTitles.length > 0
+                ? getGrantedRewardsToastDescription(
+                    result.grantedRewards,
+                    unlockedTitles,
+                    language,
+                    rewardCopy.rewardUnlockedPrefix,
+                  )
+                : getLevelUpToastDescription(result.newLevel, language),
+            duration: 6000,
           });
-          
-          // Play level up sound
+
           try {
             const audio = new Audio("/assets/sounds/medal-earned.mp3");
             audio.volume = 0.5;
-            audio.play().catch(() => {});
-          } catch {}
+            void audio.play();
+          } catch {
+            // ignore audio failures
+          }
         }, 500);
+      } else if (result.grantedRewards.length > 0) {
+        const unlockedTitles = getRewardTitleList(
+          result.grantedRewards.map((reward) => reward.reward_key),
+          language,
+        );
+
+        toast({
+          title: rewardCopy.rewardUnlockedTitle,
+          description: getGrantedRewardsToastDescription(
+            result.grantedRewards,
+            unlockedTitles,
+            language,
+            rewardCopy.rewardUnlockedPrefix,
+          ),
+          duration: 5000,
+        });
       }
     },
     onError: (error) => {
@@ -191,27 +292,25 @@ export const useUserLevel = () => {
     },
   });
 
-  // Calcular progresso para o próximo nível
   const currentLevel = levelData?.current_level || 1;
   const totalXP = levelData?.total_xp_earned || 0;
   const xpForCurrentLevel = getXPForLevel(currentLevel);
   const xpForNextLevel = getXPForNextLevel(currentLevel);
   const xpNeededForNext = xpForNextLevel - xpForCurrentLevel;
   const currentXPInLevel = totalXP - xpForCurrentLevel;
-  const progressPercent = currentLevel >= 20 
-    ? 100 
-    : Math.min((currentXPInLevel / xpNeededForNext) * 100, 100);
+  const progressPercent =
+    currentLevel >= 20 ? 100 : Math.min((currentXPInLevel / xpNeededForNext) * 100, 100);
 
   return {
-    levelData,
-    isLoading,
-    currentLevel,
-    totalXP,
-    currentXPInLevel,
-    xpNeededForNext,
-    progressPercent,
-    levelTitle: LEVEL_TITLES[currentLevel] || "Novato",
     addXP: (amount: number, reason: string) => addXPMutation.mutate({ amount, reason }),
+    currentLevel,
+    currentXPInLevel,
     isAddingXP: addXPMutation.isPending,
+    isLoading,
+    levelData,
+    levelTitle: getLevelTitle(currentLevel, i18n.resolvedLanguage || i18n.language),
+    progressPercent,
+    totalXP,
+    xpNeededForNext,
   };
 };

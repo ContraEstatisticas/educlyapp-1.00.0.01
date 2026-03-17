@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Sparkles } from "lucide-react";
-import { LEVEL_TITLES } from "@/hooks/useUserLevel";
+import { useTranslation } from "react-i18next";
+import { getLevelRewardsCopy, getLevelTitle } from "@/lib/levelRewards";
 
 interface LevelUpNotificationProps {
   level: number;
@@ -10,6 +11,9 @@ interface LevelUpNotificationProps {
 }
 
 export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotificationProps) => {
+  const { i18n } = useTranslation();
+  const copy = getLevelRewardsCopy(i18n.resolvedLanguage || i18n.language);
+
   useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(onClose, 5000);
@@ -49,7 +53,7 @@ export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotifi
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
                   <span className="text-sm font-bold text-amber-600 uppercase tracking-wider">
-                    Level Up!
+                    {copy.levelUpBannerLabel}
                   </span>
                   <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
                 </div>
@@ -69,7 +73,7 @@ export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotifi
                   transition={{ delay: 0.6 }}
                   className="text-lg font-bold text-foreground mt-2"
                 >
-                  {LEVEL_TITLES[level]}
+                  {getLevelTitle(level, i18n.resolvedLanguage || i18n.language)}
                 </motion.p>
 
                 <motion.p
@@ -78,7 +82,7 @@ export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotifi
                   transition={{ delay: 0.8 }}
                   className="text-sm text-muted-foreground mt-1"
                 >
-                  Continue aprendendo para subir ainda mais!
+                  {copy.keepLearningLabel}
                 </motion.p>
               </motion.div>
             </div>

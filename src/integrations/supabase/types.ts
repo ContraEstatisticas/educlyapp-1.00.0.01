@@ -754,6 +754,39 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_subscriptions: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          is_active: boolean
+          source: string
+          subscribed_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          source?: string
+          subscribed_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          source?: string
+          subscribed_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       pending_thank_you_emails: {
         Row: {
           buyer_name: string
@@ -1248,6 +1281,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_level_rewards: {
+        Row: {
+          created_at: string
+          granted_at: string
+          id: string
+          metadata: Json
+          reward_key: string
+          source_level: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_at?: string
+          id?: string
+          metadata?: Json
+          reward_key: string
+          source_level: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_at?: string
+          id?: string
+          metadata?: Json
+          reward_key?: string
+          source_level?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_onboarding: {
         Row: {
           completed_at: string | null
@@ -1636,6 +1702,14 @@ export type Database = {
       check_product_access: {
         Args: { p_product_type: string }
         Returns: boolean
+      }
+      apply_level_rewards: {
+        Args: { p_current_level: number; p_user_id: string }
+        Returns: {
+          metadata: Json
+          reward_key: string
+          source_level: number
+        }[]
       }
       check_purchase_exists: { Args: { p_email: string }; Returns: boolean }
       check_user_exists_by_email: {

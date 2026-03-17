@@ -28,6 +28,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SoundControl } from "@/components/SoundControl";
 import { MobileNav } from "@/components/MobileNav";
+import { LevelRewardsCard } from "@/components/dashboard/LevelRewardsCard";
+import { useUserLevel } from "@/hooks/useUserLevel";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Trophy, Star
@@ -68,15 +70,11 @@ interface Medal {
   isEarned?: boolean;
 }
 
-interface UserLevelData {
-  level: number;
-  total_xp: number;
-}
-
 const Profile = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { currentLevel, currentXPInLevel, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
 
   const [loading, setLoading] = useState(true);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -102,41 +100,6 @@ const Profile = () => {
     queryFn: async () => {
       if (!userId) return 2;
       return 2;
-    },
-    enabled: !!userId,
-  });
-
-  const { data: userLevelData } = useQuery({
-    queryKey: ["user-level", userId],
-    queryFn: async (): Promise<UserLevelData> => {
-      if (!userId) return { level: 1, total_xp: 0 };
-
-      try {
-        const { data, error } = await supabase
-          .from("user_levels")
-          .select("current_level, total_xp_earned")
-          .eq("user_id", userId)
-          .maybeSingle();
-
-        if (error) {
-          console.error("Error fetching user level:", error);
-          return { level: 1, total_xp: 0 };
-        }
-
-        const levelData = data as { current_level?: number; total_xp_earned?: number } | null;
-
-        if (!levelData) {
-          return { level: 1, total_xp: 0 };
-        }
-
-        return {
-          level: Number(levelData.current_level) || 1,
-          total_xp: Number(levelData.total_xp_earned) || 0
-        };
-      } catch (error) {
-        console.error("Unexpected error in user level query:", error);
-        return { level: 1, total_xp: 0 };
-      }
     },
     enabled: !!userId,
   });
@@ -447,11 +410,6 @@ const Profile = () => {
     });
   };
 
-  const currentLevel = userLevelData?.level || 1;
-  const totalXP = userLevelData?.total_xp || 0;
-  const progressPercent = Math.min(100, (totalXP % 1000) / 10);
-  const currentXPInLevel = totalXP % 1000 || 0;
-  const xpNeededForNext = 1000;
   const earnedCount = medals.length;
 
   if (loading) {
@@ -777,6 +735,8 @@ const Profile = () => {
             </TabsContent>
 
             <TabsContent value="achievements" className="space-y-6">
+              <LevelRewardsCard />
+
               {/* Card conquistas com bg-card */}
               <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
                 <div className="flex items-center justify-between mb-8">

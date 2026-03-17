@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
 import { TrailContentModal } from "@/components/dashboard/TrailContentModal";
 import { DailyMissionsModal } from "@/components/dashboard/DailyMissionsModal";
+import { LevelRewardsCard } from "@/components/dashboard/LevelRewardsCard";
 import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -262,6 +263,10 @@ const Dashboard = () => {
         <div className="space-y-10 mt-[10px] my-[3px]">
           <div id="weekly-streak">
             <WeeklyStreakBar />
+          </div>
+
+          <div id="xp-rewards">
+            <LevelRewardsCard />
           </div>
 
           {/* CARD PRINCIPAL */}
