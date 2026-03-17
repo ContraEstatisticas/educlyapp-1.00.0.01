@@ -43,6 +43,7 @@ export const KPICards = () => {
 
   const errorRangeValue = Number(errorRangeDays);
   const errorRangeLabel = `${errorRangeValue}d`;
+  const COMPLETED_PROGRESS_PAGE_SIZE = 1000;
 
   // Função para exportar os dados do PRIMEIRO login para CSV
   const exportSessionsToCSV = async () => {
@@ -129,26 +130,61 @@ export const KPICards = () => {
         .from("user_streaks")
         .select("current_streak, longest_streak, last_activity_date");
 
-      const totalStreaks = streakData?.length || 0;
-      const avgStreak = streakData?.length
-        ? (streakData.reduce((acc, s) => acc + s.current_streak, 0) / streakData.length).toFixed(1)
+      const activeStreaks = streakData?.filter((s) =>
+        s.last_activity_date && s.last_activity_date >= sevenDaysAgoKey
+      ) || [];
+
+      const avgStreak = activeStreaks.length
+        ? (activeStreaks.reduce((acc, s) => acc + s.current_streak, 0) / activeStreaks.length).toFixed(1)
         : 0;
       const maxStreak = streakData?.length
         ? Math.max(...streakData.map((s) => s.longest_streak))
         : 0;
 
-      // Users without streak (created account but never did any activity)
-      const usersWithoutStreak = (totalUsers || 0) - totalStreaks;
+      const usersWithCompletedDays = new Set<string>();
+      const usersActiveInLast7Days = new Set<string>();
+      let completedProgressFrom = 0;
 
-      // Activation rate (users who did at least one activity / total users)
+      while (true) {
+        const { data: completedProgressBatch, error: completedProgressError } = await supabase
+          .from("user_day_progress")
+          .select("user_id, completed_at")
+          .eq("completed", true)
+          .range(completedProgressFrom, completedProgressFrom + COMPLETED_PROGRESS_PAGE_SIZE - 1);
+
+        if (completedProgressError) throw completedProgressError;
+
+        completedProgressBatch?.forEach((row) => {
+          if (row.user_id) {
+            usersWithCompletedDays.add(row.user_id);
+
+            if (
+              row.completed_at &&
+              row.completed_at >= sevenDaysAgoStartSaoPaulo &&
+              row.completed_at < tomorrowStartSaoPaulo
+            ) {
+              usersActiveInLast7Days.add(row.user_id);
+            }
+          }
+        });
+
+        if (!completedProgressBatch || completedProgressBatch.length < COMPLETED_PROGRESS_PAGE_SIZE) {
+          break;
+        }
+
+        completedProgressFrom += COMPLETED_PROGRESS_PAGE_SIZE;
+      }
+
+      // Users without any completed learning day
+      const usersWithoutStreak = Math.max((totalUsers || 0) - usersWithCompletedDays.size, 0);
+
+      // Activation rate (users who completed at least one day / total users)
       const activationRate = totalUsers && totalUsers > 0
-        ? ((totalStreaks / totalUsers) * 100).toFixed(1)
+        ? ((usersWithCompletedDays.size / totalUsers) * 100).toFixed(1)
         : 0;
 
-      // Active users (7 dias) - using filter on the streakData we already have
-      const activeUsers = streakData?.filter(s =>
-        s.last_activity_date && s.last_activity_date >= sevenDaysAgoKey
-      ).length || 0;
+      // Active users (7 dias) - users with at least one completed day in the last 7 days
+      const activeUsers = usersActiveInLast7Days.size;
 
       // Premium users
       const { count: premiumUsers } = await supabase
@@ -360,14 +396,14 @@ export const KPICards = () => {
             icon={<UserX className="h-5 w-5" />}
             description={`${((kpis?.usersWithoutStreak || 0) / (kpis?.totalUsers || 1) * 100).toFixed(0)}% dos usuários`}
             color={kpis?.usersWithoutStreak && kpis.usersWithoutStreak > 0 ? "warning" : "default"}
-            tooltip="Usuários que criaram conta mas nunca completaram nenhuma lição (sem registro em user_streaks)"
+            tooltip="Usuários que criaram conta mas ainda não têm nenhum user_day_progress com completed=true"
           />
           <AdminKPICard
             title="Taxa de Ativação"
             value={`${kpis?.activationRate || 0}%`}
             icon={<Activity className="h-5 w-5" />}
             description="Fizeram pelo menos 1 atividade"
-            tooltip="% de usuários que têm registro em user_streaks (completaram pelo menos 1 lição)"
+            tooltip="% de usuários com pelo menos um user_day_progress completed=true"
           />
         </div>
       </section>
@@ -385,7 +421,7 @@ export const KPICards = () => {
             value={kpis?.avgStreak || 0}
             icon={<Flame className="h-5 w-5" />}
             description="dias consecutivos"
-            tooltip="Média de current_streak de todos os registros em user_streaks"
+            tooltip="Média de current_streak dos usuários ativos nos últimos 7 dias em user_streaks"
           />
           <AdminKPICard
             title="Maior Streak"
@@ -399,7 +435,7 @@ export const KPICards = () => {
             value={kpis?.activeUsers || 0}
             icon={<CheckCircle2 className="h-5 w-5" />}
             description={`${kpis?.retention}% retenção`}
-            tooltip="Usuários com last_activity_date nos últimos 7 dias em America/Sao_Paulo. Retenção = ativos / total de usuários."
+            tooltip="Usuários com pelo menos um user_day_progress completed=true nos últimos 7 dias em America/Sao_Paulo. Retenção = ativos / total de usuários."
           />
           <div onClick={exportSessionsToCSV} className="cursor-pointer transition-transform active:scale-95">
             <AdminKPICard
@@ -408,7 +444,7 @@ export const KPICards = () => {
               icon={<Clock className="h-5 w-5" />}
               color="info"
               description="CSV de Novos Usuários"
-              tooltip="Clique para baixar o relatório de tempo do primeiro acesso"
+              tooltip="Média real, em minutos, da primeira sessão registrada por usuário. Clique para baixar o relatório do primeiro acesso."
             />
           </div>
           <AdminKPICard
