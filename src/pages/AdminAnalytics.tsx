@@ -202,6 +202,12 @@ const AdminAnalyticsContent = () => {
               📦 Bulk Import
             </TabsTrigger>
             <TabsTrigger 
+              value="revoke" 
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+            >
+              🚫 Revogar
+            </TabsTrigger>
+            <TabsTrigger 
               value="migration" 
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
