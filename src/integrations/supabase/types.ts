@@ -667,6 +667,39 @@ export type Database = {
           },
         ]
       }
+      newsletter_subscriptions: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          is_active: boolean
+          source: string
+          subscribed_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          source?: string
+          subscribed_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          source?: string
+          subscribed_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       paddle_customer: {
         Row: {
           created_at: string
@@ -751,39 +784,6 @@ export type Database = {
           notification_id?: string | null
           occurred_at?: string | null
           payload?: Json
-        }
-        Relationships: []
-      }
-      newsletter_subscriptions: {
-        Row: {
-          created_at: string
-          email: string | null
-          id: string
-          is_active: boolean
-          source: string
-          subscribed_at: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          email?: string | null
-          id?: string
-          is_active?: boolean
-          source?: string
-          subscribed_at?: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          email?: string | null
-          id?: string
-          is_active?: boolean
-          source?: string
-          subscribed_at?: string
-          updated_at?: string
-          user_id?: string
         }
         Relationships: []
       }
@@ -1245,6 +1245,39 @@ export type Database = {
           },
         ]
       }
+      user_level_rewards: {
+        Row: {
+          created_at: string
+          granted_at: string
+          id: string
+          metadata: Json
+          reward_key: string
+          source_level: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_at?: string
+          id?: string
+          metadata?: Json
+          reward_key: string
+          source_level: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_at?: string
+          id?: string
+          metadata?: Json
+          reward_key?: string
+          source_level?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_levels: {
         Row: {
           created_at: string
@@ -1276,39 +1309,6 @@ export type Database = {
           level?: number | null
           total_xp?: number | null
           total_xp_earned?: number
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      user_level_rewards: {
-        Row: {
-          created_at: string
-          granted_at: string
-          id: string
-          metadata: Json
-          reward_key: string
-          source_level: number
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          granted_at?: string
-          id?: string
-          metadata?: Json
-          reward_key: string
-          source_level: number
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          granted_at?: string
-          id?: string
-          metadata?: Json
-          reward_key?: string
-          source_level?: number
           updated_at?: string
           user_id?: string
         }
@@ -1673,6 +1673,14 @@ export type Database = {
     }
     Functions: {
       admin_lookup_email: { Args: { p_email: string }; Returns: Json }
+      apply_level_rewards: {
+        Args: { p_current_level: number; p_user_id: string }
+        Returns: {
+          metadata: Json
+          reward_key: string
+          source_level: number
+        }[]
+      }
       audit_premium_access: {
         Args: never
         Returns: {
@@ -1702,14 +1710,6 @@ export type Database = {
       check_product_access: {
         Args: { p_product_type: string }
         Returns: boolean
-      }
-      apply_level_rewards: {
-        Args: { p_current_level: number; p_user_id: string }
-        Returns: {
-          metadata: Json
-          reward_key: string
-          source_level: number
-        }[]
       }
       check_purchase_exists: { Args: { p_email: string }; Returns: boolean }
       check_user_exists_by_email: {

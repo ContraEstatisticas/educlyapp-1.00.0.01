@@ -25,6 +25,7 @@ import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
 import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 import { ManualAccountCreator } from "@/components/admin/ManualAccountCreator";
+import { RevokeAccess } from "@/components/admin/RevokeAccess";
 import {
   formatAdminDateTime,
   getAdminDayStartIso,
@@ -163,7 +164,7 @@ const AdminAnalyticsContent = () => {
 
         {/* Tables with Tabs */}
         <Tabs defaultValue="billing" className="w-full">
-          <TabsList className="grid w-full grid-cols-7 h-12 p-1 bg-muted/50 rounded-xl">
+          <TabsList className="grid w-full grid-cols-8 h-12 p-1 bg-muted/50 rounded-xl">
             <TabsTrigger 
               value="billing" 
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
@@ -201,6 +202,12 @@ const AdminAnalyticsContent = () => {
               📦 Bulk Import
             </TabsTrigger>
             <TabsTrigger 
+              value="revoke" 
+              className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+            >
+              🚫 Revogar
+            </TabsTrigger>
+            <TabsTrigger 
               value="migration" 
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
@@ -225,6 +232,9 @@ const AdminAnalyticsContent = () => {
             </TabsContent>
             <TabsContent value="bulk-grant" className="m-0">
               <BulkGrantAccess />
+            </TabsContent>
+            <TabsContent value="revoke" className="m-0">
+              <RevokeAccess />
             </TabsContent>
             <TabsContent value="migration" className="m-0">
               <MigrationReport />

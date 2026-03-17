@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.magic-login]
 verify_jwt = false
+
+[functions.admin-revoke-access]
+verify_jwt = false
