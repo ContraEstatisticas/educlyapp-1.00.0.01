@@ -36,6 +36,14 @@ export const DashboardHeader = ({ onLogout }: DashboardHeaderProps) => {
     },
   });
 
+  const { data: isAdmin } = useQuery({
+    queryKey: ["is-admin"],
+    queryFn: async () => {
+      const { data } = await supabase.rpc("is_admin");
+      return !!data;
+    },
+  });
+
   const userName = profile?.fullName || t("dashboard.student");
 
   return (
