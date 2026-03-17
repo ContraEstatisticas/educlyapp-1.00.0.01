@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+﻿import { useRef, useEffect } from "react";
 import { Check, Lock, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
             const currentElement = document.getElementById(`step-bar-node-${currentStep}`);
             if (currentElement) {
                 const container = scrollRef.current;
-                // Lógica de scroll ajustada para garantir visibilidade no mobile
+                // LÃ³gica de scroll ajustada para garantir visibilidade no mobile
                 const scrollLeft = currentElement.offsetLeft - container.offsetWidth / 2 + currentElement.offsetWidth / 2;
                 container.scrollTo({ left: scrollLeft, behavior: "smooth" });
             }
@@ -30,12 +30,12 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
 
     return (
         <div className="w-full relative">
-            {/* Container de scroll com padding generoso (py-6) para não cortar o efeito pulsante */}
+            {/* Container de scroll com padding generoso (py-6) para nÃ£o cortar o efeito pulsante */}
             <div
                 ref={scrollRef}
                 className="w-full overflow-x-auto overflow-y-visible py-6 px-4 no-scrollbar snap-x"
             >
-                {/* Wrapper interno que garante centralização se houver poucos itens, e scroll seguro se houver muitos */}
+                {/* Wrapper interno que garante centralizaÃ§Ã£o se houver poucos itens, e scroll seguro se houver muitos */}
                 <div className="flex items-center justify-center min-w-full gap-4">
                     {steps.map((step) => {
                         const isCurrent = step.stepNumber === currentStep;
@@ -70,7 +70,7 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
                                             ? "bg-gray-100 text-gray-300 border border-gray-200 cursor-not-allowed"
                                             : "",
 
-                                        // ESTADO DISPONÍVEL
+                                        // ESTADO DISPONÃVEL
                                         !isCompleted && !isCurrent && !isLocked
                                             ? "bg-white border border-gray-200 text-gray-700 hover:border-primary/50 hover:text-primary"
                                             : "",
@@ -92,8 +92,7 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
                                         isCurrent ? "text-primary" : "text-gray-400 group-hover:text-gray-600",
                                     )}
                                 >
-                  {/* Alterado de M para D conforme solicitado */}
-                                    D{step.stepNumber}
+                                    {step.stepNumber}
                 </span>
                             </div>
                         );

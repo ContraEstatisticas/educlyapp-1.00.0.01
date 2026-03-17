@@ -1,8 +1,9 @@
-import { Star, Lock, Check } from "lucide-react";
+﻿import { Star, Lock, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import confetti from "canvas-confetti";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 interface FreelancerModule {
   id: string;
@@ -25,7 +26,7 @@ export const FreelancerCandyCrushPath = ({
   moduleProgress,
   onModuleClick,
 }: FreelancerCandyCrushPathProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const currentModuleRef = useRef<HTMLDivElement>(null);
 
   const isModuleUnlocked = (moduleNumber: number): boolean => {
@@ -115,7 +116,7 @@ export const FreelancerCandyCrushPath = ({
             opacity="0.3"
           />
 
-          {/* Completed path — solid green */}
+          {/* Completed path â€” solid green */}
           {completedModules.length > 0 && (
             <path
               d={buildPathData(completedModules.length + 1)}
@@ -207,7 +208,7 @@ export const FreelancerCandyCrushPath = ({
                 )}
               >
                 <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-                  {t("freelancer.module", "Módulo")} {module.moduleNumber}
+                  {tUi(t, i18n.language, "freelancer.module")} {module.moduleNumber}
                 </p>
                 <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">
                   {module.title}
@@ -220,3 +221,4 @@ export const FreelancerCandyCrushPath = ({
     </div>
   );
 };
+

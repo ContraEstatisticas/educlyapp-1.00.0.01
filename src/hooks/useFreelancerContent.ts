@@ -1,6 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+﻿import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { registerCacheClear } from "./useContentVersioning";
+import {
+  normalizeContentLanguage,
+  resolveFreelancerContentLanguage,
+} from "@/lib/contentLanguage";
 
 // Get the build version for cache-busting
 declare const __APP_VERSION__: string;
@@ -34,86 +38,86 @@ interface FreelancerContent {
   [key: string]: ModuleInfo;
 }
 
-// Cache for loaded freelancer content
 const freelancerCache: Record<string, FreelancerContent> = {};
 
-// Register cache clear function for version updates
 registerCacheClear(() => {
-  Object.keys(freelancerCache).forEach(key => delete freelancerCache[key]);
-  console.log('🧹 Freelancer content cache cleared');
+  Object.keys(freelancerCache).forEach((key) => delete freelancerCache[key]);
+  console.log("🧹 Freelancer content cache cleared");
 });
 
-// Lazy load freelancer content by language using fetch
+const normalizeLanguage = (lang: string): string => normalizeContentLanguage(lang);
+
 const loadFreelancerContent = async (lang: string): Promise<FreelancerContent | null> => {
+  const normalizedLang = normalizeLanguage(lang);
   const isDev = import.meta.env.DEV;
-  
-  if (!isDev && freelancerCache[lang]) {
-    return freelancerCache[lang];
+
+  if (!isDev && freelancerCache[normalizedLang]) {
+    return freelancerCache[normalizedLang];
   }
 
-  // Supported languages for freelancer content - ES is primary
-  const supportedLanguages = ['es', 'pt', 'en', 'fr'];
-  const targetLang = supportedLanguages.includes(lang) ? lang : 'es'; // Default to Spanish
+  const targetLang = resolveFreelancerContentLanguage(lang);
+  console.log(`🌍 freelancer content: ${lang} → normalized: ${normalizedLang} → source: ${targetLang}`);
 
   try {
-    // Always add version for cache-busting (dev uses timestamp, prod uses build version)
     const cacheBuster = isDev ? `?t=${Date.now()}` : `?v=${APP_VERSION}`;
     const response = await fetch(`/i18n/lessonContent/${targetLang}-freelancer.json${cacheBuster}`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: Failed to fetch freelancer content for ${targetLang}`);
     }
-    
+
     const rawText = await response.text();
-    
+
     try {
       const content = JSON.parse(rawText);
-      freelancerCache[lang] = content;
+      freelancerCache[normalizedLang] = content;
       console.log(`✅ Loaded ${targetLang}-freelancer.json successfully with ${Object.keys(content).length} modules`);
-      return freelancerCache[lang];
+      return freelancerCache[normalizedLang];
     } catch (parseError) {
-      const errorMsg = parseError instanceof Error ? parseError.message : 'Unknown parse error';
+      const errorMsg = parseError instanceof Error ? parseError.message : "Unknown parse error";
       console.error(`❌ JSON SYNTAX ERROR in ${targetLang}-freelancer.json:`);
       console.error(`   ${errorMsg}`);
       throw parseError;
     }
   } catch (error) {
     console.warn(`Failed to load freelancer content for ${lang}:`, error);
-    
-    // Fallback to Spanish if not already
-    if (targetLang !== 'es') {
-      console.log(`⚠️ Falling back to Spanish freelancer content...`);
+
+    if (targetLang !== "en") {
+      console.log("⚠️ Falling back to English freelancer content...");
       try {
         const cacheBuster = isDev ? `?t=${Date.now()}` : `?v=${APP_VERSION}`;
-        const fallbackResponse = await fetch(`/i18n/lessonContent/es-freelancer.json${cacheBuster}`);
+        const fallbackResponse = await fetch(`/i18n/lessonContent/en-freelancer.json${cacheBuster}`);
         if (fallbackResponse.ok) {
           const fallbackText = await fallbackResponse.text();
           const fallbackContent = JSON.parse(fallbackText);
-          freelancerCache[lang] = fallbackContent;
-          console.log(`✅ Loaded Spanish fallback successfully`);
-          return freelancerCache[lang];
+          freelancerCache[normalizedLang] = fallbackContent;
+          console.log("✅ Loaded English fallback successfully");
+          return freelancerCache[normalizedLang];
         }
       } catch (fallbackError) {
-        console.error('❌ Failed to load Spanish fallback:', fallbackError);
+        console.error("❌ Failed to load English fallback:", fallbackError);
       }
     }
+
     return null;
   }
 };
 
 export const useFreelancerContent = () => {
   const { i18n } = useTranslation();
+  const currentLang = normalizeLanguage(i18n.language);
   const [freelancerContent, setFreelancerContent] = useState<FreelancerContent | null>(
-    freelancerCache[i18n.language] || null
+    freelancerCache[currentLang] || null
   );
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadContent = async () => {
       const isDev = import.meta.env.DEV;
-      
-      if (!isDev && freelancerCache[i18n.language]) {
-        setFreelancerContent(freelancerCache[i18n.language]);
+      const normalizedLang = normalizeLanguage(i18n.language);
+
+      if (!isDev && freelancerCache[normalizedLang]) {
+        setFreelancerContent(freelancerCache[normalizedLang]);
         return;
       }
 
@@ -184,11 +188,11 @@ export const useFreelancerContent = () => {
     };
   }, [freelancerContent]);
 
-  const getAllModules = useCallback((): Array<{ 
-    id: string; 
-    moduleNumber: number; 
-    title: string; 
-    description: string; 
+  const getAllModules = useCallback((): Array<{
+    id: string;
+    moduleNumber: number;
+    title: string;
+    description: string;
     icon: string;
     totalSteps: number;
     hasContent: boolean;
@@ -198,10 +202,10 @@ export const useFreelancerContent = () => {
     }
 
     return Object.entries(freelancerContent)
-      .filter(([key]) => key.startsWith('module'))
+      .filter(([key]) => key.startsWith("module"))
       .map(([key, module]) => ({
         id: key,
-        moduleNumber: parseInt(key.replace('module', '')),
+        moduleNumber: parseInt(key.replace("module", "")),
         title: module.title,
         description: module.description,
         icon: module.icon,
@@ -215,7 +219,7 @@ export const useFreelancerContent = () => {
     getModuleContent,
     getModuleInfo,
     getAllModules,
-    currentLanguage: i18n.language,
+    currentLanguage: currentLang,
     isLoading,
   };
 };

@@ -14,8 +14,9 @@ import { useTranslation } from "react-i18next";
 import { useTranslatedChallengeContent } from "@/hooks/useTranslatedChallengeContent";
 import confetti from "canvas-confetti";
 import { ChallengeTutorial } from "@/components/onboarding";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
-const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t }: any) => {
+const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t, language }: any) => {
   const progress = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
 
   return (
@@ -33,10 +34,14 @@ const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t }: any) 
 
         <div className="space-y-1">
           <span className="inline-block rounded-full bg-primary/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
-            {progress === 100 ? t("certificate.eliteCertificate") : t("certificate.masterCertificate")}
+            {progress === 100
+              ? tUi(t, language, "certificate.eliteCertificate")
+              : tUi(t, language, "certificate.masterCertificate")}
           </span>
           <h2 className="text-xl font-bold tracking-tight text-foreground">
-            {progress === 100 ? t("certificate.conquered") : t("certificate.inProgress")}
+            {progress === 100
+              ? tUi(t, language, "certificate.conquered")
+              : tUi(t, language, "certificate.inProgress")}
           </h2>
           <p className="text-xs font-medium text-muted-foreground">{challengeName}</p>
         </div>
@@ -48,7 +53,11 @@ const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t }: any) 
           />
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          {t("certificate.daysCompleted", { completed: completedCount, total: totalDays, percent: progress })}
+          {tUi(t, language, "certificate.daysCompleted", {
+            completed: completedCount,
+            total: totalDays,
+            percent: progress,
+          })}
         </p>
       </div>
     </div>
@@ -196,7 +205,7 @@ const Challenge = () => {
   }, [loadingDays, calculatedCurrentDay]);
 
   if (loadingChallenge || loadingDays) return <div className="p-8"><Skeleton className="h-64 w-full" /></div>;
-  if (!challenge) return <div className="text-center p-8">{t("challenge.notFound")}</div>;
+  if (!challenge) return <div className="text-center p-8">{tUi(t, i18n.language, "challenge.notFound")}</div>;
 
   const svgHeight = (challengeDays?.length || 0) * ROW_HEIGHT + START_Y_OFFSET + 100;
 
@@ -230,6 +239,7 @@ const Challenge = () => {
                 completedCount={completedCount}
                 totalDays={totalDays}
                 t={t}
+                language={i18n.language}
               />
             </div>
           </div>
@@ -241,6 +251,7 @@ const Challenge = () => {
                 completedCount={completedCount}
                 totalDays={totalDays}
                 t={t}
+                language={i18n.language}
               />
             </div>
 

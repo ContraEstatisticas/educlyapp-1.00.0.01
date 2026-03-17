@@ -1,6 +1,10 @@
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import { cn } from "@/lib/utils";
+import {
+  normalizeContentLanguage,
+  type AppContentLanguage,
+} from "@/lib/contentLanguage";
 import {
   Footprints,
   Compass,
@@ -97,11 +101,48 @@ const tierBorder: Record<string, string> = {
   platinum: "ring-2 ring-purple-500/50 ring-offset-2 ring-offset-background",
 };
 
+const medalHolderCopy: Record<
+  AppContentLanguage,
+  {
+    title: string;
+    subtitle: string;
+    earnedOn: string;
+    locked: string;
+  }
+> = {
+  pt: { title: "Porta Medalhas", subtitle: "{{earned}} de {{total}} conquistadas", earnedOn: "Conquistada em", locked: "Bloqueada" },
+  en: { title: "Medal Holder", subtitle: "{{earned}} of {{total}} earned", earnedOn: "Earned on", locked: "Locked" },
+  es: { title: "Porta medallas", subtitle: "{{earned}} de {{total}} ganadas", earnedOn: "Obtenida el", locked: "Bloqueada" },
+  fr: { title: "Porte-medailles", subtitle: "{{earned}} sur {{total}} obtenues", earnedOn: "Obtenue le", locked: "Verrouillee" },
+  de: { title: "Medaillenhalter", subtitle: "{{earned}} von {{total}} verdient", earnedOn: "Verdient am", locked: "Gesperrt" },
+  it: { title: "Porta medaglie", subtitle: "{{earned}} su {{total}} ottenute", earnedOn: "Ottenuta il", locked: "Bloccata" },
+  ru: { title: "Витрина медалей", subtitle: "{{earned}} из {{total}} получено", earnedOn: "Получена", locked: "Заблокирована" },
+  zh: { title: "奖牌陈列", subtitle: "已获得 {{earned}} / {{total}}", earnedOn: "获得于", locked: "已锁定" },
+  ja: { title: "メダルホルダー", subtitle: "{{total}} 個中 {{earned}} 個獲得", earnedOn: "獲得日", locked: "ロック中" },
+  ko: { title: "메달 보관함", subtitle: "{{total}}개 중 {{earned}}개 획득", earnedOn: "획득일", locked: "잠김" },
+  ar: { title: "حافظة الميداليات", subtitle: "تم الحصول على {{earned}} من {{total}}", earnedOn: "تم الحصول عليها في", locked: "مقفلة" },
+  hi: { title: "मेडल होल्डर", subtitle: "{{total}} में से {{earned}} प्राप्त", earnedOn: "प्राप्ति तिथि", locked: "लॉक" },
+  tr: { title: "Madalya standi", subtitle: "{{total}} madalyadan {{earned}} kazanildi", earnedOn: "Kazanilma tarihi", locked: "Kilitli" },
+  pl: { title: "Gablotka medali", subtitle: "{{earned}} z {{total}} zdobytych", earnedOn: "Zdobyto", locked: "Zablokowana" },
+  nl: { title: "Medaillerek", subtitle: "{{earned}} van {{total}} behaald", earnedOn: "Behaald op", locked: "Vergrendeld" },
+};
+
+const interpolate = (template: string, values?: Record<string, string | number>) => {
+  if (!values) return template;
+
+  return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, key: string) => {
+    const value = values[key];
+    return value === undefined || value === null ? "" : String(value);
+  });
+};
+
 export const MedalHolder = () => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const { getMedalsWithStatus, isLoading, earnedCount, totalCount } = useFreelancerMedals();
 
   const medals = getMedalsWithStatus();
+  const locale = normalizeContentLanguage(i18n.language);
+  const copy = medalHolderCopy[locale];
 
   if (isLoading) {
     return (
@@ -118,27 +159,20 @@ export const MedalHolder = () => {
 
   return (
     <div className="bg-card rounded-2xl p-6 border border-border">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-full bg-amber-100 dark:bg-amber-900/30">
             <Medal className="w-5 h-5 text-amber-600 dark:text-amber-400" />
           </div>
           <div>
-            <h3 className="font-bold text-lg text-foreground">
-              {t("freelancer.medalHolder", "Porta Medalhas")}
-            </h3>
+            <h3 className="font-bold text-lg text-foreground">{copy.title}</h3>
             <p className="text-sm text-muted-foreground">
-              {t("freelancer.earnedMedals", "{{earned}} de {{total}} conquistadas", {
-                earned: earnedCount,
-                total: totalCount,
-              })}
+              {interpolate(copy.subtitle, { earned: earnedCount, total: totalCount })}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Medal Grid */}
       <TooltipProvider delayDuration={100}>
         <div className="flex flex-wrap justify-center gap-3">
           {medals.map((medal) => {
@@ -170,7 +204,6 @@ export const MedalHolder = () => {
                       <Lock className="w-5 h-5 text-muted-foreground" />
                     )}
 
-                    {/* Shine effect for earned medals */}
                     {medal.isEarned && (
                       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/30 to-transparent pointer-events-none" />
                     )}
@@ -180,9 +213,7 @@ export const MedalHolder = () => {
                   side="top"
                   className={cn(
                     "max-w-xs",
-                    medal.isEarned
-                      ? "bg-background border-border"
-                      : "bg-muted border-border"
+                    medal.isEarned ? "bg-background border-border" : "bg-muted border-border"
                   )}
                 >
                   <div className="text-center">
@@ -190,14 +221,11 @@ export const MedalHolder = () => {
                     <p className="text-sm text-muted-foreground">{medal.description}</p>
                     {medal.isEarned && medal.earnedAt && (
                       <p className="text-xs text-success mt-1">
-                        ✓ {t("freelancer.earnedOn", "Conquistada em")}{" "}
-                        {new Date(medal.earnedAt).toLocaleDateString()}
+                        ✓ {copy.earnedOn} {new Date(medal.earnedAt).toLocaleDateString(i18n.language)}
                       </p>
                     )}
                     {!medal.isEarned && (
-                      <p className="text-xs text-muted-foreground mt-1 italic">
-                        {t("freelancer.locked", "Bloqueada")}
-                      </p>
+                      <p className="text-xs text-muted-foreground mt-1 italic">{copy.locked}</p>
                     )}
                   </div>
                 </TooltipContent>

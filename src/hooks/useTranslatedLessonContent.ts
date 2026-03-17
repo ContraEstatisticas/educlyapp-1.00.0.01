@@ -1,6 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+﻿import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { registerCacheClear } from "./useContentVersioning";
+import {
+  normalizeContentLanguage,
+  resolveLessonContentLanguage,
+} from "@/lib/contentLanguage";
 
 // Get the build version for cache-busting
 declare const __APP_VERSION__: string;
@@ -28,39 +32,36 @@ const lessonCache: Record<string, Record<string, { steps: LessonStep[] }>> = {};
 // Register cache clear function for version updates
 registerCacheClear(() => {
   Object.keys(lessonCache).forEach(key => delete lessonCache[key]);
-  console.log('🧹 Lesson content cache cleared');
+  console.log('ðŸ§¹ Lesson content cache cleared');
 });
 
-// Normalize language code (pt-BR → pt)
-const normalizeLanguage = (lang: string): string => {
-  return lang?.split('-')[0] || 'en';
-};
+// Normalize language code (pt-BR â†’ pt)
+const normalizeLanguage = (lang: string): string => normalizeContentLanguage(lang);
 
 // Lazy load lesson content by language using fetch (avoids TS-Go compiler issues)
 const loadLessonContent = async (lang: string): Promise<Record<string, { steps: LessonStep[] }> | null> => {
-  // Normalize language first (pt-BR → pt)
+  // Normalize language first (pt-BR â†’ pt)
   const normalizedLang = normalizeLanguage(lang);
   
   // In development, skip cache to allow live reloading of content
   const isDev = import.meta.env.DEV;
   
   if (!isDev && lessonCache[normalizedLang]) {
-    console.log(`📦 Using cached content for ${normalizedLang}`);
+    console.log(`ðŸ“¦ Using cached content for ${normalizedLang}`);
     return lessonCache[normalizedLang];
   }
 
-  const supportedLanguages = ['pt', 'en', 'es', 'ru', 'fr', 'de', 'it'];
-  const targetLang = supportedLanguages.includes(normalizedLang) ? normalizedLang : 'en';
+  const targetLang = resolveLessonContentLanguage(lang);
 
-  console.log(`🌍 i18n.language: ${lang} → normalized: ${normalizedLang} → target: ${targetLang}`);
+  console.log(`ðŸŒ i18n.language: ${lang} â†’ normalized: ${normalizedLang} â†’ lesson source: ${targetLang}`);
 
   try {
     // Always add version for cache-busting (dev uses timestamp, prod uses build version)
     const cacheBuster = isDev ? `?t=${Date.now()}` : `?v=${APP_VERSION}`;
     const url = `/i18n/lessonContent/${targetLang}-lessons.json${cacheBuster}`;
     
-    console.log(`📂 Carregando: ${targetLang}-lessons.json`);
-    console.log(`🔗 URL: ${url}`);
+    console.log(`ðŸ“‚ Carregando: ${targetLang}-lessons.json`);
+    console.log(`ðŸ”— URL: ${url}`);
     
     const response = await fetch(url);
     if (!response.ok) {
@@ -73,12 +74,12 @@ const loadLessonContent = async (lang: string): Promise<Record<string, { steps: 
     try {
       const content = JSON.parse(rawText);
       lessonCache[normalizedLang] = content;
-      console.log(`✅ Loaded ${targetLang}-lessons.json successfully with ${Object.keys(content).length} days`);
+      console.log(`âœ… Loaded ${targetLang}-lessons.json successfully with ${Object.keys(content).length} days`);
       return lessonCache[normalizedLang];
     } catch (parseError) {
       // Provide helpful error message with position
       const errorMsg = parseError instanceof Error ? parseError.message : 'Unknown parse error';
-      console.error(`❌ JSON SYNTAX ERROR in ${targetLang}-lessons.json:`);
+      console.error(`âŒ JSON SYNTAX ERROR in ${targetLang}-lessons.json:`);
       console.error(`   ${errorMsg}`);
       console.error(`   Fix the JSON file and reload the page.`);
       throw parseError;
@@ -87,7 +88,7 @@ const loadLessonContent = async (lang: string): Promise<Record<string, { steps: 
     console.warn(`Failed to load lesson content for ${lang}:`, error);
     // Fallback to English if not already
     if (targetLang !== 'en') {
-      console.log(`⚠️ Falling back to English lessons...`);
+      console.log(`âš ï¸ Falling back to English lessons...`);
       try {
         const cacheBuster = isDev ? `?t=${Date.now()}` : `?v=${APP_VERSION}`;
         const fallbackResponse = await fetch(`/i18n/lessonContent/en-lessons.json${cacheBuster}`);
@@ -95,11 +96,11 @@ const loadLessonContent = async (lang: string): Promise<Record<string, { steps: 
           const fallbackText = await fallbackResponse.text();
           const fallbackContent = JSON.parse(fallbackText);
           lessonCache[normalizedLang] = fallbackContent;
-          console.log(`✅ Loaded English fallback successfully`);
+          console.log(`âœ… Loaded English fallback successfully`);
           return lessonCache[normalizedLang];
         }
       } catch (fallbackError) {
-        console.error('❌ Failed to load English fallback:', fallbackError);
+        console.error('âŒ Failed to load English fallback:', fallbackError);
       }
     }
     return null;
@@ -116,7 +117,7 @@ export const useTranslatedLessonContent = () => {
   useEffect(() => {
     // DON'T load until i18n is ready (language detection complete)
     if (!ready) {
-      console.log('⏳ Aguardando i18n ficar pronto...');
+      console.log('â³ Aguardando i18n ficar pronto...');
       setIsLoading(true);
       return;
     }
@@ -125,7 +126,7 @@ export const useTranslatedLessonContent = () => {
     
     // If language changed, clear previous language cache AND reset state
     if (prevLangRef.current && prevLangRef.current !== currentLang) {
-      console.log(`🔄 Idioma mudou de ${prevLangRef.current} para ${currentLang}, limpando cache e estado...`);
+      console.log(`ðŸ”„ Idioma mudou de ${prevLangRef.current} para ${currentLang}, limpando cache e estado...`);
       delete lessonCache[prevLangRef.current];
       // Clear current content to force re-render with new language
       setLessonContent(null);
@@ -139,7 +140,7 @@ export const useTranslatedLessonContent = () => {
       
       // In dev mode, always reload; in prod, use cache
       if (!isDev && lessonCache[currentLang]) {
-        console.log(`📦 Usando cache para ${currentLang}`);
+        console.log(`ðŸ“¦ Usando cache para ${currentLang}`);
         setLessonContent(lessonCache[currentLang]);
         setContentLanguage(currentLang);
         setIsLoading(false);
@@ -150,7 +151,7 @@ export const useTranslatedLessonContent = () => {
       const content = await loadLessonContent(i18n.language);
       setLessonContent(content);
       setContentLanguage(currentLang);
-      console.log(`🌐 Conteúdo carregado e estado atualizado para: ${currentLang}`);
+      console.log(`ðŸŒ ConteÃºdo carregado e estado atualizado para: ${currentLang}`);
       setIsLoading(false);
     };
 
@@ -162,7 +163,7 @@ export const useTranslatedLessonContent = () => {
     
     // Don't return stale content from wrong language
     if (!lessonContent || contentLanguage !== currentLang) {
-      console.log(`⏳ Aguardando conteúdo para ${currentLang} (atual: ${contentLanguage || 'nenhum'})`);
+      console.log(`â³ Aguardando conteÃºdo para ${currentLang} (atual: ${contentLanguage || 'nenhum'})`);
       return [];
     }
 
@@ -173,7 +174,7 @@ export const useTranslatedLessonContent = () => {
       return [];
     }
 
-    console.log(`📚 Day ${dayNumber} - Retornando ${dayData.steps.length} steps para idioma: ${contentLanguage}`);
+    console.log(`ðŸ“š Day ${dayNumber} - Retornando ${dayData.steps.length} steps para idioma: ${contentLanguage}`);
 
     return dayData.steps.map((step) => {
       const baseStep: LessonStep = {
@@ -209,3 +210,5 @@ export const useTranslatedLessonContent = () => {
     isLoading,
   };
 };
+
+

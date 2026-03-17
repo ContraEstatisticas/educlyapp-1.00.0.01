@@ -13,6 +13,7 @@ import { MedalHolder } from "@/components/freelancer/MedalHolder";
 import { FreelancerStepsBar } from "@/components/lesson/FreelancerStepsBar";
 import type { StepProgress } from "@/components/lesson/FreelancerStepsBar";
 import { MobileNav } from "@/components/MobileNav";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 // Componente separado para o conteúdo da barra lateral (Card + Medalhas)
 const SidebarContent = ({
@@ -20,13 +21,15 @@ const SidebarContent = ({
   completedCount,
   totalModules,
   progressPercentage,
-  t
+  t,
+  language
 }: {
   allCompleted: boolean;
   completedCount: number;
   totalModules: number;
   progressPercentage: number;
   t: any;
+  language: string;
 }) => (
   <div className="flex flex-col gap-6">
     {/* Card de Conquista com suporte a Dark Mode */}
@@ -37,13 +40,15 @@ const SidebarContent = ({
       </div>
 
       <div className="inline-block bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-        Certificado de Elite
+        {tUi(t, language, "certificate.eliteCertificate")}
       </div>
 
       <h2 className="text-2xl font-black text-foreground mb-2">
-        {allCompleted ? t("trail.congratulations", "Conquistado!") : t("freelancer.inProgress", "Em Progresso")}
+        {allCompleted
+          ? tUi(t, language, "certificate.conquered")
+          : tUi(t, language, "freelancer.inProgress")}
       </h2>
-      <p className="text-muted-foreground mb-6 font-medium">Trilha Freelancer Pro</p>
+      <p className="text-muted-foreground mb-6 font-medium">{t("freelancer.title", "Freelancer Pro")}</p>
 
       {/* Barra de Progresso interna */}
       <div className="w-full bg-secondary h-3 rounded-full overflow-hidden mb-3">
@@ -53,7 +58,11 @@ const SidebarContent = ({
         />
       </div>
       <p className="text-xs text-muted-foreground font-semibold">
-        {completedCount} de {totalModules} módulos completados ({progressPercentage}%)
+        {tUi(t, language, "freelancer.modulesCompleted", {
+          completed: completedCount,
+          total: totalModules,
+          percent: progressPercentage,
+        })}
       </p>
     </div>
 
@@ -66,7 +75,7 @@ const SidebarContent = ({
 
 const FreelancerContent = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getAllModules, isLoading } = useFreelancerContent();
   const [moduleProgress, setModuleProgress] = useState<Record<number, { stepIndex: number; completed: boolean }>>({});
@@ -116,8 +125,8 @@ const FreelancerContent = () => {
   const handleModuleClick = (moduleNumber: number, hasContent: boolean) => {
     if (!isModuleUnlocked(moduleNumber)) {
       toast({
-        title: t("freelancer.moduleLocked", "Módulo Bloqueado"),
-        description: t("freelancer.completePreview", "Complete o módulo anterior primeiro"),
+        title: tUi(t, i18n.language, "freelancer.moduleLocked"),
+        description: tUi(t, i18n.language, "freelancer.completePreview"),
         variant: "destructive",
       });
       return;
@@ -126,8 +135,8 @@ const FreelancerContent = () => {
       navigate(`/freelancer/${moduleNumber}`);
     } else {
       toast({
-        title: t("freelancer.comingSoon"),
-        description: t("freelancer.moduleInDevelopment"),
+        title: tUi(t, i18n.language, "freelancer.comingSoon"),
+        description: tUi(t, i18n.language, "freelancer.moduleInDevelopment"),
       });
     }
   };
@@ -166,7 +175,7 @@ const FreelancerContent = () => {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <Loader2 className="w-10 h-10 text-primary animate-spin mx-auto mb-4" />
-          <p className="text-muted-foreground">{t("trail.loading", "Carregando...")}</p>
+          <p className="text-muted-foreground">{t("common.loading", "Loading...")}</p>
         </div>
       </div>
     );
@@ -202,6 +211,7 @@ const FreelancerContent = () => {
                 totalModules={totalModules}
                 progressPercentage={progressPercentage}
                 t={t}
+                language={i18n.language}
               />
             </div>
           </div>
@@ -226,7 +236,7 @@ const FreelancerContent = () => {
               <div>
                 <h1 className="text-xl font-bold text-foreground">{t("freelancer.title")}</h1>
                 <p className="text-sm text-muted-foreground">
-                  {completedCount}/{totalModules} {t("freelancer.modulesCount", "módulos")}
+                  {completedCount}/{totalModules} {tUi(t, i18n.language, "freelancer.modulesCount")}
                 </p>
               </div>
             </div>
@@ -262,6 +272,7 @@ const FreelancerContent = () => {
                 totalModules={totalModules}
                 progressPercentage={progressPercentage}
                 t={t}
+                language={i18n.language}
               />
             </div>
 

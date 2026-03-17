@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useFreelancerContent } from "@/hooks/useFreelancerContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { useToast } from "@/hooks/use-toast";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 const MatchWords = lazy(() => import("@/components/lesson/MatchWords").then((m) => ({ default: m.MatchWords })));
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((m) => ({ default: m.FillBlanks })));
@@ -35,7 +36,7 @@ interface FinalCardProps {
 }
 
 const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProps) => {
-  const { t } = useTranslation("challenge");
+  const { t, i18n } = useTranslation();
   
   return (
     <div className="animate-in zoom-in duration-700 bg-[#0f172a] rounded-[40px] p-12 text-white text-center shadow-2xl shadow-slate-200">
@@ -43,10 +44,10 @@ const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProp
         <CheckCircle2 className="w-10 h-10 text-white" />
       </div>
       <h3 className="text-[34px] font-[900] mb-4 tracking-tight leading-tight">
-        {t("lesson.moduleComplete", "Módulo Concluído!")}
+        {tUi(t, i18n.language, "freelancer.lesson.moduleComplete")}
       </h3>
       <p className="text-slate-400 mb-8">
-        {t("lesson.moduleCompleteDesc", `Parabéns! Você completou o módulo ${moduleNumber}.`)}
+        {tUi(t, i18n.language, "freelancer.lesson.moduleCompleteDesc", { moduleNumber })}
       </p>
       <Button
         onClick={onComplete}
@@ -56,7 +57,9 @@ const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProp
         {isSavingProgress ? (
           <Sparkles className="w-5 h-5 animate-spin mr-2" />
         ) : null}
-        {isSavingProgress ? t("common.saving", "SALVANDO...") : t("common.backToModules", "VOLTAR A MÓDULOS")}
+        {isSavingProgress
+          ? t("common.saving", "Saving...")
+          : tUi(t, i18n.language, "freelancer.lesson.backToModules")}
       </Button>
     </div>
   );
@@ -65,7 +68,7 @@ const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProp
 const FreelancerLesson = () => {
   const { moduleId } = useParams<{ moduleId: string }>();
   const navigate = useNavigate();
-  const { t } = useTranslation("challenge");
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getModuleContent, getModuleInfo, isLoading: contentLoading } = useFreelancerContent();
   const { playCorrect, playIncorrect } = useQuizSounds();
@@ -112,8 +115,8 @@ const FreelancerLesson = () => {
       if (error) {
         console.error("Error saving module progress:", error);
         toast({
-          title: t("common.error", "Erro"),
-          description: t("freelancer.errorSavingProgress", "Erro ao salvar progresso"),
+          title: t("common.error", "Error"),
+          description: tUi(t, i18n.language, "freelancer.errorSavingProgress"),
           variant: "destructive"
         });
       } else {
@@ -124,7 +127,7 @@ const FreelancerLesson = () => {
     } finally {
       setIsSavingProgress(false);
     }
-  }, [moduleNumber, completedSteps.size, steps.length, t, toast]);
+  }, [moduleNumber, completedSteps.size, steps.length, t, toast, i18n.language]);
 
   // Função para processar negrito (**)
   const renderFormattedText = (text: string) => {
@@ -281,7 +284,7 @@ const FreelancerLesson = () => {
           className="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium text-slate-600 hover:bg-white transition-all animate-in fade-in slide-in-from-top-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          Voltar
+          {t("common.back", "Back")}
           <ChevronDown className="w-4 h-4 rotate-180" />
         </button>
       )}
@@ -311,7 +314,7 @@ const FreelancerLesson = () => {
                 <div className="space-y-8">
                   <div className="space-y-6">
                     <span className="bg-[#fff7ed] text-[#c2410c] px-3 py-1.5 rounded-lg text-[11px] font-[900] tracking-widest flex items-center gap-2 w-fit uppercase">
-                      <span className="text-sm">📚</span> APRENDER
+                      <span className="text-sm">📚</span> {tUi(t, i18n.language, "freelancer.lesson.tagLearn")}
                     </span>
 
                     {step.title && (
@@ -334,7 +337,7 @@ const FreelancerLesson = () => {
                       onClick={() => handleStepComplete(index)}
                       className="w-full bg-[#f97316] hover:bg-[#ea580c] text-white font-[900] py-8 rounded-2xl text-[17px] uppercase tracking-[0.15em] shadow-xl shadow-orange-100 transition-all active:scale-[0.98] mt-4"
                     >
-                      CONTINUAR
+                      {tUi(t, i18n.language, "freelancer.lesson.continue")}
                     </Button>
                   )}
                 </div>
@@ -344,7 +347,7 @@ const FreelancerLesson = () => {
               {step.type === "quiz" && (
                 <div className="space-y-8">
                   <span className="bg-[#fff7ed] text-[#c2410c] px-3 py-1.5 rounded-lg text-[11px] font-[900] tracking-widest flex items-center gap-2 w-fit uppercase">
-                    <span className="text-sm">❓</span> DESAFIO
+                    <span className="text-sm">❓</span> {tUi(t, i18n.language, "freelancer.lesson.tagChallenge")}
                   </span>
 
                   <h3 className="text-[26px] font-[900] text-[#0f172a] leading-tight tracking-tight">
@@ -403,7 +406,7 @@ const FreelancerLesson = () => {
                       variant="outline"
                       className="w-full border-slate-200 text-slate-500 font-bold rounded-2xl py-6"
                     >
-                      <RotateCcw className="w-4 h-4 mr-2" /> Tentar de novo
+                      <RotateCcw className="w-4 h-4 mr-2" /> {tUi(t, i18n.language, "freelancer.lesson.tryAgain")}
                     </Button>
                   )}
                 </div>

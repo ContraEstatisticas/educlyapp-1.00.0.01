@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 interface AIToolPopupProps {
   toolSlug: string | null;
@@ -40,7 +41,7 @@ export const AIToolPopup = ({
   isOpen,
   onClose,
 }: AIToolPopupProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isGenerating, setIsGenerating] = useState(false);
@@ -93,7 +94,7 @@ export const AIToolPopup = ({
       if (error) {
         console.error("Certificate generation error:", error);
         toast({
-          title: t("challenge.certificateError", "Erro ao gerar certificado"),
+          title: tUi(t, i18n.language, "challenge.certificateError"),
           description: error.message,
           variant: "destructive",
         });
@@ -105,8 +106,8 @@ export const AIToolPopup = ({
         navigate(`/certificado/${certId}`);
       } else {
         toast({
-          title: t("challenge.certificateError", "Erro ao gerar certificado"),
-          description: t("challenge.certificateIncomplete", "Complete todos os dias desta ferramenta primeiro."),
+          title: tUi(t, i18n.language, "challenge.certificateError"),
+          description: tUi(t, i18n.language, "challenge.certificateIncomplete"),
           variant: "destructive",
         });
       }
@@ -164,7 +165,7 @@ export const AIToolPopup = ({
         {/* Advantages */}
         <div className="px-6 pb-4">
           <h3 className="text-sm font-semibold text-foreground mb-3">
-            {t("challenge.toolAdvantages")}
+            {tUi(t, i18n.language, "challenge.toolAdvantages")}
           </h3>
           <ul className="space-y-2">
             {advantages.map((key, i) => (
@@ -173,7 +174,7 @@ export const AIToolPopup = ({
                   className="w-4 h-4 mt-0.5 flex-shrink-0"
                   style={{ color: config.color }}
                 />
-                <span className="text-sm text-muted-foreground">{t(`challenge.${key}`)}</span>
+                <span className="text-sm text-muted-foreground">{tUi(t, i18n.language, `challenge.${key}`)}</span>
               </li>
             ))}
           </ul>
@@ -193,13 +194,13 @@ export const AIToolPopup = ({
                 <Award className="w-4 h-4" />
               )}
               {isGenerating
-                ? t("challenge.generatingCertificate", "Gerando...")
-                : t("challenge.generateCertificate")}
+                ? tUi(t, i18n.language, "challenge.generatingCertificate")
+                : tUi(t, i18n.language, "challenge.generateCertificate")}
             </Button>
           ) : (
             <Button className="w-full gap-2" variant="secondary" disabled>
               <Lock className="w-4 h-4" />
-              {t("challenge.completeToCertificate")}
+              {tUi(t, i18n.language, "challenge.completeToCertificate")}
             </Button>
           )}
         </div>
