@@ -11,42 +11,70 @@ import { CompanyInfo } from "@/components/landing/CompanyInfo";
 const Contact = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const supportEmail = "contact@educly.app";
 
   const aiCapabilities = [
-    t('contactPage.aiCapabilities.item1'),
-    t('contactPage.aiCapabilities.item2'),
-    t('contactPage.aiCapabilities.item3'),
-    t('contactPage.aiCapabilities.item4'),
-    t('contactPage.aiCapabilities.item5'),
-    t('contactPage.aiCapabilities.item6'),
+    t("contactPage.aiCapabilities.item1"),
+    t("contactPage.aiCapabilities.item2"),
+    t("contactPage.aiCapabilities.item3"),
+    t("contactPage.aiCapabilities.item4"),
+    t("contactPage.aiCapabilities.item5"),
+    t("contactPage.aiCapabilities.item6"),
   ];
 
   const handleOpenChat = () => {
-    const event = new Event('open-support-chat');
+    const event = new Event("open-support-chat");
     window.dispatchEvent(event);
+  };
+
+  const openSupportEmail = (subject?: string) => {
+    const isMobileDevice = /android|iphone|ipad|ipod|mobile|windows phone|blackberry/i.test(navigator.userAgent);
+    const cleanedSubject = subject?.trim();
+
+    const mailtoParams = new URLSearchParams();
+    if (cleanedSubject) {
+      mailtoParams.set("subject", cleanedSubject);
+    }
+
+    const mailtoUrl = `mailto:${supportEmail}${mailtoParams.toString() ? `?${mailtoParams.toString()}` : ""}`;
+
+    if (isMobileDevice) {
+      window.location.href = mailtoUrl;
+      return;
+    }
+
+    const gmailParams = new URLSearchParams({
+      view: "cm",
+      to: supportEmail,
+    });
+    if (cleanedSubject) {
+      gmailParams.set("su", cleanedSubject);
+    }
+
+    window.open(`https://mail.google.com/mail/?${gmailParams.toString()}`, "_blank", "noopener,noreferrer");
   };
 
   return (
     <div className="min-h-screen bg-background">
       <LandingNavbar variant="white" />
-      
+
       <main className="container mx-auto px-4 pt-24 pb-16">
         {/* Back button */}
-        <button 
-          onClick={() => navigate('/')}
+        <button
+          onClick={() => navigate("/")}
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          {t('common.back')}
+          {t("common.back")}
         </button>
 
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {t('contactPage.title')}
+            {t("contactPage.title")}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t('contactPage.subtitle')}
+            {t("contactPage.subtitle")}
           </p>
         </div>
 
@@ -58,19 +86,19 @@ const Contact = () => {
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="w-8 h-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl">{t('contactPage.aiChat.title')}</CardTitle>
+              <CardTitle className="text-2xl">{t("contactPage.aiChat.title")}</CardTitle>
               <CardDescription className="text-base">
-                {t('contactPage.aiChat.description')}
+                {t("contactPage.aiChat.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm text-green-600">
                 <Sparkles className="w-4 h-4" />
-                {t('contactPage.aiChat.available')}
+                {t("contactPage.aiChat.available")}
               </div>
               <Button onClick={handleOpenChat} className="w-full" size="lg">
                 <MessageCircle className="w-4 h-4 mr-2" />
-                {t('contactPage.aiChat.button')}
+                {t("contactPage.aiChat.button")}
               </Button>
             </CardContent>
           </Card>
@@ -81,27 +109,27 @@ const Contact = () => {
               <div className="w-16 h-16 bg-accent/50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-8 h-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl">{t('contactPage.humanSupport.title')}</CardTitle>
+              <CardTitle className="text-2xl">{t("contactPage.humanSupport.title")}</CardTitle>
               <CardDescription className="text-base">
-                {t('contactPage.humanSupport.description')}
+                {t("contactPage.humanSupport.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4" />
-                {t('contactPage.humanSupport.responseTime')}
+                {t("contactPage.humanSupport.responseTime")}
               </div>
-              <Button 
-                onClick={() => window.open('https://mail.google.com/mail/?view=cm&to=contact@educly.app', '_blank')}
-                className="w-full" 
+              <Button
+                onClick={() => openSupportEmail()}
+                className="w-full"
                 size="lg"
               >
                 <Mail className="w-4 h-4 mr-2" />
-                {t('contactPage.humanSupport.button')}
+                {t("contactPage.humanSupport.button")}
               </Button>
-              
+
               <p className="text-sm text-muted-foreground font-mono">
-                contact@educly.app
+                {supportEmail}
               </p>
             </CardContent>
           </Card>
@@ -112,31 +140,27 @@ const Contact = () => {
               <div className="w-16 h-16 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <RefreshCcw className="w-8 h-8 text-orange-500" />
               </div>
-              <CardTitle className="text-2xl">{t('contactPage.refund.title')}</CardTitle>
+              <CardTitle className="text-2xl">{t("contactPage.refund.title")}</CardTitle>
               <CardDescription className="text-base">
-                {t('contactPage.refund.description')}
+                {t("contactPage.refund.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4" />
-                {t('contactPage.refund.responseTime')}
+                {t("contactPage.refund.responseTime")}
               </div>
-              <Button 
-                onClick={() => {
-                  const subject = encodeURIComponent(t('contactPage.refund.subject', 'Cancellation Request'));
-                  const url = `https://mail.google.com/mail/?view=cm&to=contact@educly.app&su=${subject}`;
-                  window.open(url, '_blank');
-                }}
-                className="w-full" 
+              <Button
+                onClick={() => openSupportEmail(t("contactPage.refund.subject", "Cancellation Request"))}
+                className="w-full"
                 size="lg"
               >
                 <RefreshCcw className="w-4 h-4 mr-2" />
-                {t('contactPage.refund.button')}
+                {t("contactPage.refund.button")}
               </Button>
-              
+
               <p className="text-sm text-muted-foreground font-mono">
-                contact@educly.app
+                {supportEmail}
               </p>
             </CardContent>
           </Card>
@@ -147,27 +171,27 @@ const Contact = () => {
               <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lightbulb className="w-8 h-8 text-purple-500" />
               </div>
-              <CardTitle className="text-2xl">{t('contactPage.feedback.title')}</CardTitle>
+              <CardTitle className="text-2xl">{t("contactPage.feedback.title")}</CardTitle>
               <CardDescription className="text-base">
-                {t('contactPage.feedback.description')}
+                {t("contactPage.feedback.description")}
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4" />
-                {t('contactPage.feedback.responseTime')}
+                {t("contactPage.feedback.responseTime")}
               </div>
-              <Button 
-                onClick={() => window.open('https://mail.google.com/mail/?view=cm&to=contact@educly.app&su=Feedback: Bug/Sugestão', '_blank')}
-                className="w-full" 
+              <Button
+                onClick={() => openSupportEmail(t("contactPage.feedback.subject", "Feedback: Bug/Sugestão"))}
+                className="w-full"
                 size="lg"
               >
                 <Lightbulb className="w-4 h-4 mr-2" />
-                {t('contactPage.feedback.button')}
+                {t("contactPage.feedback.button")}
               </Button>
-              
+
               <p className="text-sm text-muted-foreground font-mono">
-                contact@educly.app
+                {supportEmail}
               </p>
             </CardContent>
           </Card>
@@ -176,7 +200,7 @@ const Contact = () => {
         {/* AI Capabilities Section */}
         <div className="max-w-3xl mx-auto mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-            {t('contactPage.aiCapabilities.title')}
+            {t("contactPage.aiCapabilities.title")}
           </h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {aiCapabilities.map((item, index) => (
