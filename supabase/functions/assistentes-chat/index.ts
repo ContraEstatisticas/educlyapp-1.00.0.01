@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+﻿import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -41,60 +41,60 @@ const API_TIMEOUT_MS = 60000; // 60s hard timeout to prevent connection hanging
 // System prompts per AI persona (multilingual)
 const AI_PERSONAS: Record<string, { pt: string; en: string; isImage?: boolean }> = {
   chatgpt: {
-    pt: `Você é o ChatGPT, assistente de IA da OpenAI. Você é prestativo, criativo e claro nas respostas.
-Responda de forma natural como o ChatGPT faria. Seja completo mas conciso. Use markdown quando útil.
-Responda no idioma do usuário. Se a pergunta for em português, responda em português.`,
+    pt: `VocÃª Ã© o ChatGPT, assistente de IA da OpenAI. VocÃª Ã© prestativo, criativo e claro nas respostas.
+Responda de forma natural como o ChatGPT faria. Seja completo mas conciso. Use markdown quando Ãºtil.
+Responda no idioma do usuÃ¡rio. Se a pergunta for em portuguÃªs, responda em portuguÃªs.`,
     en: `You are ChatGPT, OpenAI's AI assistant. You are helpful, creative and clear in your responses.
 Respond naturally as ChatGPT would. Be complete but concise. Use markdown when useful.
 Respond in the user's language.`,
   },
   gemini: {
-    pt: `Você é o Gemini, assistente de IA do Google. Você é inteligente, analítico e multimodal.
+    pt: `VocÃª Ã© o Gemini, assistente de IA do Google. VocÃª Ã© inteligente, analÃ­tico e multimodal.
 Responda de forma natural como o Gemini faria. Seja preciso, use dados quando relevante. Use markdown.
-Responda no idioma do usuário. Se a pergunta for em português, responda em português.`,
+Responda no idioma do usuÃ¡rio. Se a pergunta for em portuguÃªs, responda em portuguÃªs.`,
     en: `You are Gemini, Google's AI assistant. You are intelligent, analytical and multimodal.
 Respond naturally as Gemini would. Be precise, use data when relevant. Use markdown.
 Respond in the user's language.`,
   },
   claude: {
-    pt: `Você é o Claude, assistente de IA da Anthropic. Você é cuidadoso, honesto e extremamente útil.
-Responda de forma natural como o Claude faria. Seja detalhista, estruturado e ético. Use markdown.
-Responda no idioma do usuário. Se a pergunta for em português, responda em português.`,
+    pt: `VocÃª Ã© o Claude, assistente de IA da Anthropic. VocÃª Ã© cuidadoso, honesto e extremamente Ãºtil.
+Responda de forma natural como o Claude faria. Seja detalhista, estruturado e Ã©tico. Use markdown.
+Responda no idioma do usuÃ¡rio. Se a pergunta for em portuguÃªs, responda em portuguÃªs.`,
     en: `You are Claude, Anthropic's AI assistant. You are careful, honest and extremely helpful.
 Respond naturally as Claude would. Be detailed, structured and ethical. Use markdown.
 Respond in the user's language.`,
   },
   grok: {
-    pt: `Você é o Grok, assistente de IA da xAI (empresa de Elon Musk). Você é irreverente, inteligente e direto.
+    pt: `VocÃª Ã© o Grok, assistente de IA da xAI (empresa de Elon Musk). VocÃª Ã© irreverente, inteligente e direto.
 Responda de forma natural como o Grok faria. Tenha um toque de humor seco e seja honesto sobre incertezas. Use markdown.
-Responda no idioma do usuário. Se a pergunta for em português, responda em português.`,
+Responda no idioma do usuÃ¡rio. Se a pergunta for em portuguÃªs, responda em portuguÃªs.`,
     en: `You are Grok, xAI's AI assistant (Elon Musk's company). You are irreverent, intelligent and direct.
 Respond naturally as Grok would. Have a touch of dry humor and be honest about uncertainties. Use markdown.
 Respond in the user's language.`,
   },
   nanobanana: {
-    pt: `Você é o NanoBanana, um assistente criativo especializado em geração de imagens com IA.
-IMPORTANTE: Você irá GERAR imagens diretamente, não criar prompts para outras ferramentas.
-Responda APENAS com uma breve descrição do que você vai criar (1-2 frases).
-Exemplo: "Vou criar uma imagem de um dragão dourado voando sobre um castelo ao pôr do sol! 🎨"
-NÃO inclua instruções técnicas, parâmetros ou prompts extensos. Responda no idioma do usuário.`,
+    pt: `VocÃª Ã© o NanoBanana, um assistente criativo especializado em geraÃ§Ã£o de imagens com IA.
+IMPORTANTE: VocÃª irÃ¡ GERAR imagens diretamente, nÃ£o criar prompts para outras ferramentas.
+Responda APENAS com uma breve descriÃ§Ã£o do que vocÃª vai criar (1-2 frases).
+Exemplo: "Vou criar uma imagem de um dragÃ£o dourado voando sobre um castelo ao pÃ´r do sol! ðŸŽ¨"
+NÃƒO inclua instruÃ§Ãµes tÃ©cnicas, parÃ¢metros ou prompts extensos. Responda no idioma do usuÃ¡rio.`,
     en: `You are NanoBanana, a creative assistant specialized in AI image generation.
 IMPORTANT: You will GENERATE images directly, not create prompts for other tools.
 Respond ONLY with a brief description of what you will create (1-2 sentences).
-Example: "I'll create an image of a golden dragon flying over a castle at sunset! 🎨"
+Example: "I'll create an image of a golden dragon flying over a castle at sunset! ðŸŽ¨"
 Do NOT include technical instructions, parameters, or extensive prompts. Respond in the user's language.`,
     isImage: true,
   },
   edi: {
-    pt: `Você é o EDI, o assistente oficial da Educly - uma plataforma de educação em inteligência artificial.
-Você é amigável, didático e motivador. Ajude os usuários a aprender sobre IA de forma simples e prática.
-Use emojis moderadamente. Seja encorajador. Responda no idioma do usuário.
+    pt: `VocÃª Ã© o EDI, o assistente oficial da Educly - uma plataforma de educaÃ§Ã£o em inteligÃªncia artificial.
+VocÃª Ã© amigÃ¡vel, didÃ¡tico e motivador. Ajude os usuÃ¡rios a aprender sobre IA de forma simples e prÃ¡tica.
+Use emojis moderadamente. Seja encorajador. Responda no idioma do usuÃ¡rio.
 
 REGRAS SOBRE CANCELAMENTO E REEMBOLSO:
-- Você NÃO tem acesso a dados de pagamento, assinaturas ou cobranças.
-- Para qualquer questão sobre cancelamento, reembolso, cobrança ou assinatura, SEMPRE direcione o usuário para: https://educly.app/contato
-- NUNCA tente processar cancelamentos ou dar instruções manuais de como cancelar.
-- Responda: "Para questões sobre cancelamento, reembolso ou cobranças, entre em contato com nosso suporte em https://educly.app/contato 😊"`,
+- VocÃª NÃƒO tem acesso a dados de pagamento, assinaturas ou cobranÃ§as.
+- Para qualquer questÃ£o sobre cancelamento, reembolso, cobranÃ§a ou assinatura, SEMPRE direcione o usuÃ¡rio para: https://educly.app/contato
+- NUNCA tente processar cancelamentos ou dar instruÃ§Ãµes manuais de como cancelar.
+- Responda: "Para questÃµes sobre cancelamento, reembolso ou cobranÃ§as, entre em contato com nosso suporte em https://educly.app/contato ðŸ˜Š"`,
     en: `You are EDI, the official Educly assistant - an AI education platform.
 You are friendly, didactic and motivating. Help users learn about AI in a simple and practical way.
 Use emojis moderately. Be encouraging. Respond in the user's language.
@@ -103,8 +103,196 @@ RULES ABOUT CANCELLATION AND REFUNDS:
 - You do NOT have access to payment, subscription or billing data.
 - For any question about cancellation, refund, billing or subscription, ALWAYS direct the user to: https://educly.app/contato
 - NEVER try to process cancellations or give manual instructions on how to cancel.
-- Respond: "For questions about cancellation, refund or billing, please contact our support at https://educly.app/contato 😊"`,
+- Respond: "For questions about cancellation, refund or billing, please contact our support at https://educly.app/contato ðŸ˜Š"`,
   },
+};
+
+
+const QUICK_REPLY_SUPPORTED_LANGS = [
+  "pt",
+  "en",
+  "es",
+  "fr",
+  "de",
+  "it",
+  "ru",
+  "zh",
+  "ja",
+  "ko",
+  "ar",
+  "hi",
+  "tr",
+  "pl",
+  "nl",
+] as const;
+
+type QuickReplyLang = (typeof QUICK_REPLY_SUPPORTED_LANGS)[number];
+
+type QuickReplyRule = {
+  id: string;
+  keywords: string[];
+  responses: Record<QuickReplyLang, string>;
+};
+
+const buildQuickReplyResponses = (
+  partial: Partial<Record<QuickReplyLang, string>> & Pick<Record<QuickReplyLang, string>, "pt" | "en" | "es">
+): Record<QuickReplyLang, string> => {
+  const output = {} as Record<QuickReplyLang, string>;
+  for (const lang of QUICK_REPLY_SUPPORTED_LANGS) {
+    output[lang] = partial[lang] || partial.en;
+  }
+  return output;
+};
+
+const EDI_QUICK_REPLY_RULES: QuickReplyRule[] = [
+  {
+    id: "cancel_refund_billing",
+    keywords: ["cancelamento", "cancelar", "reembolso", "refund", "chargeback", "cobranca", "assinatura", "unsubscribe", "billing", "pagamento"],
+    responses: buildQuickReplyResponses({
+      pt: "Para cancelamento ou cobranca, fale com nosso suporte humano: https://educly.app/contato . Se preferir, envie email para contact@educly.app.",
+      en: "For cancellation or billing, please contact our human support: https://educly.app/contato . You can also email contact@educly.app.",
+      es: "Para cancelacion o cobros, contacta con soporte humano: https://educly.app/contato . Tambien puedes escribir a contact@educly.app.",
+      fr: "Pour annulation, remboursement ou facturation, contactez notre support humain: https://educly.app/contato . Vous pouvez aussi ecrire a contact@educly.app.",
+      de: "Fur Kundigung, Erstattung oder Abrechnung kontaktieren Sie bitte unseren Support: https://educly.app/contato . Sie konnen auch an contact@educly.app schreiben.",
+      it: "Per cancellazione, rimborso o fatturazione, contatta il nostro supporto: https://educly.app/contato . Puoi anche scrivere a contact@educly.app.",
+      ru: "Po voprosam otmeny, vozvrata ili oplaty obratites v podderzhku: https://educly.app/contato . Takzhe mozhno napisat na contact@educly.app.",
+      tr: "Iptal, iade veya faturalama icin lutfen destek ekibimizle iletisime gecin: https://educly.app/contato . Ayrica contact@educly.app adresine yazabilirsiniz.",
+      pl: "W sprawie anulowania, zwrotu lub platnosci skontaktuj sie z naszym wsparciem: https://educly.app/contato . Mozesz tez napisac na contact@educly.app.",
+      nl: "Voor annulering, terugbetaling of facturatie neem contact op met support: https://educly.app/contato . Je kunt ook mailen naar contact@educly.app.",
+    }),
+  },
+  {
+    id: "pricing_plan",
+    keywords: ["preco", "precos", "valor", "plano", "planos", "price", "pricing", "cost", "cuanto cuesta"],
+    responses: buildQuickReplyResponses({
+      pt: "Os valores e planos ficam em https://educly.app/plan . Se quiser, eu tambem posso te explicar qual plano combina melhor com seu objetivo.",
+      en: "You can check pricing and plans at https://educly.app/plan . If you want, I can also help you choose the best plan for your goal.",
+      es: "Puedes ver precios y planes en https://educly.app/plan . Si quieres, tambien puedo ayudarte a elegir el mejor plan para tu objetivo.",
+      fr: "Vous pouvez voir les prix et plans sur https://educly.app/plan . Je peux aussi vous aider a choisir le meilleur plan selon votre objectif.",
+      de: "Preise und Plane finden Sie unter https://educly.app/plan . Ich kann Ihnen auch helfen, den passenden Plan zu wahlen.",
+      it: "Puoi vedere prezzi e piani su https://educly.app/plan . Posso anche aiutarti a scegliere il piano migliore per il tuo obiettivo.",
+      ru: "Ceny i plany dostupny na https://educly.app/plan . Ya takzhe mogu pomoch vybrat luchshiy plan pod vashu cel.",
+      tr: "Fiyatlari ve planlari https://educly.app/plan adresinde gorebilirsiniz. Hedefinize uygun en iyi plani secmenize de yardim edebilirim.",
+      pl: "Cennik i plany znajdziesz na https://educly.app/plan . Moge tez pomoc wybrac najlepszy plan do Twojego celu.",
+      nl: "Prijzen en plannen vind je op https://educly.app/plan . Ik kan je ook helpen het beste plan te kiezen voor je doel.",
+    }),
+  },
+  {
+    id: "support_contact",
+    keywords: ["suporte", "support", "atendente", "humano", "email", "contato", "contact", "ajuda humana"],
+    responses: buildQuickReplyResponses({
+      pt: "Voce pode falar com nosso suporte em https://educly.app/contato ou por email em contact@educly.app. Se quiser, eu te ajudo a montar a mensagem.",
+      en: "You can reach our support team at https://educly.app/contato or by email at contact@educly.app. If you want, I can help you draft the message.",
+      es: "Puedes hablar con soporte en https://educly.app/contato o por email en contact@educly.app. Si quieres, te ayudo a redactar el mensaje.",
+      fr: "Vous pouvez parler avec notre support sur https://educly.app/contato ou par email a contact@educly.app. Si vous voulez, je peux vous aider a rediger le message.",
+      de: "Sie konnen unser Support-Team unter https://educly.app/contato oder per E-Mail an contact@educly.app erreichen. Ich kann Ihnen auch beim Formulieren helfen.",
+      it: "Puoi contattare il nostro supporto su https://educly.app/contato o via email a contact@educly.app. Se vuoi, ti aiuto a scrivere il messaggio.",
+      ru: "Vy mozhete svyazatsya s podderzhkoy na https://educly.app/contato ili po email contact@educly.app. Esli nuzhno, ya pomogu sostavit soobshchenie.",
+      tr: "Destek ekibimize https://educly.app/contato uzerinden veya contact@educly.app adresinden ulasabilirsiniz. Isterseniz mesaji yazmaniza yardim ederim.",
+      pl: "Mozesz skontaktowac sie ze wsparciem przez https://educly.app/contato lub email: contact@educly.app. Jesli chcesz, pomoge napisac wiadomosc.",
+      nl: "Je kunt ons supportteam bereiken via https://educly.app/contato of via e-mail op contact@educly.app. Als je wilt, help ik met het opstellen van je bericht.",
+    }),
+  },
+  {
+    id: "start_path",
+    keywords: ["como comeco", "por onde comeco", "primeira aula", "iniciar", "iniciar trilha", "start", "how to start", "comenzar"],
+    responses: buildQuickReplyResponses({
+      pt: "Para comecar rapido: 1) Abra seu Dashboard, 2) Escolha uma trilha, 3) Conclua o Dia 1, 4) Volte aqui e eu te ajudo no proximo passo.",
+      en: "To get started fast: 1) Open your Dashboard, 2) Pick a learning path, 3) Complete Day 1, 4) Come back here and I will guide your next step.",
+      es: "Para empezar rapido: 1) Abre tu Dashboard, 2) Elige una ruta, 3) Completa el Dia 1, 4) Vuelve aqui y te guio con el siguiente paso.",
+      fr: "Pour commencer vite: 1) Ouvrez votre Dashboard, 2) Choisissez un parcours, 3) Terminez le Jour 1, 4) Revenez ici et je vous guide pour la suite.",
+      de: "So starten Sie schnell: 1) Dashboard offnen, 2) Lernpfad wahlen, 3) Tag 1 abschliessen, 4) Zuruckkommen und ich helfe beim nachsten Schritt.",
+      it: "Per iniziare velocemente: 1) Apri la Dashboard, 2) Scegli un percorso, 3) Completa il Giorno 1, 4) Torna qui e ti guido nel prossimo passo.",
+      ru: "Bystryy start: 1) Otkroyte Dashboard, 2) Vyberite put obucheniya, 3) Zavershite Den 1, 4) Vernites syuda i ya pomogu so sleduyushchim shagom.",
+      tr: "Hizli baslamak icin: 1) Dashboard'u acin, 2) Bir ogrenme yolu secin, 3) 1. Gunu tamamlayin, 4) Buraya donun, sonraki adimda yardim edeyim.",
+      pl: "Aby szybko zaczac: 1) Otworz Dashboard, 2) Wybierz sciezke, 3) Ukoncz Dzien 1, 4) Wroc tutaj, a pomoge Ci w kolejnym kroku.",
+      nl: "Snel starten: 1) Open je Dashboard, 2) Kies een leerpad, 3) Rond Dag 1 af, 4) Kom terug en ik help je met de volgende stap.",
+    }),
+  },
+  {
+    id: "certificate",
+    keywords: ["certificado", "certificate", "certification", "diploma"],
+    responses: buildQuickReplyResponses({
+      pt: "Sobre certificado: ele e liberado conforme o progresso da trilha. Quando cumprir os requisitos, voce consegue emitir direto no app.",
+      en: "About certificates: they unlock based on your path progress. Once you complete the requirements, you can issue it directly in the app.",
+      es: "Sobre certificados: se desbloquean segun tu progreso en la ruta. Al completar los requisitos, puedes emitirlo directamente en la app.",
+      fr: "Les certificats se debloquent selon votre progression. Quand vous atteignez les exigences, vous pouvez l'emettre directement dans l'app.",
+      de: "Zertifikate werden entsprechend Ihrem Fortschritt freigeschaltet. Sobald Sie die Anforderungen erfullen, konnen Sie sie direkt in der App ausstellen.",
+      it: "I certificati si sbloccano in base ai tuoi progressi. Quando completi i requisiti, puoi emetterli direttamente nell'app.",
+      ru: "Sertifikat otkryvaetsya po mere progressa. Kogda vypolnite trebovaniya, ego mozhno oformit pryamo v prilozhenii.",
+      tr: "Sertifika, ogrenme ilerlemenize gore acilir. Gereksinimleri tamamladiginizda uygulama icinden olusturabilirsiniz.",
+      pl: "Certyfikat odblokowuje sie wraz z postepem. Gdy spelnisz wymagania, wystawisz go bezposrednio w aplikacji.",
+      nl: "Certificaten worden ontgrendeld op basis van je voortgang. Zodra je aan de voorwaarden voldoet, kun je het direct in de app uitgeven.",
+    }),
+  },
+  {
+    id: "greeting",
+    keywords: ["oi", "ola", "hello", "hi", "hey", "e ai", "eai", "buenas", "hola"],
+    responses: buildQuickReplyResponses({
+      pt: "Oi! Eu sou o EDI. Posso te ajudar com trilhas, ferramentas de IA, estudos e duvidas da plataforma. Me diz o que voce precisa.",
+      en: "Hi! I am EDI. I can help with AI tools, study paths, and platform questions. Tell me what you need.",
+      es: "Hola! Soy EDI. Puedo ayudarte con herramientas de IA, rutas de estudio y dudas de la plataforma. Dime que necesitas.",
+      fr: "Salut! Je suis EDI. Je peux vous aider avec les outils IA, les parcours et les questions sur la plateforme. Dites-moi ce dont vous avez besoin.",
+      de: "Hallo! Ich bin EDI. Ich helfe bei KI-Tools, Lernpfaden und Fragen zur Plattform. Sagen Sie mir, was Sie brauchen.",
+      it: "Ciao! Sono EDI. Posso aiutarti con strumenti IA, percorsi di studio e domande sulla piattaforma. Dimmi di cosa hai bisogno.",
+      ru: "Privet! Ya EDI. Pomogu s AI-instrumentami, obucheniem i voprosami po platforme. Skazhite, chto vam nuzhno.",
+      tr: "Merhaba! Ben EDI. Yapay zeka araclari, ogrenme yollari ve platform sorularinda yardim edebilirim. Neye ihtiyacin var?",
+      pl: "Czesc! Tu EDI. Pomoge w narzedziach AI, sciezkach nauki i pytaniach o platformie. Napisz, czego potrzebujesz.",
+      nl: "Hoi! Ik ben EDI. Ik help je met AI-tools, leerpaden en vragen over het platform. Vertel me wat je nodig hebt.",
+    }),
+  },
+];
+const normalizeKeywordText = (text: string): string =>
+  text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const getQuickReplyLanguage = (language: string): QuickReplyLang => {
+  const normalized = language.toLowerCase().split("-")[0].split("_")[0];
+  if ((QUICK_REPLY_SUPPORTED_LANGS as readonly string[]).includes(normalized)) return normalized as QuickReplyLang;
+  return "en";
+};
+
+const getEdiKeywordQuickReply = (lastUserMessage: string, language: string): string | null => {
+  if (!lastUserMessage) return null;
+  const normalizedMessage = normalizeKeywordText(lastUserMessage);
+  if (!normalizedMessage) return null;
+  const paddedMessage = ` ${normalizedMessage} `;
+
+  const quickReplyLanguage = getQuickReplyLanguage(language);
+
+  for (const rule of EDI_QUICK_REPLY_RULES) {
+    const matched = rule.keywords.some((keyword) => {
+      const normalizedKeyword = normalizeKeywordText(keyword);
+      return paddedMessage.includes(` ${normalizedKeyword} `);
+    });
+    if (matched) {
+      return rule.responses[quickReplyLanguage] || rule.responses.en;
+    }
+  }
+
+  return null;
+};
+
+const createStreamingQuickReplyResponse = (content: string): Response => {
+  const payload =
+    "data: " + JSON.stringify({ choices: [{ delta: { content } }] }) + "\n\n" +
+    "data: [DONE]\n\n";
+
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.enqueue(new TextEncoder().encode(payload));
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+  });
 };
 
 serve(async (req) => {
@@ -184,6 +372,15 @@ serve(async (req) => {
     const messages = body.messages;
     const aiType = body.aiType || "chatgpt";
     const language = body.language || "pt";
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
+
+    if (aiType === "edi") {
+      const quickReply = getEdiKeywordQuickReply(lastUserMessage, language);
+      if (quickReply) {
+        console.log("Returning quick EDI reply without AI token usage");
+        return createStreamingQuickReplyResponse(quickReply);
+      }
+    }
 
     if (!AI_PERSONAS[aiType]) {
       return new Response(JSON.stringify({ error: "Invalid AI type" }), {
@@ -439,3 +636,4 @@ serve(async (req) => {
     });
   }
 });
+
