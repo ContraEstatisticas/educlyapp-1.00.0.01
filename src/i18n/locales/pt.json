@@ -2974,6 +2974,8 @@
       "button": "Enviar Email",
       "copyEmail": "Copiar Email",
       "emailCopied": "Email copiado!",
+      "openingEmail": "Abrindo email",
+      "emailCopiedDesc": "O endereço {{email}} também foi copiado.",
       "openGmail": "Abrir no Gmail",
       "responseTime": "Resposta em até 24-48 horas"
     },

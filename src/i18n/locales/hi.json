@@ -307,6 +307,8 @@
       "button": "ईमेल भेजें",
       "copyEmail": "ईमेल कॉपी करें",
       "emailCopied": "ईमेल कॉपी हो गया!",
+      "openingEmail": "ईमेल खोला जा रहा है",
+      "emailCopiedDesc": "{{email}} पता भी कॉपी कर लिया गया है।",
       "openGmail": "Gmail में खोलें",
       "responseTime": "24-48 घंटे में जवाब"
     },

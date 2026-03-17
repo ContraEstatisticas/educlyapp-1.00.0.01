@@ -2265,6 +2265,8 @@
       "button": "E-Mail senden",
       "copyEmail": "E-Mail kopieren",
       "emailCopied": "E-Mail kopiert!",
+      "openingEmail": "E-Mail wird geöffnet",
+      "emailCopiedDesc": "Die Adresse {{email}} wurde ebenfalls kopiert.",
       "openGmail": "In Gmail öffnen",
       "responseTime": "Antwort innerhalb von 24-48 Stunden"
     },

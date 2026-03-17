@@ -7,10 +7,12 @@ import { LandingNavbar } from "@/components/landing/LandingNavbar";
 import { Footer } from "@/components/landing/Footer";
 import { FloatingSupportChat } from "@/components/landing/FloatingSupportChat";
 import { CompanyInfo } from "@/components/landing/CompanyInfo";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const supportEmail = "contact@educly.app";
 
   const aiCapabilities = [
@@ -27,9 +29,60 @@ const Contact = () => {
     window.dispatchEvent(event);
   };
 
+  const copySupportEmail = () => {
+    const fallbackCopy = () => {
+      const textArea = document.createElement("textarea");
+      textArea.value = supportEmail;
+      textArea.setAttribute("readonly", "true");
+      textArea.style.position = "fixed";
+      textArea.style.top = "0";
+      textArea.style.left = "-9999px";
+      textArea.style.opacity = "0";
+
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      textArea.setSelectionRange(0, supportEmail.length);
+
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } catch {
+        copied = false;
+      }
+
+      document.body.removeChild(textArea);
+      return copied;
+    };
+
+    const showCopiedToast = () => {
+      toast({
+        title: t("contactPage.humanSupport.openingEmail", "Opening email"),
+        description: t("contactPage.humanSupport.emailCopiedDesc", {
+          defaultValue: "The address {{email}} was also copied.",
+          email: supportEmail,
+        }),
+      });
+    };
+
+    if (fallbackCopy()) {
+      showCopiedToast();
+      return;
+    }
+
+    if (!navigator.clipboard?.writeText) {
+      return;
+    }
+
+    void navigator.clipboard.writeText(supportEmail)
+      .then(showCopiedToast)
+      .catch(() => undefined);
+  };
+
   const openSupportEmail = (subject?: string) => {
     const isMobileDevice = /android|iphone|ipad|ipod|mobile|windows phone|blackberry/i.test(navigator.userAgent);
     const cleanedSubject = subject?.trim();
+    copySupportEmail();
 
     const mailtoParams = new URLSearchParams();
     if (cleanedSubject) {

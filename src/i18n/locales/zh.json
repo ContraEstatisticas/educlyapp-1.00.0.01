@@ -349,6 +349,8 @@
       "button": "发送邮件",
       "copyEmail": "复制邮箱",
       "emailCopied": "邮箱已复制！",
+      "openingEmail": "正在打开邮件",
+      "emailCopiedDesc": "地址 {{email}} 也已复制。",
       "openGmail": "在Gmail中打开",
       "responseTime": "24-48小时内回复"
     },

@@ -307,6 +307,8 @@
       "button": "Stuur Email",
       "copyEmail": "Kopieer Email",
       "emailCopied": "Email gekopieerd!",
+      "openingEmail": "E-mail openen",
+      "emailCopiedDesc": "Het adres {{email}} is ook gekopieerd.",
       "openGmail": "Open in Gmail",
       "responseTime": "Antwoord binnen 24-48 uur"
     },

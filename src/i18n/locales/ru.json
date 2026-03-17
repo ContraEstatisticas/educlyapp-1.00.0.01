@@ -2368,4 +2368,11 @@
     "settingsSaved": "Настройки сохранены!",
     "notificationsUpdated": "Ваши настройки уведомлений были обновлены."
   }
+,
+  "contactPage": {
+    "humanSupport": {
+      "openingEmail": "Открываем почту",
+      "emailCopiedDesc": "\u0410\u0434\u0440\u0435\u0441 {{email}} \u0442\u0430\u043a\u0436\u0435 \u0441\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d."
+    }
+  }
 }

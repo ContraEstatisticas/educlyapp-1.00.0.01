@@ -2847,6 +2847,8 @@
       "button": "Send Email",
       "copyEmail": "Copy Email",
       "emailCopied": "Email copied!",
+      "openingEmail": "Opening email",
+      "emailCopiedDesc": "The address {{email}} was also copied.",
       "openGmail": "Open in Gmail",
       "responseTime": "Response within 24-48 hours"
     },

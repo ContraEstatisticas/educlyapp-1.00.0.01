@@ -349,6 +349,8 @@
       "button": "メールを送信",
       "copyEmail": "メールをコピー",
       "emailCopied": "メールをコピーしました！",
+      "openingEmail": "メールを開いています",
+      "emailCopiedDesc": "{{email}} もコピーしました。",
       "openGmail": "Gmailで開く",
       "responseTime": "24〜48時間以内に返信"
     },

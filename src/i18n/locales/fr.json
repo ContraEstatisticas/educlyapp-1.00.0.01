@@ -2550,6 +2550,8 @@
       "button": "Envoyer un Email",
       "copyEmail": "Copier l'Email",
       "emailCopied": "Email copié !",
+      "openingEmail": "Ouverture de l'email",
+      "emailCopiedDesc": "L'adresse {{email}} a également été copiée.",
       "openGmail": "Ouvrir dans Gmail",
       "responseTime": "Réponse sous 24-48 heures"
     },

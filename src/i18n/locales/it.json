@@ -2037,6 +2037,8 @@
       "button": "Invia Email",
       "copyEmail": "Copia Email",
       "emailCopied": "Email copiata!",
+      "openingEmail": "Apertura email",
+      "emailCopiedDesc": "L'indirizzo {{email}} è stato copiato anche negli appunti.",
       "openGmail": "Apri in Gmail",
       "responseTime": "Risposta entro 24-48 ore"
     },

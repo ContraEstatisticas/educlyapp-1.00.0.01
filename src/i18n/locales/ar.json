@@ -307,6 +307,8 @@
       "button": "إرسال بريد إلكتروني",
       "copyEmail": "نسخ البريد الإلكتروني",
       "emailCopied": "تم نسخ البريد الإلكتروني!",
+      "openingEmail": "جارٍ فتح البريد الإلكتروني",
+      "emailCopiedDesc": "تم أيضًا نسخ العنوان {{email}}.",
       "openGmail": "فتح في Gmail",
       "responseTime": "الرد خلال 24-48 ساعة"
     },

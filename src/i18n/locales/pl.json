@@ -307,6 +307,8 @@
       "button": "Wyślij Email",
       "copyEmail": "Kopiuj Email",
       "emailCopied": "Email skopiowany!",
+      "openingEmail": "Otwieranie e-maila",
+      "emailCopiedDesc": "Adres {{email}} również został skopiowany.",
       "openGmail": "Otwórz w Gmail",
       "responseTime": "Odpowiedź w ciągu 24-48 godzin"
     },

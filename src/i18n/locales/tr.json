@@ -307,6 +307,8 @@
       "button": "E-posta Gönder",
       "copyEmail": "E-postayı Kopyala",
       "emailCopied": "E-posta kopyalandı!",
+      "openingEmail": "E-posta açılıyor",
+      "emailCopiedDesc": "{{email}} adresi de kopyalandı.",
       "openGmail": "Gmail'de Aç",
       "responseTime": "24-48 saat içinde yanıt"
     },
