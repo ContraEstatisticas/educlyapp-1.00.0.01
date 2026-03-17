@@ -1,4 +1,4 @@
-import { LogOut, User } from "lucide-react";
+import { LogOut, User, Shield, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StreakBadge } from "@/components/StreakBadge";
 import { LanguageSelector } from "@/components/LanguageSelector";
