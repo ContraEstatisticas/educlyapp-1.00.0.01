@@ -1127,13 +1127,9 @@ serve(async (req) => {
     const messages = body.messages;
     const aiToolContext = body.aiToolContext;
     const language = (body.language || "pt").split("-")[0].split("_")[0];
-    const recentUserMessagesText = messages
-      .filter((m) => m.role === "user")
-      .slice(-3)
-      .map((m) => m.content)
-      .join(" ");
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
 
-    const quickReply = getKeywordQuickReply(recentUserMessagesText, language);
+    const quickReply = getKeywordQuickReply(lastUserMessage, language);
     if (quickReply) {
       console.log("Returning quick reply without AI token usage");
       return createStreamingQuickReplyResponse(quickReply);

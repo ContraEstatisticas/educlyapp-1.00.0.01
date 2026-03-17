@@ -764,14 +764,10 @@ serve(async (req) => {
     const messages = body.messages;
     const aiType = String(body.aiType || "chatgpt").toLowerCase();
     const language = body.language || "pt";
-    const recentUserMessagesText = messages
-      .filter((m) => m.role === "user")
-      .slice(-3)
-      .map((m) => m.content)
-      .join(" ");
+    const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
 
     if (aiType === "edi") {
-      const quickReply = getEdiKeywordQuickReply(recentUserMessagesText, language);
+      const quickReply = getEdiKeywordQuickReply(lastUserMessage, language);
       if (quickReply) {
         console.log("Returning quick EDI reply without AI token usage");
         return createStreamingQuickReplyResponse(quickReply);
@@ -833,7 +829,7 @@ serve(async (req) => {
 
     // --- Handle image generation (nanobanana) ---
     if (isImageType) {
-      const lastUserMessage = messages[messages.length - 1]?.content || "";
+      const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
 
       const abortController = new AbortController();
       const timeoutId = setTimeout(() => abortController.abort(), API_TIMEOUT_MS);

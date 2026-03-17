@@ -607,13 +607,10 @@ serve(async (req) => {
         });
     }
 
-    const recentUserMessagesText = messages
-      .filter((m: { role: string; content: string }) => m.role === "user")
-      .slice(-3)
-      .map((m: { content: string }) => m.content)
-      .join(" ");
+    const lastUserMessage =
+      [...messages].reverse().find((m: { role: string; content: string }) => m.role === "user")?.content || "";
 
-    const quickReplyMatch = getLandingKeywordQuickReply(recentUserMessagesText, locale);
+    const quickReplyMatch = getLandingKeywordQuickReply(lastUserMessage, locale);
     if (quickReplyMatch) {
       console.log(`Returning landing quick reply rule=${quickReplyMatch.ruleId} locale=${locale} ip=${clientIP}`);
       return buildSseFallbackResponse(quickReplyMatch.response);
