@@ -233,6 +233,9 @@ const AdminAnalyticsContent = () => {
             <TabsContent value="bulk-grant" className="m-0">
               <BulkGrantAccess />
             </TabsContent>
+            <TabsContent value="revoke" className="m-0">
+              <RevokeAccess />
+            </TabsContent>
             <TabsContent value="migration" className="m-0">
               <MigrationReport />
             </TabsContent>
