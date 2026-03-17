@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
 import { Save, Loader2 } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { formatAdminDate, getAdminTodayKey } from "@/lib/adminTimeZone";
 
 interface ManualMetric {
   id: string;
@@ -62,7 +61,7 @@ export const ManualMetricsForm = () => {
   // Save mutation
   const saveMutation = useMutation({
     mutationFn: async () => {
-      const today = new Date().toISOString().split("T")[0];
+      const today = getAdminTodayKey();
       const { data: { user } } = await supabase.auth.getUser();
 
       const payload = {
@@ -130,7 +129,7 @@ export const ManualMetricsForm = () => {
     <Card>
       <CardHeader className="pb-2">
         <CardTitle className="text-base font-medium">
-          ✍️ Métricas Manuais - {format(new Date(), "dd/MM/yyyy", { locale: ptBR })}
+          ✍️ Métricas Manuais - {formatAdminDate(new Date())}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -260,7 +259,7 @@ export const ManualMetricsForm = () => {
                   {metricsHistory.map((metric) => (
                     <TableRow key={metric.id}>
                       <TableCell className="text-xs whitespace-nowrap">
-                        {format(new Date(metric.metric_date), "dd/MM", { locale: ptBR })}
+                        {formatAdminDate(metric.metric_date, "pt-BR", { day: "2-digit", month: "2-digit" })}
                       </TableCell>
                       <TableCell className="text-xs text-center">
                         {metric.nps_score ?? "-"}

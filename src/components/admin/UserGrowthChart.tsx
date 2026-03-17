@@ -9,16 +9,19 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { format, subDays, parseISO } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { AdminChartCard } from "./AdminChartCard";
+import {
+  formatAdminDate,
+  getAdminDateKey,
+  getAdminDateKeysForLastDays,
+  getAdminDaysAgoStartIso,
+} from "@/lib/adminTimeZone";
 
 export const UserGrowthChart = () => {
   const { data: chartData, isLoading } = useQuery({
     queryKey: ["admin-user-growth"],
     queryFn: async () => {
-      // Get users created in the last 30 days
-      const thirtyDaysAgo = subDays(new Date(), 30).toISOString();
+      const thirtyDaysAgo = getAdminDaysAgoStartIso(29);
       
       const { data: profiles } = await supabase
         .from("profiles")
@@ -30,15 +33,14 @@ export const UserGrowthChart = () => {
       const groupedByDate: Record<string, number> = {};
       
       // Initialize all 30 days with 0
-      for (let i = 29; i >= 0; i--) {
-        const date = format(subDays(new Date(), i), "yyyy-MM-dd");
+      for (const date of getAdminDateKeysForLastDays(30)) {
         groupedByDate[date] = 0;
       }
 
       // Count users per day
       profiles?.forEach((profile) => {
         if (profile.created_at) {
-          const date = profile.created_at.split("T")[0];
+          const date = getAdminDateKey(profile.created_at);
           if (groupedByDate[date] !== undefined) {
             groupedByDate[date]++;
           }
@@ -53,7 +55,7 @@ export const UserGrowthChart = () => {
           date,
           novos: count,
           total: cumulative,
-          label: format(parseISO(date), "dd/MM", { locale: ptBR }),
+          label: formatAdminDate(date, "pt-BR", { day: "2-digit", month: "2-digit" }),
         };
       });
 

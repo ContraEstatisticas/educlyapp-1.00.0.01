@@ -10,9 +10,8 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Crown } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { AdminDataTable } from "./AdminDataTable";
+import { formatAdminDate } from "@/lib/adminTimeZone";
 
 export const PremiumUsersTable = () => {
   const { data: premiumUsers, isLoading, refetch } = useQuery({
@@ -127,9 +126,11 @@ export const PremiumUsersTable = () => {
                 </TableCell>
                 <TableCell className="text-sm text-muted-foreground whitespace-nowrap pr-5">
                   {user.purchased_at
-                    ? format(new Date(user.purchased_at), "dd/MM/yy", {
-                      locale: ptBR,
-                    })
+                    ? formatAdminDate(user.purchased_at, "pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                      })
                     : "-"}
                 </TableCell>
               </TableRow>

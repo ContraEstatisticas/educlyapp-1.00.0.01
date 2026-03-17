@@ -9,12 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { AlertTriangle, CheckCircle, Clock, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AdminDataTable } from "./AdminDataTable";
 import { cn } from "@/lib/utils";
+import { formatAdminDateTime } from "@/lib/adminTimeZone";
 
 export const BillingLogsTable = () => {
   const { data: billingLogs, isLoading, refetch } = useQuery({
@@ -207,9 +206,12 @@ export const BillingLogsTable = () => {
                 >
                   <TableCell className="text-sm whitespace-nowrap py-3 pl-5">
                     {log.created_at
-                      ? format(new Date(log.created_at), "dd/MM HH:mm", {
-                        locale: ptBR,
-                      })
+                      ? formatAdminDateTime(log.created_at, "pt-BR", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
                       : "-"}
                   </TableCell>
                   <TableCell className="text-sm font-medium truncate max-w-[140px]" title={log.email}>

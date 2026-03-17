@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { formatAdminDateTime } from "@/lib/adminTimeZone";
 
 interface LookupResult {
   has_account: boolean;
@@ -122,7 +123,7 @@ export const EmailLookup = () => {
                   <span className="text-sm font-medium text-green-700">Conta criada</span>
                   <span className="text-xs text-muted-foreground">
                     em{" "}
-                    {new Date(result.created_at!).toLocaleDateString("pt-BR", {
+                    {formatAdminDateTime(result.created_at, "pt-BR", {
                       day: "2-digit",
                       month: "2-digit",
                       year: "numeric",
@@ -191,7 +192,7 @@ export const EmailLookup = () => {
                       </Badge>
                       <span className="font-mono">{ev.event_type}</span>
                       <span>
-                        {new Date(ev.created_at).toLocaleDateString("pt-BR", {
+                        {formatAdminDateTime(ev.created_at, "pt-BR", {
                           day: "2-digit",
                           month: "2-digit",
                           hour: "2-digit",

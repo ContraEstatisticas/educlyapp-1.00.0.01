@@ -10,9 +10,8 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Flame } from "lucide-react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { AdminDataTable } from "./AdminDataTable";
+import { formatAdminDate } from "@/lib/adminTimeZone";
 
 export const TopStreaksTable = () => {
   const { data: topUsers, isLoading, refetch } = useQuery({
@@ -102,9 +101,11 @@ export const TopStreaksTable = () => {
                 </TableCell>
                 <TableCell className="text-sm text-muted-foreground pr-5">
                   {user.last_activity_date
-                    ? format(new Date(user.last_activity_date), "dd/MM/yy", {
-                      locale: ptBR,
-                    })
+                    ? formatAdminDate(user.last_activity_date, "pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                      })
                     : "-"}
                 </TableCell>
               </TableRow>

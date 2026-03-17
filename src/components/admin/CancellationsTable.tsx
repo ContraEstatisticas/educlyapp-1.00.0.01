@@ -9,9 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { AdminDataTable } from "./AdminDataTable";
+import { formatAdminDateTime } from "@/lib/adminTimeZone";
 
 export const CancellationsTable = () => {
   const { data: cancellations, isLoading, refetch } = useQuery({
@@ -89,9 +88,13 @@ export const CancellationsTable = () => {
               <TableRow key={event.id} className="border-b border-border/30 hover:bg-muted/30">
                 <TableCell className="text-sm py-3 pl-5">
                   {event.created_at
-                    ? format(new Date(event.created_at), "dd/MM/yy HH:mm", {
-                      locale: ptBR,
-                    })
+                    ? formatAdminDateTime(event.created_at, "pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
                     : "-"}
                 </TableCell>
                 <TableCell className="text-sm font-medium truncate max-w-[180px]">

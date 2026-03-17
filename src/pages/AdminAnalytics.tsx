@@ -25,6 +25,10 @@ import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
 import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 import { ManualAccountCreator } from "@/components/admin/ManualAccountCreator";
+import {
+  formatAdminDateTime,
+  getAdminDayStartIso,
+} from "@/lib/adminTimeZone";
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
@@ -257,9 +261,7 @@ const MigrationReport = () => {
   ]), []);
   const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
   useEffect(() => {
-    const d = selectedDate;
-    const iso = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0)).toISOString();
-    setStartISO(iso);
+    setStartISO(getAdminDayStartIso(selectedDate));
   }, [selectedDate]);
 
   const { data: usersCount } = useQuery({
@@ -397,7 +399,15 @@ const MigrationReport = () => {
             {(registeredList || []).map((r: any, idx: number) => (
               <div key={idx} className="text-sm flex items-center justify-between">
                 <span className="truncate">{r.email}</span>
-                <span className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleString()}</span>
+                <span className="text-xs text-muted-foreground">
+                  {formatAdminDateTime(r.created_at, "pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
               </div>
             ))}
             {registeredList && registeredList.length === 0 && (
@@ -411,7 +421,15 @@ const MigrationReport = () => {
             {(notRegisteredList || []).map((r: any, idx: number) => (
               <div key={idx} className="text-sm flex items-center justify-between">
                 <span className="truncate">{r.email}</span>
-                <span className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleString()}</span>
+                <span className="text-xs text-muted-foreground">
+                  {formatAdminDateTime(r.created_at, "pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
               </div>
             ))}
             {notRegisteredList && notRegisteredList.length === 0 && (

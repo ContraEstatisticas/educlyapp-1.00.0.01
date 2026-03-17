@@ -29,6 +29,13 @@ import {
 } from "lucide-react";
 import { AdminKPICard } from "./AdminKPICard";
 import { AdminSectionHeader } from "./AdminSectionHeader";
+import {
+  getAdminDateKey,
+  getAdminDayEndIso,
+  getAdminDayStartIso,
+  getAdminDaysAgoStartIso,
+  getAdminTodayKey,
+} from "@/lib/adminTimeZone";
 
 export const KPICards = () => {
   const { toast } = useToast();
@@ -78,7 +85,7 @@ export const KPICards = () => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `primeiro_acesso_educly_${new Date().toISOString().split('T')[0]}.csv`);
+      link.setAttribute("download", `primeiro_acesso_educly_${getAdminTodayKey()}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -92,10 +99,11 @@ export const KPICards = () => {
   const { data: kpis, isLoading } = useQuery({
     queryKey: ["admin-kpis", errorRangeDays],
     queryFn: async () => {
-      // Boundaries (UTC)
-      const now = new Date();
-      const todayStartUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0)).toISOString();
-      const sevenDaysAgoUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 7, 0, 0, 0, 0)).toISOString();
+      const todayStartSaoPaulo = getAdminDayStartIso();
+      const tomorrowStartSaoPaulo = getAdminDayEndIso();
+      const sevenDaysAgoStartSaoPaulo = getAdminDaysAgoStartIso(7);
+      const todayKey = getAdminTodayKey();
+      const sevenDaysAgoKey = getAdminDateKey(sevenDaysAgoStartSaoPaulo);
 
       // Total users
       const { count: totalUsers } = await supabase
@@ -106,13 +114,15 @@ export const KPICards = () => {
       const { count: newToday } = await supabase
         .from("profiles")
         .select("id", { count: "exact", head: true })
-        .gte("created_at", todayStartUTC);
+        .gte("created_at", todayStartSaoPaulo)
+        .lt("created_at", tomorrowStartSaoPaulo);
 
       // New users this week
       const { count: newWeek } = await supabase
         .from("profiles")
         .select("id", { count: "exact", head: true })
-        .gte("created_at", sevenDaysAgoUTC);
+        .gte("created_at", sevenDaysAgoStartSaoPaulo)
+        .lt("created_at", tomorrowStartSaoPaulo);
 
       // Streak stats
       const { data: streakData } = await supabase
@@ -137,7 +147,7 @@ export const KPICards = () => {
 
       // Active users (7 dias) - using filter on the streakData we already have
       const activeUsers = streakData?.filter(s =>
-        s.last_activity_date && s.last_activity_date >= sevenDaysAgoUTC.split("T")[0]
+        s.last_activity_date && s.last_activity_date >= sevenDaysAgoKey
       ).length || 0;
 
       // Premium users
@@ -150,7 +160,7 @@ export const KPICards = () => {
       const { data: billingEvents } = await supabase
         .from("billing_event_logs")
         .select("event_type, created_at, payload, status")
-        .gte("created_at", sevenDaysAgoUTC);
+        .gte("created_at", sevenDaysAgoStartSaoPaulo);
 
       const chargebacks = billingEvents?.filter((e) =>
         e.event_type.toUpperCase().includes("CHARGEBACK")
@@ -169,12 +179,12 @@ export const KPICards = () => {
 
       // Filter payment events for today
       const purchasesTodayData = billingEvents?.filter((e) => {
-        const eventDate = e.created_at?.split("T")[0];
+        const eventDate = e.created_at ? getAdminDateKey(e.created_at) : null;
         const eventType = e.event_type.toUpperCase();
         const isPaymentEvent = eventType.includes("SETTLED") ||
           eventType.includes("APPROVED") ||
           eventType.includes("COMPLETE");
-        return eventDate === todayStartUTC.split("T")[0] && isPaymentEvent;
+        return eventDate === todayKey && isPaymentEvent;
       }) || [];
 
       // New purchases today (iteration = 1 OR oneoff OR Hotmart recurrence_number = 1)
@@ -259,12 +269,7 @@ export const KPICards = () => {
         ? Number(avgFirstSession).toFixed(1)
         : 0;
 
-      const errorRangeStart = new Date(Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate() - errorRangeValue,
-        0, 0, 0, 0
-      )).toISOString();
+      const errorRangeStart = getAdminDaysAgoStartIso(errorRangeValue);
       const errorsInRange = billingEvents?.filter((event) => {
         if (!event.created_at) return false;
         if (event.status !== "error") return false;
@@ -347,7 +352,7 @@ export const KPICards = () => {
             value={kpis?.newToday || 0}
             icon={<UserPlus className="h-5 w-5" />}
             color="success"
-            tooltip="Usuários com created_at >= hoje (00:00 UTC)"
+            tooltip="Usuários com created_at dentro do dia atual em America/Sao_Paulo"
           />
           <AdminKPICard
             title="Sem Atividade"
@@ -394,7 +399,7 @@ export const KPICards = () => {
             value={kpis?.activeUsers || 0}
             icon={<CheckCircle2 className="h-5 w-5" />}
             description={`${kpis?.retention}% retenção`}
-            tooltip="Usuários com last_activity_date nos últimos 7 dias. Retenção = ativos / total de usuários."
+            tooltip="Usuários com last_activity_date nos últimos 7 dias em America/Sao_Paulo. Retenção = ativos / total de usuários."
           />
           <div onClick={exportSessionsToCSV} className="cursor-pointer transition-transform active:scale-95">
             <AdminKPICard
