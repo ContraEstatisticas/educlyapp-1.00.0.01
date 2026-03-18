@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => ({
     '__APP_VERSION__': JSON.stringify(BUILD_VERSION),
   },
   build: {
+    chunkSizeWarningLimit: 3000,
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
