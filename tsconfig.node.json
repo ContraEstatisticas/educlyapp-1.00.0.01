@@ -10,6 +10,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
+    "preserveSymlinks": true,
     "noEmit": true,
 
     /* Linting */

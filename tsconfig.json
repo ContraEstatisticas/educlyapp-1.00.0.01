@@ -9,6 +9,7 @@
         "./src/*"
       ]
     },
+    "preserveSymlinks": true,
     "skipLibCheck": true,
     "strictNullChecks": false
   },
