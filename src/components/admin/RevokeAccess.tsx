@@ -14,7 +14,7 @@ interface ProductInfo {
   granted_at: string;
 }
 
-export const RevokeAccess = () => { 
+export const RevokeAccess = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
