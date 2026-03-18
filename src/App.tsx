@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { PWARedirect } from "@/components/PWARedirect";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
+import { Level3NewsletterPopup } from "@/components/level/Level3NewsletterPopup";
 import { SoundSettingsProvider } from "@/contexts/SoundSettingsContext";
 import { PremiumGuard } from "@/components/PremiumGuard";
 import { UpdateNotification } from "@/components/UpdateNotification";
@@ -181,6 +182,7 @@ const App = () => {
                 <UpdateNotification autoReloadSeconds={15} />
                 <PWARedirect />
                 <PWAInstallPrompt />
+                <Level3NewsletterPopup />
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}
                   <Route path="/" element={<Index />} />
