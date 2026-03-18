@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    // react() - temporarily disabled due to native binding issue
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "prompt", // Changed to prompt for manual update control
