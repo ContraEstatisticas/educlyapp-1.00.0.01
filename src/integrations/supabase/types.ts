@@ -1468,18 +1468,24 @@ export type Database = {
       }
       user_sessions: {
         Row: {
+          client_session_key: string | null
+          ended_at: string | null
           id: string
           last_ping_at: string | null
           started_at: string | null
           user_id: string | null
         }
         Insert: {
+          client_session_key?: string | null
+          ended_at?: string | null
           id?: string
           last_ping_at?: string | null
           started_at?: string | null
           user_id?: string | null
         }
         Update: {
+          client_session_key?: string | null
+          ended_at?: string | null
           id?: string
           last_ping_at?: string | null
           started_at?: string | null
@@ -1716,6 +1722,10 @@ export type Database = {
         Args: { p_email: string }
         Returns: boolean
       }
+      finish_user_session: {
+        Args: { p_ended_at?: string; p_session_id: string }
+        Returns: boolean
+      }
       generate_challenge_certificate: {
         Args: { p_challenge_id: string; p_user_full_name: string }
         Returns: string
@@ -1759,11 +1769,24 @@ export type Database = {
         Args: { p_action_type?: string; p_records_accessed?: number }
         Returns: undefined
       }
+      ping_user_session: {
+        Args: { p_ping_at?: string; p_session_id: string }
+        Returns: boolean
+      }
       process_pending_billing_events: {
         Args: { p_email: string; p_user_id: string }
         Returns: undefined
       }
       reconcile_pending_events: { Args: never; Returns: Json }
+      start_or_resume_user_session: {
+        Args: {
+          p_client_session_key?: string
+          p_existing_session_id?: string
+          p_started_at?: string
+        }
+        Returns: string
+      }
+      start_user_session: { Args: { p_started_at?: string }; Returns: string }
     }
     Enums: {
       ai_tool_category:
