@@ -644,6 +644,8 @@ const Profile = () => {
 
         {/* RIGHT COLUMN - MAIN CONTENT */}
         <div className="lg:col-span-8 space-y-6">
+          <LevelRewardsCard />
+
           <Tabs defaultValue="account" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="account" className="data-[state=active]:bg-primary data-[state=active]:text-white">
@@ -735,8 +737,6 @@ const Profile = () => {
             </TabsContent>
 
             <TabsContent value="achievements" className="space-y-6">
-              <LevelRewardsCard />
-
               {/* Card conquistas com bg-card */}
               <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
                 <div className="flex items-center justify-between mb-8">
