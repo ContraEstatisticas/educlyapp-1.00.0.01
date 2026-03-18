@@ -1,31 +1,56 @@
+## Sistema de Acesso Automático via Token Permanente — Implementado ✅
 
+### Fluxo principal (compras após deploy)
 
-## Plano: Alterar Trial de 7 para 30 dias
+1. **Compra chega** → webhook insere `billing_event_logs`
+2. **`auto-create-account`** cria conta com senha aleatória + confirma email + processa billing + gera token permanente em `user_access_tokens`
+3. **`send-welcome-email` (mode=magic_link)** envia email dark theme com link permanente + credenciais (email + senha)
+4. Usuário clica no link → `/magic-login?token=UUID` → edge function gera magic link fresco → redirect → autenticado
+5. Troca de senha via modal interno no `Profile.tsx` → `refreshSession()` + `updateUser({ password })`
+6. Após troca, `resend-magic-link` envia novo link de acesso por email (dark theme, com email do usuário)
 
-### Contexto
+### Token permanente
 
-O trial de 7 dias aparece em dois locais no sistema. Nenhum dos webhooks (Paddle, primer) define `expires_at` — eles concedem acesso indefinido. O problema está em:
+- Tabela `user_access_tokens` (user_id UNIQUE, token UUID UNIQUE)
+- Link no email: `https://educly.app/magic-login?token=UUID` (nunca expira)
+- Edge function `magic-login` valida token → `auth.admin.generateLink({ type: 'magiclink' })` → redirect
+- Rate limit: 10 requests/min por token
 
-1. **`ManualAccessGrant.tsx`** — A UI de liberação manual lista "7 dias" como primeira opção de duração. O valor padrão do `useState` já é `"30"`, mas a opção de 7 dias continua disponível e pode ser selecionada por engano.
+### Design dos emails (dark theme) ✅
 
-2. **Função `check_and_expire_access` no banco** — A seção 2 desta função marca eventos de billing `USER_NOT_FOUND` como `expired_no_signup` após 7 dias. Isso contradiz a política já decidida (conforme memória do projeto) de permitir resgate indefinido.
+- Fundo escuro (#07080f), card (#0f1120), bordas sutis
+- Logo Educly com ícone gradiente + ponto laranja
+- Headline em #e8eaf0, subtítulo em #6b7280
+- Botão CTA gradiente azul/indigo (#4f6ef7 → #6366f1)
+- Bloco de credenciais dark (email + senha para contas novas)
+- Footer minimalista (© 2025, Help, Privacy)
+- 7 idiomas: pt, en, es, fr, de, it, ru
 
-### Alterações
+### Batch processing ✅
 
-**1. `src/components/admin/ManualAccessGrant.tsx`**
-- Manter a opção de "7 dias" na lista (para quando vocês voltarem a usar), mas **não remover**.
-- Nenhuma mudança necessária aqui — o default já é `"30"`.
+- `send-pending-welcome-batch` busca billing_event_logs pendentes
+- Para cada: chama `auto-create-account` + `send-welcome-email`
+- Rate limit: 1 email a cada 5s, batch de 15
+- Admin-only (verifica is_admin via RPC)
 
-**2. Migração SQL — `check_and_expire_access`**
-- Alterar a seção 2 da função para usar `INTERVAL '30 days'` em vez de `INTERVAL '7 days'` na expiração de eventos `USER_NOT_FOUND`.
-- A mensagem de erro será atualizada para `'Auto-expired: user did not register within 30 days'`.
+### Compatibilidade retroativa
 
-### Resumo técnico
+- `Auth.tsx` login/signup: mantido intacto
+- `purchased-signup`, `pending-signup`, `SignupFromEmail.tsx`: mantidos
+- Usuários antigos continuam acessando normalmente
 
-| Local | Antes | Depois |
-|-------|-------|--------|
-| `check_and_expire_access` — expiração de `USER_NOT_FOUND` | 7 days | 30 days |
-| `ManualAccessGrant` default | já é 30 | sem mudança |
+### Arquivos
 
-Uma única migração SQL para recriar a função `check_and_expire_access` com o intervalo atualizado.
-
+| Arquivo | Status |
+|---|---|
+| `user_access_tokens` (tabela) | ✅ Criada |
+| `supabase/functions/magic-login/index.ts` | ✅ Criado |
+| `supabase/functions/auto-create-account/index.ts` | ✅ Modificado |
+| `supabase/functions/resend-magic-link/index.ts` | ✅ Redesign dark theme |
+| `supabase/functions/send-welcome-email/index.ts` | ✅ Redesign dark theme + credenciais |
+| `supabase/functions/send-pending-welcome-batch/index.ts` | ✅ Usa auto-create-account + send-welcome-email |
+| `supabase/functions/paddle-webhook/index.ts` | ✅ Passa token permanente |
+| `supabase/functions/primer-webhook/index.ts` | ✅ Passa token permanente |
+| `src/pages/MagicLogin.tsx` | ✅ Criado |
+| `src/pages/Profile.tsx` | ✅ refreshSession antes de updateUser |
+| `src/pages/Auth.tsx` | ✅ Expired magic link UI |
