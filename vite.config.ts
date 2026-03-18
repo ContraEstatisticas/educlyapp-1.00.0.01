@@ -17,6 +17,10 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     chunkSizeWarningLimit: 3000,
+    commonjsOptions: {
+      include: [/node_modules/, /template-node-modules/, /opt\/template-node-modules/],
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
