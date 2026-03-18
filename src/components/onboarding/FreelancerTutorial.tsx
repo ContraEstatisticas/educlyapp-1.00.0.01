@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TutorialSpotlight, TutorialStep } from "./TutorialSpotlight";
+import { useTutorialStatus } from "./useTutorialStatus";
 
 const FREELANCER_STEPS: TutorialStep[] = [
   {
@@ -27,21 +28,23 @@ const FREELANCER_STEPS: TutorialStep[] = [
 
 export const FreelancerTutorial = () => {
   const [showTutorial, setShowTutorial] = useState(false);
+  const { shouldShowTutorial, completeTutorial } = useTutorialStatus("freelancer");
 
   useEffect(() => {
-    const dashboardDone = localStorage.getItem("tutorial_dashboard");
-    const freelancerDone = localStorage.getItem("tutorial_freelancer");
-    
-    if (dashboardDone === "true" && freelancerDone !== "true") {
-      setTimeout(() => setShowTutorial(true), 500);
-    }
-  }, []);
+    if (!shouldShowTutorial) return;
+
+    const timer = setTimeout(() => setShowTutorial(true), 500);
+    return () => clearTimeout(timer);
+  }, [shouldShowTutorial]);
 
   return (
     <TutorialSpotlight
       steps={FREELANCER_STEPS}
       storageKey="freelancer"
-      onComplete={() => setShowTutorial(false)}
+      onComplete={() => {
+        void completeTutorial();
+        setShowTutorial(false);
+      }}
       isVisible={showTutorial}
     />
   );

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TutorialSpotlight, TutorialStep } from "./TutorialSpotlight";
+import { useTutorialStatus } from "./useTutorialStatus";
 
 const CHALLENGE_STEPS: TutorialStep[] = [
   {
@@ -39,23 +40,23 @@ const CHALLENGE_STEPS: TutorialStep[] = [
 
 export const ChallengeTutorial = () => {
   const [showTutorial, setShowTutorial] = useState(false);
+  const { shouldShowTutorial, completeTutorial } = useTutorialStatus("challenge");
 
   useEffect(() => {
-    // Only show if main dashboard tutorial is completed
-    const dashboardDone = localStorage.getItem("tutorial_dashboard");
-    const challengeDone = localStorage.getItem("tutorial_challenge");
-    
-    if (dashboardDone === "true" && challengeDone !== "true") {
-      // Small delay to let the page render
-      setTimeout(() => setShowTutorial(true), 500);
-    }
-  }, []);
+    if (!shouldShowTutorial) return;
+
+    const timer = setTimeout(() => setShowTutorial(true), 500);
+    return () => clearTimeout(timer);
+  }, [shouldShowTutorial]);
 
   return (
     <TutorialSpotlight
       steps={CHALLENGE_STEPS}
       storageKey="challenge"
-      onComplete={() => setShowTutorial(false)}
+      onComplete={() => {
+        void completeTutorial();
+        setShowTutorial(false);
+      }}
       isVisible={showTutorial}
     />
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { TutorialSpotlight, TutorialStep } from "./TutorialSpotlight";
 import { useProductAccess, ProductType } from "@/hooks/useProductAccess";
-import { supabase } from "@/integrations/supabase/client";
+import { useTutorialStatus } from "./useTutorialStatus";
 
 // Base: 4 steps (simple intro)
 const BASE_STEPS: TutorialStep[] = [
@@ -63,8 +63,8 @@ function getStepsForTier(tier: ProductTier): TutorialStep[] {
 
 export const ProductOnboarding = () => {
     const [showTutorial, setShowTutorial] = useState(false);
-    const [userId, setUserId] = useState<string | undefined>();
     const productAccess = useProductAccess();
+    const { shouldShowTutorial, isLoading: onboardingLoading, userId, completeTutorial } = useTutorialStatus("dashboard");
 
     const productTier = useMemo(() => {
         if (productAccess.isLoading) return null;
@@ -79,25 +79,13 @@ export const ProductOnboarding = () => {
     const storageKey = `onboarding_${productTier}`;
 
     useEffect(() => {
-        const getUser = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) setUserId(user.id);
-        };
-        getUser();
-    }, []);
-
-    useEffect(() => {
-        if (productAccess.isLoading || !productTier || !userId) return;
-
-        const fullStorageKey = `tutorial_${storageKey}_${userId}`;
-        const hasSeen = localStorage.getItem(fullStorageKey);
-        if (hasSeen === "true") return;
+        if (productAccess.isLoading || onboardingLoading || !productTier || !userId || !shouldShowTutorial) return;
 
         const timer = setTimeout(() => setShowTutorial(true), 800);
         return () => clearTimeout(timer);
-    }, [productAccess.isLoading, productTier, userId, storageKey]);
+    }, [productAccess.isLoading, onboardingLoading, productTier, userId, shouldShowTutorial]);
 
-    if (productAccess.isLoading || !productTier || !userId || steps.length === 0) {
+    if (productAccess.isLoading || onboardingLoading || !productTier || !userId || steps.length === 0) {
         return null;
     }
 
@@ -107,7 +95,10 @@ export const ProductOnboarding = () => {
             storageKey={storageKey}
             userId={userId}
             variant={productTier}
-            onComplete={() => setShowTutorial(false)}
+            onComplete={() => {
+                void completeTutorial();
+                setShowTutorial(false);
+            }}
             isVisible={showTutorial}
         />
     );
