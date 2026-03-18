@@ -15,6 +15,15 @@ export default defineConfig(({ mode }) => ({
     // Frozen at build time - same for all users with this build
     '__APP_VERSION__': JSON.stringify(BUILD_VERSION),
   },
+  build: {
+    chunkSizeWarningLimit: 3000,
+    rollupOptions: {
+      onwarn(warning, warn) {
+        if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+        warn(warning);
+      },
+    },
+  },
   server: {
     host: "::",
     port: 8080,

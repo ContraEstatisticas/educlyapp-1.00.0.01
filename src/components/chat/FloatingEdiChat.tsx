@@ -6,6 +6,7 @@ import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { toast } from "sonner";
 import mascoteEducy from "@/assets/edi-mascote.png";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   role: "user" | "assistant";
@@ -66,9 +67,7 @@ export const FloatingEdiChat = () => {
       let streamFinished = false;
 
       // Refresh token as fallback for long sessions
-      const { refreshSession } = await import("@/hooks/useRefreshSession");
-      await refreshSession();
-      const { supabase } = await import("@/integrations/supabase/client");
+      await supabase.auth.refreshSession();
       const {
         data: { session },
       } = await supabase.auth.getSession();
