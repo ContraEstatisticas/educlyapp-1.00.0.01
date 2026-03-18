@@ -1676,6 +1676,15 @@ export type Database = {
         }
         Relationships: []
       }
+      users_ready_for_email: {
+        Row: {
+          current_level: number | null
+          email: string | null
+          plan_type: string | null
+          preferred_language: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       admin_lookup_email: { Args: { p_email: string }; Returns: Json }
