@@ -218,6 +218,7 @@ JOIN public.profiles p
 JOIN auth.users u
   ON fs.user_id = u.id
 WHERE fs.session_rank = 1
+  AND lower(coalesce(u.email, '')) <> 'ferramentasdigitais1000@gmail.com'
   AND fs.started_at >= p.created_at;
 
 CREATE OR REPLACE FUNCTION public.get_avg_first_session_minutes()
@@ -236,15 +237,18 @@ AS $$
   )::NUMERIC
   FROM (
     SELECT DISTINCT ON (user_id)
-      user_id,
-      started_at,
-      GREATEST(COALESCE(last_ping_at, started_at), COALESCE(ended_at, started_at)) AS session_ended_at
-    FROM public.user_sessions
+      us.user_id,
+      us.started_at,
+      GREATEST(COALESCE(us.last_ping_at, us.started_at), COALESCE(us.ended_at, us.started_at)) AS session_ended_at
+    FROM public.user_sessions us
+    JOIN auth.users u
+      ON u.id = us.user_id
     CROSS JOIN cutoff c
-    WHERE user_id IS NOT NULL
-      AND started_at IS NOT NULL
-      AND GREATEST(COALESCE(last_ping_at, started_at), COALESCE(ended_at, started_at)) > started_at
-      AND started_at >= c.first_session_cutoff
-    ORDER BY user_id, started_at ASC
+    WHERE us.user_id IS NOT NULL
+      AND us.started_at IS NOT NULL
+      AND lower(coalesce(u.email, '')) <> 'ferramentasdigitais1000@gmail.com'
+      AND GREATEST(COALESCE(us.last_ping_at, us.started_at), COALESCE(us.ended_at, us.started_at)) > us.started_at
+      AND us.started_at >= c.first_session_cutoff
+    ORDER BY us.user_id, us.started_at ASC
   ) fs;
 $$;

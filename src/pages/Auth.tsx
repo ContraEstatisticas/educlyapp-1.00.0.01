@@ -1,19 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Sparkles, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Sparkles, Mail, Lock, ArrowLeft, User, Eye, EyeOff } from "lucide-react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { createPendingAccount, createPurchasedAccount } from "@/lib/purchasedSignup";
-import { useTranslation } from "react-i18next";
-import i18n from "i18next";
-import { LanguageSelector } from "@/components/LanguageSelector";
-
 import {
   Dialog,
   DialogContent,
@@ -28,27 +25,16 @@ const Auth = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
+
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
 
-  // Determina se é fluxo de compra baseado se existe 'email' na URL
-  const isPurchaseFlow = !!searchParams.get("email");
-
-  // Magic link expired detection
   const [showExpiredLink, setShowExpiredLink] = useState(false);
   const [expiredEmail, setExpiredEmail] = useState("");
   const [isResendingLink, setIsResendingLink] = useState(false);
-
-  // Form States
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmEmail, setConfirmEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const [showLoginPassword, setShowLoginPassword] = useState(false);
-  const [showSignupPassword, setShowSignupPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
@@ -56,19 +42,16 @@ const Auth = () => {
 
   const [isLoginErrorDialogOpen, setIsLoginErrorDialogOpen] = useState(false);
   const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService" | "unconfirmed">("invalid");
-  const [isNoPurchaseDialogOpen, setIsNoPurchaseDialogOpen] = useState(false);
-  const [lastPurchaseCheck, setLastPurchaseCheck] = useState<boolean>(false);
 
-  const defaultTab = searchParams.get("tab") === "signup" ? "signup" : "login";
-
-  // Magic link session listener — must run before any conditional render
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        console.log('[Auth] onAuthStateChange SIGNED_IN detected, redirecting to /dashboard');
-        navigate('/dashboard', { replace: true });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" && session) {
+        navigate("/dashboard", { replace: true });
       }
     });
+
     return () => subscription.unsubscribe();
   }, [navigate]);
 
@@ -77,77 +60,117 @@ const Auth = () => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+
       if (session) {
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       }
     };
-    checkUser();
 
-    // Preenche o email se vier da página de compra
+    void checkUser();
+
     const emailParam = searchParams.get("email");
     if (emailParam) {
       setEmail(emailParam);
     }
 
-    // Auto-open reset dialog if redirected from ALREADY_EXISTS
     if (searchParams.get("showReset") === "true" && emailParam) {
       setResetEmail(emailParam);
       setIsResetDialogOpen(true);
     }
   }, [navigate, searchParams]);
 
-  // Detect expired magic link from URL hash params
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const hash = window.location.hash;
-    if (hash) {
-      const hashParams = new URLSearchParams(hash.replace('#', ''));
-      const error = hashParams.get('error');
-      const errorCode = hashParams.get('error_code');
-      const errorDesc = hashParams.get('error_description');
-      if (error === 'access_denied' || errorCode === 'otp_expired' || 
-          (errorDesc && errorDesc.toLowerCase().includes('expired'))) {
-        setShowExpiredLink(true);
-        const emailParam = searchParams.get('email') || '';
-        if (emailParam) setExpiredEmail(emailParam);
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    if (!hash) {
+      return;
+    }
+
+    const hashParams = new URLSearchParams(hash.replace("#", ""));
+    const error = hashParams.get("error");
+    const errorCode = hashParams.get("error_code");
+    const errorDesc = hashParams.get("error_description");
+
+    if (
+      error === "access_denied" ||
+      errorCode === "otp_expired" ||
+      (errorDesc && errorDesc.toLowerCase().includes("expired"))
+    ) {
+      setShowExpiredLink(true);
+
+      const emailParam = searchParams.get("email") || "";
+      if (emailParam) {
+        setExpiredEmail(emailParam);
       }
+
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
   }, [searchParams]);
 
   const handleResendMagicLink = async () => {
     if (!expiredEmail) {
-      toast({ title: t("common.error"), description: t("auth.emailRequired", "Por favor, digite seu e-mail."), variant: "destructive" });
+      toast({
+        title: t("common.error"),
+        description: t("auth.emailRequired", "Por favor, digite seu email."),
+        variant: "destructive",
+      });
       return;
     }
+
     setIsResendingLink(true);
+
     try {
       const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-      const resp = await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: expiredEmail.toLowerCase().trim() }),
       });
-      const result = await resp.json();
-      if (resp.status === 429) {
-        toast({ title: t("auth.rateLimited", "Aguarde um momento"), description: t("auth.rateLimitedDesc", "Já enviamos um link recentemente. Tente novamente em 1 minuto."), variant: "destructive" });
+      const result = await response.json();
+
+      if (response.status === 429) {
+        toast({
+          title: t("auth.rateLimited", "Aguarde um momento"),
+          description: t(
+            "auth.rateLimitedDesc",
+            "Ja enviamos um link recentemente. Tente novamente em 1 minuto.",
+          ),
+          variant: "destructive",
+        });
         return;
       }
-      if (!resp.ok) throw new Error(result.error || 'Failed to resend');
-      toast({ title: t("auth.emailSent", "E-mail enviado!"), description: t("auth.magicLinkSent", "Verifique sua caixa de entrada para acessar sua conta.") });
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to resend magic link");
+      }
+
+      toast({
+        title: t("auth.emailSent", "Email enviado!"),
+        description: t("auth.magicLinkSent", "Verifique sua caixa de entrada para acessar sua conta."),
+      });
       setShowExpiredLink(false);
-    } catch (error: any) {
-      toast({ title: t("common.error"), description: error.message, variant: "destructive" });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : t("common.error");
+      toast({
+        title: t("common.error"),
+        description: message,
+        variant: "destructive",
+      });
     } finally {
       setIsResendingLink(false);
     }
   };
 
-  const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleResetPassword = async (event: React.FormEvent) => {
+    event.preventDefault();
+
     if (!resetEmail) {
       toast({
         title: t("common.error"),
-        description: t("auth.emailRequired", "Por favor, digite seu e-mail."),
+        description: t("auth.emailRequired", "Por favor, digite seu email."),
         variant: "destructive",
       });
       return;
@@ -160,18 +183,21 @@ const Auth = () => {
         body: { email: resetEmail },
       });
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
       toast({
-        title: t("auth.emailSent", "E-mail enviado!"),
+        title: t("auth.emailSent", "Email enviado!"),
         description: t("auth.checkEmailReset", "Verifique sua caixa de entrada para redefinir a senha."),
       });
       setIsResetDialogOpen(false);
       setResetEmail("");
-    } catch (error: any) {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : t("common.error");
       toast({
         title: t("auth.error"),
-        description: error.message,
+        description: message,
         variant: "destructive",
       });
     } finally {
@@ -179,15 +205,14 @@ const Auth = () => {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
     setIsLoading(true);
 
     try {
-      const normalizedLoginEmail = email.trim().toLowerCase().replace(/\.+$/, "");
-
+      const normalizedEmail = email.trim().toLowerCase().replace(/\.+$/, "");
       const { error } = await supabase.auth.signInWithPassword({
-        email: normalizedLoginEmail,
+        email: normalizedEmail,
         password,
       });
 
@@ -200,244 +225,80 @@ const Auth = () => {
       if (error) {
         const message = String(error.message || "").toLowerCase();
         const isUnconfirmed = message.includes("email not confirmed") || message.includes("not confirmed");
-
         setLoginErrorType(isUnconfirmed ? "unconfirmed" : "invalid");
         setIsLoginErrorDialogOpen(true);
         return;
       }
 
-      // Reconcilia billing events pendentes no login
-      let loggedInUser: any = null;
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        loggedInUser = user;
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
         if (user) {
           await supabase.rpc("process_pending_billing_events", {
             p_user_id: user.id,
-            p_email: normalizedLoginEmail,
+            p_email: normalizedEmail,
           });
-          console.log("Billing reconciliation on login completed for:", normalizedLoginEmail);
         }
-      } catch (rpcErr) {
-        console.error("Billing reconciliation on login error:", rpcErr);
+      } catch (reconciliationError) {
+        console.error("Billing reconciliation on login error:", reconciliationError);
       }
-
-      // Premium access is now checked by PremiumGuard on protected pages
-      console.log("[Auth] Login successful for:", normalizedLoginEmail);
 
       toast({
         title: t("auth.loginSuccess"),
-        description: t("auth.description") + (loggedInUser?.user_metadata?.full_name || email),
+        description: t("auth.description") + normalizedEmail,
       });
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const performSignup = async (hasPurchase: boolean) => {
-    const currentLanguage = navigator.language || i18n.language || "en";
-    const signupResult = hasPurchase
-      ? await createPurchasedAccount({
-        email,
-        password,
-        fullName: fullName.trim(),
-        preferredLanguage: currentLanguage,
-      })
-      : await createPendingAccount({
-      email,
-      password,
-      fullName: fullName.trim(),
-      preferredLanguage: currentLanguage,
-    });
-
-    if (!signupResult.ok) {
-      setIsLoading(false);
-      if (signupResult.code === "ALREADY_EXISTS") {
-        toast({
-          title: t("auth.signupError"),
-          description: t("auth.alreadyExistsResetHint", "Você já tem uma conta! Se não lembra a senha, use a opção 'Esqueceu a senha?' abaixo."),
-          variant: "destructive",
-        });
-        navigate(`/auth?email=${encodeURIComponent(email)}&tab=login&showReset=true`, { replace: true });
-        return;
-      }
-
-      toast({
-        title: t("auth.signupError"),
-        description: signupResult.message,
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (!hasPurchase) {
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupSuccess"),
-        description: t(
-          "auth.pendingAccessMessage",
-          "Conta criada com sucesso. O acesso sera liberado automaticamente apos a compra.",
-        ),
-      });
-      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
-      return;
-    }
-
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-    if (signInError) {
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupSuccess"),
-        description: t("auth.loginTab"),
-      });
-      navigate(`/auth?email=${encodeURIComponent(email)}&tab=login`, { replace: true });
-      return;
-    }
-
-    setIsLoading(false);
-
-    toast({
-      title: t("auth.signupSuccess"),
-      description: t("common.loading"),
-    });
-    navigate("/dashboard");
-  };
-
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!fullName.trim()) {
-      toast({
-        title: t("auth.signupError"),
-        description: t("auth.nameRequired"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Apenas valida a confirmação de e-mail SE for fluxo de compra
-    if (isPurchaseFlow) {
-      if (email !== confirmEmail) {
-        toast({
-          title: t("auth.signupError", "Erro no cadastro"),
-          description: t("auth.emailMismatch", "Os e-mails digitados não coincidem."),
-          variant: "destructive",
-        });
-        return;
-      }
-    }
-
-    if (password !== confirmPassword) {
-      toast({
-        title: t("auth.loginError"),
-        description: t("auth.passwordMismatch"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (password.length < 6) {
-      toast({
-        title: t("auth.loginError"),
-        description: t("auth.passwordTooShort"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      const { data: hasPurchase, error: purchaseError } = await supabase
-        .rpc("check_purchase_exists" as any, { p_email: email });
-
-      if (purchaseError) {
-        console.error("Error checking purchase status:", purchaseError);
-        setIsLoading(false);
-        toast({
-          title: t("auth.signupError"),
-          description: t("common.error"),
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (hasPurchase === false) {
-        setLastPurchaseCheck(false);
-        setIsLoading(false);
-        setIsNoPurchaseDialogOpen(true);
-        return;
-      }
-
-      setLastPurchaseCheck(true);
-    } catch (purchaseErr) {
-      console.error("Exception checking purchase status:", purchaseErr);
-      setIsLoading(false);
-      toast({
-        title: t("auth.signupError"),
-        description: t("common.error"),
-        variant: "destructive",
-      });
-      return;
-    }
-
-    await performSignup(true);
-  };
-
-  const handleContinueSignup = async () => {
-    setIsNoPurchaseDialogOpen(false);
-    setIsLoading(true);
-    await performSignup(lastPurchaseCheck);
-  };
-
+  const supportEmail = "contact@educly.app";
   const loginErrorTitle =
     loginErrorType === "noService"
       ? t("auth.noActiveServiceTitle", "Sem servico ativo")
       : loginErrorType === "unconfirmed"
-        ? t("auth.emailNotConfirmedTitle", "Conta criada, mas ainda não ativada")
+        ? t("auth.emailNotConfirmedTitle", "Conta criada, mas ainda nao ativada")
         : t("auth.invalidLoginTitle");
+
   const loginErrorDescription =
     loginErrorType === "noService"
       ? t(
-        "auth.noActiveServiceDescription",
-        "Nao ha servico ativo para este email. Verifique se a compra foi feita com o mesmo email cadastrado."
-      )
+          "auth.noActiveServiceDescription",
+          "Nao ha servico ativo para este email. Verifique se a compra foi feita com o mesmo email cadastrado.",
+        )
       : loginErrorType === "unconfirmed"
         ? t(
-          "auth.emailNotConfirmedDescription",
-          "Detectamos sua conta, mas o email ainda não foi confirmado. Use o botão de redefinir senha para ativar e acessar."
-        )
+            "auth.emailNotConfirmedDescription",
+            "Detectamos sua conta, mas o email ainda nao foi confirmado. Use o botao de redefinir senha para ativar e acessar.",
+          )
         : t(
-          "auth.accountNotFoundDescription",
-          "E-mail ou senha incorretos. Verifique os dados ou redefina sua senha."
-        );
-  const supportEmail = "contact@educly.app";
-  const noPurchaseDescription = t(
-    "auth.noPurchaseDescription",
-    "Nao localizamos uma compra vinculada a este e-mail. Verifique se voce informou o mesmo e-mail usado na compra. Se ainda nao comprou, acesse o link abaixo."
-  );
+            "auth.accountNotFoundDescription",
+            "Email ou senha incorretos. Verifique os dados ou redefina sua senha.",
+          );
+
   const loginErrorLines =
     loginErrorType === "noService"
       ? loginErrorDescription
-        .split("\n")
-        .map((line) => line.trim())
-        .filter(Boolean)
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
       : loginErrorType === "unconfirmed"
         ? [
-          t("auth.emailNotConfirmedStep1", "A conta foi encontrada para este e-mail."),
-          t("auth.emailNotConfirmedStep2", "Toque em 'Esqueceu a senha?' para ativar e definir uma nova senha."),
-          t("auth.emailNotConfirmedStep3", `Se continuar com problema, fale com ${supportEmail}`),
-        ]
+            t("auth.emailNotConfirmedStep1", "A conta foi encontrada para este email."),
+            t(
+              "auth.emailNotConfirmedStep2",
+              "Toque em 'Esqueceu a senha?' para ativar e definir uma nova senha.",
+            ),
+            t("auth.emailNotConfirmedStep3", `Se continuar com problema, fale com ${supportEmail}`),
+          ]
         : [
-          t("auth.accountNotFoundStep1"),
-          t("auth.accountNotFoundStep2"),
-          t("auth.accountNotFoundStep3")
-        ];
-  const noPurchaseLines = noPurchaseDescription
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
+            t("auth.accountNotFoundStep1"),
+            t("auth.accountNotFoundStep2"),
+            t("auth.accountNotFoundStep3"),
+          ];
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background safe-area-inset">
@@ -445,25 +306,36 @@ const Auth = () => {
         <LanguageSelector />
       </div>
 
-      {/* Expired Magic Link UI */}
       {showExpiredLink && (
         <Card className="w-full max-w-md p-6 space-y-4 animate-fade-in-up mb-4">
           <div className="text-center space-y-3">
             <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
               <Lock className="w-6 h-6 text-destructive" />
             </div>
-            <h2 className="text-xl font-bold text-foreground">{t("auth.linkExpired", "Seu link expirou")}</h2>
-            <p className="text-sm text-muted-foreground">{t("auth.linkExpiredDesc", "O link de acesso que você clicou já expirou. Digite seu e-mail para receber um novo.")}</p>
+            <h2 className="text-xl font-bold text-foreground">
+              {t("auth.linkExpired", "Seu link expirou")}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {t(
+                "auth.linkExpiredDesc",
+                "O link de acesso que voce clicou ja expirou. Digite seu email para receber um novo.",
+              )}
+            </p>
           </div>
+
           <div className="space-y-3">
             <Input
               type="email"
               placeholder={t("auth.emailPlaceholder", "seu@email.com")}
               value={expiredEmail}
-              onChange={(e) => setExpiredEmail(e.target.value)}
+              onChange={(event) => setExpiredEmail(event.target.value)}
             />
             <Button onClick={handleResendMagicLink} disabled={isResendingLink} className="w-full">
-              {isResendingLink ? <Sparkles className="w-4 h-4 mr-2 animate-spin" /> : <Mail className="w-4 h-4 mr-2" />}
+              {isResendingLink ? (
+                <Sparkles className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Mail className="w-4 h-4 mr-2" />
+              )}
               {t("auth.resendLink", "Enviar novo link")}
             </Button>
             <Button variant="ghost" className="w-full" onClick={() => setShowExpiredLink(false)}>
@@ -491,225 +363,86 @@ const Auth = () => {
         </div>
 
         <Card className="p-6 shadow-card border border-border">
-          <Tabs defaultValue={defaultTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-surface">
-              <TabsTrigger
-                value="login"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                {t("auth.loginTab")}
-              </TabsTrigger>
-              <TabsTrigger
-                value="signup"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                {t("auth.signupTab")}
-              </TabsTrigger>
-            </TabsList>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="login-email" className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-muted-foreground" />
+                {t("auth.email")}
+              </Label>
+              <Input
+                id="login-email"
+                type="email"
+                placeholder={t("auth.emailPlaceholder")}
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
 
-            <TabsContent value="login" className="space-y-4 mt-4">
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="login-email" className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    {t("auth.email")}
-                  </Label>
-                  <Input
-                    id="login-email"
-                    type="email"
-                    placeholder={t("auth.emailPlaceholder")}
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="login-password" className="flex items-center gap-2">
-                      <Lock className="w-4 h-4 text-muted-foreground" />
-                      {t("auth.password")}
-                    </Label>
-                    <Button
-                      variant="link"
-                      size="sm"
-                      className="px-0 h-auto text-xs text-muted-foreground hover:text-primary"
-                      onClick={() => {
-                        setResetEmail(email);
-                        setIsResetDialogOpen(true);
-                      }}
-                      type="button"
-                    >
-                      {t("auth.forgotPassword", "Esqueceu a senha?")}
-                    </Button>
-                  </div>
-
-                  <div className="relative">
-                    <Input
-                      id="login-password"
-                      type={showLoginPassword ? "text" : "password"}
-                      placeholder={t("auth.passwordPlaceholder")}
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="pr-10"
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                      onClick={() => setShowLoginPassword(!showLoginPassword)}
-                    >
-                      {showLoginPassword ? (
-                        <EyeOff className="h-4 w-4 text-muted-foreground" />
-                      ) : (
-                        <Eye className="h-4 w-4 text-muted-foreground" />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="remember-me"
-                    checked={rememberMe}
-                    onCheckedChange={(checked) => setRememberMe(checked === true)}
-                  />
-                  <Label htmlFor="remember-me" className="text-sm font-normal text-muted-foreground cursor-pointer">
-                    {t("auth.rememberMe", "Mantenha conectado")}
-                  </Label>
-                </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? t("common.loading") : t("auth.loginButton")}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="login-password" className="flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-muted-foreground" />
+                  {t("auth.password")}
+                </Label>
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="px-0 h-auto text-xs text-muted-foreground hover:text-primary"
+                  onClick={() => {
+                    setResetEmail(email);
+                    setIsResetDialogOpen(true);
+                  }}
+                  type="button"
+                >
+                  {t("auth.forgotPassword", "Esqueceu a senha?")}
                 </Button>
-              </form>
-            </TabsContent>
+              </div>
 
-            <TabsContent value="signup" className="space-y-4 mt-4">
-              <form onSubmit={handleSignup} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-name" className="flex items-center gap-2">
-                    <User className="w-4 h-4 text-muted-foreground" />
-                    {t("auth.fullName")}
-                  </Label>
-                  <Input
-                    id="signup-name"
-                    type="text"
-                    placeholder={t("auth.fullNamePlaceholder")}
-                    required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                  />
-                </div>
-
-                {/* CAMPO DE EMAIL INTELIGENTE */}
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    {t("auth.email")}
-                  </Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    placeholder={t("auth.emailPlaceholder")}
-                    required
-                    // SE FOR COMPRA: Trava o campo e deixa cinza
-                    readOnly={isPurchaseFlow}
-                    className={isPurchaseFlow ? "bg-muted cursor-not-allowed opacity-80" : ""}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-
-                {/* CAMPO DE CONFIRMAÇÃO: SÓ APARECE SE FOR COMPRA */}
-                {isPurchaseFlow && (
-                  <div className="space-y-2 animate-fade-in-up">
-                    <Label htmlFor="signup-confirm-email" className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-muted-foreground" />
-                      {t("auth.confirmEmail", "Confirme seu e-mail")}
-                    </Label>
-                    <Input
-                      id="signup-confirm-email"
-                      type="email"
-                      placeholder={t("auth.emailPlaceholder", "Digite seu e-mail novamente")}
-                      required
-                      value={confirmEmail}
-                      onChange={(e) => setConfirmEmail(e.target.value)}
-                    />
-                  </div>
-                )}
-
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-muted-foreground" />
-                    {t("auth.password")}
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      id="signup-password"
-                      type={showSignupPassword ? "text" : "password"}
-                      placeholder={t("auth.passwordPlaceholder")}
-                      required
-                      minLength={6}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="pr-10"
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                      onClick={() => setShowSignupPassword(!showSignupPassword)}
-                    >
-                      {showSignupPassword ? (
-                        <EyeOff className="h-4 w-4 text-muted-foreground" />
-                      ) : (
-                        <Eye className="h-4 w-4 text-muted-foreground" />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="signup-confirm" className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-muted-foreground" />
-                    {t("auth.confirmPassword")}
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      id="signup-confirm"
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder={t("auth.confirmPasswordPlaceholder")}
-                      required
-                      minLength={6}
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="pr-10"
-                    />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                      {showConfirmPassword ? (
-                        <EyeOff className="h-4 w-4 text-muted-foreground" />
-                      ) : (
-                        <Eye className="h-4 w-4 text-muted-foreground" />
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? t("common.loading") : t("auth.signupButton")}
+              <div className="relative">
+                <Input
+                  id="login-password"
+                  type={showLoginPassword ? "text" : "password"}
+                  placeholder={t("auth.passwordPlaceholder")}
+                  required
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  className="pr-10"
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={() => setShowLoginPassword((current) => !current)}
+                >
+                  {showLoginPassword ? (
+                    <EyeOff className="h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-muted-foreground" />
+                  )}
                 </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="remember-me"
+                checked={rememberMe}
+                onCheckedChange={(checked) => setRememberMe(checked === true)}
+              />
+              <Label
+                htmlFor="remember-me"
+                className="text-sm font-normal text-muted-foreground cursor-pointer"
+              >
+                {t("auth.rememberMe", "Mantenha conectado")}
+              </Label>
+            </div>
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? t("common.loading") : t("auth.loginButton")}
+            </Button>
+          </form>
         </Card>
       </div>
 
@@ -718,7 +451,10 @@ const Auth = () => {
           <DialogHeader>
             <DialogTitle>{t("auth.resetPasswordTitle", "Recuperar Senha")}</DialogTitle>
             <DialogDescription>
-              {t("auth.resetPasswordDesc", "Digite seu e-mail para receber um link de redefinição de senha.")}
+              {t(
+                "auth.resetPasswordDesc",
+                "Digite seu email para receber um link de redefinicao de senha.",
+              )}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleResetPassword} className="space-y-4">
@@ -729,7 +465,7 @@ const Auth = () => {
                 type="email"
                 placeholder={t("auth.emailPlaceholder")}
                 value={resetEmail}
-                onChange={(e) => setResetEmail(e.target.value)}
+                onChange={(event) => setResetEmail(event.target.value)}
                 required
               />
             </div>
@@ -748,10 +484,8 @@ const Auth = () => {
       <Dialog open={isLoginErrorDialogOpen} onOpenChange={setIsLoginErrorDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <div style={{ height: "15px", width: "100%" }}></div>
-            <DialogTitle className="text-base font-semibold leading-snug">
-              {loginErrorTitle}
-            </DialogTitle>
+            <div style={{ height: "15px", width: "100%" }} />
+            <DialogTitle className="text-base font-semibold leading-snug">{loginErrorTitle}</DialogTitle>
             <DialogDescription className="text-sm leading-relaxed">
               <ol className="mt-2 space-y-4">
                 {loginErrorLines.map((line, index) => {
@@ -765,10 +499,11 @@ const Auth = () => {
                       </span>
                       {!isLast && (
                         <span
-                          className={`absolute left-3 top-7 h-full w-px ${isBreak
-                            ? "border-l-2 border-dashed border-muted-foreground/40"
-                            : "border-l-2 border-solid border-muted-foreground/25"
-                            }`}
+                          className={`absolute left-3 top-7 h-full w-px ${
+                            isBreak
+                              ? "border-l-2 border-dashed border-muted-foreground/40"
+                              : "border-l-2 border-solid border-muted-foreground/25"
+                          }`}
                         />
                       )}
                       {isBreak && (
@@ -809,76 +544,8 @@ const Auth = () => {
             >
               {t("auth.forgotPassword", "Esqueceu a senha?")}
             </Button>
-            <Button
-              type="button"
-              onClick={() => setIsLoginErrorDialogOpen(false)}
-              className="w-full"
-            >
+            <Button type="button" onClick={() => setIsLoginErrorDialogOpen(false)} className="w-full">
               {t("common.ok", "OK")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={isNoPurchaseDialogOpen} onOpenChange={setIsNoPurchaseDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div style={{ height: "15px", width: "100%" }}></div>
-            <DialogTitle className="text-base font-semibold leading-snug">
-              {t("auth.noPurchaseTitle", "Compra nao identificada")}
-            </DialogTitle>
-            <DialogDescription className="text-sm leading-relaxed">
-              <ol className="mt-2 space-y-4">
-                {noPurchaseLines.map((line, index) => {
-                  const isLast = index === noPurchaseLines.length - 1;
-                  const isBreak = index === noPurchaseLines.length - 2;
-
-                  return (
-                    <li key={index} className="relative pl-8">
-                      <span className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-xs font-medium text-primary">
-                        {index + 1}
-                      </span>
-                      {!isLast && (
-                        <span
-                          className={`absolute left-3 top-7 h-full w-px ${isBreak
-                            ? "border-l-2 border-dashed border-muted-foreground/40"
-                            : "border-l-2 border-solid border-muted-foreground/25"
-                            }`}
-                        />
-                      )}
-                      {isBreak && (
-                        <span className="absolute left-2.5 top-[2.25rem] h-2 w-2 rounded-full border border-muted-foreground/40 bg-background" />
-                      )}
-                      <p className="text-sm text-muted-foreground">
-                        {line.includes(supportEmail) ? (
-                          <>
-                            {line.split(supportEmail)[0]}
-                            <a
-                              href={`mailto:${supportEmail}`}
-                              className="text-primary underline underline-offset-4"
-                            >
-                              {supportEmail}
-                            </a>
-                            {line.split(supportEmail)[1] ?? ""}
-                          </>
-                        ) : (
-                          line
-                        )}
-                      </p>
-                    </li>
-                  );
-                })}
-              </ol>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex flex-col sm:flex-row gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleContinueSignup}
-              className="w-full"
-            >
-              {t("auth.noPurchaseContinue", "Continuar cadastro")}
             </Button>
           </DialogFooter>
         </DialogContent>
