@@ -19,6 +19,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useDailyLoginXP } from "@/hooks/useDailyLoginXP";
 import { Badge } from "@/components/ui/badge";
+import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
+import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 
 import challengeInicianteImg from "@/assets/Edi-dashboard.png";
 import corujaIA from "@/assets/IA.png";
@@ -46,12 +48,13 @@ const MOCK_ACTIVE_SESSION = {
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { isPremium, isLoading: isPremiumLoading } = usePremiumAccess();
   const productAccess = useProductAccess();
   const [userId, setUserId] = useState<string | undefined>();
   const [trailModalOpen, setTrailModalOpen] = useState(false);
   const [missionsOpen, setMissionsOpen] = useState(false);
+  const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
 
   useDailyLoginXP();
 
@@ -67,6 +70,13 @@ const Dashboard = () => {
     await supabase.auth.signOut();
     toast({ title: t("common.logout") });
     navigate("/auth");
+  };
+
+  const showSpecializedTrailsSoon = () => {
+    toast({
+      title: aiTrailUi.toastTitle,
+      description: aiTrailUi.toastDescription,
+    });
   };
 
   const { data: completedDaysCount = 0 } = useQuery({
@@ -359,6 +369,79 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          <section id="ai-specialized-trails" className="space-y-5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  {aiTrailUi.dashboardEyebrow}
+                </p>
+                <h3 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
+                  {aiTrailUi.dashboardTitle}
+                </h3>
+              </div>
+
+              <Button
+                variant="outline"
+                className="h-12 rounded-xl border-2"
+                onClick={showSpecializedTrailsSoon}
+              >
+                {aiTrailUi.dashboardButton}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {aiMasteryTrails.slice(0, 4).map((trail) => {
+                const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
+                return (
+                  <button
+                    key={trail.slug}
+                    onClick={showSpecializedTrailsSoon}
+                    className="group relative overflow-hidden rounded-3xl border border-border bg-card p-5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+                  >
+                    <div
+                      className="absolute inset-x-0 top-0 h-1"
+                      style={{ background: `linear-gradient(90deg, ${trail.accent}, ${trail.accent}66)` }}
+                    />
+                    <div
+                      className="absolute -right-10 -top-10 h-28 w-28 rounded-full blur-3xl"
+                      style={{ backgroundColor: `${trail.accent}18` }}
+                    />
+
+                    <div className="relative z-10 flex items-start justify-between gap-3">
+                      <div
+                        className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10"
+                        style={{ backgroundColor: `${trail.accent}18` }}
+                      >
+                        {trail.logo ? (
+                          <img src={trail.logo} alt={trail.name} className="h-8 w-8 object-contain" />
+                        ) : null}
+                      </div>
+                      <Badge variant="secondary" className="border-0 bg-muted text-foreground">
+                        {aiTrailUi.comingSoon}
+                      </Badge>
+                    </div>
+
+                    <div className="relative z-10 mt-4">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        {trailMeta.category}
+                      </p>
+                      <h4 className="mt-2 text-xl font-bold text-foreground">{trail.name}</h4>
+                    </div>
+
+                    <div className="relative z-10 mt-5 flex items-center justify-between">
+                      <p className="max-w-[70%] text-sm font-medium text-foreground">{trailMeta.signature}</p>
+                      <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: trail.accent }}>
+                        {aiTrailUi.dashboardCardAction}
+                        <ChevronRight className="h-4 w-4" />
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
 
           {/* GRID DE CARDS DESTAQUE */}
           <div>

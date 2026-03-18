@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { ArrowLeft, Mic, Check, Star, Trophy, Sparkles } from "lucide-react";
+import { ArrowLeft, Mic, Check, Star, Trophy, Sparkles, Layers3, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
@@ -15,6 +15,7 @@ import { useTranslatedChallengeContent } from "@/hooks/useTranslatedChallengeCon
 import confetti from "canvas-confetti";
 import { ChallengeTutorial } from "@/components/onboarding";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import { getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 
 const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t, language }: any) => {
   const progress = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
@@ -71,10 +72,17 @@ const Challenge = () => {
   const queryClient = useQueryClient();
   const { t, i18n } = useTranslation();
   const { getChallengeName, getChallengeDescription, getDayTitle } = useTranslatedChallengeContent();
+  const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
 
   const [selectedAITool, setSelectedAITool] = useState<string | null>(null);
   const [popupToolSlug, setPopupToolSlug] = useState<string | null>(null);
   const currentDayRef = useRef<HTMLDivElement>(null);
+  const showSpecializedTrailsSoon = () => {
+    toast({
+      title: aiTrailUi.toastTitle,
+      description: aiTrailUi.toastDescription,
+    });
+  };
 
   const { data: challenge, isLoading: loadingChallenge } = useQuery({
     queryKey: ["challenge", slug],
@@ -290,6 +298,25 @@ const Challenge = () => {
                   if (day) handleDayClick(day.id);
                 }}
               />
+            </div>
+
+            <div className="mb-6 overflow-hidden rounded-3xl border border-border bg-card p-5 shadow-sm">
+              <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                  <div className="max-w-2xl">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                      <Layers3 className="h-3.5 w-3.5" />
+                      {aiTrailUi.challengeEyebrow}
+                    </div>
+                    <h3 className="mt-3 text-2xl font-bold text-foreground">
+                      {aiTrailUi.challengeTitle}
+                    </h3>
+                  </div>
+  
+                  <Button className="h-12 rounded-xl px-6" onClick={showSpecializedTrailsSoon}>
+                    {aiTrailUi.challengeButton}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+              </div>
             </div>
 
             {/* Zig-zag path */}
