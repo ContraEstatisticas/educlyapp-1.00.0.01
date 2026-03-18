@@ -562,7 +562,7 @@ export const KPICards = () => {
               icon={<Clock className="h-5 w-5" />}
               color="info"
               description="CSV de Novos Usuários"
-              tooltip="Média real, em minutos, da primeira sessão registrada por usuário. Clique para baixar o relatório do primeiro acesso."
+              tooltip="Média real, em minutos, da primeira sessão válida registrada por usuário desde o novo rollout de rastreamento em 18/03/2026. Clique para baixar o relatório do primeiro acesso."
             />
           </div>
           <AdminKPICard
@@ -710,6 +710,7 @@ export const KPICards = () => {
     </div>
   );
 };
+
 
 
 
