@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Freelas - Jornal de Vagas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d0d0d;
+      font-family: 'DM Sans', sans-serif;
+      color: #f0f0f0;
+      padding: 32px 16px;
+    }
+
+    .wrapper {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 20px 20px 0 0;
+      padding: 40px 32px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-bottom: none;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,212,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .badge-new {
+      display: inline-block;
+      background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .header h1 span {
+      background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* BODY */
+    .body {
+      background: #111118;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-top: none;
+      border-bottom: none;
+    }
+
+    /* NEWSPAPER VISUAL */
+    .newspaper-card {
+      background: linear-gradient(145deg, #1c1c2e, #14142a);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newspaper-card::after {
+      content: '📰';
+      position: absolute;
+      right: -10px; top: -10px;
+      font-size: 80px;
+      opacity: 0.06;
+      transform: rotate(15deg);
+    }
+
+    .newspaper-card .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #00d4ff;
+      margin-bottom: 10px;
+    }
+
+    .newspaper-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .newspaper-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+
+    /* FEATURES LIST */
+    .features {
+      margin-bottom: 28px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .feature-item:last-child { border-bottom: none; }
+
+    .feature-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #f0f0f0;
+      margin-bottom: 3px;
+    }
+
+    .feature-text span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+      margin: 28px 0;
+    }
+
+    /* CARDS PREMIUM vs FREE */
+    .plans {
+      display: table;
+      width: 100%;
+      margin-bottom: 28px;
+      border-spacing: 0;
+    }
+
+    .plan-card {
+      background: #1a1a2e;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: block;
+    }
+
+    .plan-card.premium {
+      border-color: rgba(123,47,247,0.5);
+      background: linear-gradient(135deg, #1a1433, #1e1040);
+    }
+
+    .plan-card.free {
+      border-color: rgba(0,212,255,0.3);
+      background: linear-gradient(135deg, #0f1a2e, #0d1f35);
+    }
+
+    .plan-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .plan-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .plan-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .plan-card.premium .plan-tag {
+      background: rgba(123,47,247,0.25);
+      color: #b47eff;
+      border: 1px solid rgba(123,47,247,0.4);
+    }
+
+    .plan-card.free .plan-tag {
+      background: rgba(0,212,255,0.15);
+      color: #00d4ff;
+      border: 1px solid rgba(0,212,255,0.3);
+    }
+
+    .plan-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    .plan-desc strong {
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* LEVEL PROGRESS */
+    .level-section {
+      background: linear-gradient(135deg, #0f1e0f, #102010);
+      border: 1px solid rgba(80,200,80,0.25);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .level-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .level-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+
+    .level-bar-bg {
+      background: rgba(255,255,255,0.08);
+      border-radius: 50px;
+      height: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .level-bar-fill {
+      height: 100%;
+      width: 66%;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #50c832, #a8e63d);
+    }
+
+    .level-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .level-labels span.active {
+      color: #50c832;
+      font-weight: 600;
+    }
+
+    /* CTA */
+    .cta-block {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .cta-block p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+
+    .btn-main {
+      display: inline-block;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 32px rgba(0,212,255,0.25);
+    }
+
+    .urgency {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 10px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-top: none;
+      border-radius: 0 0 20px 20px;
+      padding: 24px 32px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.7;
+    }
+
+    .footer a {
+      color: rgba(0,212,255,0.6);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="badge-new">🔓 Nova Funcionalidade</div>
+      <h1>Chegou o <span>Jornal de Vagas</span> aqui no Premium Freelas</h1>
+      <p>Toda semana, vagas reais de freelancer com pagamento em dólar. Selecionadas, organizadas e prontas pra você usar com IA.</p>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+
+      <!-- O QUE É -->
+      <div class="newspaper-card">
+        <div class="label">O que é isso?</div>
+        <h2>Vagas em 💵 USD toda semana, no seu email</h2>
+        <p>O Jornal de Vagas é uma curadoria semanal de oportunidades reais no Freelancer.com com pagamento em dólar. Você recebe tudo organizado: título, orçamento, descrição e link direto. Só entrar, usar IA pra mandar a proposta e faturar.</p>
+      </div>
+
+      <!-- FEATURES -->
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">🌎</div>
+          <div class="feature-text">
+            <strong>Vagas internacionais em dólar</strong>
+            <span>Projetos reais de clientes gringos, pagando em USD. Sem filtro ruim, sem perda de tempo.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-text">
+            <strong>Feito pra usar com IA</strong>
+            <span>Cada vaga vem com tudo que você precisa pra montar uma proposta matadora com ChatGPT ou qualquer IA.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📅</div>
+          <div class="feature-text">
+            <strong>Entrega semanal automática</strong>
+            <span>Chega direto no seu email toda semana. Zero esforço, máximo resultado.</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-text">
+            <strong>Categorias variadas</strong>
+            <span>Edição de vídeo, desenvolvimento web e muito mais. Independente da sua área, tem vaga pra você.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- PLANOS -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-name">⭐ Você tem Premium</div>
+          <div class="plan-tag">Desconto especial</div>
+        </div>
+        <div class="plan-desc">
+          Boa notícia! Como você já é Premium, ao atingir o <strong>Nível 3</strong> você desbloqueia o Jornal de Vagas com um <strong>desconto exclusivo</strong>. Seu plano já te dá vantagem.
+        </div>
+      </div>
+
+      <div class="plan-card free">
+        <div class="plan-header">
+          <div class="plan-name">🆓 Plano Gratuito</div>
+          <div class="plan-tag">Acesso no nível 3</div>
+        </div>
+        <div class="plan-desc">
+          Sem problema! Chegando no <strong>Nível 3</strong>, você já pode adquirir o Jornal de Vagas. É a sua porta de entrada pro mercado internacional, mesmo sem o premium.
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- LEVEL PROGRESS -->
+      <div class="level-section">
+        <div class="level-title">🏆 Chegue ao Nível 3 e destrave tudo</div>
+        <div class="level-sub">Você está mais perto do que imagina</div>
+        <div class="level-bar-bg">
+          <div class="level-bar-fill"></div>
+        </div>
+        <div class="level-labels">
+          <span>Nível 1</span>
+          <span>Nível 2</span>
+          <span class="active">Nível 3 🔓</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <p>Continue usando a plataforma, suba de nível e libere o Jornal de Vagas 🚀</p>
+        <a href="#" class="btn-main">Voltar ao app e subir de nível</a>
+        <div class="urgency">Quanto mais rápido você chegar, mais cedo começa a faturar em dólar 💸</div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>
+        Você está recebendo este email porque tem uma conta no <strong>Premium Freelas</strong>.<br>
+        Não quer mais receber? <a href="#">Descadastrar</a>
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

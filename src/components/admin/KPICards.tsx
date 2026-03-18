@@ -36,6 +36,7 @@ import {
   getAdminDaysAgoStartIso,
   getAdminTodayKey,
 } from "@/lib/adminTimeZone";
+import { getAdminProductCounts } from "@/lib/adminProductCounts";
 
 type BillingMetricEvent = {
   email: string;
@@ -309,15 +310,25 @@ export const KPICards = () => {
         .select("id", { count: "exact", head: true })
         .ilike("event_type", "%chargeback%");
 
+      const errorRangeStart = getAdminDaysAgoStartIso(errorRangeValue);
+
+      const { count: refunds } = await supabase
+        .from("billing_event_logs")
+        .select("id", { count: "exact", head: true })
+        .gte("created_at", errorRangeStart)
+        .ilike("event_type", "%refund%");
+
+      const { count: errorsCount } = await supabase
+        .from("billing_event_logs")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "error")
+        .gte("created_at", errorRangeStart);
+
       // Billing events - include payload for iteration/recurrence detection
       const { data: billingEvents } = await supabase
         .from("billing_event_logs")
         .select("email, event_type, created_at, payload, status")
         .gte("created_at", sevenDaysAgoStartSaoPaulo);
-
-      const refunds = billingEvents?.filter((e) =>
-        e.event_type.toUpperCase().includes("REFUND")
-      ).length || 0;
 
 
       const settled = billingEvents?.filter((e) =>
@@ -386,24 +397,12 @@ export const KPICards = () => {
 
       const renewalsTodayCount = renewalKeys.size;
 
-      // Product access - count UNIQUE users per product type
-      const { data: productAccess } = await supabase
-        .from("user_product_access")
-        .select("user_id, product_type")
-        .eq("is_active", true);
+      const {
+        baseUsers,
+        freelancerUsers,
+        aiHubUsers,
+      } = await getAdminProductCounts();
 
-      // Use Sets to count unique users per product type
-      const baseUserIds = new Set(productAccess?.filter((p) => p.product_type === "base").map((p) => p.user_id));
-      const freelancerUserIds = new Set(productAccess?.filter((p) => p.product_type === "freelancer").map((p) => p.user_id));
-      const aiHubUserIds = new Set(productAccess?.filter((p) => p.product_type === "ai_hub").map((p) => p.user_id));
-
-      const baseUsers = baseUserIds.size;
-      const freelancerUsers = freelancerUserIds.size;
-      const aiHubUsers = aiHubUserIds.size;
-
-      // Total unique users with any product
-      const allProductUserIds = new Set(productAccess?.map((p) => p.user_id));
-      const totalProductUsers = allProductUserIds.size;
 
       // Completed days
       const { count: completedDays } = await supabase
@@ -424,12 +423,7 @@ export const KPICards = () => {
         ? Number(avgFirstSession).toFixed(1)
         : 0;
 
-      const errorRangeStart = getAdminDaysAgoStartIso(errorRangeValue);
-      const errorsInRange = billingEvents?.filter((event) => {
-        if (!event.created_at) return false;
-        if (event.status !== "error") return false;
-        return event.created_at >= errorRangeStart;
-      }).length || 0;
+      const errorsInRange = errorsCount || 0;
       const avgErrorsPerDay = errorRangeValue > 0
         ? (errorsInRange / errorRangeValue).toFixed(2)
         : "0";
@@ -451,7 +445,6 @@ export const KPICards = () => {
         baseUsers,
         freelancerUsers,
         aiHubUsers,
-        totalProductUsers,
         completedDays: completedDays || 0,
         retention,
         activationRate,
@@ -623,34 +616,27 @@ export const KPICards = () => {
           title="Produtos"
           description="Distribuição por tipo de produto (usuários únicos)"
         />
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <AdminKPICard
-            title="Com Produto Ativo"
-            value={kpis?.totalProductUsers || 0}
-            icon={<Package className="h-5 w-5" />}
-            description="usuários únicos"
-            tooltip="Contagem de user_id únicos em user_product_access com is_active=true"
-          />
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
           <AdminKPICard
             title="Base"
             value={kpis?.baseUsers || 0}
             icon={<Package className="h-5 w-5" />}
             color="success"
-            tooltip="Usuários únicos com product_type='base' em user_product_access"
+            tooltip="COUNT(DISTINCT user_id) em user_product_access onde product_type='base'"
           />
           <AdminKPICard
             title="Freelancer"
             value={kpis?.freelancerUsers || 0}
             icon={<Briefcase className="h-5 w-5" />}
             color="info"
-            tooltip="Usuários únicos com product_type='freelancer' em user_product_access"
+            tooltip="COUNT(DISTINCT user_id) em user_product_access onde product_type='freelancer'"
           />
           <AdminKPICard
             title="AI Hub"
             value={kpis?.aiHubUsers || 0}
             icon={<Bot className="h-5 w-5" />}
             color="purple"
-            tooltip="Usuários únicos com product_type='ai_hub' em user_product_access"
+            tooltip="COUNT(DISTINCT user_id) em user_product_access onde product_type='ai_hub'"
           />
         </div>
       </section>
@@ -663,7 +649,7 @@ export const KPICards = () => {
           description="Métricas de atenção"
           action={
             <Select value={errorRangeDays} onValueChange={setErrorRangeDays}>
-              <SelectTrigger className="h-8 w-[130px] bg-white">
+              <SelectTrigger className="h-8 w-[130px] border-border/50 bg-card text-foreground shadow-sm hover:bg-card/80">
                 <SelectValue placeholder="Periodo" />
               </SelectTrigger>
               <SelectContent>
@@ -687,7 +673,8 @@ export const KPICards = () => {
             value={kpis?.refunds || 0}
             icon={<RefreshCw className="h-5 w-5" />}
             color={kpis?.refunds && kpis.refunds > 0 ? "warning" : "default"}
-            tooltip="Eventos de billing_event_logs com event_type contendo 'refund'"
+            description={`Periodo: ${errorRangeLabel}`}
+            tooltip="Total de eventos em billing_event_logs com event_type contendo 'refund' no periodo selecionado"
           />
           <AdminKPICard
             title="Logs de Erro (Cashrate)"
