@@ -304,15 +304,16 @@ export const KPICards = () => {
         .select("user_id", { count: "exact", head: true })
         .in("plan_type", ["premium", "base"]);
 
+      const { count: chargebacks } = await supabase
+        .from("billing_event_logs")
+        .select("id", { count: "exact", head: true })
+        .ilike("event_type", "%chargeback%");
+
       // Billing events - include payload for iteration/recurrence detection
       const { data: billingEvents } = await supabase
         .from("billing_event_logs")
         .select("email, event_type, created_at, payload, status")
         .gte("created_at", sevenDaysAgoStartSaoPaulo);
-
-      const chargebacks = billingEvents?.filter((e) =>
-        e.event_type.toUpperCase().includes("CHARGEBACK")
-      ).length || 0;
 
       const refunds = billingEvents?.filter((e) =>
         e.event_type.toUpperCase().includes("REFUND")
@@ -610,7 +611,7 @@ export const KPICards = () => {
             value={kpis?.chargebacks || 0}
             icon={<AlertTriangle className="h-5 w-5" />}
             color={kpis?.chargebacks && kpis.chargebacks > 0 ? "danger" : "default"}
-            tooltip="Eventos de billing_event_logs com event_type contendo 'chargeback'"
+            tooltip="Total historico de eventos em billing_event_logs com event_type contendo 'chargeback'"
           />
         </div>
       </section>
