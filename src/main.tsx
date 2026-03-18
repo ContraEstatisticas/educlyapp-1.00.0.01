@@ -113,12 +113,18 @@ console.error = (...args: any[]) => {
   enviarAlertaTelegram({ nivel: "🟠 CONSOLE", mensagem: args[0] });
 };
 
-window.onerror = (msg) => {
-  enviarAlertaTelegram({ nivel: "🔴 CRÍTICO", mensagem: msg });
-  return false;
-};
+if (typeof window !== "undefined") {
+  window.onerror = (msg) => {
+    enviarAlertaTelegram({ nivel: "🔴 CRÍTICO", mensagem: msg });
+    return false;
+  };
 
-window.onunhandledrejection = (event) => {
-  enviarAlertaTelegram({ nivel: "🔴 PROMESSA", mensagem: event.reason?.message || event.reason });
-};
-createRoot(document.getElementById("root")!).render(<App />);
+  window.onunhandledrejection = (event) => {
+    enviarAlertaTelegram({ nivel: "🔴 PROMESSA", mensagem: event.reason?.message || event.reason });
+  };
+}
+
+if (typeof document !== "undefined") {
+  createRoot(document.getElementById("root")!).render(<App />);
+}
+

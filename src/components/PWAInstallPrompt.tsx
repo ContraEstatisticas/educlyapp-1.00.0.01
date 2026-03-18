@@ -19,7 +19,10 @@ export const PWAInstallPrompt = () => {
   const [dismissed, setDismissed] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 
-  const installLink = useMemo(() => `${window.location.origin}/`, []);
+  const installLink = useMemo(
+    () => (typeof window !== 'undefined' ? `${window.location.origin}/` : '/'),
+    []
+  );
   const dismissKey = useMemo(
     () => (userId ? `pwa-install-dismissed-${userId}` : 'pwa-install-dismissed'),
     [userId]

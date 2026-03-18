@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -31,8 +31,13 @@ class GlobalErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    const platform =
+      typeof navigator !== "undefined"
+        ? `${navigator.platform} - ${navigator.userAgent.split(" ")[0]}`
+        : "unknown";
+
     Promise.resolve(supabase.from("user_bugs").insert({
-      platform: `${navigator.platform} - ${navigator.userAgent.split(" ")[0]}`,
+      platform,
       error_message: `[UI CRASH] ${error.message}`,
       component_stack: errorInfo.componentStack || "Render Error",
     })).catch(() => {});
@@ -124,38 +129,40 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  // Efeito para aplicar o tema no HTML root
-  const applyThemeToHTML = () => {
-    // Esta função será chamada pelo ThemeProvider quando o tema mudar
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
     const handleThemeChange = (theme: string) => {
       const html = document.documentElement;
 
-      if (theme === 'dark') {
-        html.classList.add('dark');
-        html.style.backgroundColor = '#0f172a'; // slate-900
-        document.body.style.backgroundColor = '#0f172a';
+      if (theme === "dark") {
+        html.classList.add("dark");
+        html.style.backgroundColor = "#0f172a";
+        document.body.style.backgroundColor = "#0f172a";
       } else {
-        html.classList.remove('dark');
-        html.style.backgroundColor = '#ffffff';
-        document.body.style.backgroundColor = '#ffffff';
+        html.classList.remove("dark");
+        html.style.backgroundColor = "#ffffff";
+        document.body.style.backgroundColor = "#ffffff";
       }
     };
 
-    // Configurar listener para mudanças de tema
-    const themeStore = localStorage.getItem('educly-theme') || 'dark';
+    const themeStore = localStorage.getItem("educly-theme") || "dark";
     handleThemeChange(themeStore);
 
-    // Observar mudanças no localStorage (para sincronização entre tabs)
-    window.addEventListener('storage', (e) => {
-      if (e.key === 'educly-theme') {
-        handleThemeChange(e.newValue || 'dark');
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "educly-theme") {
+        handleThemeChange(e.newValue || "dark");
       }
-    });
-  };
+    };
 
-  // Aplicar tema na inicialização
-  applyThemeToHTML();
+    window.addEventListener("storage", handleStorage);
 
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
   return (
     <GlobalErrorBoundary>
       <QueryClientProvider client={queryClient}>
@@ -232,3 +239,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -9,6 +9,10 @@ interface PremiumGuardProps {
 
 // Helper to clear invalid session tokens
 const clearInvalidSession = () => {
+  if (typeof localStorage === "undefined" || typeof sessionStorage === "undefined") {
+    return;
+  }
+
   const keysToRemove: string[] = [];
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -59,7 +63,9 @@ export const PremiumGuard = ({ children }: PremiumGuardProps) => {
 
         if (!isPremium) {
           // Check if user did NOT select "keep me logged in"
-          const shouldClearSession = localStorage.getItem("clearSessionOnLogout") === "true";
+          const shouldClearSession =
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("clearSessionOnLogout") === "true";
           
           if (shouldClearSession) {
             // Clear session completely before redirecting to auth
