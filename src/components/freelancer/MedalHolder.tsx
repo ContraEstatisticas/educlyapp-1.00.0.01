@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useTranslation } from "react-i18next";
+﻿import { useTranslation } from "react-i18next";
 import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import { cn } from "@/lib/utils";
 import {
