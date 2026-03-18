@@ -25,18 +25,18 @@ interface NewsletterGateCopy {
 const NEWSLETTER_GATE_COPY: Record<RewardLocale, NewsletterGateCopy> = {
   pt: {
     description:
-      "Voce liberou o jornal semanal de vagas freelance. Para receber essas oportunidades no seu email, ative o modulo Freelancer e transforme aprendizado em renda.",
-    ctaLabel: "Ativar modulo Freelancer",
+      "O jornal semanal de vagas freelance e uma curadoria enviada por email com vagas, oportunidades remotas e sinais de mercado para quem quer transformar habilidade em renda. Voce ja desbloqueou esse beneficio no nivel 3. Agora falta ativar o modulo Freelancer para comecar a receber tudo semanalmente.",
+    ctaLabel: "Desbloquear modulo Freelancer",
   },
   en: {
     description:
-      "You unlocked the weekly freelance jobs journal. To receive those opportunities in your inbox, activate the Freelancer module and turn learning into income.",
-    ctaLabel: "Activate Freelancer module",
+      "The weekly freelance jobs journal is a curated email with freelance roles, remote opportunities, and market signals for people who want to turn skill into income. You already unlocked this perk at level 3. Now you just need to activate the Freelancer module to start receiving it every week.",
+    ctaLabel: "Unlock Freelancer module",
   },
   es: {
     description:
-      "Desbloqueaste el boletin semanal de vacantes freelance. Para recibir esas oportunidades en tu email, activa el modulo Freelancer y convierte aprendizaje en ingresos.",
-    ctaLabel: "Activar modulo Freelancer",
+      "El boletin semanal de vacantes freelance es una curadoria por email con vacantes, oportunidades remotas y señales de mercado para quien quiere convertir habilidad en ingresos. Ya desbloqueaste este beneficio en el nivel 3. Ahora solo falta activar el modulo Freelancer para empezar a recibirlo cada semana.",
+    ctaLabel: "Desbloquear modulo Freelancer",
   },
   fr: {
     description:

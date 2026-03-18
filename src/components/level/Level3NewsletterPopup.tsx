@@ -12,6 +12,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useLevelRewards } from "@/hooks/useLevelRewards";
+import { useUserLevel } from "@/hooks/useUserLevel";
+import {
+  getFreelancerDiscountOfferCopy,
+  hasFreelancerDiscountOffer,
+  openFreelancerOffer,
+} from "@/lib/freelancerDiscountOffer";
 import { getNewsletterLevelPopupCopy } from "@/lib/levelRewardNewsletterPopup";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
@@ -32,10 +38,12 @@ export const Level3NewsletterPopup = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { i18n } = useTranslation();
+  const { currentLevel, isLoading: isLevelLoading, levelData } = useUserLevel();
   const { data: rewards = [], isLoading } = useLevelRewards();
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [dismissedRewardId, setDismissedRewardId] = useState<string | null>(null);
+  const [syncedLevelKey, setSyncedLevelKey] = useState<string | null>(null);
 
   const reward = useMemo(
     () =>
@@ -62,6 +70,44 @@ export const Level3NewsletterPopup = () => {
   const requiresFreelancer = status === "requires_freelancer";
   const localSeen = reward ? hasSeenPopupLocally(reward.id) : false;
   const popupCopy = getNewsletterLevelPopupCopy(i18n.resolvedLanguage || i18n.language);
+  const hasDiscountOffer = hasFreelancerDiscountOffer();
+  const discountOfferCopy = getFreelancerDiscountOfferCopy(i18n.resolvedLanguage || i18n.language);
+
+  useEffect(() => {
+    if (isLevelLoading || !levelData?.user_id || currentLevel < 3) return;
+
+    const syncKey = `${levelData.user_id}:${currentLevel}`;
+
+    if (syncedLevelKey === syncKey) return;
+
+    let cancelled = false;
+
+    const syncRewards = async () => {
+      const { data, error } = await supabase.rpc("apply_level_rewards", {
+        p_current_level: currentLevel,
+        p_user_id: levelData.user_id,
+      });
+
+      if (error) {
+        console.error("Error syncing level rewards:", error);
+        return;
+      }
+
+      if (cancelled) return;
+
+      setSyncedLevelKey(syncKey);
+
+      if (Array.isArray(data) && data.length > 0) {
+        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      }
+    };
+
+    void syncRewards();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentLevel, isLevelLoading, levelData?.user_id, queryClient, syncedLevelKey]);
 
   useEffect(() => {
     if (isLoading || !reward) return;
@@ -98,7 +144,7 @@ export const Level3NewsletterPopup = () => {
     await markSeen();
 
     if (requiresFreelancer) {
-      navigate("/freelancer");
+      openFreelancerOffer(navigate);
     }
   };
 
@@ -134,6 +180,11 @@ export const Level3NewsletterPopup = () => {
                     ? popupCopy.lockedDescription
                     : popupCopy.activeDescription}
                 </DialogDescription>
+                {requiresFreelancer && hasDiscountOffer ? (
+                  <p className="text-sm font-semibold text-primary">
+                    {discountOfferCopy.note}
+                  </p>
+                ) : null}
               </DialogHeader>
             </div>
 
@@ -148,7 +199,11 @@ export const Level3NewsletterPopup = () => {
                 ) : requiresFreelancer ? (
                   <ArrowRight className="mr-2 h-4 w-4" />
                 ) : null}
-                {requiresFreelancer ? popupCopy.lockedPrimaryButton : popupCopy.activeButton}
+                {requiresFreelancer
+                  ? hasDiscountOffer
+                    ? discountOfferCopy.ctaLabel
+                    : popupCopy.lockedPrimaryButton
+                  : popupCopy.activeButton}
               </Button>
 
               {requiresFreelancer ? (
