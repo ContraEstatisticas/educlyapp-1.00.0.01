@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
@@ -9,6 +8,9 @@ import { VitePWA } from "vite-plugin-pwa";
 const BUILD_VERSION = Date.now().toString();
 
 export default defineConfig(({ mode }) => ({
+  esbuild: {
+    jsx: 'automatic',
+  },
   define: {
     // Frozen at build time - same for all users with this build
     '__APP_VERSION__': JSON.stringify(BUILD_VERSION),
@@ -18,7 +20,6 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: "prompt", // Changed to prompt for manual update control
