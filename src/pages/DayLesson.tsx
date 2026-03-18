@@ -725,11 +725,11 @@ const DayLesson = () => {
                     </p>
                     {!stepAnswer.isCorrect && (
                       <>
-                        <div className="mt-4 p-4 rounded-xl bg-orange-100 border border-orange-200">
-                          <p className="text-orange-600 text-sm font-semibold mb-1">
+                        <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
+                          <p className="mb-1 text-sm font-semibold text-amber-700">
                             {t("lesson.quiz.hint")} {wrongAttempts}:
                           </p>
-                          <p className="text-foreground/70 text-sm">
+                          <p className="text-sm leading-relaxed text-slate-800">
                             {wrongAttempts === 1
                               ? step.type === "quiz"
                                 ? t("lesson.quiz.hintReread")
