@@ -1,0 +1,2466 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Educly Edge Functions API",
+    "version": "2026-03-19",
+    "summary": "Swagger/OpenAPI documentation for Educly serverless APIs.",
+    "description": "This project exposes its API surface primarily through Supabase Edge Functions under `/functions/v1/*`.\n\nDocumented from the current source code on March 19, 2026. Source of truth: `supabase/functions/*/index.ts`.\n\nImportant: some routes are clearly intended for internal service-to-service usage but currently do not enforce transport-level auth inside the function handler. These cases are flagged in each operation description so the docs stay honest to the implementation."
+  },
+  "servers": [
+    {
+      "url": "https://dqlcxpbfemhzzetwaxsa.supabase.co/functions/v1",
+      "description": "Production Supabase Edge Functions"
+    },
+    {
+      "url": "http://127.0.0.1:54321/functions/v1",
+      "description": "Local Supabase CLI"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public Auth",
+      "description": "Public-facing signup, password recovery and access-link routes."
+    },
+    {
+      "name": "User Chat",
+      "description": "Authenticated chat and assistant endpoints used by students."
+    },
+    {
+      "name": "User Features",
+      "description": "Authenticated user endpoints outside chat, such as certificates and targeted lifecycle emails."
+    },
+    {
+      "name": "Admin",
+      "description": "Admin-only operational endpoints guarded by an authenticated admin JWT."
+    },
+    {
+      "name": "Email / Messaging",
+      "description": "Transactional or batch email orchestration endpoints."
+    },
+    {
+      "name": "Webhooks",
+      "description": "Incoming payment and CRM webhook receivers."
+    },
+    {
+      "name": "Operations",
+      "description": "Cron, retry, diagnostics and maintenance endpoints."
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "userBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Authenticated Supabase user session JWT."
+      },
+      "adminBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Authenticated Supabase user JWT for an admin account."
+      },
+      "debugToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-debug-token",
+        "description": "Diagnostic token that must match `DEBUG_TOKEN`."
+      },
+      "paddleBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token",
+        "description": "Bearer token that must match `PADDLE_API_KEY`."
+      },
+      "paddleSignature": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "paddle-signature",
+        "description": "Alternative Paddle verification header. Must validate against `PADDLE_WEBHOOK_SECRET`."
+      },
+      "hotmartHottok": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-hotmart-hottok",
+        "description": "Hotmart/Primer webhook header matched against `HOTMART_HOTTOK`."
+      },
+      "funnelFoxSignature": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "ff-webhook-signature",
+        "description": "Funnelfox HMAC-SHA256 signature matched against `FUNNELFOX_WEBHOOK_TOKEN`."
+      },
+      "cronBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token",
+        "description": "Cron or internal bearer token. Used by `retry-failed-webhooks` with `CRON_SECRET` or service role."
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid request payload or parameters.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing or invalid authentication.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Authenticated, but not allowed to use this route.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Rate limit reached.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Unexpected server-side failure.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "HTTP method not supported by this endpoint.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "retry_after": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "additionalProperties": true
+      },
+      "LooseObject": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000
+          }
+        },
+        "required": [
+          "role",
+          "content"
+        ],
+        "additionalProperties": false
+      },
+      "AssistentesChatRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "aiType": {
+            "type": "string",
+            "enum": [
+              "chatgpt",
+              "gemini",
+              "claude",
+              "grok",
+              "nanobanana",
+              "edi"
+            ],
+            "default": "chatgpt"
+          },
+          "language": {
+            "type": "string",
+            "description": "IETF language tag or short language code.",
+            "examples": [
+              "pt",
+              "en",
+              "es"
+            ]
+          }
+        },
+        "required": [
+          "messages"
+        ],
+        "additionalProperties": false
+      },
+      "IacademyChatRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "aiToolContext": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "language": {
+            "type": "string",
+            "description": "Short language code.",
+            "examples": [
+              "pt",
+              "en",
+              "es"
+            ]
+          }
+        },
+        "required": [
+          "messages"
+        ],
+        "additionalProperties": false
+      },
+      "LandingSupportChatRequest": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "user",
+                    "assistant"
+                  ]
+                },
+                "content": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 5000
+                }
+              },
+              "required": [
+                "role",
+                "content"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "locale": {
+            "type": "string",
+            "description": "Browser or app locale, for example `pt-BR` or `en`."
+          }
+        },
+        "required": [
+          "messages"
+        ],
+        "additionalProperties": false
+      },
+      "CreativeAssistantResponse": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "creative"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "MagicLoginRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ],
+        "additionalProperties": false
+      },
+      "MagicLoginResponse": {
+        "type": "object",
+        "properties": {
+          "action_link": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "action_link"
+        ],
+        "additionalProperties": false
+      },
+      "EmailOnlyRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "additionalProperties": false
+      },
+      "PasswordResetRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "language": {
+            "type": "string",
+            "description": "Optional. Present in the handler interface, but the function currently derives the actual email locale from profile/user metadata."
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "additionalProperties": false
+      },
+      "AutoCreateAccountRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "buyer_name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "examples": [
+              "es",
+              "pt",
+              "en"
+            ]
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "additionalProperties": false
+      },
+      "AutoCreateAccountResponse": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "access_token": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generated_password": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "account_created": {
+            "type": "boolean"
+          },
+          "already_existed": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "SignupRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1
+          },
+          "full_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "preferred_language": {
+            "type": "string",
+            "examples": [
+              "en",
+              "pt",
+              "es"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "full_name"
+        ],
+        "additionalProperties": false
+      },
+      "SignupResponse": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfirmSignupEmailRequest": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "AdminGrantAccessRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "products": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "base",
+                "freelancer",
+                "ai_hub",
+                "combo_freelancer_ai"
+              ]
+            }
+          },
+          "duration_days": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "products"
+        ],
+        "additionalProperties": false
+      },
+      "AdminGrantAccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "granted_products": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expires_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "welcome_email_scheduled": {
+            "type": "boolean"
+          },
+          "welcome_email_language": {
+            "type": "string"
+          },
+          "welcome_email_skipped_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "AdminRevokeAccessRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "products": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "email",
+          "products"
+        ],
+        "additionalProperties": false
+      },
+      "BulkGrantAccessRequest": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "products_string": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "products_string"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "entries"
+        ],
+        "additionalProperties": false
+      },
+      "SendSignupInviteRequest": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "emails"
+        ],
+        "additionalProperties": false
+      },
+      "SendWelcomeEmailRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "legacy",
+              "magic_link",
+              "magic_link_existing"
+            ],
+            "default": "legacy"
+          },
+          "access_token": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "generated_password": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "userName"
+        ],
+        "additionalProperties": false
+      },
+      "GenerateCertificateRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "formacao": {
+            "type": "string"
+          },
+          "nivel": {
+            "type": "string"
+          },
+          "horas": {
+            "type": "number",
+            "minimum": 1
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string",
+            "description": "Expected format: DD/MM/YYYY",
+            "examples": [
+              "16/02/2026"
+            ]
+          },
+          "contribuicao": {
+            "type": "string"
+          },
+          "nomeResponsavel": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "formacao",
+          "nivel",
+          "horas",
+          "cidade",
+          "data"
+        ],
+        "additionalProperties": false
+      },
+      "GenerateCertificateResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      },
+      "BulkEmailRequest": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "type": "string"
+          },
+          "targetEmails": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        },
+        "required": [
+          "secret"
+        ],
+        "additionalProperties": false
+      },
+      "RetryFailedWebhooksRequest": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "type": "string",
+            "description": "Alternative to bearer auth. Must match `CRON_SECRET`."
+          }
+        },
+        "additionalProperties": false
+      },
+      "CheckAccessExpirationResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "expired_premium_count": {
+            "type": "integer"
+          },
+          "expired_product_count": {
+            "type": "integer"
+          },
+          "expired_events_count": {
+            "type": "integer"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "paths": {
+    "/admin-grant-access": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Grant product access to a user manually",
+        "description": "Admin-only route used to manually grant one or more product entitlements and premium access to a user.\n\nSource: `supabase/functions/admin-grant-access/index.ts`.",
+        "operationId": "adminGrantAccess",
+        "security": [
+          {
+            "adminBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminGrantAccessRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "products": [
+                  "base",
+                  "freelancer"
+                ],
+                "duration_days": 30,
+                "language": "es"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access granted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminGrantAccessResponse"
+                },
+                "example": {
+                  "success": true,
+                  "user_id": "2dbf6152-2467-41af-9e01-d09ea8c442f6",
+                  "granted_products": [
+                    "base",
+                    "freelancer"
+                  ],
+                  "expires_at": "2026-04-18T12:00:00.000Z",
+                  "welcome_email_scheduled": true,
+                  "welcome_email_language": "es",
+                  "welcome_email_skipped_reason": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/admin-revoke-access": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Revoke selected products from a user",
+        "description": "Admin-only route that revokes active product access rows and recalculates premium status.\n\nSource: `supabase/functions/admin-revoke-access/index.ts`.",
+        "operationId": "adminRevokeAccess",
+        "security": [
+          {
+            "adminBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminRevokeAccessRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "products": [
+                  "freelancer"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Revocation completed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "example": {
+                  "success": true,
+                  "revoked_count": 1,
+                  "is_premium_after": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/assistentes-chat": {
+      "post": {
+        "tags": [
+          "User Chat"
+        ],
+        "summary": "AI Hub chat with multiple assistant personas",
+        "description": "Authenticated student chat endpoint for the AI Hub. Streams text responses for most personas and returns JSON when `aiType=nanobanana` triggers image generation.\n\nSource: `supabase/functions/assistentes-chat/index.ts`.",
+        "operationId": "assistentesChat",
+        "security": [
+          {
+            "userBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistentesChatRequest"
+              },
+              "example": {
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Explique o que é prompt engineering."
+                  }
+                ],
+                "aiType": "chatgpt",
+                "language": "pt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSE stream for text personas, or JSON creative payload for `nanobanana`.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Server-Sent Events stream compatible with OpenAI-style chat completion deltas."
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreativeAssistantResponse"
+                },
+                "example": {
+                  "type": "creative",
+                  "text": "Vou criar uma imagem futurista inspirada no seu pedido.",
+                  "imageUrl": "https://example.com/generated.png"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/auto-create-account": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Create or reconcile an account and return permanent access token",
+        "description": "Creates a new user or reconciles an existing one, processes pending billing events and returns a permanent access token from `user_access_tokens`.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/auto-create-account/index.ts`.",
+        "operationId": "autoCreateAccount",
+        "x-internal": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutoCreateAccountRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "buyer_name": "Maria",
+                "language": "es"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account created or reconciled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutoCreateAccountResponse"
+                },
+                "example": {
+                  "user_id": "9c17d613-13b2-4eb0-9888-5175098d9e90",
+                  "access_token": "1fb05610-3fef-49d8-b4ec-e1d62aaf97ff",
+                  "generated_password": "Abcd1234!xYz",
+                  "account_created": true,
+                  "already_existed": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/bulk-grant-access": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Bulk import billing grants from CSV-style product strings",
+        "description": "Admin-only route that queues or immediately processes grant events for up to 50 entries per call.\n\nSource: `supabase/functions/bulk-grant-access/index.ts`.",
+        "operationId": "bulkGrantAccess",
+        "security": [
+          {
+            "adminBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkGrantAccessRequest"
+              },
+              "example": {
+                "entries": [
+                  {
+                    "email": "student1@example.com",
+                    "products_string": "Educly, Educly Premium"
+                  },
+                  {
+                    "email": "student2@example.com",
+                    "products_string": "Combo Educly Premium + AI Pack"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch import summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "example": {
+                  "success": true,
+                  "batch_size": 2,
+                  "events_inserted": 3,
+                  "users_processed_immediately": 1,
+                  "users_pending_signup": 1,
+                  "skipped_duplicate": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/check-access-expiration": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Expire premium and product access via database RPC",
+        "description": "Operational route that calls `check_and_expire_access` and returns counts/details.\n\nIntended for cron/manual maintenance. Current code allows invocation without strict auth; recommended usage is internal only, optionally with `x-cron-job: true`.\n\nSource: `supabase/functions/check-access-expiration/index.ts`.",
+        "operationId": "checkAccessExpiration",
+        "x-internal": true,
+        "parameters": [
+          {
+            "name": "x-cron-job",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true"
+              ]
+            },
+            "description": "Optional hint used by the handler to identify cron execution."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expiration summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckAccessExpirationResponse"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Access expiration check completed",
+                  "expired_premium_count": 3,
+                  "expired_product_count": 5,
+                  "expired_events_count": 2,
+                  "details": {
+                    "expired_users": [],
+                    "expired_events": []
+                  },
+                  "timestamp": "2026-03-19T18:00:00.000Z"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/confirm-signup-email": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Auto-confirm a recently created purchased account",
+        "description": "Confirms a user's email when the account was created recently and a purchase exists for that email.\n\nWarning: the current handler does not enforce transport auth and should only be used internally.\n\nSource: `supabase/functions/confirm-signup-email/index.ts`.",
+        "operationId": "confirmSignupEmail",
+        "x-internal": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmSignupEmailRequest"
+              },
+              "example": {
+                "user_id": "265c4b00-a8c9-472f-82f9-3f7ff1751403"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email confirmed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "example": {
+                  "confirmed": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/debug-billing": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Inspect billing state for a single email",
+        "description": "Diagnostic endpoint used to inspect recent billing events, product access and premium status for an email.\n\nSource: `supabase/functions/debug-billing/index.ts`.",
+        "operationId": "debugBilling",
+        "security": [
+          {
+            "debugToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Billing inspection payload.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "email": "student@example.com",
+                  "user_id": "4fa03fb4-9df6-4f62-9d9b-a5a441e64eb1",
+                  "events": [],
+                  "product_access": [],
+                  "premium_access": null
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/generate-certificate": {
+      "post": {
+        "tags": [
+          "User Features"
+        ],
+        "summary": "Generate and store a course certificate PNG",
+        "description": "Authenticated student endpoint that renders a PNG certificate, uploads it to Supabase Storage and stores a certificate row in the database.\n\nSource: `supabase/functions/generate-certificate/index.ts`.",
+        "operationId": "generateCertificate",
+        "security": [
+          {
+            "userBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateCertificateRequest"
+              },
+              "example": {
+                "nome": "Maria Silva",
+                "formacao": "Inteligência Artificial",
+                "nivel": "júnior",
+                "horas": 20,
+                "cidade": "São Paulo",
+                "data": "16/02/2026",
+                "contribuicao": "em projetos reais de IA generativa",
+                "nomeResponsavel": "Prof. João Silva"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Certificate generated and stored.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateCertificateResponse"
+                },
+                "example": {
+                  "success": true,
+                  "url": "https://example.supabase.co/storage/v1/object/public/certificates/certificate_123.png",
+                  "fileName": "certificate_userid_1742400000000.png"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/iacademy-chat": {
+      "post": {
+        "tags": [
+          "User Chat"
+        ],
+        "summary": "Premium student EDI/academy chat",
+        "description": "Authenticated premium chat endpoint used inside the academy experience. Validates premium access and streams model output.\n\nSource: `supabase/functions/iacademy-chat/index.ts`.",
+        "operationId": "iacademyChat",
+        "security": [
+          {
+            "userBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IacademyChatRequest"
+              },
+              "example": {
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Quais ferramentas de IA eu devo aprender primeiro?"
+                  }
+                ],
+                "aiToolContext": "Midjourney módulo 1",
+                "language": "pt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OpenAI-style SSE stream.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Server-Sent Events stream compatible with OpenAI-style chat completion deltas."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/landing-support-chat": {
+      "post": {
+        "tags": [
+          "User Chat"
+        ],
+        "summary": "Public landing-page support chat",
+        "description": "Public chat endpoint used on the marketing/landing surface. May answer with keyword-based quick replies or stream model output.\n\nSource: `supabase/functions/landing-support-chat/index.ts`.",
+        "operationId": "landingSupportChat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LandingSupportChatRequest"
+              },
+              "example": {
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "Quais ferramentas de IA a Educly ensina?"
+                  }
+                ],
+                "locale": "pt-BR"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSE stream or synthetic SSE fallback response.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "Server-Sent Events stream compatible with OpenAI-style chat completion deltas."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          }
+        }
+      }
+    },
+    "/magic-login": {
+      "get": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Resolve permanent token into a fresh Supabase magic link",
+        "description": "Accepts a permanent access token via query string and returns a fresh `action_link` generated through Supabase Auth.\n\nSource: `supabase/functions/magic-login/index.ts`.",
+        "operationId": "magicLoginGet",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fresh action link.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MagicLoginResponse"
+                },
+                "example": {
+                  "action_link": "https://dqlcxpbfemhzzetwaxsa.supabase.co/auth/v1/verify?token=..."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Resolve permanent token into a fresh Supabase magic link",
+        "description": "Same contract as the GET variant, but reads the token from JSON body.\n\nSource: `supabase/functions/magic-login/index.ts`.",
+        "operationId": "magicLoginPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MagicLoginRequest"
+              },
+              "example": {
+                "token": "1fb05610-3fef-49d8-b4ec-e1d62aaf97ff"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fresh action link.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MagicLoginResponse"
+                },
+                "example": {
+                  "action_link": "https://dqlcxpbfemhzzetwaxsa.supabase.co/auth/v1/verify?token=..."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/pending-signup": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Create an account for a pending user",
+        "description": "Creates a user without requiring purchase existence, but returns conflict if the user already exists. Used for pending-access onboarding flows.\n\nSource: `supabase/functions/pending-signup/index.ts`.",
+        "operationId": "pendingSignup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "password": "StrongPass123!",
+                "full_name": "Maria Silva",
+                "preferred_language": "pt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                },
+                "example": {
+                  "user_id": "f91d7910-7c1b-4230-8d5e-c2b79cfece3d"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "description": "User already registered.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                },
+                "example": {
+                  "error": "User already registered",
+                  "code": "ALREADY_EXISTS"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/purchased-signup": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Create an account only when a purchase already exists",
+        "description": "Creates a user only if `check_purchase_exists` succeeds for the email. Returns `403 NO_PURCHASE` when no qualifying purchase exists.\n\nSource: `supabase/functions/purchased-signup/index.ts`.",
+        "operationId": "purchasedSignup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "password": "StrongPass123!",
+                "full_name": "Maria Silva",
+                "preferred_language": "pt"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                },
+                "example": {
+                  "user_id": "f91d7910-7c1b-4230-8d5e-c2b79cfece3d"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "403": {
+            "description": "No purchase found for this email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                },
+                "example": {
+                  "error": "No purchase found for this email",
+                  "code": "NO_PURCHASE"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                },
+                "example": {
+                  "error": "User already registered",
+                  "code": "ALREADY_EXISTS"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/resend-magic-link": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Send a new permanent-access magic link email",
+        "description": "Looks up the user by email, reuses or creates a permanent access token and sends a new email through Resend.\n\nSource: `supabase/functions/resend-magic-link/index.ts`.",
+        "operationId": "resendMagicLink",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailOnlyRequest"
+              },
+              "example": {
+                "email": "student@example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Magic-link email sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "example": {
+                  "success": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "description": "Per-email rate limit reached.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "rate_limited",
+                  "retry_after": 60
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-password-reset": {
+      "post": {
+        "tags": [
+          "Public Auth"
+        ],
+        "summary": "Send password reset email",
+        "description": "Generates a Supabase recovery link and sends a localized email via Resend. The handler intentionally returns `200 { success: true }` even when the user is missing or an internal error occurs, to avoid account enumeration.\n\nSource: `supabase/functions/send-password-reset/index.ts`.",
+        "operationId": "sendPasswordReset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetRequest"
+              },
+              "example": {
+                "email": "student@example.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Always returns success-shaped response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "example": {
+                  "success": true
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          }
+        }
+      }
+    },
+    "/send-upsell-day5": {
+      "post": {
+        "tags": [
+          "User Features"
+        ],
+        "summary": "Trigger day-5 upsell email for the authenticated user",
+        "description": "Authenticated user route that decides whether to email the current student about AI Hub or Freelancer upsell after day 5.\n\nSource: `supabase/functions/send-upsell-day5/index.ts`.",
+        "operationId": "sendUpsellDay5",
+        "security": [
+          {
+            "userBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email sent or skipped with reason.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "sent": true,
+                  "target": "ai_hub"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/paddle-webhook": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Receive Paddle billing and customer webhooks",
+        "description": "Processes Paddle events, resolves customer email, logs billing actions, reconciles entitlements and triggers post-purchase account/email flows.\n\nAuthentication is accepted either through `Authorization: Bearer <PADDLE_API_KEY>` or `paddle-signature` verified against `PADDLE_WEBHOOK_SECRET`.\n\nSource: `supabase/functions/paddle-webhook/index.ts`.",
+        "operationId": "paddleWebhook",
+        "security": [
+          {
+            "paddleBearer": []
+          },
+          {
+            "paddleSignature": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Raw Paddle webhook payload. Event shape varies by `event_type` and is passed through mostly intact.",
+                "additionalProperties": true
+              },
+              "example": {
+                "event_type": "transaction.completed",
+                "event_id": "evt_123",
+                "data": {
+                  "customer_id": "ctm_123",
+                  "items": [
+                    {
+                      "price": {
+                        "product_id": "prod_123"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook accepted, ignored, deduplicated or processed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "event": "PURCHASE_COMPLETE",
+                  "customer_id": "ctm_123"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/primer-webhook": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "summary": "Receive Hotmart / Primer / FunnelFox purchase webhooks",
+        "description": "Receives purchase events, logs billing actions, reconciles entitlements, and orchestrates welcome or magic-link delivery.\n\nAuthentication is accepted either through `x-hotmart-hottok` or `ff-webhook-signature`.\n\nSource: `supabase/functions/primer-webhook/index.ts`.",
+        "operationId": "primerWebhook",
+        "security": [
+          {
+            "hotmartHottok": []
+          },
+          {
+            "funnelFoxSignature": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Raw Hotmart/FunnelFox payload. Event shape varies by provider.",
+                "additionalProperties": true
+              },
+              "example": {
+                "event_type": "PURCHASE_APPROVED",
+                "data": {
+                  "buyer": {
+                    "email": "student@example.com",
+                    "name": "Maria Silva"
+                  },
+                  "product": {
+                    "id": "prod_123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook accepted or intentionally ignored.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "magic_link": true
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/resend-pending-emails": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Resend onboarding emails to recent USER_NOT_FOUND billing records",
+        "description": "Internal batch route protected by a shared secret in the request body. Rebuilds welcome emails for recent `USER_NOT_FOUND` events.\n\nSource: `supabase/functions/resend-pending-emails/index.ts`.",
+        "operationId": "resendPendingEmails",
+        "x-internal": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              },
+              "example": {
+                "secret": "BULK_EMAIL_SECRET",
+                "targetEmails": [
+                  "student@example.com"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch resend summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "totalEmails": 1,
+                  "emailsSent": 1,
+                  "emailsFailed": 0,
+                  "results": [
+                    {
+                      "email": "student@example.com",
+                      "success": true,
+                      "language": "pt"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/retry-failed-webhooks": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Retry failed webhook deliveries",
+        "description": "Cron/internal route that replays failed webhook payloads against the original target edge function. Auth is accepted either as `Authorization: Bearer <CRON_SECRET|service_role>` or as body `{ secret }`.\n\nSource: `supabase/functions/retry-failed-webhooks/index.ts`.",
+        "operationId": "retryFailedWebhooks",
+        "x-internal": true,
+        "security": [
+          {
+            "cronBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetryFailedWebhooksRequest"
+              },
+              "example": {
+                "secret": "CRON_SECRET"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Retry cycle summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "processed": 3,
+                  "succeeded": 2,
+                  "retryScheduled": 1,
+                  "exhausted": 0,
+                  "results": []
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-bulk-emails": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Send a bulk welcome-style email blast to users",
+        "description": "Internal route protected by a body secret. Iterates over users (optionally filtered by `targetEmails`) and sends a transactional HTML email through Resend.\n\nSource: `supabase/functions/send-bulk-emails/index.ts`.",
+        "operationId": "sendBulkEmails",
+        "x-internal": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              },
+              "example": {
+                "secret": "BULK_EMAIL_SECRET",
+                "targetEmails": [
+                  "student@example.com"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk send summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "totalUsers": 1,
+                  "emailsSent": 1,
+                  "emailsFailed": 0,
+                  "results": [
+                    {
+                      "email": "student@example.com",
+                      "success": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-incident-notification": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Send a one-off incident resolution notification to premium users",
+        "description": "Operational route used to notify a fixed window of premium users about a resolved incident.\n\nWarning: current implementation does not enforce auth inside the function and should be treated as internal-only.\n\nSource: `supabase/functions/send-incident-notification/index.ts`.",
+        "operationId": "sendIncidentNotification",
+        "x-internal": true,
+        "responses": {
+          "200": {
+            "description": "Notification batch summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "sent": 10,
+                  "total_eligible": 12,
+                  "results": []
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-pending-thanks": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Process queued pending thank-you / welcome emails",
+        "description": "Cron/internal batch route that groups `pending_thank_you_emails` by email, creates/reconciles accounts when possible, and dispatches welcome or magic-link emails.\n\nWarning: current implementation does not enforce auth inside the function and should be treated as internal-only.\n\nSource: `supabase/functions/send-pending-thanks/index.ts`.",
+        "operationId": "sendPendingThanks",
+        "x-internal": true,
+        "responses": {
+          "200": {
+            "description": "Batch processing summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "processed": 2,
+                  "results": [
+                    {
+                      "email": "student@example.com",
+                      "products": 1,
+                      "status": "sent_magic_link"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-pending-welcome-batch": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Admin-triggered batch for pending welcome emails",
+        "description": "Admin-only route that scans pending billing events, creates/reconciles accounts and sends welcome or magic-link emails in controlled batches.\n\nSource: `supabase/functions/send-pending-welcome-batch/index.ts`.",
+        "operationId": "sendPendingWelcomeBatch",
+        "security": [
+          {
+            "adminBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Batch summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "sent": 3,
+                  "failed": 0,
+                  "remaining": 5,
+                  "results": []
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-signup-invite": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin-triggered signup invite emails",
+        "description": "Admin-only route that sends signup invitation emails to a list of addresses and tracks opens through `track-email-open`.\n\nSource: `supabase/functions/send-signup-invite/index.ts`.",
+        "operationId": "sendSignupInvite",
+        "security": [
+          {
+            "adminBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendSignupInviteRequest"
+              },
+              "example": {
+                "emails": [
+                  "student@example.com",
+                  "student2@example.com"
+                ],
+                "language": "es"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Invite batch summary.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "sent": 2,
+                  "skipped": 0,
+                  "errors": [],
+                  "total": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/send-welcome-email": {
+      "post": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Send welcome or magic-link email",
+        "description": "Transactional email route used by purchase/signup workflows. Supports legacy CTA email, new-account magic-link email, and existing-account magic-link email.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/send-welcome-email/index.ts`.",
+        "operationId": "sendWelcomeEmail",
+        "x-internal": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendWelcomeEmailRequest"
+              },
+              "example": {
+                "email": "student@example.com",
+                "userName": "Maria",
+                "language": "pt",
+                "mode": "magic_link",
+                "access_token": "1fb05610-3fef-49d8-b4ec-e1d62aaf97ff",
+                "generated_password": "Abcd1234!xYz"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email sent or deduplicated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "skipped": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/track-email-open": {
+      "get": {
+        "tags": [
+          "Email / Messaging"
+        ],
+        "summary": "Track email open via 1x1 pixel",
+        "description": "Returns a transparent GIF and updates `email_logs.opened_at` when `id` is present.\n\nSource: `supabase/functions/track-email-open/index.ts`.",
+        "operationId": "trackEmailOpen",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Email log identifier. If omitted or invalid, the route still returns the pixel."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparent 1x1 GIF pixel.",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

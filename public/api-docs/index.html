@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Educly API Docs</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        background: #f5f7fb;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .topbar {
+        display: none;
+      }
+
+      .docs-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 20px;
+        border-bottom: 1px solid #d8deea;
+        background: #ffffff;
+      }
+
+      .docs-toolbar h1 {
+        margin: 0;
+        font-size: 18px;
+        color: #122033;
+      }
+
+      .docs-toolbar p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: #556274;
+      }
+
+      .docs-toolbar label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      .docs-toolbar select {
+        margin-left: 8px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="docs-toolbar">
+      <div>
+        <h1 id="docs-title">Educly API Docs</h1>
+        <p id="docs-subtitle">Swagger/OpenAPI for the project's edge functions</p>
+      </div>
+      <div>
+        <label for="language-select" id="language-label">Language</label>
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="pt-BR">Português</option>
+        </select>
+      </div>
+    </div>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+    <script>
+      const SPEC_BY_LANGUAGE = {
+        en: {
+          url: "./openapi.json",
+          htmlLang: "en",
+          title: "Educly API Docs",
+          subtitle: "Swagger/OpenAPI for the project's edge functions",
+          label: "Language",
+        },
+        "pt-BR": {
+          url: "./openapi.pt-BR.json",
+          htmlLang: "pt-BR",
+          title: "Documentação da API Educly",
+          subtitle: "Swagger/OpenAPI das edge functions do projeto",
+          label: "Idioma",
+        },
+      };
+
+      const query = new URLSearchParams(window.location.search);
+      const storedLanguage = window.localStorage.getItem("educly_api_docs_language");
+      const initialLanguage =
+        (query.get("lang") && SPEC_BY_LANGUAGE[query.get("lang")]) ?
+          query.get("lang") :
+          (storedLanguage && SPEC_BY_LANGUAGE[storedLanguage]) ? storedLanguage : "en";
+
+      const languageSelect = document.getElementById("language-select");
+      const docsTitle = document.getElementById("docs-title");
+      const docsSubtitle = document.getElementById("docs-subtitle");
+      const languageLabel = document.getElementById("language-label");
+
+      function updateToolbar(language) {
+        const config = SPEC_BY_LANGUAGE[language] || SPEC_BY_LANGUAGE.en;
+        document.documentElement.lang = config.htmlLang;
+        document.title = config.title;
+        docsTitle.textContent = config.title;
+        docsSubtitle.textContent = config.subtitle;
+        languageLabel.textContent = config.label;
+      }
+
+      function renderSwagger(language) {
+        const config = SPEC_BY_LANGUAGE[language] || SPEC_BY_LANGUAGE.en;
+        document.getElementById("swagger-ui").innerHTML = "";
+        updateToolbar(language);
+        window.ui = SwaggerUIBundle({
+          url: config.url,
+          dom_id: "#swagger-ui",
+          deepLinking: true,
+          docExpansion: "list",
+          defaultModelsExpandDepth: 2,
+          persistAuthorization: true,
+          presets: [SwaggerUIBundle.presets.apis],
+        });
+      }
+
+      languageSelect.value = initialLanguage;
+      renderSwagger(initialLanguage);
+
+      languageSelect.addEventListener("change", (event) => {
+        const language = event.target.value;
+        window.localStorage.setItem("educly_api_docs_language", language);
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.set("lang", language);
+        window.history.replaceState({}, "", nextUrl.toString());
+        renderSwagger(language);
+      });
+    </script>
+  </body>
+</html>
