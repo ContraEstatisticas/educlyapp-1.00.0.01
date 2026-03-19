@@ -120,6 +120,7 @@ import Billing from "./pages/Billing";
 import MagicLogin from "./pages/MagicLogin";
 import AIToolTrailsHub from "./pages/AIToolTrailsHub";
 import AIToolTrailPage from "./pages/AIToolTrailPage";
+import AIToolModuleLessonPage from "./pages/AIToolModuleLessonPage";
 
 // Inicialização do Query Client para cache de requisições
 const queryClient = new QueryClient({
@@ -216,6 +217,7 @@ const App = () => {
                   <Route path="/desafio/:slug" element={<PremiumGuard><Challenge /></PremiumGuard>} />
                   <Route path="/trilhas-ia" element={<PremiumGuard><AIToolTrailsHub /></PremiumGuard>} />
                   <Route path="/trilhas-ia/:toolSlug" element={<PremiumGuard><AIToolTrailPage /></PremiumGuard>} />
+                  <Route path="/trilhas-ia/:toolSlug/modulo/:moduleNumber" element={<PremiumGuard><AIToolModuleLessonPage /></PremiumGuard>} />
                   <Route path="/aula/:dayId" element={<PremiumGuard><DayLesson /></PremiumGuard>} />
                   <Route path="/chat" element={<PremiumGuard><Chat /></PremiumGuard>} />
                   <Route path="/certificado/:id" element={<PremiumGuard><Certificate /></PremiumGuard>} />

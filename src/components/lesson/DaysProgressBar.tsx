@@ -11,9 +11,15 @@ interface DaysProgressBarProps {
   days: DayProgress[];
   currentDay: number;
   onDayClick: (day: number) => void;
+  labelPrefix?: string;
 }
 
-export const DaysProgressBar = ({ days, currentDay, onDayClick }: DaysProgressBarProps) => {
+export const DaysProgressBar = ({
+  days,
+  currentDay,
+  onDayClick,
+  labelPrefix = "D",
+}: DaysProgressBarProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Scroll automático para centralizar o botão roxo (dia atual)
@@ -86,7 +92,7 @@ export const DaysProgressBar = ({ days, currentDay, onDayClick }: DaysProgressBa
                   isCurrent ? "text-primary" : "text-muted-foreground",
                 )}
               >
-                D{day.dayNumber}
+                {labelPrefix}{day.dayNumber}
               </span>
             </div>
           );

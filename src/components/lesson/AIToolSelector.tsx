@@ -23,6 +23,7 @@ export const aiToolsConfig: Record<string, { logo?: string; color: string; name:
   'claude':     { logo: claudeLogo,     color: '#8b5cf6', name: 'Claude' },
   'deepseek':   { logo: deepseekLogo,   color: '#1e3a8a', name: 'DeepSeek' },
   'gemini':     { logo: geminiLogo,     color: '#4285f4', name: 'Gemini' },
+  'gamma':      { color: '#6d28d9', name: 'Gamma' },
   'copilot':    { logo: copilotLogo,    color: '#0078d4', name: 'Copilot' },
   'grok':       { logo: grokLogo,       color: '#e5e7eb', name: 'Grok' },
   'perplexity': { logo: perplexityLogo, color: '#ffffff', name: 'Perplexity' },

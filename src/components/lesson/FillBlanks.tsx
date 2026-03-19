@@ -36,7 +36,19 @@ export const FillBlanks = ({
   const actualAnswers = answers || correctAnswers || [];
   const numBlanks = blanks.length - 1;
   
+  const optionItems = useMemo(
+    () =>
+      options.map((value, index) => ({
+        id: `${value}-${index}`,
+        value,
+      })),
+    [options]
+  );
+
   const [filledAnswers, setFilledAnswers] = useState<(string | null)[]>(
+    Array(numBlanks).fill(null)
+  );
+  const [filledOptionIds, setFilledOptionIds] = useState<(string | null)[]>(
     Array(numBlanks).fill(null)
   );
   const [usedOptions, setUsedOptions] = useState<Set<string>>(new Set());
@@ -44,25 +56,28 @@ export const FillBlanks = ({
   const [isCorrect, setIsCorrect] = useState(false);
   const [activeBlank, setActiveBlank] = useState<number | null>(0);
   
-  const shuffledOptions = useMemo(() => shuffleArray([...options]), [options]);
+  const shuffledOptions = useMemo(() => shuffleArray([...optionItems]), [optionItems]);
   
-  const handleOptionClick = (option: string) => {
-    if (showResult || activeBlank === null || usedOptions.has(option)) return;
+  const handleOptionClick = (option: { id: string; value: string }) => {
+    if (showResult || activeBlank === null || usedOptions.has(option.id)) return;
     
     const newFilledAnswers = [...filledAnswers];
+    const newFilledOptionIds = [...filledOptionIds];
     
     // If the blank already has an answer, remove it from used
-    if (newFilledAnswers[activeBlank]) {
+    if (newFilledOptionIds[activeBlank]) {
       const newUsed = new Set(usedOptions);
-      newUsed.delete(newFilledAnswers[activeBlank]!);
+      newUsed.delete(newFilledOptionIds[activeBlank]!);
       setUsedOptions(newUsed);
     }
     
-    newFilledAnswers[activeBlank] = option;
+    newFilledAnswers[activeBlank] = option.value;
+    newFilledOptionIds[activeBlank] = option.id;
     setFilledAnswers(newFilledAnswers);
+    setFilledOptionIds(newFilledOptionIds);
     
     const newUsed = new Set(usedOptions);
-    newUsed.add(option);
+    newUsed.add(option.id);
     setUsedOptions(newUsed);
     
     // Move to next empty blank
@@ -82,12 +97,17 @@ export const FillBlanks = ({
     if (currentAnswer) {
       // Remove the answer
       const newFilledAnswers = [...filledAnswers];
+      const newFilledOptionIds = [...filledOptionIds];
       newFilledAnswers[index] = null;
       setFilledAnswers(newFilledAnswers);
       
       const newUsed = new Set(usedOptions);
-      newUsed.delete(currentAnswer);
+      if (newFilledOptionIds[index]) {
+        newUsed.delete(newFilledOptionIds[index]!);
+      }
       setUsedOptions(newUsed);
+      newFilledOptionIds[index] = null;
+      setFilledOptionIds(newFilledOptionIds);
     }
     
     setActiveBlank(index);
@@ -110,6 +130,7 @@ export const FillBlanks = ({
   
   const handleReset = () => {
     setFilledAnswers(Array(numBlanks).fill(null));
+    setFilledOptionIds(Array(numBlanks).fill(null));
     setUsedOptions(new Set());
     setShowResult(false);
     setIsCorrect(false);
@@ -167,18 +188,18 @@ export const FillBlanks = ({
         <div className="flex flex-wrap gap-2 mb-4">
           {shuffledOptions.map((option) => (
             <button
-              key={option}
+              key={option.id}
               onClick={() => handleOptionClick(option)}
-              disabled={usedOptions.has(option)}
+              disabled={usedOptions.has(option.id)}
               className={cn(
                 "px-4 py-2 rounded-lg text-sm font-medium transition-all",
                 "border border-border",
-                usedOptions.has(option)
+                usedOptions.has(option.id)
                   ? "bg-muted/30 text-muted-foreground/50 cursor-not-allowed"
                   : "bg-card hover:bg-primary/10 hover:border-primary text-foreground"
               )}
             >
-              {option}
+              {option.value}
             </button>
           ))}
         </div>

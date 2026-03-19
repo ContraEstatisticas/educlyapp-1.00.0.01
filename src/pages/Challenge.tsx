@@ -77,13 +77,6 @@ const Challenge = () => {
   const [selectedAITool, setSelectedAITool] = useState<string | null>(null);
   const [popupToolSlug, setPopupToolSlug] = useState<string | null>(null);
   const currentDayRef = useRef<HTMLDivElement>(null);
-  const showSpecializedTrailsSoon = () => {
-    toast({
-      title: aiTrailUi.toastTitle,
-      description: aiTrailUi.toastDescription,
-    });
-  };
-
   const { data: challenge, isLoading: loadingChallenge } = useQuery({
     queryKey: ["challenge", slug],
     queryFn: async () => {
@@ -312,7 +305,7 @@ const Challenge = () => {
                     </h3>
                   </div>
   
-                  <Button className="h-12 rounded-xl px-6" onClick={showSpecializedTrailsSoon}>
+                  <Button className="h-12 rounded-xl px-6" onClick={() => navigate("/trilhas-ia")}>
                     {aiTrailUi.challengeButton}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

@@ -20,6 +20,7 @@ import { useDailyLoginXP } from "@/hooks/useDailyLoginXP";
 import { Badge } from "@/components/ui/badge";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
+import { isAiTrailLive } from "@/lib/aiTrailContent";
 
 import challengeInicianteImg from "@/assets/Edi-dashboard.png";
 import corujaIA from "@/assets/IA.png";
@@ -30,6 +31,14 @@ import claudeLogo from "@/assets/ai-logos/claude.png";
 import grokLogo from "@/assets/ai-logos/grok.png";
 import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
 import ediLogo from "@/assets/edi-mascote.png";
+
+const getTrailInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || "")
+    .join("");
 
 const CHALLENGE_28_DAYS_ID = "dfb76f1b-d272-4e4d-96b2-0bc4d3392489";
 
@@ -71,7 +80,14 @@ const Dashboard = () => {
     navigate("/auth");
   };
 
-  const showSpecializedTrailsSoon = () => {
+  const openSpecializedTrailsHub = () => navigate("/trilhas-ia");
+
+  const handleSpecializedTrailClick = (slug: string) => {
+    if (isAiTrailLive(slug)) {
+      navigate(`/trilhas-ia/${slug}`);
+      return;
+    }
+
     toast({
       title: aiTrailUi.toastTitle,
       description: aiTrailUi.toastDescription,
@@ -379,7 +395,7 @@ const Dashboard = () => {
               <Button
                 variant="outline"
                 className="h-12 rounded-xl border-2"
-                onClick={showSpecializedTrailsSoon}
+                onClick={openSpecializedTrailsHub}
               >
                 {aiTrailUi.dashboardButton}
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -389,10 +405,11 @@ const Dashboard = () => {
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {aiMasteryTrails.slice(0, 4).map((trail) => {
                 const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
+                const trailIsLive = isAiTrailLive(trail.slug);
                 return (
                   <button
                     key={trail.slug}
-                    onClick={showSpecializedTrailsSoon}
+                    onClick={() => handleSpecializedTrailClick(trail.slug)}
                     className="group relative overflow-hidden rounded-3xl border border-border bg-card p-5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
                   >
                     <div
@@ -411,10 +428,17 @@ const Dashboard = () => {
                       >
                         {trail.logo ? (
                           <img src={trail.logo} alt={trail.name} className="h-8 w-8 object-contain" />
-                        ) : null}
+                        ) : (
+                          <span className="text-lg font-black" style={{ color: trail.accent }}>
+                            {getTrailInitials(trail.name)}
+                          </span>
+                        )}
                       </div>
-                      <Badge variant="secondary" className="border-0 bg-muted text-foreground">
-                        {aiTrailUi.comingSoon}
+                      <Badge
+                        variant="secondary"
+                        className={trailIsLive ? "border-0 bg-emerald-500/15 text-emerald-700 dark:text-emerald-200" : "border-0 bg-muted text-foreground"}
+                      >
+                        {trailIsLive ? aiTrailUi.availableNow : aiTrailUi.comingSoon}
                       </Badge>
                     </div>
 
@@ -428,7 +452,7 @@ const Dashboard = () => {
                     <div className="relative z-10 mt-5 flex items-center justify-between">
                       <p className="max-w-[70%] text-sm font-medium text-foreground">{trailMeta.signature}</p>
                       <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: trail.accent }}>
-                        {aiTrailUi.dashboardCardAction}
+                        {trailIsLive ? aiTrailUi.openTrail : aiTrailUi.dashboardCardAction}
                         <ChevronRight className="h-4 w-4" />
                       </div>
                     </div>

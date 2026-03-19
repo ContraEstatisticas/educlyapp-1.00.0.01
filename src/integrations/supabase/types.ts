@@ -119,6 +119,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_trail_module_progress: {
+        Row: {
+          completed_at: string
+          created_at: string
+          id: string
+          module_number: number
+          tool_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          module_number: number
+          tool_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          module_number?: number
+          tool_slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       billing_access_audit_log: {
         Row: {
           accessed_at: string

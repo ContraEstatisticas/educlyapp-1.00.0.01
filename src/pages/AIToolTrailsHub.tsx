@@ -6,6 +6,15 @@ import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
+import { isAiTrailLive } from "@/lib/aiTrailContent";
+
+const getInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || "")
+    .join("");
 
 const AIToolTrailsHub = () => {
   const navigate = useNavigate();
@@ -18,6 +27,15 @@ const AIToolTrailsHub = () => {
       title: aiTrailUi.toastTitle,
       description: aiTrailUi.toastDescription,
     });
+  };
+
+  const handleTrailOpen = (slug: string) => {
+    if (isAiTrailLive(slug)) {
+      navigate(`/trilhas-ia/${slug}`);
+      return;
+    }
+
+    showComingSoonToast();
   };
 
   return (
@@ -62,12 +80,13 @@ const AIToolTrailsHub = () => {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-3">
-                {aiMasteryTrails.slice(0, 6).map((trail) => {
-                  const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
-                  return (
-                    <div
-                      key={trail.slug}
+              <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {aiMasteryTrails.map((trail) => {
+                const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
+                const trailIsLive = isAiTrailLive(trail.slug);
+                return (
+                  <div
+                    key={trail.slug}
                       className="rounded-2xl border border-white/10 bg-slate-950/60 p-3"
                       style={{ boxShadow: `inset 0 1px 0 ${trail.accent}40` }}
                     >
@@ -75,10 +94,19 @@ const AIToolTrailsHub = () => {
                         className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10"
                         style={{ backgroundColor: `${trail.accent}22` }}
                       >
-                        {trail.logo ? <img src={trail.logo} alt={trail.name} className="h-6 w-6 object-contain" /> : null}
+                        {trail.logo ? (
+                          <img src={trail.logo} alt={trail.name} className="h-6 w-6 object-contain" />
+                        ) : (
+                          <span className="text-sm font-black" style={{ color: trail.accent }}>
+                            {getInitials(trail.name)}
+                          </span>
+                        )}
                       </div>
                       <p className="mt-3 text-sm font-semibold">{trail.name}</p>
                       <p className="mt-1 text-xs text-slate-400">{trailMeta.category}</p>
+                      <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: trailIsLive ? "#86efac" : trail.accent }}>
+                        {trailIsLive ? aiTrailUi.availableNow : aiTrailUi.comingSoon}
+                      </p>
                     </div>
                   );
                 })}
@@ -99,10 +127,11 @@ const AIToolTrailsHub = () => {
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {aiMasteryTrails.map((trail) => {
             const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
+            const trailIsLive = isAiTrailLive(trail.slug);
             return (
               <button
                 key={trail.slug}
-                onClick={showComingSoonToast}
+                onClick={() => handleTrailOpen(trail.slug)}
                 className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 text-left transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06]"
               >
                 <div className="absolute inset-x-0 top-0 h-1" style={{ background: `linear-gradient(90deg, ${trail.accent}, ${trail.accent}55)` }} />
@@ -114,15 +143,24 @@ const AIToolTrailsHub = () => {
                       className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10"
                       style={{ backgroundColor: `${trail.accent}22` }}
                     >
-                      {trail.logo ? <img src={trail.logo} alt={trail.name} className="h-8 w-8 object-contain" /> : null}
+                      {trail.logo ? (
+                        <img src={trail.logo} alt={trail.name} className="h-8 w-8 object-contain" />
+                      ) : (
+                        <span className="text-lg font-black" style={{ color: trail.accent }}>
+                          {getInitials(trail.name)}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">{trailMeta.category}</p>
                       <h3 className="mt-1 text-xl font-bold">{trail.name}</h3>
                     </div>
                   </div>
-                  <Badge variant="outline" className="border-white/15 bg-white/5 text-orange-200">
-                    {aiTrailUi.comingSoon}
+                  <Badge
+                    variant="outline"
+                    className={trailIsLive ? "border-emerald-400/20 bg-emerald-500/10 text-emerald-100" : "border-white/15 bg-white/5 text-orange-200"}
+                  >
+                    {trailIsLive ? aiTrailUi.availableNow : aiTrailUi.comingSoon}
                   </Badge>
                 </div>
 
@@ -140,7 +178,7 @@ const AIToolTrailsHub = () => {
                 <div className="relative z-10 mt-5 flex items-center justify-between">
                   <p className="max-w-[75%] text-sm font-medium text-slate-200">{trailMeta.signature}</p>
                   <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: trail.accent }}>
-                    {aiTrailUi.seeLater}
+                    {trailIsLive ? aiTrailUi.openTrail : aiTrailUi.seeLater}
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
