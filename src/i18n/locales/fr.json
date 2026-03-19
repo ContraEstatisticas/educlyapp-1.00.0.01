@@ -2965,18 +2965,18 @@
     "title": "Politique d'Annulation",
     "subtitle": "Transparence et confiance avant tout. Découvrez nos conditions.",
     "guarantee": {
-      "title": "Garantie de 7 Jours",
-      "description": "Nous offrons une garantie inconditionnelle de 7 jours. Si vous n'êtes pas satisfait du cours, demandez un remboursement complet dans ce délai."
+      "title": "Garantie de 14 Jours",
+      "description": "Nous offrons une garantie inconditionnelle de 14 jours. Si vous n'êtes pas satisfait du cours, demandez un remboursement complet dans ce délai."
     },
     "eligibility": {
       "title": "Éligibilité au Remboursement",
-      "item1": "Demande faite dans les 7 jours suivant l'achat",
+      "item1": "Demande faite dans les 14 jours suivant l'achat",
       "item2": "Premier achat du produit (non valable pour les rachats)",
       "item3": "E-mail de demande envoyé à contact@educly.app"
     },
     "nonEligibility": {
       "title": "Cas Non Éligibles",
-      "item1": "Demandes après 7 jours d'achat",
+      "item1": "Demandes après 14 jours d'achat",
       "item2": "Clients ayant déjà demandé un remboursement"
     },
     "howToRequest": {

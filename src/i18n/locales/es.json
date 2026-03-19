@@ -3896,18 +3896,18 @@
     "title": "Política de Cancelación",
     "subtitle": "Transparencia y confianza en primer lugar. Conoce nuestros términos.",
     "guarantee": {
-      "title": "Garantía de 7 Días",
-      "description": "Ofrecemos 7 días de garantía incondicional. Si no estás satisfecho con el curso, solicita el reembolso completo dentro de este período."
+      "title": "Garantía de 14 Días",
+      "description": "Ofrecemos 14 días de garantía incondicional. Si no estás satisfecho con el curso, solicita el reembolso completo dentro de este período."
     },
     "eligibility": {
       "title": "Elegibilidad para Reembolso",
-      "item1": "Solicitud realizada dentro de los 7 días posteriores a la compra",
+      "item1": "Solicitud realizada dentro de los 14 días posteriores a la compra",
       "item2": "Primera compra del producto (no válido para recompras)",
       "item3": "Correo de solicitud enviado a contact@educly.app"
     },
     "nonEligibility": {
       "title": "Casos No Elegibles",
-      "item1": "Solicitudes después de 7 días de la compra",
+      "item1": "Solicitudes después de 14 días de la compra",
       "item2": "Clientes que ya han solicitado un reembolso anteriormente"
     },
     "howToRequest": {

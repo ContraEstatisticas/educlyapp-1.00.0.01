@@ -3499,16 +3499,27 @@
     }
   },
   "refundPolicy": {
-    "title": "Política de Devolução e Reembolso",
+    "title": "Política de Cancelamento",
     "subtitle": "Transparência e confiança em primeiro lugar. Conheça nossos termos.",
+    "guarantee": {
+      "title": "Garantia de 14 Dias",
+      "description": "Oferecemos uma garantia incondicional de 14 dias. Se você não estiver satisfeito com o curso, solicite o reembolso integral dentro desse prazo."
+    },
     "intro": "Obrigado por assinar o Educly. Agradecemos o fato de você gostar do conteúdo educacional que oferecemos. Também queremos garantir que você tenha uma experiência satisfatória enquanto explora, avalia e usa nossa plataforma.",
     "contact": {
       "title": "Não Está Satisfeito?",
       "description": "Se, por qualquer motivo, você não estiver completamente satisfeito com qualquer serviço que fornecemos, não hesite em nos contatar e discutiremos quaisquer problemas que você esteja enfrentando com nossa plataforma."
     },
     "eligibility": {
-      "title": "Direitos de Reembolso",
-      "description": "Esses direitos e condições de reembolso se aplicam além de quaisquer direitos de reembolso disponíveis a você sob as leis aplicáveis. Caso você não tenha certeza se tem direito a um reembolso, não hesite em entrar em contato com nossa equipe de suporte no endereço de e-mail abaixo e encontraremos juntos a melhor solução."
+      "title": "Elegibilidade para Reembolso",
+      "item1": "Solicitação realizada em até 14 dias após a compra",
+      "item2": "Primeira compra do produto (não válido para recompras)",
+      "item3": "E-mail de solicitação enviado para contact@educly.app"
+    },
+    "nonEligibility": {
+      "title": "Casos Não Elegíveis",
+      "item1": "Solicitações feitas após 14 dias da compra",
+      "item2": "Clientes que já solicitaram reembolso anteriormente"
     },
     "subscriptionRefunds": {
       "title": "Reembolsos de Assinatura",
@@ -3518,13 +3529,18 @@
     },
     "howToRequest": {
       "title": "Como Solicitar",
-      "intro": "Para solicitar reembolso ou cancelamento, envie um e-mail com as seguintes informações:",
-      "emailSubject": "Assunto: Solicitação de Reembolso/Cancelamento",
+      "intro": "Para solicitar cancelamento ou reembolso, envie um e-mail com as seguintes informações:",
+      "emailSubject": "Assunto: Solicitação de Cancelamento",
       "include1": "E-mail cadastrado na compra",
       "include2": "Data da compra",
-      "include3": "Descrição do problema ou motivo (opcional)",
+      "include3": "Motivo do cancelamento (opcional)",
       "emailLabel": "E-mail de contato",
       "email": "contact@educly.app"
+    },
+    "cancellation": {
+      "title": "Cancelamento de Assinatura",
+      "description": "Você pode cancelar sua assinatura a qualquer momento. O cancelamento interrompe cobranças futuras, mas não reembolsa períodos já pagos.",
+      "instructions": "Para cancelar, envie um e-mail para contact@educly.app com o assunto 'Cancelamento de Assinatura'."
     },
     "processing": {
       "title": "Prazos de Processamento",
