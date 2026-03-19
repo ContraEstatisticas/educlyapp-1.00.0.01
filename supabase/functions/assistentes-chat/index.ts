@@ -764,6 +764,9 @@ serve(async (req) => {
     const messages = body.messages;
     const aiType = String(body.aiType || "chatgpt").toLowerCase();
     const language = body.language || "pt";
+    const chatContext = typeof body.chatContext === "string" && body.chatContext.trim().length > 0
+      ? body.chatContext.trim().slice(0, 100)
+      : null;
     const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
 
     if (aiType === "edi") {
@@ -925,6 +928,10 @@ serve(async (req) => {
           .from("generated-images")
           .upload(fileName, imageBytes, { contentType: mimeType, upsert: false });
 
+        if (uploadError) {
+          console.error("Generated image upload error:", uploadError);
+        }
+
         if (!uploadError) {
           const { data: publicData } = supabase.storage
             .from("generated-images")
@@ -940,10 +947,26 @@ serve(async (req) => {
 
       // Save to DB
       const responseContent = imageUrl ? `${briefResponse}\n\n[IMAGE:${imageUrl}]` : briefResponse;
-      await supabase.from("chat_messages").insert([
-        { user_id: user.id, role: "user", content: lastUserMessage, ai_assistant_type: aiType },
-        { user_id: user.id, role: "assistant", content: responseContent, ai_assistant_type: aiType },
+      const { error: persistError } = await supabase.from("chat_messages").insert([
+        {
+          user_id: user.id,
+          role: "user",
+          content: lastUserMessage,
+          ai_assistant_type: aiType,
+          ai_tool_context: chatContext,
+        },
+        {
+          user_id: user.id,
+          role: "assistant",
+          content: responseContent,
+          ai_assistant_type: aiType,
+          ai_tool_context: chatContext,
+        },
       ]);
+
+      if (persistError) {
+        console.error("Error saving creative chat history:", persistError);
+      }
 
       return new Response(JSON.stringify({
         type: "creative",

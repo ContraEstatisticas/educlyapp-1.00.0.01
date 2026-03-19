@@ -110,7 +110,7 @@ export const FloatingEdiChat = () => {
 
         let index;
         while ((index = buffer.indexOf("\n")) !== -1) {
-          let line = buffer.slice(0, index).trim();
+          const line = buffer.slice(0, index).trim();
           buffer = buffer.slice(index + 1);
 
           if (!line.startsWith("data:")) continue;
@@ -140,12 +140,14 @@ export const FloatingEdiChat = () => {
             role: "user",
             content: message,
             ai_assistant_type: "edi",
+            ai_tool_context: "floating_edi_widget",
           },
           {
             user_id: session.user.id,
             role: "assistant",
             content: assistantContent,
             ai_assistant_type: "edi",
+            ai_tool_context: "floating_edi_widget",
           },
         ]);
       }

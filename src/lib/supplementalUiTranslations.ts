@@ -1042,6 +1042,73 @@ for (const [language, translations] of Object.entries(uiLessonEdiGuideTranslatio
   Object.assign(uiFallbackTranslations[language as UiLang], translations);
 }
 
+const uiChatControlTranslations: Partial<Record<UiLang, Record<string, string>>> = {
+  pt: {
+    "chat.newConversation": "Novo chat",
+    "chat.newConversationHint": "Comecar esta conversa de novo",
+  },
+  en: {
+    "chat.newConversation": "New chat",
+    "chat.newConversationHint": "Start this conversation over",
+  },
+  es: {
+    "chat.newConversation": "Nuevo chat",
+    "chat.newConversationHint": "Empezar esta conversacion de nuevo",
+  },
+  fr: {
+    "chat.newConversation": "Nouveau chat",
+    "chat.newConversationHint": "Recommencer cette conversation",
+  },
+  de: {
+    "chat.newConversation": "Neuer Chat",
+    "chat.newConversationHint": "Diese Unterhaltung neu starten",
+  },
+  it: {
+    "chat.newConversation": "Nuova chat",
+    "chat.newConversationHint": "Ricomincia questa conversazione",
+  },
+  ru: {
+    "chat.newConversation": "Новый чат",
+    "chat.newConversationHint": "Начать этот разговор заново",
+  },
+  zh: {
+    "chat.newConversation": "新聊天",
+    "chat.newConversationHint": "重新开始这段对话",
+  },
+  ja: {
+    "chat.newConversation": "新しいチャット",
+    "chat.newConversationHint": "この会話を最初からやり直す",
+  },
+  ko: {
+    "chat.newConversation": "새 채팅",
+    "chat.newConversationHint": "이 대화를 처음부터 다시 시작",
+  },
+  ar: {
+    "chat.newConversation": "دردشة جديدة",
+    "chat.newConversationHint": "ابدأ هذه المحادثة من جديد",
+  },
+  hi: {
+    "chat.newConversation": "नई चैट",
+    "chat.newConversationHint": "इस बातचीत को फिर से शुरू करें",
+  },
+  tr: {
+    "chat.newConversation": "Yeni sohbet",
+    "chat.newConversationHint": "Bu sohbeti yeniden baslat",
+  },
+  pl: {
+    "chat.newConversation": "Nowy czat",
+    "chat.newConversationHint": "Rozpocznij te rozmowe od nowa",
+  },
+  nl: {
+    "chat.newConversation": "Nieuwe chat",
+    "chat.newConversationHint": "Begin dit gesprek opnieuw",
+  },
+};
+
+for (const [language, translations] of Object.entries(uiChatControlTranslations)) {
+  Object.assign(uiFallbackTranslations[language as UiLang], translations);
+}
+
 const normalizeUiLanguage = (language?: string): UiLang => {
   const baseLanguage = language?.split("-")[0]?.toLowerCase();
   return UI_LANGS.includes(baseLanguage as UiLang) ? (baseLanguage as UiLang) : "en";

@@ -16,6 +16,8 @@ import { AIModelSelector, AI_MODELS } from "@/components/assistentes/AIModelSele
 import { AISidebar } from "@/components/assistentes/AISidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import type { Database } from "@/integrations/supabase/types";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
 
@@ -27,6 +29,85 @@ interface Message {
 
 const DAILY_MESSAGE_LIMIT = 50;
 const DAILY_IMAGE_LIMIT = 10;
+const MAX_CONTEXT_MESSAGES = 24;
+const GREETING_MESSAGE_ID = "greeting";
+const AI_HUB_CHAT_CONTEXT = "assistentes_hub";
+const ASSISTANTS_MODE_STORAGE_KEY = "educly-assistants-mode";
+const ASSISTANTS_MODEL_STORAGE_KEY = "educly-assistants-model";
+
+type PersistedChatMessage = Pick<
+  Database["public"]["Tables"]["chat_messages"]["Row"],
+  "id" | "role" | "content" | "created_at"
+>;
+
+const buildGreetingMessage = (
+  aiType: string,
+  t: (key: string) => string,
+): Message => ({
+  id: GREETING_MESSAGE_ID,
+  role: "assistant",
+  content: t(`assistants.${aiType}.greeting`),
+});
+
+const stripImagePayload = (content: string) =>
+  content.replace(/\[IMAGE:(https?:\/\/[^\]]+|data:image\/[^;]+;base64,[^\]]+)\]/g, "").trim();
+
+const sortPersistedMessages = (chatMessages: PersistedChatMessage[]) =>
+  [...chatMessages].sort((first, second) => {
+    const firstTime = first.created_at ? new Date(first.created_at).getTime() : 0;
+    const secondTime = second.created_at ? new Date(second.created_at).getTime() : 0;
+
+    if (firstTime !== secondTime) {
+      return firstTime - secondTime;
+    }
+
+    if (first.role === second.role) {
+      return 0;
+    }
+
+    return first.role === "user" ? -1 : 1;
+  });
+
+const getAssistantsHistoryStorageKey = (userId: string, aiType: string) =>
+  `educly-assistants-history:v2:${userId}:${aiType}:${AI_HUB_CHAT_CONTEXT}`;
+
+const readCachedAssistantMessages = (userId: string, aiType: string): Message[] => {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const raw = window.localStorage.getItem(getAssistantsHistoryStorageKey(userId, aiType));
+    if (!raw) return [];
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed
+      .filter(
+        (message): message is Message =>
+          message &&
+          typeof message.id === "string" &&
+          (message.role === "user" || message.role === "assistant") &&
+          typeof message.content === "string",
+      )
+      .slice(-100);
+  } catch {
+    return [];
+  }
+};
+
+const getStoredAssistantsMode = (): "chat" | "creative" => {
+  if (typeof window === "undefined") return "chat";
+
+  const storedMode = window.localStorage.getItem(ASSISTANTS_MODE_STORAGE_KEY);
+  return storedMode === "creative" ? "creative" : "chat";
+};
+
+const getStoredAssistantsModel = (): string => {
+  if (typeof window === "undefined") return "chatgpt";
+
+  const storedModel = window.localStorage.getItem(ASSISTANTS_MODEL_STORAGE_KEY);
+  return AI_MODELS.some((model) => model.id === storedModel) ? String(storedModel) : "chatgpt";
+};
 
 const AssistentesContent = () => {
   const navigate = useNavigate();
@@ -35,10 +116,13 @@ const AssistentesContent = () => {
   const { isPremium, isLoading: premiumLoading, checkoutUrl } = usePremiumAccess();
   const isMobile = useIsMobile();
 
-  const [mode, setMode] = useState<"chat" | "creative">("chat");
-  const [activeModel, setActiveModel] = useState("chatgpt");
+  const [mode, setMode] = useState<"chat" | "creative">(() => getStoredAssistantsMode());
+  const [activeModel, setActiveModel] = useState(() => getStoredAssistantsModel());
   const [messages, setMessages] = useState<Message[]>([]);
+  const [messagesAssistantType, setMessagesAssistantType] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isHistoryLoading, setIsHistoryLoading] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [usageToday, setUsageToday] = useState(0);
   const [imagesUsed, setImagesUsed] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -58,6 +142,7 @@ const AssistentesContent = () => {
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { navigate("/auth"); return; }
+      setCurrentUserId(user.id);
       const today = new Date().toISOString().split("T")[0];
       const { data } = await supabase
         .from("ai_hub_usage")
@@ -73,12 +158,81 @@ const AssistentesContent = () => {
     init();
   }, [navigate]);
 
-  // Set greeting when model/mode changes
+  // Load persisted history for the active assistant
   useEffect(() => {
     if (!isPremium) return;
-    const greetingKey = `assistants.${currentAiType}.greeting`;
-    setMessages([{ id: "greeting", role: "assistant", content: t(greetingKey) }]);
-  }, [isPremium, currentAiType, t, i18n.language]);
+
+    let cancelled = false;
+
+    const loadPersistedHistory = async () => {
+      setIsHistoryLoading(true);
+      setMessagesAssistantType(null);
+      setMessages([]);
+
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user || cancelled) return;
+        setCurrentUserId(user.id);
+
+        const cachedMessages = readCachedAssistantMessages(user.id, currentAiType);
+        if (cachedMessages.length > 0) {
+          setMessagesAssistantType(currentAiType);
+          setMessages(cachedMessages);
+        }
+
+        let query = supabase
+          .from("chat_messages")
+          .select("id, role, content, created_at")
+          .eq("user_id", user.id)
+          .eq("ai_assistant_type", currentAiType);
+
+        query = currentAiType === "edi"
+          ? query.eq("ai_tool_context", AI_HUB_CHAT_CONTEXT)
+          : query.or(`ai_tool_context.eq.${AI_HUB_CHAT_CONTEXT},ai_tool_context.is.null`);
+
+        const { data, error } = await query.order("created_at", { ascending: true });
+
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Error loading assistant history:", error);
+          toast({ title: t("chat.error.sendError"), variant: "destructive" });
+          setMessagesAssistantType(currentAiType);
+          setMessages(
+            cachedMessages.length > 0
+              ? cachedMessages
+              : [buildGreetingMessage(currentAiType, t)],
+          );
+          return;
+        }
+
+        const persistedMessages = sortPersistedMessages(data ?? []).map((message) => ({
+          id: message.id,
+          role: message.role === "user" ? "user" : "assistant",
+          content: message.content,
+        }));
+
+        setMessages(
+          persistedMessages.length > 0
+            ? persistedMessages
+            : cachedMessages.length > 0
+              ? cachedMessages
+              : [buildGreetingMessage(currentAiType, t)],
+        );
+        setMessagesAssistantType(currentAiType);
+      } finally {
+        if (!cancelled) {
+          setIsHistoryLoading(false);
+        }
+      }
+    };
+
+    void loadPersistedHistory();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentAiType, isPremium, t, toast]);
 
   // Scroll to bottom
   useEffect(() => {
@@ -94,9 +248,39 @@ const AssistentesContent = () => {
     setSidebarOpen(false);
   };
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(ASSISTANTS_MODE_STORAGE_KEY, mode);
+  }, [mode]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(ASSISTANTS_MODEL_STORAGE_KEY, activeModel);
+  }, [activeModel]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !currentUserId || isHistoryLoading) return;
+    if (messagesAssistantType !== currentAiType) return;
+
+    const storageKey = getAssistantsHistoryStorageKey(currentUserId, currentAiType);
+    const messagesToCache = messages.filter((message) => message.id !== GREETING_MESSAGE_ID).slice(-100);
+
+    try {
+      if (messagesToCache.length === 0) {
+        window.localStorage.removeItem(storageKey);
+        return;
+      }
+
+      window.localStorage.setItem(storageKey, JSON.stringify(messagesToCache));
+    } catch (error) {
+      console.error("Error caching assistant history locally:", error);
+    }
+  }, [currentAiType, currentUserId, isHistoryLoading, messages, messagesAssistantType]);
+
   const sendMessage = async (input: string) => {
-    if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading || isHistoryLoading) return;
     const userMessage: Message = { id: `user-${Date.now()}`, role: "user", content: input.trim() };
+    setMessagesAssistantType(currentAiType);
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
@@ -108,9 +292,11 @@ const AssistentesContent = () => {
       }
 
       const apiMessages = messages
-        .filter((m) => m.id !== "greeting")
+        .filter((m) => m.id !== GREETING_MESSAGE_ID)
         .concat(userMessage)
-        .map((m) => ({ role: m.role, content: m.content }));
+        .map((m) => ({ role: m.role, content: stripImagePayload(m.content) }))
+        .filter((m) => m.content.length > 0)
+        .slice(-MAX_CONTEXT_MESSAGES);
 
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/assistentes-chat`,
@@ -120,13 +306,23 @@ const AssistentesContent = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${session.access_token}`,
           },
-          body: JSON.stringify({ messages: apiMessages, aiType: currentAiType, language: i18n.language }),
+          body: JSON.stringify({
+            messages: apiMessages,
+            aiType: currentAiType,
+            language: i18n.language,
+            chatContext: AI_HUB_CHAT_CONTEXT,
+          }),
         }
       );
 
       if (!response.ok) {
         let errorMsg = t("chat.error.sendError");
-        try { const err = await response.json(); if (err?.error) errorMsg = err.error; } catch { }
+        try {
+          const err = await response.json();
+          if (err?.error) errorMsg = err.error;
+        } catch {
+          errorMsg = t("chat.error.sendError");
+        }
         if (response.status === 429) errorMsg = t("assistants.rateLimit.message");
         toast({ title: errorMsg, variant: "destructive" });
         setIsLoading(false);
@@ -193,10 +389,28 @@ const AssistentesContent = () => {
       // Save to DB
       const { data: { user } } = await supabase.auth.getUser();
       if (user && assistantContent) {
-        await supabase.from("chat_messages").insert([
-          { user_id: user.id, role: "user", content: userMessage.content, ai_assistant_type: currentAiType },
-          { user_id: user.id, role: "assistant", content: assistantContent, ai_assistant_type: currentAiType },
+        const baseTimestamp = Date.now();
+        const { error: persistError } = await supabase.from("chat_messages").insert([
+          {
+            user_id: user.id,
+            role: "user",
+            content: userMessage.content,
+            ai_assistant_type: currentAiType,
+            ai_tool_context: AI_HUB_CHAT_CONTEXT,
+            created_at: new Date(baseTimestamp).toISOString(),
+          },
+          {
+            user_id: user.id,
+            role: "assistant",
+            content: assistantContent,
+            ai_assistant_type: currentAiType,
+            ai_tool_context: AI_HUB_CHAT_CONTEXT,
+            created_at: new Date(baseTimestamp + 1).toISOString(),
+          },
         ]);
+        if (persistError) {
+          console.error("Error saving assistant history:", persistError);
+        }
       }
     } catch (error) {
       console.error("Chat error:", error);
@@ -206,9 +420,46 @@ const AssistentesContent = () => {
     }
   };
 
-  const clearChat = () => {
-    const greetingKey = `assistants.${currentAiType}.greeting`;
-    setMessages([{ id: "greeting", role: "assistant", content: t(greetingKey) }]);
+  const clearChat = async () => {
+    if (isLoading || isHistoryLoading) return;
+
+    setIsHistoryLoading(true);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate("/auth");
+        return;
+      }
+
+      let deleteQuery = supabase
+        .from("chat_messages")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("ai_assistant_type", currentAiType);
+
+      deleteQuery = currentAiType === "edi"
+        ? deleteQuery.eq("ai_tool_context", AI_HUB_CHAT_CONTEXT)
+        : deleteQuery.or(`ai_tool_context.eq.${AI_HUB_CHAT_CONTEXT},ai_tool_context.is.null`);
+
+      const { error } = await deleteQuery;
+
+      if (error) {
+        throw error;
+      }
+
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem(getAssistantsHistoryStorageKey(user.id, currentAiType));
+      }
+
+      setMessagesAssistantType(currentAiType);
+      setMessages([buildGreetingMessage(currentAiType, t)]);
+    } catch (error) {
+      console.error("Error clearing assistant history:", error);
+      toast({ title: t("chat.error.sendError"), variant: "destructive" });
+    } finally {
+      setIsHistoryLoading(false);
+    }
   };
 
   if (premiumLoading) {
@@ -243,6 +494,8 @@ const AssistentesContent = () => {
       imageLimit={DAILY_IMAGE_LIMIT}
     />
   );
+
+  const visibleMessages = messagesAssistantType === currentAiType ? messages : [];
 
   const currentName = mode === "creative"
     ? t("assistants.nanobanana.name")
@@ -295,8 +548,17 @@ const AssistentesContent = () => {
                   ? `🎨 ${imagesUsed}/${DAILY_IMAGE_LIMIT}`
                   : `💬 ${usageToday}/${DAILY_MESSAGE_LIMIT}`}
               </div>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={clearChat}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 gap-2 rounded-full px-3 text-xs sm:text-sm"
+                onClick={() => void clearChat()}
+                disabled={isHistoryLoading || isLoading}
+                aria-label={tUi(t, i18n.language, "chat.newConversationHint")}
+                title={tUi(t, i18n.language, "chat.newConversationHint")}
+              >
                 <RotateCcw className="w-3.5 h-3.5" />
+                <span>{tUi(t, i18n.language, "chat.newConversation")}</span>
               </Button>
             </div>
           </div>
@@ -305,15 +567,21 @@ const AssistentesContent = () => {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto px-3 py-4">
           <div className="max-w-3xl mx-auto space-y-4">
-            {messages.map((message) => (
-              <ChatMessage
-                key={message.id}
-                role={message.role}
-                content={message.content}
-                avatarUrl={message.role === "assistant" ? getCurrentLogo() : undefined}
-              />
-            ))}
-            {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
+            {isHistoryLoading && visibleMessages.length === 0 ? (
+              <div className="flex items-center justify-center py-12">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+              </div>
+            ) : (
+              visibleMessages.map((message) => (
+                <ChatMessage
+                  key={message.id}
+                  role={message.role}
+                  content={message.content}
+                  avatarUrl={message.role === "assistant" ? getCurrentLogo() : undefined}
+                />
+              ))
+            )}
+            {isLoading && visibleMessages[visibleMessages.length - 1]?.role !== "assistant" && !isHistoryLoading && (
               <div className="flex gap-3">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-muted p-1">
                   <img src={getCurrentLogo()} alt="" className="w-full h-full object-contain" />
@@ -336,7 +604,7 @@ const AssistentesContent = () => {
           <div className="max-w-3xl mx-auto">
             <ChatInput
               onSend={sendMessage}
-              isLoading={isLoading}
+              isLoading={isLoading || isHistoryLoading}
               placeholder={
                 mode === "creative"
                   ? t("assistants.nanobanana.greeting").slice(0, 50) + "..."

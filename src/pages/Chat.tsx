@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Trash2 } from "lucide-react";
+import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
@@ -10,6 +10,7 @@ import { useProductAccess } from "@/hooks/useProductAccess";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import ediMascote from "@/assets/edi-mascote.png";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 interface Message {
   id: string;
@@ -273,8 +274,16 @@ const Chat = () => {
             </div>
           </div>
 
-          <Button variant="ghost" size="icon" onClick={clearChat} className="text-muted-foreground flex-shrink-0">
-            <Trash2 className="w-4 h-4" />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={clearChat}
+            className="gap-2 rounded-full px-3 text-xs sm:text-sm text-muted-foreground flex-shrink-0"
+            aria-label={tUi(t, i18n.language, "chat.newConversationHint")}
+            title={tUi(t, i18n.language, "chat.newConversationHint")}
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>{tUi(t, i18n.language, "chat.newConversation")}</span>
           </Button>
         </div>
       </header>
