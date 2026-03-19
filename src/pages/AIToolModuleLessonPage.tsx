@@ -7,9 +7,11 @@ import { cn, shuffleArray } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { GradualTextDisplay, GradualTextDisplayRef } from "@/components/lesson/GradualTextDisplay";
+import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
 import { aiMasteryTrailsBySlug } from "@/lib/aiMasteryTrails";
 import { AiTrailLessonStep, getAiTrailContent, isAiTrailLive } from "@/lib/aiTrailContent";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((module) => ({ default: module.FillBlanks })));
 
@@ -41,6 +43,28 @@ type StepAnswerState = {
   isCorrect: boolean;
   userWords: string[];
   componentCompleted: boolean;
+};
+
+interface EdiAssistState {
+  steps: EdiGuidedHelpStep[];
+  title?: string;
+  description?: string;
+  kind: "quiz" | "practical";
+}
+
+const getDefaultStepAnswer = (): StepAnswerState => ({
+  selectedOption: null,
+  isAnswerChecked: false,
+  isCorrect: false,
+  userWords: [],
+  componentCompleted: false,
+});
+
+const removeFirstOccurrence = (items: string[], itemToRemove: string) => {
+  const index = items.findIndex((item) => item === itemToRemove);
+  if (index === -1) return items;
+
+  return [...items.slice(0, index), ...items.slice(index + 1)];
 };
 
 const LESSON_UI = {
@@ -208,6 +232,7 @@ const AIToolModuleLessonPage = () => {
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
   const [availableWords, setAvailableWords] = useState<string[]>([]);
   const [wrongAttempts, setWrongAttempts] = useState(0);
+  const [ediAssistState, setEdiAssistState] = useState<EdiAssistState | null>(null);
 
   const gradualTextRef = useRef<GradualTextDisplayRef>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -252,6 +277,7 @@ const AIToolModuleLessonPage = () => {
     if (!step) return;
 
     setWrongAttempts(0);
+    setEdiAssistState(null);
 
     if (step.type === "practical" && !stepAnswers[currentStepIndex]?.userWords?.length) {
       setAvailableWords(step.initialWords || []);
@@ -271,13 +297,8 @@ const AIToolModuleLessonPage = () => {
   }, [currentStepIndex]);
 
   const currentStep = lessonSteps[currentStepIndex];
-  const currentStepAnswer = stepAnswers[currentStepIndex] || {
-    selectedOption: null,
-    isAnswerChecked: false,
-    isCorrect: false,
-    userWords: [],
-    componentCompleted: false,
-  };
+  const currentStepAnswer = stepAnswers[currentStepIndex] || getDefaultStepAnswer();
+  const ediHelpEnabled = toolSlug === "midjourney";
 
   const setSelectedOption = (value: number | null) => {
     setStepAnswers((prev) => ({
@@ -351,6 +372,85 @@ const AIToolModuleLessonPage = () => {
     setUserWords((previous) => [...previous, word]);
   };
 
+  const getEdiAssistForCurrentStep = (step: TrailLessonStep): EdiAssistState | null => {
+    if (step.type === "quiz") {
+      const correctIndex = step.options?.findIndex((option) => option.isCorrect) ?? -1;
+      const correctOption = correctIndex >= 0 ? step.options?.[correctIndex] : null;
+
+      if (!correctOption) return null;
+
+      return {
+        kind: "quiz",
+        title: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalTitle"),
+        description: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalDescription"),
+        steps: [
+          {
+            id: `ai-trail-quiz-answer-${currentStepIndex}`,
+            title: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepTitle"),
+            description: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepDescription", {
+              letter: String.fromCharCode(65 + correctIndex),
+              answer: correctOption.text,
+            }),
+            actionLabel: tUi(t, i18n.language, "lesson.ediGuide.quiz.action"),
+          },
+        ],
+      };
+    }
+
+    if (step.type === "practical" && step.correctOrder?.length) {
+      return {
+        kind: "practical",
+        title: tUi(t, i18n.language, "lesson.ediGuide.practical.modalTitle"),
+        description: tUi(t, i18n.language, "lesson.ediGuide.practical.modalDescription"),
+        steps: step.correctOrder.map((word, index) => ({
+          id: `ai-trail-practical-word-${currentStepIndex}-${index}`,
+          title: tUi(t, i18n.language, "lesson.ediGuide.practical.stepTitle", {
+            index: index + 1,
+          }),
+          description: tUi(t, i18n.language, "lesson.ediGuide.practical.stepDescription", {
+            word,
+          }),
+          actionLabel: tUi(t, i18n.language, "lesson.ediGuide.practical.action"),
+        })),
+      };
+    }
+
+    return null;
+  };
+
+  const handleApplyCurrentEdiStep = async (guideStepIndex: number) => {
+    const step = lessonSteps[currentStepIndex];
+
+    if (!step || !ediAssistState) return;
+
+    if (step.type === "quiz") {
+      const correctIndex = step.options?.findIndex((option) => option.isCorrect) ?? -1;
+      if (correctIndex === -1) return;
+
+      setSelectedOption(correctIndex);
+      setIsCorrect(true);
+      setIsAnswerChecked(true);
+      setWrongAttempts(0);
+      playCorrect();
+      return;
+    }
+
+    if (step.type === "practical" && step.correctOrder?.[guideStepIndex]) {
+      const nextWord = step.correctOrder[guideStepIndex];
+
+      setAvailableWords((prev) => removeFirstOccurrence(prev, nextWord));
+      setUserWords((prev) => (prev.includes(nextWord) ? prev : [...prev, nextWord]));
+
+      const isLastWord = guideStepIndex === step.correctOrder.length - 1;
+      if (isLastWord) {
+        setIsCorrect(true);
+        setIsAnswerChecked(true);
+        setWrongAttempts(0);
+        playCorrect();
+      }
+    }
+  };
+
   const handleVerify = () => {
     if (!currentStep) return;
 
@@ -367,9 +467,19 @@ const AIToolModuleLessonPage = () => {
 
     if (correct) {
       playCorrect();
+      setEdiAssistState(null);
     } else {
       playIncorrect();
-      setWrongAttempts((previous) => previous + 1);
+      const nextWrongAttempts = wrongAttempts + 1;
+      setWrongAttempts(nextWrongAttempts);
+
+      if (ediHelpEnabled && nextWrongAttempts >= 3) {
+        const assistState = getEdiAssistForCurrentStep(currentStep);
+
+        if (assistState) {
+          setEdiAssistState(assistState);
+        }
+      }
     }
   };
 
@@ -390,6 +500,7 @@ const AIToolModuleLessonPage = () => {
     if ((currentStep.type === "quiz" || currentStep.type === "practical") && currentStepAnswer.isAnswerChecked && !currentStepAnswer.isCorrect) {
       setIsAnswerChecked(false);
       setSelectedOption(null);
+      setEdiAssistState(null);
 
       if (currentStep.type === "practical") {
         setUserWords([]);
@@ -469,13 +580,7 @@ const AIToolModuleLessonPage = () => {
             if (stepIndex > currentStepIndex) return null;
 
             const isCurrent = stepIndex === currentStepIndex;
-            const stepAnswer = stepAnswers[stepIndex] || {
-              selectedOption: null,
-              isAnswerChecked: false,
-              isCorrect: false,
-              userWords: [],
-              componentCompleted: false,
-            };
+            const stepAnswer = stepAnswers[stepIndex] || getDefaultStepAnswer();
 
             return (
               <div
@@ -600,16 +705,12 @@ const AIToolModuleLessonPage = () => {
                           answers={step.answers || []}
                           options={step.fillBlanksOptions || []}
                           explanation={step.explanation}
+                          ediHelpEnabled={ediHelpEnabled}
                           onComplete={() => {
                             setStepAnswers((prev) => ({
                               ...prev,
                               [currentStepIndex]: {
-                                ...(prev[currentStepIndex] || {
-                                  selectedOption: null,
-                                  isAnswerChecked: false,
-                                  isCorrect: false,
-                                  userWords: [],
-                                }),
+                                ...(prev[currentStepIndex] || getDefaultStepAnswer()),
                                 componentCompleted: true,
                                 isCorrect: true,
                                 isAnswerChecked: true,
@@ -772,6 +873,17 @@ const AIToolModuleLessonPage = () => {
           </Button>
         </div>
       </div>
+
+      {ediHelpEnabled && ediAssistState ? (
+        <EdiGuidedHelp
+          isOpen
+          title={ediAssistState.title}
+          description={ediAssistState.description}
+          steps={ediAssistState.steps}
+          onApplyStep={handleApplyCurrentEdiStep}
+          onClose={() => setEdiAssistState(null)}
+        />
+      ) : null}
     </div>
   );
 };
