@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import { useTranslatedLessonContent } from "@/hooks/useTranslatedLessonContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -22,6 +23,7 @@ const AppPromo = lazy(() => import("@/components/AppPromo").then((m) => ({ defau
 
 // Import Edi Motivation components
 import { EdiMotivation, useEdiMotivation } from "@/components/lesson/EdiMotivation";
+import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
 
 // Component registry for dynamic rendering - using any to allow flexible prop passing from JSON
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,6 +66,36 @@ interface LessonStep {
   props?: Record<string, unknown>;
 }
 
+interface StepAnswerState {
+  selectedOption: number | null;
+  isAnswerChecked: boolean;
+  isCorrect: boolean;
+  userWords: string[];
+  componentCompleted: boolean;
+}
+
+interface EdiAssistState {
+  steps: EdiGuidedHelpStep[];
+  title?: string;
+  description?: string;
+  kind: "quiz" | "practical";
+}
+
+const getDefaultStepAnswer = (): StepAnswerState => ({
+  selectedOption: null,
+  isAnswerChecked: false,
+  isCorrect: false,
+  userWords: [],
+  componentCompleted: false,
+});
+
+const removeFirstOccurrence = (items: string[], itemToRemove: string) => {
+  const index = items.findIndex((item) => item === itemToRemove);
+  if (index === -1) return items;
+
+  return [...items.slice(0, index), ...items.slice(index + 1)];
+};
+
 // Clean white theme colors (Dashboard style)
 const THEME = {
   // Primary (purple from design system)
@@ -95,14 +127,9 @@ const DayLesson = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
-  const [stepAnswers, setStepAnswers] = useState<Record<number, {
-    selectedOption: number | null;
-    isAnswerChecked: boolean;
-    isCorrect: boolean;
-    userWords: string[];
-    componentCompleted: boolean;
-  }>>({});
+  const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
   const [wrongAttempts, setWrongAttempts] = useState(0);
+  const [ediAssistState, setEdiAssistState] = useState<EdiAssistState | null>(null);
 
   // Edi Motivation system - shows motivational messages at progress milestones
   const { activeMotivation, closeMotivation } = useEdiMotivation(
@@ -119,13 +146,7 @@ const DayLesson = () => {
   const gradualTextRef = useRef<GradualTextDisplayRef>(null);
 
   // Getters para o step atual (compatibilidade com lógica existente)
-  const currentStepAnswer = stepAnswers[currentStepIndex] || { 
-    selectedOption: null, 
-    isAnswerChecked: false, 
-    isCorrect: false,
-    userWords: [],
-    componentCompleted: false
-  };
+  const currentStepAnswer = stepAnswers[currentStepIndex] || getDefaultStepAnswer();
   const selectedOption = currentStepAnswer.selectedOption;
   const isAnswerChecked = currentStepAnswer.isAnswerChecked;
   const isCorrect = currentStepAnswer.isCorrect;
@@ -144,7 +165,8 @@ const DayLesson = () => {
         selectedOption: value,
         isAnswerChecked: prev[currentStepIndex]?.isAnswerChecked ?? false,
         isCorrect: prev[currentStepIndex]?.isCorrect ?? false,
-        userWords: prev[currentStepIndex]?.userWords ?? []
+        userWords: prev[currentStepIndex]?.userWords ?? [],
+        componentCompleted: prev[currentStepIndex]?.componentCompleted ?? false,
       }
     }));
   };
@@ -157,7 +179,8 @@ const DayLesson = () => {
         selectedOption: prev[currentStepIndex]?.selectedOption ?? null,
         isAnswerChecked: value,
         isCorrect: prev[currentStepIndex]?.isCorrect ?? false,
-        userWords: prev[currentStepIndex]?.userWords ?? []
+        userWords: prev[currentStepIndex]?.userWords ?? [],
+        componentCompleted: prev[currentStepIndex]?.componentCompleted ?? false,
       }
     }));
   };
@@ -170,7 +193,8 @@ const DayLesson = () => {
         selectedOption: prev[currentStepIndex]?.selectedOption ?? null,
         isAnswerChecked: prev[currentStepIndex]?.isAnswerChecked ?? false,
         isCorrect: value,
-        userWords: prev[currentStepIndex]?.userWords ?? []
+        userWords: prev[currentStepIndex]?.userWords ?? [],
+        componentCompleted: prev[currentStepIndex]?.componentCompleted ?? false,
       }
     }));
   };
@@ -187,7 +211,8 @@ const DayLesson = () => {
           selectedOption: current?.selectedOption ?? null,
           isAnswerChecked: current?.isAnswerChecked ?? false,
           isCorrect: current?.isCorrect ?? false,
-          userWords: newWords
+          userWords: newWords,
+          componentCompleted: current?.componentCompleted ?? false,
         }
       };
     });
@@ -240,14 +265,15 @@ const DayLesson = () => {
     if (step) {
       // Apenas reseta wrongAttempts para o step atual
       setWrongAttempts(0);
+      setEdiAssistState(null);
 
       // Inicializa availableWords para prática se for um novo step
-      if (step.type === "practical" && !stepAnswers[currentStepIndex]?.userWords?.length) {
+      if (step.type === "practical") {
         setAvailableWords(step.initialWords || []);
       }
 
     }
-  }, [currentStepIndex, lessonSteps, stepAnswers]);
+  }, [currentStepIndex, lessonSteps]);
 
 
   // Scroll suave para o step atual quando muda
@@ -349,7 +375,9 @@ const DayLesson = () => {
                   },
                 });
               }
-            } catch {}
+            } catch (upsellError) {
+              console.error("Error sending day 5 upsell:", upsellError);
+            }
           }
         }
         navigate("/dashboard");
@@ -365,6 +393,85 @@ const DayLesson = () => {
     
     // Avança para próximo step e faz scroll suave
     setCurrentStepIndex((prev) => prev + 1);
+  };
+
+  const getEdiAssistForCurrentStep = (step: LessonStep): EdiAssistState | null => {
+    if (step.type === "quiz") {
+      const correctIndex = step.options?.findIndex((option) => option.isCorrect) ?? -1;
+      const correctOption = correctIndex >= 0 ? step.options?.[correctIndex] : null;
+
+      if (!correctOption) return null;
+
+      return {
+        kind: "quiz",
+        title: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalTitle"),
+        description: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalDescription"),
+        steps: [
+          {
+            id: `quiz-answer-${currentStepIndex}`,
+            title: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepTitle"),
+            description: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepDescription", {
+              letter: String.fromCharCode(65 + correctIndex),
+              answer: correctOption.text,
+            }),
+            actionLabel: tUi(t, i18n.language, "lesson.ediGuide.quiz.action"),
+          },
+        ],
+      };
+    }
+
+    if (step.type === "practical" && step.correctOrder?.length) {
+      return {
+        kind: "practical",
+        title: tUi(t, i18n.language, "lesson.ediGuide.practical.modalTitle"),
+        description: tUi(t, i18n.language, "lesson.ediGuide.practical.modalDescription"),
+        steps: step.correctOrder.map((word, index) => ({
+          id: `practical-word-${currentStepIndex}-${index}`,
+          title: tUi(t, i18n.language, "lesson.ediGuide.practical.stepTitle", {
+            index: index + 1,
+          }),
+          description: tUi(t, i18n.language, "lesson.ediGuide.practical.stepDescription", {
+            word,
+          }),
+          actionLabel: tUi(t, i18n.language, "lesson.ediGuide.practical.action"),
+        })),
+      };
+    }
+
+    return null;
+  };
+
+  const handleApplyCurrentEdiStep = async (guideStepIndex: number) => {
+    const step = lessonSteps[currentStepIndex];
+
+    if (!step || !ediAssistState) return;
+
+    if (step.type === "quiz") {
+      const correctIndex = step.options?.findIndex((option) => option.isCorrect) ?? -1;
+      if (correctIndex === -1) return;
+
+      setSelectedOption(correctIndex);
+      setIsCorrect(true);
+      setIsAnswerChecked(true);
+      setWrongAttempts(0);
+      playCorrect();
+      return;
+    }
+
+    if (step.type === "practical" && step.correctOrder?.[guideStepIndex]) {
+      const nextWord = step.correctOrder[guideStepIndex];
+
+      setAvailableWords((prev) => removeFirstOccurrence(prev, nextWord));
+      setUserWords((prev) => (prev.includes(nextWord) ? prev : [...prev, nextWord]));
+
+      const isLastWord = guideStepIndex === step.correctOrder.length - 1;
+      if (isLastWord) {
+        setIsCorrect(true);
+        setIsAnswerChecked(true);
+        setWrongAttempts(0);
+        playCorrect();
+      }
+    }
   };
 
   const handleVerify = () => {
@@ -385,7 +492,18 @@ const DayLesson = () => {
       playCorrect();
     } else {
       playIncorrect();
-      setWrongAttempts((prev) => prev + 1);
+      const nextWrongAttempts = wrongAttempts + 1;
+      setWrongAttempts(nextWrongAttempts);
+
+      const shouldOfferEdiHelp = nextWrongAttempts >= 3;
+
+      if (shouldOfferEdiHelp) {
+        const assistState = getEdiAssistForCurrentStep(step);
+
+        if (assistState) {
+          setEdiAssistState(assistState);
+        }
+      }
     }
   };
 
@@ -461,12 +579,7 @@ const DayLesson = () => {
             if (stepIndex > currentStepIndex) return null;
             
             const isCurrent = stepIndex === currentStepIndex;
-            const stepAnswer = stepAnswers[stepIndex] || { 
-              selectedOption: null, 
-              isAnswerChecked: false, 
-              isCorrect: false,
-              userWords: []
-            };
+            const stepAnswer = stepAnswers[stepIndex] || getDefaultStepAnswer();
             
               return (
                 <div
@@ -558,7 +671,13 @@ const DayLesson = () => {
                           const DynamicComponent = getComponent(step.componentName!);
                           if (!DynamicComponent) return null;
                           const componentProps = step.props || {};
-                          return <DynamicComponent {...componentProps} onComplete={handleComponentComplete} />;
+                          return (
+                            <DynamicComponent
+                              {...componentProps}
+                              onComplete={handleComponentComplete}
+                              ediHelpEnabled
+                            />
+                          );
                         })()}
                       </Suspense>
                     ) : (
@@ -788,6 +907,16 @@ const DayLesson = () => {
             </Button>
           </div>
         </div>
+      )}
+      {ediAssistState && (
+        <EdiGuidedHelp
+          isOpen={Boolean(ediAssistState)}
+          title={ediAssistState.title}
+          description={ediAssistState.description}
+          steps={ediAssistState.steps}
+          onApplyStep={handleApplyCurrentEdiStep}
+          onClose={() => setEdiAssistState(null)}
+        />
       )}
       {/* Edi Motivation Popup - Shows motivational messages at progress milestones */}
       {activeMotivation?.show && (
