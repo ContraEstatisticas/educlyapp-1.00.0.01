@@ -1,4 +1,8 @@
-export type LevelRewardKey = "newsletter_access" | "ai_hub_day_pass" | "prompt_guide_pdf";
+export type LevelRewardKey =
+  | "newsletter_access"
+  | "ai_hub_day_pass"
+  | "prompt_guide_pdf"
+  | "ai_hub_bonus_limits";
 
 type RewardLocale = "pt" | "en" | "es" | "fr" | "de" | "it" | "ru" | "zh" | "ja" | "ko" | "ar" | "hi" | "tr" | "pl" | "nl";
 
@@ -37,7 +41,7 @@ interface LevelRewardsCopy {
   levelUpDescriptionTemplate: string;
   levelUpBannerLabel: string;
   keepLearningLabel: string;
-  rewardMap: Record<LevelRewardKey, RewardCopy>;
+  rewardMap: Partial<Record<LevelRewardKey, RewardCopy>>;
   level5LockedTitle: string;
   level5LockedDescription: string;
 }
@@ -69,6 +73,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Jornal semanal de vagas freelance", description: "Uma curadoria semanal enviada por email com vagas freelance, oportunidades remotas e sinais praticos de mercado para quem quer transformar aprendizado em renda." },
       ai_hub_day_pass: { title: "AI Hub por 1 dia", description: "No nivel 5, voce ganha acesso ao nosso AI Hub por 24 horas para testar os assistentes da plataforma." },
       prompt_guide_pdf: { title: "PDF de prompts por IA", description: "Se voce ja tiver AI Hub no nivel 5, liberamos um PDF com prompts recomendados para cada IA." },
+      ai_hub_bonus_limits: { title: "Boost diario do AI Hub", description: "No nivel 7, quem tiver AI Hub ativo libera 20 mensagens extras e 5 imagens extras por dia." },
     },
     level5LockedTitle: "Recompensa do nivel 5",
     level5LockedDescription: "No nivel 5 voce ganha 1 dia de AI Hub. Se ja tiver AI Hub ativo, recebe o PDF com os melhores prompts.",
@@ -99,6 +104,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Weekly freelance jobs journal", description: "A weekly curated email with freelance roles, remote opportunities, and practical market signals for people who want to turn learning into income." },
       ai_hub_day_pass: { title: "AI Hub for 1 day", description: "At level 5 you get 24 hours of access to the AI Hub to try the platform assistants." },
       prompt_guide_pdf: { title: "AI prompt guide PDF", description: "If you already have AI Hub at level 5, we unlock a PDF with recommended prompts for each AI." },
+      ai_hub_bonus_limits: { title: "AI Hub daily boost", description: "At level 7, anyone with an active AI Hub unlocks 20 extra messages and 5 extra images per day." },
     },
     level5LockedTitle: "Level 5 reward",
     level5LockedDescription: "At level 5 you unlock 1 day of AI Hub. If you already have AI Hub active, you receive the best prompts PDF instead.",
@@ -129,6 +135,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Boletin semanal de vacantes freelance", description: "Una curadoria semanal por email con vacantes freelance, oportunidades remotas y señales practicas de mercado para quien quiere convertir aprendizaje en ingresos." },
       ai_hub_day_pass: { title: "AI Hub por 1 dia", description: "En el nivel 5 recibes 24 horas de acceso a nuestro AI Hub para probar los asistentes de la plataforma." },
       prompt_guide_pdf: { title: "PDF de prompts por IA", description: "Si ya tienes AI Hub en el nivel 5, desbloqueamos un PDF con prompts recomendados para cada IA." },
+      ai_hub_bonus_limits: { title: "Impulso diario del AI Hub", description: "En el nivel 7, quien tenga AI Hub activo desbloquea 20 mensajes extra y 5 imagenes extra por dia." },
     },
     level5LockedTitle: "Recompensa del nivel 5",
     level5LockedDescription: "En el nivel 5 ganas 1 dia de AI Hub. Si ya tienes AI Hub activo, recibes el PDF con los mejores prompts.",
@@ -159,6 +166,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Journal hebdomadaire des missions freelance", description: "Au niveau 3, vous commencez a recevoir par email notre journal hebdomadaire avec des missions et opportunites freelance." },
       ai_hub_day_pass: { title: "AI Hub pendant 1 jour", description: "Au niveau 5, vous obtenez 24 heures d'acces a notre AI Hub pour tester les assistants de la plateforme." },
       prompt_guide_pdf: { title: "PDF de prompts par IA", description: "Si vous avez deja AI Hub au niveau 5, nous debloquons un PDF avec des prompts recommandes pour chaque IA." },
+      ai_hub_bonus_limits: { title: "Boost quotidien AI Hub", description: "Au niveau 7, toute personne ayant AI Hub actif debloque 20 messages supplementaires et 5 images supplementaires par jour." },
     },
     level5LockedTitle: "Recompense du niveau 5",
     level5LockedDescription: "Au niveau 5, vous gagnez 1 jour d'AI Hub. Si AI Hub est deja actif, vous recevez le PDF des meilleurs prompts a la place.",
@@ -189,6 +197,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Wochentliches Freelance-Journal", description: "Ab Level 3 erhaltst du per E-Mail unser wochentliches Journal mit Freelance-Jobs und Chancen." },
       ai_hub_day_pass: { title: "AI Hub fur 1 Tag", description: "Auf Level 5 erhaltst du 24 Stunden Zugang zum AI Hub, um die Assistenten der Plattform zu testen." },
       prompt_guide_pdf: { title: "PDF mit Prompts pro KI", description: "Wenn du auf Level 5 bereits AI Hub hast, schalten wir ein PDF mit empfohlenen Prompts fur jede KI frei." },
+      ai_hub_bonus_limits: { title: "Taglicher AI-Hub-Boost", description: "Auf Level 7 schalten Nutzer mit aktivem AI Hub 20 zusatzliche Nachrichten und 5 zusatzliche Bilder pro Tag frei." },
     },
     level5LockedTitle: "Belohnung fur Level 5",
     level5LockedDescription: "Auf Level 5 erhaltst du 1 Tag AI Hub. Wenn AI Hub bereits aktiv ist, bekommst du stattdessen das PDF mit den besten Prompts.",
@@ -219,6 +228,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "Giornale settimanale di opportunita freelance", description: "Al livello 3 inizi a ricevere via email il nostro giornale settimanale con lavori e opportunita freelance." },
       ai_hub_day_pass: { title: "AI Hub per 1 giorno", description: "Al livello 5 ottieni 24 ore di accesso al nostro AI Hub per provare gli assistenti della piattaforma." },
       prompt_guide_pdf: { title: "PDF di prompt per ogni IA", description: "Se hai gia AI Hub al livello 5, sblocchiamo un PDF con prompt consigliati per ogni IA." },
+      ai_hub_bonus_limits: { title: "Boost giornaliero AI Hub", description: "Al livello 7, chi ha AI Hub attivo sblocca 20 messaggi extra e 5 immagini extra al giorno." },
     },
     level5LockedTitle: "Ricompensa del livello 5",
     level5LockedDescription: "Al livello 5 guadagni 1 giorno di AI Hub. Se AI Hub e gia attivo, ricevi invece il PDF con i migliori prompt.",
@@ -249,6 +259,7 @@ const COPY_BY_LOCALE: Record<RewardLocale, LevelRewardsCopy> = {
       newsletter_access: { title: "???????????? ?????? ???????-????????", description: "?? ?????? 3 ?? ????????? ???????? ?? ????? ??? ???????????? ?????? ? ???????-?????????? ? ?????????????." },
       ai_hub_day_pass: { title: "AI Hub ?? 1 ????", description: "?? ?????? 5 ?? ????????? 24 ???? ??????? ? AI Hub, ????? ??????????? ??????????? ?????????." },
       prompt_guide_pdf: { title: "PDF ? ????????? ??? ?????? ??", description: "???? ?? ?????? 5 ? ??? ??? ???? AI Hub, ?? ????????? PDF ? ?????????????? ????????? ??? ?????? ??." },
+      ai_hub_bonus_limits: { title: "???????? ????? AI Hub", description: "?? ?????? 7 ?????????? ? ??????? AI Hub ????????? 20 ?????????????? ???????? ? 5 ?????????????? ??????????? ? ???." },
     },
     level5LockedTitle: "??????? ?????? 5",
     level5LockedDescription: "?? ?????? 5 ?? ????????? 1 ???? AI Hub. ???? AI Hub ??? ???????, ?????? ????? ?? ???????? PDF ? ??????? ?????????.",
@@ -499,11 +510,13 @@ const REWARD_LEVELS = {
   newsletter_access: 3,
   ai_hub_day_pass: 5,
   prompt_guide_pdf: 5,
+  ai_hub_bonus_limits: 7,
 } as const;
 
 export const REWARD_MILESTONES = [
   { level: 3, keys: ["newsletter_access"] as const },
   { level: 5, keys: ["ai_hub_day_pass", "prompt_guide_pdf"] as const },
+  { level: 7, keys: ["ai_hub_bonus_limits"] as const },
 ] as const;
 
 const interpolate = (template: string, values: Record<string, string | number>) => {
@@ -519,7 +532,12 @@ export const normalizeRewardLocale = (language?: string): RewardLocale => {
 
 export const getLevelRewardsCopy = (language?: string) => COPY_BY_LOCALE[normalizeRewardLocale(language)];
 export const getRewardLevel = (rewardKey: LevelRewardKey) => REWARD_LEVELS[rewardKey];
-export const getRewardDetails = (rewardKey: LevelRewardKey, language?: string) => getLevelRewardsCopy(language).rewardMap[rewardKey];
+export const getRewardDetails = (rewardKey: LevelRewardKey, language?: string) =>
+  getLevelRewardsCopy(language).rewardMap[rewardKey] ||
+  COPY_BY_LOCALE.en.rewardMap[rewardKey] || {
+    title: rewardKey,
+    description: rewardKey,
+  };
 export const getRewardTitleList = (rewardKeys: LevelRewardKey[], language?: string) => rewardKeys.map((rewardKey) => getRewardDetails(rewardKey, language).title);
 export const getUnlockedRewardForMilestone = (rewards: LevelRewardRow[], milestoneLevel: number) => rewards.find((reward) => reward.source_level === milestoneLevel) || null;
 export const getLevelTitle = (level: number, language?: string) => `${getLevelRewardsCopy(language).levelLabel} ${level}`;

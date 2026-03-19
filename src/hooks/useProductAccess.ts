@@ -1,13 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { hasWhitelistedAiHubAccess } from '@/lib/aiHubConfig';
 
 export type ProductType = 'base' | 'freelancer' | 'ai_hub';
-
-const AI_HUB_WHITELIST = [
-  'ferramentasdigitais1000@gmail.com',
-  'felip@gmailcom',
-  'acess@nuvei.com'
-];
 
 interface ProductAccessState {
   base: boolean;
@@ -39,9 +34,7 @@ export const useProductAccess = () => {
       }
 
       const userEmail = user.email?.toLowerCase() || '';
-      const hasAiHubAccess = AI_HUB_WHITELIST.some(
-        email => email.toLowerCase() === userEmail
-      );
+      const hasAiHubAccess = hasWhitelistedAiHubAccess(userEmail);
 
       const { data, error } = await supabase.rpc('get_user_products');
 

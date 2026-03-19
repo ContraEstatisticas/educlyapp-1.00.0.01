@@ -33,6 +33,7 @@ const iconByReward: Record<LevelRewardKey, typeof Mail> = {
   newsletter_access: Mail,
   ai_hub_day_pass: Brain,
   prompt_guide_pdf: FileText,
+  ai_hub_bonus_limits: Sparkles,
 };
 
 export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
@@ -41,7 +42,7 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
   const { i18n } = useTranslation();
   const { currentLevel, currentXPInLevel, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
   const { data: rewards = [], isLoading } = useLevelRewards();
-  const { freelancer } = useProductAccess();
+  const { freelancer, ai_hub } = useProductAccess();
 
   const copy = getLevelRewardsCopy(i18n.resolvedLanguage || i18n.language);
   const language = i18n.resolvedLanguage || i18n.language;
@@ -159,6 +160,10 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
               isUnlocked &&
               rewardKey === "newsletter_access" &&
               (!freelancer || rewardStatus === "requires_freelancer");
+            const aiHubBonusRequiresHub =
+              isUnlocked &&
+              rewardKey === "ai_hub_bonus_limits" &&
+              (!ai_hub || rewardStatus === "requires_ai_hub");
 
             return (
               <div
@@ -252,6 +257,19 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
                         {copy.downloadGuideLabel}
                         <Sparkles className="ml-2 h-4 w-4" />
                       </a>
+                    </Button>
+                  </div>
+                )}
+
+                {isUnlocked && rewardKey === "ai_hub_bonus_limits" && (
+                  <div className="mt-4">
+                    <Button
+                      onClick={() => navigate("/assistentes")}
+                      variant={aiHubBonusRequiresHub ? "outline" : "default"}
+                      className="w-full rounded-xl"
+                    >
+                      {copy.openAiHubLabel}
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
                 )}

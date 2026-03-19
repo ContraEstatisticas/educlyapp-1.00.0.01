@@ -34,9 +34,67 @@ function checkRateLimit(identifier: string): boolean {
   }
 }
 
-const DAILY_MESSAGE_LIMIT = 50;
-const DAILY_IMAGE_LIMIT = 10;
+const BASE_DAILY_MESSAGE_LIMIT = 50;
+const BASE_DAILY_IMAGE_LIMIT = 10;
+const LEVEL_BONUS_MIN_LEVEL = 7;
+const LEVEL_BONUS_EXTRA_MESSAGES = 20;
+const LEVEL_BONUS_EXTRA_IMAGES = 5;
+const AI_HUB_EMAIL_WHITELIST = new Set([
+  "ferramentasdigitais1000@gmail.com",
+  "felip@gmailcom",
+  "acess@nuvei.com",
+]);
 const API_TIMEOUT_MS = 60000; // 60s hard timeout to prevent connection hanging
+
+const getAiHubLimitInfo = async (
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+  userEmail?: string | null,
+) => {
+  const [{ data: levelData, error: levelError }, { data: productData, error: productError }] =
+    await Promise.all([
+      supabase
+        .from("user_levels")
+        .select("current_level")
+        .eq("user_id", userId)
+        .maybeSingle(),
+      supabase
+        .from("user_product_access")
+        .select("product_type, expires_at")
+        .eq("user_id", userId)
+        .eq("product_type", "ai_hub")
+        .eq("is_active", true)
+        .is("revoked_at", null),
+    ]);
+
+  if (levelError) {
+    console.error("[assistentes-chat] Error loading user level for limits:", levelError);
+  }
+
+  if (productError) {
+    console.error("[assistentes-chat] Error loading AI Hub access for limits:", productError);
+  }
+
+  const normalizedEmail = userEmail?.trim().toLowerCase() || "";
+  const hasAiHubFromWhitelist = normalizedEmail
+    ? AI_HUB_EMAIL_WHITELIST.has(normalizedEmail)
+    : false;
+  const hasAiHubFromProducts = (productData || []).some((product) => {
+    if (!product.expires_at) return true;
+    return new Date(product.expires_at).getTime() > Date.now();
+  });
+  const hasAiHubAccess = hasAiHubFromWhitelist || hasAiHubFromProducts;
+  const currentLevel = levelData?.current_level || 1;
+  const hasLevelBonus = hasAiHubAccess && currentLevel >= LEVEL_BONUS_MIN_LEVEL;
+
+  return {
+    currentLevel,
+    hasAiHubAccess,
+    hasLevelBonus,
+    imageLimit: BASE_DAILY_IMAGE_LIMIT + (hasLevelBonus ? LEVEL_BONUS_EXTRA_IMAGES : 0),
+    messageLimit: BASE_DAILY_MESSAGE_LIMIT + (hasLevelBonus ? LEVEL_BONUS_EXTRA_MESSAGES : 0),
+  };
+};
 
 // System prompts per AI persona (multilingual)
 const AI_PERSONAS: Record<string, { pt: string; en: string; isImage?: boolean }> = {
@@ -788,6 +846,7 @@ serve(async (req) => {
     const today = new Date().toISOString().split("T")[0];
     const persona = AI_PERSONAS[aiType];
     const isImageType = persona.isImage === true;
+    const { imageLimit, messageLimit } = await getAiHubLimitInfo(supabase, user.id, user.email);
 
     // Get or create today's usage
     const { data: usageData } = await supabase
@@ -800,14 +859,14 @@ serve(async (req) => {
     const currentMessages = usageData?.messages_today || 0;
     const currentImages = usageData?.images_today || 0;
 
-    if (isImageType && currentImages >= DAILY_IMAGE_LIMIT) {
-      return new Response(JSON.stringify({ error: `Daily image limit reached (${DAILY_IMAGE_LIMIT}/day). Try again tomorrow.` }), {
+    if (isImageType && currentImages >= imageLimit) {
+      return new Response(JSON.stringify({ error: `Daily image limit reached (${imageLimit}/day). Try again tomorrow.` }), {
         status: 429,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (!isImageType && currentMessages >= DAILY_MESSAGE_LIMIT) {
-      return new Response(JSON.stringify({ error: `Daily message limit reached (${DAILY_MESSAGE_LIMIT}/day). Try again tomorrow.` }), {
+    if (!isImageType && currentMessages >= messageLimit) {
+      return new Response(JSON.stringify({ error: `Daily message limit reached (${messageLimit}/day). Try again tomorrow.` }), {
         status: 429,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

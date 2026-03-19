@@ -18,6 +18,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import type { Database } from "@/integrations/supabase/types";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import {
+  AI_HUB_BASE_DAILY_IMAGE_LIMIT,
+  AI_HUB_BASE_DAILY_MESSAGE_LIMIT,
+  getAiHubDailyLimits,
+  hasWhitelistedAiHubAccess,
+} from "@/lib/aiHubConfig";
 
 import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
 
@@ -27,8 +33,6 @@ interface Message {
   content: string;
 }
 
-const DAILY_MESSAGE_LIMIT = 50;
-const DAILY_IMAGE_LIMIT = 10;
 const MAX_CONTEXT_MESSAGES = 24;
 const GREETING_MESSAGE_ID = "greeting";
 const AI_HUB_CHAT_CONTEXT = "assistentes_hub";
@@ -125,6 +129,8 @@ const AssistentesContent = () => {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [usageToday, setUsageToday] = useState(0);
   const [imagesUsed, setImagesUsed] = useState(0);
+  const [messageLimit, setMessageLimit] = useState(AI_HUB_BASE_DAILY_MESSAGE_LIMIT);
+  const [imageLimit, setImageLimit] = useState(AI_HUB_BASE_DAILY_IMAGE_LIMIT);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -144,16 +150,44 @@ const AssistentesContent = () => {
       if (!user) { navigate("/auth"); return; }
       setCurrentUserId(user.id);
       const today = new Date().toISOString().split("T")[0];
-      const { data } = await supabase
-        .from("ai_hub_usage")
-        .select("messages_today, images_today")
-        .eq("user_id", user.id)
-        .eq("date", today)
-        .maybeSingle();
-      if (data) {
-        setUsageToday(data.messages_today);
-        setImagesUsed(data.images_today);
+      const [{ data: usageData, error: usageError }, { data: products, error: productsError }, { data: levelData, error: levelError }] = await Promise.all([
+        supabase
+          .from("ai_hub_usage")
+          .select("messages_today, images_today")
+          .eq("user_id", user.id)
+          .eq("date", today)
+          .maybeSingle(),
+        supabase.rpc("get_user_products"),
+        supabase
+          .from("user_levels")
+          .select("current_level")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+      ]);
+
+      if (usageError) {
+        console.error("Error loading AI Hub usage:", usageError);
       }
+
+      if (productsError) {
+        console.error("Error loading AI Hub products:", productsError);
+      }
+
+      if (levelError) {
+        console.error("Error loading user level for AI Hub limits:", levelError);
+      }
+
+      setUsageToday(usageData?.messages_today || 0);
+      setImagesUsed(usageData?.images_today || 0);
+
+      const hasAiHubAccess =
+        hasWhitelistedAiHubAccess(user.email) ||
+        (products || []).some((product) => product.product_type === "ai_hub");
+      const currentLevel = levelData?.current_level || 1;
+      const limits = getAiHubDailyLimits({ currentLevel, hasAiHubAccess });
+
+      setMessageLimit(limits.messageLimit);
+      setImageLimit(limits.imageLimit);
     };
     init();
   }, [navigate]);
@@ -490,8 +524,8 @@ const AssistentesContent = () => {
       onModeChange={handleModeChange}
       usageToday={usageToday}
       imagesUsed={imagesUsed}
-      messageLimit={DAILY_MESSAGE_LIMIT}
-      imageLimit={DAILY_IMAGE_LIMIT}
+      messageLimit={messageLimit}
+      imageLimit={imageLimit}
     />
   );
 
@@ -545,8 +579,8 @@ const AssistentesContent = () => {
               {/* Usage pill */}
               <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full hidden sm:block">
                 {mode === "creative"
-                  ? `🎨 ${imagesUsed}/${DAILY_IMAGE_LIMIT}`
-                  : `💬 ${usageToday}/${DAILY_MESSAGE_LIMIT}`}
+                  ? `🎨 ${imagesUsed}/${imageLimit}`
+                  : `💬 ${usageToday}/${messageLimit}`}
               </div>
               <Button
                 variant="outline"
