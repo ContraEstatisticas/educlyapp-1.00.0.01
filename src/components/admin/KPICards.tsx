@@ -417,7 +417,7 @@ export const KPICards = () => {
 
       // Average First Session Time (via RPC no banco)
       const { data: avgFirstSession } = await supabase
-        .rpc('get_avg_first_session_minutes' as any);
+        .rpc('get_avg_first_session_minutes');
 
       const avgSessionMinutes = avgFirstSession
         ? Number(avgFirstSession).toFixed(1)
@@ -555,7 +555,7 @@ export const KPICards = () => {
               icon={<Clock className="h-5 w-5" />}
               color="info"
               description="CSV de Novos Usuários"
-              tooltip="Média real, em minutos, da primeira sessão válida registrada por usuário desde o novo rollout de rastreamento em 18/03/2026. Clique para baixar o relatório do primeiro acesso."
+              tooltip="Média, em minutos, apenas do primeiro uso ativo de contas novas criadas desde 19/03/2026 às 17:30 em America/Sao_Paulo. O tempo só conta com interação e encerra após 30 segundos sem atividade. Clique para baixar o relatório do primeiro acesso."
             />
           </div>
           <AdminKPICard

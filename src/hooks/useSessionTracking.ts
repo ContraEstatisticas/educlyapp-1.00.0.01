@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-const SESSION_PING_INTERVAL_MS = 15000;
-const FIRST_SESSION_PING_DELAY_MS = 5000;
+const SESSION_IDLE_TIMEOUT_MS = 30000;
 const MIN_PING_GAP_MS = 5000;
 
 const SESSION_USER_STORAGE_KEY = "educly:session-tracker:user-id";
@@ -11,10 +10,13 @@ const SESSION_BROWSER_KEY_STORAGE = "educly:session-tracker:browser-key";
 
 type PingOptions = {
   force?: boolean;
+  pingAtMs?: number;
   useKeepalive?: boolean;
 };
 
 type FinishOptions = {
+  clearPersisted?: boolean;
+  endedAtMs?: number;
   force?: boolean;
   useKeepalive?: boolean;
 };
@@ -34,25 +36,21 @@ export const useSessionTracking = () => {
   const sessionIdRef = useRef<string | null>(null);
   const clientSessionKeyRef = useRef<string | null>(null);
   const accessTokenRef = useRef<string | null>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const firstPingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const inactivityTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isStartingSessionRef = useRef(false);
   const isUpdatingRef = useRef(false);
   const hasStartedSessionRef = useRef(false);
   const lastDispatchedPingAtRef = useRef(0);
+  const lastInteractionAtRef = useRef<number | null>(null);
 
   useEffect(() => {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-    const clearPingTimers = () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-
-      if (firstPingTimeoutRef.current) {
-        clearTimeout(firstPingTimeoutRef.current);
-        firstPingTimeoutRef.current = null;
+    const clearInactivityTimer = () => {
+      if (inactivityTimeoutRef.current) {
+        clearTimeout(inactivityTimeoutRef.current);
+        inactivityTimeoutRef.current = null;
       }
     };
 
@@ -65,12 +63,14 @@ export const useSessionTracking = () => {
     };
 
     const resetSessionTracking = ({ clearPersisted = false }: { clearPersisted?: boolean } = {}) => {
-      clearPingTimers();
+      clearInactivityTimer();
       sessionIdRef.current = null;
       clientSessionKeyRef.current = null;
       hasStartedSessionRef.current = false;
+      isStartingSessionRef.current = false;
       isUpdatingRef.current = false;
       lastDispatchedPingAtRef.current = 0;
+      lastInteractionAtRef.current = null;
 
       if (clearPersisted) {
         clearPersistedSessionState();
@@ -126,7 +126,7 @@ export const useSessionTracking = () => {
     };
 
     const dispatchKeepaliveRequest = (
-      rpcName: string,
+      rpcName: "ping_user_session" | "finish_user_session",
       payload: Record<string, unknown>,
     ) => {
       if (!canUseKeepaliveRequest() || !accessTokenRef.current) {
@@ -153,11 +153,15 @@ export const useSessionTracking = () => {
       }
     };
 
-    const updateSessionPing = async ({ force = false, useKeepalive = false }: PingOptions = {}) => {
+    const updateSessionPing = async ({
+      force = false,
+      pingAtMs,
+      useKeepalive = false,
+    }: PingOptions = {}) => {
       const currentSessionId = sessionIdRef.current;
       if (!currentSessionId) return;
 
-      const now = Date.now();
+      const now = pingAtMs ?? Date.now();
       if (!force && now - lastDispatchedPingAtRef.current < MIN_PING_GAP_MS) {
         return;
       }
@@ -182,7 +186,7 @@ export const useSessionTracking = () => {
       lastDispatchedPingAtRef.current = now;
 
       try {
-        const { error } = await (supabase.rpc as any)("ping_user_session", {
+        const { error } = await supabase.rpc("ping_user_session", {
           p_session_id: currentSessionId,
           p_ping_at: timestamp,
         });
@@ -197,11 +201,16 @@ export const useSessionTracking = () => {
       }
     };
 
-    const finishSession = async ({ force = false, useKeepalive = false }: FinishOptions = {}) => {
+    const finishSession = async ({
+      clearPersisted = false,
+      endedAtMs,
+      force = false,
+      useKeepalive = false,
+    }: FinishOptions = {}) => {
       const currentSessionId = sessionIdRef.current;
       if (!currentSessionId) return;
 
-      const now = Date.now();
+      const now = endedAtMs ?? Date.now();
       if (!force && now - lastDispatchedPingAtRef.current < MIN_PING_GAP_MS) {
         return;
       }
@@ -216,17 +225,21 @@ export const useSessionTracking = () => {
 
         if (keepaliveSent) {
           lastDispatchedPingAtRef.current = now;
+          resetSessionTracking({ clearPersisted });
           return;
         }
       }
 
-      if (isUpdatingRef.current) return;
+      if (isUpdatingRef.current) {
+        resetSessionTracking({ clearPersisted });
+        return;
+      }
 
       isUpdatingRef.current = true;
       lastDispatchedPingAtRef.current = now;
 
       try {
-        const { error } = await (supabase.rpc as any)("finish_user_session", {
+        const { error } = await supabase.rpc("finish_user_session", {
           p_session_id: currentSessionId,
           p_ended_at: timestamp,
         });
@@ -238,27 +251,31 @@ export const useSessionTracking = () => {
         console.error("Erro ao finalizar sessao:", error);
       } finally {
         isUpdatingRef.current = false;
+        resetSessionTracking({ clearPersisted });
       }
     };
 
-    const scheduleSessionPings = () => {
-      clearPingTimers();
+    const scheduleInactivityTimeout = (interactionAtMs: number) => {
+      clearInactivityTimer();
 
-      firstPingTimeoutRef.current = setTimeout(() => {
-        if (document.visibilityState === "visible") {
-          void updateSessionPing({ force: true });
-        }
-      }, FIRST_SESSION_PING_DELAY_MS);
+      inactivityTimeoutRef.current = setTimeout(() => {
+        const lastInteractionAt = lastInteractionAtRef.current;
+        if (!sessionIdRef.current || lastInteractionAt == null) return;
 
-      intervalRef.current = setInterval(() => {
-        if (document.visibilityState === "visible") {
-          void updateSessionPing();
-        }
-      }, SESSION_PING_INTERVAL_MS);
+        void finishSession({
+          clearPersisted: true,
+          endedAtMs: lastInteractionAt + SESSION_IDLE_TIMEOUT_MS,
+          force: true,
+        });
+      }, SESSION_IDLE_TIMEOUT_MS);
+
+      lastInteractionAtRef.current = interactionAtMs;
     };
 
-    const startSession = async () => {
-      if (hasStartedSessionRef.current) return;
+    const startSession = async (startedAtMs: number) => {
+      if (hasStartedSessionRef.current || isStartingSessionRef.current) return;
+
+      isStartingSessionRef.current = true;
 
       try {
         const {
@@ -268,22 +285,20 @@ export const useSessionTracking = () => {
         const user = session?.user;
         if (!user) {
           setAccessToken(null);
+          resetSessionTracking({ clearPersisted: true });
           return;
         }
 
         setAccessToken(session.access_token);
 
         const { clientSessionKey, existingSessionId } = getPersistedSessionState(user.id);
-        const timestamp = new Date().toISOString();
+        const timestamp = new Date(startedAtMs).toISOString();
 
-        const { data, error } = await (supabase.rpc as any)(
-          "start_or_resume_user_session",
-          {
-            p_client_session_key: clientSessionKey,
-            p_started_at: timestamp,
-            p_existing_session_id: existingSessionId,
-          },
-        );
+        const { data, error } = await supabase.rpc("start_or_resume_user_session", {
+          p_client_session_key: clientSessionKey,
+          p_existing_session_id: existingSessionId ?? undefined,
+          p_started_at: timestamp,
+        });
 
         if (error || !data) {
           console.error("Erro ao iniciar sessao:", error);
@@ -293,37 +308,67 @@ export const useSessionTracking = () => {
         sessionIdRef.current = data;
         clientSessionKeyRef.current = clientSessionKey;
         hasStartedSessionRef.current = true;
-        lastDispatchedPingAtRef.current = Date.now();
+        lastDispatchedPingAtRef.current = startedAtMs;
         persistSessionState(user.id, data, clientSessionKey);
-        scheduleSessionPings();
       } catch (error) {
         console.error("Erro no rastreamento de sessao:", error);
+      } finally {
+        isStartingSessionRef.current = false;
+      }
+    };
+
+    const registerInteraction = async () => {
+      if (document.visibilityState !== "visible") return;
+
+      const interactionAtMs = Date.now();
+      scheduleInactivityTimeout(interactionAtMs);
+
+      if (!sessionIdRef.current) {
+        if (!hasStartedSessionRef.current && !isStartingSessionRef.current) {
+          await startSession(interactionAtMs);
+        }
+        return;
+      }
+
+      await updateSessionPing({ pingAtMs: interactionAtMs });
+    };
+
+    const initializeAuthState = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      setAccessToken(session?.access_token);
+
+      if (!session?.user) {
+        resetSessionTracking({ clearPersisted: true });
       }
     };
 
     const handleVisibilityChange = () => {
-      if (!sessionIdRef.current) return;
+      if (document.visibilityState !== "hidden" || !sessionIdRef.current) return;
 
-      if (document.visibilityState === "hidden") {
-        void updateSessionPing({ force: true, useKeepalive: true });
-        return;
-      }
-
-      void updateSessionPing({ force: true });
-    };
-
-    const handleWindowFocus = () => {
-      if (document.visibilityState !== "visible") return;
-      void updateSessionPing({ force: true });
+      void finishSession({
+        clearPersisted: true,
+        endedAtMs: Date.now(),
+        force: true,
+        useKeepalive: true,
+      });
     };
 
     const handleUserActivity = () => {
-      if (document.visibilityState !== "visible") return;
-      void updateSessionPing();
+      void registerInteraction();
     };
 
     const handlePageHide = () => {
-      void finishSession({ force: true, useKeepalive: true });
+      if (!sessionIdRef.current) return;
+
+      void finishSession({
+        clearPersisted: true,
+        endedAtMs: Date.now(),
+        force: true,
+        useKeepalive: true,
+      });
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -331,18 +376,12 @@ export const useSessionTracking = () => {
 
       if (!session?.user) {
         resetSessionTracking({ clearPersisted: true });
-        return;
-      }
-
-      if (!sessionIdRef.current && !hasStartedSessionRef.current) {
-        void startSession();
       }
     });
 
-    void startSession();
+    void initializeAuthState();
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleWindowFocus);
     window.addEventListener("pagehide", handlePageHide);
     window.addEventListener("beforeunload", handlePageHide);
     window.addEventListener("pointerdown", handleUserActivity, { passive: true });
@@ -351,10 +390,9 @@ export const useSessionTracking = () => {
     window.addEventListener("scroll", handleUserActivity, { passive: true });
 
     return () => {
-      clearPingTimers();
+      clearInactivityTimer();
       authListener.subscription.unsubscribe();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleWindowFocus);
       window.removeEventListener("pagehide", handlePageHide);
       window.removeEventListener("beforeunload", handlePageHide);
       window.removeEventListener("pointerdown", handleUserActivity);
@@ -363,7 +401,12 @@ export const useSessionTracking = () => {
       window.removeEventListener("scroll", handleUserActivity);
 
       if (sessionIdRef.current) {
-        void finishSession({ force: true, useKeepalive: true });
+        void finishSession({
+          clearPersisted: true,
+          endedAtMs: Date.now(),
+          force: true,
+          useKeepalive: true,
+        });
       }
     };
   }, []);
