@@ -325,6 +325,22 @@ const handler = async (req: Request): Promise<Response> => {
     if (insertError) {
       console.error("Error recording attempt:", insertError);
     }
+
+    // --- PURCHASE CHECK ---
+    const { data: hasPurchase, error: purchaseError } = await supabase.rpc("check_purchase_exists", { p_email: normalizedEmail });
+    
+    if (purchaseError) {
+      console.error("Error checking purchase:", purchaseError);
+      // If RPC fails (maybe not public/service role accessible?), proceed with standard logic
+    } else if (hasPurchase === false) {
+      console.warn(`No purchase found for ${normalizedEmail}. blocking reset.`);
+      return new Response(JSON.stringify({ 
+        error: "Nao encontramos uma compra vinculada a este e-mail. Por favor, utilize o mesmo e-mail usado no ato da compra ou entre em contato com nosso suporte: contact@educly.app" 
+      }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     // --------------------------------------------------------
 
     const redirectUrl = "https://educly.app/update-password";
