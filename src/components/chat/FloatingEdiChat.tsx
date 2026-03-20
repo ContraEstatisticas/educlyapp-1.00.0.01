@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { toast } from "sonner";
-import mascoteEducy from "@/assets/edi-mascote.png";
+import mascoteEducly from "@/assets/edi-mascote.png";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
@@ -35,7 +35,7 @@ export const FloatingEdiChat = () => {
 
   useEffect(() => {
     if (isOpen && !hasGreeted) {
-      const greeting = t("supportChat.greeting", "Olá! 👋 Eu sou o assistente da Educy. Estou aqui para te ajudar a praticar o uso de ferramentas de IA. Como posso te ajudar hoje?");
+      const greeting = t("supportChat.greeting", "Olá! 👋 Eu sou o assistente da Educly. Estou aqui para te ajudar a praticar o uso de ferramentas de IA. Como posso te ajudar hoje?");
       setMessages([{ role: "assistant", content: greeting }]);
       setHasGreeted(true);
     }
@@ -178,9 +178,9 @@ export const FloatingEdiChat = () => {
           "overflow-hidden",
           isOpen && "hidden",
         )}
-        aria-label="Open Educy chat"
+        aria-label="Open Educly chat"
       >
-        <img src={mascoteEducy} alt="Educy" className="w-full h-full object-cover" />
+        <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
         {/* Removido: animate-pulse da bolinha verde */}
         <span
           style={{ animation: "none" }}
@@ -202,7 +202,7 @@ export const FloatingEdiChat = () => {
             <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-primary to-accent text-white">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white overflow-hidden flex items-center justify-center">
-                  <img src={mascoteEducy} alt="Educy" className="w-full h-full object-cover" />
+                  <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">EDI</h3>
@@ -230,14 +230,14 @@ export const FloatingEdiChat = () => {
                   role={msg.role}
                   content={msg.content}
                   isStreaming={isLoading && index === messages.length - 1 && msg.role === "assistant"}
-                  avatarUrl={msg.role === "assistant" ? mascoteEducy : undefined}
+                  avatarUrl={msg.role === "assistant" ? mascoteEducly : undefined}
                 />
               ))}
               {/* Typing Indicator - 3 dots animation */}
               {isLoading && messages[messages.length - 1]?.role === "user" && (
                 <div className="flex gap-2 sm:gap-3 flex-row animate-fade-in">
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-white">
-                    <img src={mascoteEducy} alt="EDI" className="w-full h-full object-cover" />
+                    <img src={mascoteEducly} alt="EDI" className="w-full h-full object-cover" />
                   </div>
                   <div className="bg-muted text-foreground rounded-2xl rounded-bl-md px-4 py-3">
                     <div className="flex items-center gap-1.5">

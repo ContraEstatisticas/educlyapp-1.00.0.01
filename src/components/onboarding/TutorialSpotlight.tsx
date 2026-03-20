@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import mascoteEducy from "@/assets/mascote-educy.png";
+import mascoteEducly from "@/assets/mascote-educly.png";
 import { ChevronRight, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -309,8 +309,8 @@ export const TutorialSpotlight = ({
         >
           <div className="relative flex-shrink-0">
             <img
-              src={mascoteEducy}
-              alt="Educy - Assistente"
+              src={mascoteEducly}
+              alt="Educly - Assistente"
               className={`object-contain drop-shadow-2xl ${isMobile ? "w-16 h-16" : "w-24 h-24 sm:w-32 sm:h-32"}`}
             />
           </div>

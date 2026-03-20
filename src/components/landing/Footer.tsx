@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Youtube, Twitter } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logoEducy from "@/assets/logo-educy.png";
+import logoEducly from "@/assets/logo-educly.png";
 const socialLinks = [
   {
     icon: Instagram,
@@ -117,7 +117,7 @@ export const Footer = () => {
           {/* Logo & Description */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="inline-block mb-4">
-              <img src={logoEducy} alt="Educy" className="h-8" />
+              <img src={logoEducly} alt="Educly" className="h-8" />
             </Link>
             <p className="text-secondary-foreground/70 text-sm mb-4">{t("landing.footer.description")}</p>
             <p className="text-secondary-foreground/70 text-sm">

@@ -38,8 +38,8 @@ export default defineConfig(({ mode }) => ({
       registerType: "prompt", // Changed to prompt for manual update control
       includeAssets: ["favicon.ico", "robots.txt", "apple-touch-icon.png"],
       manifest: {
-        name: "Educy - Formando Líderes em IA",
-        short_name: "Educy",
+        name: "Educly - Formando Líderes em IA",
+        short_name: "Educly",
         description: "A plataforma líder em educação de Inteligência Artificial. Domine ChatGPT, Claude, Lovable e mais ferramentas.",
         theme_color: "#0D2837",
         background_color: "#FFFFFF",

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { toast } from "sonner";
-import mascoteEducy from "@/assets/mascote-educy.png";
+import mascoteEducly from "@/assets/mascote-educly.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -153,7 +153,7 @@ export const FloatingSupportChat = () => {
         )}
         aria-label="Open support chat"
       >
-        <img src={mascoteEducy} alt="Educy" className="w-full h-full object-cover" />
+        <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
         {/* Removi animate-pulse daqui também */}
         <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white" />
       </button>
@@ -173,7 +173,7 @@ export const FloatingSupportChat = () => {
             <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-primary to-accent text-white">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white overflow-hidden flex items-center justify-center">
-                  <img src={mascoteEducy} alt="Educy" className="w-full h-full object-cover" />
+                  <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">EDI</h3>
@@ -201,7 +201,7 @@ export const FloatingSupportChat = () => {
                   role={msg.role}
                   content={msg.content}
                   isStreaming={isLoading && index === messages.length - 1 && msg.role === "assistant"}
-                  avatarUrl={msg.role === "assistant" ? mascoteEducy : undefined}
+                  avatarUrl={msg.role === "assistant" ? mascoteEducly : undefined}
                 />
               ))}
               <div ref={messagesEndRef} />

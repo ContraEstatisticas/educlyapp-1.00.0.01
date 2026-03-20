@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { ChevronRight, Lightbulb, Sparkles, X } from "lucide-react";
-import mascoteEdi from "@/assets/mascote-educy.png";
+import mascoteEdi from "@/assets/mascote-educly.png";
 import { tUi } from "@/lib/supplementalUiTranslations";
 
 export interface EdiGuidedHelpStep {

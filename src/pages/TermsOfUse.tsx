@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Footer } from "@/components/landing/Footer";
 import { useTranslation } from "react-i18next";
-import logoEducy from "@/assets/logo-educy.png";
+import logoEducly from "@/assets/logo-educly.png";
 
 const TermsOfUse = () => {
   const { t } = useTranslation();
@@ -13,7 +13,7 @@ const TermsOfUse = () => {
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoEducy} alt="Educy" className="h-10" />
+            <img src={logoEducly} alt="Educly" className="h-10" />
           </Link>
           <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="w-4 h-4" />

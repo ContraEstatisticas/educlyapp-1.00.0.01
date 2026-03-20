@@ -1,6 +1,6 @@
 {
   "chat": {
-    "title": "Chat Educy",
+    "title": "Chat Educly",
     "practicing": "Praticando",
     "loading": "Carregando...",
     "greeting": {
@@ -19,7 +19,7 @@
       "sendError": "Erro ao enviar mensagem"
     },
     "premium": {
-      "title": "Chat Educy Premium",
+      "title": "Chat Educly Premium",
       "description": "Desbloqueie o chat com IA para praticar o que você aprendeu nas aulas",
       "unlock": "Desbloquear Acesso Premium",
       "backToDashboard": "Voltar ao Dashboard",
@@ -1498,12 +1498,12 @@
     "avancado": "Avançado"
   },
   "pwa": {
-    "title": "Instalar Educy",
+    "title": "Instalar Educly",
     "description": "Acesse mais rápido direto da sua tela inicial!",
     "install": "Instalar Agora",
     "installApp": "Instalar App",
     "installed": "Instalado",
-    "installTitle": "Instalar Educy",
+    "installTitle": "Instalar Educly",
     "installDescription": "Siga os passos abaixo para instalar o app:",
     "desktop": "Use o menu do navegador para instalar",
     "ios": {
@@ -1535,8 +1535,8 @@
     "daysLearning": "28 dias de aprendizado",
     "earnedOn": "Conquistado em",
     "download": "Baixar Certificado",
-    "shareTitle": "Meu Certificado Educy",
-    "shareText": "Completei o desafio {{challenge}} na Educy!",
+    "shareTitle": "Meu Certificado Educly",
+    "shareText": "Completei o desafio {{challenge}} na Educly!",
     "notFound": "Certificado não encontrado",
     "myCertificate": "Meu Certificado",
     "generating": "Gerando certificado...",
@@ -1596,7 +1596,7 @@
       "week4Theme": "Aplicação Profissional",
       "intro": "**Bem-vindo ao Dia {{day}}!** 🎯\n\nHoje você aprenderá sobre **{{tool}}** na Semana {{week}}: {{weekTheme}}.\n\n{{description}}\n\n⚠️ *Este conteúdo está em desenvolvimento. Aulas completas em breve!*",
       "aboutTool": "Sobre {{tool}}",
-      "toolInfo": "**{{tool}}** é uma ferramenta poderosa de IA.\n\n{{description}}\n\n**Foco de hoje:** {{focusArea}}\n\n💡 *Pratique no Chat Educy para consolidar seu aprendizado!*",
+      "toolInfo": "**{{tool}}** é uma ferramenta poderosa de IA.\n\n{{description}}\n\n**Foco de hoje:** {{focusArea}}\n\n💡 *Pratique no Chat Educly para consolidar seu aprendizado!*",
       "quizQuestion": "O que você aprendeu sobre {{tool}} hoje?",
       "wrongOption": "Ferramenta de edição de imagem"
     }

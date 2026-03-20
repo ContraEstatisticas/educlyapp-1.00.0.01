@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import logoEducy from "@/assets/logo-educy.png";
+import logoEducly from "@/assets/logo-educly.png";
 import { LanguageSelector } from "@/components/LanguageSelector";
 
 type NavbarVariant = "default" | "white";
@@ -39,7 +39,7 @@ export const LandingNavbar = ({ variant = "default" }: { variant?: NavbarVariant
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoEducy} alt="Educy" className="h-12 md:h-14" />
+            <img src={logoEducly} alt="Educly" className="h-12 md:h-14" />
           </Link>
 
           {/* Desktop Navigation */}

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { X, Sparkles, Flame, Trophy, Target, Zap, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
-import mascoteEdi from "@/assets/mascote-educy.png";
+import mascoteEdi from "@/assets/mascote-educly.png";
 
 interface EdiMotivationProps {
   /** Tipo de motivação */
