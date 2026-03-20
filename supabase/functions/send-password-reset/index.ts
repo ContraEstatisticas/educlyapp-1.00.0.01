@@ -310,9 +310,10 @@ const handler = async (req: Request): Promise<Response> => {
     } else if (count !== null && count >= 2) {
       console.warn(`Rate limit exceeded for ${normalizedEmail}: ${count} attempts since ${tenMinutesAgo}`);
       return new Response(JSON.stringify({ 
+        success: false,
         error: "Muitas tentativas enviadas. Por favor, aguarde 10 minutos antes de tentar novamente." 
       }), {
-        status: 429,
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -335,9 +336,10 @@ const handler = async (req: Request): Promise<Response> => {
     } else if (hasPurchase === false) {
       console.warn(`No purchase found for ${normalizedEmail}. blocking reset.`);
       return new Response(JSON.stringify({ 
+        success: false,
         error: "Nao encontramos uma compra vinculada a este e-mail. Por favor, utilize o mesmo e-mail usado no ato da compra ou entre em contato com nosso suporte: contact@educly.app" 
       }), {
-        status: 400,
+        status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }

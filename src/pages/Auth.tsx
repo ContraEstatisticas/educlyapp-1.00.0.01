@@ -182,12 +182,21 @@ const Auth = () => {
     setIsResetLoading(true);
 
     try {
-      const { error } = await supabase.functions.invoke("send-password-reset", {
+      const { data, error } = await supabase.functions.invoke("send-password-reset", {
         body: { email: resetEmail },
       });
 
       if (error) {
         throw error;
+      }
+
+      if (data?.success === false || data?.error) {
+        toast({
+          title: t("auth.error"),
+          description: data.error || t("common.error"),
+          variant: "destructive",
+        });
+        return;
       }
 
       setLastResetEmail(resetEmail.trim().toLowerCase());
