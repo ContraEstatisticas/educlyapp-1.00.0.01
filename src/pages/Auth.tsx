@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Sparkles, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Sparkles, Mail, Lock, ArrowLeft, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -42,6 +42,8 @@ const Auth = () => {
   const [isResetLoading, setIsResetLoading] = useState(false);
   const [isResetSuccessDialogOpen, setIsResetSuccessDialogOpen] = useState(false);
   const [lastResetEmail, setLastResetEmail] = useState("");
+  const [isResetErrorDialogOpen, setIsResetErrorDialogOpen] = useState(false);
+  const [resetErrorMessage, setResetErrorMessage] = useState("");
 
   const [isLoginErrorDialogOpen, setIsLoginErrorDialogOpen] = useState(false);
   const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService" | "unconfirmed">("invalid");
@@ -191,11 +193,8 @@ const Auth = () => {
       }
 
       if (data?.success === false || data?.error) {
-        toast({
-          title: t("auth.error"),
-          description: data.error || t("common.error"),
-          variant: "destructive",
-        });
+        setResetErrorMessage(data.error || t("common.error"));
+        setIsResetErrorDialogOpen(true);
         return;
       }
 
@@ -585,6 +584,25 @@ const Auth = () => {
           </DialogHeader>
           <DialogFooter>
             <Button type="button" onClick={() => setIsResetSuccessDialogOpen(false)} className="w-full sm:w-auto">
+              {t("common.ok", "OK")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isResetErrorDialogOpen} onOpenChange={setIsResetErrorDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-destructive flex items-center gap-2 font-bold">
+              <AlertCircle className="w-5 h-5" />
+              {t("common.error")}
+            </DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed pt-2">
+              {resetErrorMessage}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button type="button" onClick={() => setIsResetErrorDialogOpen(false)} className="w-full">
               {t("common.ok", "OK")}
             </Button>
           </DialogFooter>
