@@ -356,7 +356,7 @@ export function DailyMissionsModal({ open, onOpenChange }: DailyMissionsModalPro
     const nextDailyClaims: Record<string, boolean> = {};
     const nextJourneyClaims: Record<string, boolean> = {};
 
-    ((claimRows as MissionClaimRow[]) || []).forEach((row) => {
+    ((claimRows as unknown as MissionClaimRow[]) || []).forEach((row) => {
       if (row.period_key === todayKey) {
         nextDailyClaims[row.mission_key] = true;
       }
