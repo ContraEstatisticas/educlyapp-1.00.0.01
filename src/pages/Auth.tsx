@@ -4,6 +4,7 @@ import { Sparkles, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { ModeToggle } from "@/components/ModeToggle";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -302,7 +303,8 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background safe-area-inset">
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 pt-safe">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 pt-safe flex items-center gap-2">
+        <ModeToggle />
         <LanguageSelector />
       </div>
 
@@ -388,7 +390,7 @@ const Auth = () => {
                 <Button
                   variant="link"
                   size="sm"
-                  className="px-0 h-auto text-xs text-muted-foreground hover:text-primary"
+                  className="px-0 h-auto text-sm font-semibold text-primary hover:text-primary/80"
                   onClick={() => {
                     setResetEmail(email);
                     setIsResetDialogOpen(true);
@@ -535,7 +537,7 @@ const Auth = () => {
             <Button
               type="button"
               variant="outline"
-              className="w-full"
+              className="w-full border-primary/30 text-primary hover:bg-primary/5 font-semibold"
               onClick={() => {
                 setResetEmail(email.trim());
                 setIsLoginErrorDialogOpen(false);

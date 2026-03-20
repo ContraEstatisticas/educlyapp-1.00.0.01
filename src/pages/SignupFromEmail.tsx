@@ -11,6 +11,7 @@ import { createPurchasedAccount } from "@/lib/purchasedSignup";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { ModeToggle } from "@/components/ModeToggle";
 
 const isValidEmail = (email: string) => {
   if (!email) return false;
@@ -162,7 +163,10 @@ const SignupFromEmail = () => {
   if (!emailParam) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-background">
-        <div className="absolute top-4 right-4 z-50"><LanguageSelector /></div>
+        <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+        <ModeToggle />
+        <LanguageSelector />
+      </div>
         <Card className="p-8 max-w-md w-full text-center space-y-6">
           <h2 className="text-xl font-bold text-foreground">{t("signupFromEmail.invalidLink", "Link inválido")}</h2>
           <p className="text-muted-foreground">
@@ -188,7 +192,10 @@ const SignupFromEmail = () => {
   if (hasAccount) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-background">
-        <div className="absolute top-4 right-4 z-50"><LanguageSelector /></div>
+        <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+        <ModeToggle />
+        <LanguageSelector />
+      </div>
         <Card className="p-8 max-w-md w-full text-center space-y-6">
           <div className="flex justify-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
@@ -210,7 +217,10 @@ const SignupFromEmail = () => {
   if (hasPurchase === false) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-background">
-        <div className="absolute top-4 right-4 z-50"><LanguageSelector /></div>
+        <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+        <ModeToggle />
+        <LanguageSelector />
+      </div>
         <Card className="p-8 max-w-md w-full text-center space-y-6">
           <h2 className="text-xl font-bold text-foreground">{t("signupFromEmail.purchaseNotFound", "Compra não localizada")}</h2>
           <p className="text-muted-foreground">{t("signupFromEmail.purchaseNotFoundDesc", "Não localizamos uma compra vinculada a este email. Verifique se usou o email correto.")}</p>
@@ -233,7 +243,10 @@ const SignupFromEmail = () => {
   // Signup form
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background safe-area-inset">
-      <div className="absolute top-4 right-4 z-50"><LanguageSelector /></div>
+      <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+        <ModeToggle />
+        <LanguageSelector />
+      </div>
 
       <div className="w-full max-w-md space-y-6 animate-fade-in-up">
         <Button variant="ghost" onClick={() => navigate("/")} className="mb-4">
