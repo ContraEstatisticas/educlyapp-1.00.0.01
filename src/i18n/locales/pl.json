@@ -22,7 +22,7 @@
     "review": "Przegląd",
     "viewTrail": "Zobacz ścieżkę",
     "aiChallenges": "Wyzwania AI",
-    "master8AI": "Opanuj 8 AI w 28 dni",
+    "master8AI": "Opanuj 15 AI w 28 dni",
     "master8AIDesc": "Każde wyzwanie zostało zaprojektowane, aby nauczyć Cię najważniejszych narzędzi AI na rynku."
   },
   "personalizedTrail": {
@@ -314,7 +314,7 @@
     },
     "aiCapabilities": {
       "title": "W czym może pomóc nasz AI chat",
-      "item1": "Informacje o 8 narzędziach AI (ChatGPT, Claude, Gemini, itp.)",
+      "item1": "Informacje o 15 narzędziach AI (ChatGPT, Claude, Gemini, itp.)",
       "item2": "Ceny i plany subskrypcji",
       "item3": "Szczegóły wyzwania 28-dniowego",
       "item4": "Jak działa platforma",

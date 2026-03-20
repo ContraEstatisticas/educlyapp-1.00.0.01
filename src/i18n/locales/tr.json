@@ -22,7 +22,7 @@
     "review": "İnceleme",
     "viewTrail": "Yolu gör",
     "aiChallenges": "AI Meydan Okumaları",
-    "master8AI": "28 günde 8 AI'de ustalaşın",
+    "master8AI": "28 günde 15 AI'de ustalaşın",
     "master8AIDesc": "Her meydan okuma, pazardaki en önemli AI araçlarını öğretmek için tasarlanmıştır."
   },
   "personalizedTrail": {
@@ -314,7 +314,7 @@
     },
     "aiCapabilities": {
       "title": "AI sohbetimiz ne konuda yardımcı olabilir",
-      "item1": "8 AI aracımız hakkında bilgi (ChatGPT, Claude, Gemini, vb.)",
+      "item1": "15 AI aracımız hakkında bilgi (ChatGPT, Claude, Gemini, vb.)",
       "item2": "Fiyatlar ve abonelik planları",
       "item3": "28 günlük meydan okuma detayları",
       "item4": "Platform nasıl çalışır",

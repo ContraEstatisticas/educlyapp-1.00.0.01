@@ -22,7 +22,7 @@
     "review": "レビュー",
     "viewTrail": "パスを見る",
     "aiChallenges": "AIチャレンジ",
-    "master8AI": "28日で8つのAIをマスター",
+    "master8AI": "28日で15つのAIをマスター",
     "master8AIDesc": "各チャレンジは市場の主要なAIツールを教えるように設計されています。"
   },
   "personalizedTrail": {
@@ -356,7 +356,7 @@
     },
     "aiCapabilities": {
       "title": "AIチャットでできること",
-      "item1": "8つのAIツールについて（ChatGPT、Claude、Geminiなど）",
+      "item1": "15つのAIツールについて（ChatGPT、Claude、Geminiなど）",
       "item2": "料金と購読プラン",
       "item3": "28日間チャレンジの詳細",
       "item4": "プラットフォームの使い方",

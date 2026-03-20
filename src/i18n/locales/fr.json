@@ -14,7 +14,7 @@
   "challenges": {
     "iniciante-ia": {
       "name": "Défi IA Débutant",
-      "description": "Apprenez tout sur les 8 principales IA du marché en 28 jours d'apprentissage intensif et pratique.",
+      "description": "Apprenez tout sur les 15 principales IA du marché en 28 jours d'apprentissage intensif et pratique.",
       "days": {
         "1": {
           "title": "Qu'est-ce que ChatGPT ?",
@@ -2615,7 +2615,7 @@
       "base": {
         "welcome": "Salut ! 👋 Je suis EDI, ton guide sur Educly ! Bienvenue dans ton cours d'IA !",
         "streak": "Voici ta série hebdomadaire ! 🔥 Étudie chaque jour pour gagner des XP bonus !",
-        "challenge": "Voici ton Défi de 28 Jours ! 🎯 Apprends les 8 principaux outils d'IA du marché !",
+        "challenge": "Voici ton Défi de 28 Jours ! 🎯 Apprends les 15 principaux outils d'IA du marché !",
         "finish": "C'est prêt ! 🎉 Commence ton défi de 28 jours et maîtrise l'Intelligence Artificielle. C'est parti !"
       },
       "freelancer": {
@@ -2629,7 +2629,7 @@
       "aipack": {
         "welcome": "Salut ! 👋 Je suis EDI ! Tu as débloqué l'AI Pack ! 🤖 Laisse-moi te montrer la puissance que tu as maintenant !",
         "streak": "Voici ta série hebdomadaire ! 🔥 Étudie chaque jour pour des XP supplémentaires !",
-        "challenge": "Commence par le Défi de 28 Jours ! 🎯 Apprends les 8 principaux outils d'IA du marché !",
+        "challenge": "Commence par le Défi de 28 Jours ! 🎯 Apprends les 15 principaux outils d'IA du marché !",
         "assistantsCard": "Et voici tes Assistants IA ! 🤖 Des IA spécialisées qui répondent à tes questions 24h/24, aident avec des tâches réelles et accélèrent ton apprentissage !",
         "ediChat": "Et voici EDI, ton tuteur IA ! 💬 Clique sur lui quand tu as besoin d'aide — il est disponible 24h/24 !",
         "finish": "Incroyable ! 🎉 Tu as la puissance de l'AI Pack ! Utilise les assistants et EDI quand tu en as besoin. Allons maîtriser l'IA !"
@@ -2637,7 +2637,7 @@
       "combo": {
         "welcome": "Salut ! 👋 Je suis EDI ! WOW ! Tu as le pack complet ! 🚀 Laisse-moi te montrer tout ce que tu as débloqué !",
         "streak": "Ta série hebdomadaire est ici ! 🔥 Garde le feu allumé et multiplie tes XP !",
-        "challenge": "Ton Défi de 28 Jours ! 🎯 La base de tout : maîtrise les 8 principales IA du marché !",
+        "challenge": "Ton Défi de 28 Jours ! 🎯 La base de tout : maîtrise les 15 principales IA du marché !",
         "assistantsCard": "Tes Assistants IA ! 🤖 Des IA spécialisées 24h/24 pour répondre aux questions et accélérer tes tâches réelles !",
         "freelancerCard": "Et le Hub Freelancer ! 💼 Des modules complets sur la monétisation de l'IA : positionnement, portfolio et comment décrocher des clients premium !",
         "ediChat": "Rencontre EDI, ton tuteur personnel ! 💬 Clique ici quand tu as des questions — il t'aide sur n'importe quel sujet d'IA, 24h/24 !",

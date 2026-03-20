@@ -22,7 +22,7 @@
     "review": "복습",
     "viewTrail": "경로 보기",
     "aiChallenges": "AI 챌린지",
-    "master8AI": "28일 안에 8개 AI 마스터",
+    "master8AI": "28일 안에 15개 AI 마스터",
     "master8AIDesc": "각 챌린지는 시장의 주요 AI 도구를 가르치도록 설계되었습니다."
   },
   "personalizedTrail": {
@@ -314,7 +314,7 @@
     },
     "aiCapabilities": {
       "title": "AI 채팅으로 도움받을 수 있는 것",
-      "item1": "8가지 AI 도구 정보 (ChatGPT, Claude, Gemini 등)",
+      "item1": "15가지 AI 도구 정보 (ChatGPT, Claude, Gemini 등)",
       "item2": "가격 및 구독 플랜",
       "item3": "28일 챌린지 세부사항",
       "item4": "플랫폼 사용 방법",

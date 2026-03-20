@@ -79,7 +79,7 @@ export const AISidebar = ({
                 <div className="text-xs text-muted-foreground">
                     <div className="flex justify-between mb-1">
                         <span>💬 {t("assistants.rateLimit.counter")}</span>
-                        <span className="font-medium text-foreground">{usageToday}/{messageLimit}</span>
+                        <span className="font-medium text-foreground">{Math.round((usageToday / Math.max(messageLimit, 1)) * 100)}%</span>
                     </div>
                     <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
                         <div
@@ -91,7 +91,7 @@ export const AISidebar = ({
                 <div className="text-xs text-muted-foreground">
                     <div className="flex justify-between mb-1">
                         <span>🎨 imgs</span>
-                        <span className="font-medium text-foreground">{imagesUsed}/{imageLimit}</span>
+                        <span className="font-medium text-foreground">{Math.round((imagesUsed / Math.max(imageLimit, 1)) * 100)}%</span>
                     </div>
                     <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
                         <div

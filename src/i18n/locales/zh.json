@@ -22,7 +22,7 @@
     "review": "复习",
     "viewTrail": "查看路径",
     "aiChallenges": "AI挑战",
-    "master8AI": "28天掌握8个AI",
+    "master8AI": "28天掌握15个AI",
     "master8AIDesc": "每个挑战都旨在教您市场上最重要的AI工具。"
   },
   "personalizedTrail": {
@@ -356,7 +356,7 @@
     },
     "aiCapabilities": {
       "title": "AI聊天可以帮助您",
-      "item1": "关于8种AI工具的信息（ChatGPT、Claude、Gemini等）",
+      "item1": "关于15种AI工具的信息（ChatGPT、Claude、Gemini等）",
       "item2": "价格和订阅计划",
       "item3": "28天挑战详情",
       "item4": "平台使用方法",

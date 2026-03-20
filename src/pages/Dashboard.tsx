@@ -48,7 +48,7 @@ const MOCK_ACTIVE_SESSION = {
     id: "1",
     name: "Desafio Iniciante de IA",
     slug: "chatgpt",
-    description: "Aprenda tudo sobre as 8 principais IAs do mercado...",
+    description: "Aprenda tudo sobre as 15 principais IAs do mercado...",
     duration_days: 28
   }
 };

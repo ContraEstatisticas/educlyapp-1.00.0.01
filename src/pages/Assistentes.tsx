@@ -240,7 +240,7 @@ const AssistentesContent = () => {
           return;
         }
 
-        const persistedMessages = sortPersistedMessages(data ?? []).map((message) => ({
+        const persistedMessages = sortPersistedMessages(data ?? []).map((message): Message => ({
           id: message.id,
           role: message.role === "user" ? "user" : "assistant",
           content: message.content,
@@ -579,8 +579,8 @@ const AssistentesContent = () => {
               {/* Usage pill */}
               <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full hidden sm:block">
                 {mode === "creative"
-                  ? `🎨 ${imagesUsed}/${imageLimit}`
-                  : `💬 ${usageToday}/${messageLimit}`}
+                  ? `🎨 ${Math.round((imagesUsed / Math.max(imageLimit, 1)) * 100)}%`
+                  : `💬 ${Math.round((usageToday / Math.max(messageLimit, 1)) * 100)}%`}
               </div>
               <Button
                 variant="outline"

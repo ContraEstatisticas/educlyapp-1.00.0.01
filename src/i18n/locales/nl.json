@@ -22,7 +22,7 @@
     "review": "Beoordelen",
     "viewTrail": "Bekijk pad",
     "aiChallenges": "AI Uitdagingen",
-    "master8AI": "Beheers 8 AI's in 28 dagen",
+    "master8AI": "Beheers 15 AI's in 28 dagen",
     "master8AIDesc": "Elke uitdaging is ontworpen om je de belangrijkste AI-tools op de markt te leren."
   },
   "personalizedTrail": {
@@ -314,7 +314,7 @@
     },
     "aiCapabilities": {
       "title": "Waar onze AI chat mee kan helpen",
-      "item1": "Informatie over onze 8 AI-tools (ChatGPT, Claude, Gemini, enz.)",
+      "item1": "Informatie over onze 15 AI-tools (ChatGPT, Claude, Gemini, enz.)",
       "item2": "Prijzen en abonnementsplannen",
       "item3": "Details van de 28-daagse uitdaging",
       "item4": "Hoe het platform werkt",

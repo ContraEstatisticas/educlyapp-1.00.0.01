@@ -14,7 +14,7 @@
   "challenges": {
     "iniciante-ia": {
       "name": "KI-Einsteiger-Challenge",
-      "description": "Lernen Sie alles über die 8 wichtigsten KIs des Marktes in 28 Tagen intensivem und praktischem Lernen.",
+      "description": "Lernen Sie alles über die 15 wichtigsten KIs des Marktes in 28 Tagen intensivem und praktischem Lernen.",
       "days": {
         "1": {
           "title": "Was ist ChatGPT?",
@@ -2330,7 +2330,7 @@
       "base": {
         "welcome": "Hallo! 👋 Ich bin EDI, dein Guide bei Educly! Willkommen zu deinem KI-Kurs!",
         "streak": "Hier ist deine wöchentliche Serie! 🔥 Lerne jeden Tag für Bonus-XP!",
-        "challenge": "Hier ist deine 28-Tage-Challenge! 🎯 Lerne die 8 wichtigsten KI-Tools des Marktes!",
+        "challenge": "Hier ist deine 28-Tage-Challenge! 🎯 Lerne die 15 wichtigsten KI-Tools des Marktes!",
         "finish": "Fertig! 🎉 Starte deine 28-Tage-Challenge und meistere Künstliche Intelligenz. Los geht's!"
       },
       "freelancer": {
@@ -2344,7 +2344,7 @@
       "aipack": {
         "welcome": "Hallo! 👋 Ich bin EDI! Du hast das AI Pack freigeschaltet! 🤖 Lass mich dir die Power zeigen, die du jetzt hast!",
         "streak": "Hier ist deine wöchentliche Serie! 🔥 Lerne jeden Tag für extra XP!",
-        "challenge": "Starte mit der 28-Tage-Challenge! 🎯 Lerne die 8 wichtigsten KI-Tools des Marktes!",
+        "challenge": "Starte mit der 28-Tage-Challenge! 🎯 Lerne die 15 wichtigsten KI-Tools des Marktes!",
         "assistantsCard": "Und hier sind deine KI-Assistenten! 🤖 Spezialisierte KIs, die deine Fragen 24h beantworten, bei echten Aufgaben helfen und dein Lernen beschleunigen!",
         "ediChat": "Und das ist EDI, dein KI-Tutor! 💬 Klicke auf ihn, wenn du Hilfe brauchst — er ist 24h verfügbar!",
         "finish": "Unglaublich! 🎉 Du hast die Power des AI Packs! Nutze die Assistenten und EDI, wann immer du willst. Lass uns KI meistern!"
@@ -2352,7 +2352,7 @@
       "combo": {
         "welcome": "Hallo! 👋 Ich bin EDI! WOW! Du hast das komplette Paket! 🚀 Lass mich dir alles zeigen, was du freigeschaltet hast!",
         "streak": "Deine wöchentliche Serie ist hier! 🔥 Halte das Feuer am Brennen und multipliziere deine XP!",
-        "challenge": "Deine 28-Tage-Challenge! 🎯 Die Basis von allem: Meistere die 8 wichtigsten KIs des Marktes!",
+        "challenge": "Deine 28-Tage-Challenge! 🎯 Die Basis von allem: Meistere die 15 wichtigsten KIs des Marktes!",
         "assistantsCard": "Deine KI-Assistenten! 🤖 Spezialisierte KIs 24h am Tag, um Fragen zu beantworten und deine echten Aufgaben zu beschleunigen!",
         "freelancerCard": "Und der Freelancer Hub! 💼 Komplette Module zur KI-Monetarisierung: Positionierung, Portfolio und Premium-Kundengewinnung!",
         "ediChat": "Triff EDI, deinen persönlichen Tutor! 💬 Klicke hier bei Fragen — er hilft dir bei jedem KI-Thema, 24h am Tag!",
