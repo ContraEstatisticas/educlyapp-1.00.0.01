@@ -1241,7 +1241,14 @@
         "lovable": "démontrant la maîtrise du développement d'applications web avec l'IA, du prototypage rapide et de la création de produits numériques.",
         "captions": "démontrant la maîtrise de l'édition vidéo avec l'IA, du sous-titrage automatique et de la production de contenu audiovisuel.",
         "nanobanana": "démontrant la maîtrise de la génération d'images avec l'IA, du design créatif et de la production visuelle pour des projets numériques.",
-        "default": "démontrant des connaissances pratiques et une compréhension des fondamentaux essentiels appliqués dans des projets réels."
+        "default": "démontrant des connaissances pratiques et une compréhension des fondamentaux essentiels appliqués dans des projets réels.",
+        "copilot": "démontrant sa maîtrise de la productivité assistée par l'IA, de l'intégration de l'écosystème Microsoft 365 et des workflows d'entreprise.",
+        "grok": "démontrant sa maîtrise de l'analyse d'informations en temps réel, du raisonnement logique avancé et de l'exploration de données.",
+        "perplexity": "démontrant sa maîtrise de la recherche intelligente, de la vérification des sources et de la synthèse d'informations complexes.",
+        "manus": "démontrant sa maîtrise de l'automatisation Web avec des agents d'IA, de l'exécution de tâches complexes et de la navigation assistée.",
+        "leonardo": "démontrant sa maîtrise de la génération d'art numérique, de la manipulation de modèles d'images et du design créatif haute performance.",
+        "midjourney": "démontrant sa maîtrise de la création visuelle artistique haute fidélité, de l'exploration de styles et de la composition IA avancée.",
+        "veo": "démontrant sa maîtrise de la génération de vidéos cinématographiques, de l'animation par IA et du storytelling visuel axé sur les données."
       }
     }
   },

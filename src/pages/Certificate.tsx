@@ -52,6 +52,13 @@ const toolHours: Record<string, number> = {
   lovable: 32,
   captions: 24,
   nanobanana: 32,
+  copilot: 24,
+  grok: 24,
+  perplexity: 24,
+  manus: 24,
+  leonardo: 32,
+  midjourney: 32,
+  veo: 24,
 };
 
 const toolSpecialization: Record<string, string> = {
@@ -63,6 +70,13 @@ const toolSpecialization: Record<string, string> = {
   lovable: 'Lovable',
   captions: 'Captions AI',
   nanobanana: 'NanoBanana',
+  copilot: 'Microsoft Copilot',
+  grok: 'xAI Grok',
+  perplexity: 'Perplexity AI',
+  manus: 'Manus AI',
+  leonardo: 'Leonardo AI',
+  midjourney: 'MidJourney',
+  veo: 'Google VEO',
 };
 
 const Certificate = () => {

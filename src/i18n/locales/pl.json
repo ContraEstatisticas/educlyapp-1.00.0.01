@@ -49,49 +49,218 @@
     "complete": "Ukończ"
   },
   "landing": {
-    "nav": {"home": "Strona główna", "about": "O nas", "programs": "Funkcje", "testimonials": "Opinie", "plan": "Cennik", "contact": "Kontakt", "login": "Zaloguj się", "startNow": "Pobierz aplikację"},
-    "hero": {"badge": "Najbardziej kompletna aplikacja AI na rynku", "title": "Opanuj", "titleHighlight": "Sztuczną Inteligencję", "titleEnd": "Prosto z Twojego Telefonu", "subtitle": "Ucz się AI z interaktywnymi ścieżkami, praktycznymi ćwiczeniami i cyfrowymi certyfikatami — wszystko w aplikacji. Dostęp do 20+ narzędzi AI, tryb offline i grywalizacja.", "cta": "Pobierz za darmo", "demo": "Zobacz demo", "students": "pobrań", "rating": "ocena", "countries": "krajów"},
+    "nav": {
+      "home": "Strona główna",
+      "about": "O nas",
+      "programs": "Funkcje",
+      "testimonials": "Opinie",
+      "plan": "Cennik",
+      "contact": "Kontakt",
+      "login": "Zaloguj się",
+      "startNow": "Pobierz aplikację"
+    },
+    "hero": {
+      "badge": "Najbardziej kompletna aplikacja AI na rynku",
+      "title": "Opanuj",
+      "titleHighlight": "Sztuczną Inteligencję",
+      "titleEnd": "Prosto z Twojego Telefonu",
+      "subtitle": "Ucz się AI z interaktywnymi ścieżkami, praktycznymi ćwiczeniami i cyfrowymi certyfikatami — wszystko w aplikacji. Dostęp do 20+ narzędzi AI, tryb offline i grywalizacja.",
+      "cta": "Pobierz za darmo",
+      "demo": "Zobacz demo",
+      "students": "pobrań",
+      "rating": "ocena",
+      "countries": "krajów"
+    },
     "features": {
-      "sectionLabel": "Funkcje aplikacji", "title": "Wszystko czego potrzebujesz w kieszeni", "subtitle": "Kompletna aplikacja z interaktywnymi ścieżkami, asystentem AI, postępem w czasie rzeczywistym i certyfikatami.",
-      "curriculum": {"title": "Interaktywne ścieżki", "description": "Ucz się z grywalizowanymi ścieżkami i stale aktualizowaną treścią o najlepszych narzędziach AI."},
-      "mentoring": {"title": "Wbudowany asystent AI", "description": "Uzyskaj odpowiedzi w czasie rzeczywistym od EDI, twojego osobistego asystenta AI w aplikacji."},
-      "community": {"title": "Postęp w czasie rzeczywistym", "description": "Śledź swój postęp za pomocą szczegółowych paneli, serii i statystyk nauki."},
-      "certification": {"title": "Cyfrowe certyfikaty", "description": "Zdobywaj certyfikaty ukończając ścieżki i wyzwania."},
-      "practical": {"title": "Tryb offline", "description": "Pobierz lekcje i ucz się bez internetu — idealne do nauki w dowolnym miejscu."},
-      "career": {"title": "Grywalizacja", "description": "Zdobywaj XP, awansuj, odblokuj odznaki i utrzymuj codzienną serię nauki."}
+      "sectionLabel": "Funkcje aplikacji",
+      "title": "Wszystko czego potrzebujesz w kieszeni",
+      "subtitle": "Kompletna aplikacja z interaktywnymi ścieżkami, asystentem AI, postępem w czasie rzeczywistym i certyfikatami.",
+      "curriculum": {
+        "title": "Interaktywne ścieżki",
+        "description": "Ucz się z grywalizowanymi ścieżkami i stale aktualizowaną treścią o najlepszych narzędziach AI."
+      },
+      "mentoring": {
+        "title": "Wbudowany asystent AI",
+        "description": "Uzyskaj odpowiedzi w czasie rzeczywistym od EDI, twojego osobistego asystenta AI w aplikacji."
+      },
+      "community": {
+        "title": "Postęp w czasie rzeczywistym",
+        "description": "Śledź swój postęp za pomocą szczegółowych paneli, serii i statystyk nauki."
+      },
+      "certification": {
+        "title": "Cyfrowe certyfikaty",
+        "description": "Zdobywaj certyfikaty ukończając ścieżki i wyzwania."
+      },
+      "practical": {
+        "title": "Tryb offline",
+        "description": "Pobierz lekcje i ucz się bez internetu — idealne do nauki w dowolnym miejscu."
+      },
+      "career": {
+        "title": "Grywalizacja",
+        "description": "Zdobywaj XP, awansuj, odblokuj odznaki i utrzymuj codzienną serię nauki."
+      }
     },
     "programs": {
-      "sectionLabel": "Funkcje", "title": "Odkryj funkcje aplikacji", "subtitle": "Funkcje zaprojektowane dla wszystkich poziomów.", "popular": "Najpopularniejszy", "startNow": "Pobierz aplikację", "beginner": "Początkujący", "intermediate": "Średniozaawansowany", "advanced": "Zaawansowany",
-      "fundamentals": {"title": "Ścieżki AI", "description": "Rozpocznij przygodę z AI dzięki interaktywnym i grywalizowanym ścieżkom w aplikacji.", "duration": "4 tygodnie", "highlights": ["Interaktywne ścieżki AI", "Praktyczne ćwiczenia z ChatGPT", "Automatyzacja zadań przez aplikację", "Cyfrowy certyfikat"]},
-      "machineLearning": {"title": "Zaawansowane wyzwania", "description": "Zanurz się w 28-dniowe wyzwania z codziennymi ćwiczeniami.", "duration": "28 dni", "highlights": ["Codzienne wyzwania AI", "Interaktywne ćwiczenia", "Grywalizowany postęp", "Certyfikaty ukończenia"]},
-      "deepLearning": {"title": "Osobisty asystent AI", "description": "Używaj EDI, wbudowanego asystenta AI, do pytań i treningu promptów.", "duration": "Bez limitu", "highlights": ["Wbudowany czat AI", "Trener promptów", "Odpowiedzi w czasie rzeczywistym", "Spersonalizowane wsparcie w aplikacji"]}
+      "sectionLabel": "Funkcje",
+      "title": "Odkryj funkcje aplikacji",
+      "subtitle": "Funkcje zaprojektowane dla wszystkich poziomów.",
+      "popular": "Najpopularniejszy",
+      "startNow": "Pobierz aplikację",
+      "beginner": "Początkujący",
+      "intermediate": "Średniozaawansowany",
+      "advanced": "Zaawansowany",
+      "fundamentals": {
+        "title": "Ścieżki AI",
+        "description": "Rozpocznij przygodę z AI dzięki interaktywnym i grywalizowanym ścieżkom w aplikacji.",
+        "duration": "4 tygodnie",
+        "highlights": [
+          "Interaktywne ścieżki AI",
+          "Praktyczne ćwiczenia z ChatGPT",
+          "Automatyzacja zadań przez aplikację",
+          "Cyfrowy certyfikat"
+        ]
+      },
+      "machineLearning": {
+        "title": "Zaawansowane wyzwania",
+        "description": "Zanurz się w 28-dniowe wyzwania z codziennymi ćwiczeniami.",
+        "duration": "28 dni",
+        "highlights": [
+          "Codzienne wyzwania AI",
+          "Interaktywne ćwiczenia",
+          "Grywalizowany postęp",
+          "Certyfikaty ukończenia"
+        ]
+      },
+      "deepLearning": {
+        "title": "Osobisty asystent AI",
+        "description": "Używaj EDI, wbudowanego asystenta AI, do pytań i treningu promptów.",
+        "duration": "Bez limitu",
+        "highlights": [
+          "Wbudowany czat AI",
+          "Trener promptów",
+          "Odpowiedzi w czasie rzeczywistym",
+          "Spersonalizowane wsparcie w aplikacji"
+        ]
+      }
     },
-    "pricing": {"badge": "Cennik", "title": "Odblokuj pełny potencjał aplikacji", "subtitle": "Rozpocznij swoją podróż z AI już dziś", "week1": "PLAN 1 TYDZIEŃ", "week4": "PLAN 4 TYGODNIE", "week12": "PLAN 12 TYGODNI", "mostPopular": "NAJPOPULARNIEJSZY", "from": "Z", "for": "ZA", "perDay": "dziennie", "getMyPlan": "WYBIERZ PLAN", "note": "Osoby korzystające z planu 12-tygodniowego osiągają podwójne wyniki."},
+    "pricing": {
+      "badge": "Cennik",
+      "title": "Odblokuj pełny potencjał aplikacji",
+      "subtitle": "Rozpocznij swoją podróż z AI już dziś",
+      "week1": "PLAN 1 TYDZIEŃ",
+      "week4": "PLAN 4 TYGODNIE",
+      "week12": "PLAN 12 TYGODNI",
+      "mostPopular": "NAJPOPULARNIEJSZY",
+      "from": "Z",
+      "for": "ZA",
+      "perDay": "dziennie",
+      "getMyPlan": "WYBIERZ PLAN",
+      "note": "Osoby korzystające z planu 12-tygodniowego osiągają podwójne wyniki."
+    },
     "testimonials": {
-      "sectionLabel": "Opinie", "title": "Co mówią nasi użytkownicy", "subtitle": "Tysiące osób nauczyło się już AI z aplikacją Educly.",
+      "sectionLabel": "Opinie",
+      "title": "Co mówią nasi użytkownicy",
+      "subtitle": "Tysiące osób nauczyło się już AI z aplikacją Educly.",
       "items": [
-        {"name": "Maria Silva", "role": "Data Scientist", "country": "Brazylia", "text": "Aplikacja Educly zmieniła mój sposób nauki AI. Używam jej codziennie w autobusie i w 3 miesiące dostałam pierwszą pracę."},
-        {"name": "João Santos", "role": "Product Manager", "country": "Portugalia", "text": "Aplikacja jest niesamowita — ścieżki są praktyczne i mogę się uczyć offline. Grywalizacja utrzymuje moją motywację."},
-        {"name": "Ana García", "role": "ML Engineer", "country": "Meksyk", "text": "Ukończyłam kilka wyzwań przez aplikację i cyfrowe certyfikaty zrobiły ogromną różnicę w moim CV."},
-        {"name": "Carlos Fernández", "role": "Startup Founder", "country": "Argentyna", "text": "Codziennie używam aplikacji, aby być na bieżąco z AI. Tryb offline jest idealny dla osób często podróżujących."}
+        {
+          "name": "Maria Silva",
+          "role": "Data Scientist",
+          "country": "Brazylia",
+          "text": "Aplikacja Educly zmieniła mój sposób nauki AI. Używam jej codziennie w autobusie i w 3 miesiące dostałam pierwszą pracę."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portugalia",
+          "text": "Aplikacja jest niesamowita — ścieżki są praktyczne i mogę się uczyć offline. Grywalizacja utrzymuje moją motywację."
+        },
+        {
+          "name": "Ana García",
+          "role": "ML Engineer",
+          "country": "Meksyk",
+          "text": "Ukończyłam kilka wyzwań przez aplikację i cyfrowe certyfikaty zrobiły ogromną różnicę w moim CV."
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Startup Founder",
+          "country": "Argentyna",
+          "text": "Codziennie używam aplikacji, aby być na bieżąco z AI. Tryb offline jest idealny dla osób często podróżujących."
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "Globalny zasięg", "title": "Obecni na całym świecie", "subtitle": "Aplikacja Educly została pobrana w ponad 150 krajach.",
-      "regions": {"latinAmerica": "Ameryka Łacińska", "europe": "Europa", "northAmerica": "Ameryka Północna", "asiaOceania": "Azja i Oceania"},
-      "features": {"languages": {"title": "15 języków", "description": "Aplikacja dostępna w wielu językach z profesjonalnym tłumaczeniem"}, "support": {"title": "Wsparcie 24/7", "description": "Wbudowany asystent AI i zespół wsparcia zawsze dostępny"}, "community": {"title": "Społeczność w aplikacji", "description": "Łącz się z użytkownikami z całego świata i dziel się postępami"}}
+      "sectionLabel": "Globalny zasięg",
+      "title": "Obecni na całym świecie",
+      "subtitle": "Aplikacja Educly została pobrana w ponad 150 krajach.",
+      "regions": {
+        "latinAmerica": "Ameryka Łacińska",
+        "europe": "Europa",
+        "northAmerica": "Ameryka Północna",
+        "asiaOceania": "Azja i Oceania"
+      },
+      "features": {
+        "languages": {
+          "title": "15 języków",
+          "description": "Aplikacja dostępna w wielu językach z profesjonalnym tłumaczeniem"
+        },
+        "support": {
+          "title": "Wsparcie 24/7",
+          "description": "Wbudowany asystent AI i zespół wsparcia zawsze dostępny"
+        },
+        "community": {
+          "title": "Społeczność w aplikacji",
+          "description": "Łącz się z użytkownikami z całego świata i dziel się postępami"
+        }
+      }
     },
-    "stats": {"students": "Pobrań", "countries": "Krajów", "satisfaction": "Ocena sklepu", "partners": "Narzędzi AI"},
+    "stats": {
+      "students": "Pobrań",
+      "countries": "Krajów",
+      "satisfaction": "Ocena sklepu",
+      "partners": "Narzędzi AI"
+    },
     "cta": {
-      "title": "Gotowy uczyć się AI prosto z telefonu?", "subtitle": "Dołącz do ponad 50 000 użytkowników, którzy już opanowują AI z aplikacją Educly.",
-      "startFree": "Pobierz za darmo", "talkConsultant": "Porozmawiaj ze wsparciem", "guarantee": "30 dni gwarancji", "installments": "Do 12 rat",
-      "benefits": ["Pełny dostęp do wszystkich ścieżek", "Darmowe aktualizacje aplikacji", "Wbudowany asystent AI", "Cyfrowe certyfikaty", "Tryb offline dostępny", "30-dniowa gwarancja zwrotu"]
+      "title": "Gotowy uczyć się AI prosto z telefonu?",
+      "subtitle": "Dołącz do ponad 50 000 użytkowników, którzy już opanowują AI z aplikacją Educly.",
+      "startFree": "Pobierz za darmo",
+      "talkConsultant": "Porozmawiaj ze wsparciem",
+      "guarantee": "30 dni gwarancji",
+      "installments": "Do 12 rat",
+      "benefits": [
+        "Pełny dostęp do wszystkich ścieżek",
+        "Darmowe aktualizacje aplikacji",
+        "Wbudowany asystent AI",
+        "Cyfrowe certyfikaty",
+        "Tryb offline dostępny",
+        "30-dniowa gwarancja zwrotu"
+      ]
     },
     "footer": {
       "description": "Najbardziej kompletna aplikacja AI na rynku. Ucz się AI praktycznie, prosto z telefonu.",
-      "contact": "Kontakt", "programs": "Funkcje", "resources": "Zasoby", "company": "Firma", "legal": "Prawne",
-      "links": {"aiFundamentals": "Ścieżki AI", "machineLearning": "28-dniowe wyzwania", "deepLearning": "Asystent AI", "aiForBusiness": "Cyfrowe certyfikaty", "blog": "Blog", "webinars": "Tutoriale", "ebooks": "Poradniki", "community": "Społeczność", "aboutUs": "O nas", "careers": "Kariera", "partnerships": "Partnerstwa", "contact": "Kontakt", "terms": "Regulamin", "privacy": "Prywatność", "cookies": "Cookies"},
-      "copyright": "Wszelkie prawa zastrzeżone.", "madeWith": "Stworzone z ❤️ dla globalnej społeczności AI"
+      "contact": "Kontakt",
+      "programs": "Funkcje",
+      "resources": "Zasoby",
+      "company": "Firma",
+      "legal": "Prawne",
+      "links": {
+        "aiFundamentals": "Ścieżki AI",
+        "machineLearning": "28-dniowe wyzwania",
+        "deepLearning": "Asystent AI",
+        "aiForBusiness": "Cyfrowe certyfikaty",
+        "blog": "Blog",
+        "webinars": "Tutoriale",
+        "ebooks": "Poradniki",
+        "community": "Społeczność",
+        "aboutUs": "O nas",
+        "careers": "Kariera",
+        "partnerships": "Partnerstwa",
+        "contact": "Kontakt",
+        "terms": "Regulamin",
+        "privacy": "Prywatność",
+        "cookies": "Cookies"
+      },
+      "copyright": "Wszelkie prawa zastrzeżone.",
+      "madeWith": "Stworzone z ❤️ dla globalnej społeczności AI"
     }
   },
   "common": {
@@ -289,8 +458,50 @@
     "access": "Wejdź na Ścieżkę",
     "tipsTitle": "Porady Ekspertów",
     "tipsDesc": "Każdy moduł zawiera praktyczne wskazówki od freelancerów, którzy już zarabiają na AI.",
-    "premium": { "title": "Premium Ścieżka Freelancera", "description": "Odblokuj ekskluzywne treści, aby zostać odnoszącym sukcesy freelancerem AI", "features": { "strategies": "Sprawdzone strategie sprzedaży", "clients": "Jak zdobyć pierwszych klientów", "pricing": "Wycena i negocjacje", "platforms": "Najlepsze platformy dla freelancerów" } },
-    "modulesList": { "1": { "title": "Podstawy Freelancingu", "description": "Nastawienie i pierwsze kroki" }, "2": { "title": "Tworzenie Portfolio", "description": "Stwórz nieodparte portfolio z AI" }, "3": { "title": "Znajdowanie Klientów", "description": "Strategie na pierwsze zlecenia" }, "4": { "title": "Strategiczne Wycenianie", "description": "Jak wyceniać pracę z AI" }, "5": { "title": "Networking i Partnerstwa", "description": "Buduj sieć kontaktów" }, "6": { "title": "Zwycięskie Oferty", "description": "Pisz oferty, które konwertują" }, "7": { "title": "Skalowanie Biznesu", "description": "Od freelancera do przedsiębiorcy" }, "8": { "title": "Automatyzacja z AI", "description": "Użyj AI do zwiększenia produktywności" } }
+    "premium": {
+      "title": "Premium Ścieżka Freelancera",
+      "description": "Odblokuj ekskluzywne treści, aby zostać odnoszącym sukcesy freelancerem AI",
+      "features": {
+        "strategies": "Sprawdzone strategie sprzedaży",
+        "clients": "Jak zdobyć pierwszych klientów",
+        "pricing": "Wycena i negocjacje",
+        "platforms": "Najlepsze platformy dla freelancerów"
+      }
+    },
+    "modulesList": {
+      "1": {
+        "title": "Podstawy Freelancingu",
+        "description": "Nastawienie i pierwsze kroki"
+      },
+      "2": {
+        "title": "Tworzenie Portfolio",
+        "description": "Stwórz nieodparte portfolio z AI"
+      },
+      "3": {
+        "title": "Znajdowanie Klientów",
+        "description": "Strategie na pierwsze zlecenia"
+      },
+      "4": {
+        "title": "Strategiczne Wycenianie",
+        "description": "Jak wyceniać pracę z AI"
+      },
+      "5": {
+        "title": "Networking i Partnerstwa",
+        "description": "Buduj sieć kontaktów"
+      },
+      "6": {
+        "title": "Zwycięskie Oferty",
+        "description": "Pisz oferty, które konwertują"
+      },
+      "7": {
+        "title": "Skalowanie Biznesu",
+        "description": "Od freelancera do przedsiębiorcy"
+      },
+      "8": {
+        "title": "Automatyzacja z AI",
+        "description": "Użyj AI do zwiększenia produktywności"
+      }
+    }
   },
   "contactPage": {
     "title": "Skontaktuj się z nami",
@@ -434,6 +645,19 @@
           "title": "11. Kontakt",
           "intro": "Pytania, wnioski o zwrot płatnego okresu próbnego lub wnioski o anulowanie lub wstrzymanie subskrypcji muszą być składane wyłącznie za pośrednictwem oficjalnego adresu e-mail:"
         }
+      }
+    }
+  },
+  "certificate": {
+    "canvas": {
+      "toolDescription": {
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   }

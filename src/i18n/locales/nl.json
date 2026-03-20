@@ -49,49 +49,218 @@
     "complete": "Voltooien"
   },
   "landing": {
-    "nav": {"home": "Home", "about": "Over ons", "programs": "Functies", "testimonials": "Testimonials", "plan": "Abonnement", "contact": "Contact", "login": "Inloggen", "startNow": "Download App"},
-    "hero": {"badge": "De meest complete AI-app op de markt", "title": "Beheers", "titleHighlight": "Kunstmatige Intelligentie", "titleEnd": "Direct vanaf Je Telefoon", "subtitle": "Leer AI met interactieve leerpaden, praktische oefeningen en digitale certificaten — alles in de app. Toegang tot 20+ AI-tools, offline modus en gamification.", "cta": "Gratis downloaden", "demo": "Demo bekijken", "students": "downloads", "rating": "beoordeling", "countries": "landen"},
+    "nav": {
+      "home": "Home",
+      "about": "Over ons",
+      "programs": "Functies",
+      "testimonials": "Testimonials",
+      "plan": "Abonnement",
+      "contact": "Contact",
+      "login": "Inloggen",
+      "startNow": "Download App"
+    },
+    "hero": {
+      "badge": "De meest complete AI-app op de markt",
+      "title": "Beheers",
+      "titleHighlight": "Kunstmatige Intelligentie",
+      "titleEnd": "Direct vanaf Je Telefoon",
+      "subtitle": "Leer AI met interactieve leerpaden, praktische oefeningen en digitale certificaten — alles in de app. Toegang tot 20+ AI-tools, offline modus en gamification.",
+      "cta": "Gratis downloaden",
+      "demo": "Demo bekijken",
+      "students": "downloads",
+      "rating": "beoordeling",
+      "countries": "landen"
+    },
     "features": {
-      "sectionLabel": "App-functies", "title": "Alles Wat Je Nodig Hebt in Je Zak", "subtitle": "Een complete app met interactieve paden, AI-assistent, realtime voortgang en certificaten.",
-      "curriculum": {"title": "Interactieve Leerpaden", "description": "Leer met gegamificeerde paden en voortdurend bijgewerkte content over de beste AI-tools."},
-      "mentoring": {"title": "Ingebouwde AI-assistent", "description": "Krijg realtime antwoorden van EDI, je persoonlijke AI-assistent in de app."},
-      "community": {"title": "Realtime Voortgang", "description": "Volg je voortgang met gedetailleerde dashboards, streaks en leerstatistieken."},
-      "certification": {"title": "Digitale Certificaten", "description": "Verdien certificaten door paden en uitdagingen te voltooien."},
-      "practical": {"title": "Offline Modus", "description": "Download lessen en studeer zonder internet — perfect om overal te leren."},
-      "career": {"title": "Gamification", "description": "Verdien XP, level up, ontgrendel badges en houd je dagelijkse studiestreek vol."}
+      "sectionLabel": "App-functies",
+      "title": "Alles Wat Je Nodig Hebt in Je Zak",
+      "subtitle": "Een complete app met interactieve paden, AI-assistent, realtime voortgang en certificaten.",
+      "curriculum": {
+        "title": "Interactieve Leerpaden",
+        "description": "Leer met gegamificeerde paden en voortdurend bijgewerkte content over de beste AI-tools."
+      },
+      "mentoring": {
+        "title": "Ingebouwde AI-assistent",
+        "description": "Krijg realtime antwoorden van EDI, je persoonlijke AI-assistent in de app."
+      },
+      "community": {
+        "title": "Realtime Voortgang",
+        "description": "Volg je voortgang met gedetailleerde dashboards, streaks en leerstatistieken."
+      },
+      "certification": {
+        "title": "Digitale Certificaten",
+        "description": "Verdien certificaten door paden en uitdagingen te voltooien."
+      },
+      "practical": {
+        "title": "Offline Modus",
+        "description": "Download lessen en studeer zonder internet — perfect om overal te leren."
+      },
+      "career": {
+        "title": "Gamification",
+        "description": "Verdien XP, level up, ontgrendel badges en houd je dagelijkse studiestreek vol."
+      }
     },
     "programs": {
-      "sectionLabel": "Functies", "title": "Ontdek de app-functies", "subtitle": "Functies ontworpen voor alle niveaus.", "popular": "Meest populair", "startNow": "Download App", "beginner": "Beginner", "intermediate": "Gemiddeld", "advanced": "Gevorderd",
-      "fundamentals": {"title": "AI-leerpaden", "description": "Begin je AI-reis met interactieve en gegamificeerde paden in de app.", "duration": "4 weken", "highlights": ["Interactieve AI-paden", "Praktische ChatGPT-oefeningen", "Taakautomatisering via app", "Digitaal certificaat"]},
-      "machineLearning": {"title": "Geavanceerde Uitdagingen", "description": "Duik in 28-daagse uitdagingen met dagelijkse oefeningen.", "duration": "28 dagen", "highlights": ["Dagelijkse AI-uitdagingen", "Interactieve oefeningen", "Gegamificeerde voortgang", "Voltooiingscertificaten"]},
-      "deepLearning": {"title": "Persoonlijke AI-assistent", "description": "Gebruik EDI, je ingebouwde AI-assistent, voor vragen en prompt-training.", "duration": "Onbeperkt", "highlights": ["Ingebouwde AI-chat", "Prompt-trainer", "Realtime antwoorden", "Gepersonaliseerde ondersteuning in de app"]}
+      "sectionLabel": "Functies",
+      "title": "Ontdek de app-functies",
+      "subtitle": "Functies ontworpen voor alle niveaus.",
+      "popular": "Meest populair",
+      "startNow": "Download App",
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "advanced": "Gevorderd",
+      "fundamentals": {
+        "title": "AI-leerpaden",
+        "description": "Begin je AI-reis met interactieve en gegamificeerde paden in de app.",
+        "duration": "4 weken",
+        "highlights": [
+          "Interactieve AI-paden",
+          "Praktische ChatGPT-oefeningen",
+          "Taakautomatisering via app",
+          "Digitaal certificaat"
+        ]
+      },
+      "machineLearning": {
+        "title": "Geavanceerde Uitdagingen",
+        "description": "Duik in 28-daagse uitdagingen met dagelijkse oefeningen.",
+        "duration": "28 dagen",
+        "highlights": [
+          "Dagelijkse AI-uitdagingen",
+          "Interactieve oefeningen",
+          "Gegamificeerde voortgang",
+          "Voltooiingscertificaten"
+        ]
+      },
+      "deepLearning": {
+        "title": "Persoonlijke AI-assistent",
+        "description": "Gebruik EDI, je ingebouwde AI-assistent, voor vragen en prompt-training.",
+        "duration": "Onbeperkt",
+        "highlights": [
+          "Ingebouwde AI-chat",
+          "Prompt-trainer",
+          "Realtime antwoorden",
+          "Gepersonaliseerde ondersteuning in de app"
+        ]
+      }
     },
-    "pricing": {"badge": "Prijzen", "title": "Ontgrendel het volledige potentieel van de app", "subtitle": "Begin vandaag je AI-leerreis", "week1": "1 WEEK PLAN", "week4": "4 WEKEN PLAN", "week12": "12 WEKEN PLAN", "mostPopular": "MEEST POPULAIR", "from": "VAN", "for": "VOOR", "perDay": "per dag", "getMyPlan": "NEEM MIJN PLAN", "note": "Mensen die het 12-weken plan gebruiken krijgen dubbele resultaten."},
+    "pricing": {
+      "badge": "Prijzen",
+      "title": "Ontgrendel het volledige potentieel van de app",
+      "subtitle": "Begin vandaag je AI-leerreis",
+      "week1": "1 WEEK PLAN",
+      "week4": "4 WEKEN PLAN",
+      "week12": "12 WEKEN PLAN",
+      "mostPopular": "MEEST POPULAIR",
+      "from": "VAN",
+      "for": "VOOR",
+      "perDay": "per dag",
+      "getMyPlan": "NEEM MIJN PLAN",
+      "note": "Mensen die het 12-weken plan gebruiken krijgen dubbele resultaten."
+    },
     "testimonials": {
-      "sectionLabel": "Testimonials", "title": "Wat onze gebruikers zeggen", "subtitle": "Duizenden mensen hebben al AI geleerd met de Educly-app.",
+      "sectionLabel": "Testimonials",
+      "title": "Wat onze gebruikers zeggen",
+      "subtitle": "Duizenden mensen hebben al AI geleerd met de Educly-app.",
       "items": [
-        {"name": "Maria Silva", "role": "Data Scientist", "country": "Brazilië", "text": "De Educly-app heeft mijn manier van AI leren veranderd. Ik gebruik hem elke dag in de bus en in 3 maanden had ik mijn eerste baan."},
-        {"name": "João Santos", "role": "Product Manager", "country": "Portugal", "text": "De app is geweldig — de paden zijn praktisch en ik kan offline studeren. Gamification houdt me gemotiveerd."},
-        {"name": "Ana García", "role": "ML Engineer", "country": "Mexico", "text": "Ik heb meerdere uitdagingen via de app voltooid en de digitale certificaten maakten het verschil in mijn CV."},
-        {"name": "Carlos Fernández", "role": "Startup Founder", "country": "Argentinië", "text": "Ik gebruik de app dagelijks om bij te blijven met AI. De offline modus is perfect voor wie veel reist."}
+        {
+          "name": "Maria Silva",
+          "role": "Data Scientist",
+          "country": "Brazilië",
+          "text": "De Educly-app heeft mijn manier van AI leren veranderd. Ik gebruik hem elke dag in de bus en in 3 maanden had ik mijn eerste baan."
+        },
+        {
+          "name": "João Santos",
+          "role": "Product Manager",
+          "country": "Portugal",
+          "text": "De app is geweldig — de paden zijn praktisch en ik kan offline studeren. Gamification houdt me gemotiveerd."
+        },
+        {
+          "name": "Ana García",
+          "role": "ML Engineer",
+          "country": "Mexico",
+          "text": "Ik heb meerdere uitdagingen via de app voltooid en de digitale certificaten maakten het verschil in mijn CV."
+        },
+        {
+          "name": "Carlos Fernández",
+          "role": "Startup Founder",
+          "country": "Argentinië",
+          "text": "Ik gebruik de app dagelijks om bij te blijven met AI. De offline modus is perfect voor wie veel reist."
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "Wereldwijd bereik", "title": "Aanwezig over de hele wereld", "subtitle": "De Educly-app is gedownload in meer dan 150 landen.",
-      "regions": {"latinAmerica": "Latijns-Amerika", "europe": "Europa", "northAmerica": "Noord-Amerika", "asiaOceania": "Azië & Oceanië"},
-      "features": {"languages": {"title": "15 talen", "description": "App beschikbaar in meerdere talen met professionele vertaling"}, "support": {"title": "24/7 ondersteuning", "description": "Ingebouwde AI-assistent en supportteam altijd beschikbaar"}, "community": {"title": "Community in de app", "description": "Verbind met gebruikers wereldwijd en deel je voortgang"}}
+      "sectionLabel": "Wereldwijd bereik",
+      "title": "Aanwezig over de hele wereld",
+      "subtitle": "De Educly-app is gedownload in meer dan 150 landen.",
+      "regions": {
+        "latinAmerica": "Latijns-Amerika",
+        "europe": "Europa",
+        "northAmerica": "Noord-Amerika",
+        "asiaOceania": "Azië & Oceanië"
+      },
+      "features": {
+        "languages": {
+          "title": "15 talen",
+          "description": "App beschikbaar in meerdere talen met professionele vertaling"
+        },
+        "support": {
+          "title": "24/7 ondersteuning",
+          "description": "Ingebouwde AI-assistent en supportteam altijd beschikbaar"
+        },
+        "community": {
+          "title": "Community in de app",
+          "description": "Verbind met gebruikers wereldwijd en deel je voortgang"
+        }
+      }
     },
-    "stats": {"students": "Downloads", "countries": "Landen", "satisfaction": "Store-beoordeling", "partners": "AI-tools"},
+    "stats": {
+      "students": "Downloads",
+      "countries": "Landen",
+      "satisfaction": "Store-beoordeling",
+      "partners": "AI-tools"
+    },
     "cta": {
-      "title": "Klaar om AI te leren direct vanaf je telefoon?", "subtitle": "Sluit je aan bij meer dan 50.000 gebruikers die AI al beheersen met de Educly-app.",
-      "startFree": "Gratis downloaden", "talkConsultant": "Praat met support", "guarantee": "30 dagen garantie", "installments": "Tot 12 termijnen",
-      "benefits": ["Volledige toegang tot alle paden", "Gratis app-updates", "Ingebouwde AI-assistent", "Digitale certificaten", "Offline modus beschikbaar", "30 dagen geld-terug-garantie"]
+      "title": "Klaar om AI te leren direct vanaf je telefoon?",
+      "subtitle": "Sluit je aan bij meer dan 50.000 gebruikers die AI al beheersen met de Educly-app.",
+      "startFree": "Gratis downloaden",
+      "talkConsultant": "Praat met support",
+      "guarantee": "30 dagen garantie",
+      "installments": "Tot 12 termijnen",
+      "benefits": [
+        "Volledige toegang tot alle paden",
+        "Gratis app-updates",
+        "Ingebouwde AI-assistent",
+        "Digitale certificaten",
+        "Offline modus beschikbaar",
+        "30 dagen geld-terug-garantie"
+      ]
     },
     "footer": {
       "description": "De meest complete AI-app op de markt. Leer AI praktisch, direct vanaf je telefoon.",
-      "contact": "Contact", "programs": "Functies", "resources": "Bronnen", "company": "Bedrijf", "legal": "Juridisch",
-      "links": {"aiFundamentals": "AI-leerpaden", "machineLearning": "28-daagse uitdagingen", "deepLearning": "AI-assistent", "aiForBusiness": "Digitale certificaten", "blog": "Blog", "webinars": "Tutorials", "ebooks": "Gidsen", "community": "Community", "aboutUs": "Over ons", "careers": "Carrières", "partnerships": "Partnerschappen", "contact": "Contact", "terms": "Gebruiksvoorwaarden", "privacy": "Privacy", "cookies": "Cookies"},
-      "copyright": "Alle rechten voorbehouden.", "madeWith": "Gemaakt met ❤️ voor de wereldwijde AI-community"
+      "contact": "Contact",
+      "programs": "Functies",
+      "resources": "Bronnen",
+      "company": "Bedrijf",
+      "legal": "Juridisch",
+      "links": {
+        "aiFundamentals": "AI-leerpaden",
+        "machineLearning": "28-daagse uitdagingen",
+        "deepLearning": "AI-assistent",
+        "aiForBusiness": "Digitale certificaten",
+        "blog": "Blog",
+        "webinars": "Tutorials",
+        "ebooks": "Gidsen",
+        "community": "Community",
+        "aboutUs": "Over ons",
+        "careers": "Carrières",
+        "partnerships": "Partnerschappen",
+        "contact": "Contact",
+        "terms": "Gebruiksvoorwaarden",
+        "privacy": "Privacy",
+        "cookies": "Cookies"
+      },
+      "copyright": "Alle rechten voorbehouden.",
+      "madeWith": "Gemaakt met ❤️ voor de wereldwijde AI-community"
     }
   },
   "common": {
@@ -289,8 +458,50 @@
     "access": "Ga naar Leertraject",
     "tipsTitle": "Expertips",
     "tipsDesc": "Elke module bevat praktische tips van succesvolle freelancers die al verdienen met AI.",
-    "premium": { "title": "Premium Freelancer Leertraject", "description": "Ontgrendel exclusieve content om een succesvolle AI-freelancer te worden", "features": { "strategies": "Bewezen verkoopstrategieën", "clients": "Hoe je je eerste klanten krijgt", "pricing": "Prijsstelling en onderhandeling", "platforms": "Beste platforms voor freelancers" } },
-    "modulesList": { "1": { "title": "Freelancer Basis", "description": "Mindset en eerste stappen om te beginnen" }, "2": { "title": "Portfolio Bouwen", "description": "Maak een onweerstaanbaar portfolio met AI" }, "3": { "title": "Klanten Vinden", "description": "Strategieën om je eerste opdrachten te krijgen" }, "4": { "title": "Strategische Prijsstelling", "description": "Hoe je AI-werk moet berekenen" }, "5": { "title": "Netwerken & Partnerschappen", "description": "Bouw je professionele netwerk" }, "6": { "title": "Winnende Voorstellen", "description": "Schrijf voorstellen die converteren" }, "7": { "title": "Business Schalen", "description": "Van solo freelancer naar ondernemer" }, "8": { "title": "AI Automatisering", "description": "Gebruik AI om productiviteit te vermenigvuldigen" } }
+    "premium": {
+      "title": "Premium Freelancer Leertraject",
+      "description": "Ontgrendel exclusieve content om een succesvolle AI-freelancer te worden",
+      "features": {
+        "strategies": "Bewezen verkoopstrategieën",
+        "clients": "Hoe je je eerste klanten krijgt",
+        "pricing": "Prijsstelling en onderhandeling",
+        "platforms": "Beste platforms voor freelancers"
+      }
+    },
+    "modulesList": {
+      "1": {
+        "title": "Freelancer Basis",
+        "description": "Mindset en eerste stappen om te beginnen"
+      },
+      "2": {
+        "title": "Portfolio Bouwen",
+        "description": "Maak een onweerstaanbaar portfolio met AI"
+      },
+      "3": {
+        "title": "Klanten Vinden",
+        "description": "Strategieën om je eerste opdrachten te krijgen"
+      },
+      "4": {
+        "title": "Strategische Prijsstelling",
+        "description": "Hoe je AI-werk moet berekenen"
+      },
+      "5": {
+        "title": "Netwerken & Partnerschappen",
+        "description": "Bouw je professionele netwerk"
+      },
+      "6": {
+        "title": "Winnende Voorstellen",
+        "description": "Schrijf voorstellen die converteren"
+      },
+      "7": {
+        "title": "Business Schalen",
+        "description": "Van solo freelancer naar ondernemer"
+      },
+      "8": {
+        "title": "AI Automatisering",
+        "description": "Gebruik AI om productiviteit te vermenigvuldigen"
+      }
+    }
   },
   "contactPage": {
     "title": "Neem Contact Op",
@@ -434,6 +645,19 @@
           "title": "11. Contact",
           "intro": "Vragen, restitutieverzoeken voor de betaalde proefperiode of verzoeken om annulering of pauze van het abonnement moeten uitsluitend worden ingediend via de officiële e-mail:"
         }
+      }
+    }
+  },
+  "certificate": {
+    "canvas": {
+      "toolDescription": {
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   }

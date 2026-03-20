@@ -1236,7 +1236,14 @@
         "lovable": "продемонстрировав владение разработкой веб-приложений с ИИ, быстрым прототипированием и созданием цифровых продуктов.",
         "captions": "продемонстрировав владение видеомонтажом с ИИ, автоматическими субтитрами и производством аудиовизуального контента.",
         "nanobanana": "продемонстрировав владение генерацией изображений с ИИ, креативным дизайном и визуальным производством для цифровых проектов.",
-        "default": "продемонстрировав практические знания и понимание основных принципов, применённых в реальных проектах."
+        "default": "продемонстрировав практические знания и понимание основных принципов, применённых в реальных проектах.",
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   },
@@ -2367,12 +2374,11 @@
     "updateError": "Не удалось обновить профиль.",
     "settingsSaved": "Настройки сохранены!",
     "notificationsUpdated": "Ваши настройки уведомлений были обновлены."
-  }
-,
+  },
   "contactPage": {
     "humanSupport": {
       "openingEmail": "Открываем почту",
-      "emailCopiedDesc": "\u0410\u0434\u0440\u0435\u0441 {{email}} \u0442\u0430\u043a\u0436\u0435 \u0441\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d."
+      "emailCopiedDesc": "Адрес {{email}} также скопирован."
     }
   }
 }

@@ -1377,7 +1377,14 @@
         "lovable": "demostrando dominio en desarrollo de aplicaciones web con IA, prototipado rápido y creación de productos digitales.",
         "captions": "demostrando dominio en edición de video con IA, subtitulado automático y producción de contenido audiovisual.",
         "nanobanana": "demostrando dominio en generación de imágenes con IA, diseño creativo y producción visual para proyectos digitales.",
-        "default": "demostrando conocimientos prácticos y comprensión de los fundamentos esenciales aplicados en proyectos reales."
+        "default": "demostrando conocimientos prácticos y comprensión de los fundamentos esenciales aplicados en proyectos reales.",
+        "copilot": "demostrando dominio en productividad asistida por IA, integración con el ecosistema Microsoft 365 y flujos de trabajo corporativos.",
+        "grok": "demostrando dominio en análisis de información en tempo real, razonamiento lógico avanzado y exploración de datos.",
+        "perplexity": "demostrando dominio en búsqueda inteligente, verificación de fuentes y síntesis de información compleja.",
+        "manus": "demostrando dominio en automatización web con agentes de IA, ejecución de tareas complejas y navegación asistida.",
+        "leonardo": "demostrando dominio en generación de arte digital, manipulación de modelos de imagen y diseño creativo de alto rendimiento.",
+        "midjourney": "demostrando dominio en creación visual artística de alta fidelidad, exploración de estilos y composición avanzada con IA.",
+        "veo": "demostrando dominio en generación de videos cinematográficos, animación por IA y narrativas visuales orientadas a datos."
       }
     }
   },

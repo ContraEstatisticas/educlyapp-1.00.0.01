@@ -49,49 +49,218 @@
     "complete": "完成"
   },
   "landing": {
-    "nav": {"home": "首页", "about": "关于我们", "programs": "功能", "testimonials": "用户评价", "plan": "套餐", "contact": "联系我们", "login": "登录", "startNow": "下载App"},
-    "hero": {"badge": "市场上最完整的AI应用", "title": "掌握", "titleHighlight": "人工智能", "titleEnd": "，直接从手机开始", "subtitle": "通过互动学习路径、实践练习和数字证书学习AI——全在App内。访问20+AI工具、离线模式和游戏化学习。", "cta": "免费下载", "demo": "观看演示", "students": "下载量", "rating": "评分", "countries": "国家"},
+    "nav": {
+      "home": "首页",
+      "about": "关于我们",
+      "programs": "功能",
+      "testimonials": "用户评价",
+      "plan": "套餐",
+      "contact": "联系我们",
+      "login": "登录",
+      "startNow": "下载App"
+    },
+    "hero": {
+      "badge": "市场上最完整的AI应用",
+      "title": "掌握",
+      "titleHighlight": "人工智能",
+      "titleEnd": "，直接从手机开始",
+      "subtitle": "通过互动学习路径、实践练习和数字证书学习AI——全在App内。访问20+AI工具、离线模式和游戏化学习。",
+      "cta": "免费下载",
+      "demo": "观看演示",
+      "students": "下载量",
+      "rating": "评分",
+      "countries": "国家"
+    },
     "features": {
-      "sectionLabel": "App功能", "title": "口袋里的一切所需", "subtitle": "一款完整的App，包含互动路径、AI助手、实时进度和证书——随时随地学习。",
-      "curriculum": {"title": "互动学习路径", "description": "通过游戏化路径和持续更新的内容学习市场上最好的AI工具。"},
-      "mentoring": {"title": "内置AI助手", "description": "从EDI获取实时答案，你在App中的个人AI助手。"},
-      "community": {"title": "实时进度", "description": "通过详细仪表板、连续学习天数和学习统计跟踪你的进步。"},
-      "certification": {"title": "数字证书", "description": "完成路径和挑战获得证书，证明你的AI技能。"},
-      "practical": {"title": "离线模式", "description": "下载课程离线学习——随时随地完美学习。"},
-      "career": {"title": "游戏化", "description": "获得XP，升级，解锁徽章，保持每日学习连续记录。"}
+      "sectionLabel": "App功能",
+      "title": "口袋里的一切所需",
+      "subtitle": "一款完整的App，包含互动路径、AI助手、实时进度和证书——随时随地学习。",
+      "curriculum": {
+        "title": "互动学习路径",
+        "description": "通过游戏化路径和持续更新的内容学习市场上最好的AI工具。"
+      },
+      "mentoring": {
+        "title": "内置AI助手",
+        "description": "从EDI获取实时答案，你在App中的个人AI助手。"
+      },
+      "community": {
+        "title": "实时进度",
+        "description": "通过详细仪表板、连续学习天数和学习统计跟踪你的进步。"
+      },
+      "certification": {
+        "title": "数字证书",
+        "description": "完成路径和挑战获得证书，证明你的AI技能。"
+      },
+      "practical": {
+        "title": "离线模式",
+        "description": "下载课程离线学习——随时随地完美学习。"
+      },
+      "career": {
+        "title": "游戏化",
+        "description": "获得XP，升级，解锁徽章，保持每日学习连续记录。"
+      }
     },
     "programs": {
-      "sectionLabel": "功能", "title": "探索App功能", "subtitle": "为所有级别设计的功能。", "popular": "最受欢迎", "startNow": "下载App", "beginner": "初级", "intermediate": "中级", "advanced": "高级",
-      "fundamentals": {"title": "AI学习路径", "description": "在App中通过互动和游戏化路径开始你的AI之旅。", "duration": "4周", "highlights": ["互动AI路径", "ChatGPT实践练习", "通过App自动化任务", "数字证书"]},
-      "machineLearning": {"title": "进阶挑战", "description": "深入28天挑战，每日练习和进度追踪。", "duration": "28天", "highlights": ["每日AI挑战", "互动练习", "游戏化进度", "完成证书"]},
-      "deepLearning": {"title": "个人AI助手", "description": "使用EDI，你的内置AI助手，提问和练习提示词。", "duration": "无限", "highlights": ["内置AI聊天", "提示词训练器", "实时回答", "App内个性化支持"]}
+      "sectionLabel": "功能",
+      "title": "探索App功能",
+      "subtitle": "为所有级别设计的功能。",
+      "popular": "最受欢迎",
+      "startNow": "下载App",
+      "beginner": "初级",
+      "intermediate": "中级",
+      "advanced": "高级",
+      "fundamentals": {
+        "title": "AI学习路径",
+        "description": "在App中通过互动和游戏化路径开始你的AI之旅。",
+        "duration": "4周",
+        "highlights": [
+          "互动AI路径",
+          "ChatGPT实践练习",
+          "通过App自动化任务",
+          "数字证书"
+        ]
+      },
+      "machineLearning": {
+        "title": "进阶挑战",
+        "description": "深入28天挑战，每日练习和进度追踪。",
+        "duration": "28天",
+        "highlights": [
+          "每日AI挑战",
+          "互动练习",
+          "游戏化进度",
+          "完成证书"
+        ]
+      },
+      "deepLearning": {
+        "title": "个人AI助手",
+        "description": "使用EDI，你的内置AI助手，提问和练习提示词。",
+        "duration": "无限",
+        "highlights": [
+          "内置AI聊天",
+          "提示词训练器",
+          "实时回答",
+          "App内个性化支持"
+        ]
+      }
     },
-    "pricing": {"badge": "价格", "title": "解锁App全部潜力", "subtitle": "今天开始您的AI学习之旅", "week1": "1周计划", "week4": "4周计划", "week12": "12周计划", "mostPopular": "最受欢迎", "from": "原价", "for": "现价", "perDay": "每天", "getMyPlan": "获取我的计划", "note": "使用12周计划的人获得的效果是4周的两倍。"},
+    "pricing": {
+      "badge": "价格",
+      "title": "解锁App全部潜力",
+      "subtitle": "今天开始您的AI学习之旅",
+      "week1": "1周计划",
+      "week4": "4周计划",
+      "week12": "12周计划",
+      "mostPopular": "最受欢迎",
+      "from": "原价",
+      "for": "现价",
+      "perDay": "每天",
+      "getMyPlan": "获取我的计划",
+      "note": "使用12周计划的人获得的效果是4周的两倍。"
+    },
     "testimonials": {
-      "sectionLabel": "用户评价", "title": "用户怎么说", "subtitle": "数千人已经通过Educly App学会了AI。",
+      "sectionLabel": "用户评价",
+      "title": "用户怎么说",
+      "subtitle": "数千人已经通过Educly App学会了AI。",
       "items": [
-        {"name": "玛丽亚·席尔瓦", "role": "数据科学家", "country": "巴西", "text": "Educly App改变了我学习AI的方式。我每天在公交上使用，3个月就获得了第一份工作。"},
-        {"name": "若昂·桑托斯", "role": "产品经理", "country": "葡萄牙", "text": "App太棒了——路径实用且可以离线学习。游戏化让我保持动力。"},
-        {"name": "安娜·加西亚", "role": "ML工程师", "country": "墨西哥", "text": "通过App完成了多个挑战，数字证书让我的简历脱颖而出。"},
-        {"name": "卡洛斯·费尔南德斯", "role": "创业者", "country": "阿根廷", "text": "我每天使用App更新AI知识。离线模式非常适合经常出差的人。"}
+        {
+          "name": "玛丽亚·席尔瓦",
+          "role": "数据科学家",
+          "country": "巴西",
+          "text": "Educly App改变了我学习AI的方式。我每天在公交上使用，3个月就获得了第一份工作。"
+        },
+        {
+          "name": "若昂·桑托斯",
+          "role": "产品经理",
+          "country": "葡萄牙",
+          "text": "App太棒了——路径实用且可以离线学习。游戏化让我保持动力。"
+        },
+        {
+          "name": "安娜·加西亚",
+          "role": "ML工程师",
+          "country": "墨西哥",
+          "text": "通过App完成了多个挑战，数字证书让我的简历脱颖而出。"
+        },
+        {
+          "name": "卡洛斯·费尔南德斯",
+          "role": "创业者",
+          "country": "阿根廷",
+          "text": "我每天使用App更新AI知识。离线模式非常适合经常出差的人。"
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "全球覆盖", "title": "遍布全球", "subtitle": "Educly App已在150多个国家被下载。",
-      "regions": {"latinAmerica": "拉丁美洲", "europe": "欧洲", "northAmerica": "北美洲", "asiaOceania": "亚洲和大洋洲"},
-      "features": {"languages": {"title": "15种语言", "description": "App支持多种语言专业翻译"}, "support": {"title": "24/7支持", "description": "内置AI助手和支持团队随时可用"}, "community": {"title": "App内社区", "description": "与全球用户连接分享进度"}}
+      "sectionLabel": "全球覆盖",
+      "title": "遍布全球",
+      "subtitle": "Educly App已在150多个国家被下载。",
+      "regions": {
+        "latinAmerica": "拉丁美洲",
+        "europe": "欧洲",
+        "northAmerica": "北美洲",
+        "asiaOceania": "亚洲和大洋洲"
+      },
+      "features": {
+        "languages": {
+          "title": "15种语言",
+          "description": "App支持多种语言专业翻译"
+        },
+        "support": {
+          "title": "24/7支持",
+          "description": "内置AI助手和支持团队随时可用"
+        },
+        "community": {
+          "title": "App内社区",
+          "description": "与全球用户连接分享进度"
+        }
+      }
     },
-    "stats": {"students": "下载量", "countries": "国家", "satisfaction": "商店评分", "partners": "AI工具"},
+    "stats": {
+      "students": "下载量",
+      "countries": "国家",
+      "satisfaction": "商店评分",
+      "partners": "AI工具"
+    },
     "cta": {
-      "title": "准备好从手机直接学习AI了吗？", "subtitle": "加入超过50,000名已经用Educly App掌握AI的用户。",
-      "startFree": "免费下载", "talkConsultant": "联系支持", "guarantee": "30天保证", "installments": "最多12期付款",
-      "benefits": ["完全访问所有路径", "免费App更新", "内置AI助手", "数字证书", "离线模式可用", "30天满意保证"]
+      "title": "准备好从手机直接学习AI了吗？",
+      "subtitle": "加入超过50,000名已经用Educly App掌握AI的用户。",
+      "startFree": "免费下载",
+      "talkConsultant": "联系支持",
+      "guarantee": "30天保证",
+      "installments": "最多12期付款",
+      "benefits": [
+        "完全访问所有路径",
+        "免费App更新",
+        "内置AI助手",
+        "数字证书",
+        "离线模式可用",
+        "30天满意保证"
+      ]
     },
     "footer": {
       "description": "市场上最完整的AI应用。从手机直接实践学习AI。",
-      "contact": "联系方式", "programs": "功能", "resources": "资源", "company": "公司", "legal": "法律",
-      "links": {"aiFundamentals": "AI学习路径", "machineLearning": "28天挑战", "deepLearning": "AI助手", "aiForBusiness": "数字证书", "blog": "博客", "webinars": "教程", "ebooks": "指南", "community": "社区", "aboutUs": "关于我们", "careers": "职业机会", "partnerships": "合作伙伴", "contact": "联系我们", "terms": "使用条款", "privacy": "隐私政策", "cookies": "Cookie政策"},
-      "copyright": "版权所有。", "madeWith": "为全球AI社区用❤️打造"
+      "contact": "联系方式",
+      "programs": "功能",
+      "resources": "资源",
+      "company": "公司",
+      "legal": "法律",
+      "links": {
+        "aiFundamentals": "AI学习路径",
+        "machineLearning": "28天挑战",
+        "deepLearning": "AI助手",
+        "aiForBusiness": "数字证书",
+        "blog": "博客",
+        "webinars": "教程",
+        "ebooks": "指南",
+        "community": "社区",
+        "aboutUs": "关于我们",
+        "careers": "职业机会",
+        "partnerships": "合作伙伴",
+        "contact": "联系我们",
+        "terms": "使用条款",
+        "privacy": "隐私政策",
+        "cookies": "Cookie政策"
+      },
+      "copyright": "版权所有。",
+      "madeWith": "为全球AI社区用❤️打造"
     }
   },
   "common": {
@@ -476,6 +645,19 @@
           "title": "11. 联系方式",
           "intro": "问题、付费试用退款请求或订阅取消或暂停请求必须通过官方电子邮件进行："
         }
+      }
+    }
+  },
+  "certificate": {
+    "canvas": {
+      "toolDescription": {
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   }

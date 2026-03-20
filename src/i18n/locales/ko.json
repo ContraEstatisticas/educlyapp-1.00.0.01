@@ -49,49 +49,218 @@
     "complete": "완료"
   },
   "landing": {
-    "nav": {"home": "홈", "about": "소개", "programs": "기능", "testimonials": "후기", "plan": "요금제", "contact": "문의하기", "login": "로그인", "startNow": "앱 다운로드"},
-    "hero": {"badge": "시장에서 가장 완벽한 AI 앱", "title": "마스터하세요", "titleHighlight": "인공지능", "titleEnd": ", 스마트폰에서 바로", "subtitle": "인터랙티브 학습 경로, 실습 연습, 디지털 인증서로 AI를 배우세요 — 모든 것이 앱 안에. 20개 이상의 AI 도구, 오프라인 모드, 게이미피케이션.", "cta": "무료 다운로드", "demo": "데모 보기", "students": "다운로드", "rating": "평점", "countries": "국가"},
+    "nav": {
+      "home": "홈",
+      "about": "소개",
+      "programs": "기능",
+      "testimonials": "후기",
+      "plan": "요금제",
+      "contact": "문의하기",
+      "login": "로그인",
+      "startNow": "앱 다운로드"
+    },
+    "hero": {
+      "badge": "시장에서 가장 완벽한 AI 앱",
+      "title": "마스터하세요",
+      "titleHighlight": "인공지능",
+      "titleEnd": ", 스마트폰에서 바로",
+      "subtitle": "인터랙티브 학습 경로, 실습 연습, 디지털 인증서로 AI를 배우세요 — 모든 것이 앱 안에. 20개 이상의 AI 도구, 오프라인 모드, 게이미피케이션.",
+      "cta": "무료 다운로드",
+      "demo": "데모 보기",
+      "students": "다운로드",
+      "rating": "평점",
+      "countries": "국가"
+    },
     "features": {
-      "sectionLabel": "앱 기능", "title": "주머니 속에 필요한 모든 것", "subtitle": "인터랙티브 경로, AI 어시스턴트, 실시간 진도, 인증서를 갖춘 완벽한 앱.",
-      "curriculum": {"title": "인터랙티브 학습 경로", "description": "게이미피케이션 경로와 지속적으로 업데이트되는 AI 도구 콘텐츠로 학습."},
-      "mentoring": {"title": "내장 AI 어시스턴트", "description": "앱 내 개인 AI 어시스턴트 EDI에서 실시간 답변을 받으세요."},
-      "community": {"title": "실시간 진도", "description": "상세 대시보드, 연속 학습 일수, 학습 통계로 진도 추적."},
-      "certification": {"title": "디지털 인증서", "description": "경로와 챌린지를 완료하여 인증서를 획득하세요."},
-      "practical": {"title": "오프라인 모드", "description": "레슨을 다운로드하여 인터넷 없이 학습 — 어디서나 완벽하게."},
-      "career": {"title": "게이미피케이션", "description": "XP를 획득하고, 레벨업하고, 배지를 잠금 해제하고, 매일 학습 연속 기록을 유지하세요."}
+      "sectionLabel": "앱 기능",
+      "title": "주머니 속에 필요한 모든 것",
+      "subtitle": "인터랙티브 경로, AI 어시스턴트, 실시간 진도, 인증서를 갖춘 완벽한 앱.",
+      "curriculum": {
+        "title": "인터랙티브 학습 경로",
+        "description": "게이미피케이션 경로와 지속적으로 업데이트되는 AI 도구 콘텐츠로 학습."
+      },
+      "mentoring": {
+        "title": "내장 AI 어시스턴트",
+        "description": "앱 내 개인 AI 어시스턴트 EDI에서 실시간 답변을 받으세요."
+      },
+      "community": {
+        "title": "실시간 진도",
+        "description": "상세 대시보드, 연속 학습 일수, 학습 통계로 진도 추적."
+      },
+      "certification": {
+        "title": "디지털 인증서",
+        "description": "경로와 챌린지를 완료하여 인증서를 획득하세요."
+      },
+      "practical": {
+        "title": "오프라인 모드",
+        "description": "레슨을 다운로드하여 인터넷 없이 학습 — 어디서나 완벽하게."
+      },
+      "career": {
+        "title": "게이미피케이션",
+        "description": "XP를 획득하고, 레벨업하고, 배지를 잠금 해제하고, 매일 학습 연속 기록을 유지하세요."
+      }
     },
     "programs": {
-      "sectionLabel": "기능", "title": "앱 기능 탐색", "subtitle": "모든 레벨을 위한 기능.", "popular": "가장 인기", "startNow": "앱 다운로드", "beginner": "초급", "intermediate": "중급", "advanced": "고급",
-      "fundamentals": {"title": "AI 학습 경로", "description": "앱에서 인터랙티브하고 게이미피케이션된 경로로 AI 여정을 시작하세요.", "duration": "4주", "highlights": ["인터랙티브 AI 경로", "ChatGPT 실습 연습", "앱으로 작업 자동화", "디지털 인증서"]},
-      "machineLearning": {"title": "고급 챌린지", "description": "매일 연습과 진도 추적으로 28일 챌린지에 도전하세요.", "duration": "28일", "highlights": ["매일 AI 챌린지", "인터랙티브 연습", "게이미피케이션 진도", "완료 인증서"]},
-      "deepLearning": {"title": "개인 AI 어시스턴트", "description": "EDI, 내장 AI 어시스턴트로 질문하고 프롬프트를 연습하세요.", "duration": "무제한", "highlights": ["내장 AI 채팅", "프롬프트 트레이너", "실시간 답변", "앱 내 맞춤 지원"]}
+      "sectionLabel": "기능",
+      "title": "앱 기능 탐색",
+      "subtitle": "모든 레벨을 위한 기능.",
+      "popular": "가장 인기",
+      "startNow": "앱 다운로드",
+      "beginner": "초급",
+      "intermediate": "중급",
+      "advanced": "고급",
+      "fundamentals": {
+        "title": "AI 학습 경로",
+        "description": "앱에서 인터랙티브하고 게이미피케이션된 경로로 AI 여정을 시작하세요.",
+        "duration": "4주",
+        "highlights": [
+          "인터랙티브 AI 경로",
+          "ChatGPT 실습 연습",
+          "앱으로 작업 자동화",
+          "디지털 인증서"
+        ]
+      },
+      "machineLearning": {
+        "title": "고급 챌린지",
+        "description": "매일 연습과 진도 추적으로 28일 챌린지에 도전하세요.",
+        "duration": "28일",
+        "highlights": [
+          "매일 AI 챌린지",
+          "인터랙티브 연습",
+          "게이미피케이션 진도",
+          "완료 인증서"
+        ]
+      },
+      "deepLearning": {
+        "title": "개인 AI 어시스턴트",
+        "description": "EDI, 내장 AI 어시스턴트로 질문하고 프롬프트를 연습하세요.",
+        "duration": "무제한",
+        "highlights": [
+          "내장 AI 채팅",
+          "프롬프트 트레이너",
+          "실시간 답변",
+          "앱 내 맞춤 지원"
+        ]
+      }
     },
-    "pricing": {"badge": "가격", "title": "앱의 모든 잠재력 잠금 해제", "subtitle": "오늘 AI 학습 여정을 시작하세요", "week1": "1주 플랜", "week4": "4주 플랜", "week12": "12주 플랜", "mostPopular": "가장 인기", "from": "기존", "for": "할인", "perDay": "일당", "getMyPlan": "내 플랜 받기", "note": "12주 플랜을 사용하는 사람들은 두 배의 결과를 얻습니다."},
+    "pricing": {
+      "badge": "가격",
+      "title": "앱의 모든 잠재력 잠금 해제",
+      "subtitle": "오늘 AI 학습 여정을 시작하세요",
+      "week1": "1주 플랜",
+      "week4": "4주 플랜",
+      "week12": "12주 플랜",
+      "mostPopular": "가장 인기",
+      "from": "기존",
+      "for": "할인",
+      "perDay": "일당",
+      "getMyPlan": "내 플랜 받기",
+      "note": "12주 플랜을 사용하는 사람들은 두 배의 결과를 얻습니다."
+    },
     "testimonials": {
-      "sectionLabel": "후기", "title": "사용자들의 이야기", "subtitle": "수천 명이 Educly 앱으로 AI를 배웠습니다.",
+      "sectionLabel": "후기",
+      "title": "사용자들의 이야기",
+      "subtitle": "수천 명이 Educly 앱으로 AI를 배웠습니다.",
       "items": [
-        {"name": "마리아 실바", "role": "데이터 사이언티스트", "country": "브라질", "text": "Educly 앱이 AI 학습 방식을 바꿨습니다. 매일 버스에서 사용하고 3개월 만에 첫 직장을 구했습니다."},
-        {"name": "조앙 산토스", "role": "프로덕트 매니저", "country": "포르투갈", "text": "앱이 놀라워요 — 경로가 실용적이고 오프라인으로 공부할 수 있습니다. 게이미피케이션이 동기를 유지해줍니다."},
-        {"name": "아나 가르시아", "role": "ML 엔지니어", "country": "멕시코", "text": "앱으로 여러 챌린지를 완료했고 디지털 인증서가 이력서에서 큰 차이를 만들었습니다."},
-        {"name": "카를로스 페르난데스", "role": "스타트업 창업자", "country": "아르헨티나", "text": "AI 최신 정보를 위해 매일 앱을 사용합니다. 오프라인 모드는 출장이 많은 사람에게 완벽합니다."}
+        {
+          "name": "마리아 실바",
+          "role": "데이터 사이언티스트",
+          "country": "브라질",
+          "text": "Educly 앱이 AI 학습 방식을 바꿨습니다. 매일 버스에서 사용하고 3개월 만에 첫 직장을 구했습니다."
+        },
+        {
+          "name": "조앙 산토스",
+          "role": "프로덕트 매니저",
+          "country": "포르투갈",
+          "text": "앱이 놀라워요 — 경로가 실용적이고 오프라인으로 공부할 수 있습니다. 게이미피케이션이 동기를 유지해줍니다."
+        },
+        {
+          "name": "아나 가르시아",
+          "role": "ML 엔지니어",
+          "country": "멕시코",
+          "text": "앱으로 여러 챌린지를 완료했고 디지털 인증서가 이력서에서 큰 차이를 만들었습니다."
+        },
+        {
+          "name": "카를로스 페르난데스",
+          "role": "스타트업 창업자",
+          "country": "아르헨티나",
+          "text": "AI 최신 정보를 위해 매일 앱을 사용합니다. 오프라인 모드는 출장이 많은 사람에게 완벽합니다."
+        }
       ]
     },
     "globalReach": {
-      "sectionLabel": "글로벌 도달", "title": "전 세계에 진출", "subtitle": "Educly 앱은 150개국 이상에서 다운로드되었습니다.",
-      "regions": {"latinAmerica": "라틴 아메리카", "europe": "유럽", "northAmerica": "북미", "asiaOceania": "아시아 & 오세아니아"},
-      "features": {"languages": {"title": "15개 언어", "description": "전문 번역으로 다국어 지원"}, "support": {"title": "24시간 지원", "description": "내장 AI 어시스턴트와 지원팀 상시 대기"}, "community": {"title": "앱 내 커뮤니티", "description": "전 세계 사용자와 연결하고 진도를 공유"}}
+      "sectionLabel": "글로벌 도달",
+      "title": "전 세계에 진출",
+      "subtitle": "Educly 앱은 150개국 이상에서 다운로드되었습니다.",
+      "regions": {
+        "latinAmerica": "라틴 아메리카",
+        "europe": "유럽",
+        "northAmerica": "북미",
+        "asiaOceania": "아시아 & 오세아니아"
+      },
+      "features": {
+        "languages": {
+          "title": "15개 언어",
+          "description": "전문 번역으로 다국어 지원"
+        },
+        "support": {
+          "title": "24시간 지원",
+          "description": "내장 AI 어시스턴트와 지원팀 상시 대기"
+        },
+        "community": {
+          "title": "앱 내 커뮤니티",
+          "description": "전 세계 사용자와 연결하고 진도를 공유"
+        }
+      }
     },
-    "stats": {"students": "다운로드", "countries": "국가", "satisfaction": "스토어 평점", "partners": "AI 도구"},
+    "stats": {
+      "students": "다운로드",
+      "countries": "국가",
+      "satisfaction": "스토어 평점",
+      "partners": "AI 도구"
+    },
     "cta": {
-      "title": "스마트폰에서 바로 AI를 배울 준비가 되셨나요?", "subtitle": "이미 Educly 앱으로 AI를 마스터하고 있는 50,000명 이상의 사용자와 함께하세요.",
-      "startFree": "무료 다운로드", "talkConsultant": "지원팀 문의", "guarantee": "30일 보장", "installments": "최대 12개월 할부",
-      "benefits": ["모든 경로 완전 접근", "무료 앱 업데이트", "내장 AI 어시스턴트", "디지털 인증서", "오프라인 모드 이용 가능", "30일 환불 보장"]
+      "title": "스마트폰에서 바로 AI를 배울 준비가 되셨나요?",
+      "subtitle": "이미 Educly 앱으로 AI를 마스터하고 있는 50,000명 이상의 사용자와 함께하세요.",
+      "startFree": "무료 다운로드",
+      "talkConsultant": "지원팀 문의",
+      "guarantee": "30일 보장",
+      "installments": "최대 12개월 할부",
+      "benefits": [
+        "모든 경로 완전 접근",
+        "무료 앱 업데이트",
+        "내장 AI 어시스턴트",
+        "디지털 인증서",
+        "오프라인 모드 이용 가능",
+        "30일 환불 보장"
+      ]
     },
     "footer": {
       "description": "시장에서 가장 완벽한 AI 앱. 스마트폰에서 바로 실습으로 AI를 배우세요.",
-      "contact": "연락처", "programs": "기능", "resources": "리소스", "company": "회사", "legal": "법적 정보",
-      "links": {"aiFundamentals": "AI 학습 경로", "machineLearning": "28일 챌린지", "deepLearning": "AI 어시스턴트", "aiForBusiness": "디지털 인증서", "blog": "블로그", "webinars": "튜토리얼", "ebooks": "가이드", "community": "커뮤니티", "aboutUs": "회사 소개", "careers": "채용", "partnerships": "파트너십", "contact": "연락처", "terms": "이용약관", "privacy": "개인정보처리방침", "cookies": "쿠키 정책"},
-      "copyright": "모든 권리 보유.", "madeWith": "글로벌 AI 커뮤니티를 위해 ❤️로 제작"
+      "contact": "연락처",
+      "programs": "기능",
+      "resources": "리소스",
+      "company": "회사",
+      "legal": "법적 정보",
+      "links": {
+        "aiFundamentals": "AI 학습 경로",
+        "machineLearning": "28일 챌린지",
+        "deepLearning": "AI 어시스턴트",
+        "aiForBusiness": "디지털 인증서",
+        "blog": "블로그",
+        "webinars": "튜토리얼",
+        "ebooks": "가이드",
+        "community": "커뮤니티",
+        "aboutUs": "회사 소개",
+        "careers": "채용",
+        "partnerships": "파트너십",
+        "contact": "연락처",
+        "terms": "이용약관",
+        "privacy": "개인정보처리방침",
+        "cookies": "쿠키 정책"
+      },
+      "copyright": "모든 권리 보유.",
+      "madeWith": "글로벌 AI 커뮤니티를 위해 ❤️로 제작"
     }
   },
   "common": {
@@ -289,8 +458,50 @@
     "access": "트랙 접근",
     "tipsTitle": "전문가 팁",
     "tipsDesc": "각 모듈에는 이미 AI로 수익을 올리고 있는 성공한 프리랜서들의 실용적인 팁이 포함되어 있습니다.",
-    "premium": { "title": "프리미엄 프리랜서 학습 트랙", "description": "성공적인 AI 프리랜서가 되기 위한 독점 콘텐츠 잠금 해제", "features": { "strategies": "검증된 판매 전략", "clients": "첫 고객 확보 방법", "pricing": "가격 책정 및 협상", "platforms": "프리랜서를 위한 최고의 플랫폼" } },
-    "modulesList": { "1": { "title": "프리랜서 기초", "description": "시작을 위한 마인드셋과 첫 걸음" }, "2": { "title": "포트폴리오 구축", "description": "AI로 매력적인 포트폴리오 만들기" }, "3": { "title": "고객 찾기", "description": "첫 일감을 얻기 위한 전략" }, "4": { "title": "전략적 가격 책정", "description": "AI 작업에 대한 요금 설정 방법" }, "5": { "title": "네트워킹 및 파트너십", "description": "전문 네트워크 구축" }, "6": { "title": "성공하는 제안서", "description": "전환되는 제안서 작성" }, "7": { "title": "비즈니스 확장", "description": "솔로 프리랜서에서 기업가로" }, "8": { "title": "AI 자동화", "description": "AI를 사용하여 생산성 배가" } }
+    "premium": {
+      "title": "프리미엄 프리랜서 학습 트랙",
+      "description": "성공적인 AI 프리랜서가 되기 위한 독점 콘텐츠 잠금 해제",
+      "features": {
+        "strategies": "검증된 판매 전략",
+        "clients": "첫 고객 확보 방법",
+        "pricing": "가격 책정 및 협상",
+        "platforms": "프리랜서를 위한 최고의 플랫폼"
+      }
+    },
+    "modulesList": {
+      "1": {
+        "title": "프리랜서 기초",
+        "description": "시작을 위한 마인드셋과 첫 걸음"
+      },
+      "2": {
+        "title": "포트폴리오 구축",
+        "description": "AI로 매력적인 포트폴리오 만들기"
+      },
+      "3": {
+        "title": "고객 찾기",
+        "description": "첫 일감을 얻기 위한 전략"
+      },
+      "4": {
+        "title": "전략적 가격 책정",
+        "description": "AI 작업에 대한 요금 설정 방법"
+      },
+      "5": {
+        "title": "네트워킹 및 파트너십",
+        "description": "전문 네트워크 구축"
+      },
+      "6": {
+        "title": "성공하는 제안서",
+        "description": "전환되는 제안서 작성"
+      },
+      "7": {
+        "title": "비즈니스 확장",
+        "description": "솔로 프리랜서에서 기업가로"
+      },
+      "8": {
+        "title": "AI 자동화",
+        "description": "AI를 사용하여 생산성 배가"
+      }
+    }
   },
   "contactPage": {
     "title": "문의하기",
@@ -434,6 +645,19 @@
           "title": "11. 연락처",
           "intro": "문의사항, 유료 체험 환불 요청, 구독 취소 또는 일시 중지 요청은 공식 이메일을 통해서만 이루어져야 합니다:"
         }
+      }
+    }
+  },
+  "certificate": {
+    "canvas": {
+      "toolDescription": {
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   }

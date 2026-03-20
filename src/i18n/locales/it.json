@@ -1269,7 +1269,14 @@
         "lovable": "dimostrando padronanza nello sviluppo di applicazioni web con IA, prototipazione rapida e creazione di prodotti digitali.",
         "captions": "dimostrando padronanza nell'editing video con IA, sottotitolazione automatica e produzione di contenuti audiovisivi.",
         "nanobanana": "dimostrando padronanza nella generazione di immagini con IA, design creativo e produzione visiva per progetti digitali.",
-        "default": "dimostrando conoscenze pratiche e comprensione dei fondamenti essenziali applicati in progetti reali."
+        "default": "dimostrando conoscenze pratiche e comprensione dei fondamenti essenziali applicati in progetti reali.",
+        "copilot": "dimostrando padronanza nella produttività assistita dall'IA, nell'integrazione dell'ecosistema Microsoft 365 e nei workflow aziendali.",
+        "grok": "dimostrando padronanza nell'analisi delle informazioni in tempo reale, nel ragionamento logico avanzato e nell'esplorazione dei dati.",
+        "perplexity": "dimostrando padronanza nella ricerca intelligente, nella verifica delle fonti e nella sintesi di informazioni complesse.",
+        "manus": "dimostrando padronanza nell'automazione web con agenti IA, nell'esecuzione di compiti complessi e nella navigazione assistita.",
+        "leonardo": "dimostrando padronanza nella generazione di arte digitale, nella manipolazione di modelli di immagine e nel design creativo ad alte prestazioni.",
+        "midjourney": "dimostrando padronanza nella creazione visuale artistica ad alta fedeltà, nell'esplorazione degli stili e nella composizione IA avanzata.",
+        "veo": "dimostrando padronanza nella generazione di video cinematografici, nell'animazione tramite IA e nello storytelling visuale basato sui dati."
       }
     }
   },

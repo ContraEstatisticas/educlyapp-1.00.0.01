@@ -441,8 +441,8 @@
         "description": "Crie imagens diretamente no chat."
       },
       "20": {
-        "title": "Lovable Avan\u00e7ado: Fluxo, Integra\u00e7\u00f5es e Resultados",
-        "description": "Domine o fluxo correto, integra\u00e7\u00f5es essenciais e t\u00e9cnicas para extrair os melhores resultados do Lovable."
+        "title": "Lovable Avançado: Fluxo, Integrações e Resultados",
+        "description": "Domine o fluxo correto, integrações essenciais e técnicas para extrair os melhores resultados do Lovable."
       },
       "21": {
         "title": "Revisão da Semana 3",
@@ -549,12 +549,12 @@
     },
     "lovable": {
       "1": {
-        "title": "Introdu\u00e7\u00e3o ao Lovable",
-        "description": "Crie aplica\u00e7\u00f5es web completas descrevendo em linguagem natural, sem escrever c\u00f3digo."
+        "title": "Introdução ao Lovable",
+        "description": "Crie aplicações web completas descrevendo em linguagem natural, sem escrever código."
       },
       "2": {
-        "title": "Lovable Avan\u00e7ado: Fluxo, Integra\u00e7\u00f5es e Resultados",
-        "description": "Domine o fluxo correto, integra\u00e7\u00f5es essenciais e t\u00e9cnicas para extrair os melhores resultados do Lovable."
+        "title": "Lovable Avançado: Fluxo, Integrações e Resultados",
+        "description": "Domine o fluxo correto, integrações essenciais e técnicas para extrair os melhores resultados do Lovable."
       }
     },
     "nanobanana": {
@@ -1564,6 +1564,13 @@
         "lovable": "demonstrando domínio em desenvolvimento de aplicações web com IA, prototipagem rápida e criação de produtos digitais.",
         "captions": "demonstrando domínio em edição de vídeo com IA, legendagem automática e produção de conteúdo audiovisual.",
         "nanobanana": "demonstrando domínio em geração de imagens com IA, design criativo e produção visual para projetos digitais.",
+        "copilot": "demonstrando domínio em produtividade assistida por IA, integração com o ecossistema Microsoft 365 e fluxos de trabalho corporativos.",
+        "grok": "demonstrando domínio em análise de informações em tempo real, raciocínio lógico avançado e exploração de dados.",
+        "perplexity": "demonstrando domínio em pesquisa inteligente, verificação de fontes e síntese de informações complexas.",
+        "manus": "demonstrando domínio em automação web com agentes de IA, execução de tarefas complexas e navegação assistida.",
+        "leonardo": "demonstrando domínio em geração de arte digital, manipulação de modelos de imagem e design criativo de alta performance.",
+        "midjourney": "demonstrando domínio em criação visual artística de alta fidelidade, exploração de estilos e composição avançada com IA.",
+        "veo": "demonstrando domínio em geração de vídeos cinematográficos, animação por IA e narrativas visuais orientadas a dados.",
         "default": "demonstrando conhecimentos práticos e compreensão dos fundamentos essenciais aplicados em projetos reais."
       }
     }

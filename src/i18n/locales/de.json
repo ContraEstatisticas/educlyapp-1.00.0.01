@@ -1241,7 +1241,14 @@
         "lovable": "mit nachgewiesener Beherrschung in KI-gestützter Webanwendungsentwicklung, Rapid Prototyping und digitaler Produkterstellung.",
         "captions": "mit nachgewiesener Beherrschung in KI-Videobearbeitung, automatischer Untertitelung und audiovisueller Inhaltsproduktion.",
         "nanobanana": "mit nachgewiesener Beherrschung in KI-Bilderzeugung, kreativem Design und visueller Produktion für digitale Projekte.",
-        "default": "mit nachgewiesenen praktischen Kenntnissen und Verständnis der wesentlichen Grundlagen in realen Projekten."
+        "default": "mit nachgewiesenen praktischen Kenntnissen und Verständnis der wesentlichen Grundlagen in realen Projekten.",
+        "copilot": "demonstrating mastery in AI-assisted productivity, Microsoft 365 ecosystem integration, and enterprise workflows.",
+        "grok": "demonstrating mastery in real-time information analysis, advanced logical reasoning, and data exploration.",
+        "perplexity": "demonstrating mastery in intelligent search, source verification, and synthesis of complex information.",
+        "manus": "demonstrating mastery in web automation with AI agents, complex task execution, and assisted navigation.",
+        "leonardo": "demonstrating mastery in digital art generation, image model manipulation, and high-performance creative design.",
+        "midjourney": "demonstrating mastery in high-fidelity artistic visual creation, style exploration, and advanced AI composition.",
+        "veo": "demonstrating mastery in cinematic video generation, AI animation, and data-driven visual storytelling."
       }
     }
   },
