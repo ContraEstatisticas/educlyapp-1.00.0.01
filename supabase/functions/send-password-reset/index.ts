@@ -296,6 +296,37 @@ const handler = async (req: Request): Promise<Response> => {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
+    // --- RATE LIMIT CHECK (Max 2 emails every 10 minutes) ---
+    const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { count, error: countError } = await supabase
+      .from("password_reset_attempts")
+      .select("*", { count: "exact", head: true })
+      .eq("email", normalizedEmail)
+      .gte("created_at", tenMinutesAgo);
+
+    if (countError) {
+      console.error("Error checking rate limit:", countError);
+      // Proceeding despite error to be safe, but logging it
+    } else if (count !== null && count >= 2) {
+      console.warn(`Rate limit exceeded for ${normalizedEmail}: ${count} attempts since ${tenMinutesAgo}`);
+      return new Response(JSON.stringify({ 
+        error: "Muitas tentativas enviadas. Por favor, aguarde 10 minutos antes de tentar novamente." 
+      }), {
+        status: 429,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Record the attempt before proceeding
+    const { error: insertError } = await supabase
+      .from("password_reset_attempts")
+      .insert({ email: normalizedEmail });
+    
+    if (insertError) {
+      console.error("Error recording attempt:", insertError);
+    }
+    // --------------------------------------------------------
+
     const redirectUrl = "https://educly.app/update-password";
 
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
