@@ -76,11 +76,11 @@ const GEMINI_BACKED_AI_TYPES = new Set(["gemini", "nanobanana", "edi"]);
 
 const OPENROUTER_MODELS: Record<string, OpenRouterModelConfig> = {
   chatgpt: {
-    textModel: Deno.env.get("OPENROUTER_MODEL_CHATGPT")?.trim() || "openai/gpt-5-mini",
+    textModel: Deno.env.get("OPENROUTER_MODEL_CHATGPT")?.trim() || "openai/gpt-4o-mini",
   },
   claude: {
     textModel:
-      Deno.env.get("OPENROUTER_MODEL_CLAUDE")?.trim() || "anthropic/claude-sonnet-4",
+      Deno.env.get("OPENROUTER_MODEL_CLAUDE")?.trim() || "anthropic/claude-3-haiku",
   },
   grok: {
     textModel: Deno.env.get("OPENROUTER_MODEL_GROK")?.trim() || "x-ai/grok-3-mini",
