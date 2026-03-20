@@ -13,6 +13,9 @@ const uiFallbackTranslations: Record<UiLang, Record<string, string>> = {
     "certificate.inProgress": "In progress",
     "certificate.daysCompleted": "{{completed}} of {{total}} days completed ({{percent}}%)",
     "challenge.notFound": "Challenge not found",
+    "challenge.progress": "Progress",
+    "challenge.days": "days",
+    "challenge.completed": "Completed",
     "challenge.toolAdvantages": "Tool advantages",
     "challenge.generateCertificate": "Generate certificate",
     "challenge.completeToCertificate": "Complete 100% to unlock the certificate",
@@ -67,6 +70,9 @@ const uiFallbackTranslations: Record<UiLang, Record<string, string>> = {
     "certificate.inProgress": "Em progresso",
     "certificate.daysCompleted": "{{completed}} de {{total}} dias concluídos ({{percent}}%)",
     "challenge.notFound": "Trilha não encontrada",
+    "challenge.progress": "Progresso",
+    "challenge.days": "dias",
+    "challenge.completed": "Concluído",
     "challenge.toolAdvantages": "Vantagens da ferramenta",
     "challenge.generateCertificate": "Gerar certificado",
     "challenge.completeToCertificate": "Conclua 100% para liberar o certificado",
@@ -121,6 +127,9 @@ const uiFallbackTranslations: Record<UiLang, Record<string, string>> = {
     "certificate.inProgress": "En progreso",
     "certificate.daysCompleted": "{{completed}} de {{total}} días completados ({{percent}}%)",
     "challenge.notFound": "Ruta no encontrada",
+    "challenge.progress": "Progreso",
+    "challenge.days": "días",
+    "challenge.completed": "Completado",
     "challenge.toolAdvantages": "Ventajas de la herramienta",
     "challenge.generateCertificate": "Generar certificado",
     "challenge.completeToCertificate": "Completa el 100% para desbloquear el certificado",
@@ -175,6 +184,9 @@ const uiFallbackTranslations: Record<UiLang, Record<string, string>> = {
     "certificate.inProgress": "En cours",
     "certificate.daysCompleted": "{{completed}} sur {{total}} jours terminés ({{percent}}%)",
     "challenge.notFound": "Parcours introuvable",
+    "challenge.progress": "Progression",
+    "challenge.days": "jours",
+    "challenge.completed": "Terminé",
     "challenge.toolAdvantages": "Avantages de l'outil",
     "challenge.generateCertificate": "Générer le certificat",
     "challenge.completeToCertificate": "Terminez à 100 % pour débloquer le certificat",
@@ -1129,13 +1141,28 @@ export const tUi = (
   key: string,
   values?: UiValues,
 ): string => {
+  const normalizedLanguage = normalizeUiLanguage(language);
   const translated = t(key, { ...(values ?? {}), defaultValue: "" });
 
   if (typeof translated === "string" && translated.trim() && translated !== key) {
+    if (normalizedLanguage !== "en") {
+      const translatedEnglish = t(key, { ...(values ?? {}), lng: "en", defaultValue: "" });
+      const localizedTemplate = uiFallbackTranslations[normalizedLanguage][key];
+
+      // If i18n returned English via fallback but we have a localized UI fallback,
+      // prefer the localized value to avoid English leaking into other languages.
+      if (
+        localizedTemplate &&
+        typeof translatedEnglish === "string" &&
+        translated === translatedEnglish
+      ) {
+        return interpolate(localizedTemplate, values);
+      }
+    }
+
     return translated;
   }
 
-  const normalizedLanguage = normalizeUiLanguage(language);
   const template = uiFallbackTranslations[normalizedLanguage][key] ?? uiFallbackTranslations.en[key] ?? key;
   return interpolate(template, values);
 };

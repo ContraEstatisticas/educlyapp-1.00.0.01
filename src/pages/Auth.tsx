@@ -39,6 +39,8 @@ const Auth = () => {
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [isResetLoading, setIsResetLoading] = useState(false);
+  const [isResetSuccessDialogOpen, setIsResetSuccessDialogOpen] = useState(false);
+  const [lastResetEmail, setLastResetEmail] = useState("");
 
   const [isLoginErrorDialogOpen, setIsLoginErrorDialogOpen] = useState(false);
   const [loginErrorType, setLoginErrorType] = useState<"invalid" | "noService" | "unconfirmed">("invalid");
@@ -187,12 +189,10 @@ const Auth = () => {
         throw error;
       }
 
-      toast({
-        title: t("auth.emailSent", "Email enviado!"),
-        description: t("auth.checkEmailReset", "Verifique sua caixa de entrada para redefinir a senha."),
-      });
+      setLastResetEmail(resetEmail.trim().toLowerCase());
       setIsResetDialogOpen(false);
       setResetEmail("");
+      setIsResetSuccessDialogOpen(true);
     } catch (error) {
       const message = error instanceof Error ? error.message : t("common.error");
       toast({
@@ -545,6 +545,35 @@ const Auth = () => {
               {t("auth.forgotPassword", "Esqueceu a senha?")}
             </Button>
             <Button type="button" onClick={() => setIsLoginErrorDialogOpen(false)} className="w-full">
+              {t("common.ok", "OK")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isResetSuccessDialogOpen} onOpenChange={setIsResetSuccessDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>{t("auth.emailSent", "Email enviado!")}</DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed space-y-3">
+              <p>
+                {t("auth.checkEmailReset", "Verifique sua caixa de entrada para redefinir a senha.")}
+              </p>
+              <p>
+                {t(
+                  "auth.resetPasswordDeliveryWarning",
+                  'Confira a caixa principal e o "Spam" e valide se este e-mail e o mesmo usado na compra.',
+                )}
+              </p>
+              {lastResetEmail ? (
+                <p className="text-foreground/80">
+                  {t("auth.email", "Email")}: <strong>{lastResetEmail}</strong>
+                </p>
+              ) : null}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button type="button" onClick={() => setIsResetSuccessDialogOpen(false)} className="w-full sm:w-auto">
               {t("common.ok", "OK")}
             </Button>
           </DialogFooter>

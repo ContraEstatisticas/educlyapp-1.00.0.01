@@ -145,7 +145,7 @@ export const AIToolPopup = ({
         {/* Progress */}
         <div className="px-6 pb-4">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-muted-foreground">{t("challenge.progress")}</span>
+            <span className="text-muted-foreground">{tUi(t, i18n.language, "challenge.progress")}</span>
             <span className="font-bold text-foreground">{progress}%</span>
           </div>
           <div className="h-3 w-full bg-muted rounded-full overflow-hidden">
@@ -158,7 +158,7 @@ export const AIToolPopup = ({
             />
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            {completedDays}/{totalDays} {t("challenge.days")} {t("challenge.completed").toLowerCase()}
+            {completedDays}/{totalDays} {tUi(t, i18n.language, "challenge.days")} {tUi(t, i18n.language, "challenge.completed").toLowerCase()}
           </p>
         </div>
 
