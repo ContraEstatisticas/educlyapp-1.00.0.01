@@ -28,13 +28,13 @@ interface TrailLessonStep {
   content?: string;
   promptBox?: string;
   question?: string;
-  options?: LessonQuizOption[];
-  fillBlanksOptions?: string[];
+  options?: readonly LessonQuizOption[];
+  fillBlanksOptions?: readonly string[];
   explanation?: string;
-  initialWords?: string[];
-  correctOrder?: string[];
+  initialWords?: readonly string[];
+  correctOrder?: readonly string[];
   sentence?: string;
-  answers?: string[];
+  answers?: readonly string[];
 }
 
 type StepAnswerState = {
@@ -60,9 +60,9 @@ const getDefaultStepAnswer = (): StepAnswerState => ({
   componentCompleted: false,
 });
 
-const removeFirstOccurrence = (items: string[], itemToRemove: string) => {
+const removeFirstOccurrence = (items: readonly string[], itemToRemove: string): string[] => {
   const index = items.findIndex((item) => item === itemToRemove);
-  if (index === -1) return items;
+  if (index === -1) return [...items];
 
   return [...items.slice(0, index), ...items.slice(index + 1)];
 };
@@ -170,8 +170,8 @@ const AIToolModuleLessonPage = () => {
             title: step.title,
             question: step.instruction,
             sentence: step.sentence,
-            answers: step.answers,
-            fillBlanksOptions: step.options,
+            answers: [...step.answers],
+            fillBlanksOptions: [...step.options],
             explanation: step.explanation,
           };
         }
@@ -207,8 +207,8 @@ const AIToolModuleLessonPage = () => {
         title: moduleContent.practice.title,
         question: `${moduleContent.practice.instruction}\n\n${lessonUi.practiceLead}`,
         explanation: moduleContent.practice.solution,
-        initialWords: shuffleArray([...moduleContent.practice.terms]),
-        correctOrder: moduleContent.practice.terms,
+        initialWords: shuffleArray(moduleContent.practice.terms),
+        correctOrder: [...moduleContent.practice.terms],
       },
       {
         type: "quiz",
@@ -230,7 +230,7 @@ const AIToolModuleLessonPage = () => {
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
-  const [availableWords, setAvailableWords] = useState<string[]>([]);
+  const [availableWords, setAvailableWords] = useState<readonly string[]>([]);
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [ediAssistState, setEdiAssistState] = useState<EdiAssistState | null>(null);
 
@@ -298,7 +298,7 @@ const AIToolModuleLessonPage = () => {
 
   const currentStep = lessonSteps[currentStepIndex];
   const currentStepAnswer = stepAnswers[currentStepIndex] || getDefaultStepAnswer();
-  const ediHelpEnabled = toolSlug === "midjourney";
+  const ediHelpEnabled = toolSlug === "midjourney" || toolSlug === "gemini";
 
   const setSelectedOption = (value: number | null) => {
     setStepAnswers((prev) => ({

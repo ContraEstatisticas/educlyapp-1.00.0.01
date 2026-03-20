@@ -10,9 +10,9 @@ import { tUi } from "@/lib/supplementalUiTranslations";
 interface FillBlanksProps {
   title: string;
   sentence: string;
-  answers?: string[];
-  correctAnswers?: string[];
-  options: string[];
+  answers?: readonly string[];
+  correctAnswers?: readonly string[];
+  options: readonly string[];
   explanation?: string;
   onComplete: () => void;
   ediHelpEnabled?: boolean;
