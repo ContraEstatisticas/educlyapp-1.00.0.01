@@ -45,13 +45,54 @@ const AI_HUB_EMAIL_WHITELIST = new Set([
   "acess@nuvei.com",
 ]);
 const API_TIMEOUT_MS = 60000; // 60s hard timeout to prevent connection hanging
+const OPENROUTER_BASE_URL =
+  Deno.env.get("OPENROUTER_BASE_URL")?.trim() || "https://openrouter.ai/api/v1";
+const OPENROUTER_APP_NAME =
+  Deno.env.get("OPENROUTER_APP_NAME")?.trim() || "Educly AI Hub";
+const OPENROUTER_HTTP_REFERER =
+  Deno.env.get("OPENROUTER_HTTP_REFERER")?.trim() || "https://educly.app";
+const GEMINI_TEXT_BASE_URL =
+  Deno.env.get("GEMINI_TEXT_BASE_URL")?.trim() ||
+  "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+const GEMINI_TEXT_MODEL =
+  Deno.env.get("GEMINI_TEXT_MODEL")?.trim() || "gemini-2.5-flash";
+const GEMINI_IMAGE_MODEL =
+  Deno.env.get("GEMINI_IMAGE_MODEL")?.trim() || "gemini-2.5-flash-image";
+
+type OpenRouterModelConfig = {
+  textModel?: string;
+};
+
+type AiHubLevelRow = {
+  current_level: number | null;
+};
+
+type AiHubProductRow = {
+  product_type: string | null;
+  expires_at: string | null;
+};
+
+const GEMINI_BACKED_AI_TYPES = new Set(["gemini", "nanobanana", "edi"]);
+
+const OPENROUTER_MODELS: Record<string, OpenRouterModelConfig> = {
+  chatgpt: {
+    textModel: Deno.env.get("OPENROUTER_MODEL_CHATGPT")?.trim() || "openai/gpt-5-mini",
+  },
+  claude: {
+    textModel:
+      Deno.env.get("OPENROUTER_MODEL_CLAUDE")?.trim() || "anthropic/claude-sonnet-4",
+  },
+  grok: {
+    textModel: Deno.env.get("OPENROUTER_MODEL_GROK")?.trim() || "x-ai/grok-3-mini",
+  },
+};
 
 const getAiHubLimitInfo = async (
-  supabase: ReturnType<typeof createClient>,
+  supabase: { from: (typeof createClient extends (...args: any[]) => infer T ? T : never)["from"] },
   userId: string,
   userEmail?: string | null,
 ) => {
-  const [{ data: levelData, error: levelError }, { data: productData, error: productError }] =
+  const [{ data: levelDataRaw, error: levelError }, { data: productDataRaw, error: productError }] =
     await Promise.all([
       supabase
         .from("user_levels")
@@ -67,6 +108,9 @@ const getAiHubLimitInfo = async (
         .is("revoked_at", null),
     ]);
 
+  const levelData = (levelDataRaw as AiHubLevelRow | null) || null;
+  const productData = (productDataRaw as AiHubProductRow[] | null) || [];
+
   if (levelError) {
     console.error("[assistentes-chat] Error loading user level for limits:", levelError);
   }
@@ -79,7 +123,7 @@ const getAiHubLimitInfo = async (
   const hasAiHubFromWhitelist = normalizedEmail
     ? AI_HUB_EMAIL_WHITELIST.has(normalizedEmail)
     : false;
-  const hasAiHubFromProducts = (productData || []).some((product) => {
+  const hasAiHubFromProducts = productData.some((product) => {
     if (!product.expires_at) return true;
     return new Date(product.expires_at).getTime() > Date.now();
   });
@@ -745,6 +789,108 @@ const createStreamingQuickReplyResponse = (content: string): Response => {
   });
 };
 
+const getOpenRouterApiKey = (): string | null => {
+  const apiKey = Deno.env.get("OPENROUTER_API_KEY")?.trim();
+  return apiKey && apiKey.length > 0 ? apiKey : null;
+};
+
+const getGeminiApiKey = (): string | null => {
+  const apiKey = Deno.env.get("GEMINI_API_KEY")?.trim();
+  return apiKey && apiKey.length > 0 ? apiKey : null;
+};
+
+const buildOpenRouterHeaders = (apiKey: string): Record<string, string> => {
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+
+  if (OPENROUTER_HTTP_REFERER) {
+    headers["HTTP-Referer"] = OPENROUTER_HTTP_REFERER;
+  }
+
+  if (OPENROUTER_APP_NAME) {
+    headers["X-Title"] = OPENROUTER_APP_NAME;
+  }
+
+  return headers;
+};
+
+const getModelConfigForAiType = (aiType: string): OpenRouterModelConfig | null =>
+  OPENROUTER_MODELS[aiType] || null;
+
+const normalizeOpenRouterText = (content: unknown): string => {
+  if (typeof content === "string") return content.trim();
+  if (!Array.isArray(content)) return "";
+
+  return content
+    .map((part) => {
+      if (typeof part === "string") return part;
+      if (!part || typeof part !== "object") return "";
+      const typedPart = part as Record<string, unknown>;
+      return typedPart.type === "text" && typeof typedPart.text === "string"
+        ? typedPart.text
+        : "";
+    })
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+};
+
+const extractOpenRouterImageUrl = (message: unknown): string | null => {
+  if (!message || typeof message !== "object") return null;
+
+  const typedMessage = message as Record<string, unknown>;
+  const images = Array.isArray(typedMessage.images) ? typedMessage.images : [];
+
+  for (const image of images) {
+    if (typeof image === "string" && image.trim()) {
+      return image.trim();
+    }
+
+    if (!image || typeof image !== "object") continue;
+    const typedImage = image as Record<string, unknown>;
+    const snakeCaseUrl = typedImage.image_url;
+    if (snakeCaseUrl && typeof snakeCaseUrl === "object") {
+      const url = (snakeCaseUrl as Record<string, unknown>).url;
+      if (typeof url === "string" && url.trim()) return url.trim();
+    }
+
+    const camelCaseUrl = typedImage.imageUrl;
+    if (camelCaseUrl && typeof camelCaseUrl === "object") {
+      const url = (camelCaseUrl as Record<string, unknown>).url;
+      if (typeof url === "string" && url.trim()) return url.trim();
+    }
+  }
+
+  const content = Array.isArray(typedMessage.content) ? typedMessage.content : [];
+  for (const part of content) {
+    if (!part || typeof part !== "object") continue;
+    const typedPart = part as Record<string, unknown>;
+    if (typedPart.type !== "image_url") continue;
+
+    const partImageUrl = typedPart.image_url;
+    if (partImageUrl && typeof partImageUrl === "object") {
+      const url = (partImageUrl as Record<string, unknown>).url;
+      if (typeof url === "string" && url.trim()) return url.trim();
+    }
+  }
+
+  return null;
+};
+
+const parseDataUrlImage = (imageUrl: string): { bytes: Uint8Array; mimeType: string; ext: string } | null => {
+  const match = imageUrl.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+  if (!match) return null;
+
+  const mimeType = match[1];
+  const base64Data = match[2];
+  const ext = mimeType === "image/jpeg" ? "jpg" : mimeType === "image/webp" ? "webp" : "png";
+  const bytes = Uint8Array.from(atob(base64Data), (char) => char.charCodeAt(0));
+
+  return { bytes, mimeType, ext };
+};
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -875,38 +1021,41 @@ serve(async (req) => {
     // Get system prompt
     const lang = language.startsWith("pt") ? "pt" : "en";
     const systemPrompt = persona[lang];
-
-    // Get API key
-    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
-    if (!GEMINI_API_KEY) {
-      return new Response(JSON.stringify({ error: "API key not configured" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    const AI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
-    const TEXT_MODEL = "gemini-2.5-flash";
-    const IMAGE_GEN_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=${GEMINI_API_KEY}`;
+    const useGeminiProvider = GEMINI_BACKED_AI_TYPES.has(aiType);
 
     // --- Handle image generation (nanobanana) ---
     if (isImageType) {
-      const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
+      if (!useGeminiProvider) {
+        return new Response(JSON.stringify({ error: "Creative mode is only configured for Gemini-backed assistants" }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
 
+      const geminiApiKey = getGeminiApiKey();
+      if (!geminiApiKey) {
+        return new Response(JSON.stringify({ error: "GEMINI_API_KEY not configured" }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const imageGenUrl =
+        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_IMAGE_MODEL}:generateContent?key=${geminiApiKey}`;
       const abortController = new AbortController();
       const timeoutId = setTimeout(() => abortController.abort(), API_TIMEOUT_MS);
 
       let textResponse;
       try {
-        textResponse = await fetch(AI_BASE_URL, {
+        textResponse = await fetch(GEMINI_TEXT_BASE_URL, {
           method: "POST",
           signal: abortController.signal,
           headers: {
-            Authorization: `Bearer ${GEMINI_API_KEY}`,
+            Authorization: `Bearer ${geminiApiKey}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: TEXT_MODEL,
+            model: GEMINI_TEXT_MODEL,
             messages: [
               { role: "system", content: systemPrompt },
               ...messages,
@@ -918,7 +1067,7 @@ serve(async (req) => {
       }
 
       if (!textResponse.ok) {
-        console.error("Text response error:", await textResponse.text());
+        console.error("Gemini creative text response error:", await textResponse.text());
         return new Response(JSON.stringify({ error: "Failed to generate response" }), {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -927,9 +1076,8 @@ serve(async (req) => {
 
       const textData = await textResponse.json();
       const briefResponse = textData.choices?.[0]?.message?.content || "";
-
       const imagePrompt = `${lastUserMessage}. Ultra high resolution, professional quality, highly detailed.`;
-      const imageResponse = await fetch(IMAGE_GEN_URL, {
+      const imageResponse = await fetch(imageGenUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -957,7 +1105,7 @@ serve(async (req) => {
 
       if (!imageResponse.ok) {
         const errText = await imageResponse.text();
-        console.error("Image generation error:", errText);
+        console.error("Gemini image generation error:", errText);
         return new Response(JSON.stringify({
           type: "creative",
           text: briefResponse,
@@ -968,12 +1116,9 @@ serve(async (req) => {
       }
 
       const imageData = await imageResponse.json();
-      console.log("Gemini image response:", JSON.stringify(imageData).slice(0, 500));
-
-      // Gemini 2.0 Flash image generation returns inlineData in content parts
       const parts: Array<{ text?: string; inlineData?: { data: string; mimeType: string } }> =
         imageData.candidates?.[0]?.content?.parts || [];
-      const imagePart = parts.find((p) => p.inlineData);
+      const imagePart = parts.find((part) => part.inlineData);
       let imageUrl: string | null = null;
 
       if (imagePart?.inlineData) {
@@ -981,7 +1126,7 @@ serve(async (req) => {
         const mimeType = imagePart.inlineData.mimeType || "image/png";
         const ext = mimeType === "image/jpeg" ? "jpg" : "png";
         const fileName = `nanobanana/${user.id}/${Date.now()}.${ext}`;
-        const imageBytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        const imageBytes = Uint8Array.from(atob(b64), (char) => char.charCodeAt(0));
 
         const { error: uploadError } = await supabase.storage
           .from("generated-images")
@@ -998,7 +1143,6 @@ serve(async (req) => {
           imageUrl = publicData?.publicUrl || null;
         }
 
-        // Fallback: use data URL so image always displays even without storage bucket
         if (!imageUrl) {
           imageUrl = `data:${mimeType};base64,${b64}`;
         }
@@ -1042,22 +1186,63 @@ serve(async (req) => {
 
     let response;
     try {
-      response = await fetch(AI_BASE_URL, {
-        method: "POST",
-        signal: streamAbortController.signal,
-        headers: {
-          Authorization: `Bearer ${GEMINI_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: TEXT_MODEL,
-          messages: [
-            { role: "system", content: systemPrompt },
-            ...messages,
-          ],
-          stream: true,
-        }),
-      });
+      if (useGeminiProvider) {
+        const geminiApiKey = getGeminiApiKey();
+        if (!geminiApiKey) {
+          return new Response(JSON.stringify({ error: "GEMINI_API_KEY not configured" }), {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+
+        response = await fetch(GEMINI_TEXT_BASE_URL, {
+          method: "POST",
+          signal: streamAbortController.signal,
+          headers: {
+            Authorization: `Bearer ${geminiApiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: GEMINI_TEXT_MODEL,
+            messages: [
+              { role: "system", content: systemPrompt },
+              ...messages,
+            ],
+            stream: true,
+          }),
+        });
+      } else {
+        const openRouterApiKey = getOpenRouterApiKey();
+        if (!openRouterApiKey) {
+          return new Response(JSON.stringify({ error: "OPENROUTER_API_KEY not configured" }), {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+
+        const openRouterConfig = getModelConfigForAiType(aiType);
+        if (!openRouterConfig?.textModel) {
+          return new Response(JSON.stringify({ error: "No text model configured for this AI type" }), {
+            status: 500,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+
+        response = await fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
+          method: "POST",
+          signal: streamAbortController.signal,
+          headers: buildOpenRouterHeaders(openRouterApiKey),
+          body: JSON.stringify({
+            model: openRouterConfig.textModel,
+            messages: [
+              { role: "system", content: systemPrompt },
+              ...messages,
+            ],
+            stream: true,
+            user: user.id,
+          }),
+        });
+      }
     } finally {
       clearTimeout(streamTimeoutId);
     }
