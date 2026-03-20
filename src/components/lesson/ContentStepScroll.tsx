@@ -180,7 +180,7 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
               disabled={isRevealing}
             >
               <ChevronUp className="w-4 h-4 mr-2" />
-              {t("lesson.previousPart") || "Ver parte anterior"}
+              {t("lesson.previousPart", "Ver parte anterior")}
             </Button>
           )}
 
@@ -208,7 +208,7 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
                 </>
               ) : (
                 <>
-                  <span>{t("lesson.nextPart") || "Próxima parte"}</span>
+                  <span>{t("lesson.nextPart", "Próxima parte")}</span>
                   <ChevronDown className={cn("w-5 h-5", isRevealing ? "animate-pulse" : "animate-bounce")} />
                 </>
               )}
@@ -218,7 +218,7 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
           {/* Instructions */}
           {!isLastPart && (
             <p className="text-center text-xs text-muted-foreground">
-              {t("lesson.partsHint") || `Clique para continuar lendo (${currentPart + 1}/${parts.length})`}
+              {t("lesson.partsHint", `Clique para continuar lendo (${currentPart + 1}/${parts.length})`)}
             </p>
           )}
         </div>

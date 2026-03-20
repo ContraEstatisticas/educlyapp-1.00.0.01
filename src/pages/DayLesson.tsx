@@ -684,7 +684,7 @@ const DayLesson = () => {
                       /* Componente não reconhecido - auto-skip */
                       <div className="bg-muted rounded-2xl p-6 text-center">
                         <p className="text-muted-foreground text-sm">
-                          {t("lesson.componentUnavailable") || "Componente não disponível"}
+                          {t("lesson.componentUnavailable", "Componente não disponível")}
                         </p>
                       </div>
                     )}
@@ -696,7 +696,7 @@ const DayLesson = () => {
                   <div className="bg-card rounded-2xl p-4 border border-border/50 shadow-sm">
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <CheckCircle2 className="w-5 h-5 text-success" />
-                      <span className="text-sm">{t("lesson.stepCompleted") || "Etapa concluída"}</span>
+                      <span className="text-sm">{t("lesson.stepCompleted", "Etapa concluída")}</span>
                     </div>
                   </div>
                 )}

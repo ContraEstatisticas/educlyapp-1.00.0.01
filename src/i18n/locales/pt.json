@@ -1674,6 +1674,8 @@
       "practical": "⚡ Prática",
       "simulator": "🤖 Simulador"
     },
+    "stepCompleted": "Etapa concluída",
+    "componentUnavailable": "Componente não disponível",
     "quiz": {
       "correct": "Correto!",
       "incorrect": "Tente novamente",

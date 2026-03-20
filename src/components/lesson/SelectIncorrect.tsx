@@ -104,10 +104,10 @@ export const SelectIncorrect = ({
         </div>
         <div>
           <h3 className="text-lg font-bold text-foreground mb-1">
-            {t("lesson.selectIncorrect.title") || "Encontre os Erros"}
+            {t("lesson.selectIncorrect.title", "Encontre os Erros")}
           </h3>
           <p className="text-muted-foreground">
-            {t("lesson.selectIncorrect.instruction") || `Selecione ${required > 1 ? 'as' : 'a'} opç${required > 1 ? 'ões' : 'ão'} que ${required > 1 ? 'estão' : 'está'} INCORRETA${required > 1 ? 'S' : ''}.`}
+            {t("lesson.selectIncorrect.instruction", `Selecione ${required > 1 ? 'as' : 'a'} opç${required > 1 ? 'ões' : 'ão'} que ${required > 1 ? 'estão' : 'está'} INCORRETA${required > 1 ? 'S' : ''}.`)}
           </p>
         </div>
       </div>
@@ -199,7 +199,7 @@ export const SelectIncorrect = ({
       {/* Contador de seleções */}
       {!isChecked && (
         <div className="text-center text-sm text-muted-foreground">
-          {t("lesson.selectIncorrect.selected") || "Selecionadas:"} {selectedIndices.length}/{required}
+          {t("lesson.selectIncorrect.selected", "Selecionadas:")} {selectedIndices.length}/{required}
         </div>
       )}
 
@@ -222,8 +222,8 @@ export const SelectIncorrect = ({
             <div>
               <p className={cn("font-semibold", isCorrect ? "text-green-800" : "text-red-800")}>
                 {isCorrect
-                  ? t("lesson.selectIncorrect.correct") || "Perfeito! Você identificou corretamente as opções erradas!"
-                  : t("lesson.selectIncorrect.incorrect") || "Ainda não... Revise sua seleção!"}
+                  ? t("lesson.selectIncorrect.correct", "Perfeito! Você identificou corretamente as opções erradas!")
+                  : t("lesson.selectIncorrect.incorrect", "Ainda não... Revise sua seleção!")}
               </p>
               {isCorrect && successExplanation && (
                 <p className="text-green-700 mt-2 text-sm">{successExplanation}</p>
@@ -231,17 +231,17 @@ export const SelectIncorrect = ({
               {!isCorrect && (
                 <p className="text-red-700 mt-2 text-sm">
                   {selectedIndices.some(idx => !shuffledOptions[idx].isIncorrect)
-                    ? t("lesson.selectIncorrect.hasCorrect") || "Você selecionou algo que está CERTO. Lembre-se: queremos as opções ERRADAS."
+                    ? t("lesson.selectIncorrect.hasCorrect", "Você selecionou algo que está CERTO. Lembre-se: queremos as opções ERRADAS.")
                     : selectedIndices.length < required
-                      ? t("lesson.selectIncorrect.needMore") || `Selecione mais opções incorretas. Faltam ${required - selectedIndices.length}.`
-                      : t("lesson.selectIncorrect.tooMany") || "Você selecionou opções demais."}
+                      ? t("lesson.selectIncorrect.needMore", `Selecione mais opções incorretas. Faltam ${required - selectedIndices.length}.`)
+                      : t("lesson.selectIncorrect.tooMany", "Você selecionou opções demais.")}
                 </p>
               )}
               {!isCorrect && attempts >= 2 && (
                 <div className="mt-3 flex items-start gap-2 text-orange-700 bg-orange-50 rounded-xl p-3 border border-orange-200">
                   <Lightbulb className="w-5 h-5 flex-shrink-0" />
                   <p className="text-sm">
-                    {t("lesson.selectIncorrect.hint") || "Dica: Pense no que você aprendeu sobre boas práticas. O que vai CONTRA esses princípios?"}
+                    {t("lesson.selectIncorrect.hint", "Dica: Pense no que você aprendeu sobre boas práticas. O que vai CONTRA esses princípios?")}
                   </p>
                 </div>
               )}
@@ -258,7 +258,7 @@ export const SelectIncorrect = ({
           className="w-full h-14 text-lg font-semibold rounded-xl"
           size="lg"
         >
-          {t("lesson.checkAnswer") || "Verificar"}
+          {t("lesson.checkAnswer", "Verificar")}
         </Button>
       ) : (
         <Button
@@ -272,8 +272,8 @@ export const SelectIncorrect = ({
           size="lg"
         >
           {isCorrect
-            ? t("common.continue") || "Continuar"
-            : t("lesson.tryAgain") || "Tentar Novamente"}
+            ? t("common.continue", "Continuar")
+            : t("lesson.tryAgain", "Tentar Novamente")}
         </Button>
       )}
     </div>

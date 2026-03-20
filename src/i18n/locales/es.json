@@ -1387,6 +1387,8 @@
     "continue": "CONTINUAR",
     "verify": "VERIFICAR",
     "tryAgain": "INTENTAR DE NUEVO",
+    "stepCompleted": "Etapa completada",
+    "componentUnavailable": "Componente no disponible",
     "stepTypes": {
       "learn": "📚 Aprender",
       "quiz": "❓ Quiz",

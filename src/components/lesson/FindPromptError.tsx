@@ -145,8 +145,8 @@ export const FindPromptError = ({
             <div>
               <p className={cn("font-semibold", isCorrect ? "text-green-800" : "text-red-800")}>
                 {isCorrect
-                  ? t("lesson.findError.correct") || "Excelente! Você encontrou o erro!"
-                  : t("lesson.findError.incorrect") || "Não é esse o erro. Tente novamente!"}
+                  ? t("lesson.findError.correct", "Excelente! Você encontrou o erro!")
+                  : t("lesson.findError.incorrect", "Não é esse o erro. Tente novamente!")}
               </p>
               {isCorrect && promptParts[correctErrorIndex]?.errorExplanation && (
                 <p className="text-green-700 mt-2 text-sm">
@@ -160,7 +160,7 @@ export const FindPromptError = ({
                 <div className="mt-3 flex items-start gap-2 text-orange-700 bg-orange-50 rounded-xl p-3 border border-orange-200">
                   <Lightbulb className="w-5 h-5 flex-shrink-0" />
                   <p className="text-sm">
-                    {t("lesson.findError.hint") || "Dica: Procure por algo que está vago, ambíguo ou que poderia ser mais específico no prompt."}
+                    {t("lesson.findError.hint", "Dica: Procure por algo que está vago, ambíguo ou que poderia ser mais específico no prompt.")}
                   </p>
                 </div>
               )}
@@ -177,7 +177,7 @@ export const FindPromptError = ({
           className="w-full h-14 text-lg font-semibold rounded-xl"
           size="lg"
         >
-          {t("lesson.checkAnswer") || "Verificar"}
+          {t("lesson.checkAnswer", "Verificar")}
         </Button>
       ) : (
         <Button
@@ -191,8 +191,8 @@ export const FindPromptError = ({
           size="lg"
         >
           {isCorrect
-            ? t("common.continue") || "Continuar"
-            : t("lesson.tryAgain") || "Tentar Novamente"}
+            ? t("common.continue", "Continuar")
+            : t("lesson.tryAgain", "Tentar Novamente")}
         </Button>
       )}
     </div>

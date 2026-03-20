@@ -72,12 +72,12 @@ export const EdiMotivation = ({
 
   // Mensagens default por tipo (fallback when no custom message)
   const defaultMessages: Record<string, string> = {
-    almost_done: t("lesson.ediMotivation.almostDone") || "Falta pouco! 🎯 Você está quase lá!",
-    halfway: t("lesson.ediMotivation.halfway") || "Metade concluída! 💪 Continue assim!",
-    great_job: t("lesson.ediMotivation.greatJob") || "Excelente trabalho! ✨ Você está arrasando!",
-    keep_going: t("lesson.ediMotivation.keepGoing") || "Não desista agora! 🔥 Você consegue!",
-    final_stretch: t("lesson.ediMotivation.finalStretch") || "Reta final! ⚡ Mais um pouquinho!",
-    encouragement: t("lesson.ediMotivation.encouragement") || "Eu acredito em você! 💖 Vamos juntos!",
+    almost_done: t("lesson.ediMotivation.almostDone", "Falta pouco! 🎯 Você está quase lá!"),
+    halfway: t("lesson.ediMotivation.halfway", "Metade concluída! 💪 Continue assim!"),
+    great_job: t("lesson.ediMotivation.greatJob", "Excelente trabalho! ✨ Você está arrasando!"),
+    keep_going: t("lesson.ediMotivation.keepGoing", "Não desista agora! 🔥 Você consegue!"),
+    final_stretch: t("lesson.ediMotivation.finalStretch", "Reta final! ⚡ Mais um pouquinho!"),
+    encouragement: t("lesson.ediMotivation.encouragement", "Eu acredito em você! 💖 Vamos juntos!"),
   };
 
   // Use custom message if provided, otherwise use default
@@ -163,7 +163,7 @@ export const EdiMotivation = ({
               {displayMessage}
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              — EDI, {t("lesson.ediMotivation.yourAssistant") || "seu assistente"}
+              — EDI, {t("lesson.ediMotivation.yourAssistant", "seu assistente")}
             </p>
           </div>
         </div>

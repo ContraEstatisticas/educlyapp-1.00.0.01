@@ -54,6 +54,10 @@ export const FillBlanks = ({
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [isEdiHelpOpen, setIsEdiHelpOpen] = useState(false);
 
+  const areAllAnswersCorrect = (answersState: (string | null)[]) =>
+    answersState.length === actualAnswers.length &&
+    answersState.every((answer, index) => answer === actualAnswers[index]);
+
   const shuffledOptions = useMemo(() => shuffleArray([...optionItems]), [optionItems]);
 
   const moveToNextEmptyBlank = (answersState: (string | null)[], currentIndex: number) => {
@@ -68,32 +72,49 @@ export const FillBlanks = ({
     setActiveBlank(firstEmpty !== -1 ? firstEmpty : null);
   };
 
-  const applyAnswerToBlank = (blankIndex: number, answer: string) => {
+  const applyAnswerToBlank = (blankIndex: number, answer: string): (string | null)[] | null => {
+    const normalizeValue = (value: string) => value.trim();
     const currentOptionId = filledOptionIds[blankIndex];
     const matchingOption = optionItems.find(
-      (option) => option.value === answer && (!usedOptions.has(option.id) || option.id === currentOptionId)
+      (option) => normalizeValue(option.value) === normalizeValue(answer)
     );
 
-    if (!matchingOption) return false;
+    if (!matchingOption) return null;
 
     const nextFilledAnswers = [...filledAnswers];
     const nextFilledOptionIds = [...filledOptionIds];
-    const nextUsedOptions = new Set(usedOptions);
+
+    // If the correct option is currently placed in another blank, free that blank first.
+    const occupiedIndex = nextFilledOptionIds.findIndex(
+      (optionId, index) => optionId === matchingOption.id && index !== blankIndex
+    );
+
+    if (occupiedIndex !== -1) {
+      nextFilledAnswers[occupiedIndex] = null;
+      nextFilledOptionIds[occupiedIndex] = null;
+    }
 
     if (currentOptionId && currentOptionId !== matchingOption.id) {
-      nextUsedOptions.delete(currentOptionId);
+      const previousSlot = nextFilledOptionIds.findIndex((optionId) => optionId === currentOptionId);
+      if (previousSlot !== -1) {
+        nextFilledAnswers[previousSlot] = null;
+        nextFilledOptionIds[previousSlot] = null;
+      }
     }
 
     nextFilledAnswers[blankIndex] = answer;
     nextFilledOptionIds[blankIndex] = matchingOption.id;
-    nextUsedOptions.add(matchingOption.id);
+
+    const nextUsedOptions = new Set(
+      nextFilledOptionIds.filter((optionId): optionId is string => optionId !== null)
+    );
 
     setFilledAnswers(nextFilledAnswers);
     setFilledOptionIds(nextFilledOptionIds);
     setUsedOptions(nextUsedOptions);
     moveToNextEmptyBlank(nextFilledAnswers, blankIndex);
 
-    return true;
+    return nextFilledAnswers;
   };
 
   const handleOptionClick = (option: { id: string; value: string }) => {
@@ -174,17 +195,21 @@ export const FillBlanks = ({
 
   const handleApplyEdiStep = async (stepIndex: number) => {
     const answer = actualAnswers[stepIndex];
-    if (!answer) return;
+    if (!answer) return false;
 
-    const applied = applyAnswerToBlank(stepIndex, answer);
-    if (!applied) return;
+    const nextFilledAnswers = applyAnswerToBlank(stepIndex, answer);
+    if (!nextFilledAnswers) return false;
 
-    const isLastStep = stepIndex === actualAnswers.length - 1;
-    if (isLastStep) {
+    const allCorrect = areAllAnswersCorrect(nextFilledAnswers);
+    if (allCorrect) {
       setIsCorrect(true);
       setShowResult(true);
+      setWrongAttempts(0);
       playCorrect();
+      return true;
     }
+
+    return true;
   };
 
   const allFilled = filledAnswers.every((answer) => answer !== null);
@@ -323,7 +348,15 @@ export const FillBlanks = ({
         description={tUi(t, i18n.language, "lesson.ediGuide.fillBlanks.modalDescription")}
         steps={ediHelpSteps}
         onApplyStep={handleApplyEdiStep}
-        onClose={() => setIsEdiHelpOpen(false)}
+        onClose={() => {
+          setIsEdiHelpOpen(false);
+
+          if (areAllAnswersCorrect(filledAnswers)) {
+            setIsCorrect(true);
+            setShowResult(true);
+            setWrongAttempts(0);
+          }
+        }}
       />
     </div>
   );

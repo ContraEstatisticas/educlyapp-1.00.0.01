@@ -18,7 +18,7 @@ interface EdiGuidedHelpProps {
   title?: string;
   description?: string;
   steps: EdiGuidedHelpStep[];
-  onApplyStep?: (stepIndex: number, step: EdiGuidedHelpStep) => void | Promise<void>;
+  onApplyStep?: (stepIndex: number, step: EdiGuidedHelpStep) => boolean | void | Promise<boolean | void>;
   onClose: () => void;
 }
 
@@ -53,7 +53,11 @@ export const EdiGuidedHelp = ({
     setIsApplying(true);
 
     try {
-      await onApplyStep?.(currentStepIndex, currentStep);
+      const applyResult = await onApplyStep?.(currentStepIndex, currentStep);
+
+      if (applyResult === false) {
+        return;
+      }
 
       if (isLastStep) {
         onClose();
