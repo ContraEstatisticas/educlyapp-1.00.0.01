@@ -343,38 +343,6 @@ serve(async (req) => {
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     console.error("[send-welcome-email] Error:", error);
-
-    // ✅ Log failure in the database if the log entry was created
-    try {
-      const supabaseAdmin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-      const body = await req.clone().json().catch(() => ({}));
-      const email = body.email?.toLowerCase().trim();
-      
-      if (email) {
-        // Find the most recent pending log for this email to update it as failed
-        const { data: latestLog } = await supabaseAdmin
-          .from("email_logs")
-          .select("id")
-          .eq("recipient_email", email)
-          .eq("status", "pending")
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .maybeSingle();
-
-        if (latestLog) {
-          await supabaseAdmin
-            .from("email_logs")
-            .update({ 
-              status: "failed", 
-              error_message: errorMessage 
-            })
-            .eq("id", latestLog.id);
-        }
-      }
-    } catch (logError) {
-      console.error("[send-welcome-email] Critical failure logging the error:", logError);
-    }
-
     return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -64,7 +64,7 @@ serve(async (req) => {
     // 1. Look up token
     const { data: tokenRow, error: tokenError } = await supabase
       .from('user_access_tokens')
-      .select('user_id, created_at')
+      .select('user_id')
       .eq('token', token)
       .maybeSingle();
 
@@ -72,18 +72,6 @@ serve(async (req) => {
       console.log(`[magic-login] Invalid token: ${token}`);
       return new Response(JSON.stringify({ error: 'invalid_token' }), {
         status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
-    }
-
-    // 2. Check expiration (72 hours)
-    const createdAt = new Date(tokenRow.created_at);
-    const now = new Date();
-    const ageInHours = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60);
-
-    if (ageInHours > 72) {
-      console.log(`[magic-login] Token expired (${Math.round(ageInHours)}h): ${token}`);
-      return new Response(JSON.stringify({ error: 'token_expired' }), {
-        status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
@@ -103,7 +91,7 @@ serve(async (req) => {
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'magiclink',
       email,
-      options: { redirectTo: 'https://educly.app/auth?redirect=/desafio/chatgpt' },
+      options: { redirectTo: 'https://educly.app/auth' },
     });
 
     if (linkError || !linkData?.properties?.action_link) {

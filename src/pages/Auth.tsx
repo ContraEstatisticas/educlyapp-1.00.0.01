@@ -53,8 +53,7 @@ const Auth = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && session) {
-        const target = searchParams.get("redirect") || searchParams.get("returnTo") || "/dashboard";
-        navigate(target, { replace: true });
+        navigate("/dashboard", { replace: true });
       }
     });
 
