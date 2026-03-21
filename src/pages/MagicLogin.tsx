@@ -48,6 +48,29 @@ const MagicLogin = () => {
       });
   }, [searchParams]);
 
+  const [isResending, setIsResending] = useState(false);
+  const [resendEmail, setResendEmail] = useState("");
+
+  const handleResend = async () => {
+    if (!resendEmail) return;
+    setIsResending(true);
+    try {
+      const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
+      const resp = await fetch(`https://${projectId}.supabase.co/functions/v1/resend-magic-link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resendEmail.trim().toLowerCase() }),
+      });
+      if (!resp.ok) throw new Error("failed");
+      alert("Novo link enviado! Verifique seu e-mail.");
+      setError(null);
+    } catch (err) {
+      alert("Erro ao enviar novo link. Tente novamente mais tarde.");
+    } finally {
+      setIsResending(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground gap-4">
@@ -62,13 +85,37 @@ const MagicLogin = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground gap-6 px-4">
       <AlertCircle className="w-12 h-12 text-destructive" />
-      <h1 className="text-xl font-bold">Link inválido</h1>
-      <p className="text-muted-foreground text-center max-w-md">
-        Este link de acesso não é válido. Por favor, faça login com seu email e senha.
-      </p>
-      <Button onClick={() => navigate("/auth")} size="lg">
-        Ir para o Login
-      </Button>
+      <div className="text-center space-y-2">
+        <h1 className="text-xl font-bold">
+          {error === "token_expired" ? "Link expirado" : "Link inválido"}
+        </h1>
+        <p className="text-muted-foreground text-center max-w-md">
+          {error === "token_expired" 
+            ? "Este link de acesso expirou (limite de 72h). Digite seu e-mail para receber um novo."
+            : "Este link de acesso não é válido. Se você acabou de comprar, aguarde 30 segundos e verifique seu e-mail."}
+        </p>
+      </div>
+
+      {error === "token_expired" && (
+        <div className="w-full max-w-xs space-y-3">
+          <input
+            type="email"
+            placeholder="seu@email.com"
+            className="w-full px-4 py-2 rounded-md border border-input bg-background"
+            value={resendEmail}
+            onChange={(e) => setResendEmail(e.target.value)}
+          />
+          <Button onClick={handleResend} disabled={isResending || !resendEmail} className="w-full">
+            {isResending ? "Enviando..." : "Receber novo link"}
+          </Button>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-2 w-full max-w-xs">
+        <Button onClick={() => navigate("/auth")} variant="outline" className="w-full">
+          Ir para o Login
+        </Button>
+      </div>
     </div>
   );
 };

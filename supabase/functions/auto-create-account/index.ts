@@ -120,7 +120,12 @@ serve(async (req) => {
 
       if (existingToken?.token) {
         accessToken = existingToken.token;
-        console.log(`[auto-create-account] Existing permanent token found for ${userId}`);
+        // Refresh timestamp for the 72h window
+        await supabase
+          .from('user_access_tokens')
+          .update({ created_at: new Date().toISOString() })
+          .eq('token', accessToken);
+        console.log(`[auto-create-account] Existing token found and refreshed for ${userId}`);
       } else {
         // Create new permanent token
         const { data: newToken, error: tokenError } = await supabase
