@@ -195,7 +195,7 @@ const AIToolTrailPage = () => {
   if (trail && isLive && trailContent) {
     const allCompleted = completedModules.length >= totalModules;
     const focusModuleNumber = allCompleted ? totalModules : currentModuleNumber;
-    const focusModule = trail.modules[focusModuleNumber - 1];
+    const focusModule = trailContent.modules[focusModuleNumber - 1];
     const ROW_HEIGHT = 180;
     const START_Y_OFFSET = 60;
     const VIEWBOX_WIDTH = 400;
@@ -456,7 +456,7 @@ const AIToolTrailPage = () => {
                       {trailContent.moduleLabel} {focusModuleNumber}: {focusModule?.title || trailContent.modules[focusModuleNumber - 1]?.title}
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                      {focusModule?.summary || pageUi.continueDescription}
+                      {focusModule?.summary || focusModule?.intro || pageUi.continueDescription}
                     </p>
                     {focusModule?.outcome ? (
                       <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground">

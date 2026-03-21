@@ -41,6 +41,54 @@ import {
   GEMINI_MODULE_7_STEPS_PT,
 } from "@/lib/geminiModule7LessonSteps";
 import {
+  CHATGPT_MODULE_1_STEPS_EN,
+  CHATGPT_MODULE_1_STEPS_ES,
+  CHATGPT_MODULE_1_STEPS_FR,
+  CHATGPT_MODULE_1_STEPS_PT,
+} from "@/lib/chatgptModule1LessonSteps";
+import {
+  CHATGPT_MODULE_2_STEPS_EN,
+  CHATGPT_MODULE_2_STEPS_ES,
+  CHATGPT_MODULE_2_STEPS_FR,
+  CHATGPT_MODULE_2_STEPS_PT,
+} from "@/lib/chatgptModule2LessonSteps";
+import {
+  CHATGPT_MODULE_3_STEPS_EN,
+  CHATGPT_MODULE_3_STEPS_ES,
+  CHATGPT_MODULE_3_STEPS_FR,
+  CHATGPT_MODULE_3_STEPS_PT,
+} from "@/lib/chatgptModule3LessonSteps";
+import {
+  CHATGPT_MODULE_4_STEPS_EN,
+  CHATGPT_MODULE_4_STEPS_ES,
+  CHATGPT_MODULE_4_STEPS_FR,
+  CHATGPT_MODULE_4_STEPS_PT,
+} from "@/lib/chatgptModule4LessonSteps";
+import {
+  CHATGPT_MODULE_5_STEPS_EN,
+  CHATGPT_MODULE_5_STEPS_ES,
+  CHATGPT_MODULE_5_STEPS_FR,
+  CHATGPT_MODULE_5_STEPS_PT,
+} from "@/lib/chatgptModule5LessonSteps";
+import {
+  CHATGPT_MODULE_6_STEPS_EN,
+  CHATGPT_MODULE_6_STEPS_ES,
+  CHATGPT_MODULE_6_STEPS_FR,
+  CHATGPT_MODULE_6_STEPS_PT,
+} from "@/lib/chatgptModule6LessonSteps";
+import {
+  CHATGPT_MODULE_7_STEPS_EN,
+  CHATGPT_MODULE_7_STEPS_ES,
+  CHATGPT_MODULE_7_STEPS_FR,
+  CHATGPT_MODULE_7_STEPS_PT,
+} from "@/lib/chatgptModule7LessonSteps";
+import {
+  CHATGPT_MODULE_8_STEPS_EN,
+  CHATGPT_MODULE_8_STEPS_ES,
+  CHATGPT_MODULE_8_STEPS_FR,
+  CHATGPT_MODULE_8_STEPS_PT,
+} from "@/lib/chatgptModule8LessonSteps";
+import {
   MIDJOURNEY_MODULE_1_STEPS_EN,
   MIDJOURNEY_MODULE_1_STEPS_ES,
   MIDJOURNEY_MODULE_1_STEPS_FR,
@@ -134,6 +182,8 @@ export interface AiTrailModuleContent {
   practice: AiTrailPractice;
   quiz: AiTrailQuiz;
   takeaway: string;
+  summary?: string;
+  outcome?: string;
   lessonSteps?: readonly AiTrailLessonStep[];
 }
 
@@ -205,6 +255,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Sua primeira arte com IA",
+            summary: "Acesso, /imagine, U, V e primeiros prompts.",
+            outcome: "Primeira geração com clareza.",
             intro:
               "Voce aprende como entrar pelo Discord, usar o /imagine, ler as 4 variacoes e refinar com U, V e redo sem depender de tentativa cega.",
             keyPoints: [
@@ -447,6 +499,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Your first AI artwork",
+            summary: "Access, /imagine, U, V and first prompts.",
+            outcome: "First generation with clarity.",
             intro:
               "You learn how to enter through Discord, use /imagine, read the 4 variations, and refine with U, V, and redo instead of blind trial and error.",
             keyPoints: [
@@ -689,6 +743,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Tu primera obra con IA",
+            summary: "Acceso, /imagine, U, V y primeros prompts.",
+            outcome: "Primera generación con claridad.",
             intro:
               "Aprendes a entrar por Discord, usar /imagine, leer las 4 variaciones y refinar con U, V y redo sin depender del ensayo ciego.",
             keyPoints: [
@@ -931,6 +987,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Ta premiere image IA",
+            summary: "Accès, /imagine, U, V et premiers prompts.",
+            outcome: "Première génération avec clarté.",
             intro:
               "Tu apprends a entrer via Discord, utiliser /imagine, lire les 4 variations et affiner avec U, V et redo sans avancer a l'aveugle.",
             keyPoints: [
@@ -1178,6 +1236,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "O Assistente de IA do Google",
+            summary: "Pergunta, contexto e objetivo no mesmo fluxo.",
+            outcome: "Modelo de briefing multimodal.",
             intro:
               "Conheca as forcas primordiais do Gemini, onde ele se sobressai perante as outras ferramentas de inteligencia e como interagir da forma mais estrategica possivel.",
             keyPoints: [
@@ -1419,6 +1479,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Google's AI Assistant",
+            summary: "Question, context and objective in the same flow.",
+            outcome: "Multimodal briefing model.",
             intro:
               "Familiarize yourself with the main pillars of Gemini, unpacking its unique value angles when compared to existing options, and applying it strategically.",
             keyPoints: [
@@ -1660,6 +1722,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "El Asistente IA de Google",
+            summary: "Pregunta, contexto y objetivo en el mismo flujo.",
+            outcome: "Modelo de briefing multimodal.",
             intro:
               "Entiende la naturaleza fundamental de Gemini desde adentro. Descubre en que situaciones vence a cualquier rival y como encajarlo efectivamente a diario.",
             keyPoints: [
@@ -1901,6 +1965,8 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           {
             number: 1,
             title: "Assistant Universel de Google",
+            summary: "Question, contexte et objectif dans le même flux.",
+            outcome: "Modèle de briefing multimodal.",
             intro:
               "Decouvrez la logique en profondeur qui anime et confere une plus-value immediate face a la grande concurrence digitale logicielle.",
             keyPoints: [
@@ -2114,6 +2180,1091 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
               explanation: "Un tableur inerte se transforme en consultant exécutif lorsque vous demandez au modèle des plans de rectification pour réaligner les failles exposées."
             },
             takeaway: "Avec Gemini, le marketing cesse d'être une course contre la montre pour devenir un processus stratégique, créatif et piloté par les données."
+          }
+        ]
+      }
+    }
+  },
+  chatgpt: {
+    status: "live",
+    locales: {
+      pt: {
+        statusBadge: "Trilha ativa",
+        heroEyebrow: "ChatGPT",
+        heroTitle: "Especialista em ChatGPT.",
+        heroDescription: "Uma trilha para transformar prompts soltos em sistema de trabalho, conteúdo e produtividade.",
+        overviewTitle: "O que você vai dominar",
+        overviewItems: [
+          "Arquitetura de prompts e criação de saídas previsíveis e úteis.",
+          "Rotinas de pesquisa, escrita e revisão integradas ao dia a dia.",
+          "Como transformar interações esporádicas em um playbook repetível."
+        ],
+        moduleLabel: "Módulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referência",
+        practiceLabel: "Prática guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "Arquitetura de prompts",
+            summary: "Contexto, restrições e saídas previsíveis.",
+            outcome: "Biblioteca essencial de prompts.",
+            intro: "Entenda a lógica por trás dos Grandes Modelos de Linguagem e aprenda os princípios da Engenharia de Prompts para obter resultados reais e consistentes.",
+            keyPoints: [
+              "O ChatGPT não tem 'conhecimento fixo', ele prevê padrões.",
+              "A importância do contexto explícito para não receber respostas genéricas.",
+              "Engenharia de prompts não é magia, é clareza estruturada na comunicação."
+            ],
+            lessonSteps: CHATGPT_MODULE_1_STEPS_PT,
+            promptExample: "Você pode me ajudar explicando o passo a passo para fazer uma vitamina de banana, focando nos ingredientes básicos?",
+            practice: {
+              title: "Primeiro Comando com Intenção",
+              instruction: "Formule um pedido claro e focado em um objetivo de texto criativo que não avance direto para a resolução final, mas encoraje continuidade.",
+              terms: ["Continue a história", "Começa com", "Era uma vez", "Mochila misteriosa"],
+              solution: "Em vez de pedir para o ChatGPT fazer tudo sozinho, dê a direção inicial e o formato desejado, ancorando o conteúdo no contexto já existente."
+            },
+            quiz: {
+              question: "Por que as respostas do ChatGPT muitas vezes parecem decepcionantes ou rasas quando você pede algo muito amplo?",
+              options: [
+                "Porque ele tem menos inteligência do que outras IAs.",
+                "Porque sem restrições ou contexto, ele busca a média estatística mais genérica dos seus dados de treinamento.",
+                "Porque o modelo só funciona bem para programação.",
+                "Porque a IA precisa de comandos de voz para ser mais precisa."
+              ],
+              correctIndex: 1,
+              explanation: "Fornecer direção e contexto afunila as probabilidades da IA em direção ao que é específico para você, abandonando a 'média' que serve a qualquer um."
+            },
+            takeaway: "Saber formular melhor suas perguntas fará com que a genialidade que está no robô seja acessada pela qualidade da sua instrução."
+          },
+          {
+            number: 2,
+            title: "Rotinas de trabalho com os Modelos do ChatGPT",
+            intro: "Explore os diferentes modelos do ChatGPT disponíveis hoje, comparando seus pontos fortes para escolher a melhor versão ou Modo com base nos seus objetivos.",
+            keyPoints: [
+              "O ChatGPT tem mais de um tipo de modelo e diferentes 'modos' de ação.",
+              "Modos mais rápidos resolvem tarefas simples com eficiência; modos detalhados aprofundam a pesquisa.",
+              "Gerenciamento de contexto em múltiplas etapas muda o jogo para projetos maiores."
+            ],
+            lessonSteps: CHATGPT_MODULE_2_STEPS_PT,
+            promptExample: "Ative o modo focado em velocidade (Instant Mode) ou precisão (Thinking Mode) na sua mente para planejar o prompt.",
+            practice: {
+              title: "Avaliar o Raciocínio",
+              instruction: "Pense em uma tarefa atual. Escolheria velocidade e ação direta, ou estruturação e múltiplas origens de pesquisa para resolvê-la?",
+              terms: ["Respostas curtas", "Raciocínio estruturado", "Múltiplas etapas"],
+              solution: "Se tempo é crucial, o modelo ou modo rápido. Se o problema exige pensar, modelo de alta densidade."
+            },
+            quiz: {
+              question: "Por que escolher o GPT-4o em vez de focar tudo no modelo mais avançado (GPT-5.2) o tempo inteiro?",
+              options: [
+                "Porque o modelo mais novo tem erros.",
+                "Porque em tarefas únicas com texto e imagem que precisam de retorno ágil sem multi-passos complexos, o GPT-4o é muito responsivo e equilibra recursos sem ser sobrequalificado e lento.",
+                "Porque ele consome menos bateria do computador.",
+                "Não existe um motivo, você sempre deve usar o GPT-5.2."
+              ],
+              correctIndex: 1,
+              explanation: "Cada modelo tem um 'sweet spot'. O mais robusto nem sempre é prático para consultas corriqueiras velozes."
+            },
+            takeaway: "Ao entender quem é a 'máquina' por trás da tela, você para de tentar pregar pregos com uma chave de fenda."
+          },
+          {
+            number: 3,
+            title: "Geração de Imagens com IA",
+            intro: "Aprenda como a geração de imagens com IA funciona e como escrever prompts visuais que produzem resultados profissionais e precisos.",
+            keyPoints: [
+              "A ordem importa: elementos no início têm mais influência.",
+              "Um prompt visual carrega 6 camadas essenciais (Sujeito, Ação, Ambiente, Estilo, Luz, Parâmetros).",
+              "A iluminação dita até 60% do impacto emocional.",
+              "Negative Prompts limpam impurezas."
+            ],
+            lessonSteps: CHATGPT_MODULE_3_STEPS_PT,
+            promptExample: "Ultra realistic cinematic portrait of a middle-aged businessman, wearing a dark suit, sitting in a sleek modern office, dramatic studio lighting, shot on 85mm f/1.4 lens, shallow depth of field, professional editorial photography, 8K.",
+            practice: {
+              title: "Construção de Cenários",
+              instruction: "Aplique a estrutura de 6 camadas para construir um ambiente interno complexo.",
+              terms: ["Photorealistic", "Rain drops on the glass", "Soft candlelight", "Cinematic photography", "Warm and earthy"],
+              solution: "Seja cirúrgico em onde e quando as coisas acontecem e no tipo da lente antes de rodar o comando."
+            },
+            quiz: {
+              question: "Qual o erro número um de quem não entende de prompts de imagens?",
+              options: [
+                "Descrever pouco os sentimentos",
+                "Achar que o final do prompt é mais relevante",
+                "Não descrever qual foi o último dado que ela aprendeu",
+                "Falar a língua errada"
+              ],
+              correctIndex: 1,
+              explanation: "De fato, a arquitetura dos difusores prioriza os primeiros tokens listados para alicerçar o quadro."
+            },
+            takeaway: "Direção de arte não é poesia. Dominar a imagem é entregar instruções mecânicas que orquestram a luz e a lente."
+          },
+          {
+            number: 4,
+            title: "Dados Importam",
+            intro: "Eleve o nível e entenda uma parte crucial do uso de IA: fornecer dados precisos e instruções contextuais ao ChatGPT.",
+            keyPoints: [
+              "Entregar o contexto correto acelera e eleva os resultados incrivelmente.",
+              "As respostas genéricas são culpa de perguntas genéricas.",
+              "O ChatGPT não tem memória entre conversas longas por padrão.",
+              "Use as Instruções Personalizadas para definir tom de voz constante."
+            ],
+            lessonSteps: CHATGPT_MODULE_4_STEPS_PT,
+            promptExample: "Atuando como um orientador vocacional para um estudante de 18 anos sem experiência: avalie minhas habilidades lógicas e me liste 5 áreas promissoras. Fale diretamente para mim.",
+            practice: {
+              title: "Contexto Base",
+              instruction: "Formule um bloco com dados sobre o que você deseja do ChatGPT, evitando a irrelevância.",
+              terms: ["Sou um estudante universitário", "Preciso de um resumo de 3 páginas", "Sobre Segunda Guerra", "Linguagem simples, não acadêmica"],
+              solution: "Especificar idade, formato, objetivo e tom previne que o ChatGPT crie teses complexas não compreensíveis."
+            },
+            quiz: {
+              question: "Ao iniciar um novo chat sobre um projeto existente do zero, qual a abordagem primária?",
+              options: [
+                "Assumir que ele se conectará aos últimos tópicos que vocês conversaram.",
+                "Copiar um textão inteiro das outras conversas indiscriminadamente e jogar lá.",
+                "Fazer um pequeno briefing sintetizado dos pontos chave para que ele inicie perfeitamente focado do estágio atual.",
+                "Deixar que ele faça perguntas e deduzir gradualmente."
+              ],
+              correctIndex: 2,
+              explanation: "Briefings curtos de retomada economizam incontáveis mensagens de calibração."
+            },
+            takeaway: "A qualidade da resposta reflete exatamente a clareza e solidez do contexto que foi enviado previamente à inteligência artificial."
+          },
+          {
+            number: 5,
+            title: "ChatGPT para Marketing nas Redes Sociais",
+            intro: "As possibilidades da IA para marketing são quase ilimitadas. Use o ChatGPT para criar posts envolventes, desenvolver estratégias e analisar tendências.",
+            keyPoints: [
+              "O primeiro passo de qualquer estratégia é ter um banco de ideias diversificado.",
+              "Uma boa legenda tem gancho, corpo e CTA que soam como a marca.",
+              "Especifique estruturas e tempos para criar roteiros otimizados.",
+              "Gerar templates de respostas eleva radicalmente a gestão de comunidade."
+            ],
+            lessonSteps: CHATGPT_MODULE_5_STEPS_PT,
+            promptExample: "Atuando como estrategista de mídias: gere 5 ideias de conteúdos em diferentes formatos focados na jornada de bem-estar diária de uma marca de nutrição.",
+            practice: {
+              title: "Gerar Ideias e Estratégia",
+              instruction: "Formule um bloco com papéis, tom e tópicos de ideias para suas redes, além do objetivo dessas chamadas.",
+              terms: ["Tom humanizado e motivacional", "Post de engajamento diário e bastidor", "Marcas esportivas de roupas", "3 dicas longas e CTA de loja"],
+              solution: "Ao ditar todas as frentes necessárias (engajamento, tom e modelo do post) ele não fará um bloco genérico vazio."
+            },
+            quiz: {
+              question: "Por que especificar o formato, tamanho e a estrutura narrativa no prompt na criação de um roteiro curto (Shorts ou Reel) é primordial?",
+              options: [
+                "Para evitar que o robô seja muito informal sem solicitar a formalidade expressa.",
+                "Pois sem amarras ele recairá na formatação de blog post acadêmico clássico que é longo e cansativo.",
+                "Impede o ChatGPT de gastar mais de uma busca online e se distrair no texto.",
+                "Não é necessário, ele descobre seu objetivo visual lendo suas palavras iniciais."
+              ],
+              correctIndex: 1,
+              explanation: "Restringindo espaços e tempos, você proíbe que a máquina use toda sua verbosidade e obriga-a a pensar para conversão ágil."
+            },
+            takeaway: "O diferencial não é só usar o ChatGPT. É saber exatamente o que pedir, delimitando formato, voz e canais da sua produção de marketing diária."
+          },
+          {
+            number: 6,
+            title: "Técnicas Avançadas de Engenharia de Prompt",
+            intro: "Aprimore suas habilidades para criar prompts mais complexos e eficazes explorando as técnicas de Zero-Shot, Few-Shot e Chain-of-Thought Prompting.",
+            keyPoints: [
+              "Zero-Shot Prompting executa tarefas baseadas no conhecimento geral da IA sem exemplos prévios.",
+              "Few-Shot Prompting aumenta a precisão apresentando padrões e formatos no próprio comando.",
+              "Chain-of-Thought instrui a IA dividindo análises colossais em etapas rigorosamente sequenciais."
+            ],
+            lessonSteps: CHATGPT_MODULE_6_STEPS_PT,
+            promptExample: "Ao orientar a mudança de vida de um cliente, separe tudo em 3 blocos lógicos: primeiro peça sua história, depois sugira um novo horizonte, e por fim crie uma tabela de 12 meses.",
+            practice: {
+              title: "Domínio Multietapas",
+              instruction: "Estruture um fluxo sequencial para evitar conselhos superficiais sobre planejamento financeiro.",
+              terms: ["Coleta de dívidas", "Traçar cenário de transição", "Sugestão realista em blocos", "Cronograma prático"],
+              solution: "Obrigar a máquina a avançar escalonadamente aniquila as chances de erro no percurso."
+            },
+            quiz: {
+              question: "Por que uma técnica rígida como o Chain-of-Thought salva planejamentos complexos da desgraça visual?",
+              options: [
+                "Evita de tajo que recaiga no formato engessado ou respostas cegas, focando a máquina a prever etapas lógicas contínuas escalonadas.",
+                "Não permite que o agente invente termos novos que possam distraí-lo da função de base.",
+                "Diminui significativamente a taxa de queima computacional, respondendo muito mais ligeiro.",
+                "É a única forma de conectar a API do modelo nas suas planilhas de finanças integradas."
+              ],
+              correctIndex: 0,
+              explanation: "Ao focar a IA repetidamente em fatiar o problema nas suas partes vitais, ela jamais criará 'atalhos falsos'."
+            },
+            takeaway: "Ao fragmentar o inatingível em partes administráveis, você comanda o maquinário algorítmico da inteligência artificial para pensar junto, e não por você."
+          },
+          {
+            number: 7,
+            title: "Análise de Documentos e Contratos com ChatGPT",
+            intro: "Descubra como o ChatGPT atua como seu analista pericial de arquivos longos e contratos, destacando riscos e blindando sua assinatura sem substituir seu advogado.",
+            keyPoints: [
+              "O robô sumariza e compara centenas de páginas densas instantaneamente.",
+              "Identificar cláusulas hostis previne enganos antes de contratar o advogado oficial.",
+              "A tradução quebra jargões difíceis expondo a linguagem coloquial compreensível.",
+              "Extração cirúrgica arranca os fatos escondidos ignorando o floreio inútil."
+            ],
+            lessonSteps: CHATGPT_MODULE_7_STEPS_PT,
+            promptExample: "Analise o contrato abaixo extraindo estritamente a multa imposta de desistência e as metas finais; resuma tudo em 3 linhas.",
+            practice: {
+              title: "O Pente Fino",
+              instruction: "Estruture um prompt focado em expor penalidades ou desvantagens financeiras dentro do acordo comercial.",
+              terms: ["cláusulas obscuras", "desvantagem grave", "resuma e traduza impacto", "linguagem civil simples"],
+              solution: "Forçar a máquina ao pessimismo obriga o processador a focar a lente na busca de falhas perigosas e onerosas para você."
+            },
+            quiz: {
+              question: "Qual o maior equívoco ao usar atenciosamente IA em análises de escrituras reais cruciais da empresa na mesa redonda oficial?",
+              options: [
+                "Lembrar que a máquina cansa ao ler folhas processuais intermináveis velhas sem formatação rígida padrão.",
+                "Considerar que a resposta constitui blindagem ou parecer autêntico jurídico capaz de evitar responsabilização penal real, dispensando de vez a consulta advocatícia legal da matriz.",
+                "Ficar com medo que o arquivo vaze num fórum estrangeiro bizarro.",
+                "O tempo longo da demora de processamento que atrasa a equipe contábil financeira e todo conselho final."
+              ],
+              correctIndex: 1,
+              explanation: "Jamais entregue o dever pericial com peso de lei a um gerador estocástico; ele filtra brilhantemente para que você decida mais rápido aliado ao seu escritório formal."
+            },
+            takeaway: "Varredura automatizada aniquila o trabalho exaustivo, jogando a luz exata sob os riscos reais para munir sua mente crítica com armas para o confronto."
+          },
+          {
+            number: 8,
+            title: "ChatGPT como Seu Professor Particular",
+            intro: "Descubra como usar o ChatGPT para aprender qualquer assunto — do zero ao avançado — de forma personalizada, dominando o ritmo e o seu formato ideal.",
+            keyPoints: [
+              "A ferramenta nivela e ajusta o nível técnico da explicação instantaneamente à sua ignorância atual.",
+              "Quebrar o assunto com o método Socrático ensina muito mais do que resumos simples e mastigados.",
+              "Gerar seus próprios simulados blinda a retenção do conhecimento prático.",
+              "O esforço bruto prático e a absorção real ainda dependem puramente da sua cognição, o robô só facilita o atrito."
+            ],
+            lessonSteps: CHATGPT_MODULE_8_STEPS_PT,
+            promptExample: "Devore a constituição deste assunto duro, teste severamente meu aprendizado por três etapas de perguntas, e jamais me oferte a resposta direta se eu errar.",
+            practice: {
+              title: "Tutor Implacável",
+              instruction: "Estruture um prompt focado em extrair conhecimento socrático doloroso de uma máquina.",
+              terms: ["Mestre de matemática", "Inicie sem jargão", "Dê um problema de teste final cego", "Guie se errar sem revelar tudo logo"],
+              solution: "Ao barrar o resumo grátis mole, constrói-se sabedoria dura perene que não foge na hora da pressa cruel da vida real pura."
+            },
+            quiz: {
+              question: "Qual o maior equívoco ao delegar cegamente a estruturação inteira do conhecimento ao robô formatador verbal?",
+              options: [
+                "Lembrar que o processador pode pifar se perguntar temas complexos filosóficos avulsos absurdos difíceis pesados velozes quentes difusos únicos sem teto ou fundo claro.",
+                "Crer dogmaticamente que varrer resumos macios prontos substitui integralmente a força intelectual dolorosa ativa que gruda a matéria na sinapse verdadeira cerebral.",
+                "Recear que a inteligência vá criar mentiras apenas sobre física teórica isoladamente.",
+                "O tempo passivo estático gasto em conversas ociosas amenas vãs chatas sem sentido focado rígido fixo."
+              ],
+              correctIndex: 1,
+              explanation: "O silício estrutura maravilhosamente a esteira formativa, porém levantar o peso cognitivo repousa inalienavelmente na sua força de vontade bruta suada isolada própria forte."
+            },
+            takeaway: "Transformar a IA em feitor inquisitório reativa o cérebro; usar a tela como atalho brando amolece a sua genialidade."
+          }
+        ]
+      },
+      en: {
+        statusBadge: "Trail live",
+        heroEyebrow: "ChatGPT",
+        heroTitle: "ChatGPT Specialist.",
+        heroDescription: "A trail to turn loose prompts into a work, content, and productivity system.",
+        overviewTitle: "What you will master",
+        overviewItems: [
+          "Prompt architecture and creating predictable and useful outputs.",
+          "Research, writing, and reviewing routines integrated into daily life.",
+          "How to turn sporadic interactions into a repeatable playbook."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final takeaway",
+        modules: [
+          {
+            number: 1,
+            title: "Prompt Architecture",
+            summary: "Context, constraints and predictable outputs.",
+            outcome: "Essential prompt library.",
+            intro: "Understand the logic behind Large Language Models and learn the principles of Prompt Engineering to get real and consistent results.",
+            keyPoints: [
+              "ChatGPT doesn't have 'fixed knowledge', it predicts patterns.",
+              "The importance of explicit context to avoid generic answers.",
+              "Prompt engineering is not magic; it's structured clarity in communication."
+            ],
+            lessonSteps: CHATGPT_MODULE_1_STEPS_EN,
+            promptExample: "Can you help me by explaining the step-by-step process of making a banana smoothie, focusing on basic ingredients?",
+            practice: {
+              title: "First Intentional Command",
+              instruction: "Formulate a clear command focused on a creative text objective that doesn't jump straight to the final resolution but encourages continuity.",
+              terms: ["Continue the story", "Starts with", "Once upon a time", "Mysterious backpack"],
+              solution: "Instead of asking ChatGPT to do everything on its own, give it the initial direction and desired format, anchoring the content in the existing context."
+            },
+            quiz: {
+              question: "Why do ChatGPT's answers often seem disappointing or shallow when you ask something too broad?",
+              options: [
+                "Because it has less intelligence than other AIs.",
+                "Because without constraints or context, it seeks the most generic statistical average of its training data.",
+                "Because the model only works well for programming.",
+                "Because the AI needs voice commands to be more accurate."
+              ],
+              correctIndex: 1,
+              explanation: "Providing direction and context narrows the AI's probabilities toward what is specific to you, abandoning the 'average' that suits anyone."
+            },
+            takeaway: "Knowing how to better formulate your questions will allow you to access the genius inside the robot through the quality of your instruction."
+          },
+          {
+            number: 2,
+            title: "Work routines with ChatGPT Models",
+            intro: "Explore the different ChatGPT models available today, comparing their strengths to choose the best version or Mode based on your goals.",
+            keyPoints: [
+              "ChatGPT features multiple models and different 'modes' of action.",
+              "Fast modes solve simple tasks efficiently; detailed modes dive deep into research.",
+              "Multi-step context management is a game-changer for larger projects."
+            ],
+            lessonSteps: CHATGPT_MODULE_2_STEPS_EN,
+            promptExample: "Keep in mind whether to leverage the speed-focused Instant Mode or precision-driven Thinking Mode during prompt planning.",
+            practice: {
+              title: "Evaluate Reasoning Needs",
+              instruction: "Think of an actual task you have. Would you pick quick action, or structured logic with deep research to get it done?",
+              terms: ["Quick responses", "Structured reasoning", "Multi-step workflows"],
+              solution: "If time is critical, use the fast model or mode. If the problem demands deduction, use the highly dense model."
+            },
+            quiz: {
+              question: "Why choose GPT-4o instead of pushing everything onto the most advanced option (GPT-5.2) constantly?",
+              options: [
+                "Because the newest model is flawed.",
+                "Because in one-off tasks involving text and images that need a fast return without complex background steps, GPT-4o is highly responsive and perfectly balanced.",
+                "Because it consumes less computer battery.",
+                "There is no reason, you should always enforce GPT-5.2."
+              ],
+              correctIndex: 1,
+              explanation: "Each model has a 'sweet spot.' The heaviest system isn't always practical for speedy daily inquiries."
+            },
+            takeaway: "By understanding the 'engine' behind the screen, you stop trying to hammer nails with a screwdriver."
+          },
+          {
+            number: 3,
+            title: "AI Image Generation",
+            intro: "Welcome to one of the most highly visual modules of the course! Learn how AI image generation models function, and how to write visual prompts that yield precise and professional results.",
+            keyPoints: [
+              "Order matters: elements listed early on carry more weight.",
+              "A visual prompt packs 6 layers (Subject, Action, Context, Style, Lighting, Specs).",
+              "Lighting defines up to 60% of emotional impact.",
+              "Negative Prompts act as the AI's eraser."
+            ],
+            lessonSteps: CHATGPT_MODULE_3_STEPS_EN,
+            promptExample: "Ultra realistic cinematic portrait of a middle-aged businessman, wearing a dark suit, sitting in a sleek modern office, dramatic studio lighting, shot on 85mm f/1.4 lens, shallow depth of field, professional editorial photography, 8K.",
+            practice: {
+              title: "Drafting Scenes",
+              instruction: "Draft an interior shot following the 6 tiers of descriptive construction.",
+              terms: ["Photorealistic", "Rain drops on the glass", "Soft candlelight", "Cinematic photography", "Warm and earthy"],
+              solution: "Focus thoroughly on specifying internal components sequentially: subject, light, lens, aesthetic."
+            },
+            quiz: {
+              question: "What is the biggest trap newcomers fall into during visual prompting?",
+              options: [
+                "Listing too few adjectives",
+                "Dismissing that initial words lead the core aesthetic",
+                "Not providing any background memory",
+                "Talking in slang"
+              ],
+              correctIndex: 1,
+              explanation: "Indeed, the architecture of diffusers prioritizes early tokens over the trailing ones."
+            },
+            takeaway: "Art direction isn't mere poetry. Dominating AI visuals is about laying down mechanical guides orchestrating lens and light."
+          },
+          {
+            number: 4,
+            title: "Data Matters",
+            intro: "Elevate your usage by understanding a crucial piece of the puzzle: feeding precise data and deep contextual layouts to ChatGPT.",
+            keyPoints: [
+              "Delivering correct context dramatically boosts output quality.",
+              "Generic answers are the child of generic questions.",
+              "ChatGPT defaults to zero memory between separate threads.",
+              "You can strictly mandate a constant tone by tweaking Custom Instructions."
+            ],
+            lessonSteps: CHATGPT_MODULE_4_STEPS_EN,
+            promptExample: "Acting as a career counselor for an inexperienced 18-year-old student: assess my logical abilities and list 5 up-and-coming fields. Keep an encouraging tone.",
+            practice: {
+              title: "Baseline Context",
+              instruction: "Assemble a chunk framing up what you actually need from the AI, dodging useless trivia.",
+              terms: ["I am a college student", "Need a 3-page brief", "On WW2 specifics", "Simple, non-academic style"],
+              solution: "Pinning down age, format, goal, and tone guarantees the AI won't churn a highly complex doctoral thesis."
+            },
+            quiz: {
+              question: "When kicking off a fresh chat thread about an ongoing heavy project, what is the golden rule?",
+              options: [
+                "Assume it internally knows your last few inputs from another tab.",
+                "Blindly copy and paste 50 pages of the former chat inside.",
+                "Deliver a compact briefing summarizing key points so it starts sharp from the current line of thought.",
+                "Throw a random question and let it stumble till it guesses the subject."
+              ],
+              correctIndex: 2,
+              explanation: "Short summary briefings upon starting save countless hours of micro-adjustments."
+            },
+            takeaway: "The caliber of the answer mirrors precisely the sheer clarity and solidity of the context fed beforehand to the AI."
+          },
+          {
+            number: 5,
+            title: "ChatGPT for Social Media Marketing",
+            intro: "AI possibilities for marketing are almost limitless. Use ChatGPT to craft engaging posts, outline strategies, and dissect macro trends.",
+            keyPoints: [
+              "Always start with a broad ideation bank before moving to fine copy.",
+              "Solid captions are constructed with an aggressive hook, body, and CTA.",
+              "Force rigid timeframes to stop AI from writing 10-minute long vertical scripts.",
+              "Automate community management by generating reply templates."
+            ],
+            lessonSteps: CHATGPT_MODULE_5_STEPS_EN,
+            promptExample: "Acting as a digital strategist: spit out 5 distinct content vectors in mixed formats aiming to boost daily wellness interaction for a nutrition brand.",
+            practice: {
+              title: "Ideation & Architecture",
+              instruction: "Pack a prompt commanding roles, tone, ideas vectors, and business goals behind those publications.",
+              terms: ["Motivational human tone", "Behind the scenes content", "Apparel sports brand", "3 deep tips and shop CTA"],
+              solution: "Giving exact boundaries (engagement angle, tone, script model) forces it out of its boring generic default text algorithm."
+            },
+            quiz: {
+              question: "Why does hardcoding the narrative bounds and time constraints matter massively when scripting short videos like Reels?",
+              options: [
+                "To stop the bot from being way too colloquial by accident.",
+                "Without chains, it immediately relapses to the default academic blog-post writing style which kills rapid media.",
+                "It restricts the AI from wasting internet searching processes.",
+                "It does not matter, the algorithm automatically senses what you are going to film."
+              ],
+              correctIndex: 1,
+              explanation: "By setting heavy boundaries, you cripple its generic verbosity requiring it to condense for heavy, rapid retention videos."
+            },
+            takeaway: "The true gap isn't just enabling ChatGPT. It is knowing exactly what, when, and how to query boundaries, tones, and formats for high-output strategies."
+          },
+          {
+            number: 6,
+            title: "Advanced Prompt Engineering Techniques",
+            intro: "Level up to craft highly complex prompts. Explore three powerful tactics to handle heavy tasks: Zero-Shot, Few-Shot, and Chain-of-Thought.",
+            keyPoints: [
+              "Zero-Shot demands answers blindly relying sheerly on the AI's training base.",
+              "Few-Shot inserts pre-solved examples right into the instruction to clone formats.",
+              "Chain-of-Thought violently segments heavy tasks into unbreakable logic stages."
+            ],
+            lessonSteps: CHATGPT_MODULE_6_STEPS_EN,
+            promptExample: "Walk me step-by-step on escaping debt: Stage 1 involves calculating debt, Stage 2 maps income streams, and Stage 3 dictates a strict savings table.",
+            practice: {
+              title: "Sequential Domination",
+              instruction: "Fragment an impossible life planning task into manageable bite-sized steps to feed properly to the AI.",
+              terms: ["Current job struggles", "Mapping true passions", "Listing transitions", "Timeline setup"],
+              solution: "Refusing to let the AI guess steps abruptly boosts mathematical and philosophical precision."
+            },
+            quiz: {
+              question: "Why does the sequential formatting of Chain-of-Thought prompting absolutely annihilate random errors on hefty setups?",
+              options: [
+                "By demanding logic loops, the model abandons lazy broad answers for meticulous architectural precision.",
+                "Because it physically limits the wording the model outputs thus dodging bugs.",
+                "Saves you huge server fees when requesting heavy tokens.",
+                "False, it does not do anything actually. It is purely cosmetic."
+              ],
+              correctIndex: 0,
+              explanation: "Segmenting prevents the neural net from skipping reasoning layers in favor of predicting an immediate ending."
+            },
+            takeaway: "Mastering sequence fragmentation officially crosses you over from casual querying to genuine systemic prompting."
+          },
+          {
+            number: 7,
+            title: "Document and Contract Analysis",
+            intro: "Turn ChatGPT into your elite scouting co-pilot to shred 50-page reports into 5-minute actionable summaries while hunting concealed legal hazards.",
+            keyPoints: [
+              "Summarize the impossible heavy paperwork into straightforward bullet points rapidly.",
+              "Locate predatory clauses prior to dispatching your licensed attorney to fight.",
+              "Decimate snobby legalese terminology down to absolute normal street vocabulary.",
+              "Extract strictly numbers and dates evading all the formal rhetoric noise completely."
+            ],
+            lessonSteps: CHATGPT_MODULE_7_STEPS_EN,
+            promptExample: "Scrape the attached manual extracting solely delivery conditions and monetary fallback procedures under total failure.",
+            practice: {
+              title: "Hostile Recon",
+              instruction: "Draft an order to expose predatory wording buried in paragraph 5 without distractions.",
+              terms: ["hunt penalties", "explain everyday impact", "reveal risks", "outline simple"],
+              solution: "Commanding critical negativity flips the AI from an agreeable assistant into a pessimistic security sweep engine protecting your rear."
+            },
+            quiz: {
+              question: "What marks the untouchable limit of deploying GPT to process corporate treaties before high-stakes deals?",
+              options: [
+                "It takes drastically more effort rewriting prompts than reading 80 pages directly.",
+                "It firmly does not carry legitimate state bar licensure thus shielding absolutely zero liability should its interpretation crash the corporation functionally.",
+                "It cannot grasp numbers or monetary signs during extraction rendering it useless financially.",
+                "Servers collapse easily during uploads."
+              ],
+              correctIndex: 1,
+              explanation: "Language models triage heavy lifting aggressively to prep your mind; they never replace the legally enforceable shield of an acting firm lawyer."
+            },
+            takeaway: "Crushing mountains of paperwork natively via intelligent automated commands restores the hours and sharpens the fangs required to execute absolute decisive leadership daily."
+          },
+          {
+            number: 8,
+            title: "Your Absolute Private 24/7 Teacher",
+            intro: "Harness the engine to learn literally anything from absolute scratch — customized ruthlessly to your specific rhythm, capacity, and current intellectual bandwidth.",
+            keyPoints: [
+              "The processor scales mathematical and theoretical difficulty to match your exact current baseline instantly.",
+              "Deploying Socratic warfare demands actual cognitive effort, cementing data significantly better than scrolling.",
+              "Forging blind pop-quizzes weaponizes your retention securely against forgetfulness.",
+              "The brutal reality: the system simply removes friction, the raw intellectual grit remains completely yours."
+            ],
+            lessonSteps: CHATGPT_MODULE_8_STEPS_EN,
+            promptExample: "Devour this complex theorem, evaluate my ignorance through three tiers of blind quizzes, never spoon-feeding the final answer upon failure.",
+            practice: {
+              title: "The Ruthless Mentor",
+              instruction: "Draft an ironclad protocol forcing the algorithm into an unyielding Socratic inquisitor rather than a basic summarizer.",
+              terms: ["Act as senior physicist", "Begin devoid of jargon", "Hit me with a blind test", "Only offer sparse hints upon failure without full answers ever"],
+              solution: "Banning the algorithm from outputting fast cheap answers forces active struggle, which is the sheer basis of real cognitive memory building."
+            },
+            quiz: {
+              question: "What is the primary lethal pitfall when handing over your total learning roadmap strictly to synthetic intelligence?",
+              options: [
+                "Assuming the servers will crash if scaling queries regarding complex random deep philosophy too quickly in succession daily.",
+                "Deluding yourself that passively reading flawlessly generated summaries fully replaces the painful active neural effort required to truly cement data permanently into the brain matrix.",
+                "Fearing the chatbot specifically creates random hallucinations strictly concerning advanced macro-economics rather than other simple subjects usually.",
+                "Wasting long hours talking politely to the machine completely draining actionable productivity spans rapidly empty hollow."
+              ],
+              correctIndex: 1,
+              explanation: "Silicon flawlessly provides the ultimate launchpad and gym framework, but lifting the heavy mental iron remains entirely a solo un-transferable human endeavor."
+            },
+            takeaway: "Weaponizing AI as a relentless Socratic inquisitor supercharges neural connections while treating it as a lazy shortcut actively softens your intellect over time."
+          }
+        ]
+      },
+      es: {
+        statusBadge: "Ruta activa",
+        heroEyebrow: "ChatGPT",
+        heroTitle: "Especialista en ChatGPT.",
+        heroDescription: "Una ruta para transformar prompts sueltos en un sistema de trabajo, contenido y productividad.",
+        overviewTitle: "Lo que vas a dominar",
+        overviewItems: [
+          "Arquitectura de prompts y creación de resultados predecibles y útiles.",
+          "Rutinas de investigación, escritura y revisión integradas al día a día.",
+          "Cómo transformar interacciones esporádicas en un playbook repetible."
+        ],
+        moduleLabel: "Módulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Práctica guiada",
+        termsLabel: "Términos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "Arquitectura de prompts",
+            summary: "Contexto, restricciones y salidas previsibles.",
+            outcome: "Biblioteca esencial de prompts.",
+            intro: "Entiende la lógica detrás de los Grandes Modelos de Lenguaje y aprende los principios de la Ingeniería de Prompts para obtener resultados reales y consistentes.",
+            keyPoints: [
+              "ChatGPT no tiene 'conocimiento fijo', predice patrones.",
+              "La importancia del contexto explícito para evitar respuestas genéricas.",
+              "La ingeniería de prompts no es magia, es claridad estructurada en la comunicación."
+            ],
+            lessonSteps: CHATGPT_MODULE_1_STEPS_ES,
+            promptExample: "¿Puedes ayudarme explicando el paso a paso para hacer un batido de plátano, enfocándote en los ingredientes básicos?",
+            practice: {
+              title: "Primer Comando con Intención",
+              instruction: "Formula un comando claro centrado en un objetivo de texto creativo que no salte directo a la resolución final, sino que fomente la continuidad.",
+              terms: ["Continúa la historia", "Empieza con", "Érase una vez", "Mochila misteriosa"],
+              solution: "En lugar de pedir a ChatGPT que haga todo solo, dale la dirección inicial y el formato deseado, anclando el contenido en el contexto existente."
+            },
+            quiz: {
+              question: "¿Por qué las respuestas de ChatGPT a menudo parecen decepcionantes o superficiales cuando pides algo muy amplio?",
+              options: [
+                "Porque tiene menos inteligencia que otras IAs.",
+                "Porque sin restricciones o contexto, busca el promedio estadístico más genérico de sus datos de entrenamiento.",
+                "Porque el modelo solo funciona bien para programación.",
+                "Porque la IA necesita comandos de voz para ser más precisa."
+              ],
+              correctIndex: 1,
+              explanation: "Proporcionar dirección y contexto reduce las probabilidades de la IA hacia lo que es específico para ti, abandonando el 'promedio' que le sirve a cualquiera."
+            },
+            takeaway: "Saber formular mejor tus preguntas te permitirá acceder a la genialidad del robot a través de la calidad de tu instrucción."
+          },
+          {
+            number: 2,
+            title: "Rutinas de trabajo con los Modelos de ChatGPT",
+            intro: "Explora los diferentes modelos de ChatGPT disponibles hoy, comparando sus puntos fuertes para elegir la mejor versión u opción de procesamiento según tus metas.",
+            keyPoints: [
+              "ChatGPT tiene varios tipos de modelo y varios modos operativos.",
+              "Los modos ligeros abordan faenas simples fugazmente; los metódicos se hunden en investigación densa.",
+              "Entregarle gestión automática de multiprocesos modifica por completo proyectos ambiciosos."
+            ],
+            lessonSteps: CHATGPT_MODULE_2_STEPS_ES,
+            promptExample: "Contempla si recurrirás a un modo relámpago u optarás por el análisis meticuloso de Pro Mode al plantear tu requerimiento.",
+            practice: {
+              title: "Evalúa tu necesidad intelectual",
+              instruction: "Medita tu próxima asignación. ¿Decantarias por agilidad sin fricciones o estructura escalonada profunda?",
+              terms: ["Resultados cortos", "Estructuración lógica", "Etapas automatizadas"],
+              solution: "Si urge, asume el camino ágil (Instant o 4o). Si el rompecabezas impone deducción secuencial, acude a los cerebros superiores."
+            },
+            quiz: {
+              question: "¿Por qué seleccionar a GPT-4o absteniéndote en ciertas ocurrentes de exigir el todopoderoso GPT-5.2?",
+              options: [
+                "Porque el hermano mayor sufre de bugs incurables.",
+                "Porque ante solicitudes singulares de formato texto-imagen que claman celeridad e inmediatez sin procesos opacos extra, el 4o provee la simetría perfecta de atributos.",
+                "Porque preserva mejor tu batería móvil.",
+                "No cabe motivo, forzar el uso de GPT-5.2 es ley inquebrantable."
+              ],
+              correctIndex: 1,
+              explanation: "Todo modelo cubre un nicho sublime. Disparar los cañones lógicos colosales no se justifica para clavetear una tachuela textual veloz."
+            },
+            takeaway: "Reconocer las entrañas de ingeniería que te sirven asegura que elijamos la herramienta puntera que no frene el flujo en vano."
+          },
+          {
+            number: 3,
+            title: "Generación de Imágenes con IA",
+            intro: "Aprende cómo funciona la creación de imágenes generativas y perfecciona el talento para escribir prompts visuales produciendo obras de carácter profesional.",
+            keyPoints: [
+              "Jerarquía de lectura: El modelo infunde mayor prioridad a los sustantivos del principio.",
+              "Un prompt estelar posee 6 capas formativas (Sujeto, Acción, Escenario, Arte, Luz, Óptica).",
+              "La directriz lumínica abarca el 60% emocional de una imagen.",
+              "Prompt Negativo: Bloqueador anti-errores que veda la aparición de material sucio."
+            ],
+            lessonSteps: CHATGPT_MODULE_3_STEPS_ES,
+            promptExample: "Ultra realistic cinematic portrait of a middle-aged businessman, wearing a dark suit, sitting in a sleek modern office, dramatic studio lighting, shot on 85mm f/1.4 lens, shallow depth of field, professional editorial photography, 8K.",
+            practice: {
+              title: "Tiro Escenográfico",
+              instruction: "Rellena ordenadamente siguiendo las 6 fases de concepción hasta armar un prompt completo de interiores.",
+              terms: ["Photorealistic", "Rain drops on the glass", "Soft candlelight", "Cinematic photography", "Warm and earthy"],
+              solution: "Detallar paso por paso quién, de qué forma está, cobijado bajo qué foco de luz e interpretándolo artísticamente asienta el éxito."
+            },
+            quiz: {
+              question: "Si comparamos cómo interpreta código un asistente regular respecto a los modelos gráficos ¿Qué error crucial de escritura solemos cometer creyendo que la máquina obedece igual a ChatGPT?",
+              options: [
+                "Presuponer que lee la frase de izquierda a derecha secuencialmente priorizando remates",
+                "Dictar especificaciones técnicas y creer que las saltará arbitrariamente",
+                "Omitir cargar nuestro estilo discursivo personal al lienzo",
+                "Uso de mayúsculas innecesario"
+              ],
+              correctIndex: 0,
+              explanation: "Redes difusivas procesan todo en un solo bloque macizo, por eso las palabras en primeras casillas inyectan mayores directrices en la estética final en lugar de una lógica de remate."
+            },
+            takeaway: "Saber mandar directrices pictóricas despuntará tus obras hacia la excelencia hiper-realista que la media suele ignorar asumiendo que es arte mágico."
+          },
+          {
+            number: 4,
+            title: "Los Datos Importan",
+            intro: "Sube de nivel comprendiendo una pieza estelar del rompecabezas de IA: entregarle contexto férreo e información concreta a ChatGPT.",
+            keyPoints: [
+              "Otorgar el contexto debido exalta inmediatamente la validez de los resultados.",
+              "Si disparas dudas perezosas, cosecharás textos igualmente genéricos.",
+              "ChatGPT omite preservar memorias atadas entre diferentes conversaciones por defecto.",
+              "Usa Funciones de Personalización para un estilo inamovible de habla."
+            ],
+            lessonSteps: CHATGPT_MODULE_4_STEPS_ES,
+            promptExample: "Bajo tu rol de consejero de vida para un novato de 18 años: mide mi intelecto lógico y formula 5 metas académicas. Dirígete a mí alentando siempre.",
+            practice: {
+              title: "Tiro Contextual",
+              instruction: "Funda un texto compacto delimitando requerimientos para la IA, sin desviarte.",
+              terms: ["Soy un pupilo de facultad", "Preciso un resumen de 3 resmas", "Acerca de la 2da Guerra", "Léxico fácil para legos"],
+              solution: "Encuadrar perfil, largo, objetivo y dialecto blinda a la máquina de inventar tesinas aburridas e incomprensibles."
+            },
+            quiz: {
+              question: "Si inauguras un hilo nuevecito abarcando un caso que abordaste ayer en otro chat, ¿Por dónde arrancas?",
+              options: [
+                "Dar por sentado que el hilo maestro los conecta bajo las sombras.",
+                "Copiar a ciegas toda la letanía de letras del chat originario y colapsar la pantalla.",
+                "Cimentar un repaso sumarizado denso para que inicie la partida 100% calibrado y sin amnesias.",
+                "Lanzar una queja y forzar que pida perdón por olvidar su rol."
+              ],
+              correctIndex: 2,
+              explanation: "Entregas o briefings de reinicio compactos suprimen docenas de aclaraciones y rectificaciones tediosas."
+            },
+            takeaway: "El rigor y genio de la contestación emulan la nitidez categórica del briefing suministrado previamente a la mente artificial."
+          },
+          {
+            number: 5,
+            title: "ChatGPT para Marketing en Redes Sociales",
+            intro: "Las posibilidades de la IA para marketing son infinitas. Emplea ChatGPT para tejer contenido orgánico, desplegar estrategias maduras e identificar tendencias.",
+            keyPoints: [
+              "Un abanico preventivo de lluvia de ideas es el pilar de la constancia.",
+              "Los pies de foto (captions) perfectos ostentan gancho forzado y CTA innegable.",
+              "Limitar guiones cortos previene verborrea inabarcable en formato cámara.",
+              "Clonar perfiles de respuesta sanea horas letales de mensajería aburrida."
+            ],
+            lessonSteps: CHATGPT_MODULE_5_STEPS_ES,
+            promptExample: "Manejándote como arquitecto creativo web: desglosa 5 ramas de publicación disímiles con meta de detonar un feedback masivo sobre salud diaria para una firma suplementaria.",
+            practice: {
+              title: "Gestación Estratégica",
+              instruction: "Entrama un mando delineando jerarquías, voces, matrices de contenido y la meta perenne de la publicación.",
+              terms: ["Verbo cálido y empuje vital", "Contenido íntimo y ritos tras cortinas", "Prendas atléticas urbanas", "Cápsula de 3 trucos y CTA a vitrina"],
+              solution: "Reunir un combo de encuadres asfixia cualquier desliz robótico o aburrido de la Inteligencia Artificial."
+            },
+            quiz: {
+              question: "¿Por qué encadenar al modelo a pautas de segundo exacto e hilos rígidos al momento de producir libretos Short/Reels es mandatorio?",
+              options: [
+                "Trata de evitar que usemos recursos de mal gusto o muy coloquiales si no lo planeamos.",
+                "Evita de tajo que recaiga en el síndrome del posteo doctrinario o enciclopédico, el cual asesina de sueño el clip al instante.",
+                "Previene el drenado ilícito de las cargas de tu red local Wi-Fi.",
+                "Es una maña, el robot suele acertar visualmente su propósito mirando tus letras previas."
+              ],
+              correctIndex: 1,
+              explanation: "Ceñir los espacios obliga a la placa base a licuar la teoría de aburrimiento y escupir solo retención rápida y pura."
+            },
+            takeaway: "La verdadera ventaja ya no es tener Inteligencia Artificial instalada, sino liderar como maestro orquestador ordenando qué, cuándo y qué formato pedir."
+          },
+          {
+            number: 6,
+            title: "Técnicas Avanzadas de Ingeniería de Prompts",
+            intro: "Asciende al siguiente escalafón dominando los prompts complejos. Vamos a explorar las armas tácticas: Zero-Shot, Few-Shot y el Chain-of-Thought.",
+            keyPoints: [
+              "Zero-Shot ejecuta saltos al vacío dependiendo plenamente de la sapiencia innata de la máquina.",
+              "Few-Shot contamina tu requerimiento con moldes perfectos guiando la mímesis robótica.",
+              "Chain-of-Thought deshuesa la encrucijada y dictamina un orden mental lógico inquebrantable."
+            ],
+            lessonSteps: CHATGPT_MODULE_6_STEPS_ES,
+            promptExample: "Pauta mi renuncia paulatina en etapas. Fase 1: sondeo de finanzas, Fase 2: búsqueda a medio tiempo, Fase 3: la fecha crítica.",
+            practice: {
+              title: "Tiro Fragmentado",
+              instruction: "Arma un dictamen secuestrado en piezas para blindar a la máquina de deducciones tórpes acerca de deudas.",
+              terms: ["Extracción biográfica", "Detección de falencias", "Trazado cronológico", "Emplazamiento a 1 año"],
+              solution: "Sistematizar le arrebata al bot el libertinaje de inventar conclusiones vacías e irremontables."
+            },
+            quiz: {
+              question: "¿Dónde reside el músculo ineludible del modelo secuenciado o 'Chain-of-Thought' frente a misiones magnas?",
+              options: [
+                "Evita que el algoritmo use su propia voz genérica permitiéndote simular humanos.",
+                "Romper el eslabón total en pasos lógicos bloquea de tajo alucinaciones y omisiones flagrantes.",
+                "Protege agresivamente el consumo rápido de caracteres sin costo extra.",
+                "Prohíbe a la IA indagar en la red para que suene más neutra."
+              ],
+              correctIndex: 1,
+              explanation: "Desbaratar el requerimiento fuerza el paso a paso previniendo un colapso deductivo artificial precoz."
+            },
+            takeaway: "Develar el poder de fracturar el pensamiento asienta tu corona como manipulador avanzado que jamás recibe contestaciones rotas."
+          },
+          {
+            number: 7,
+            title: "Análisis Táctico de Documentos y Tratados",
+            intro: "Convierte a ChatGPT en un perro sabueso de la burocracia. Escanea gruesos volúmenes en segundos para rescatar los riesgos encubiertos velozmente.",
+            keyPoints: [
+              "La bestia sintetiza tomos amorfos extrayendo las espinas nucleares instantáneamente.",
+              "Fijar el visor en daños detecta multas mortales previas a contratar despacho real.",
+              "Tritura el lenguaje presuntuoso para escupir la verdad en palabras ciudadanas puras.",
+              "Compara ofertas a columnas para fulminar la ceguera directiva por fatiga de lectura atroz."
+            ],
+            lessonSteps: CHATGPT_MODULE_7_STEPS_ES,
+            promptExample: "Devora el tratado siguiente y regurgita apenas el costo punitivo y el día tope oficial, suprimiendo formalidades al darme el reporte liso.",
+            practice: {
+              title: "Visor Crítico Férreo",
+              instruction: "Arma un barrido ordenando un rastreo hiper-paranoico enfocado puramente en desventajas ocultas severillas.",
+              terms: ["señalar cláusula nociva", "exponer desventajas claras", "desglose en calle", "evidencia el fallo"],
+              solution: "Vestir a la IA de escéptico despiadado blinda tu operación ante abusos documentales ajenos que pasarían limpios."
+            },
+            quiz: {
+              question: "¿Dónde choca abruptamente contra un muro el potencial del bot leyendo los papeles de tu mega firma globalizada al borde final?",
+              options: [
+                "A veces invierte las páginas si están largas y cansa corregir todo a mano libre en solitario aburrido lento general.",
+                "Carece de cualquier fuero, sello, e inmunidad jurídica para resguardar las quiebras monetarias desatendidas tras un dictamen engañoso en acuerdos severos.",
+                "Gasta exceso de internet y es un lujo caprichoso.",
+                "Soporta solo dos renglones, y carece de peso en formatos puros."
+              ],
+              correctIndex: 1,
+              explanation: "Él barre el lodo inútil; el maestro en leyes certificado humano toma el timón de facto y la responsabilidad intransferible al cruzar el Rubicón firmando."
+            },
+            takeaway: "Extirpar lo laborioso y árido digitalmente te inyecta toda la fuerza cerebral remanente para negociar incisivamente sabiendo de antemano lo que firmas."
+          },
+          {
+            number: 8,
+            title: "El Mentor Táctico Particular Omnisciente",
+            intro: "Desata todo el armamento para asimilar cualquier disciplina desde el abismo ciego absoluto: calibrando letalmente la exigencia a tu preciso umbral analítico orgánico diario.",
+            keyPoints: [
+              "El modelo auto-nivela todo el tecnicismo para encajar robóticamente en tu deficiencia temporal o pericia.",
+              "Exigir fogueo Socrático implacable te ancla el saber puramente mejor que ojear párrafos inertes flojos fáciles.",
+              "Exigir autoevaluaciones ciegas y agresivas fulmina del todo la neblina del olvido pasajero ligero rápido blando.",
+              "La máquina elimina apenas las piedras del camino formativo; el sudor analítico recae indelegable y absolutamente en tu intelecto puro."
+            ],
+            lessonSteps: CHATGPT_MODULE_8_STEPS_ES,
+            promptExample: "Ingiere este fundamento oscuro numérico, dispárame una ráfaga con tres cuestionarios crueles aislados de retención pura, y prohíbete obsequiarme la salida lisa llana obvia barata y gratis jamás.",
+            practice: {
+              title: "Instructor Despiadado Activo Total",
+              instruction: "Arma un precepto inquebrantable obligando a la interfaz a fungir de sádico tutor dialéctico Socrático privándote de consuelos teóricos tibios suaves pasivos vagos rasos.",
+              terms: ["Inicia el mandato vacío sin jergas de élite pesadas", "Forra el contenido de puras metáforas", "Exige simulación ciega final resolutiva ríspida", "Asísteme con pistas ínfimas nulas pacativas si fracaso absoluto"],
+              solution: "Impedir el desborde de respuestas blandas fáciles gratuitas somete tu masa gris al trabajo espartano que de veras fragua el genio perdurable."
+            },
+            quiz: {
+              question: "¿Cuál es el veneno fatal principal que se traga ingenuamente al delegarle la asimilación didáctica bruta integral puramente sin filtros al cerebro artificial veloz sintético de lenguaje masivo crudo y frío digital libre global?",
+              options: [
+                "Fantasear perezosamente pensando que ojear resúmenes cristalinos pre-moldeados ya releva permanentemente el arduo desgarro cognitivo doloroso activo necesario de veras empíricamente para tatuar nociones sólidas pesadas puras fijas reales vivas al fondo total neurológico tuyo mortal y cierto pleno vivo nato firme total perenne crudo largo y constante solo real vital y durísimo intenso sano bueno seguro innegable verdadero total.",
+                "Miedo atávico infundado de que las máquinas no procesen teoremas pesados lógicos abstractos sin colgar sus discos duros remotos.",
+                "Especular vagamente asumiendo que el bot detesta filosofías clásicas pesadas vetustas.",
+                "El peligro falaz de ofenderle pasivamente a ciegas el núcleo gris neutro sordo al tipear burdo grosero malo."
+              ],
+              correctIndex: 0,
+              explanation: "El chip fabrica la autopista plana lisa limpia segura, encendiendo luces francas puras útiles. Avanzar sangrando calzado y trepar de veras al fondo hasta el vértice lo ejecutas tú intrínsecamente o nada real existe."
+            },
+            takeaway: "Blindar al motor en el molde de un examinador hosco acorazará tus dotes deductivas nativas y erradicará el letargo endeble."
+          }
+        ]
+      },
+      fr: {
+        statusBadge: "Parcours actif",
+        heroEyebrow: "ChatGPT",
+        heroTitle: "Spécialiste ChatGPT.",
+        heroDescription: "Un parcours pour transformer des requêtes vagues en un système de travail, de contenu et de productivité.",
+        overviewTitle: "Ce que vous allez maîtriser",
+        overviewItems: [
+          "Architecture de requêtes et création de sorties prévisibles et utiles.",
+          "Routines de recherche, d'écriture et de révision intégrées au quotidien.",
+          "Comment transformer des interactions occasionnelles en un manuel de jeu (playbook) reproductible."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points clés",
+        promptLabel: "Requête de référence",
+        practiceLabel: "Pratique guidée",
+        termsLabel: "Termes associés",
+        solutionLabel: "Réponse attendue",
+        quizLabel: "Test de contrôle",
+        correctLabel: "Bonne réponse",
+        takeawayLabel: "Bilan",
+        modules: [
+          {
+            number: 1,
+            title: "Architecture des prompts",
+            summary: "Contexte, contraintes et résultats prévisibles.",
+            outcome: "Bibliothèque de prompts essentielle.",
+            intro: "Comprenez la logique derrière les Grands Modèles de Langage et apprenez les principes de l'Ingénierie de Requêtes pour des résultats réels et cohérents.",
+            keyPoints: [
+              "ChatGPT n'a pas de 'connaissance figée', il prédit des motifs.",
+              "L'importance d'un contexte explicite pour éviter des réponses génériques.",
+              "L'ingénierie de requêtes n'est pas de la magie; c'est une clarté structurée."
+            ],
+            lessonSteps: CHATGPT_MODULE_1_STEPS_FR,
+            promptExample: "Peux-tu m'expliquer étape par étape comment faire un smoothie à la banane, en te concentrant sur les ingrédients de base ?",
+            practice: {
+              title: "Première Requête Intentionnelle",
+              instruction: "Formulez une requête claire axée sur un objectif de texte créatif qui ne passe pas directement à la conclusion, mais encourage la continuité.",
+              terms: ["Continue l'histoire", "Commence par", "Il était une fois", "Sac à dos mystérieux"],
+              solution: "Au lieu de demander à ChatGPT de tout faire seul, donnez-lui la direction initiale et le format souhaité, en ancrant le contenu dans le contexte existant."
+            },
+            quiz: {
+              question: "Pourquoi les réponses de ChatGPT semblent-elles souvent décevantes ou superficielles lorsque vous posez une question trop large ?",
+              options: [
+                "Parce qu'il est moins intelligent que d'autres IA.",
+                "Parce que sans contraintes ou contexte, il cherche la moyenne statistique la plus générique de ses données d'entraînement.",
+                "Parce que le modèle ne fonctionne bien que pour la programmation.",
+                "Parce que l'IA a besoin de commandes vocales pour être plus précise."
+              ],
+              correctIndex: 1,
+              explanation: "Fournir une direction et un contexte oriente les probabilités de l'IA vers ce qui est spécifique à vos besoins, en abandonnant la 'moyenne' qui convient à n'importe qui."
+            },
+            takeaway: "Savoir mieux formuler vos questions vous permettra d'accéder au génie du robot grâce à la qualité de votre instruction."
+          },
+          {
+            number: 2,
+            title: "Routines de travail et Modèles ChatGPT",
+            intro: "Explorez les différents modèles de ChatGPT disponibles aujourd'hui, en comparant leurs points forts pour choisir la meilleure version ou Mode selon vos objectifs.",
+            keyPoints: [
+              "ChatGPT comporte plusieurs modèles et variantes d'opération très distinctes.",
+              "Les profils rapides valident la commande leste ; les modes pointus affrontent l'analyse longue.",
+              "Confier un raisonnement fractionné et autonome au système bouleverse la gestion des chantiers."
+            ],
+            lessonSteps: CHATGPT_MODULE_2_STEPS_FR,
+            promptExample: "Réfléchissez préalablement si l'outil rapide (Instant Mode) prévaut sur la machine méticuleuse (Thinking Mode) avant l'exécution.",
+            practice: {
+              title: "Diagnostiquer l'Exigence Cognitive",
+              instruction: "Pensez à un blocage immédiat à évaporer. Pencheriez-vous pour du rendement éclair ou pour une machinerie à étages multiples automatiques ?",
+              terms: ["Requête fulgurante courte", "Pensée cadrée", "Workflow séquentiel lourd"],
+              solution: "Si l'urgence temporelle surplombe, basculez au rapide. Si l'énigme défie la logique séquentielle, embrassez les modes denses supérieurs."
+            },
+            quiz: {
+              question: "Quelle réelle considération pousse par moment à sélectionner brillamment le GPT-4o ancien plutôt que d'enrôler continuellement l'architecte terminal (GPT-5.2) ?",
+              options: [
+                "Parce que l'architecture nouvelle compte plusieurs lacunes sévères.",
+                "Parce que sur des requêtes immédiates combinées texte-image sans processus interne autonome de recherche longue, il délivre d'un coup l'équation parfaite entre panache et grande immédiateté.",
+                "Parce qu'il monopolise moins l'énergie informatique serveur.",
+                "Aucun motif ne subsiste, forcer un 5.2 s'impose catégoriquement."
+              ],
+              correctIndex: 1,
+              explanation: "Opter intelligemment s'identifie au bon artisan: une charge logicielle colossale étoufferait inutilement ce qui réclame une souplesse dynamique."
+            },
+            takeaway: "Aussitôt l'anatomie cérébrale des modèles démasquée, vous dissipez sur-le-champ l'erreur grotesque d'attaquer une brindille textuelle au bulldozer numérique."
+          },
+          {
+            number: 3,
+            title: "Génération d'Images par IA",
+            intro: "Découvrez précisément comment fonctionnent les moteurs génératifs et affûtez votre rédaction de requêtes graphiques sous un format strictement professionnel.",
+            keyPoints: [
+              "Lecture orientée: L'intelligence artificielle donne plus de poids aux mots du début de la phrase.",
+              "Un prompt imbattable s'articule en 6 étapes (Sujet, Action, Cadre, Esthétisme, Luminosité, Objectif photo).",
+              "Le rayon de lumière influe sur 60% de la psychologie de l'œuvre.",
+              "Prompt Négatif: l'arme de destruction massive bloquant les déformations fâcheuses classiques."
+            ],
+            lessonSteps: CHATGPT_MODULE_3_STEPS_FR,
+            promptExample: "Ultra realistic cinematic portrait of a middle-aged businessman, wearing a dark suit, sitting in a sleek modern office, dramatic studio lighting, shot on 85mm f/1.4 lens, shallow depth of field, professional editorial photography, 8K.",
+            practice: {
+              title: "Scénarisation Absolue",
+              instruction: "Remplissez les trous en vous pliant systématiquement aux 6 étages de configuration séquentielle sur une scène en intérieur.",
+              terms: ["Photorealistic", "Rain drops on the glass", "Soft candlelight", "Cinematic photography", "Warm and earthy"],
+              solution: "Concevoir qui fait quoi, nimbé par quelle intensité lumineuse et sous quel œil d'appareil vous prémunit du dessin d'amateur."
+            },
+            quiz: {
+              question: "Si l'on jauge la méthode de compréhension textuelle, quelle grave faute le néophyte reproduit-il machinalement lors de l'appel d'un modèle d'image en calquant l'usage du ChatGPT de base ?",
+              options: [
+                "Assumer que l'IA va lire son texte linéairement d'un bout à l'autre en donnant du poids surtout à sa conclusion finale",
+                "Fournir des mesures techniques complexes d'objectif qu'elle ne sait pas assumer",
+                "Oublier de saluer formellement l'agent comme on le ferait à l'écrit",
+                "Imposer des majuscules aléatoirement"
+              ],
+              correctIndex: 0,
+              explanation: "Les modèles picturaux reçoivent la toile syntaxique d'une seule traite; les tout premiers mots fixent irrémédiablement le terreau visuel du rendu global à la différence du traitement de texte séquentiel normal."
+            },
+            takeaway: "Adresser avec rigidité de vraies directives architecturales projettera immédiatement vos futures créations pixel au-delà du vulgaire divertissement pour débutants."
+          },
+          {
+            number: 4,
+            title: "Les Données Priment",
+            intro: "Élevez vertigineusement votre potentiel en maîtrisant le cœur du système IA : l'injection massive de paramètres contextuels avant sommation.",
+            keyPoints: [
+              "Remettre avec diligence un historique balisé provoque un triomphe immédiat des calculs de rendu.",
+              "Toute requête morne donne automatiquement le jour à un bavardage inutile et insipide.",
+              "L'environnement reste fondamentalement frappé d'amnésie dès que vous ouvrez une fenêtre vierge.",
+              "Configurez avec intransigeance ses Instructions Personnalisées pour régir son éloquence perpétuellement."
+            ],
+            lessonSteps: CHATGPT_MODULE_4_STEPS_FR,
+            promptExample: "Prends la veste d'un conseiller académique adressant ses mots à un novice de 18 ans : cible et chiffre mes axes forts en 5 voies d'avenir très distinctes en demeurant ultra bienveillant et familier.",
+            practice: {
+              title: "Cimenter le Fond",
+              instruction: "Formez un bloc direct orientant fermement vos attentes logistiques, en bannissant toute divagation verbeuse de l'IA.",
+              terms: ["Débutant de collège", "Vise un rapport d'étape de 3 volets maximum", "Thématique Guerre Mondiale rigoureuse", "Vocable purement basique"],
+              solution: "Conclure l'identité, l'état, l'envergure, et le dialecte ferme instantanément la porte aux envolées doctrinaires lourdes d'éminences grises inutiles."
+            },
+            quiz: {
+              question: "En inaugurant fatalement un espace blanc et neuf pour poursuivre la vaste tâche étudiée hier, quelle attitude est couronnée absolue ?",
+              options: [
+                "Présumer avec grande paresse que les serveurs font un pont cognitif permanent d'un jour à l'autre.",
+                "Recopier brutalement le script entier d'hier tel un immense bloc sans tri de matière.",
+                "Remise claire et condensée par synthèse rigide pour forcer la machine à s'armer correctement dès le salut verbal.",
+                "Assénez un mot vague et l'estimer habile à remonter la pente dans la douleur globale."
+              ],
+              correctIndex: 2,
+              explanation: "Rappeler le socle d'acquis résume en quelques lignes l'essence cruciale à re-mobiliser pour ne tolérer aucune digression ou remise en selle pénible de l'engin."
+            },
+            takeaway: "La brillance foudroyante de la résolution artificielle à l'écran n'est fondamentalement que le strict miroir de l'arborescence contextuelle qu'on aura daigné lui offrir juste avant l'envoi de consigne."
+          },
+          {
+            number: 5,
+            title: "ChatGPT en Ingénierie Sociale de Marque",
+            intro: "La force de l'intelligence générative en marketing est illimitée. Éditez des stratégies pesantes, sculptez vos posts et flairez les données mondiales sociologiques.",
+            keyPoints: [
+              "L'élaboration de la forge d'idées initiale est la fondation de fer pour alimenter votre réseau.",
+              "Les légendes puissantes possèdent ce crochet mortel avec son CTA agressif.",
+              "Borner les gabarits courts muselle l'aspect professoral théorique lourd de l'IA pour la vidéo.",
+              "Dresser la flotte textuelle via modèles (templates) économise des journées mortes sur la modération SAV."
+            ],
+            lessonSteps: CHATGPT_MODULE_5_STEPS_FR,
+            promptExample: "Revêts ton casque d'architecte digital monde : Expulse 5 courants organiques originaux visant le grand boost d'un rituel mieux-être au nom d'un géant du nutriment.",
+            practice: {
+              title: "Création Structurée Globalisée",
+              instruction: "Croisez la création du ton désiré, le socle des cibles, les arrières scènes, et l'assaut final espéré pour verrouiller la charpente de publication réseau.",
+              terms: ["Sonorité fraternelle stimulante", "Focus confessionnel de coulisses", "Marque haut de gamme de street-running", "Distillation de 3 secrets longs avec clôture marchande"],
+              solution: "Serrer toutes les issues conceptuelles (ciblage, réconfort, intention) l'empêche net d'exposer la page plate fadement calculée algorithmiquement."
+            },
+            quiz: {
+              question: "Pourquoi infliger des contraintes minutées sévères aux récits lors d'un script audiovisuel Reel vertical a un énorme bénéfice ?",
+              options: [
+                "L'empêcher de virer familier au possible bien qu'on ne l'ait pas dit.",
+                "Sans corsetage formel, l'IA replonge irrésistiblement dans une verve encyclopédique molle qui assassine catégoriquement votre rétention mobile visuelle au cordeau.",
+                "Ça endigue la sur-dépense électrique des calculateurs.",
+                "Fausse piste, le système calibre de lui-même la justesse vidéo suite à la simple lecture."
+              ],
+              correctIndex: 1,
+              explanation: "Resserrez le chrono, et l'IA liquidera la verbosité vaine pour cracher l'essence nerveuse demandée."
+            },
+            takeaway: "La différence n'est plus logée dans le simple accès du chatbot magique pour poster. C'est présider au poste du souverain stratège : dicter l'idée, le gabarit chronométré, la voix et l'exécution aux ordres."
+          },
+          {
+            number: 6,
+            title: "Ingénierie Avancée des Requêtes Magistrales",
+            intro: "Affûtez impitoyablement vos commandes pour manipuler l'algorithme. Maîtrisez l'artillerie stratégique : le Zero-Shot, le Few-Shot, et le Chain-of-Thought.",
+            keyPoints: [
+              "Zero-Shot ordonne brutalement en se reposant béatement sur le savoir infaillible stocké en base.",
+              "Few-Shot corrompt l'instruction en inoculant des réponses calibres pour imposer un ton et un axe.",
+              "Chain-of-Thought pulvérise l'irrémédiable en paliers de réflexion ultra-logiques impénétrables."
+            ],
+            lessonSteps: CHATGPT_MODULE_6_STEPS_FR,
+            promptExample: "Conduis mon expatriation par échelons: Étage 1 la trame légale, Étage 2 la liquidation ménagère, Étage 3 le plan d'installation ferme.",
+            practice: {
+              title: "L'Arc Séquentiel",
+              instruction: "Montez en fragments les contraintes absolues sur un planning d'endettement affreux.",
+              terms: ["Scanner le solde bancaire", "Analyse de fuite", "Dresser les piliers mensuels", "Déclenchement 12 mois"],
+              solution: "Contraindre l'évolution en la sectionnant supprime formellement la poésie inutile et hasardeuse de la machine globale."
+            },
+            quiz: {
+              question: "Quelle est la clef de voûte triomphale de la Chaîne de Pensée limitant la machine frontale lors des travaux dantesques ?",
+              options: [
+                "Broyer l'équation dans un système chronologique exécute mathématiquement sa bêtise et accule le bot à des réponses pures sans hallucination.",
+                "Cela fige l'IA dans l'usage stéréotypé de listes à la ligne sans qu'elle tente la réécriture fantaisiste illisible.",
+                "La chaîne sauvegarde indéniablement l'empreinte carbone et l'usure de batterie lourde de votre périphérique.",
+                "Cette fonction force uniquement l'interface à défiler par à-coups."
+              ],
+              correctIndex: 0,
+              explanation: "En scindant rudement le temps de cerveau artificiel, l'erreur par égarement ou supposition creuse s'annule purement."
+            },
+            takeaway: "Empoigner la logique fracturée de la machine décuple sa faculté analytique propulsant vos stratégies professionnelles au sommet intellectuel."
+          },
+          {
+            number: 7,
+            title: "Audit Ultime de Documentation Légaliste et Commerciale",
+            intro: "Furetez à vitesse stellaire au travers des charabias opaques effroyables. La machine dégrossit les lourdes plaidoiries textuelles expurgées de gras inutile en exhumant le danger pur vital franc directement à sa racine textuelle inévitable.",
+            keyPoints: [
+              "Évaporer les 40 feuillets insipides en cinq axes majeurs vitaux percutants clairs.",
+              "Identifier agressivement la clause assassine préalablement à l'achat d'un juriste onéreux très coûteux complet.",
+              "Démolir la suprématie de la rhétorique hautaine pour un aveu factuel limpide banal d'allure commune rapide facile.",
+              "Extraire ardemment le quota chiffré dissimulé en jetant l'excédent de lettres à la benne froide virtuelle instantanément sans délai précis dur pur et parfait."
+            ],
+            lessonSteps: CHATGPT_MODULE_7_STEPS_FR,
+            promptExample: "Balaye ce bloc textuel lourd avec froideur implacable pour restituer crûment via une seule colonne étroite le versement maximum forfaitaire absolu et la date butoir exacte sans discussion de forme verbale périphérique pompeuse ennuyeuse inutile grave.",
+            practice: {
+              title: "Faisceau Radarique Defensif Pur Fort",
+              instruction: "Instruisez le scanner à flairer par totale paranoïa la ruine potentielle des alinéas malveillants cachés en plein soleil.",
+              terms: ["traque le malus caché grave", "réécrit de suite l'impact financier banal direct total", "alerte danger clair net précis rouge vif alerte", "format tableau strict imposé dur et direct forcé sans bavardage d'ambiance lointain du but formel complet vrai"],
+              solution: "Allumer l'intuition catastrophique chez la machine éradique votre passivité coupable devant la masse de papier; elle cherche activement pour vous d'arrache pied rapide et fort."
+            },
+            quiz: {
+              question: "Si l'intelligence générative balaie l'obstacle bureaucratique prodigieusement de manière constante sans défaut, pourquoi l'Avocat de métier réside-t-il suprême lors du saut aveugle final grave et fort?",
+              options: [
+                "À un détail mineur que la machine tape moins vite à certains moments sombres d'absence passagers.",
+                "Par le fait solennel inévitable et irremplaçable que l'outil de silicium pur se décharge intégralement de toute validité juridique d'erreur et ne sauvera aucunement votre tête ou compte en banque d'une erreur d'interprétation factuelle lors du jugement de cour sévère étatique authentique formel incontestable.",
+                "L'IA a un souci passager concernant les majuscules seulement en France.",
+                "L'Avocat a une fonction psychologique d'assistance vocale plaisante pour rire un coup ensemble au soleil entre amis calmes l'après midi en terrasse de café joyeux doux tendre pur et naïf gentil chaleureux simple clair parfait bon."
+              ],
+              correctIndex: 1,
+              explanation: "Le silicium débroussaille brillamment les lianes épineuses; votre juriste appose l'acier légal souverain protégeant la compagnie. L'IA ne remplace jamais le risque certifié de sa propre responsabilité réelle forte."
+            },
+            takeaway: "Renverser l'ordre des tâches assommantes par l'ingénierie formelle textuelle libère l'essence combative supérieure de la direction d'affaires active concentrée rapide."
+          },
+          {
+            number: 8,
+            title: "L'Instructeur Omniscient et Personnel",
+            intro: "Exploitez toute l'armada synaptique synthétique crue et froide pour assimiler tout domaine vierge à soi dès le palier d'absolu ignorance : nivelé impitoyablement à la courbe stricte, l'endurance et l'oscillation intime et précise singulière fermement ancrée.",
+            keyPoints: [
+              "Le réacteur échelonne de lui-même rigoureusement tout jargon indigeste afin de s'arrimer au point d'ignorance réel ponctuel.",
+              "Le choc dialéctique coercitif frontal vif par interrogatoires maïeutiques Socratiques implante rudement de l'adamantium neuronal.",
+              "Forcer arbitrairement une rafale cruelle d'auto-évaluation piège éradique farouchement l'oubli brumeux volatile naissant léger.",
+              "La loi lourde d'airain inévitable : L'IA ne détruit fermement que les ronces d'accès; l'haltérophilie mentale et viscérale incombe à votre esprit."
+            ],
+            lessonSteps: CHATGPT_MODULE_8_STEPS_FR,
+            promptExample: "Broyer ce document dense technique de force. Ordonnance ma mise au défi brutale via un triage aveugle graduel impitoyable de type Quiz et entrave physiquement logiciellement durement ta console d'offrir vainement l'aboutissement net gratuit.",
+            practice: {
+              title: "Le Censeur Pédagogue Féroce",
+              instruction: "Dicter impérativement un corset contraignant obligeant l'IA à l'oppression intellectuelle pure et non à la mollesse encylopédique stérile.",
+              terms: ["Embrase un rôle de maître", "Balaye les sigles pesants vides", "Opprime par l'inquisition aveugle", "Maintien du voile sombre total sans pitié si échec"],
+              solution: "Bannir les dons synthétiques de répliques complètes précuites faciles élève formellement dramatiquement le fardeau neural bâtissant une mémoire inébranlable."
+            },
+            quiz: {
+              question: "Quelle chimère léthale embaume et drogue mollement l'étudiant paresseux moderne décadent lâche bas vil plat lors de son alliance pernicieuse vide froide sourde avec le cerveau textuel infini gratuit clair simple absolu fluide fort magique plat lourd beau d'interface simple de chat ouvert vide web ?",
+              options: [
+                "Avoir une phobie absurde fausse vaine plate vide creuse et oiseuse des coupures et pannes informatiques logicielles globales vastes réseaux longs sans atteste.",
+                "Croire oisivement divinement sereinement passivement joyeusement benoîtement à tort que la simple lecture apathique molle inerte inoffensive sans heurts de résumés lustrés sublimes lisses froids justes équivaut à la forge intellectuelle douloureuse, au travail de chair actif viscéral ardu lourd long dur lent nécessaire requis obligatoire vrai authentique fort juste de mémorisation permanente.",
+                "Penser lourdement bêtement platement pauvrement et bassement fermement fort que les androïdes mentent sur commande ferme simple froide.",
+                "Craindre mollement sans fondement justifié réel la simple interface claire polie lisse moderne digne propre épurée belle sans accroc."
+              ],
+              correctIndex: 1,
+              explanation: "Le silicium pave et lave l'asphalte du Dojo. Or porter l'arme et fracasser l'erreur dans l'arène est un acte purement humain."
+            },
+            takeaway: "Verrouiller le système dans la carcasse du bourreau didactique forge l'acier spirituel mental fort, et annihile la paresse mortifère qui gangrène le siècle."
           }
         ]
       }

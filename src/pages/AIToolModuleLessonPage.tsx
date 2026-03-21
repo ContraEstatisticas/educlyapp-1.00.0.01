@@ -298,7 +298,7 @@ const AIToolModuleLessonPage = () => {
 
   const currentStep = lessonSteps[currentStepIndex];
   const currentStepAnswer = stepAnswers[currentStepIndex] || getDefaultStepAnswer();
-  const ediHelpEnabled = toolSlug === "midjourney" || toolSlug === "gemini";
+  const ediHelpEnabled = toolSlug === "midjourney" || toolSlug === "gemini" || toolSlug === "chatgpt";
 
   const setSelectedOption = (value: number | null) => {
     setStepAnswers((prev) => ({
