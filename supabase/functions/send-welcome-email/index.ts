@@ -220,9 +220,12 @@ function getEmailHtml(params: {
 <!-- Body -->
 <tr><td style="padding:36px 40px 32px;">
   <!-- CTA Button -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
     <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;letter-spacing:0.01em;">${t(lang,'cta')} →</a>
   </td></tr></table>
+  <!-- Copy-paste link -->
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:11px;color:#6b7280;margin:0 0 8px;line-height:1.4;">${t(lang,'copyLink')}</p>
+  <p style="font-family:'Courier New',monospace;font-size:11px;color:#9ca3af;margin:0 0 16px;word-break:break-all;line-height:1.4;"><a href="${ctaUrl}" target="_blank" style="color:#9ca3af;text-decoration:underline;">${ctaUrl}</a></p>
 </td></tr>
 
 ${credentialsBlock}
