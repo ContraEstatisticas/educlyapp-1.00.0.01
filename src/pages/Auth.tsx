@@ -28,6 +28,7 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isProcessingMagicLink, setIsProcessingMagicLink] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
