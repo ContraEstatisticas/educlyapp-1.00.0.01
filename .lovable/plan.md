@@ -1,42 +1,38 @@
 
 
-## Plano: Corrigir Race Condition no Login via Magic Link
+## Plano: Senhas simples + link copiavel nos emails
 
-### Diagnóstico
+### 1. Simplificar gerador de senha (`auto-create-account`)
 
-O problema é uma **race condition** no `Auth.tsx`. Quando o magic link redireciona o usuario para `/auth#access_token=...`, o Supabase SDK precisa processar o hash fragment assincronamente para estabelecer a sessao. Porém, **nao existe um loading state** enquanto isso acontece - a pagina renderiza o formulario de login imediatamente.
+Alterar `generateSecurePassword()` para gerar apenas numeros + uma letra no final (x ou k):
 
-O que acontece na primeira tentativa:
-1. `/magic-login` gera action_link com sucesso (confirmado nos logs)
-2. Redireciona para Supabase verify → Supabase redireciona para `/auth#access_token=...`
-3. Auth.tsx carrega e renderiza o formulario de login **antes** do SDK processar o hash
-4. O SDK tenta processar o hash, mas a pagina ja esta no estado "login form"
-5. Em alguns casos, o `onAuthStateChange(SIGNED_IN)` dispara e funciona. Em outros, o processamento falha silenciosamente.
+```
+Antes: "kB7$mN3&xP9#fQ2%" (16 chars, simbolos)
+Depois: "483927561x" (9 digitos + 1 letra)
+```
 
-Na segunda tentativa funciona porque o usuario clica no link de novo, o magic-login gera um novo OTP, e desta vez o timing e favoravel.
+Logica: 9 digitos aleatorios + escolha aleatoria entre "x" e "k" no final.
 
-A memoria do projeto menciona que deveria existir um "Processing access loading state with 10-second timeout" - mas esse codigo **nao existe** no Auth.tsx atual. Foi perdido em algum commit.
+### 2. Adicionar link copiavel nos emails
 
-### Correcao
+Em ambos os templates (`send-welcome-email` e `resend-magic-link`), adicionar abaixo do botao CTA um texto com o link visivel que o usuario pode copiar e colar:
 
-**`src/pages/Auth.tsx`** - Adicionar deteccao de `access_token` no hash:
+```
+Ou copie e cole este link no navegador:
+https://educly.app/magic-login?token=UUID
+```
 
-1. Novo state: `isProcessingMagicLink`
-2. No useEffect de hash detection (linhas 87-116), **antes** de verificar erros, detectar se o hash contem `access_token`
-3. Se sim: setar `isProcessingMagicLink = true` e mostrar um loading spinner ("Processando seu acesso...")
-4. Timeout de 10 segundos: se o `onAuthStateChange(SIGNED_IN)` nao disparar, tentar `getSession()` manualmente como fallback
-5. Se ainda falhar apos timeout: mostrar a UI de "link expirado" com opcao de reenvio
-6. Quando `isProcessingMagicLink = true`, renderizar loading state em vez do formulario de login
+Estilizado discretamente (font-size pequeno, cor cinza, link sublinhado).
 
-### Resumo tecnico
+Adicionar traducao `copyLink` nos 7 idiomas de ambas as funcoes.
 
-| Local | Mudanca |
-|-------|---------|
-| `Auth.tsx` - state | Adicionar `isProcessingMagicLink` |
-| `Auth.tsx` - hash useEffect | Detectar `access_token` no hash, setar loading |
-| `Auth.tsx` - onAuthStateChange | Limpar `isProcessingMagicLink` quando SIGNED_IN |
-| `Auth.tsx` - render | Mostrar spinner quando processando magic link |
-| `Auth.tsx` - timeout | Fallback com `getSession()` apos 10s |
+### Arquivos modificados
 
-Nenhuma mudanca em edge functions - o problema e 100% no frontend.
+| Arquivo | Mudanca |
+|---------|---------|
+| `supabase/functions/auto-create-account/index.ts` | `generateSecurePassword()` → numeros + x/k |
+| `supabase/functions/send-welcome-email/index.ts` | Traducao `copyLink` + bloco HTML com link visivel |
+| `supabase/functions/resend-magic-link/index.ts` | Traducao `copyLink` + bloco HTML com link visivel |
+
+Tudo o mais permanece igual: senha continua sendo enviada no email de boas-vindas, botao CTA continua funcionando.
 
