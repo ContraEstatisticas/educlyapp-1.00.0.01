@@ -1,38 +1,42 @@
 
 
-## Plano: Corrigir Links de Acesso Permanente (Magic Login)
+## Plano: Corrigir Race Condition no Login via Magic Link
 
 ### Diagnóstico
 
-Os tokens permanentes existem no banco e estão corretos. O problema é que **certos clientes de email** (Hotmail, Outlook, Gmail em alguns casos) estão interpretando o HTML do botão CTA incorretamente, anexando o atributo `style` do `<a>` à URL do `href`.
+O problema é uma **race condition** no `Auth.tsx`. Quando o magic link redireciona o usuario para `/auth#access_token=...`, o Supabase SDK precisa processar o hash fragment assincronamente para estabelecer a sessao. Porém, **nao existe um loading state** enquanto isso acontece - a pagina renderiza o formulario de login imediatamente.
 
-**Prova nos logs:**
-```
-token recebido: a5108a5e-96aa-4c0e-9a30-2f9f6cb1398f" style="display:block;text-align:center;background:linear-gradient(135deg,
-token no banco:  a5108a5e-96aa-4c0e-9a30-2f9f6cb1398f  ← correto
-```
+O que acontece na primeira tentativa:
+1. `/magic-login` gera action_link com sucesso (confirmado nos logs)
+2. Redireciona para Supabase verify → Supabase redireciona para `/auth#access_token=...`
+3. Auth.tsx carrega e renderiza o formulario de login **antes** do SDK processar o hash
+4. O SDK tenta processar o hash, mas a pagina ja esta no estado "login form"
+5. Em alguns casos, o `onAuthStateChange(SIGNED_IN)` dispara e funciona. Em outros, o processamento falha silenciosamente.
 
-### Correções (2 camadas de proteção)
+Na segunda tentativa funciona porque o usuario clica no link de novo, o magic-login gera um novo OTP, e desta vez o timing e favoravel.
 
-**1. Edge Function `magic-login` — sanitizar token (defesa imediata)**
-- Extrair apenas o UUID do valor recebido via regex (`/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i`)
-- Se não encontrar UUID válido, retornar erro
-- Isso corrige TODOS os links já enviados que estão quebrados
+A memoria do projeto menciona que deveria existir um "Processing access loading state with 10-second timeout" - mas esse codigo **nao existe** no Auth.tsx atual. Foi perdido em algum commit.
 
-**2. Templates de email — tornar href mais robusto (prevenção futura)**
-- Em `send-welcome-email` e `resend-magic-link`: envolver a URL com espaços ou usar encoding HTML para as aspas
-- Usar técnica comprovada para email: colocar o `<a>` com `href` em uma linha separada do `style`, sem inline style no mesmo elemento, ou usar `<!--[if mso]>` wrappers
-- Alternativa mais simples e eficaz: usar `style` em um `<td>` pai ao invés de no próprio `<a>`, deixando o `<a>` apenas com `href` e `color/text-decoration`
+### Correcao
 
-### Resumo técnico
+**`src/pages/Auth.tsx`** - Adicionar deteccao de `access_token` no hash:
 
-| Arquivo | Mudança |
-|---------|---------|
-| `supabase/functions/magic-login/index.ts` | Regex para extrair UUID limpo do token |
-| `supabase/functions/send-welcome-email/index.ts` | Separar estilo do botão CTA do `<a href>` |
-| `supabase/functions/resend-magic-link/index.ts` | Mesma correção de template do CTA |
+1. Novo state: `isProcessingMagicLink`
+2. No useEffect de hash detection (linhas 87-116), **antes** de verificar erros, detectar se o hash contem `access_token`
+3. Se sim: setar `isProcessingMagicLink = true` e mostrar um loading spinner ("Processando seu acesso...")
+4. Timeout de 10 segundos: se o `onAuthStateChange(SIGNED_IN)` nao disparar, tentar `getSession()` manualmente como fallback
+5. Se ainda falhar apos timeout: mostrar a UI de "link expirado" com opcao de reenvio
+6. Quando `isProcessingMagicLink = true`, renderizar loading state em vez do formulario de login
 
-### Impacto
-- Links já enviados passarão a funcionar (fix no magic-login)
-- Novos emails não terão mais o problema (fix nos templates)
+### Resumo tecnico
+
+| Local | Mudanca |
+|-------|---------|
+| `Auth.tsx` - state | Adicionar `isProcessingMagicLink` |
+| `Auth.tsx` - hash useEffect | Detectar `access_token` no hash, setar loading |
+| `Auth.tsx` - onAuthStateChange | Limpar `isProcessingMagicLink` quando SIGNED_IN |
+| `Auth.tsx` - render | Mostrar spinner quando processando magic link |
+| `Auth.tsx` - timeout | Fallback com `getSession()` apos 10s |
+
+Nenhuma mudanca em edge functions - o problema e 100% no frontend.
 
