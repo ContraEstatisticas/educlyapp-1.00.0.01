@@ -817,6 +817,24 @@ export type Database = {
         }
         Relationships: []
       }
+      password_reset_attempts: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       pending_thank_you_emails: {
         Row: {
           buyer_name: string
@@ -1588,6 +1606,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_xp_mission_claims: {
+        Row: {
+          claimed_at: string
+          created_at: string
+          id: string
+          metadata: Json
+          mission_group: string
+          mission_key: string
+          period_key: string
+          user_id: string
+        }
+        Insert: {
+          claimed_at?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          mission_group?: string
+          mission_key: string
+          period_key?: string
+          user_id: string
+        }
+        Update: {
+          claimed_at?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          mission_group?: string
+          mission_key?: string
+          period_key?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       webhook_failure_logs: {
         Row: {
           created_at: string
@@ -1710,8 +1761,8 @@ export type Database = {
         Row: {
           current_level: number | null
           email: string | null
-          plan_type: string | null
           preferred_language: string | null
+          product_type: string | null
         }
         Relationships: []
       }
@@ -1807,6 +1858,10 @@ export type Database = {
       log_billing_access: {
         Args: { p_action_type?: string; p_records_accessed?: number }
         Returns: undefined
+      }
+      mark_level_reward_popup_seen: {
+        Args: { p_reward_key: string }
+        Returns: boolean
       }
       ping_user_session: {
         Args: { p_ping_at?: string; p_session_id: string }
