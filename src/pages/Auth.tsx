@@ -54,6 +54,7 @@ const Auth = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && session) {
+        setIsProcessingMagicLink(false);
         navigate("/dashboard", { replace: true });
       }
     });
