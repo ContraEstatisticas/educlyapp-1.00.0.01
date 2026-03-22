@@ -50,6 +50,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Nouveau lien d\'accès',
     heroSubtitle: 'Cliquez sur le bouton ci-dessous pour accéder directement à votre compte Educly.',
     cta: 'Accéder à Mon Compte',
+    copyLink: 'Ou copiez et collez ce lien dans votre navigateur :',
     credentialsTitle: 'VOTRE COMPTE',
     credentialsNote: 'Utilisez votre mot de passe enregistré ou cliquez sur le bouton ci-dessus.',
     credentialsEmail: 'E-mail',
