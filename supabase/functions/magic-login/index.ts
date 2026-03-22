@@ -33,14 +33,23 @@ serve(async (req) => {
 
   try {
     // Accept token from query param (GET) or body (POST)
-    let token: string | null = null;
+    let rawToken: string | null = null;
 
     if (req.method === 'GET') {
       const url = new URL(req.url);
-      token = url.searchParams.get('token');
+      rawToken = url.searchParams.get('token');
     } else if (req.method === 'POST') {
       const body = await req.json();
-      token = body.token;
+      rawToken = body.token;
+    }
+
+    // Sanitize: extract UUID from potentially corrupted token
+    // Some email clients (Hotmail, Outlook) append style attributes to the href
+    const UUID_REGEX = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+    const token = rawToken ? (rawToken.match(UUID_REGEX)?.[0] || null) : null;
+
+    if (rawToken && rawToken !== token) {
+      console.log(`[magic-login] Sanitized token: "${rawToken?.substring(0, 80)}..." → "${token}"`);
     }
 
     if (!token) {

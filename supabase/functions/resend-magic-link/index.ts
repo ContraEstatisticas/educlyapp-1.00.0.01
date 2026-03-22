@@ -116,8 +116,8 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
 
 <!-- Body -->
 <tr><td style="padding:36px 40px 32px;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td>
-    <a href="${accessUrl}" style="display:block;text-align:center;background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;border-radius:14px;letter-spacing:0.01em;">${tr(lang,'cta')} →</a>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
+    <a href="${accessUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;letter-spacing:0.01em;">${tr(lang,'cta')} →</a>
   </td></tr></table>
 </td></tr>
 
