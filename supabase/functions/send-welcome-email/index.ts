@@ -127,6 +127,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Вы можете изменить пароль в любое время в приложении.",
     newPurchaseTitle: "Новая покупка активирована!",
     newPurchaseSubtitle: "Ваш новый пакет теперь доступен. Нажмите ниже для доступа.",
+    copyLink: "Или скопируйте и вставьте эту ссылку в браузер:",
     team: "Команда Educly",
     rights: "Все права защищены.",
     help: "Помощь",
