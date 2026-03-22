@@ -333,6 +333,22 @@ const Auth = () => {
             t("auth.accountNotFoundStep3"),
           ];
 
+  if (isProcessingMagicLink) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background safe-area-inset">
+        <div className="text-center space-y-4 animate-fade-in-up">
+          <Sparkles className="w-10 h-10 text-primary mx-auto animate-spin" />
+          <h2 className="text-xl font-bold text-foreground">
+            {t("auth.processingAccess", "Processando seu acesso...")}
+          </h2>
+          <p className="text-muted-foreground text-sm">
+            {t("auth.pleaseWait", "Aguarde um momento...")}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background safe-area-inset">
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 pt-safe flex items-center gap-2">
