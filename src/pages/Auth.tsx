@@ -28,6 +28,7 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isProcessingMagicLink, setIsProcessingMagicLink] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -53,6 +54,7 @@ const Auth = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" && session) {
+        setIsProcessingMagicLink(false);
         navigate("/dashboard", { replace: true });
       }
     });
@@ -85,16 +87,38 @@ const Auth = () => {
   }, [navigate, searchParams]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (typeof window === "undefined") return;
 
     const hash = window.location.hash;
-    if (!hash) {
-      return;
-    }
+    if (!hash) return;
 
     const hashParams = new URLSearchParams(hash.replace("#", ""));
+
+    // Detect access_token in hash → magic link being processed
+    if (hashParams.get("access_token")) {
+      setIsProcessingMagicLink(true);
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+
+      // Fallback timeout: if onAuthStateChange doesn't fire within 10s
+      const timeout = setTimeout(async () => {
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            navigate("/dashboard", { replace: true });
+            return;
+          }
+        } catch (e) {
+          console.error("Fallback getSession failed:", e);
+        }
+        // No session after timeout → show expired link UI
+        setIsProcessingMagicLink(false);
+        setShowExpiredLink(true);
+      }, 10000);
+
+      return () => clearTimeout(timeout);
+    }
+
+    // Check for error in hash (expired OTP etc.)
     const error = hashParams.get("error");
     const errorCode = hashParams.get("error_code");
     const errorDesc = hashParams.get("error_description");
@@ -113,7 +137,7 @@ const Auth = () => {
 
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   const handleResendMagicLink = async () => {
     if (!expiredEmail) {
@@ -308,6 +332,22 @@ const Auth = () => {
             t("auth.accountNotFoundStep2"),
             t("auth.accountNotFoundStep3"),
           ];
+
+  if (isProcessingMagicLink) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-background safe-area-inset">
+        <div className="text-center space-y-4 animate-fade-in-up">
+          <Sparkles className="w-10 h-10 text-primary mx-auto animate-spin" />
+          <h2 className="text-xl font-bold text-foreground">
+            {t("auth.processingAccess", "Processando seu acesso...")}
+          </h2>
+          <p className="text-muted-foreground text-sm">
+            {t("auth.pleaseWait", "Aguarde um momento...")}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background safe-area-inset">
