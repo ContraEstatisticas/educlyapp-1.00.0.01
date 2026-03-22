@@ -86,6 +86,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Новая ссылка для входа',
     heroSubtitle: 'Нажмите кнопку ниже, чтобы войти в свой аккаунт Educly.',
     cta: 'Войти в Мой Аккаунт',
+    copyLink: 'Или скопируйте и вставьте эту ссылку в браузер:',
     credentialsTitle: 'ВАШ АККАУНТ',
     credentialsNote: 'Используйте зарегистрированный пароль или нажмите кнопку выше для входа.',
     credentialsEmail: 'E-mail',
