@@ -19,6 +19,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Você pode alterar sua senha a qualquer momento dentro do app.",
     newPurchaseTitle: "Nova compra ativada!",
     newPurchaseSubtitle: "Seu novo pacote já está disponível. Clique abaixo para acessar.",
+    copyLink: "Ou copie e cole este link no navegador:",
     team: "Equipe Educly",
     rights: "Todos os direitos reservados.",
     help: "Ajuda",
