@@ -7,10 +7,11 @@ const corsHeaders = {
 };
 
 function generateSecurePassword(): string {
-  const chars = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%&*';
-  const array = new Uint8Array(16);
-  crypto.getRandomValues(array);
-  return Array.from(array, b => chars[b % chars.length]).join('');
+  const digits = new Uint8Array(9);
+  crypto.getRandomValues(digits);
+  const numPart = Array.from(digits, b => (b % 10).toString()).join('');
+  const suffix = crypto.getRandomValues(new Uint8Array(1))[0] % 2 === 0 ? 'x' : 'k';
+  return numPart + suffix;
 }
 
 function normalizeEmail(raw: string): string {

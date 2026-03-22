@@ -19,6 +19,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Você pode alterar sua senha a qualquer momento dentro do app.",
     newPurchaseTitle: "Nova compra ativada!",
     newPurchaseSubtitle: "Seu novo pacote já está disponível. Clique abaixo para acessar.",
+    copyLink: "Ou copie e cole este link no navegador:",
     team: "Equipe Educly",
     rights: "Todos os direitos reservados.",
     help: "Ajuda",
@@ -36,6 +37,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "You can change your password anytime inside the app.",
     newPurchaseTitle: "New purchase activated!",
     newPurchaseSubtitle: "Your new package is now available. Click below to access.",
+    copyLink: "Or copy and paste this link in your browser:",
     team: "Educly Team",
     rights: "All rights reserved.",
     help: "Help",
@@ -53,6 +55,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Puedes cambiar tu contraseña en cualquier momento dentro de la app.",
     newPurchaseTitle: "¡Nueva compra activada!",
     newPurchaseSubtitle: "Tu nuevo paquete ya está disponible. Haz clic abajo para acceder.",
+    copyLink: "O copia y pega este enlace en tu navegador:",
     team: "Equipo Educly",
     rights: "Todos los derechos reservados.",
     help: "Ayuda",
@@ -70,6 +73,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Vous pouvez modifier votre mot de passe à tout moment dans l'application.",
     newPurchaseTitle: "Nouvel achat activé !",
     newPurchaseSubtitle: "Votre nouveau forfait est disponible. Cliquez ci-dessous pour y accéder.",
+    copyLink: "Ou copiez et collez ce lien dans votre navigateur :",
     team: "Équipe Educly",
     rights: "Tous droits réservés.",
     help: "Aide",
@@ -87,6 +91,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Sie können Ihr Passwort jederzeit in der App ändern.",
     newPurchaseTitle: "Neuer Kauf aktiviert!",
     newPurchaseSubtitle: "Ihr neues Paket ist jetzt verfügbar. Klicken Sie unten, um darauf zuzugreifen.",
+    copyLink: "Oder kopieren Sie diesen Link und fügen Sie ihn in Ihren Browser ein:",
     team: "Educly Team",
     rights: "Alle Rechte vorbehalten.",
     help: "Hilfe",
@@ -104,6 +109,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Puoi cambiare la password in qualsiasi momento nell'app.",
     newPurchaseTitle: "Nuovo acquisto attivato!",
     newPurchaseSubtitle: "Il tuo nuovo pacchetto è ora disponibile. Clicca sotto per accedere.",
+    copyLink: "Oppure copia e incolla questo link nel tuo browser:",
     team: "Team Educly",
     rights: "Tutti i diritti riservati.",
     help: "Aiuto",
@@ -121,6 +127,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsChangeNote: "Вы можете изменить пароль в любое время в приложении.",
     newPurchaseTitle: "Новая покупка активирована!",
     newPurchaseSubtitle: "Ваш новый пакет теперь доступен. Нажмите ниже для доступа.",
+    copyLink: "Или скопируйте и вставьте эту ссылку в браузер:",
     team: "Команда Educly",
     rights: "Все права защищены.",
     help: "Помощь",
@@ -213,9 +220,12 @@ function getEmailHtml(params: {
 <!-- Body -->
 <tr><td style="padding:36px 40px 32px;">
   <!-- CTA Button -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
     <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;letter-spacing:0.01em;">${t(lang,'cta')} →</a>
   </td></tr></table>
+  <!-- Copy-paste link -->
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:11px;color:#6b7280;margin:0 0 8px;line-height:1.4;">${t(lang,'copyLink')}</p>
+  <p style="font-family:'Courier New',monospace;font-size:11px;color:#9ca3af;margin:0 0 16px;word-break:break-all;line-height:1.4;"><a href="${ctaUrl}" target="_blank" style="color:#9ca3af;text-decoration:underline;">${ctaUrl}</a></p>
 </td></tr>
 
 ${credentialsBlock}
