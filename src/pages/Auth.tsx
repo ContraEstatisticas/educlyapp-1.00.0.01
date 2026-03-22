@@ -87,16 +87,38 @@ const Auth = () => {
   }, [navigate, searchParams]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (typeof window === "undefined") return;
 
     const hash = window.location.hash;
-    if (!hash) {
-      return;
-    }
+    if (!hash) return;
 
     const hashParams = new URLSearchParams(hash.replace("#", ""));
+
+    // Detect access_token in hash → magic link being processed
+    if (hashParams.get("access_token")) {
+      setIsProcessingMagicLink(true);
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+
+      // Fallback timeout: if onAuthStateChange doesn't fire within 10s
+      const timeout = setTimeout(async () => {
+        try {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            navigate("/dashboard", { replace: true });
+            return;
+          }
+        } catch (e) {
+          console.error("Fallback getSession failed:", e);
+        }
+        // No session after timeout → show expired link UI
+        setIsProcessingMagicLink(false);
+        setShowExpiredLink(true);
+      }, 10000);
+
+      return () => clearTimeout(timeout);
+    }
+
+    // Check for error in hash (expired OTP etc.)
     const error = hashParams.get("error");
     const errorCode = hashParams.get("error_code");
     const errorDesc = hashParams.get("error_description");
@@ -115,7 +137,7 @@ const Auth = () => {
 
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   const handleResendMagicLink = async () => {
     if (!expiredEmail) {
