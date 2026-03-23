@@ -138,6 +138,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Все права защищены.",
     help: "Помощь",
     privacy: "Конфиденциальность",
+    supportText: "Нужна помощь? Свяжитесь с нами:",
   },
 };
 
