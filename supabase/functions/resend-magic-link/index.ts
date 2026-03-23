@@ -16,8 +16,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Acessar',
     directLogin: 'Logue diretamente aqui',
     manualLogin: 'Ou logue usando seus dados',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Acessar com login e senha',
+    manualAccessLink: 'Acessar com seus dados',
+    credentialsEmail: 'Usuário',
+    credentialsNote: 'Use sua senha cadastrada ou clique no botão acima para entrar direto.',
     help: 'Ajuda',
     privacy: 'Privacidade',
     supportText: 'Precisa de ajuda? Entre em contato:',
@@ -29,8 +30,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Sign In',
     directLogin: 'Sign in directly here',
     manualLogin: 'Or sign in with your credentials',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Sign in with login and password',
+    manualAccessLink: 'Sign in with your credentials',
+    credentialsEmail: 'User',
+    credentialsNote: 'Use your registered password or click the button above to sign in directly.',
     help: 'Help',
     privacy: 'Privacy',
     supportText: 'Need help? Get in touch:',
@@ -42,8 +44,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Acceder',
     directLogin: 'Inicia sesión directamente aquí',
     manualLogin: 'O inicia sesión con tus datos',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Acceder con login y contraseña',
+    manualAccessLink: 'Acceder con tus datos',
+    credentialsEmail: 'Usuario',
+    credentialsNote: 'Usa tu contraseña registrada o haz clic en el botón de arriba para entrar directo.',
     help: 'Ayuda',
     privacy: 'Privacidad',
     supportText: '¿Necesitas ayuda? Contáctanos:',
@@ -55,8 +58,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Accéder',
     directLogin: 'Connectez-vous directement ici',
     manualLogin: 'Ou connectez-vous avec vos identifiants',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Se connecter avec login et mot de passe',
+    manualAccessLink: 'Se connecter avec vos identifiants',
+    credentialsEmail: 'Utilisateur',
+    credentialsNote: 'Utilisez votre mot de passe enregistré ou cliquez sur le bouton ci-dessus.',
     help: 'Aide',
     privacy: 'Confidentialité',
     supportText: "Besoin d'aide ? Contactez-nous :",
@@ -66,10 +70,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: 'Neuer Zugangslink',
     heroSubtitle: 'Klicken Sie auf die Schaltfläche unten, um sich direkt bei Ihrem Educly-Konto anzumelden.',
     cta: 'Zugreifen',
-    directLogin: 'Melden Sie sich hier direkt an',
+    directLogin: 'Melden Sie sich direkt hier an',
     manualLogin: 'Oder melden Sie sich mit Ihren Daten an',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Mit Login und Passwort anmelden',
+    manualAccessLink: 'Mit Ihren Daten anmelden',
+    credentialsEmail: 'Benutzer',
+    credentialsNote: 'Verwenden Sie Ihr registriertes Passwort oder klicken Sie oben auf die Schaltfläche.',
     help: 'Hilfe',
     privacy: 'Datenschutz',
     supportText: 'Brauchen Sie Hilfe? Kontaktieren Sie uns:',
@@ -81,8 +86,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Accedi',
     directLogin: 'Accedi direttamente qui',
     manualLogin: 'Oppure accedi con i tuoi dati',
-    credentialsEmail: 'Login',
-    manualAccessLink: 'Accedi con login e password',
+    manualAccessLink: 'Accedi con i tuoi dati',
+    credentialsEmail: 'Utente',
+    credentialsNote: 'Usa la tua password registrata o clicca sul pulsante sopra per accedere direttamente.',
     help: 'Aiuto',
     privacy: 'Privacy',
     supportText: 'Hai bisogno di aiuto? Contattaci:',
@@ -94,8 +100,9 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: 'Войти',
     directLogin: 'Войдите напрямую здесь',
     manualLogin: 'Или войдите с вашими данными',
-    credentialsEmail: 'Логин',
-    manualAccessLink: 'Войти с логином и паролем',
+    manualAccessLink: 'Войти с вашими данными',
+    credentialsEmail: 'Пользователь',
+    credentialsNote: 'Используйте зарегистрированный пароль или нажмите кнопку выше для входа.',
     help: 'Помощь',
     privacy: 'Конфиденциальность',
     supportText: 'Нужна помощь? Свяжитесь с нами:',
@@ -123,7 +130,7 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
 <!-- Header -->
 <tr><td style="padding:40px 40px 32px;border-bottom:1px solid #e5e7eb;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;"><tr>
-    <td style="width:36px;height:36px;vertical-align:middle;"><img src="https://educly.app/images/corujaLogo.svg" alt="Educly" width="36" height="36" style="display:block;border:0;" /></td>
+    <td style="width:36px;height:36px;vertical-align:middle;"><img src="https://educly.app/images/corujaLogo.svg" width="36" height="36" alt="Educly" style="display:block;border:0;" /></td>
     <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#111827;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
   </tr></table>
   <h1 style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:26px;font-weight:800;color:#111827;line-height:1.2;letter-spacing:-0.02em;margin:0 0 8px;">${tr(lang,'heroTitle')}</h1>
@@ -131,8 +138,9 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
 </td></tr>
 
 <!-- Direct Login Section -->
-<tr><td style="padding:28px 40px 32px;">
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">${tr(lang,'directLogin')}</p>
+<tr><td style="padding:28px 40px 24px;">
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">${tr(lang,'directLogin')}</p>
+  <!-- CTA Button -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
     <a href="${accessUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${tr(lang,'cta')} →</a>
   </td></tr></table>
@@ -147,15 +155,16 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
 
 <!-- Manual Login Section -->
 <tr><td style="padding:28px 40px 0;">
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 20px;">${tr(lang,'manualLogin')}</p>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 20px;">${tr(lang,'manualLogin')}</p>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
     <tr><td style="padding:0 0 14px;">
       <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;font-weight:600;color:#f97316;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.05em;">${tr(lang,'credentialsEmail')}</p>
       <p style="font-family:'Courier New',monospace;font-size:15px;color:#111827;margin:0;">${email}</p>
     </td></tr>
   </table>
-  <!-- Manual login link -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;"><tr><td style="background:#ffffff;border:2px solid #1f2937;border-radius:12px;text-align:center;">
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 16px;line-height:1.5;">${tr(lang,'credentialsNote')}</p>
+  <!-- Manual access button -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="border:2px solid #1f2937;border-radius:12px;text-align:center;">
     <a href="${authUrl}" target="_blank" style="display:block;color:#1f2937;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;padding:14px 28px;">${tr(lang,'manualAccessLink')} →</a>
   </td></tr></table>
 </td></tr>

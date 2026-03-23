@@ -14,12 +14,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Acessar",
     directLogin: "Logue diretamente aqui",
     manualLogin: "Ou logue usando seus dados",
-    credentialsEmail: "Login",
+    manualAccessLink: "Acessar com seus dados",
+    credentialsTitle: "Seus dados de acesso",
+    credentialsEmail: "Usuário",
     credentialsPassword: "Senha",
     credentialsChangeNote: "Você pode alterar sua senha a qualquer momento dentro do app.",
-    manualAccessLink: "Acessar com login e senha",
     newPurchaseTitle: "Nova compra ativada!",
     newPurchaseSubtitle: "Seu novo pacote já está disponível. Clique abaixo para acessar.",
+    accessBelow: "Acesse através do botão abaixo",
+    copyLink: "Ou acesse diretamente:",
     team: "Equipe Educly",
     rights: "Todos os direitos reservados.",
     help: "Ajuda",
@@ -33,12 +36,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Sign In",
     directLogin: "Sign in directly here",
     manualLogin: "Or sign in with your credentials",
-    credentialsEmail: "Login",
+    manualAccessLink: "Sign in with your credentials",
+    credentialsTitle: "Your access details",
+    credentialsEmail: "User",
     credentialsPassword: "Password",
     credentialsChangeNote: "You can change your password anytime inside the app.",
-    manualAccessLink: "Sign in with login and password",
     newPurchaseTitle: "New purchase activated!",
     newPurchaseSubtitle: "Your new package is now available. Click below to access.",
+    accessBelow: "Access through the button below",
+    copyLink: "Or access directly:",
     team: "Educly Team",
     rights: "All rights reserved.",
     help: "Help",
@@ -52,12 +58,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Acceder",
     directLogin: "Inicia sesión directamente aquí",
     manualLogin: "O inicia sesión con tus datos",
-    credentialsEmail: "Login",
+    manualAccessLink: "Acceder con tus datos",
+    credentialsTitle: "Tus datos de acceso",
+    credentialsEmail: "Usuario",
     credentialsPassword: "Contraseña",
     credentialsChangeNote: "Puedes cambiar tu contraseña en cualquier momento dentro de la app.",
-    manualAccessLink: "Acceder con login y contraseña",
     newPurchaseTitle: "¡Nueva compra activada!",
     newPurchaseSubtitle: "Tu nuevo paquete ya está disponible. Haz clic abajo para acceder.",
+    accessBelow: "Accede a través del botón de abajo",
+    copyLink: "O accede directamente:",
     team: "Equipo Educly",
     rights: "Todos los derechos reservados.",
     help: "Ayuda",
@@ -71,12 +80,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Accéder",
     directLogin: "Connectez-vous directement ici",
     manualLogin: "Ou connectez-vous avec vos identifiants",
-    credentialsEmail: "Login",
+    manualAccessLink: "Se connecter avec vos identifiants",
+    credentialsTitle: "Vos données d'accès",
+    credentialsEmail: "Utilisateur",
     credentialsPassword: "Mot de passe",
     credentialsChangeNote: "Vous pouvez modifier votre mot de passe à tout moment dans l'application.",
-    manualAccessLink: "Se connecter avec login et mot de passe",
     newPurchaseTitle: "Nouvel achat activé !",
     newPurchaseSubtitle: "Votre nouveau forfait est disponible. Cliquez ci-dessous pour y accéder.",
+    accessBelow: "Accédez via le bouton ci-dessous",
+    copyLink: "Ou accédez directement :",
     team: "Équipe Educly",
     rights: "Tous droits réservés.",
     help: "Aide",
@@ -88,14 +100,17 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Ihr Konto ist bereit.",
     heroSubtitle: "Klicken Sie auf die Schaltfläche unten, um sich sofort anzumelden.",
     cta: "Zugreifen",
-    directLogin: "Melden Sie sich hier direkt an",
+    directLogin: "Melden Sie sich direkt hier an",
     manualLogin: "Oder melden Sie sich mit Ihren Daten an",
-    credentialsEmail: "Login",
+    manualAccessLink: "Mit Ihren Daten anmelden",
+    credentialsTitle: "Ihre Zugangsdaten",
+    credentialsEmail: "Benutzer",
     credentialsPassword: "Passwort",
     credentialsChangeNote: "Sie können Ihr Passwort jederzeit in der App ändern.",
-    manualAccessLink: "Mit Login und Passwort anmelden",
     newPurchaseTitle: "Neuer Kauf aktiviert!",
     newPurchaseSubtitle: "Ihr neues Paket ist jetzt verfügbar. Klicken Sie unten, um darauf zuzugreifen.",
+    accessBelow: "Zugang über den Button unten",
+    copyLink: "Oder greifen Sie direkt zu:",
     team: "Educly Team",
     rights: "Alle Rechte vorbehalten.",
     help: "Hilfe",
@@ -109,12 +124,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Accedi",
     directLogin: "Accedi direttamente qui",
     manualLogin: "Oppure accedi con i tuoi dati",
-    credentialsEmail: "Login",
+    manualAccessLink: "Accedi con i tuoi dati",
+    credentialsTitle: "I tuoi dati di accesso",
+    credentialsEmail: "Utente",
     credentialsPassword: "Password",
     credentialsChangeNote: "Puoi cambiare la password in qualsiasi momento nell'app.",
-    manualAccessLink: "Accedi con login e password",
     newPurchaseTitle: "Nuovo acquisto attivato!",
     newPurchaseSubtitle: "Il tuo nuovo pacchetto è ora disponibile. Clicca sotto per accedere.",
+    accessBelow: "Accedi tramite il pulsante qui sotto",
+    copyLink: "Oppure accedi direttamente:",
     team: "Team Educly",
     rights: "Tutti i diritti riservati.",
     help: "Aiuto",
@@ -128,12 +146,15 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     cta: "Войти",
     directLogin: "Войдите напрямую здесь",
     manualLogin: "Или войдите с вашими данными",
-    credentialsEmail: "Логин",
+    manualAccessLink: "Войти с вашими данными",
+    credentialsTitle: "Ваши данные для входа",
+    credentialsEmail: "Пользователь",
     credentialsPassword: "Пароль",
     credentialsChangeNote: "Вы можете изменить пароль в любое время в приложении.",
-    manualAccessLink: "Войти с логином и паролем",
     newPurchaseTitle: "Новая покупка активирована!",
     newPurchaseSubtitle: "Ваш новый пакет теперь доступен. Нажмите ниже для доступа.",
+    accessBelow: "Войдите через кнопку ниже",
+    copyLink: "Или перейдите напрямую:",
     team: "Команда Educly",
     rights: "Все права защищены.",
     help: "Помощь",
@@ -168,7 +189,7 @@ function getEmailHtml(params: {
 
   const authUrl = "https://educly.app/auth";
 
-  // Manual credentials block for new accounts
+  // Manual credentials block (for new accounts with password)
   let manualBlock = '';
   if (mode === 'magic_link' && generatedPassword) {
     manualBlock = `
@@ -180,7 +201,7 @@ function getEmailHtml(params: {
     </td></tr>
     <!-- Manual Login Section -->
     <tr><td style="padding:28px 40px 0;">
-      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 20px;">${t(lang,'manualLogin')}</p>
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 20px;">${t(lang,'manualLogin')}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr><td style="padding:0 0 14px;">
           <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;font-weight:600;color:#f97316;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.05em;">${t(lang,'credentialsEmail')}</p>
@@ -192,8 +213,8 @@ function getEmailHtml(params: {
         </td></tr>
       </table>
       <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 16px;line-height:1.5;">${t(lang,'credentialsChangeNote')}</p>
-      <!-- Manual login link -->
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#ffffff;border:2px solid #1f2937;border-radius:12px;text-align:center;">
+      <!-- Manual access button -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="border:2px solid #1f2937;border-radius:12px;text-align:center;">
         <a href="${authUrl}" target="_blank" style="display:block;color:#1f2937;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;padding:14px 28px;">${t(lang,'manualAccessLink')} →</a>
       </td></tr></table>
     </td></tr>`;
@@ -213,7 +234,7 @@ function getEmailHtml(params: {
 <tr><td style="padding:40px 40px 32px;border-bottom:1px solid #e5e7eb;">
   <!-- Logo -->
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;"><tr>
-    <td style="width:36px;height:36px;vertical-align:middle;"><img src="https://educly.app/images/corujaLogo.svg" alt="Educly" width="36" height="36" style="display:block;border:0;" /></td>
+    <td style="width:36px;height:36px;vertical-align:middle;"><img src="https://educly.app/images/corujaLogo.svg" width="36" height="36" alt="Educly" style="display:block;border:0;" /></td>
     <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#111827;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
   </tr></table>
   <!-- Headline -->
@@ -222,8 +243,8 @@ function getEmailHtml(params: {
 </td></tr>
 
 <!-- Direct Login Section -->
-<tr><td style="padding:28px 40px 32px;">
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">${t(lang,'directLogin')}</p>
+<tr><td style="padding:28px 40px 24px;">
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">${t(lang,'directLogin')}</p>
   <!-- CTA Button -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
     <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${t(lang,'cta')} →</a>
