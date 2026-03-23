@@ -249,10 +249,12 @@ function getEmailHtml(params: {
 <!-- Direct Login Section -->
 <tr><td style="padding:28px 40px 24px;">
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">${t(lang,'directLogin')}</p>
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 12px;text-align:center;">${t(lang,'ctaNote')}</p>
   <!-- CTA Button -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
-    <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${t(lang,'cta')} →</a>
+    <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;padding:16px 28px;">
+      <span style="font-size:15px;font-weight:700;">${t(lang,'ctaNote')}</span><br/>
+      <span style="font-size:13px;font-weight:400;opacity:0.85;">${t(lang,'cta')} →</span>
+    </a>
   </td></tr></table>
 </td></tr>
 
