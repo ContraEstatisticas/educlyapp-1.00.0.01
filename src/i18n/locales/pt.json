@@ -1517,7 +1517,10 @@
       "step2": "Selecione \"Instalar app\"",
       "stepTitle1": "Passo 1",
       "stepTitle2": "Passo 2"
-    }
+    },
+    "installInstructions": "Instruções de Instalação",
+    "alreadyInstalledDesc": "Você já está usando a versão App do Educly. Aproveite o acesso direto!",
+    "desktopPrompt": "No Desktop?"
   },
   "certificate": {
     "obtained": "Certificado Obtido!",
@@ -3661,5 +3664,87 @@
     "alreadyRegistered": "Já tem conta? Faça login",
     "invalidLink": "Link inválido",
     "useEmailLink": "Use o link enviado no seu email de compra."
+  },
+  "trailModal": {
+    "title": "🤖 O que você vai aprender nas trilhas",
+    "subtitle": "28 dias · 15 IAs · do básico ao avançado",
+    "footer": "🎯 Ao completar as trilhas você terá domínio prático das IAs mais usadas no mercado",
+    "items": {
+      "chatgpt": {
+        "days": "Dias 1–4",
+        "category": "Escrita & Chat",
+        "description": "O assistente mais popular do mundo. Aprenda a usá-lo do zero ao avançado."
+      },
+      "claude": {
+        "days": "Dias 5–6",
+        "category": "Análise & Redação",
+        "description": "Ideal para textos longos, análise de documentos e raciocínio detalhado."
+      },
+      "deepseek": {
+        "days": "Dias 7–8",
+        "category": "Programação",
+        "description": "IA poderosa para código e análise técnica com custo zero."
+      },
+      "gemini": {
+        "days": "Dias 9–10",
+        "category": "Multimodal",
+        "description": "A IA do Google: imagens, documentos, buscas e integração com G Suite."
+      },
+      "copilot": {
+        "days": "Dias 11–12",
+        "category": "Produtividade",
+        "description": "IA da Microsoft integrada ao Word, Excel, Teams e Windows."
+      },
+      "grok": {
+        "days": "Dias 13–14",
+        "category": "Análise & Pesquisa",
+        "description": "IA do X (Twitter) com acesso em tempo real a notícias e conversas."
+      },
+      "perplexity": {
+        "days": "Dias 15–16",
+        "category": "Pesquisa com IA",
+        "description": "Buscador impulsionado por IA que cita fontes e responde com precisão."
+      },
+      "manus": {
+        "days": "Dias 17–18",
+        "category": "Agente Autônomo",
+        "description": "Agente de IA que executa tarefas complexas de forma independente."
+      },
+      "lovable": {
+        "days": "Dias 19–20",
+        "category": "Criação de Apps",
+        "description": "Crie aplicativos completos em minutos apenas descrevendo o que quer."
+      },
+      "nanobanana": {
+        "days": "Dia 21",
+        "category": "IA Brasileira",
+        "description": "A IA nacional: treinada para o contexto e o português do Brasil."
+      },
+      "leonardo": {
+        "days": "Dia 22",
+        "category": "Imagens com IA",
+        "description": "Gere imagens profissionais e assets visuais para qualquer projeto."
+      },
+      "midjourney": {
+        "days": "Dia 23",
+        "category": "Arte com IA",
+        "description": "A ferramenta preferida de designers para criar arte e conceitos visuais."
+      },
+      "captions": {
+        "days": "Dia 24",
+        "category": "Vídeo & Reels",
+        "description": "Edite e crie vídeos curtos com IA — legendas, cortes e efeitos automáticos."
+      },
+      "elevenlabs": {
+        "days": "Dia 25",
+        "category": "Voz & Narração",
+        "description": "Clone vozes, crie narrações e produza áudios hiper-realistas com IA."
+      },
+      "veo": {
+        "days": "Dias 26–28",
+        "category": "Vídeo com IA",
+        "description": "A IA de vídeo do Google: transforme texto e imagens em vídeos cinematográficos."
+      }
+    }
   }
 }

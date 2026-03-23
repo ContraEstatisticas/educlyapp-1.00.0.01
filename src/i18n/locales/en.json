@@ -4481,5 +4481,87 @@
     "alreadyRegistered": "Already have an account? Log in",
     "invalidLink": "Invalid link",
     "useEmailLink": "Use the link sent to your purchase email."
+  },
+  "trailModal": {
+    "title": "🤖 What you will learn in the trails",
+    "subtitle": "28 days · 15 AIs · from basic to advanced",
+    "footer": "🎯 By completing the trails you will have practical mastery of the most used AIs in the market",
+    "items": {
+      "chatgpt": {
+        "days": "Days 1–4",
+        "category": "Writing & Chat",
+        "description": "The most popular assistant in the world. Learn to use it from scratch to advanced."
+      },
+      "claude": {
+        "days": "Days 5–6",
+        "category": "Analysis & Writing",
+        "description": "Ideal for long texts, document analysis and detailed reasoning."
+      },
+      "deepseek": {
+        "days": "Days 7–8",
+        "category": "Programming",
+        "description": "Powerful AI for code and technical analysis with zero cost."
+      },
+      "gemini": {
+        "days": "Days 9–10",
+        "category": "Multimodal",
+        "description": "Google's AI: images, documents, searches and G Suite integration."
+      },
+      "copilot": {
+        "days": "Days 11–12",
+        "category": "Productivity",
+        "description": "Microsoft AI integrated into Word, Excel, Teams and Windows."
+      },
+      "grok": {
+        "days": "Days 13–14",
+        "category": "Analysis & Research",
+        "description": "X (Twitter) AI with real-time access to news and conversations."
+      },
+      "perplexity": {
+        "days": "Days 15–16",
+        "category": "AI Search",
+        "description": "AI-powered search engine that cites sources and answers accurately."
+      },
+      "manus": {
+        "days": "Days 17–18",
+        "category": "Autonomous Agent",
+        "description": "AI agent that executes complex tasks independently."
+      },
+      "lovable": {
+        "days": "Days 19–20",
+        "category": "App Creation",
+        "description": "Create complete applications in minutes just by describing what you want."
+      },
+      "nanobanana": {
+        "days": "Day 21",
+        "category": "Brazilian AI",
+        "description": "The national AI: trained for the context and Portuguese of Brazil."
+      },
+      "leonardo": {
+        "days": "Day 22",
+        "category": "AI Images",
+        "description": "Generate professional images and visual assets for any project."
+      },
+      "midjourney": {
+        "days": "Day 23",
+        "category": "AI Art",
+        "description": "Designers' favorite tool for creating art and visual concepts."
+      },
+      "captions": {
+        "days": "Day 24",
+        "category": "Video & Reels",
+        "description": "Edit and create short videos with AI — automatic captions, cuts and effects."
+      },
+      "elevenlabs": {
+        "days": "Day 25",
+        "category": "Voice & Narration",
+        "description": "Clone voices, create narrations and produce hyper-realistic audio with AI."
+      },
+      "veo": {
+        "days": "Days 26–28",
+        "category": "AI Video",
+        "description": "Google's video AI: transform text and images into cinematic videos."
+      }
+    }
   }
 }

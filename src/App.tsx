@@ -182,7 +182,7 @@ const App = () => {
                 <SessionTracker />
                 <UpdateNotification autoReloadSeconds={15} />
                 <PWARedirect />
-                <PWAInstallPrompt />
+{/* <PWAInstallPrompt /> */}
                 <LevelRewardMilestonePopup />
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}

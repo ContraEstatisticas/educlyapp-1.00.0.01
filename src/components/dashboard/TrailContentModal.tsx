@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 
 // AI logos
 import chatgptLogo from "@/assets/ai-logos/chatgpt.png";
@@ -25,138 +26,110 @@ interface TrailContentModalProps {
 
 const AI_ITEMS = [
   {
+    id: "chatgpt",
     name: "ChatGPT",
     logo: chatgptLogo,
     color: "#10a37f",
-    days: "Dias 1–4",
-    category: "Escrita & Chat",
-    description: "O assistente mais popular do mundo. Aprenda a usá-lo do zero ao avançado.",
   },
   {
+    id: "claude",
     name: "Claude",
     logo: claudeLogo,
     color: "#8b5cf6",
-    days: "Dias 5–6",
-    category: "Análise & Redação",
-    description: "Ideal para textos longos, análise de documentos e raciocínio detalhado.",
   },
   {
+    id: "deepseek",
     name: "DeepSeek",
     logo: deepseekLogo,
     color: "#1e3a8a",
-    days: "Dias 7–8",
-    category: "Programação",
-    description: "IA poderosa para código e análise técnica com custo zero.",
   },
   {
+    id: "gemini",
     name: "Gemini",
     logo: geminiLogo,
     color: "#4285f4",
-    days: "Dias 9–10",
-    category: "Multimodal",
-    description: "A IA do Google: imagens, documentos, buscas e integração com G Suite.",
   },
   {
+    id: "copilot",
     name: "Copilot",
     logo: copilotLogo,
     color: "#0078d4",
-    days: "Dias 11–12",
-    category: "Produtividade",
-    description: "IA da Microsoft integrada ao Word, Excel, Teams e Windows.",
   },
   {
+    id: "grok",
     name: "Grok",
     logo: grokLogo,
     color: "#374151",
-    days: "Dias 13–14",
-    category: "Análise & Pesquisa",
-    description: "IA do X (Twitter) com acesso em tempo real a notícias e conversas.",
   },
   {
+    id: "perplexity",
     name: "Perplexity",
     logo: perplexityLogo,
     color: "#1fb8cd",
-    days: "Dias 15–16",
-    category: "Pesquisa com IA",
-    description: "Buscador impulsionado por IA que cita fontes e responde com precisão.",
   },
   {
+    id: "manus",
     name: "Manus",
     logo: manusLogo,
     color: "#ff6b35",
-    days: "Dias 17–18",
-    category: "Agente Autônomo",
-    description: "Agente de IA que executa tarefas complexas de forma independente.",
   },
   {
+    id: "lovable",
     name: "Lovable",
     logo: lovableLogo,
     color: "#6366f1",
-    days: "Dias 19–20",
-    category: "Criação de Apps",
-    description: "Crie aplicativos completos em minutos apenas descrevendo o que quer.",
   },
   {
+    id: "nanobanana",
     name: "NanoBanana",
     logo: nanobananaLogo,
     color: "#f59e0b",
-    days: "Dia 21",
-    category: "IA Brasileira",
-    description: "A IA nacional: treinada para o contexto e o português do Brasil.",
   },
   {
+    id: "leonardo",
     name: "LeonardoAI",
     logo: leonardoLogo,
     color: "#7c3aed",
-    days: "Dia 22",
-    category: "Imagens com IA",
-    description: "Gere imagens profissionais e assets visuais para qualquer projeto.",
   },
   {
+    id: "midjourney",
     name: "MidJourney",
     logo: midjourneyLogo,
     color: "#6b7280",
-    days: "Dia 23",
-    category: "Arte com IA",
-    description: "A ferramenta preferida de designers para criar arte e conceitos visuais.",
   },
   {
+    id: "captions",
     name: "Captions",
     logo: captionsLogo,
     color: "#ec4899",
-    days: "Dia 24",
-    category: "Vídeo & Reels",
-    description: "Edite e crie vídeos curtos com IA — legendas, cortes e efeitos automáticos.",
   },
   {
+    id: "elevenlabs",
     name: "ElevenLabs",
     logo: elevenlabsLogo,
     color: "#f97316",
-    days: "Dia 25",
-    category: "Voz & Narração",
-    description: "Clone vozes, crie narrações e produza áudios hiper-realistas com IA.",
   },
   {
+    id: "veo",
     name: "VEO",
     logo: veoLogo,
     color: "#ea4335",
-    days: "Dias 26–28",
-    category: "Vídeo com IA",
-    description: "A IA de vídeo do Google: transforme texto e imagens em vídeos cinematográficos.",
   },
 ];
 
 export function TrailContentModal({ open, onOpenChange }: TrailContentModalProps) {
+  const { t } = useTranslation();
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl w-full max-h-[85vh] overflow-hidden flex flex-col p-0">
         {/* Header */}
         <DialogHeader className="px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
           <DialogTitle className="text-xl font-bold text-slate-900 dark:text-white">
-            🤖 O que você vai aprender nas trilhas
+            {t("trailModal.title")}
           </DialogTitle>
           <p className="text-sm text-slate-500 dark:text-muted-foreground mt-1">
-            28 dias · 15 IAs · do básico ao avançado
+            {t("trailModal.subtitle")}
           </p>
         </DialogHeader>
 
@@ -165,7 +138,7 @@ export function TrailContentModal({ open, onOpenChange }: TrailContentModalProps
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {AI_ITEMS.map((ai) => (
               <div
-                key={ai.name}
+                key={ai.id}
                 className="group relative flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
               >
                 {/* Color accent line */}
@@ -187,7 +160,7 @@ export function TrailContentModal({ open, onOpenChange }: TrailContentModalProps
                     />
                   </div>
                   <span className="text-[10px] font-semibold text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                    {ai.days}
+                    {t(`trailModal.items.${ai.id}.days`)}
                   </span>
                 </div>
 
@@ -201,13 +174,13 @@ export function TrailContentModal({ open, onOpenChange }: TrailContentModalProps
                     className="text-[10px] mt-0.5 px-1.5 py-0 h-4 border-0 rounded-md font-medium"
                     style={{ backgroundColor: `${ai.color}18`, color: ai.color }}
                   >
-                    {ai.category}
+                    {t(`trailModal.items.${ai.id}.category`)}
                   </Badge>
                 </div>
 
                 {/* Description */}
                 <p className="text-[11px] text-slate-500 dark:text-muted-foreground leading-snug">
-                  {ai.description}
+                  {t(`trailModal.items.${ai.id}.description`)}
                 </p>
               </div>
             ))}
@@ -217,10 +190,11 @@ export function TrailContentModal({ open, onOpenChange }: TrailContentModalProps
         {/* Footer */}
         <div className="px-6 py-4 border-t border-border flex-shrink-0 bg-muted/30">
           <p className="text-xs text-center text-muted-foreground">
-            🎯 Ao completar as trilhas você terá domínio prático das IAs mais usadas no mercado
+            {t("trailModal.footer")}
           </p>
         </div>
       </DialogContent>
     </Dialog>
   );
 }
+

@@ -4036,5 +4036,87 @@
     "alreadyRegistered": "¿Ya tienes cuenta? Inicia sesión",
     "invalidLink": "Enlace inválido",
     "useEmailLink": "Usa el enlace enviado a tu correo de compra."
+  },
+  "trailModal": {
+    "title": "🤖 Qué aprenderás en las rutas",
+    "subtitle": "28 días · 15 IAs · de lo básico a lo avanzado",
+    "footer": "🎯 Al completar las rutas tendrás dominio práctico de las IAs más usadas en el mercado",
+    "items": {
+      "chatgpt": {
+        "days": "Días 1–4",
+        "category": "Escritura y Chat",
+        "description": "El asistente más popular del mundo. Aprende a usarlo desde cero hasta avanzado."
+      },
+      "claude": {
+        "days": "Días 5–6",
+        "category": "Análisis y Redacción",
+        "description": "Ideal para textos largos, análisis de documentos y razonamiento detallado."
+      },
+      "deepseek": {
+        "days": "Días 7–8",
+        "category": "Programación",
+        "description": "IA potente para código y análisis técnico con coste cero."
+      },
+      "gemini": {
+        "days": "Días 9–10",
+        "category": "Multimodal",
+        "description": "La IA de Google: imágenes, documentos, búsquedas e integración con G Suite."
+      },
+      "copilot": {
+        "days": "Días 11–12",
+        "category": "Productividad",
+        "description": "IA de Microsoft integrada en Word, Excel, Teams y Windows."
+      },
+      "grok": {
+        "days": "Días 13–14",
+        "category": "Análisis e Investigación",
+        "description": "IA de X (Twitter) con acceso en tiempo real a noticias y conversaciones."
+      },
+      "perplexity": {
+        "days": "Días 15–16",
+        "category": "Búsqueda con IA",
+        "description": "Buscador impulsado por IA que cita fuentes y responde con precisión."
+      },
+      "manus": {
+        "days": "Días 17–18",
+        "category": "Agente Autónomo",
+        "description": "Agente de IA que ejecuta tareas complejas de forma independiente."
+      },
+      "lovable": {
+        "days": "Días 19–20",
+        "category": "Creación de Apps",
+        "description": "Crea aplicaciones completas en minutos solo describiendo lo que quieres."
+      },
+      "nanobanana": {
+        "days": "Día 21",
+        "category": "IA Brasileña",
+        "description": "La IA nacional: entrenada para el contexto y el portugués de Brasil."
+      },
+      "leonardo": {
+        "days": "Día 22",
+        "category": "Imágenes con IA",
+        "description": "Genera imágenes profesionales y activos visuales para cualquier proyecto."
+      },
+      "midjourney": {
+        "days": "Día 23",
+        "category": "Arte con IA",
+        "description": "La herramienta preferida de los diseñadores para crear arte y conceptos visuales."
+      },
+      "captions": {
+        "days": "Día 24",
+        "category": "Vídeo y Reels",
+        "description": "Edita y crea vídeos cortos con IA: subtítulos, cortes y efectos automáticos."
+      },
+      "elevenlabs": {
+        "days": "Día 25",
+        "category": "Voz y Narración",
+        "description": "Clona voces, crea narraciones y produce audios hiperrealistas con IA."
+      },
+      "veo": {
+        "days": "Días 26–28",
+        "category": "Vídeo con IA",
+        "description": "La IA de vídeo de Google: transforma texto e imágenes en vídeos cinematográficos."
+      }
+    }
   }
 }

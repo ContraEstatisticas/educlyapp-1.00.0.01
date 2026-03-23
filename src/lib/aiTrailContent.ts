@@ -124,6 +124,44 @@ import {
   MIDJOURNEY_MODULE_6_STEPS_FR,
   MIDJOURNEY_MODULE_6_STEPS_PT,
 } from "@/lib/midjourneyModule6LessonSteps";
+import {
+  DEEPSEEK_MODULE_1_STEPS_EN,
+  DEEPSEEK_MODULE_1_STEPS_ES,
+  DEEPSEEK_MODULE_1_STEPS_FR,
+  DEEPSEEK_MODULE_1_STEPS_PT,
+} from "@/lib/deepseekModule1LessonSteps";
+import {
+  DEEPSEEK_MODULE_2_STEPS_EN,
+  DEEPSEEK_MODULE_2_STEPS_ES,
+  DEEPSEEK_MODULE_2_STEPS_FR,
+  DEEPSEEK_MODULE_2_STEPS_PT,
+} from "@/lib/deepseekModule2LessonSteps";
+import {
+  DEEPSEEK_MODULE_3_STEPS_EN,
+  DEEPSEEK_MODULE_3_STEPS_ES,
+  DEEPSEEK_MODULE_3_STEPS_FR,
+  DEEPSEEK_MODULE_3_STEPS_PT,
+} from "@/lib/deepseekModule3LessonSteps";
+import {
+  DEEPSEEK_MODULE_4_STEPS_EN,
+  DEEPSEEK_MODULE_4_STEPS_ES,
+  DEEPSEEK_MODULE_4_STEPS_FR,
+  DEEPSEEK_MODULE_4_STEPS_PT,
+} from "@/lib/deepseekModule4LessonSteps";
+import {
+  DEEPSEEK_MODULE_5_STEPS_EN,
+  DEEPSEEK_MODULE_5_STEPS_ES,
+  DEEPSEEK_MODULE_5_STEPS_FR,
+  DEEPSEEK_MODULE_5_STEPS_PT,
+} from "@/lib/deepseekModule5LessonSteps";
+import {
+  DEEPSEEK_MODULE_6_STEPS_EN,
+  DEEPSEEK_MODULE_6_STEPS_ES,
+  DEEPSEEK_MODULE_6_STEPS_FR,
+  DEEPSEEK_MODULE_6_STEPS_PT,
+} from "@/lib/deepseekModule6LessonSteps";
+
+
 
 export type AiTrailLocale = "pt" | "en" | "es" | "fr";
 export type AiTrailStatus = "live" | "coming_soon";
@@ -3268,6 +3306,899 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
           }
         ]
       }
+    }
+  },
+  deepseek: {
+    status: "coming_soon",
+    locales: {
+      pt: {
+        statusBadge: "Em breve",
+        heroEyebrow: "DeepSeek",
+        heroTitle: "O Assistente de IA que Surpreendeu o Mundo.",
+        heroDescription: "Uma trilha para dominar raciocínio profundo, código, escrita, análise e uso estratégico do DeepSeek no dia a dia.",
+        overviewTitle: "O que você vai dominar",
+        overviewItems: [
+          "Os modelos do DeepSeek (R1, V3, Coder) e quando usar cada um.",
+          "Raciocínio visível, análise estruturada e resolução de problemas complexos.",
+          "Boas práticas de privacidade e uso estratégico combinado com outros assistentes."
+        ],
+        moduleLabel: "Módulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Pratica guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "O Assistente que Surpreendeu o Mundo",
+            summary: "Modelos, raciocínio visível, código, escrita, análise e privacidade.",
+            outcome: "Domínio completo das capacidades do DeepSeek.",
+            intro: "Nesta lição, você vai conhecer o DeepSeek — o assistente de inteligência artificial chinês que revolucionou o mercado de IA com altíssima performance e custo acessível. Entenda como ele funciona, o que o diferencia e como usá-lo de forma estratégica no seu dia a dia.",
+            keyPoints: [
+              "O DeepSeek entregou performance comparável aos melhores modelos com custo drasticamente menor.",
+              "O R1 mostra o raciocínio passo a passo (Chain of Thought visível) antes de entregar a resposta.",
+              "O DeepSeek Coder escreve, revisa, explica e depura código em dezenas de linguagens.",
+              "Por ser chinês, exige atenção especial com privacidade e dados sensíveis."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_1_STEPS_PT,
+            promptExample: "Preciso resolver o seguinte problema: como precificar meu serviço de consultoria. Antes de responder, mostre seu raciocínio passo a passo, identificando as variáveis envolvidas, as possíveis abordagens e a lógica por trás de cada decisão.",
+            practice: {
+              title: "Escolha Estratégica de Modelos",
+              instruction: "Monte a combinação correta de modelos do DeepSeek para diferentes tipos de tarefa.",
+              terms: ["R1 para raciocínio", "V3 para escrita", "Coder para programação", "Revisar antes de aplicar"],
+              solution: "Usar o modelo certo para cada tipo de tarefa e sempre revisar as respostas antes de aplicar em decisões importantes."
+            },
+            quiz: {
+              question: "Por que o DeepSeek surpreendeu o mundo em 2025?",
+              options: [
+                "Porque foi o primeiro modelo de IA da história.",
+                "Porque entregou performance de ponta com custo de desenvolvimento drasticamente menor que os concorrentes.",
+                "Porque é o único modelo que funciona offline.",
+                "Porque substituiu completamente todos os outros assistentes."
+              ],
+              correctIndex: 1,
+              explanation: "O DeepSeek provou que IA de alta performance não exige investimentos bilionários, democratizando o acesso à tecnologia de ponta."
+            },
+            takeaway: "Entender os modelos do DeepSeek, suas capacidades e limitações é o primeiro passo para usá-lo com estratégia e consciência."
+          },
+          {
+            number: 2,
+            title: "Técnicas Avançadas de Prompt",
+            summary: "Raciocínio em cadeia, self-consistency, role prompting e socrático.",
+            outcome: "Domínio de prompts estruturados para resultados professionais.",
+            intro: "Nesta lição, você vai dominar as técnicas avançadas de prompt específicas para extrair o máximo do DeepSeek — explorando seu raciocínio profundo e precisão lógica.",
+            keyPoints: [
+              "O Chain of Thought visível do R1 aumenta drasticamente a precisão em tarefas complexas.",
+              "A autocrítica iterativa permite que o modelo identifique e corrija suas próprias lacunas.",
+              "Combinar múltiplas técnicas cria o prompt definitivo para análises estratégicas.",
+              "Restrições deliberadas e injeção de contexto rico personalizam o resultado."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_2_STEPS_PT,
+            promptExample: "Você é um consultor estratégico sênior. Contexto: [meus dados]. Analise o problema passo a passo sob 3 perspectivas diferentes. Ao final critique sua própria análise e apresente o resultado em formato de relatório executivo.",
+            practice: {
+              title: "O Prompt Definitivo",
+              instruction: "Monte um prompt que combine pelo menos 3 técnicas avançadas vistas na lição.",
+              terms: ["Role Prompting", "Context Injection", "Chain of Thought", "Autocrítica"],
+              solution: "Um prompt que defina papel, injete contexto específico e peça raciocínio passo a passo com autocrítica final."
+            },
+            quiz: {
+              question: "Qual técnica é mais valiosa para decisões importantes onde você quer minimizar erros através da redundância de raciocínio?",
+              options: [
+                "Role Prompting genérico.",
+                "Self-Consistency Prompting (múltiplas resoluções independentes).",
+                "Restrições de contagem de palavras.",
+                "Prompting apenas com emojis."
+              ],
+              correctIndex: 1,
+              explanation: "O Self-Consistency pede caminhos de raciocínio independentes e busca a solução mais frequente, aumentando muito a confiabilidade."
+            },
+            takeaway: "Prompting avançado no DeepSeek não é sobre o que você pergunta, mas sobre como você estrutura o processo de pensamento que o modelo deve seguir."
+          },
+          {
+            number: 3,
+            title: "Aprendendo com o DeepSeek",
+            summary: "Planejamento de estudo, analogias, testes e método Feynman.",
+            outcome: "Aprendizado acelerado e eficaz de qualquer assunto complexo.",
+            intro: "Nesta lição, você vai descobrir como usar o DeepSeek como seu professor particular mais poderoso — aproveitando seu raciocínio profundo para aprender qualquer coisa.",
+            keyPoints: [
+              "O R1 decompõe conceitos complexos em blocos de conhecimento digeríveis.",
+              "O Prompt Mestre de Mapeamento cria o mapa de rota ideal para sua evolução.",
+              "O Método Feynman com DeepSeek identifica e cobre suas lacunas com precisão.",
+              "Repetição espaçada e testes de raciocínio fixam o conhecimento de forma duradoura."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_3_STEPS_PT,
+            promptExample: "Explique o conceito de [assunto] no nível 3 de 5 de profundidade. Comece com uma analogia baseada em [algo que já domino]. Depois me faça uma pergunta que teste meu raciocínio antes de seguir adiante.",
+            practice: {
+              title: "Seu Plano de Estudo",
+              instruction: "Crie um mapeamento de aprendizado completo para um assunto que deseja dominar do zero.",
+              terms: ["Assunto a aprender", "Nível atual: Iniciante", "Visão 360", "Conceitos-chave"],
+              solution: "Aplicar o prompt de mapeamento para gerar uma estrutura de aprendizado completa organizada do mais fundamental ao mais avançado."
+            },
+            quiz: {
+              question: "Por que o uso do DeepSeek para aprendizado é superior aos assistentes de IA que apenas explicam?",
+              options: [
+                "Porque ele consegue ler a mente do estudante.",
+                "Porque permite acompanhar o processo de raciocínio lógico passo a passo.",
+                "Porque garante que o estudante passará em todas as provas.",
+                "Porque é capaz de fazer o dever de casa no lugar do estudante."
+              ],
+              correctIndex: 1,
+              explanation: "Entender o processo de construção de uma ideia torna o aprendizado muito mais profundo e resistente ao esquecimento do que a simples memorização."
+            },
+            takeaway: "O DeepSeek não apenas te entrega a resposta — ele te ensina a construir o raciocínio para chegar nela sozinho."
+          },
+          {
+            number: 4,
+            title: "DeepSeek para Automações",
+            summary: "Automação de tarefas, scripts, APIs, integração de ferramentas e no-code.",
+            outcome: "Trabalho inteligente eliminando o que é repetitivo e manual.",
+            intro: "Nesta lição, você vai descobrir como usar o DeepSeek para criar automações poderosas — gerando scripts, integrando ferramentas e eliminando tarefas repetitivas.",
+            keyPoints: [
+              "Python e DeepSeek: o par perfeito para automações locais velozes.",
+              "Gerenciamento inteligente de e-mails, relatórios e comunicações.",
+              "Conectando ferramentas via API e no-code de forma simplificada.",
+              "Web scraping e monitoramento de mercado com scripts em segundos."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_4_STEPS_PT,
+            promptExample: "Escreva um script Python que monitore a pasta Downloads e organize todos os arquivos em subpastas com base na extensão, criando as categorias automaticamente.",
+            practice: {
+              title: "Sua Primeira Automação",
+              instruction: "Escolha uma tarefa manual e repetitiva e use o DeepSeek para planejar e documentar sua automatização.",
+              terms: ["Tarefa a automatizar", "Trigger/Gatilho", "Fluxo", "Ferramenta"],
+              solution: "Descrever uma tarefa diária previsível para o DeepSeek, que gerará o script ou fluxo no-code correspondente e sua documentação completa."
+            },
+            quiz: {
+              question: "Qual o principal critério para escolher uma boa oportunidade de automatização?",
+              options: [
+                "A tarefa precisa ser muito complexa.",
+                "A tarefa precisa consumir pelo menos 8 horas por dia.",
+                "A tarefa deve ser repetitiva, previsível e baseada em dados ou regras de negócio claras.",
+                "A automatização só deve ser feita por quem sabe programar há anos."
+              ],
+              correctIndex: 2,
+              explanation: "O retorno sobre investimento de tempo é maior naquilo que é cansativo, repetitivo e segue um padrão lógico definido."
+            },
+            takeaway: "Automatizar o previsível permite que você tenha tempo para o que só você pode fazer: o estratégico e o criativo."
+          },
+          {
+            number: 5,
+            title: "Os Erros Mais Comuns",
+            summary: "Prompts vagos, falta de contexto, dados sensíveis e como evitar falhas.",
+            outcome: "Uso estratégico evitando as armadilhas que travam a maioria dos usuários.",
+            intro: "Nesta lição, você vai aprender a identificar e evitar os erros mais comuns que fazem usuários do DeepSeek obterem resultados medíocres.",
+            keyPoints: [
+              "Prompts vagos vs. Contexto rico: a diferença entre o amador e o mestre.",
+              "Segurança: o que nunca compartilhar e como anonimizar seus dados.",
+              "Raciocínio: por que não ignorar o pensamento visível do R1.",
+              "Verificação: IA como copiloto estratégico, nunca como oráculo final."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_5_STEPS_PT,
+            promptExample: "Identifique as potenciais falhas de lógica neste prompt e me apresente uma versão corrigida e otimizada para o DeepSeek R1.",
+            practice: {
+              title: "Otimizador de Prompts",
+              instruction: "Pegue um prompt antigo seu que não deu o resultado esperado e use as técnicas desta lição para corrigi-lo.",
+              terms: ["Prompt Original", "Contexto Adicionado", "Instrução de Raciocínio", "Restrições"],
+              solution: "Transformar um pedido genérico em um prompt estruturado com contexto de negócio, persona e formato de saída definido."
+            },
+            quiz: {
+              question: "Por que considerar o DeepSeek como um 'copiloto' é a mentalidade mais segura?",
+              options: [
+                "Para não precisar trabalhar nunca mais.",
+                "Porque ele toma as decisões finais por você sem erros.",
+                "Para garantir que você sempre valide as informações críticas e mantenha o julgamento humano no controle.",
+                "Porque copilotos de IA são sempre mais inteligentes que os humanos."
+              ],
+              correctIndex: 2,
+              explanation: "A supervisão humana é indispensável para garantir a precisão de dados factuais e a adequação ética e estratégica das saídas da IA."
+            },
+            takeaway: "Conhecer as limitações da ferramenta é o que te permite usá-la com o máximo de potência e a mínima frustração."
+          },
+          {
+            number: 6,
+            title: "Aprendizado Autodirigido",
+            summary: "Autonomia, pesquisa rigorosa, crítica e gestão do conhecimento.",
+            outcome: "Maestria em aprender qualquer tema com profundidade e consistência.",
+            intro: "Nesta lição, você vai aprender como usar o DeepSeek para se tornar um aprendiz verdadeiramente autodirigido — construindo seu próprio caminho.",
+            keyPoints: [
+              "Avaliação diagnóstica: mapeando suas lacunas reais antes de estudar.",
+              "Trilhas personalizadas: o fim dos cursos genéricos e do tempo perdido.",
+              "Rigor na pesquisa: como o R1 conecta conceitos e identifica contradições.",
+              "Gestão do saber: criando seu cérebro digital e sistema de revisão."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_6_STEPS_PT,
+            promptExample: "Com base nas minhas lacunas em [tema], crie uma trilha de aprendizado personalizada de 3 meses com marcos de avaliação quinzenais.",
+            practice: {
+              title: "Seu Dashboard de Aprendizado",
+              instruction: "Crie a estrutura de um sistema de gestão de conhecimento para um tema que você está estudando agora.",
+              terms: ["Categorias", "Templates de Nota", "Grafo de Conexões", "Calendário de Revisão"],
+              solution: "Estruturar no DeepSeek como organizar, registrar e revisar conteúdos para que o aprendizado seja duradouro e aplicável."
+            },
+            quiz: {
+              question: "Qual o papel do pensamento crítico no aprendizado com o DeepSeek?",
+              options: [
+                "Nenhum, pois a IA já processa tudo corretamente.",
+                "Serve apenas para encontrar erros de gramática.",
+                "É o filtro essencial que garante que você valide, questione e adapte o conhecimento ao seu contexto real.",
+                "É usado apenas em discussões filosóficas sem aplicação prática."
+              ],
+              correctIndex: 2,
+              explanation: "No aprendizado autodirigido, você é o próprio editor do seu conhecimento, tornando a vigilância intelectual indispensável."
+            },
+            takeaway: "Em um mundo de informação infinita, saber dirigir seu próprio aprendizado é a sua maior vantagem competitiva."
+          }
+        ]
+      },
+
+      en: {
+        statusBadge: "Coming soon",
+        heroEyebrow: "DeepSeek",
+        heroTitle: "The AI Assistant that Surprised the World.",
+        heroDescription: "A trail to master deep reasoning, code, writing, analysis and strategic use of DeepSeek in your daily life.",
+        overviewTitle: "What you will master",
+        overviewItems: [
+          "DeepSeek models (R1, V3, Coder) and when to use each.",
+          "Visible reasoning, structured analysis and complex problem solving.",
+          "Privacy best practices and strategic combined use with other assistants."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final reading",
+        modules: [
+          {
+            number: 1,
+            title: "The Assistant that Surprised the World",
+            summary: "Models, visible reasoning, code, writing, analysis and privacy.",
+            outcome: "Complete mastery of DeepSeek capabilities.",
+            intro: "In this lesson, you will get to know DeepSeek — the Chinese AI assistant that revolutionized the AI market with top-tier performance and accessible cost. Understand how it works, what sets it apart and how to use it strategically.",
+            keyPoints: [
+              "DeepSeek delivered performance comparable to the best models at a drastically lower cost.",
+              "R1 shows step-by-step reasoning (visible Chain of Thought) before delivering the answer.",
+              "DeepSeek Coder writes, reviews, explains and debugs code in dozens of languages.",
+              "Being Chinese, it requires special attention to privacy and sensitive data."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_1_STEPS_EN,
+            promptExample: "I need to solve the following problem: how to price my consulting service. Before answering, show your reasoning step by step, identifying the variables involved, possible approaches and the logic behind each decision.",
+            practice: {
+              title: "Strategic Model Choice",
+              instruction: "Build the right combination of DeepSeek models for different task types.",
+              terms: ["R1 for reasoning", "V3 for writing", "Coder for programming", "Review before applying"],
+              solution: "Using the right model for each task type and always reviewing responses before applying to important decisions."
+            },
+            quiz: {
+              question: "Why did DeepSeek surprise the world in 2025?",
+              options: [
+                "Because it was the first AI model in history.",
+                "Because it delivered cutting-edge performance at a drastically lower development cost than competitors.",
+                "Because it's the only model that works offline.",
+                "Because it completely replaced all other assistants."
+              ],
+              correctIndex: 1,
+              explanation: "DeepSeek proved that high-performance AI doesn't require billion-dollar investments, democratizing access to cutting-edge technology."
+            },
+            takeaway: "Understanding DeepSeek's models, capabilities and limitations is the first step to using it with strategy and awareness."
+          },
+          {
+            number: 2,
+            title: "Advanced Prompting Techniques",
+            summary: "Chain of Thought, self-consistency, role prompting and socratic.",
+            outcome: "Mastery of structured prompts for professional results.",
+            intro: "In this lesson, you will master the specific advanced prompting techniques to extract the maximum from DeepSeek — exploring its deep reasoning and logical precision.",
+            keyPoints: [
+              "R1's visible Chain of Thought drastically increases precision in complex tasks.",
+              "Iterative self-criticism allowed the model to identify and fix its own gaps.",
+              "Combining multiple techniques creates the definitive prompt for strategic analysis.",
+              "Deliberate constraints and rich context injection customize the result."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_2_STEPS_EN,
+            promptExample: "You are a senior strategic consultant. Context: [my data]. Analyze the problem step-by-step under 3 different perspectives. At the end critique your own analysis and present the result in executive report format.",
+            practice: {
+              title: "The Definitive Prompt",
+              instruction: "Build a prompt that combines at least 3 advanced techniques seen in the lesson.",
+              terms: ["Role Prompting", "Context Injection", "Chain of Thought", "Self-Criticism"],
+              solution: "A prompt that defines a role, injects specific context and asks for step-by-step reasoning with final self-criticism."
+            },
+            quiz: {
+              question: "Which technique is most valuable for important decisions where you want to minimize errors through reasoning redundancy?",
+              options: [
+                "Generic Role Prompting.",
+                "Self-Consistency Prompting (multiple independent resolutions).",
+                "Word count constraints.",
+                "Prompting with emojis only."
+              ],
+              correctIndex: 1,
+              explanation: "Self-Consistency asks for independent reasoning paths and looks for the most frequent solution, greatly increasing reliability."
+            },
+            takeaway: "Advanced prompting in DeepSeek is not about what you ask, but about how you structure the thought process the model should follow."
+          },
+          {
+            number: 3,
+            title: "Learning with DeepSeek",
+            summary: "Study planning, analogies, tests and Feynman method.",
+            outcome: "Accelerated and effective learning of any complex subject.",
+            intro: "In this lesson, you will discover how to use DeepSeek as your most powerful private tutor — leveraging its deep reasoning to learn anything.",
+            keyPoints: [
+              "R1 decomposes complex concepts into digestible building blocks of knowledge.",
+              "The Mapping Prompt Master creates the ideal roadmap for your progress.",
+              "The Feynman Method with DeepSeek identifies and fills your gaps with precision.",
+              "Spaced repetition and reasoning tests fix knowledge in a lasting way."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_3_STEPS_EN,
+            promptExample: "Explain the concept of [subject] at level 3 of 5 depth. Start with an analogy based on [something I already know]. Then ask me a question that tests my reasoning before moving on.",
+            practice: {
+              title: "Your Study Plan",
+              instruction: "Create a complete learning map for a subject you want to master from scratch.",
+              terms: ["Subject to learn", "Current level: Beginner", "360 Vision", "Key concepts"],
+              solution: "Apply the mapping prompt to generate a complete learning structure organized from most fundamental to most advanced."
+            },
+            quiz: {
+              question: "Why is using DeepSeek for learning superior to AI assistants that only explain?",
+              options: [
+                "Because it can read the student's mind.",
+                "Because it allows following the logical reasoning process step-by-step.",
+                "Because it guarantees the student will pass all exams.",
+                "Because it's capable of doing homework for the student."
+              ],
+              correctIndex: 1,
+              explanation: "Understanding the process of building an idea makes learning much deeper and more resistant to forgetting than simple memorization."
+            },
+            takeaway: "DeepSeek doesn't just give you the answer — it teaches you to build the reasoning to get there yourself."
+          },
+          {
+            number: 4,
+            title: "DeepSeek for Automations",
+            summary: "Task automation, scripts, APIs, tool integration and no-code.",
+            outcome: "Smart work eliminating repetitive and manual tasks.",
+            intro: "In this lesson, you will discover how to use DeepSeek to create powerful automations — generating scripts, integrating tools, and eliminating repetitive tasks.",
+            keyPoints: [
+              "Python and DeepSeek: the perfect duo for fast local automations.",
+              "Smart management of emails, reports, and communications.",
+              "Connecting tools via API and no-code in a simplified way.",
+              "Web scraping and market monitoring with scripts in seconds."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_4_STEPS_EN,
+            promptExample: "Write a Python script that monitors the Downloads folder and organizes all files into subfolders based on extension, creating categories automatically.",
+            practice: {
+              title: "Your First Automation",
+              instruction: "Choose a manual and repetitive task and use DeepSeek to plan and document its automation.",
+              terms: ["Task to automate", "Trigger", "Workflow", "Tool"],
+              solution: "Describe a predictable daily task for DeepSeek, which will generate the corresponding script or no-code flow and its full documentation."
+            },
+            quiz: {
+              question: "What is the main criterion for choosing a good automation opportunity?",
+              options: [
+                "The task needs to be very complex.",
+                "The task must consume at least 8 hours per day.",
+                "The task should be repetitive, predictable, and based on clear data or business rules.",
+                "Automation should only be done by someone who has been programming for years."
+              ],
+              correctIndex: 2,
+              explanation: "The return on time investment is greatest in what is tiring, repetitive, and follows a defined logical pattern."
+            },
+            takeaway: "Automating the predictable allows you to have time for what only you can do: the strategic and the creative."
+          },
+          {
+            number: 5,
+            title: "Common Mistakes",
+            summary: "Vague prompts, lack of context, sensitive data and how to avoid failures.",
+            outcome: "Strategic use avoiding the traps that block most users.",
+            intro: "In this lesson, you will learn to identify and avoid the most common mistakes that make DeepSeek users get mediocre results.",
+            keyPoints: [
+              "Vague prompts vs. Rich context: the difference between amateur and master.",
+              "Security: what never to share and how to anonymize your data.",
+              "Reasoning: why you shouldn't ignore R1's visible thinking.",
+              "Verification: AI as a strategic co-pilot, never as the final oracle."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_5_STEPS_EN,
+            promptExample: "Identify the potential logic failures in this prompt and present me with a corrected and optimized version for DeepSeek R1.",
+            practice: {
+              title: "Prompt Optimizer",
+              instruction: "Take an old prompt of yours that didn't give the expected result and use the techniques in this lesson to fix it.",
+              terms: ["Original Prompt", "Added Context", "Reasoning Instruction", "Constraints"],
+              solution: "Transform a generic request into a structured prompt with business context, persona, and defined output format."
+            },
+            quiz: {
+              question: "Why is considering DeepSeek as a 'co-pilot' the safest mindset?",
+              options: [
+                "So you never have to work again.",
+                "Because it makes final decisions for you without errors.",
+                "To ensure you always validate critical information and keep human judgment in control.",
+                "Because AI co-pilots are always smarter than humans."
+              ],
+              correctIndex: 2,
+              explanation: "Human supervision is essential to ensure the accuracy of factual data and the ethical and strategic adequacy of AI outputs."
+            },
+            takeaway: "Knowing the tool's limitations is what allows you to use it with maximum power and minimum frustration."
+          },
+          {
+            number: 6,
+            title: "Self-Directed Learning",
+            summary: "Autonomy, rigorous research, critique and knowledge management.",
+            outcome: "Mastery in learning any subject with depth and consistency.",
+            intro: "In this lesson, you will learn how to use DeepSeek to become a truly self-directed learner — building your own path.",
+            keyPoints: [
+              "Diagnostic assessment: mapping your real gaps before studying.",
+              "Personalized paths: the end of generic courses and wasted time.",
+              "Rigor in research: how R1 connects concepts and identifies contradictions.",
+              "Knowledge management: creating your digital brain and review system."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_6_STEPS_EN,
+            promptExample: "Based on my gaps in [subject], create a personalized 3-month learning path with bi-weekly assessment milestones.",
+            practice: {
+              title: "Your Learning Dashboard",
+              instruction: "Create the structure of a knowledge management system for a subject you are studying now.",
+              terms: ["Categories", "Note Templates", "Connection Graph", "Review Calendar"],
+              solution: "Structure in DeepSeek how to organize, record and review content so that learning is lasting and applicable."
+            },
+            quiz: {
+              question: "What is the role of critical thinking in learning with DeepSeek?",
+              options: [
+                "None, as AI already processes everything correctly.",
+                "It only serves to find grammar errors.",
+                "It is the essential filter that ensures you validate, question and adapt knowledge to your real context.",
+                "It is only used in philosophical discussions without practical application."
+              ],
+              correctIndex: 2,
+              explanation: "In self-directed learning, you are the editor of your own knowledge, making intellectual vigilance indispensable."
+            },
+            takeaway: "In a world of infinite information, knowing how to direct your own learning is your greatest competitive advantage."
+          }
+        ]
+      },
+
+      es: {
+        statusBadge: "Próximamente",
+        heroEyebrow: "DeepSeek",
+        heroTitle: "El Asistente de IA que Surprendió al Mundo.",
+        heroDescription: "Una ruta para dominar el razonamiento profundo, el código, la escritura, el análisis y el uso estratégico de DeepSeek en el día a día.",
+        overviewTitle: "Lo que vas a dominar",
+        overviewItems: [
+          "Los modelos de DeepSeek (R1, V3, Coder) y cuándo usar cada uno.",
+          "Razonamiento visible, análisis estructurado y resolución de problemas complejos.",
+          "Buenas prácticas de privacidad y uso estratégico combinado con otros asistentes."
+        ],
+        moduleLabel: "Módulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Práctica guiada",
+        termsLabel: "Términos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "El Asistente que Surprendió al Mundo",
+            summary: "Modelos, razonamiento visible, código, escritura, análisis y privacidad.",
+            outcome: "Dominio completo de las capacidades de DeepSeek.",
+            intro: "En esta lección, conocerás DeepSeek — el asistente de inteligencia artificial chino que revolucionó el mercado de la IA con un rendimiento altísimo y un costo accesible. Entiende cómo funciona, qué lo diferencia y cómo usarlo de forma estratégica en tu día a día.",
+            keyPoints: [
+              "DeepSeek ofreció un rendimiento comparable a los mejores modelos con un costo drásticamente menor.",
+              "El R1 muestra el razonamiento paso a paso (Chain of Thought visible) antes de entregar la respuesta.",
+              "DeepSeek Coder escribe, revisa, explica y depura código en decenas de lenguajes.",
+              "Al ser chino, exige una atención especial con la privacidad y los datos sensibles."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_1_STEPS_ES,
+            promptExample: "Necesito resolver el siguiente problema: cómo fijar los precios de mi servicio de consultoría. Antes de responder, muestra tu razonamiento paso a paso, identificando las variables involucradas, los posibles enfoques y la lógica detrás de cada decisión.",
+            practice: {
+              title: "Elección Estratégica de Modelos",
+              instruction: "Arma la combinación correcta de modelos de DeepSeek para diferentes tipos de tareas.",
+              terms: ["R1 para razonamiento", "V3 para escritura", "Coder para programación", "Revisar antes de aplicar"],
+              solution: "Usar el modelo correcto para cada tipo de tarea y siempre revisar las respuestas antes de aplicarlas en decisiones importantes."
+            },
+            quiz: {
+              question: "¿Por qué DeepSeek sorprendió al mundo en 2025?",
+              options: [
+                "Porque fue el primer modelo de IA de la historia.",
+                "Porque ofreció un rendimiento de punta con un costo de desarrollo drásticamente menor que sus competidores.",
+                "Porque es el único modelo que funciona offline.",
+                "Porque reemplazó completamente a todos los otros asistentes."
+              ],
+              correctIndex: 1,
+              explanation: "DeepSeek demostró que la IA de alto rendimiento no exige inversiones multimillonarias, democratizando el acceso a la tecnología de punta."
+            },
+            takeaway: "Entender los modelos de DeepSeek, sus capacidades y limitaciones es el primer paso para usarlo con estrategia y conciencia."
+          },
+          {
+            number: 2,
+            title: "Técnicas Avanzadas de Prompt",
+            summary: "Razonamiento en cadena, auto-consistencia, role prompting y socrático.",
+            outcome: "Dominio de prompts estruturados para resultados profesionales.",
+            intro: "En esta lección, dominarás las técnicas avanzadas de prompt específicas para extraer lo máximo de DeepSeek — explorando su razonamiento profundo y precisión lógica.",
+            keyPoints: [
+              "El Chain of Thought visible del R1 aumenta drásticamente la precisión en tareas complejas.",
+              "La autocrítica iterativa permite que el modelo identifique y corrija sus próprias lagunas.",
+              "Combinar múltiples técnicas crea el prompt definitivo para análisis estratégicos.",
+              "Restricciones deliberadas e inyección de contexto rico personalizan el resultado."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_2_STEPS_ES,
+            promptExample: "Eres un consultor estratégico sénior. Contexto: [mis datos]. Analiza el problema paso a paso bajo 3 perspectivas diferentes. Al final critica tu propio análisis y presenta el resultado en formato de informe ejecutivo.",
+            practice: {
+              title: "El Prompt Definitivo",
+              instruction: "Monta un prompt que combine al menos 3 técnicas avanzadas vistas en la lección.",
+              terms: ["Role Prompting", "Inyección de Contexto", "Chain of Thought", "Autocrítica"],
+              solution: "Un prompt que defina un papel, inyecte contexto específico y pida un razonamiento paso a paso con autocrítica final."
+            },
+            quiz: {
+              question: "¿Qué técnica es más valiosa para decisiones importantes donde quieres minimizar errores mediante la redundancia de razonamiento?",
+              options: [
+                "Role Prompting genérico.",
+                "Self-Consistency Prompting (múltiples resoluciones independientes).",
+                "Restricciones de número de palabras.",
+                "Prompting solo con emojis."
+              ],
+              correctIndex: 1,
+              explanation: "El Self-Consistency pide caminos de razonamiento independientes y busca la solución más frecuente, aumentando mucho la confiabilidad."
+            },
+            takeaway: "El prompting avanzado en DeepSeek no se trata de lo que preguntas, sino de cómo estructuras el proceso de pensamiento que el modelo debe seguir."
+          },
+          {
+            number: 3,
+            title: "Aprender con DeepSeek",
+            summary: "Plan de estudios, analogías, pruebas y método Feynman.",
+            outcome: "Aprendizaje acelerado y eficaz de cualquier tema complejo.",
+            intro: "En esta lección, descubrirás cómo usar DeepSeek como tu profesor particular más poderoso — aprovechando su razonamiento profundo para aprender cualquier cosa.",
+            keyPoints: [
+              "El R1 descompone conceptos complejos en bloques de conocimiento digeribles.",
+              "El Prompt Maestro de Mapeo crea la hoja de ruta ideal para tu progreso.",
+              "El Método Feynman con DeepSeek identifica y cubre tus lagunas con precisión.",
+              "La repetición espaciada y las pruebas de razonamiento fijan el conocimiento de forma duradera."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_3_STEPS_ES,
+            promptExample: "Explícame el concepto de [tema] en el nivel 3 de 5 de profundidad. Comienza con una analogía basada en [algo que ya conozco]. Luego hazme una pregunta que ponga a prueba mi razonamiento antes de seguir adelante.",
+            practice: {
+              title: "Tu Plan de Estudios",
+              instruction: "Crea un mapeo de aprendizaje completo para un tema que desees dominar desde cero.",
+              terms: ["Tema a aprender", "Nivel actual: Principiante", "Visión 360", "Conceptos clave"],
+              solution: "Aplicar el prompt de mapeo para generar una estructura de aprendizaje completa organizada desde lo más fundamental a lo más avanzado."
+            },
+            quiz: {
+              question: "¿Por qué el uso de DeepSeek para el aprendizaje es superior a los asistentes de IA que solo explican?",
+              options: [
+                "Porque puede leer la mente del estudiante.",
+                "Porque permite seguir el proceso de razonamiento lógico paso a paso.",
+                "Porque garantiza que el estudiante aprobará todos los exámenes.",
+                "Porque es capaz de hacer la tarea en lugar del estudiante."
+              ],
+              correctIndex: 1,
+              explanation: "Entender el proceso de construcción de una idea hace que el aprendizaje sea mucho más profundo y resistente al olvido que la simple memorización."
+            },
+            takeaway: "DeepSeek no solo te da la respuesta — te enseña a construir el razonamiento para llegar a ella tú mismo."
+          },
+          {
+            number: 4,
+            title: "DeepSeek para Automatizaciones",
+            summary: "Automatización de tareas, scripts, APIs, integración de herramientas y no-code.",
+            outcome: "Trabajo inteligente eliminando lo repetitivo y manual.",
+            intro: "En esta lección, descubrirás cómo usar DeepSeek para crear automatizaciones poderosas — generando scripts, integrando herramientas y eliminando tareas repetitivas.",
+            keyPoints: [
+              "Python y DeepSeek: el dúo perfecto para automatizaciones locales veloces.",
+              "Gestión inteligente de correos, informes y comunicaciones.",
+              "Conectando herramientas vía API y no-code de forma simplificada.",
+              "Web scraping y monitoreo de mercado con scripts en segundos."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_4_STEPS_ES,
+            promptExample: "Escribe un script Python que monitoree la carpeta Descargas y organice todos los archivos en subcarpetas con base en la extensión, creando categorías de forma automática.",
+            practice: {
+              title: "Tu Primera Automatización",
+              instruction: "Elige una tarea manual y repetitiva y usa DeepSeek para planificar y documentar su automatización.",
+              terms: ["Tarea a automatizar", "Trigger/Disparador", "Flujo", "Herramienta"],
+              solution: "Describir una tarea diaria previsible para DeepSeek, que generará el script o flujo no-code correspondiente y su documentación completa."
+            },
+            quiz: {
+              question: "¿Cuál es el principal criterio para elegir una buena oportunidad de automatización?",
+              options: [
+                "La tarea debe ser muy compleja.",
+                "La tarea debe consumir al menos 8 horas al día.",
+                "La tarea debe ser repetitiva, previsible y basada en datos o reglas de negocio claras.",
+                "La automatización solo debe ser hecha por quien sabe programar hace años."
+              ],
+              correctIndex: 2,
+              explanation: "El retorno sobre la inversión de tiempo es mayor en aquello que es cansado, repetitivo y sigue un patrón lógico definido."
+            },
+            takeaway: "Automatizar lo previsible te permite tener tiempo para lo que solo tú puedes hacer: lo estratégico y lo creativo."
+          },
+          {
+            number: 5,
+            title: "Errores Más Comunes",
+            summary: "Prompts vagos, contexto, datos sensibles y cómo evitar fallos.",
+            outcome: "Uso estratégico evitando las trampas que bloquean a la mayoría.",
+            intro: "En esta lección, aprenderás a identificar y evitar los errores más comunes que hacen que los usuarios de DeepSeek obtengan resultados mediocres.",
+            keyPoints: [
+              "Prompts vagos vs. Contexto rico: la diferencia entre el amateur y el experto.",
+              "Seguridad: qué nunca compartir y cómo anonimizar tus datos.",
+              "Razonamiento: por qué no ignorar el pensamiento visible del R1.",
+              "Verificación: IA como copiloto estratégico, nunca como oráculo final."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_5_STEPS_ES,
+            promptExample: "Identifica los posibles fallos de lógica en este prompt y preséntame una versión corregida y optimizada para DeepSeek R1.",
+            practice: {
+              title: "Optimizador de Prompts",
+              instruction: "Toma un prompt antiguo tuyo que no dio el resultado esperado y usa las técnicas de esta lección para corregirlo.",
+              terms: ["Prompt Original", "Contexto Añadido", "Instrucción de Razonamiento", "Restricciones"],
+              solution: "Transformar un pedido genérico en un prompt estructurado con contexto de negocio, persona y formato de salida definido."
+            },
+            quiz: {
+              question: "¿Por qué considerar a DeepSeek como un 'copiloto' es la mentalidad más segura?",
+              options: [
+                "Para no tener que trabajar nunca más.",
+                "Porque toma las decisiones finales por ti sin errores.",
+                "Para garantizar que siempre valides la información crítica y mantengas el juicio humano bajo control.",
+                "Porque los copilotos de IA son siempre más inteligentes que los humanos."
+              ],
+              correctIndex: 2,
+              explanation: "La supervisión humana es indispensable para garantizar la precisión de los datos factuales y la adecuación ética y estratégica de las salidas de la IA."
+            },
+            takeaway: "Conocer las limitaciones de la herramienta es lo que te permite usarla con la máxima potencia y la mínima frustración."
+          },
+          {
+            number: 6,
+            title: "Aprendizaje Autodirigido",
+            summary: "Autonomía, investigación rigurosa, crítica y gestión del conocimiento.",
+            outcome: "Maestría en aprender cualquier tema con profundidad y consistencia.",
+            intro: "En esta lección, aprenderás cómo usar DeepSeek para convertirte en un aprendiz verdaderamente autodirigido — construyendo tu propio camino.",
+            keyPoints: [
+              "Evaluación diagnóstica: mapeando tus brechas reales antes de estudiar.",
+              "Rutas personalizadas: el fin de los cursos genéricos y del tiempo perdido.",
+              "Rigor en la investigación: cómo el R1 conecta conceptos e identifica contradicciones.",
+              "Gestión del saber: creando tu cerebro digital y sistema de revisión."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_6_STEPS_ES,
+            promptExample: "Con base en mis brechas en [tema], crea una ruta de aprendizaje personalizada de 3 meses con hitos de evaluación quincenales.",
+            practice: {
+              title: "Tu Dashboard de Aprendizaje",
+              instruction: "Crea la estructura de un sistema de gestión del conocimiento para un tema que estás estudiando ahora.",
+              terms: ["Categorías", "Plantillas de Nota", "Grafo de Conexiones", "Calendario de Revisión"],
+              solution: "Estructurar en DeepSeek cómo organizar, registrar y revisar contenidos para que el aprendizaje sea duradero y aplicable."
+            },
+            quiz: {
+              question: "¿Cuál es el papel del pensamiento crítico en el aprendizaje con DeepSeek?",
+              options: [
+                "Ninguno, ya que la IA ya procesa todo correctamente.",
+                "Solo sirve para encontrar errores de gramática.",
+                "Es el filtro esencial que garantiza que valides, cuestiones y adaptes el conocimiento a tu contexto real.",
+                "Solo se usa en discusiones filosóficas sin aplicación práctica."
+              ],
+              correctIndex: 2,
+              explanation: "En el aprendizaje autodirigido, tú eres el editor de tu propio conocimiento, haciendo indispensable la vigilancia intelectual."
+            },
+            takeaway: "En un mundo de información infinita, saber dirigir tu propio aprendizaje es tu mayor ventaja competitiva."
+          }
+        ]
+      },
+
+      fr: {
+        statusBadge: "Bientôt",
+        heroEyebrow: "DeepSeek",
+        heroTitle: "L'Assistant IA qui a Surpris le Monde.",
+        heroDescription: "Un parcours pour maîtriser le raisonnement profond, le code, l'écriture, l'analyse et l'utilisation stratégique de DeepSeek au quotidien.",
+        overviewTitle: "Ce que vous allez maîtriser",
+        overviewItems: [
+          "Les modèles DeepSeek (R1, V3, Coder) et quand utiliser chacun.",
+          "Raisonnement visible, analyse structurée et résolution de problèmes complexes.",
+          "Bonnes pratiques de confidentialité et utilisation stratégique combinée avec d'autres assistants."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points clés",
+        promptLabel: "Prompt de référence",
+        practiceLabel: "Pratique guidée",
+        termsLabel: "Termes",
+        solutionLabel: "Réponse attendue",
+        quizLabel: "Checkpoint",
+        correctLabel: "Bonne réponse",
+        takeawayLabel: "Lecture finale",
+        modules: [
+          {
+            number: 1,
+            title: "L'Assistant qui a Surpris le Monde",
+            summary: "Modèles, raisonnement visible, code, écriture, analyse et confidentialité.",
+            outcome: "Maîtrise complète des capacités de DeepSeek.",
+            intro: "Dans cette leçon, vous allez découvrir DeepSeek — l'assistant d'intelligence artificielle chinois qui a révolutionné le marché de l'IA avec des performances de pointe à un coût accessible. Comprenez comment il fonctionne, ce qui le différencie et comment l'utiliser de manière stratégique au quotidien.",
+            keyPoints: [
+              "DeepSeek a offert des performances comparables aux meilleurs modèles avec un coût drastiquement inférieur.",
+              "Le R1 montre son raisonnement étape par étape (Chain of Thought visible) avant de livrer la réponse.",
+              "DeepSeek Coder écrit, révise, explique et débogue du code dans des dizaines de langages.",
+              "Étant chinois, il exige une attention particulière à la confidentialité et aux données sensibles."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_1_STEPS_FR,
+            promptExample: "Je dois résoudre le problème suivant : comment tarifer mon service de conseil. Avant de répondre, montrez votre raisonnement étape par étape, en identifiant les variables impliquées, les approches possibles et la logique derrière chaque décision.",
+            practice: {
+              title: "Choix Stratégique de Modèles",
+              instruction: "Construisez la bonne combinaison de modèles DeepSeek pour différents types de tâches.",
+              terms: ["R1 pour le raisonnement", "V3 pour l'écriture", "Coder pour la programmation", "Réviser avant d'appliquer"],
+              solution: "Utiliser le bon modèle pour chaque type de tâche et toujours réviser les réponses avant de les appliquer à des décisions importantes."
+            },
+            quiz: {
+              question: "Pourquoi DeepSeek a-t-il surpris le monde en 2025 ?",
+              options: [
+                "Parce que c'était le premier modèle d'IA de l'histoire.",
+                "Parce qu'il a offert des performances de pointe avec un coût de développement drastiquement inférieur aux concurrents.",
+                "Parce que c'est le seul modèle qui fonctionne hors ligne.",
+                "Parce qu'il a complètement remplacé tous les autres assistants."
+              ],
+              correctIndex: 1,
+              explanation: "DeepSeek a prouvé que l'IA performante ne nécessite pas des investissements colossaux, démocratisant l'accès à la technologie de pointe."
+            },
+            takeaway: "Comprendre les modèles DeepSeek, leurs capacités et limites est la première étape pour les utiliser avec stratégie et conscience."
+          },
+          {
+            number: 2,
+            title: "Techniques de Prompt Avancées",
+            summary: "Chain of Thought, auto-cohérence, role prompting et socratique.",
+            outcome: "Maîtrise des prompts structurés pour des résultats professionnels.",
+            intro: "Dans cette leçon, vous maîtriserez les techniques de prompt avancées spécifiques pour extraire le maximum de DeepSeek — en explorant son raisonnement profond et sa précision logique.",
+            keyPoints: [
+              "Le Chain of Thought visible du R1 augmente considérablement la précision pour les tâches complexes.",
+              "L'autocritique itérative permet au modèle d'identifier et de corriger ses propres lacunes.",
+              "La combinaison de plusieurs techniques crée le prompt ultime pour les analyses stratégiques.",
+              "Les contraintes délibérées et l'injection de contexte riche personnalisent le résultat."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_2_STEPS_FR,
+            promptExample: "Vous êtes un consultant stratégique senior. Contexte : [mes données]. Analysez le problème étape par étape sous 3 perspectives différentes. Enfin, critiquez votre propre analyse et présentez le résultat sous forme de rapport exécutif.",
+            practice: {
+              title: "Le Prompt Ultime",
+              instruction: "Créez un prompt qui combine au moins 3 techniques avancées vues dans la leçon.",
+              terms: ["Role Prompting", "Injection de Contexte", "Chain of Thought", "Autocritique"],
+              solution: "Un prompt qui définit un rôle, injecte un contexte spécifique et demande un raisonnement étape par étape avec autocritique finale."
+            },
+            quiz: {
+              question: "Quelle technique est la plus précieuse pour les décisions importantes où vous souhaitez minimiser les erreurs grâce à la redondance de raisonnement ?",
+              options: [
+                "Role Prompting générique.",
+                "Self-Consistency Prompting (résolutions multiples indépendantes).",
+                "Contraintes de nombre de mots.",
+                "Prompting uniquement avec des emojis."
+              ],
+              correctIndex: 1,
+              explanation: "Le Self-Consistency demande des chemins de raisonnement indépendants et recherche la solution la plus fréquente, augmentant considérablement la fiabilité."
+            },
+            takeaway: "Le prompting avancé dans DeepSeek ne concerne pas ce que vous demandez, mais la manière dont vousructurez le processus de réflexion que le modèle doit suivre."
+          },
+          {
+            number: 3,
+            title: "Apprendre avec DeepSeek",
+            summary: "Plan d'études, analogies, tests et méthode Feynman.",
+            outcome: "Apprentissage accéléré et efficace de tout sujet complexe.",
+            intro: "Dans cette leçon, vous découvrirez comment utiliser DeepSeek comme votre tuteur privé le plus puissant — en tirant parti de son raisonnement profond pour apprendre n'importe quoi.",
+            keyPoints: [
+              "Le R1 décompose les concepts complexes en briques de savoir digestes.",
+              "Le Prompt Master de Cartographie crée le plan de route idéal pour votre progression.",
+              "La Méthode Feynman avec DeepSeek identifie et comble vos lacunes avec précision.",
+              "La répétition espacée et les tests de raisonnement fixent le savoir de manière durable."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_3_STEPS_FR,
+            promptExample: "Expliquez-moi le concept de [sujet] au niveau 3 sur 5 de profondeur. Commencez par une analogie basée sur [quelque chose que je connais déjà]. Posez-moi ensuite une question qui teste mon raisonnement avant d'aller plus loin.",
+            practice: {
+              title: "Votre Plan d'Études",
+              instruction: "Créez une cartographie d'apprentissage complète pour un sujet que vous souhaitez maîtriser de zéro.",
+              terms: ["Sujet à apprendre", "Niveau actuel : Débutant", "Vision 360", "Concepts clés"],
+              solution: "Appliquer le prompt de cartographie pour générer une structure d'apprentissage complète organisée du plus fondamental au plus avancé."
+            },
+            quiz: {
+              question: "Pourquoi l'utilisation de DeepSeek pour l'apprentissage est-elle supérieure aux assistants IA qui ne font qu'expliquer ?",
+              options: [
+                "Parce qu'il peut lire l'esprit de l'étudiant.",
+                "Parce qu'il permet de suivre le processus de raisonnement logique étape par étape.",
+                "Parce qu'il garantit que l'étudiant réussira tous les examens.",
+                "Parce qu'il est capable de faire les devoirs à la place de l'étudiant."
+              ],
+              correctIndex: 1,
+              explanation: "Comprendre le processus de construction d'une idée rend l'apprentissage beaucoup plus profond et résistant à l'oubli que la simple mémorisation."
+            },
+            takeaway: "DeepSeek ne vous donne pas seulement la réponse — il vous apprend à construire le raisonnement pour y arriver vous-même."
+          },
+          {
+            number: 4,
+            title: "DeepSeek pour les Automatisations",
+            summary: "Automatisation de tâches, scripts, APIs, intégration d'outils et no-code.",
+            outcome: "Un travail intelligent éliminant les tâches répétitives et manuelles.",
+            intro: "Dans cette leçon, vous découvrirez comment utiliser DeepSeek pour créer des automatisations puissantes — en générant des scripts et en intégrant des outils.",
+            keyPoints: [
+              "Python et DeepSeek : le duo parfait pour des automatisations locales rapides.",
+              "Gestion intelligente des e-mails, des rapports et des communications.",
+              "Connecter des outils via API et no-code de manière simplifiée.",
+              "Web scraping et veille de marché avec des scripts en quelques secondes."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_4_STEPS_FR,
+            promptExample: "Écris un script Python qui surveille le dossier Téléchargements et organise tous les fichiers dans des sous-dossiers en fonction de l'extension, en créant les catégories automatiquement.",
+            practice: {
+              title: "Votre Première Automatisation",
+              instruction: "Choisissez une tâche manuelle et répétitive et utilisez DeepSeek pour planifier sa mise en oeuvre.",
+              terms: ["Tâche à automatiser", "Trigger/Déclencheur", "Flux", "Outil"],
+              solution: "Décrire une tâche quotidienne prévisible pour DeepSeek, qui générera le script ou le flux no-code correspondant et sa documentation complète."
+            },
+            quiz: {
+              question: "Quel est le critère principal pour choisir une bonne opportunité d'automatisation ?",
+              options: [
+                "La tâche doit être très complexe.",
+                "La tâche doit prendre au moins 8 heures par jour.",
+                "La tâche doit être répétitive, prévisible et basée sur des données ou des règles claires.",
+                "L'automatisation ne doit être faite que par ceux qui programment depuis des années."
+              ],
+              correctIndex: 2,
+              explanation: "Le retour sur investissement est maximal sur ce qui est fatigant, répétitif et suit un schéma logique défini."
+            },
+            takeaway: "Automatiser le prévisible vous permet d'avoir du temps pour ce que vous seul pouvez faire : le stratégique et le créatif."
+          },
+          {
+            number: 5,
+            title: "Erreurs les Plus Courantes",
+            summary: "Prompts vagues, contexte, données sensibles et comment éviter les échecs.",
+            outcome: "Usage stratégique évitant les pièges qui bloquent la majorité.",
+            intro: "Dans cette leçon, vous apprendrez à identifier et à éviter les erreurs les plus courantes qui font que les utilisateurs de DeepSeek obtiennent des résultats médiocres.",
+            keyPoints: [
+              "Prompts vagues vs. Contexte riche : la différence entre l'amateur et l'expert.",
+              "Sécurité : ce qu'il ne faut jamais partager et comment anonymiser vos données.",
+              "Raisonnement : pourquoi ne pas ignorer la réflexion visible du R1.",
+              "Vérification : l'IA comme copilote stratégique, jamais comme oracle final."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_5_STEPS_FR,
+            promptExample: "Identifiez les failles logiques potentielles dans ce prompt et présentez-moi une version corrigée et optimisée pour DeepSeek R1.",
+            practice: {
+              title: "Optimiseur de Prompts",
+              instruction: "Prenez un ancien prompt de vous qui n'a pas donné le résultat escompté et utilisez les techniques de cette leçon pour le corriger.",
+              terms: ["Prompt Original", "Contexte Ajouté", "Instruction de Raisonnement", "Restrictions"],
+              solution: "Transformer une demande générique en un prompt structuré avec contexte métier, persona et format de sortie défini."
+            },
+            quiz: {
+              question: "Pourquoi considérer DeepSeek comme un 'copilote' est-elle la mentalité la plus sûre ?",
+              options: [
+                "Pour ne plus jamais avoir à travailler.",
+                "Parce qu'il prend les décisions finales pour vous sans erreur.",
+                "Pour s'assurer que vous validez toujours les informations critiques et gardez le jugement humain aux commandes.",
+                "Parce que les copilotes IA sont toujours plus intelligents que les humains."
+              ],
+              correctIndex: 2,
+              explanation: "La supervision humaine est indispensable pour garantir la précision des données factuelles et l'adéquation éthique et stratégique des sorties de l'IA."
+            },
+            takeaway: "Connaître les limites de l'outil est ce qui vous permet de l'utiliser avec un maximum de puissance et un minimum de frustration."
+          },
+          {
+            number: 6,
+            title: "Apprentissage Autodirigé",
+            summary: "Autonomie, recherche rigoureuse, critique et gestion des connaissances.",
+            outcome: "Maîtrise de l'apprentissage de n'importe quel sujet avec profondeur et constance.",
+            intro: "Dans cette leçon, vous découvrirez comment utiliser DeepSeek pour devenir un apprenant véritablement autodirigé — en construisant votre propre parcours.",
+            keyPoints: [
+              "Évaluation diagnostique : cartographier vos lacunes réelles avant d'étudier.",
+              "Parcours personnalisés : la fin des cours génériques et du temps perdu.",
+              "Rigueur dans la recherche : comment le R1 connecte les concepts et identifie les contradictions.",
+              "Gestion du savoir : créer votre cerveau numérique et votre système de révision."
+            ],
+            lessonSteps: DEEPSEEK_MODULE_6_STEPS_FR,
+            promptExample: "Sur la base de mes lacunes dans [sujet], créez un parcours d'apprentissage personnalisé de 3 mois avec des jalons d'évaluation bimensuels.",
+            practice: {
+              title: "Votre Tableau de Bord d'Apprentissage",
+              instruction: "Créez la structure d'un système de gestion des connaissances pour un sujet que vous étudiez actuellement.",
+              terms: ["Catégories", "Modèles de Note", "Graphe de Connexions", "Calendrier de Révision"],
+              solution: "Structurer dans DeepSeek l'organisation, l'enregistrement et la révision des contenus pour que l'apprentissage soit durable et applicable."
+            },
+            quiz: {
+              question: "Quel est le rôle de l'esprit critique dans l'apprentissage avec DeepSeek ?",
+              options: [
+                "Aucun, car l'IA traite déjà tout correctement.",
+                "Il sert uniquement à trouver des fautes de grammaire.",
+                "C'est le filtre essentiel qui garantit que vous validez, questionnez et adaptez le savoir à votre contexte réel.",
+                "Il n'est utilisé que dans des discussions philosophiques sans application pratique."
+              ],
+              correctIndex: 2,
+              explanation: "Dans l'apprentissage autodirigé, vous êtes l'éditeur de votre propre savoir, ce qui rend la vigilance intellectuelle indispensable."
+            },
+            takeaway: "Dans un monde d'informations infinies, savoir diriger son propre apprentissage est votre plus grand avantage concurrentiel."
+          }
+        ]
+      }
+
     }
   }
 };

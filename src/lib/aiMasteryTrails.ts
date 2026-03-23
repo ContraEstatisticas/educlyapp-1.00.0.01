@@ -107,7 +107,7 @@ export const aiMasteryTrails: MasteryTrail[] = [
     audience: "Para perfis tecnicos que querem uma IA para pensar junto de verdade.",
     vibe: ["debug", "refatoracao", "sistemas"],
     modules: [
-      { title: "Decomposicao de problema", summary: "Quebrando desafios em blocos resolviveis.", outcome: "Metodo de raciocinio tecnico." },
+      { title: "O Assistente que Surpreendeu o Mundo", summary: "Modelos, raciocinio visivel, codigo, escrita, analise e privacidade.", outcome: "Dominio completo das capacidades do DeepSeek." },
       { title: "Debug guiado", summary: "Logs, causas raiz e validacao de hipoteses.", outcome: "Checklist de troubleshooting." },
       { title: "Refatoracao assistida", summary: "Estrutura, legibilidade e performance.", outcome: "Fluxo de refatoracao com IA." },
       { title: "Projeto final", summary: "Mini build tecnico com apoio da IA.", outcome: "Entrega tecnica aplicada." },

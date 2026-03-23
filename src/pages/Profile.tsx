@@ -7,8 +7,9 @@ import {
   CreditCard, ChevronRight, Medal as MedalIcon,
   Star, Image as ImageIcon, Mail, User, Key,
   Bell, Eye, EyeOff, TrendingUp, CalendarDays,
-  Award, FileText, Share2, Lock
+  Award, FileText, Share2, Lock, Download, Smartphone, Share, Plus, MoreVertical
 } from "lucide-react";
+import { usePWAInstall } from "@/hooks/usePWAInstall";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -75,6 +76,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentLevel, currentXPInLevel, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
+  const { isInstallable, isInstalled, isIOS, isAndroid, promptInstall } = usePWAInstall();
 
   const [loading, setLoading] = useState(true);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -95,11 +97,39 @@ const Profile = () => {
   const [isPasswordOpen, setIsPasswordOpen] = useState(false);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
 
-  const { data: coursesCount = 2 } = useQuery({
+  const { data: coursesCount = 0 } = useQuery({
     queryKey: ["user-courses-count", userId],
     queryFn: async () => {
-      if (!userId) return 2;
-      return 2;
+      if (!userId) return 0;
+
+      // 1. Trails Progress (Unique tools)
+      const { data: trailData } = await supabase
+        .from("ai_trail_module_progress")
+        .select("tool_slug")
+        .eq("user_id", userId);
+
+      // 2. Freelancer Progress
+      const { data: freelancerData } = await supabase
+        .from("freelancer_module_progress")
+        .select("id")
+        .eq("user_id", userId)
+        .limit(1);
+
+      // 3. Challenge 28 Days
+      const { data: challengeData } = await supabase
+        .from("user_day_progress")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("completed", true)
+        .limit(1);
+
+      const uniqueTools = new Set(trailData?.map(t => t.tool_slug) || []);
+      let total = uniqueTools.size;
+      
+      if (freelancerData && freelancerData.length > 0) total += 1;
+      if (challengeData && challengeData.length > 0) total += 1;
+
+      return total;
     },
     enabled: !!userId,
   });
@@ -114,7 +144,7 @@ const Profile = () => {
         .select("medal_id, created_at")
         .eq("user_id", userId);
 
-      if (!userMedals) return [];
+      if (!userMedals || userMedals.length === 0) return [];
 
       const { data: medalDetails } = await supabase
         .from("freelancer_medals")
@@ -313,7 +343,6 @@ const Profile = () => {
     }
     try {
       setIsSendingEmail(true);
-      // Refresh session to ensure valid token
       const { error: refreshError } = await supabase.auth.refreshSession();
       if (refreshError) {
         toast({ variant: "destructive", title: t('profile.error'), description: t('profile.sessionExpired', 'Sua sessão expirou. Faça login novamente.') });
@@ -325,7 +354,6 @@ const Profile = () => {
         toast({ variant: "destructive", title: t('profile.sendError'), description: error.message });
         return;
       }
-      // Send new magic link after password change
       try {
         const email = getFullEmail();
         if (email) {
@@ -647,18 +675,26 @@ const Profile = () => {
           <LevelRewardsCard />
 
           <Tabs defaultValue="account" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="account" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 bg-muted/20 p-1.5 h-auto gap-1.5">
+              <TabsTrigger value="account" className="data-[state=active]:bg-primary data-[state=active]:text-white rounded-xl py-2.5">
                 <Settings className="w-4 h-4 mr-2" />
-                {t('profile.tabAccount')}
+                <span className="hidden sm:inline">{t('profile.tabAccount')}</span>
+                <span className="sm:hidden">{t('profile.tabAccount').split(' ')[0]}</span>
               </TabsTrigger>
-              <TabsTrigger value="achievements" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-white">
+              <TabsTrigger value="achievements" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-white rounded-xl py-2.5">
                 <Trophy className="w-4 h-4 mr-2" />
-                {t('profile.tabAchievements')}
+                <span className="hidden sm:inline">{t('profile.tabAchievements')}</span>
+                <span className="sm:hidden">{t('profile.tabAchievements').split(' ')[0]}</span>
               </TabsTrigger>
-              <TabsTrigger value="notifications" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">
+              <TabsTrigger value="notifications" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white rounded-xl py-2.5">
                 <Bell className="w-4 h-4 mr-2" />
-                {t('profile.tabNotifications')}
+                <span className="hidden sm:inline">{t('profile.tabNotifications')}</span>
+                <span className="sm:hidden">{t('profile.tabNotifications').split(' ')[0]}</span>
+              </TabsTrigger>
+              <TabsTrigger value="install" className="data-[state=active]:bg-orange-500 data-[state=active]:text-white rounded-xl py-2.5">
+                <Smartphone className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">{t('pwa.installApp', 'Instalar App')}</span>
+                <span className="sm:hidden">{t('pwa.install', 'Instalar')}</span>
               </TabsTrigger>
             </TabsList>
 
@@ -889,6 +925,113 @@ const Profile = () => {
                 </div>
               </Card>
             </TabsContent>
+
+            <TabsContent value="install" className="space-y-6">
+              <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
+                <div className="flex items-start gap-4 mb-8">
+                  <div className="w-14 h-14 rounded-2xl bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+                    <Download className="w-8 h-8 text-orange-500" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground">
+                      {t('pwa.title', { defaultValue: 'Instalar Educly' })}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1 text-pretty max-w-lg">
+                      {t('pwa.description', { defaultValue: 'Transforme o Educly em um aplicativo na sua tela de início para acesso rápido e melhor experiência.' })}
+                    </p>
+                  </div>
+                </div>
+
+                {isInstalled ? (
+                  <div className="p-12 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 flex flex-col items-center gap-4 text-center">
+                    <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                      <Award className="w-8 h-8 text-emerald-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground text-lg">{t('pwa.installed', 'App Instalado!')}</h4>
+                      <p className="text-sm text-muted-foreground mt-1 max-w-sm">
+                        {t('pwa.alreadyInstalledDesc', 'Você já está usando a versão App do Educly. Aproveite o acesso direto!')}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <h4 className="font-bold text-foreground flex items-center gap-2">
+                        <Smartphone className="w-5 h-5 text-primary" />
+                        {t('pwa.installInstructions', 'Instruções de Instalação')}
+                      </h4>
+
+                      {isIOS ? (
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-4 bg-muted/30 hover:bg-muted/50 transition-colors p-4 rounded-2xl border border-border/50">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <Share className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="text-sm leading-tight">
+                              <p className="font-bold text-foreground mb-1">{t('pwa.ios.stepTitle1', 'Passo 1')}</p>
+                              <p className="text-muted-foreground">{t('pwa.ios.step1', 'Toque no botão de compartilhar no navegador Safari')}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4 bg-muted/30 hover:bg-muted/50 transition-colors p-4 rounded-2xl border border-border/50">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                              <Plus className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="text-sm leading-tight">
+                              <p className="font-bold text-foreground mb-1">{t('pwa.ios.stepTitle2', 'Passo 2')}</p>
+                              <p className="text-muted-foreground">{t('pwa.ios.step2', 'Clique em "Adicionar à Tela de Início"')}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {isInstallable ? (
+                            <Button 
+                              onClick={promptInstall}
+                              className="w-full h-14 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/20"
+                            >
+                              <Download className="w-5 h-5 mr-3" />
+                              {t('pwa.install', 'Instalar Agora')}
+                            </Button>
+                          ) : (
+                            <>
+                              <div className="flex items-center gap-4 bg-muted/30 p-4 rounded-2xl border border-border/50">
+                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                  <MoreVertical className="w-5 h-5 text-primary" />
+                                </div>
+                                <div className="text-sm">
+                                  <p className="font-bold text-foreground mb-1">{t('pwa.android.stepTitle1', 'Passo 1')}</p>
+                                  <p className="text-muted-foreground">{t('pwa.android.step1', 'Abra o menu do navegador (três pontos)')}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-4 bg-muted/30 p-4 rounded-2xl border border-border/50">
+                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                  <Download className="w-5 h-5 text-primary" />
+                                </div>
+                                <div className="text-sm">
+                                  <p className="font-bold text-foreground mb-1">{t('pwa.android.stepTitle2', 'Passo 2')}</p>
+                                  <p className="text-muted-foreground">{t('pwa.android.step2', 'Selecione "Instalar aplicativo" ou "Adicionar à tela inicial"')}</p>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="bg-muted/30 rounded-3xl p-6 flex flex-col items-center justify-center text-center border border-dashed border-border/60">
+                      <div className="w-32 h-32 mb-4 bg-card rounded-2xl shadow-sm border border-border/40 flex items-center justify-center p-3">
+                         <img src="/logo192.png" alt="Educly Logo" className="w-full h-full object-contain rounded-lg" />
+                      </div>
+                      <h5 className="font-bold text-sm text-foreground mb-2">{t('pwa.desktopPrompt', 'No Desktop?')}</h5>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {t('pwa.desktop', 'Use o menu de configurações do seu navegador e selecione "Instalar Educly" para ter o atalho no seu computador.')}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Card>
+            </TabsContent>
           </Tabs>
 
         </div>
@@ -897,4 +1040,5 @@ const Profile = () => {
     </div>
   );
 };
+
 export default Profile;
