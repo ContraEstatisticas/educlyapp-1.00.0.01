@@ -21,6 +21,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Usuário',
     help: 'Ajuda',
     privacy: 'Privacidade',
+    supportText: 'Precisa de ajuda? Entre em contato:',
   },
   en: {
     subject: '🔑 Your new access link — Educly',
