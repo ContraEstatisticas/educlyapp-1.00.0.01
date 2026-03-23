@@ -105,6 +105,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Пользователь',
     help: 'Помощь',
     privacy: 'Конфиденциальность',
+    supportText: 'Нужна помощь? Свяжитесь с нами:',
   },
 };
 
