@@ -1,32 +1,53 @@
 
 
-## Adicionar informação de suporte nos emails de acesso
+## Reestruturar HTML dos emails de acesso
 
-### Problema
-Os emails de boas-vindas (`send-welcome-email`) e reenvio de acesso (`resend-magic-link`) têm apenas um pequeno link "Ajuda" no rodapé que aponta para `mailto:contact@educly.app`, mas não é visível o suficiente. O usuario não percebe que pode pedir suporte.
+### Mudancas de layout (ambos os emails)
 
-### Solução
-Adicionar uma seção de suporte visível **acima do rodapé** em ambos os emails, com o texto traduzido nos 7 idiomas, mostrando claramente o email de contato.
+**1. Logo real no lugar do emoji**
+- Substituir o quadrado com emoji 🎓 por uma tag `<img>` apontando para `https://educly.app/images/corujaLogo.svg`
+- Manter o texto "educly." ao lado
 
-### Mudanças
+**2. Nova ordem das secoes (send-welcome-email)**
 
-**1. `supabase/functions/send-welcome-email/index.ts`**
-- Adicionar nova chave de tradução `supportText` em todos os 7 idiomas (ex: "Precisa de ajuda? Entre em contato: contact@educly.app")
-- Inserir bloco HTML de suporte entre o CTA e o footer, com ícone de envelope e o email clicável em roxo
-
-**2. `supabase/functions/resend-magic-link/index.ts`**
-- Mesma adição: chave `supportText` nos 7 idiomas + bloco HTML de suporte antes do footer
-
-### Visual do bloco
 ```text
 ┌─────────────────────────────────────┐
+│  [LOGO IMG] educly.                 │
+│                                     │
+│  Sua conta está pronta.             │
+│  (subtitle)                         │
+├─────────────────────────────────────┤
+│  LOGUE DIRETAMENTE AQUI             │
+│  ┌─────────────────────────────┐    │
+│  │      Acessar →              │    │
+│  └─────────────────────────────┘    │
+├─────────────────────────────────────┤
+│  OU LOGUE USANDO SEUS DADOS        │
+│                                     │
+│  USUARIO: user@email.com            │
+│  SENHA: abc123                      │
+│                                     │
+│  (nota sobre alterar senha)         │
+│                                     │
+│  Link: https://educly.app/auth      │
+├─────────────────────────────────────┤
 │  📩 Precisa de ajuda?               │
 │  contact@educly.app                 │
+├─────────────────────────────────────┤
+│  © 2025 Educly    Ajuda · Privacid. │
 └─────────────────────────────────────┘
 ```
 
-Texto em fundo cinza claro (`#f9fafb`), email em roxo (`#7c3aed`), sublinhado e clicável.
+**3. Nova ordem das secoes (resend-magic-link)**
+- Mesmo layout, mas sem senha (so email do usuario + link manual)
 
-### Deploy
-Ambas as Edge Functions precisam ser re-deployed após a alteração.
+**4. Novas chaves de traducao (7 idiomas)**
+- `directLogin`: "Logue diretamente aqui" / "Sign in directly here" / etc.
+- `manualLogin`: "Ou logue usando seus dados" / "Or sign in with your credentials" / etc.
+
+### Arquivos a modificar
+- `supabase/functions/send-welcome-email/index.ts`
+- `supabase/functions/resend-magic-link/index.ts`
+
+Ambas precisam de redeploy apos a alteracao.
 
