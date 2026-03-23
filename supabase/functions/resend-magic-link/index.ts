@@ -171,10 +171,7 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
     </td></tr>
   </table>
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 16px;line-height:1.5;">${tr(lang,'credentialsNote')}</p>
-  <!-- Manual access button -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="border:2px solid #1f2937;border-radius:12px;text-align:center;">
-    <a href="${authUrl}" target="_blank" style="display:block;color:#1f2937;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;padding:14px 28px;">${tr(lang,'manualAccessLink')} →</a>
-  </td></tr></table>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 8px;">${tr(lang,'manualAccessLink')}: <a href="${authUrl}" target="_blank" style="color:#7c3aed;font-weight:600;text-decoration:underline;">${authUrl}</a></p>
 </td></tr>
 
 <!-- Support -->
