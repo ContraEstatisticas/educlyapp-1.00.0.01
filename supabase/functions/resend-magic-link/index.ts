@@ -91,6 +91,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Utente',
     help: 'Aiuto',
     privacy: 'Privacy',
+    supportText: 'Hai bisogno di aiuto? Contattaci:',
   },
   ru: {
     subject: '🔑 Ваша новая ссылка для входа — Educly',
