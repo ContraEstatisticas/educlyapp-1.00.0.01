@@ -13,11 +13,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Seu novo link de acesso — Educly',
     heroTitle: 'Novo link de acesso',
     heroSubtitle: 'Clique no botão abaixo para entrar diretamente na sua conta Educly.',
-    cta: 'Entrar na Minha Conta',
-    copyLink: 'Ou copie e cole este link no navegador:',
-    credentialsTitle: 'SUA CONTA',
+    cta: 'Acessar',
+    accessBelow: 'Acesse através do botão abaixo',
+    copyLink: 'Ou acesse diretamente:',
+    credentialsTitle: 'Sua conta',
     credentialsNote: 'Use sua senha cadastrada ou clique no botão acima para entrar direto.',
-    credentialsEmail: 'E-mail',
+    credentialsEmail: 'Usuário',
     help: 'Ajuda',
     privacy: 'Privacidade',
   },
@@ -25,11 +26,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Your new access link — Educly',
     heroTitle: 'New access link',
     heroSubtitle: 'Click the button below to sign in directly to your Educly account.',
-    cta: 'Sign In to My Account',
-    copyLink: 'Or copy and paste this link in your browser:',
-    credentialsTitle: 'YOUR ACCOUNT',
+    cta: 'Sign In',
+    accessBelow: 'Access through the button below',
+    copyLink: 'Or access directly:',
+    credentialsTitle: 'Your account',
     credentialsNote: 'Use your registered password or click the button above to sign in directly.',
-    credentialsEmail: 'Email',
+    credentialsEmail: 'User',
     help: 'Help',
     privacy: 'Privacy',
   },
@@ -37,11 +39,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Tu nuevo enlace de acceso — Educly',
     heroTitle: 'Nuevo enlace de acceso',
     heroSubtitle: 'Haz clic en el botón de abajo para entrar directamente a tu cuenta Educly.',
-    cta: 'Entrar a Mi Cuenta',
-    copyLink: 'O copia y pega este enlace en tu navegador:',
-    credentialsTitle: 'TU CUENTA',
+    cta: 'Acceder',
+    accessBelow: 'Accede a través del botón de abajo',
+    copyLink: 'O accede directamente:',
+    credentialsTitle: 'Tu cuenta',
     credentialsNote: 'Usa tu contraseña registrada o haz clic en el botón de arriba para entrar directo.',
-    credentialsEmail: 'Correo',
+    credentialsEmail: 'Usuario',
     help: 'Ayuda',
     privacy: 'Privacidad',
   },
@@ -49,11 +52,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Votre nouveau lien d\'accès — Educly',
     heroTitle: 'Nouveau lien d\'accès',
     heroSubtitle: 'Cliquez sur le bouton ci-dessous pour accéder directement à votre compte Educly.',
-    cta: 'Accéder à Mon Compte',
-    copyLink: 'Ou copiez et collez ce lien dans votre navigateur :',
-    credentialsTitle: 'VOTRE COMPTE',
+    cta: 'Accéder',
+    accessBelow: 'Accédez via le bouton ci-dessous',
+    copyLink: 'Ou accédez directement :',
+    credentialsTitle: 'Votre compte',
     credentialsNote: 'Utilisez votre mot de passe enregistré ou cliquez sur le bouton ci-dessus.',
-    credentialsEmail: 'E-mail',
+    credentialsEmail: 'Utilisateur',
     help: 'Aide',
     privacy: 'Confidentialité',
   },
@@ -61,11 +65,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Ihr neuer Zugangslink — Educly',
     heroTitle: 'Neuer Zugangslink',
     heroSubtitle: 'Klicken Sie auf die Schaltfläche unten, um sich direkt bei Ihrem Educly-Konto anzumelden.',
-    cta: 'Auf Mein Konto Zugreifen',
-    copyLink: 'Oder kopieren Sie diesen Link und fügen Sie ihn in Ihren Browser ein:',
-    credentialsTitle: 'IHR KONTO',
+    cta: 'Zugreifen',
+    accessBelow: 'Zugang über den Button unten',
+    copyLink: 'Oder greifen Sie direkt zu:',
+    credentialsTitle: 'Ihr Konto',
     credentialsNote: 'Verwenden Sie Ihr registriertes Passwort oder klicken Sie oben auf die Schaltfläche.',
-    credentialsEmail: 'E-Mail',
+    credentialsEmail: 'Benutzer',
     help: 'Hilfe',
     privacy: 'Datenschutz',
   },
@@ -73,11 +78,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Il tuo nuovo link di accesso — Educly',
     heroTitle: 'Nuovo link di accesso',
     heroSubtitle: 'Clicca sul pulsante qui sotto per accedere direttamente al tuo account Educly.',
-    cta: 'Accedi al Mio Account',
-    copyLink: 'Oppure copia e incolla questo link nel tuo browser:',
-    credentialsTitle: 'IL TUO ACCOUNT',
+    cta: 'Accedi',
+    accessBelow: 'Accedi tramite il pulsante qui sotto',
+    copyLink: 'Oppure accedi direttamente:',
+    credentialsTitle: 'Il tuo account',
     credentialsNote: 'Usa la tua password registrata o clicca sul pulsante sopra per accedere direttamente.',
-    credentialsEmail: 'E-mail',
+    credentialsEmail: 'Utente',
     help: 'Aiuto',
     privacy: 'Privacy',
   },
@@ -85,11 +91,12 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     subject: '🔑 Ваша новая ссылка для входа — Educly',
     heroTitle: 'Новая ссылка для входа',
     heroSubtitle: 'Нажмите кнопку ниже, чтобы войти в свой аккаунт Educly.',
-    cta: 'Войти в Мой Аккаунт',
-    copyLink: 'Или скопируйте и вставьте эту ссылку в браузер:',
-    credentialsTitle: 'ВАШ АККАУНТ',
+    cta: 'Войти',
+    accessBelow: 'Войдите через кнопку ниже',
+    copyLink: 'Или перейдите напрямую:',
+    credentialsTitle: 'Ваш аккаунт',
     credentialsNote: 'Используйте зарегистрированный пароль или нажмите кнопку выше для входа.',
-    credentialsEmail: 'E-mail',
+    credentialsEmail: 'Пользователь',
     help: 'Помощь',
     privacy: 'Конфиденциальность',
   },
@@ -101,70 +108,66 @@ function tr(lang: string, key: string): string {
 }
 
 function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): string {
+  const authUrl = "https://educly.app/auth";
+
   return `<!DOCTYPE html><html lang="${lang}"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
-<body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#07080f;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#07080f;">
+<body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-color:#f3f4f6;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f3f4f6;">
 <tr><td style="padding:48px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:480px;margin:0 auto;">
 
 <!-- Card -->
 <tr><td>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0f1120;border:1px solid rgba(255,255,255,0.07);border-radius:20px;overflow:hidden;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;">
 
 <!-- Header -->
-<tr><td style="padding:40px 40px 36px;border-bottom:1px solid rgba(255,255,255,0.07);background:linear-gradient(135deg,rgba(79,110,247,0.12) 0%,transparent 60%);">
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;"><tr>
-    <td style="width:36px;height:36px;background:linear-gradient(135deg,#4f6ef7,#7c3aed);border-radius:10px;text-align:center;vertical-align:middle;font-size:16px;">🎓</td>
-    <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#e8eaf0;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
+<tr><td style="padding:40px 40px 32px;border-bottom:1px solid #e5e7eb;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;"><tr>
+    <td style="width:36px;height:36px;background:#1f2937;border-radius:10px;text-align:center;vertical-align:middle;font-size:16px;">🎓</td>
+    <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#111827;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
   </tr></table>
-  <h1 style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:28px;font-weight:800;color:#e8eaf0;line-height:1.15;letter-spacing:-0.03em;margin:0 0 10px;">${tr(lang,'heroTitle')}</h1>
+  <h1 style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:26px;font-weight:800;color:#111827;line-height:1.2;letter-spacing:-0.02em;margin:0 0 8px;">${tr(lang,'heroTitle')}</h1>
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;color:#6b7280;line-height:1.6;margin:0;">${tr(lang,'heroSubtitle')}</p>
-</td></tr>
-
-<!-- Body -->
-<tr><td style="padding:36px 40px 32px;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;"><tr><td style="background:linear-gradient(135deg,#4f6ef7 0%,#6366f1 100%);border-radius:14px;text-align:center;">
-    <a href="${accessUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:17px 28px;letter-spacing:0.01em;">${tr(lang,'cta')} →</a>
-  </td></tr></table>
-  <!-- Copy-paste link -->
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:11px;color:#6b7280;margin:0 0 8px;line-height:1.4;">${tr(lang,'copyLink')}</p>
-  <p style="font-family:'Courier New',monospace;font-size:11px;color:#9ca3af;margin:0 0 16px;word-break:break-all;line-height:1.4;"><a href="${accessUrl}" target="_blank" style="color:#9ca3af;text-decoration:underline;">${accessUrl}</a></p>
 </td></tr>
 
 <!-- Divider -->
 <tr><td style="padding:0 40px;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td style="height:1px;background:rgba(255,255,255,0.07);"></td>
+    <td style="height:1px;background:#e5e7eb;"></td>
   </tr></table>
 </td></tr>
 
 <!-- Account info -->
 <tr><td style="padding:24px 40px 0;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
-    <tr><td style="padding:12px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);">
-      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#6b7280;margin:0;">${tr(lang,'credentialsTitle')}</p>
-    </td></tr>
-    <tr><td style="padding:13px 16px;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-        <td style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;font-weight:500;width:70px;">${tr(lang,'credentialsEmail')}</td>
-        <td style="font-family:'Courier New',monospace;font-size:13px;color:#e8eaf0;text-align:right;">${email}</td>
-      </tr></table>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:16px;font-weight:700;color:#111827;margin:0 0 14px;">${tr(lang,'credentialsTitle')}</p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td style="padding:0 0 14px;">
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;font-weight:600;color:#f97316;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.05em;">${tr(lang,'credentialsEmail')}</p>
+      <p style="font-family:'Courier New',monospace;font-size:15px;color:#111827;margin:0;">${email}</p>
     </td></tr>
   </table>
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;margin:10px 0 0;line-height:1.5;">${tr(lang,'credentialsNote')}</p>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 0;line-height:1.5;">${tr(lang,'credentialsNote')}</p>
 </td></tr>
 
-<!-- Spacer -->
-<tr><td style="height:24px;"></td></tr>
+<!-- Body / CTA -->
+<tr><td style="padding:28px 40px 32px;">
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;color:#374151;margin:0 0 16px;">${tr(lang,'accessBelow')}</p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
+    <a href="${accessUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${tr(lang,'cta')} →</a>
+  </td></tr></table>
+  <!-- Copy-paste link -->
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 6px;line-height:1.4;">${tr(lang,'copyLink')}</p>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;margin:0;word-break:break-all;line-height:1.4;"><a href="${authUrl}" target="_blank" style="color:#7c3aed;text-decoration:underline;">${authUrl}</a></p>
+</td></tr>
 
 <!-- Footer -->
-<tr><td style="padding:20px 40px;border-top:1px solid rgba(255,255,255,0.07);">
+<tr><td style="padding:20px 40px;border-top:1px solid #e5e7eb;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-    <td style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;">© 2025 Educly</td>
+    <td style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#9ca3af;">© 2025 Educly</td>
     <td style="text-align:right;">
-      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;text-decoration:none;">${tr(lang,'help')}</a>
-      <span style="color:#6b7280;font-size:12px;padding:0 8px;">·</span>
-      <a href="https://educly.app/politica-privacidade" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#6b7280;text-decoration:none;">${tr(lang,'privacy')}</a>
+      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#7c3aed;text-decoration:none;">${tr(lang,'help')}</a>
+      <span style="color:#9ca3af;font-size:12px;padding:0 8px;">·</span>
+      <a href="https://educly.app/politica-privacidade" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:12px;color:#7c3aed;text-decoration:none;">${tr(lang,'privacy')}</a>
     </td>
   </tr></table>
 </td></tr>
