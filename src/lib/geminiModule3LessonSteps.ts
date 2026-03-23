@@ -61,7 +61,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Faça sua primeira pesquisa em tempo real!",
     "Colete fatos verídicos diretamente das fontes mais quentes.",
-    "\"Pesquise as [______] mais recentes sobre [______]. Me apresente um resumo com os [______] acontecimentos, as [______] mais relevantes e [______] as fontes consultadas para que eu possa verificar.\"",
+    "\"Pesquise as [___] mais recentes sobre [___]. Me apresente um resumo com os [___] acontecimentos, as [___] mais relevantes e [___] as fontes consultadas para que eu possa verificar.\"",
     ["notícias e atualizações", "mudanças na legislação trabalhista brasileira", "5 principais", "informações", "cite"],
     ["notícias e atualizações", "mudanças na legislação trabalhista brasileira", "5 principais", "informações", "cite"],
     "Sempre force o bot a listar fontes para que você evite cair em qualquer alucinação."
@@ -85,7 +85,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Monitore seu mercado!",
     "Entenda os movimentos silenciosos antes mesmo de se tornarem o padrão da indústria.",
-    "\"Pesquise as principais [______] do mercado de [______] em [______]. Para cada tendência, explique: o que é, por que está [______], quais [______] estão liderando esse movimento e como uma empresa de [______] pode se posicionar.\"",
+    "\"Pesquise as principais [___] do mercado de [___] em [___]. Para cada tendência, explique: o que é, por que está [___], quais [___] estão liderando esse movimento e como uma empresa de [___] pode se posicionar.\"",
     ["tendências", "tecnologia educacional", "2025", "crescendo", "empresas ou países", "pequeno porte"],
     ["tendências", "tecnologia educacional", "2025", "crescendo", "empresas ou países", "pequeno porte"],
     "Adaptar achados macro para o contexto exato da sua empresa torna as respostas plenamente estratégicas."
@@ -109,7 +109,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Analise sua concorrência!",
     "Realize auditorias rápidas sobre seus oponentes no mercado.",
-    "\"Pesquise sobre [______], uma empresa do setor de [______]. Me traga: seu [______] de mercado atual, as principais [______] que ela usa, os [______] mais comentados pelos clientes e as [______] que aparecem nas avaliações online.\"",
+    "\"Pesquise sobre [___], uma empresa do setor de [___]. Me traga: seu [___] de mercado atual, as principais [___] que ela usa, os [___] mais comentados pelos clientes e as [___] que aparecem nas avaliações online.\"",
     ["[nome do concorrente]", "e-commerce de moda", "posicionamento", "estratégias de comunicação", "pontos fortes", "fraquezas"],
     ["[nome do concorrente]", "e-commerce de moda", "posicionamento", "estratégias de comunicação", "pontos fortes", "fraquezas"],
     "Ler comentários dispersos da concorrência pela web inteira consome dias; o Gemini faz isso em segundos."
@@ -133,7 +133,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Pesquise antes de decidir!",
     "Evite prejuízos levantando a probabilidade de falha primeiro.",
-    "\"Preciso decidir se vale a pena [______]. Pesquise e me traga: dados sobre o [______] atual desse mercado, os [______] de quem já tentou, os [______] envolvidos e qualquer [______] recente que possa influenciar essa decisão.\"",
+    "\"Preciso decidir se vale a pena [___]. Pesquise e me traga: dados sobre o [___] atual desse mercado, os [___] de quem já tentou, os [___] envolvidos e qualquer [___] recente que possa influenciar essa decisão.\"",
     ["abrir um negócio de alimentação saudável na minha cidade", "tamanho e crescimento", "casos de sucesso e fracasso", "principais riscos", "estudo ou pesquisa"],
     ["abrir um negócio de alimentação saudável na minha cidade", "tamanho e crescimento", "casos de sucesso e fracasso", "principais riscos", "estudo ou pesquisa"],
     "Toda tomada de risco requer fundamentos. Deixe a parte mecânica de achar artigos sob o comando da IA."
@@ -157,7 +157,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Compare antes de comprar!",
     "Tabelas organizam perfeitamente escolhas difíceis.",
-    "\"Pesquise e compare as [______] opções de [______] disponíveis no mercado brasileiro atualmente. Para cada uma: [______] mensal, principais [______], [______] e para qual [______] de empresa ela é mais indicada. Apresente em formato de tabela.\"",
+    "\"Pesquise e compare as [___] opções de [___] disponíveis no mercado brasileiro atualmente. Para cada uma: [___] mensal, principais [___], [___] e para qual [___] de empresa ela é mais indicada. Apresente em formato de tabela.\"",
     ["principais", "ferramentas de gestão de projetos", "preço", "funcionalidades", "limitações", "tamanho"],
     ["principais", "ferramentas de gestão de projetos", "preço", "funcionalidades", "limitações", "tamanho"],
     "Pedir o comparativo num formato de tabela é a técnica essencial para simplificar escolhas gerenciais."
@@ -181,7 +181,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Monitore seu tema!",
     "Mantenha um radar sem esforço ativo constante.",
-    "\"Pesquise tudo que foi publicado sobre [______] nos [______]. Me traga: as [______] mais relevantes, os [______] que estão gerando mais debate e qualquer [______] ou [______] que tenha surgido sobre esse tema recentemente.\"",
+    "\"Pesquise tudo que foi publicado sobre [___] nos [___]. Me traga: as [___] mais relevantes, os [___] que estão gerando mais debate e qualquer [___] ou [___] que tenha surgido sobre esse tema recentemente.\"",
     ["inteligência artificial na medicina", "últimos 30 dias", "notícias", "assuntos", "descoberta científica", "polêmica"],
     ["inteligência artificial na medicina", "últimos 30 dias", "notícias", "assuntos", "descoberta científica", "polêmica"],
     "Ativar filtros delimitando prazos de publicação impede o algoritmo de resgatar histórias vencidas do ano passado."
@@ -205,7 +205,7 @@ export const GEMINI_MODULE_3_STEPS_PT = [
   fillStep(
     "Personalize sua pesquisa!",
     "Alimente a IA para focar no seu momento exato.",
-    "\"Meu negócio é [______] e estou enfrentando o seguinte desafio: [______]. Pesquise na internet estratégias e casos reais de empresas que [______] esse mesmo desafio, filtre os que são [______] para uma empresa do meu [______] e me sugira os [______] mais viáveis para começar.\"",
+    "\"Meu negócio é [___] e estou enfrentando o seguinte desafio: [___]. Pesquise na internet estratégias e casos reais de empresas que [___] esse mesmo desafio, filtre os que são [___] para uma empresa do meu [___] e me sugira os [___] mais viáveis para começar.\"",
     ["uma escola de idiomas com 3 unidades", "aumentar a retenção de alunos", "superaram", "aplicáveis", "porte e setor", "3 caminhos"],
     ["uma escola de idiomas com 3 unidades", "aumentar a retenção de alunos", "superaram", "aplicáveis", "porte e setor", "3 caminhos"],
     "Fornecer um contexto seu converte uma busca simples parecida à de qualquer pessoa num projeto de consultoria supernicho."
@@ -268,7 +268,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Conduct your first real-time query!",
     "Extract actionable facts straight from the live feeds.",
-    "\"Research the most recent [______] covering [______]. Provide me with a cohesive digest containing the [______] events, the most relevant [______], and precisely [______] the sources you consulted so I may verify them.\"",
+    "\"Research the most recent [___] covering [___]. Provide me with a cohesive digest containing the [___] events, the most relevant [___], and precisely [___] the sources you consulted so I may verify them.\"",
     ["news and updates", "changes in Brazilian labor laws", "top 5", "information points", "cite"],
     ["news and updates", "changes in Brazilian labor laws", "top 5", "information points", "cite"],
     "Enforcing that the bot explicitly lists URLs acts as your prime safeguard against AI-generated hallucinations."
@@ -292,7 +292,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Monitor your industry environment!",
     "Catch silent market drifts before they become standard practices.",
-    "\"Research the dominating [______] within the [______] arena for [______]. For each trend, elaborate: what it entails, exactly why it is currently [______], which [______] are spearheading this shift, and how a [______] enterprise should position itself to capture this value.\"",
+    "\"Research the dominating [___] within the [___] arena for [___]. For each trend, elaborate: what it entails, exactly why it is currently [___], which [___] are spearheading this shift, and how a [___] enterprise should position itself to capture this value.\"",
     ["trends", "educational technology", "2025", "growing", "companies or countries", "small-sized"],
     ["trends", "educational technology", "2025", "growing", "companies or countries", "small-sized"],
     "Translating vast macro trends down to your company's micro realities upgrades simple research into high-tier strategic roadmaps."
@@ -316,7 +316,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Audit your competition blindly!",
     "Run exceptionally rapid intelligence checks against market rivals.",
-    "\"Conduct a deep web search covering [______], an enterprise in the [______] market. Extract and summarize: their ongoing market [______], the prevailing [______] they exhibit, the most common [______] celebrated by their user base, and the critical [______] heavily repeated across their public reviews.\"",
+    "\"Conduct a deep web search covering [___], an enterprise in the [___] market. Extract and summarize: their ongoing market [___], the prevailing [___] they exhibit, the most common [___] celebrated by their user base, and the critical [___] heavily repeated across their public reviews.\"",
     ["[competitor's name]", "fashion e-commerce", "positioning", "communication strategies", "strengths", "weaknesses"],
     ["[competitor's name]", "fashion e-commerce", "positioning", "communication strategies", "strengths", "weaknesses"],
     "Sifting individually through scattered forum threads globally demands weeks; Gemini runs this sweep in negligible seconds."
@@ -340,7 +340,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Research prior to committing!",
     "Immunize yourself from massive losses by running probability stress-tests via the bot.",
-    "\"I need to decide whether it's truly viable to [______]. Search the web and deliver: solid data depicting the actual [______] of this niche, documented [______] of those who attempted this earlier, the central [______] inherently involved, and any recent [______] that radically impacts such a move.\"",
+    "\"I need to decide whether it's truly viable to [___]. Search the web and deliver: solid data depicting the actual [___] of this niche, documented [___] of those who attempted this earlier, the central [___] inherently involved, and any recent [___] that radically impacts such a move.\"",
     ["open a healthy food business in my city", "size and growth", "cases of success and failure", "main risks", "study or research"],
     ["open a healthy food business in my city", "size and growth", "cases of success and failure", "main risks", "study or research"],
     "Assuming massive risk mandates proper groundwork. Assign the mechanical grind of collating relevant studies entirely to the AI."
@@ -364,7 +364,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Compare radically before buying!",
     "Nothing organizes chaotic choices better than structured data arrays.",
-    "\"Research and contrast the [______] viable options for [______] currently active in the Brazilian market. For each singular platform, stipulate: monthly [______], defining [______], glaring [______], and dictate exactly the [______] of enterprise that platform targets. Output all this cleanly within a table format.\"",
+    "\"Research and contrast the [___] viable options for [___] currently active in the Brazilian market. For each singular platform, stipulate: monthly [___], defining [___], glaring [___], and dictate exactly the [___] of enterprise that platform targets. Output all this cleanly within a table format.\"",
     ["main", "project management tools", "price", "functionalities", "limitations", "size"],
     ["main", "project management tools", "price", "functionalities", "limitations", "size"],
     "Forcing analytical comparisons to render inside a Markdown-style table remains the master key to effortlessly digesting market offerings."
@@ -388,7 +388,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Monitor your domain relentlessly!",
     "Keep your radar spinning without lifting a finger.",
-    "\"Search the entire web for everything published regarding [______] strictly within the [______]. Compile and output: the most deeply relevant [______], specific [______] igniting widespread debates online, and essentially any vital [______] or shocking [______] uncovered in this time block.\"",
+    "\"Search the entire web for everything published regarding [___] strictly within the [___]. Compile and output: the most deeply relevant [___], specific [___] igniting widespread debates online, and essentially any vital [___] or shocking [___] uncovered in this time block.\"",
     ["artificial intelligence in medicine", "last 30 days", "news", "topics", "scientific discovery", "controversy"],
     ["artificial intelligence in medicine", "last 30 days", "news", "topics", "scientific discovery", "controversy"],
     "Mandating strict timeline boundaries forcefully prevents algorithms from scraping stale, obsolete storylines from legacy archives."
@@ -412,7 +412,7 @@ export const GEMINI_MODULE_3_STEPS_EN = [
   fillStep(
     "Hyper-personalize your hunt!",
     "Feed the AI specific nuances of your exact struggle.",
-    "\"My enterprise operates as a [______] and I am battling the immediate challenge to [______]. Comb the internet for documented strategies detailing real agencies that successfully [______] this precise hurdle, filter strictly those completely [______] to my scale and [______], and pitch me the 3 most viable [______] to execute tomorrow.\"",
+    "\"My enterprise operates as a [___] and I am battling the immediate challenge to [___]. Comb the internet for documented strategies detailing real agencies that successfully [___] this precise hurdle, filter strictly those completely [___] to my scale and [___], and pitch me the 3 most viable [___] to execute tomorrow.\"",
     ["language school with 3 branches", "increase student retention rates", "overcame", "applicable", "size and sector", "3 paths"],
     ["language school with 3 branches", "increase student retention rates", "overcame", "applicable", "size and sector", "3 paths"],
     "Pumping personal constraints directly into the command flips a standard web query into an elite, bespoke corporate consultancy review."
@@ -475,7 +475,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "¡Realiza tu primera consulta en tiempo real!",
     "Extrae hechos que guíen tus decisiones directamente desde las redes de información.",
-    "\"Investiga sobre las [______] más recientes que traten los [______]. Entrégame un resumen cohesivo que contenga los [______], el [______] más pertinente a mis labores y lista explícitamente cuáles fueron las [______].\"",
+    "\"Investiga sobre las [___] más recientes que traten los [___]. Entrégame un resumen cohesivo que contenga los [___], el [___] más pertinente a mis labores y lista explícitamente cuáles fueron las [___].\"",
     ["noticias y actualizaciones", "cambios en las leyes laborales brasileñas", "5 eventos principales", "punto de información", "fuentes consultadas"],
     ["noticias y actualizaciones", "cambios en las leyes laborales brasileñas", "5 eventos principales", "punto de información", "fuentes consultadas"],
     "Exigirle al bot que enumere las URLs actuales es tu salvaguarda principal frente a las especulaciones generadas por la IA."
@@ -499,7 +499,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "¡Monitorea tu entorno de negocio!",
     "Detecta las corrientes subterráneas del mercado antes de que se vuelvan estándares populares.",
-    "\"Examina cómo evolucionan las [______] de la vertical de [______] durante el [______]. Para cada dinámica, detalla qué es, por qué se percibe que está [______], las [______] punteras impulsando su avance, y evalúa cómo una [______] debería capitalizar dicha información.\"",
+    "\"Examina cómo evolucionan las [___] de la vertical de [___] durante el [___]. Para cada dinámica, detalla qué es, por qué se percibe que está [___], las [___] punteras impulsando su avance, y evalúa cómo una [___] debería capitalizar dicha información.\"",
     ["tendencias", "tecnología educativa", "2025", "creciendo", "empresas o países", "empresa pequeña"],
     ["tendencias", "tecnología educativa", "2025", "creciendo", "empresas o países", "empresa pequeña"],
     "Adaptar el ruido del mercado global hacia tus debilidades y capacidades locales vuelve valiosa la síntesis en vivo."
@@ -523,7 +523,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "¡Focaliza la carencia ajena!",
     "Ejecuta comprobaciones de inteligencia aplastantemente más rápidas.",
-    "\"Haz una inmersión profunda que cubra a [______], la marca del rubro [______]. Necesito estructurado: cómo dictan su [______] principal, cuáles [______] ejecutan día a día, y cruzar estas virtudes o [______] directas con las [______] escritas por sus clientes reales en los portales.\"",
+    "\"Haz una inmersión profunda que cubra a [___], la marca del rubro [___]. Necesito estructurado: cómo dictan su [___] principal, cuáles [___] ejecutan día a día, y cruzar estas virtudes o [___] directas con las [___] escritas por sus clientes reales en los portales.\"",
     ["el nombre exacto de la competencia", "e-commerce de moda", "posicionamiento", "estrategias de comunicación", "fortalezas", "debilidades"],
     ["el nombre exacto de la competencia", "e-commerce de moda", "posicionamiento", "estrategias de comunicación", "fortalezas", "debilidades"],
     "Sintetizar individualmente años de retroalimentación suelta por foros anónimos puede durar meses completos; Gemini asimila los trozos instantáneamente."
@@ -547,7 +547,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "Investiga el riesgo por anticipado",
     "Inmuniza tu presupuesto testeando masivamente en paralelo experiencias probadas.",
-    "\"Quiero decidir si vale la inversión de vida el [______]. Realiza una prospección intensa devolviéndome detalles crudos: el factor tangible real del [______], mapear puntillosamente los [______], la anatomía precisa de la mortandad de [______], e incluir el factor que aportaría cualquier [______] oficial que incida sobre esto.\"",
+    "\"Quiero decidir si vale la inversión de vida el [___]. Realiza una prospección intensa devolviéndome detalles crudos: el factor tangible real del [___], mapear puntillosamente los [___], la anatomía precisa de la mortandad de [___], e incluir el factor que aportaría cualquier [___] oficial que incida sobre esto.\"",
     ["abrir un negocio de comida sana en mi ciudad", "tamaño y crecimiento", "casos de éxito y fracaso", "riesgos primarios", "estudio de mercado"],
     ["abrir un negocio de comida sana en mi ciudad", "tamaño y crecimiento", "casos de éxito y fracaso", "riesgos primarios", "estudio de mercado"],
     "Incluso con resúmenes ágiles, externalizar a favor de una máquina exploradora anula un sinfín incalculable de callejones ciegos bibliográficos."
@@ -571,7 +571,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "Cribaje financiero",
     "Un cuadro tabulado bien perfilado es invencible a la hora frenar el caos de compras.",
-    "\"Compara exhaustivamente el abanico de [______] correspondientes a las [______] que puedan despacharse en mi locación geográfica. Para aislar tu investigación pon peso al [______] base, destapa sus [______], localiza el punto ciego de sus [______], e insiere a ciegas una casilla sobre cuál [______] corresponde a mi perfil operativo corporativo. Devuélvemelo visualizado a modo de gráfica tabular.\"",
+    "\"Compara exhaustivamente el abanico de [___] correspondientes a las [___] que puedan despacharse en mi locación geográfica. Para aislar tu investigación pon peso al [___] base, destapa sus [___], localiza el punto ciego de sus [___], e insiere a ciegas una casilla sobre cuál [___] corresponde a mi perfil operativo corporativo. Devuélvemelo visualizado a modo de gráfica tabular.\"",
     ["principales", "herramientas de gestión de proyectos", "precio", "funcionalidades robustas", "limitaciones técnicas", "tamaño empresarial ideal"],
     ["principales", "herramientas de gestión de proyectos", "precio", "funcionalidades robustas", "limitaciones técnicas", "tamaño empresarial ideal"],
     "Forzar el formato por tabla es de uso obligatorio, facilitando brutalmente la lectura en cualquier consejo."
@@ -595,7 +595,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "Control absoluto de dominio local",
     "Poderío total del tiempo a favor del flujo de actualidad perenne.",
-    "\"Acopia una búsqueda sobre el cúmulo absoluto dictado publicamente acerca de [______] durante los acotados [______]. Traza la línea directriz en la caja para agrupar únicamente dictados sobre [______], hurgando en [______] específicos con carga de [______] contundente para las instituciones médicas y aísla fuertemente el foco de [______] ética que está candente y reventando foros hoy en día.\"",
+    "\"Acopia una búsqueda sobre el cúmulo absoluto dictado publicamente acerca de [___] durante los acotados [___]. Traza la línea directriz en la caja para agrupar únicamente dictados sobre [___], hurgando en [___] específicos con carga de [___] contundente para las instituciones médicas y aísla fuertemente el foco de [___] ética que está candente y reventando foros hoy en día.\"",
     ["inteligencia artificial en medicina", "últimos 30 días", "novedades fidedignas", "asuntos", "descubrimientos", "polémica"],
     ["inteligencia artificial en medicina", "últimos 30 días", "novedades fidedignas", "asuntos", "descubrimientos", "polémica"],
     "Imponiendo la trampa temporal como filtro obligatorio para su radar anulas la perniciosa costumbre del software a engullir legados de efemérides empolvadas y fútiles de hace 5 trimestres."
@@ -619,7 +619,7 @@ export const GEMINI_MODULE_3_STEPS_ES = [
   fillStep(
     "Sastrería Operacional Pura",
     "Trata a tu máquina cual psiquiatra ejecutivo impasible.",
-    "\"Yo regento por entero un panorama inestable como el de [______] que al día de hoy se debate ahogado por sostener y mitigar este flagelo recurrente para mi nicho: necesito urgentemente [______] sostenidas. Tráeme el rescate tangible por la vía de diseccionar metódicamente firmas análogas reales en las entrañas de la web comercial, en un rango calcado a mi escala natural que milagrosamente e irrefutablemente [______] satisfactoriamente lo antes expuesto, cerciórate en el cielo de que resulten innegablemente [______] en base a mi asolado [______] comercial empírico con lo del capital, y corónalo dándome explícitamente la llave con apenas los selectos [______] estratégicos con los que despuntar agresivamente mis próximos madrugones.\"",
+    "\"Yo regento por entero un panorama inestable como el de [___] que al día de hoy se debate ahogado por sostener y mitigar este flagelo recurrente para mi nicho: necesito urgentemente [___] sostenidas. Tráeme el rescate tangible por la vía de diseccionar metódicamente firmas análogas reales en las entrañas de la web comercial, en un rango calcado a mi escala natural que milagrosamente e irrefutablemente [___] satisfactoriamente lo antes expuesto, cerciórate en el cielo de que resulten innegablemente [___] en base a mi asolado [___] comercial empírico con lo del capital, y corónalo dándome explícitamente la llave con apenas los selectos [___] estratégicos con los que despuntar agresivamente mis próximos madrugones.\"",
     ["escuela de idiomas con 3 unidades pequeñas", "incrementar las permanencias mensuales", "superaron las incidencias", "tácticas aplicables aquí y ahora", "tamaño", "3 caminos directos"],
     ["escuela de idiomas con 3 unidades pequeñas", "incrementar las permanencias mensuales", "superaron las incidencias", "tácticas aplicables aquí y ahora", "tamaño", "3 caminos directos"],
     "El inyectar minuciosamente veneno, fallas, ambiciones o métricas desesperadas es catapultar por los aires de internet un bólido implacablemente programado para obsequiar exclusivas consultas privadas personalizadas corporativas en una mera pantalla plana reluciente de destellos blancos."
@@ -681,7 +681,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Votre Baptême du Temps Réel !",
     "Bénéficiez instantanément d'une revue de presse magistrale.",
-    "\"Exécute une investigation visant les [______] tournant autour des [______]. Rends-moi une restitution compacte contenant les [______], le [______] capital qui me concerne, et dresse sans faute la liste des [______].\"",
+    "\"Exécute une investigation visant les [___] tournant autour des [___]. Rends-moi une restitution compacte contenant les [___], le [___] capital qui me concerne, et dresse sans faute la liste des [___].\"",
     ["actualités brûlantes", "réformes du droit du travail français", "5 événements phares", "détail décisif", "sources consultées"],
     ["actualités brûlantes", "réformes du droit du travail français", "5 événements phares", "détail décisif", "sources consultées"],
     "Bloquer l'I.A. en l'obligeant à sourcer son récit érige un mur infranchissable contre le fléau des fausses informations générées."
@@ -705,7 +705,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Devenez l'Œil du Cyclone !",
     "Ressentez le tempo de l'industrie pour réagir avant les mastodontes lents.",
-    "\"Pénètre les coulisses des [______] qui balaient le pôle de [______] courant [______]. À propos de chaque axe, définis ses fondations, pourquoi il se retrouve [______] de façon foudroyante, les [______] instigatrices du séisme, et postule comment une [______] a le devoir de s'y greffer sur le champ.\"",
+    "\"Pénètre les coulisses des [___] qui balaient le pôle de [___] courant [___]. À propos de chaque axe, définis ses fondations, pourquoi il se retrouve [___] de façon foudroyante, les [___] instigatrices du séisme, et postule comment une [___] a le devoir de s'y greffer sur le champ.\"",
     ["tendances", "technologies de l'enseignement", "2025", "en pleine effervescence", "multinationales", "PME"],
     ["tendances", "technologies de l'enseignement", "2025", "en pleine effervescence", "multinationales", "PME"],
     "Croiser une macro-tendance mondiale à l'échelle de votre petite cellule entrepreneuriale produit des pépites d'or stratégiques."
@@ -729,7 +729,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Passez la Concurrence au Rayon X !",
     "Asséchez leurs secrets de polichinelle au grand jour.",
-    "\"Amorce un filet de chalutage massif sur le Web concernant [______], grand rival du secteur [______]. Extirpe pour moi : son manifeste de [______], le réseau de [______] qu'il finance, son catalogue de [______] acclamées et les [______] les plus flagrantes lues sur ses revues en ligne.\"",
+    "\"Amorce un filet de chalutage massif sur le Web concernant [___], grand rival du secteur [___]. Extirpe pour moi : son manifeste de [___], le réseau de [___] qu'il finance, son catalogue de [___] acclamées et les [___] les plus flagrantes lues sur ses revues en ligne.\"",
     ["[votre compétiteur direct]", "la mode en ligne", "positionnement", "stratégies d'acquisition", "forces", "vulnérabilités"],
     ["[votre compétiteur direct]", "la mode en ligne", "positionnement", "stratégies d'acquisition", "forces", "vulnérabilités"],
     "Plutôt que d'attendre vos retours de salons, agréger l'océan d'avis client s'accomplit en quelques secondes inestimables."
@@ -753,7 +753,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Le Sceau de l'Validation !",
     "Demandez à la toile de valider vos hypothèses périlleuses.",
-    "\"La décision de [______] me taraude amèrement. Plonge en ligne et retourne-moi : la véritable estimation de [______] inhérent, un tableau des [______] analogues et des désastres retentissants similaires, les colossaux [______], sans éluder n'importe quelle [______] parue le mois dernier capable de foudroyer le marché.\"",
+    "\"La décision de [___] me taraude amèrement. Plonge en ligne et retourne-moi : la véritable estimation de [___] inhérent, un tableau des [___] analogues et des désastres retentissants similaires, les colossaux [___], sans éluder n'importe quelle [___] parue le mois dernier capable de foudroyer le marché.\"",
     ["lancer une chaîne de fast-food vegan locale", "croissance et d'espace", "succès fulgurants", "risques majeurs", "législation"],
     ["lancer une chaîne de fast-food vegan locale", "croissance et d'espace", "succès fulgurants", "risques majeurs", "législation"],
     "Avoir recourt aux sondes du Web épargne au stratège les tâtonnements coûteux."
@@ -777,7 +777,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Ordonnancement Tarifaire",
     "Rangez le fouillis commercial par tableurs visuels nets.",
-    "\"Examine et confronte cruellement les [______] systèmes de [______] actifs sous nos latitudes. Expose méthodiquement pour chacune d'elles : la grille de [______], les robustes [______], ses fâcheuses [______] chroniques, et précise sa cible en termes de [______]. Renvoie l'intégralité du calcul encapsulé exclusivement dans un tableau final.\"",
+    "\"Examine et confronte cruellement les [___] systèmes de [___] actifs sous nos latitudes. Expose méthodiquement pour chacune d'elles : la grille de [___], les robustes [___], ses fâcheuses [___] chroniques, et précise sa cible en termes de [___]. Renvoie l'intégralité du calcul encapsulé exclusivement dans un tableau final.\"",
     ["quatre", "suivi de management en SaaS", "prix net mensuel", "fonctions phares de compétition", "contraintes", "dimension d'entreprise"],
     ["quatre", "suivi de management en SaaS", "prix net mensuel", "fonctions phares de compétition", "contraintes", "dimension d'entreprise"],
     "Mettre les plaquettes tarifaires côte à côte désamorce la magie des discours marketing au profit de la stricte vérité marchande."
@@ -801,7 +801,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Radar Perpétuel",
     "Gérez la panique médiatique ou l'essor académique d'un seul geste.",
-    "\"Scanne méticuleusement la toile pour traquer les retombées inhérentes au sujet de [______] durant les stricts [______]. Délie la brume ambiante et sers-moi : les ultimes [______] brûlantes parues, les [______] déclenchant les batailles sur les forums d'experts et dévoile s'il subsiste l'ombre d'une éventuelle [______] récente non réglée.\"",
+    "\"Scanne méticuleusement la toile pour traquer les retombées inhérentes au sujet de [___] durant les stricts [___]. Délie la brume ambiante et sers-moi : les ultimes [___] brûlantes parues, les [___] déclenchant les batailles sur les forums d'experts et dévoile s'il subsiste l'ombre d'une éventuelle [___] récente non réglée.\"",
     ["l'I.A. dans le cadre pharmaceutique", "derniers 30 jours calendaires", "avancées", "enjeux", "polémique"],
     ["l'I.A. dans le cadre pharmaceutique", "derniers 30 jours calendaires", "avancées", "enjeux", "polémique"],
     "Réduire la voilure temporelle à de courtes fenêtres extirpe le risque d'intoxication de données venant de dossiers refermés appartenant au passé révolu."
@@ -825,7 +825,7 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   fillStep(
     "Asservir la Globalité",
     "Confrontez la masse à votre singularité.",
-    "\"Mon affaire n'est rien d'autre qu'une fragile [______], en proie depuis un trimestre à un mal chronique consistant à [______]. Chalute le réseau mondial dans le but ultime d'isoler de sang froid des modèles d'entreprises consœurs qui miraculeusement [______] avec brio au même type de drame structurel affectant le système. Retire toute fiction littéraire pour ne retenir que des process immédiatement [______] et fais ressortir pour l'aube d'un jour nouveau les seules [______] armes viables pour déclencher ma riposte salvatrice de survie face au néant.\"",
+    "\"Mon affaire n'est rien d'autre qu'une fragile [___], en proie depuis un trimestre à un mal chronique consistant à [___]. Chalute le réseau mondial dans le but ultime d'isoler de sang froid des modèles d'entreprises consœurs qui miraculeusement [___] avec brio au même type de drame structurel affectant le système. Retire toute fiction littéraire pour ne retenir que des process immédiatement [___] et fais ressortir pour l'aube d'un jour nouveau les seules [___] armes viables pour déclencher ma riposte salvatrice de survie face au néant.\"",
     ["école de danse urbaine modeste", "perdre des abonnés dès février", "ont remédié", "transposables dans une TPE", "trois"],
     ["école de danse urbaine modeste", "perdre des abonnés dès février", "ont remédié", "transposables dans une TPE", "trois"],
     "La profondeur d'immersion personnalisée garantit que le remède prodigué épouse l'échelle réelle de votre enjeu évitant les envolées de budgets illusoires destinés aux méga-corporations."

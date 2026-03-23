@@ -31,7 +31,7 @@ export const FillBlanks = ({
   const { t, i18n } = useTranslation();
   const { playCorrect, playIncorrect } = useQuizSounds();
 
-  const normalizedSentence = sentence.replace(/\[BLANK\]/g, "___");
+  const normalizedSentence = sentence.replace(/\[BLANK\]/g, "___").replace(/_{3,}/g, "___");
   const blanks = normalizedSentence.split("___");
   const actualAnswers = answers || correctAnswers || [];
   const numBlanks = blanks.length - 1;
@@ -75,9 +75,15 @@ export const FillBlanks = ({
   const applyAnswerToBlank = (blankIndex: number, answer: string): (string | null)[] | null => {
     const normalizeValue = (value: string) => value.trim();
     const currentOptionId = filledOptionIds[blankIndex];
-    const matchingOption = optionItems.find(
-      (option) => normalizeValue(option.value) === normalizeValue(answer)
-    );
+    const matchingOption =
+      optionItems.find(
+        (option) =>
+          normalizeValue(option.value) === normalizeValue(answer) &&
+          !filledOptionIds.some((id, idx) => id === option.id && idx !== blankIndex)
+      ) ||
+      optionItems.find(
+        (option) => normalizeValue(option.value) === normalizeValue(answer)
+      );
 
     if (!matchingOption) return null;
 
@@ -233,7 +239,7 @@ export const FillBlanks = ({
       </div>
 
       <p className="text-sm text-muted-foreground mb-4">
-        {t("lesson.fillBlanks.instructions", "Complete a frase clicando nas palavras corretas!")}
+        {tUi(t, i18n.language, "lesson.fillBlanks.instructions")}
       </p>
 
       <div className="p-4 bg-muted/30 rounded-lg mb-4">
@@ -246,7 +252,7 @@ export const FillBlanks = ({
                   onClick={() => handleBlankClick(index)}
                   disabled={showResult}
                   className={cn(
-                    "inline-flex items-center justify-center min-w-[80px] mx-1 px-3 py-1",
+                    "inline-flex items-center justify-center min-w-[100px] mx-1 px-3 py-1",
                     "rounded-lg border-2 border-dashed transition-all",
                     "text-sm font-medium",
                     showResult
@@ -260,7 +266,7 @@ export const FillBlanks = ({
                           : "bg-muted/50 border-muted-foreground/30 text-muted-foreground"
                   )}
                 >
-                  {filledAnswers[index] || "___"}
+                  {filledAnswers[index] || "__________"}
                 </button>
               )}
             </span>

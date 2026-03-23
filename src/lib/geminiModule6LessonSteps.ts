@@ -77,7 +77,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Ative o raciocínio visual!",
     "Determine todas as diretrizes de composição obrigando a máquina a refletir sobre os detalhes.",
-    "\"Com o Nano Banana Pro ativado, gere uma imagem de [______] em estilo [______], com iluminação [______], [______] ao fundo e transmitindo sensação de [______]. Antes de gerar, [______] suas escolhas de composição e estilo.\"",
+    "\"Com o Nano Banana Pro ativado, gere uma imagem de [___] em estilo [___], com iluminação [___], [___] ao fundo e transmitindo sensação de [___]. Antes de gerar, [___] suas escolhas de composição e estilo.\"",
     ["uma jovem cientista em laboratório moderno", "fotorrealista editorial", "fria e azulada com reflexos de equipamentos", "telas com dados e equipamentos de pesquisa", "inteligência e foco", "explique"],
     ["uma jovem cientista em laboratório moderno", "fotorrealista editorial", "fria e azulada com reflexos de equipamentos", "telas com dados e equipamentos de pesquisa", "inteligência e foco", "explique"],
     "Saber a lógica de construção visual da máquina instrui o prompter a melhorar continuamente seus inputs subsequentes."
@@ -101,7 +101,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Monte seu prompt em camadas!",
     "Configure as peças elementares de um tiro fotográfico preciso.",
-    "\"[______] de [______], [______] em [______], iluminação [______], estilo [______], perspectiva de [______], [______] profundidade de campo, cores [______] e qualidade [______].\"",
+    "\"[___] de [___], [___] em [___], iluminação [___], estilo [___], perspectiva de [___], [___] profundidade de campo, cores [___] e qualidade [___].\"",
     ["Fotografia realista", "um chef preparando um prato sofisticado", "em movimento", "cozinha profissional aberta", "dramática e quente vinda dos fogões", "editorial gastronômico", "câmera baixa olhando para cima", "rasa", "terrosas e vibrantes", "ultra detalhada 8K"],
     ["Fotografia realista", "um chef preparando um prato sofisticado", "em movimento", "cozinha profissional aberta", "dramática e quente vinda dos fogões", "editorial gastronômico", "câmera baixa olhando para cima", "rasa", "terrosas e vibrantes", "ultra detalhada 8K"],
     "Fornecer diretrizes físicas, de lentes e de paleta isola a interpretação livre (e frequentemente errônea) que a inteligência artificial adota por conforto matemático."
@@ -125,7 +125,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Refine com raciocínio!",
     "Ordene as mudanças exatas e compreenda como o sistema visual processará.",
-    "\"A imagem gerada está boa, mas quero ajustar: mude a [______] para tons mais [______], adicione [______] na cena, altere a [______] para [______] e explique como essas mudanças vão [______] o impacto visual antes de gerar.\"",
+    "\"A imagem gerada está boa, mas quero ajustar: mude a [___] para tons mais [___], adicione [___] na cena, altere a [___] para [___] e explique como essas mudanças vão [___] o impacto visual antes de gerar.\"",
     ["paleta", "frios e noturnos", "reflexos de neon no chão molhado", "expressão do personagem", "mais determinada e intensa", "melhorar"],
     ["paleta", "frios e noturnos", "reflexos de neon no chão molhado", "expressão do personagem", "mais determinada e intensa", "melhorar"],
     "Refinar isolando elementos garante a continuidade plástica da primeira geração."
@@ -165,7 +165,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Crie seu vídeo com o Veo 3.1!",
     "Monte em texto o que a lente virtual gravará perfeitamente.",
-    "\"Usando o Veo 3.1, gere um vídeo de [______] segundos mostrando [______]. Movimento de câmera: [______]. Estilo: [______]. Iluminação: [______]. Áudio: [______]. A cena deve transmitir [______].\"",
+    "\"Usando o Veo 3.1, gere um vídeo de [___] segundos mostrando [___]. Movimento de câmera: [___]. Estilo: [___]. Iluminação: [___]. Áudio: [___]. A cena deve transmitir [___].\"",
     ["10", "uma cidade futurista ao amanhecer com carros voadores passando entre arranha-céus", "drone descendo lentamente do alto em direção às ruas", "cinematográfico e fotorrealista", "golden hour com névoa azulada entre os prédios", "sons da cidade do futuro com música ambiente eletrônica suave", "esperança e movimento"],
     ["10", "uma cidade futurista ao amanhecer com carros voadores passando entre arranha-céus", "drone descendo lentamente do alto em direção às ruas", "cinematográfico e fotorrealista", "golden hour com névoa azulada entre os prédios", "sons da cidade do futuro com música ambiente eletrônica suave", "esperança e movimento"],
     "Orquestrar as camadas de iluminação, ruídos mundanos e movimentação do set substitui as gigantescas e custosas engrenagens da velha Hollywood."
@@ -189,7 +189,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Escolha seu formato!",
     "Alterne a diretriz do set filmográfico em apenas duas linhas descritivas.",
-    "\"Gere um vídeo no estilo [______] mostrando [______]. Use [______] de câmera para criar [______]. O áudio deve ter [______] e o resultado deve parecer produzido por [______].\"",
+    "\"Gere um vídeo no estilo [___] mostrando [___]. Use [___] de câmera para criar [___]. O áudio deve ter [___] e o resultado deve parecer produzido por [___].\"",
     ["documentário intimista", "um artesão esculpindo uma peça de cerâmica com as mãos", "close-ups detalhados e câmera lenta nos momentos de precisão", "sensação de paciência e maestria", "sons naturais do barro e música instrumental suave", "um premiado documentário internacional"],
     ["documentário intimista", "um artesão esculpindo uma peça de cerâmica com as mãos", "close-ups detalhados e câmera lenta nos momentos de precisão", "sensação de paciência e maestria", "sons naturais do barro e música instrumental suave", "um premiado documentário internacional"],
     "Comandar estéticas fílmicas clássicas dota produções de baixo orçamento e prazo curtíssimo de uma gravidade monumental indescritível."
@@ -213,7 +213,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Combine as duas ferramentas!",
     "Efetive o transplante impecável do quadro fixo perfeitamente moldado para a cinemática fluida retumbante.",
-    "\"Primeiro use o [______] para gerar e raciocinar sobre uma imagem de [______] com estilo [______]. Depois use o [______] para criar um vídeo de [______] segundos baseado nessa referência visual, adicionando [______] de câmera e [______] ambiente sincronizado.\"",
+    "\"Primeiro use o [___] para gerar e raciocinar sobre uma imagem de [___] com estilo [___]. Depois use o [___] para criar um vídeo de [___] segundos baseado nessa referência visual, adicionando [___] de câmera e [___] ambiente sincronizado.\"",
     ["Nano Banana Pro", "uma praia deserta ao entardecer com ondas quebrando suavemente", "fotorrealista e cinematográfico", "Veo 3.1", "12", "movimento lento de aproximação", "áudio"],
     ["Nano Banana Pro", "uma praia deserta ao entardecer com ondas quebrando suavemente", "fotorrealista e cinematográfico", "Veo 3.1", "12", "movimento lento de aproximação", "áudio"],
     "Fundir as duas mentes lógicas algorítmicas evita perigos de alucinação plástica, blindando o frame vital definitivo na hora da gravação digital contínua."
@@ -237,7 +237,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Roteirize com raciocínio antes de gerar!",
     "Extraia fragmentos decupados da visão geral para o preenchimento algorítmico da tela fluida sem atritos de transição.",
-    "\"Com o Nano Banana Pro ativado, crie um roteiro de [______] cenas para um vídeo sobre [______]. Para cada cena descreva: o que acontece, o [______] de câmera, a [______] e o [______] — prontos para usar como prompt no Veo 3.1. Explique o [______] criativo por trás de cada escolha.\"",
+    "\"Com o Nano Banana Pro ativado, crie um roteiro de [___] cenas para um vídeo sobre [___]. Para cada cena descreva: o que acontece, o [___] de câmera, a [___] e o [___] — prontos para usar como prompt no Veo 3.1. Explique o [___] criativo por trás de cada escolha.\"",
     ["6", "o lançamento de um tênis esportivo premium", "movimento", "iluminação", "áudio sugerido", "raciocínio"],
     ["6", "o lançamento de um tênis esportivo premium", "movimento", "iluminação", "áudio sugerido", "raciocínio"],
     "O método dedutivo em blocos cimenta a consistência de iluminação, áudio e ritmo sequencial do videoclipe artificial inteiro."
@@ -261,7 +261,7 @@ export const GEMINI_MODULE_6_STEPS_PT = [
   fillStep(
     "Use as ferramentas com estratégia!",
     "Mantenha-se lúcido sob a batuta irrefutável de maestro e supervisor primário da cadeia laboratorial eletrônica.",
-    "\"Ao usar o [______], sempre peça para ele [______] suas escolhas antes de gerar a imagem. Ao usar o [______], descreva o [______] de câmera e o [______] de forma clara. Para projetos complexos, [______] o conceito visual com o Nano Banana Pro antes de [______] com o Veo 3.1.\"",
+    "\"Ao usar o [___], sempre peça para ele [___] suas escolhas antes de gerar a imagem. Ao usar o [___], descreva o [___] de câmera e o [___] de forma clara. Para projetos complexos, [___] o conceito visual com o Nano Banana Pro antes de [___] com o Veo 3.1.\"",
     ["Nano Banana Pro", "explicar", "Veo 3.1", "movimento", "áudio", "valide", "animar"],
     ["Nano Banana Pro", "explicar", "Veo 3.1", "movimento", "áudio", "valide", "animar"],
     "Forçar o relatório cognitivo antes de prosseguir com recursos avassaladores da máquina é o apelo soberano incontornável da racionalidade humana de vanguarda."
@@ -324,7 +324,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Activate visual reasoning!",
     "Determine all the composition guidelines forcing the machine to reflect on the details.",
-    "\"With Nano Banana Pro activated, generate an image of [______] in [______] style, with [______] lighting, [______] in the background, conveying a sense of [______]. Before generating, [______] your choices of composition and style.\"",
+    "\"With Nano Banana Pro activated, generate an image of [___] in [___] style, with [___] lighting, [___] in the background, conveying a sense of [___]. Before generating, [___] your choices of composition and style.\"",
     ["a young scientist in a modern lab", "editorial photorealistic", "cold and bluish with equipment reflections", "screens with data and research equipment", "intelligence and focus", "explain"],
     ["a young scientist in a modern lab", "editorial photorealistic", "cold and bluish with equipment reflections", "screens with data and research equipment", "intelligence and focus", "explain"],
     "Knowing the machine's visual construction logic instructs the prompter to continually improve subsequent inputs."
@@ -348,7 +348,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Build your prompt in layers!",
     "Configure the elementary pieces of a precise photographic shot.",
-    "\"[______] of [______], [______] in an [______], [______] lighting, [______] style, [______] perspective, [______] depth of field, [______] colors, and [______] quality.\"",
+    "\"[___] of [___], [___] in an [___], [___] lighting, [___] style, [___] perspective, [___] depth of field, [___] colors, and [___] quality.\"",
     ["Realistic photography", "a chef preparing a sophisticated dish", "in motion", "open professional kitchen", "dramatic and warm coming from the stoves", "gastronomic editorial", "low camera looking up", "shallow", "earthy and vibrant", "ultra-detailed 8K"],
     ["Realistic photography", "a chef preparing a sophisticated dish", "in motion", "open professional kitchen", "dramatic and warm coming from the stoves", "gastronomic editorial", "low camera looking up", "shallow", "earthy and vibrant", "ultra-detailed 8K"],
     "Providing physical, lens, and palette guidelines isolates the free (and often erroneous) interpretation that artificial intelligence adopts for mathematical comfort."
@@ -372,7 +372,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Refine with reasoning!",
     "Order the exact changes and understand how the visual system will process them.",
-    "\"The generated image is good, but I want to adjust: change the [______] to more [______] tones, add [______] in the scene, alter the [______] to be [______], and explain how these changes will [______] the visual impact before generating.\"",
+    "\"The generated image is good, but I want to adjust: change the [___] to more [___] tones, add [___] in the scene, alter the [___] to be [___], and explain how these changes will [___] the visual impact before generating.\"",
     ["palette", "cold and nocturnal", "neon reflections on the wet floor", "character's expression", "more determined and intense", "improve"],
     ["palette", "cold and nocturnal", "neon reflections on the wet floor", "character's expression", "more determined and intense", "improve"],
     "Refining by isolating elements ensures the plastic continuity of the first generation."
@@ -412,7 +412,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Create your video with Veo 3.1!",
     "Assemble in text what the virtual lens will shoot perfectly.",
-    "\"Using Veo 3.1, generate a [______] second video showing [______]. Camera movement: [______]. Style: [______]. Lighting: [______]. Audio: [______]. The scene should convey [______].\"",
+    "\"Using Veo 3.1, generate a [___] second video showing [___]. Camera movement: [___]. Style: [___]. Lighting: [___]. Audio: [___]. The scene should convey [___].\"",
     ["10", "a futuristic city at dawn with flying cars passing between skyscrapers", "drone descending slowly from above towards the streets", "cinematic and photorealistic", "golden hour with bluish mist between the buildings", "sounds of the city of the future with soft electronic ambient music", "hope and movement"],
     ["10", "a futuristic city at dawn with flying cars passing between skyscrapers", "drone descending slowly from above towards the streets", "cinematic and photorealistic", "golden hour with bluish mist between the buildings", "sounds of the city of the future with soft electronic ambient music", "hope and movement"],
     "Orchestrating the layers of lighting, mundane noises, and set movement replaces the giant and costly gears of old Hollywood."
@@ -436,7 +436,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Choose your format!",
     "Switch the filmographic set directive in just two descriptive lines.",
-    "\"Generate a video in the style of an [______] showing [______]. Use [______] to create a [______]. The audio should feature [______], and the result should look like it was produced by an [______].\"",
+    "\"Generate a video in the style of an [___] showing [___]. Use [___] to create a [___]. The audio should feature [___], and the result should look like it was produced by an [___].\"",
     ["intimate documentary", "an artisan sculpting a ceramic piece with their hands", "detailed close-ups and slow motion during moments of precision", "feeling of patience and mastery", "natural sounds of clay and soft instrumental music", "award-winning international documentary"],
     ["intimate documentary", "an artisan sculpting a ceramic piece with their hands", "detailed close-ups and slow motion during moments of precision", "feeling of patience and mastery", "natural sounds of clay and soft instrumental music", "award-winning international documentary"],
     "Commanding classic film aesthetics bestows low-budget, tight-deadline productions with an indescribably monumental gravity."
@@ -460,7 +460,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Combine the two tools!",
     "Perform the flawless transplant of the perfectly molded still frame to resounding fluid kinematics.",
-    "\"First use [______] to generate and reason about an image of [______] with a [______] style. Then use [______] to create a [______] second video based on this visual reference, adding [______] and synchronized ambient [______].\"",
+    "\"First use [___] to generate and reason about an image of [___] with a [___] style. Then use [___] to create a [___] second video based on this visual reference, adding [___] and synchronized ambient [___].\"",
     ["Nano Banana Pro", "a deserted beach at dusk with waves breaking softly", "photorealistic and cinematic", "Veo 3.1", "12", "a slow zoom-in camera movement", "audio"],
     ["Nano Banana Pro", "a deserted beach at dusk with waves breaking softly", "photorealistic and cinematic", "Veo 3.1", "12", "a slow zoom-in camera movement", "audio"],
     "Fusing the two logical algorithmic minds voids the dangers of plastic hallucination, shielding the definitive vital frame right at the moment of continuous digital recording."
@@ -484,7 +484,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Script with reasoning before generating!",
     "Extract decoupled fragments from the overarching vision to algorithmically flesh out the fluid canvas without transitional friction.",
-    "\"With Nano Banana Pro activated, create a [______]-scene script for a video about [______]. For each scene describe: what happens, the camera [______], the [______], and the suggested [______] — ready to use as a prompt in Veo 3.1. Explain the creative [______] behind each choice.\"",
+    "\"With Nano Banana Pro activated, create a [___]-scene script for a video about [___]. For each scene describe: what happens, the camera [___], the [___], and the suggested [___] — ready to use as a prompt in Veo 3.1. Explain the creative [___] behind each choice.\"",
     ["6", "the launch of a premium athletic sneaker", "movement", "lighting", "audio", "reasoning"],
     ["6", "the launch of a premium athletic sneaker", "movement", "lighting", "audio", "reasoning"],
     "The deductive block method cements the consistency of lighting, audio, and sequential rhythm of the entire artificial music video."
@@ -508,7 +508,7 @@ export const GEMINI_MODULE_6_STEPS_EN = [
   fillStep(
     "Use the tools strategically!",
     "Remain lucid under the irrefutable baton of maestro and primary supervisor of the electronic laboratory chain.",
-    "\"When using [______], always ask it to [______] its choices before generating the image. When using [______], describe camera [______] and [______] clearly. For complex projects, [______] the visual concept with Nano Banana Pro before [______] with Veo 3.1.\"",
+    "\"When using [___], always ask it to [___] its choices before generating the image. When using [___], describe camera [___] and [___] clearly. For complex projects, [___] the visual concept with Nano Banana Pro before [___] with Veo 3.1.\"",
     ["Nano Banana Pro", "explain", "Veo 3.1", "movement", "audio", "validate", "animating"],
     ["Nano Banana Pro", "explain", "Veo 3.1", "movement", "audio", "validate", "animating"],
     "Forcing the cognitive report before pressing ahead with the machine's overwhelming capabilities is the inescapable sovereign plea of vanguard human rationality."
@@ -570,7 +570,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Activa el razonamiento visual!",
     "Determina todas las pautas de composición forzando a la máquina a reflexionar sobre los detalles.",
-    "\"Con Nano Banana Pro activado, genera una imagen de [______] en estilo [______], con iluminación [______], [______] al fondo y transmitiendo sensación de [______]. Antes de generar, [______] tus opciones de composición y estilo.\"",
+    "\"Con Nano Banana Pro activado, genera una imagen de [___] en estilo [___], con iluminación [___], [___] al fondo y transmitiendo sensación de [___]. Antes de generar, [___] tus opciones de composición y estilo.\"",
     ["una joven científica en un laboratorio moderno", "fotorrealista editorial", "fría y azulada con reflejos de equipos", "pantallas con datos y equipos de investigación", "inteligencia y enfoque", "explica"],
     ["una joven científica en un laboratorio moderno", "fotorrealista editorial", "fría y azulada con reflejos de equipos", "pantallas con datos y equipos de investigación", "inteligencia y enfoque", "explica"],
     "Conocer la lógica de construcción visual de la máquina instruye al creador a mejorar continuamente sus futuras peticiones."
@@ -594,7 +594,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Monta tu prompt en capas!",
     "Configura las piezas elementales para un disparo fotográfico preciso.",
-    "\"[______] de [______], [______] en [______], iluminación [______], estilo [______], perspectiva [______], [______] profundidad de campo, colores [______] y calidad [______].\"",
+    "\"[___] de [___], [___] en [___], iluminación [___], estilo [___], perspectiva [___], [___] profundidad de campo, colores [___] y calidad [___].\"",
     ["Fotografía realista", "un chef preparando un plato sofisticado", "en movimiento", "cocina profesional abierta", "dramática y cálida proviniendo de los fuegos", "editorial gastronómico", "cámara baja mirando hacia arriba", "escasa", "terrosos y vibrantes", "ultra detallada 8K"],
     ["Fotografía realista", "un chef preparando un plato sofisticado", "en movimiento", "cocina profesional abierta", "dramática y cálida proviniendo de los fuegos", "editorial gastronómico", "cámara baja mirando hacia arriba", "escasa", "terrosos y vibrantes", "ultra detallada 8K"],
     "Suministrar indicaciones físicas, de lente y de paleta aísla la libre (y a menudo errónea) interpretación que la inteligencia artificial asume por simple conveniencia."
@@ -618,7 +618,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Refina con razonamiento!",
     "Solicita los cambios exactos y comprende cómo procederá el sistema visual.",
-    "\"La imagen generada es buena, pero quiero ajustar: cambia la [______] a tonos más [______], adiciona [______] en la escena, modifica la [______] para que parezca [______] y explica cómo estos cambios [______] el impacto visual antes de generar.\"",
+    "\"La imagen generada es buena, pero quiero ajustar: cambia la [___] a tonos más [___], adiciona [___] en la escena, modifica la [___] para que parezca [___] y explica cómo estos cambios [___] el impacto visual antes de generar.\"",
     ["paleta", "fríos y nocturnos", "reflejos de neón en el suelo mojado", "expresión del personaje", "más determinada e intensa", "mejorarán"],
     ["paleta", "fríos y nocturnos", "reflejos de neón en el suelo mojado", "expresión del personaje", "más determinada e intensa", "mejorarán"],
     "Aislar elementos a la hora de refinar asegura que se conserve la continuidad plástica del primer avance."
@@ -658,7 +658,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Modela tu obra de Veo 3.1!",
     "Construye lo que la óptica artificial deberá enfocar minuciosamente.",
-    "\"Apoyándote en Veo 3.1, quiero un video de [______] segundos en el que surja [______]. Traslación de cámara: [______]. Arte visual: [______]. Luz: [______]. Banda sonora: [______]. Y esta propuesta debe contagiar de inmediato mucha [______].\"",
+    "\"Apoyándote en Veo 3.1, quiero un video de [___] segundos en el que surja [___]. Traslación de cámara: [___]. Arte visual: [___]. Luz: [___]. Banda sonora: [___]. Y esta propuesta debe contagiar de inmediato mucha [___].\"",
     ["10", "una metrópoli futurista con autos de vuelo surcando rascacielos", "drone cayendo desde las alturas internándose al fondo de las calles", "fotorrealismo de cine intenso", "golden hour con trazos de neblina azul por los techos", "el rugir lejano de urbes del futuro junto a unas lentas pistas electrónicas", "esperanza tecnológica incansable"],
     ["10", "una metrópoli futurista con autos de vuelo surcando rascacielos", "drone cayendo desde las alturas internándose al fondo de las calles", "fotorrealismo de cine intenso", "golden hour con trazos de neblina azul por los techos", "el rugir lejano de urbes del futuro junto a unas lentas pistas electrónicas", "esperanza tecnológica incansable"],
     "Coordinar a fondo estos componentes extingue drásticamente todas aquellas fastuosas y limitantes rentas de la vieja y lejana época de Hollywood puro."
@@ -682,7 +682,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Selecciona tu ambiente!",
     "Manipula el timón artístico principal simplemente reeditando dos líneas breves de tu encargo.",
-    "\"Requiero esto rodado a forma de un [______] exhibiendo a [______]. Aplica encuadres a manera de [______] originando así profunda [______]. Se debe colar un tono auditivo colmado de [______] bajo la mística de [______].\"",
+    "\"Requiero esto rodado a forma de un [___] exhibiendo a [___]. Aplica encuadres a manera de [___] originando así profunda [___]. Se debe colar un tono auditivo colmado de [___] bajo la mística de [___].\"",
     ["documental intimista", "un maestro orfebre tallando a ciegas una fina obra en barro", "primerísimos planos extremados bajo un régimen en cámara lenta a plena pulsada", "persistencia pasmosa pero dominada técnica al máximo", "roces y la naturalidad húmeda del propio yeso tocando el fondo sinfónico discreto", "los aclamados informes en canales de historia extranjeros avalados con premios"],
     ["documental intimista", "un maestro orfebre tallando a ciegas una fina obra en barro", "primerísimos planos extremados bajo un régimen en cámara lenta a plena pulsada", "persistencia pasmosa pero dominada técnica al máximo", "roces y la naturalidad húmeda del propio yeso tocando el fondo sinfónico discreto", "los aclamados informes en canales de historia extranjeros avalados con premios"],
     "Inyectar las filosofías más aplaudidas del plató dota hasta el más ínfimo esfuerzo publicitario de un aplomo inestimable para una retina humana que se impacta de veras."
@@ -706,7 +706,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Funde a estos colosos!",
     "Realiza incólume la transposición quirúrgica de un marco pictórico supremo para darle vida sinfónica estelar y sin costuras.",
-    "\"Al principio, sírvete de [______] al fin de deliberar y gestarme un fotograma de [______] a purísimo y genuino aire [______]. Inmediatamente empalma a [______] para que a base puntual y fidedigna de ésto irradies una trama de [______] segundos introduciéndole [______] mientras detonas un sincronizado despliegue de [______].\"",
+    "\"Al principio, sírvete de [___] al fin de deliberar y gestarme un fotograma de [___] a purísimo y genuino aire [___]. Inmediatamente empalma a [___] para que a base puntual y fidedigna de ésto irradies una trama de [___] segundos introduciéndole [___] mientras detonas un sincronizado despliegue de [___].\"",
     ["Nano Banana Pro", "playa despoblada en pleno atardecer con sus aguas lamiendo el borde sereno", "cine y fotorrealismo apabullante", "Veo 3.1", "12", "movilidad inamovible penetrante casi reptante", "audio envolvente natural al ocaso desierto"],
     ["Nano Banana Pro", "playa despoblada en pleno atardecer con sus aguas lamiendo el borde sereno", "cine y fotorrealismo apabullante", "Veo 3.1", "12", "movilidad inamovible penetrante casi reptante", "audio envolvente natural al ocaso desierto"],
     "Alear en plena sinergia estos hemisferios algorítmicos borra toda amenaza de un final plástico amorfo y desconectado, encuadrando definitivamente el cuadro visual."
@@ -730,7 +730,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Traza una película guionada razonadamente!",
     "Destila por fin esos bocetos difusos obligándolos a cristalizar matemáticamente antes de dar la bendición o la marcha a una transición lisa en rodaje sin roces ni malinterpretaciones o sorpresas.",
-    "\"Reuniendo plenos poderes con tu Nano activísimo por allí, invéntame una bitácora exhaustiva que contemple exactamente [______] cortes de película para filmar en el set de [______]. De modo aislado vas relatando minucias así: lo fáctico, qué hace estrictamente el [______] y qué arroja al fondo la magistral cuota de [______], junto a qué demonios propusiste de [______] base —para ser digerido por Veo 3.1 luego. A cada paso fundaméntalo bajo estricto [______] intelectual y creativo para entender las razones artísticas por detrás antes del sí final.\"",
+    "\"Reuniendo plenos poderes con tu Nano activísimo por allí, invéntame una bitácora exhaustiva que contemple exactamente [___] cortes de película para filmar en el set de [___]. De modo aislado vas relatando minucias así: lo fáctico, qué hace estrictamente el [___] y qué arroja al fondo la magistral cuota de [___], junto a qué demonios propusiste de [___] base —para ser digerido por Veo 3.1 luego. A cada paso fundaméntalo bajo estricto [___] intelectual y creativo para entender las razones artísticas por detrás antes del sí final.\"",
     ["6", "gran lanzamiento del tenis ultra deportivo insignia de la temporada suprema", "juego del marco operando allí en la lente virtual giratoria o estática", "iluminación ambiental de acento en estudio encrespado al rodaje final o en locaciones cálidas a puro rayo natural", "ruido propuesto musical del corto final incisivo a todo el metraje", "razonamiento minucioso en prosa explicativa para nosotros acá fuera para la elección estética que has realizado justificadamente punto por punto a fondo y meticulosa de veras"],
     ["6", "gran lanzamiento del tenis ultra deportivo insignia de la temporada suprema", "juego del marco operando allí en la lente virtual giratoria o estática", "iluminación ambiental de acento en estudio encrespado al rodaje final o en locaciones cálidas a puro rayo natural", "ruido propuesto musical del corto final incisivo a todo el metraje", "razonamiento minucioso en prosa explicativa para nosotros acá fuera para la elección estética que has realizado justificadamente punto por punto a fondo y meticulosa de veras"],
     "Exigir desmembramientos en bloques forzosamente al algoritmo ancla indiscutiblemente la consistencia tonal a una banda de filmación secuencial totalmente inquebrantable a un nivel y estatus virtual de obra casi premiada internacional y consagrada para cualquier mortal frente a nosotros asistentemente."
@@ -754,7 +754,7 @@ export const GEMINI_MODULE_6_STEPS_ES = [
   fillStep(
     "¡Estrategina Férreamente la Táctica Sintética!",
     "Erígete dueño de la ejecución no declinando a la herramienta sino adiestrándola sin titubeos.",
-    "\"Mientras manejes al afamado [______], asegúrate de inquirir siempre que él mismísimo te venga a [______] sin demora las decisiones que toma antes de renderizar pixel alguno por ti. Al turno de accionar sobre las entrañas plásticas del asombroso [______], traza la geometría exacta y natural de tu [______] visual e imperativamente cuelga una nota de tu [______] con nitidez allí. Ante desafíos enrevesados, mejor [______] primero íntegra y exhaustivamente para tu bienestar visual general el esqueleto referencial de ideas valiéndose a fondo de él; para que luego sí y con luz verde, [______] dócilmente allí con este aludido coloso fílmico de alta escuela que le rinde obediencia.\"",
+    "\"Mientras manejes al afamado [___], asegúrate de inquirir siempre que él mismísimo te venga a [___] sin demora las decisiones que toma antes de renderizar pixel alguno por ti. Al turno de accionar sobre las entrañas plásticas del asombroso [___], traza la geometría exacta y natural de tu [___] visual e imperativamente cuelga una nota de tu [___] con nitidez allí. Ante desafíos enrevesados, mejor [___] primero íntegra y exhaustivamente para tu bienestar visual general el esqueleto referencial de ideas valiéndose a fondo de él; para que luego sí y con luz verde, [___] dócilmente allí con este aludido coloso fílmico de alta escuela que le rinde obediencia.\"",
     ["Nano Banana Pro", "esgrimir/explicar", "Veo 3.1", "deslizamiento dinámico cinético o recorrido visual", "sonido natural envolvente ambiental a oídos", "aprueba in situ reflexivamente para luego y validar la estética a fondo real", "inicies la faena vital impulsora dotadora de movimiento al esqueleto para que logres transicionarlo o dotarlo de espíritu animador virtual real para"],
     ["Nano Banana Pro", "esgrimir/explicar", "Veo 3.1", "deslizamiento dinámico cinético o recorrido visual", "sonido natural envolvente ambiental a oídos", "aprueba in situ reflexivamente para luego y validar la estética a fondo real", "inicies la faena vital impulsora dotadora de movimiento al esqueleto para que logres transicionarlo o dotarlo de espíritu animador virtual real para"],
     "Arrancar al bot el esquema lógico mental suyo como garantía pre dictamen, nos devuelve y restituye ese timón superior del cual somos históricamente poseedores frente a todas las fuerzas inconmensurables puestas por máquinas bajo el poder creador de avanzada intelectual imperativo acá hoy."
@@ -816,7 +816,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Activez le raisonnement visuel !",
     "Déterminez toutes les consignes de composition pour obliger la machine à réfléchir sur les moindres détails.",
-    "\"Avec Nano Banana Pro activé, génère une image d'une [______] dans un style [______], avec un éclairage [______], des [______] en arrière-plan et transmettant une forte sensation d'[______]. Avant de générer, [______] minutieusement tes choix de composition et de style.\"",
+    "\"Avec Nano Banana Pro activé, génère une image d'une [___] dans un style [___], avec un éclairage [___], des [___] en arrière-plan et transmettant une forte sensation d'[___]. Avant de générer, [___] minutieusement tes choix de composition et de style.\"",
     ["jeune scientifique dans un laboratoire moderne", "photoréaliste éditorial", "froid et bleuté avec des reflets d'équipement", "écrans avec des données et équipements de recherche", "intelligence et de concentration", "explique"],
     ["jeune scientifique dans un laboratoire moderne", "photoréaliste éditorial", "froid et bleuté avec des reflets d'équipement", "écrans avec des données et équipements de recherche", "intelligence et de concentration", "explique"],
     "Connaître la logique de construction visuelle de la machine aide le créateur à toujours améliorer ses instructions futures."
@@ -840,7 +840,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Créez un prompt en plusieurs strates !",
     "Configurez les pièces élémentaires pour obtenir un cliché photographique ultra pertinent.",
-    "\"[______] d'un [______], [______] dans une [______], éclairage [______], style [______], perspective de [______], profondeur de champ [______], couleurs [______] et qualité [______].\"",
+    "\"[___] d'un [___], [___] dans une [___], éclairage [___], style [___], perspective de [___], profondeur de champ [___], couleurs [___] et qualité [___].\"",
     ["Photographie réaliste", "chef préparant un plat sophistiqué", "en mouvement", "cuisine professionnelle ouverte", "dramatique et chaud provenant des fourneaux", "éditorial gastronomique", "caméra basse regardant vers le haut", "limitée", "terreuses et vibrantes", "ultra détaillée 8K"],
     ["Photographie réaliste", "chef préparant un plat sophistiqué", "en mouvement", "cuisine professionnelle ouverte", "dramatique et chaud provenant des fourneaux", "éditorial gastronomique", "caméra basse regardant vers le haut", "limitée", "terreuses et vibrantes", "ultra détaillée 8K"],
     "Apporter des directives physiques, géométriques et typiques isole l'interprétation arbitraire (et souvent ratée) que cette entité endosse sinon par confort d'exécution."
@@ -864,7 +864,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Retouchez avec l'intellect !",
     "Pilotez les corrections parfaites en visualisant comment le processeur graphique encaisse ces retours sans heurt.",
-    "\"Cette ébauche-ci s'avère correcte, cependant permettons cette variante : passe toute la [______] vers des nuances carrément [______], déploie fortement [______] au milieu de la scène, mue farouchement la [______] plus vers quelque chose [______] et décris distinctement comment de telles variations se doivent d'[______] le sens total par rapport au brouillon originel justifiant ce choix visuel là.\"",
+    "\"Cette ébauche-ci s'avère correcte, cependant permettons cette variante : passe toute la [___] vers des nuances carrément [___], déploie fortement [___] au milieu de la scène, mue farouchement la [___] plus vers quelque chose [___] et décris distinctement comment de telles variations se doivent d'[___] le sens total par rapport au brouillon originel justifiant ce choix visuel là.\"",
     ["palette globale", "froides et nocturnes", "tout pleins de lumières frémissantes en reflet au sol détrempé bas", "physionomie faciale dudit bonhomme", "d'immensément déterminée puis vive de force", "enjoliver solidement"],
     ["palette globale", "froides et nocturnes", "tout pleins de lumières frémissantes en reflet au sol détrempé bas", "physionomie faciale dudit bonhomme", "d'immensément déterminée puis vive de force", "enjoliver solidement"],
     "Une correction parcellaire conforte de façon inébranlable la texture et plastique fondatrice du dessin primordial intact à côté."
@@ -904,7 +904,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Orchestrez le flux pur du film Veo 3.1 a pleine vapeur formelle nette et exempte de failles !",
     "Assemblez de manière méticuleuse là l'objet exact qu'immortalisera sans défaut cette machinerie aveugle en arrière-cour.",
-    "\"Exigeant de l'architecture sublime logée dans Veo 3.1 un métrage actif de [______] longues secondes de visu fixant impitoyablement à l'œil central une immense [______]. Dynamique du cadre à savoir [______]. Courant de sens design ici attendu: [______]. Aura solaire projetée là-bas au loin [______]. Sonification environnementale [______]. Toute la saynète devra vibrer au cœur du lecteur spectateur un pan de sentiment indéniable porteur résolument autour du feu d'une [______].\"",
+    "\"Exigeant de l'architecture sublime logée dans Veo 3.1 un métrage actif de [___] longues secondes de visu fixant impitoyablement à l'œil central une immense [___]. Dynamique du cadre à savoir [___]. Courant de sens design ici attendu: [___]. Aura solaire projetée là-bas au loin [___]. Sonification environnementale [___]. Toute la saynète devra vibrer au cœur du lecteur spectateur un pan de sentiment indéniable porteur résolument autour du feu d'une [___].\"",
     ["10", "mégapole d'une époque futuriste à la charnière de son tout petit matin constellée d'engins circulant haut perchés flottant au sein des édifices faramineux et pointus", "plongée radiale et de grand large via aéronef versant avec douce lenteur sa voilure tout au creux intime de la rue endormie", "photoréalisme saisissant digne des écrans larges géants ou panoramiques des grands festivals d'arts majeurs au cinéma pur", "golden hour crépusculaire habillée lâchement loupé de cette aura bleuâtre fumante typique entre de froids gratte-ciels alignés serrés", "bruissements caractéristiques d'ère du lointain futur adoucie merveilleusement bercée en musique de basse fréquence fine lancinante en arpèges oniriques électroniques à tempo moyen discret là-dedans ce clip sublime a part", "certitude infinie ou de promesse irréversible en vol en un bond perpétuel d'avenir réjoui permanent sans anicroche du tout de l'humanité a vivre heureux sans faillir ensemble un jour a tous"],
     ["10", "mégapole d'une époque futuriste à la charnière de son tout petit matin constellée d'engins circulant haut perchés flottant au sein des édifices faramineux et pointus", "plongée radiale et de grand large via aéronef versant avec douce lenteur sa voilure tout au creux intime de la rue endormie", "photoréalisme saisissant digne des écrans larges géants ou panoramiques des grands festivals d'arts majeurs au cinéma pur", "golden hour crépusculaire habillée lâchement loupé de cette aura bleuâtre fumante typique entre de froids gratte-ciels alignés serrés", "bruissements caractéristiques d'ère du lointain futur adoucie merveilleusement bercée en musique de basse fréquence fine lancinante en arpèges oniriques électroniques à tempo moyen discret là-dedans ce clip sublime a part", "certitude infinie ou de promesse irréversible en vol en un bond perpétuel d'avenir réjoui permanent sans anicroche du tout de l'humanité a vivre heureux sans faillir ensemble un jour a tous"],
     "Mettre au pas savamment de l'écrit seul un spectre si immense d'éléments tels que bruit de scène profond ainsi de position de réflecteur éradique froidement et de revers et avec une prestance redoutable quasi royale le fardeau colossale des plateaux coûteux pharaoniques archaïques."
@@ -928,7 +928,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Embrassez le Prisme Stylistique Idéal !",
     "Subtilisez par une fraction succincte textuelle rédigée finement une volte face entière d'architrame filmique a réaliser la sans douleur ni délais ou de coût exponentiel pour ce set tourné par l'IA.",
-    "\"Exécute fidèlement un plan filmé respectant grandement à la lettre une approche globale de type bien [______] étalant devant ainsi l'œil [______]. Assis la caméra en imposant scrupuleusement la vision de ces [______] ceci ayant pour vertu noble pure de fomenter la toute première impulsion vitale en mon tréfonds là même et qui se dit comme un parfum fort singulier et ineffable soit d'une [______]. Sur cette fine toile viendra tapisser ou napper le fond de tout l'événement en question purement via force et au travers magiquement la seule perception la d'[______], afin qu'à la livraison le tout sente avec un vrai bonheur de prestance et d'art subtil pour finir majestueux ceci : à l'image des [______] de renoms pour tout dire.\"",
+    "\"Exécute fidèlement un plan filmé respectant grandement à la lettre une approche globale de type bien [___] étalant devant ainsi l'œil [___]. Assis la caméra en imposant scrupuleusement la vision de ces [___] ceci ayant pour vertu noble pure de fomenter la toute première impulsion vitale en mon tréfonds là même et qui se dit comme un parfum fort singulier et ineffable soit d'une [___]. Sur cette fine toile viendra tapisser ou napper le fond de tout l'événement en question purement via force et au travers magiquement la seule perception la d'[___], afin qu'à la livraison le tout sente avec un vrai bonheur de prestance et d'art subtil pour finir majestueux ceci : à l'image des [___] de renoms pour tout dire.\"",
     ["intime de par sa forme grand documentaire auteur", "vieux tailleur sur pierre façonnant presque sous un touché magique l'argile à même doigt nu à main", "très gros plans appuyés massifs ou lents pour ne pas du tout de rien dire et insistant amplement du lourd du très lent magnifiant chacun l'extrême grand doigté par moments ultra serrés pour voir de la poussière d'instant précieux se cristalliser au millimètre de rien", "imposante et belle patience majestueuse tout d'une de cette immense sagesse ancienne noble à la tache", "sonorité rocailleuse pure de la glaise caressée ainsi qu'arpèges instrumentaux légers onctueux doux discrets accompagnants la lente course de cela à l'oreille fine sans la brutalité pour de la grandeur", "ceux fameux grand film étranger lauréat des très hauts grands festival et raflant la mise à la critique exigeante snob là de ce monde des arts nobles pour être dit ici"],
     ["intime de par sa forme grand documentaire auteur", "vieux tailleur sur pierre façonnant presque sous un touché magique l'argile à même doigt nu à main", "très gros plans appuyés massifs ou lents pour ne pas du tout de rien dire et insistant amplement du lourd du très lent magnifiant chacun l'extrême grand doigté par moments ultra serrés pour voir de la poussière d'instant précieux se cristalliser au millimètre de rien", "imposante et belle patience majestueuse tout d'une de cette immense sagesse ancienne noble à la tache", "sonorité rocailleuse pure de la glaise caressée ainsi qu'arpèges instrumentaux légers onctueux doux discrets accompagnants la lente course de cela à l'oreille fine sans la brutalité pour de la grandeur", "ceux fameux grand film étranger lauréat des très hauts grands festival et raflant la mise à la critique exigeante snob là de ce monde des arts nobles pour être dit ici"],
     "Commander de manière martiale au prompt de géniales épopées nobles jadis coûteuses accorde la victoire aisé à quiconque créera ce bijou monumental virtuel d'image doté de toute éternité de prestance malgré les pauvres maigres petits sous alloués par son bureau chiche."
@@ -952,7 +952,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Joignez La Maîtrise Outil-Double !",
     "La clef dorée de voute sublime revient à clouer fixement du dur le beau du fixe d'avant d'insuffler prodigieusement du génie ou fluide de temps continu avec, tel le miracle des temps animés virtuels contemporains via d'IA. Ainsi sans plus et hop sans peur en un clic, à toi les manettes ici du bon sans faux bond au but visé précis là ce soir pour toute de suite a votre maitrise claire à fond formel pur grand dieu ! Voyons ! Que faire avec et ou ? Ici :",
-    "\"Je requiers de me concevoir initialement par du raisonné fort le bel écrin au sein pur grâce [______] de façon sublime via [______] dans ce très lourd jus visuel d'esprit [______]. Seulement dès aval au rendu ok, actionne avec force sans appel tout via majesté ce dit là, le féroce et tout dernier moteur puissant ici de [______] lui demandant instamment fort l'éclosion du clip film là via durée imposante et de pas moins de ces intenses très long [______] secondes appuyées fortes dessus la très noble de susdit vision fixée, incluant pour le chic et drame absolu mouvement visuel imposé à l'appareil de ce type à présent pour le beau final en force là; [______] et sans clore sans rajouter encore un gros très gros du bien senti en bande acoustique tel ce que l'on voudra bien être et paraître là [______].\"",
+    "\"Je requiers de me concevoir initialement par du raisonné fort le bel écrin au sein pur grâce [___] de façon sublime via [___] dans ce très lourd jus visuel d'esprit [___]. Seulement dès aval au rendu ok, actionne avec force sans appel tout via majesté ce dit là, le féroce et tout dernier moteur puissant ici de [___] lui demandant instamment fort l'éclosion du clip film là via durée imposante et de pas moins de ces intenses très long [___] secondes appuyées fortes dessus la très noble de susdit vision fixée, incluant pour le chic et drame absolu mouvement visuel imposé à l'appareil de ce type à présent pour le beau final en force là; [___] et sans clore sans rajouter encore un gros très gros du bien senti en bande acoustique tel ce que l'on voudra bien être et paraître là [___].\"",
     ["Nano Banana Pro", "grève abandonnée crépusculaire au calme ressac d'océan évanoui de bord doux caressant tendrement aux brisants fins du large des flots bleus de nuit de feu", "totalement photo authentique sublime a frémir aux tripes pur jus de pur du lourd grand très cinéma pur grandiloquent noblement magistrale sans faillir l'âme au vent d'étoiles fines un peu", "Veo 3.1", "12", "avancée bien menée calme majestueuse et puissamment englobante doucereusement en approches douces des choses de pres sans aucune de viles précipitation gâchant toute vision magistrale noble un peu sereinement sans brutal", "de bruitage du lieu du songe en accord sonore d'ambiance raccord en pleine harmonie natifs d'un vrai souffle ambiante vrai très clair à la mer un peu doux discret un peu au crépuscule d'horizon de là pour lui"],
     ["Nano Banana Pro", "grève abandonnée crépusculaire au calme ressac d'océan évanoui de bord doux caressant tendrement aux brisants fins du large des flots bleus de nuit de feu", "totalement photo authentique sublime a frémir aux tripes pur jus de pur du lourd grand très cinéma pur grandiloquent noblement magistrale sans faillir l'âme au vent d'étoiles fines un peu", "Veo 3.1", "12", "avancée bien menée calme majestueuse et puissamment englobante doucereusement en approches douces des choses de pres sans aucune de viles précipitation gâchant toute vision magistrale noble un peu sereinement sans brutal", "de bruitage du lieu du songe en accord sonore d'ambiance raccord en pleine harmonie natifs d'un vrai souffle ambiante vrai très clair à la mer un peu doux discret un peu au crépuscule d'horizon de là pour lui"],
     "Cristalliser via la très sage instance pensée à l'image des erreurs prévisibles l'état du fixe va couper vif l'herbe des pieds froids a de grandes chimères hasardeuses ou autres délires monstrueux générés au moment d'aborder sans filet dur avec la très dure machine cinétique le Veo la grande scène fluide du très beau final ou de gros bugs couteux auraient frappés si ce pas n'eut point fait avant par raison. Du bon pour lui en vain de l'outil et sans lourd cout du faux bond total. Ce qu'on écarte ici de fait du chemin !"
@@ -976,7 +976,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Forger Ses Scénarios De Force Par Anticipation Réfléchie Visuelle Du Bon !",
     "Capter d'en haut ou fractionner ton dessein ultime a de justes micro blocs ou des directives prémâchées pour abreuver de fluidité et coulant le grand automate a clip virtuel sans choc abrupt. Avec ordre pur on y est, avec ça là devant pour vous au pur :",
-    "\"Exécute je te prie avec tes beaux cerveaux Nano très bien ouvert à la tache ceci pour nous: conçois pour de vrai de vrai de tout pur avec raison : Un bien dense registre du plan en pleine et vraie écriture a hauteur des justes [______] cadres divers du beau récit là pour de vrai clip portant ce grand sujet a dire ici de par: [______]. Alors ici et en ces petits découpages tu mettras l'action vive détaillée; le sens physique à mouvoir la belle mécanique fine de l'optique par [______] imposé ou guidé; avec quoi on éclaire en belle lumière a ce beau jour bien précis ce de par un fond via ce cadre fin d'éblouis la bonne [______], de l'ambiant aussi au rendu audio parfait bien de son juste pour le décor via là un peu beau suggéré : [______] au rendu fort sans faille avec le beau rendu du clip au final, sans faillir le pourquoi le plus noble là au sein de cette tête bien pensante pour ton [______] pur et du meilleur gout pour valider avant a cette tache si vaste en avant Veo 3.1 !\"",
+    "\"Exécute je te prie avec tes beaux cerveaux Nano très bien ouvert à la tache ceci pour nous: conçois pour de vrai de vrai de tout pur avec raison : Un bien dense registre du plan en pleine et vraie écriture a hauteur des justes [___] cadres divers du beau récit là pour de vrai clip portant ce grand sujet a dire ici de par: [___]. Alors ici et en ces petits découpages tu mettras l'action vive détaillée; le sens physique à mouvoir la belle mécanique fine de l'optique par [___] imposé ou guidé; avec quoi on éclaire en belle lumière a ce beau jour bien précis ce de par un fond via ce cadre fin d'éblouis la bonne [___], de l'ambiant aussi au rendu audio parfait bien de son juste pour le décor via là un peu beau suggéré : [___] au rendu fort sans faille avec le beau rendu du clip au final, sans faillir le pourquoi le plus noble là au sein de cette tête bien pensante pour ton [___] pur et du meilleur gout pour valider avant a cette tache si vaste en avant Veo 3.1 !\"",
     ["6", "grande et monumentale présentation produit via un grand et noble soulier d’athlétisme premium rare en vue", "mouvement global a mener en vue avec", "lumineuse et sa forte disposition à irradier sans fausse lumière cruelle inepte sur sujet d'au cœur sans ombrer fort du beau avec ca sans faille", "du bruit sonore de pur acoustique ambiance a proposer avec du bel effet sur de ce fond au film final sans aucun couac un peu bien calé sans", "fort lourd beau et profond du pourquoi je prend telle mesure là pour y amener du bon raisonnement de création justifié sans faillir à propos de cette choix précis avant a l'usage un peu pour ce Veo bien guidé ainsi par le cerveau Nano"],
     ["6", "grande et monumentale présentation produit via un grand et noble soulier d’athlétisme premium rare en vue", "mouvement global a mener en vue avec", "lumineuse et sa forte disposition à irradier sans fausse lumière cruelle inepte sur sujet d'au cœur sans ombrer fort du beau avec ca sans faille", "du bruit sonore de pur acoustique ambiance a proposer avec du bel effet sur de ce fond au film final sans aucun couac un peu bien calé sans", "fort lourd beau et profond du pourquoi je prend telle mesure là pour y amener du bon raisonnement de création justifié sans faillir à propos de cette choix précis avant a l'usage un peu pour ce Veo bien guidé ainsi par le cerveau Nano"],
     "Convier l'arsenal et ses gros canons de logique deductive par strates de scripts fermement découpés grave fermement de cohésion ou du fil commun d'acoustique ou des rayons, et tout l'élan continu séquentiel ou du vide clip musical d'artificiel absolu se mue de chaos a tout chef œuvre du moment."
@@ -1000,7 +1000,7 @@ export const GEMINI_MODULE_6_STEPS_FR = [
   fillStep(
     "Déployez Stratégiquement Ton Pouvoir Opérateur AI Majeur Ici, Pilote Visuel Là !",
     "Se tenir fermement du clair dans la vue de diriger tel le vrai de pur directeur général au trépied maître d'ensemble grand de l'arsenal ou complexe laboratoire sans pareille des miracles écran ou du vide du vide en code de bits tout de beauté la :",
-    "\"A chaque appel bien solennel là au fameux [______], de grâce dictez fort toujours la règle pure l'exhortant par avant même a très bien en vous en détailler c'est-à-dire [______] tous ses choix profonds. Ensuite lors aux appels vers grand seigneur le pur de chez pur d'un certain fort fameux l'autre : [______], alors vous poserez clairs mots de description la sur cette caméra dans toute de son gros [______] ainsi en n'oubliant en rien et surtout son très primordial son d'[______] assez évident avec ; Dès si grand ou gros labeurs projet en tête ambitieux ou plus subtiles là sans faute; il ne vous tiendra en maitre que de l'utiliser fort avant et avec maitrise d'abords par de bon Nano de façon par bien qu'on [______] ça solide amont ; Avant d'oser a ce de l'action pour fin sans faute l'imminente tache fort pure donnant du grand mouvement ou [______] de vie forte sous le charme Veo pour cloturer cela de la superbe maestria visuelle en bout à jamais graver noble là d'ici présent par vos seules directives pures pour votre majesté l'auteur.\"",
+    "\"A chaque appel bien solennel là au fameux [___], de grâce dictez fort toujours la règle pure l'exhortant par avant même a très bien en vous en détailler c'est-à-dire [___] tous ses choix profonds. Ensuite lors aux appels vers grand seigneur le pur de chez pur d'un certain fort fameux l'autre : [___], alors vous poserez clairs mots de description la sur cette caméra dans toute de son gros [___] ainsi en n'oubliant en rien et surtout son très primordial son d'[___] assez évident avec ; Dès si grand ou gros labeurs projet en tête ambitieux ou plus subtiles là sans faute; il ne vous tiendra en maitre que de l'utiliser fort avant et avec maitrise d'abords par de bon Nano de façon par bien qu'on [___] ça solide amont ; Avant d'oser a ce de l'action pour fin sans faute l'imminente tache fort pure donnant du grand mouvement ou [___] de vie forte sous le charme Veo pour cloturer cela de la superbe maestria visuelle en bout à jamais graver noble là d'ici présent par vos seules directives pures pour votre majesté l'auteur.\"",
     ["Nano Banana Pro", "expliquant de raisons au dit en bon français sur son acte intellectuel pour ça", "Veo 3.1", "et si clair de mouvement", "le bon bel et majestueux bel attribut audio pour fond", "valide sans bouger un brin avec forte assurance à l'image via ça de l'intellect formel de la IA", "animer fort joliment et si réaliste ça in fine avec ça sans faux bug et faille pour y arriver noble et du tout bonnement et fermement"],
     ["Nano Banana Pro", "expliquant de raisons au dit en bon français sur son acte intellectuel pour ça", "Veo 3.1", "et si clair de mouvement", "le bon bel et majestueux bel attribut audio pour fond", "valide sans bouger un brin avec forte assurance à l'image via ça de l'intellect formel de la IA", "animer fort joliment et si réaliste ça in fine avec ça sans faux bug et faille pour y arriver noble et du tout bonnement et fermement"],
     "Soumettre la boite mystère au verdict formel verbalisé garantit ou impose le dictat absolu souverain du grand de l'humain créateur que nul génie ou robot aveugle même de grand luxe ou de force pure ne viendra par là ravir au bout ou usurper et sans faille pour nos artistes ou du bon travail maitrisé de soi d'origine noble."

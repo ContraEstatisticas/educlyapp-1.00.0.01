@@ -61,7 +61,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Combine texto com contexto!",
     "Combine entradas variadas para obter melhores análises.",
-    "\"Analise o [______] que estou enviando junto com esta mensagem. Com base no [______] e nos [______] apresentados, me diga quais são as [______] mais relevantes e o que elas indicam sobre o [______] do negócio.\"",
+    "\"Analise o [___] que estou enviando junto com esta mensagem. Com base no [___] e nos [___] apresentados, me diga quais são as [___] mais relevantes e o que elas indicam sobre o [___] do negócio.\"",
     ["gráfico de desempenho", "visual", "dados", "tendências", "momento atual"],
     ["gráfico de desempenho", "visual", "dados", "tendências", "momento atual"],
     "Fornecer referências cruzadas enriquece incrivelmente as análises feitas pela Inteligência Artificial."
@@ -85,7 +85,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Analise uma imagem!",
     "Ensine o Gemini a olhar como um observador.",
-    "\"Aqui está uma [______] do produto do meu concorrente. Analise e me diga: quais são os [______] visuais de destaque, que [______] o design transmite, quais [______] estão sendo comunicados e o que eu poderia [______] na minha própria linha de produtos.\"",
+    "\"Aqui está uma [___] do produto do meu concorrente. Analise e me diga: quais são os [___] visuais de destaque, que [___] o design transmite, quais [___] estão sendo comunicados e o que eu poderia [___] na minha própria linha de produtos.\"",
     ["foto", "elementos", "emoções", "diferenciais", "aprender e aplicar"],
     ["foto", "elementos", "emoções", "diferenciais", "aprender e aplicar"],
     "Dar foco aos elementos emocionais da foto traz camadas ricas na interpretação do material."
@@ -109,7 +109,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Processe seu documento visual!",
     "Extraia dados cruciais usando o leitor unificado.",
-    "\"Aqui está o [______] da empresa com [______] páginas. Analise os [______] e [______] presentes no documento, extraia os [______] mais importantes e me diga quais [______] merecem atenção imediata da gestão.\"",
+    "\"Aqui está o [___] da empresa com [___] páginas. Analise os [___] e [___] presentes no documento, extraia os [___] mais importantes e me diga quais [___] merecem atenção imediata da gestão.\"",
     ["relatório anual", "45", "gráficos", "tabelas", "indicadores", "números"],
     ["relatório anual", "45", "gráficos", "tabelas", "indicadores", "números"],
     "O entendimento multimodal não ignora gráficos dentro das páginas, cruzando-os com o texto perfeitamente."
@@ -133,7 +133,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Analise um vídeo!",
     "Poupe horas transcrevendo e assistindo palestras longas.",
-    "\"Aqui está o [______] de uma palestra sobre [______]. Assista e me entregue: os [______] principais abordados, as [______] mais citadas pelo apresentador, os momentos de maior [______] e um resumo de no máximo [______] linhas.\"",
+    "\"Aqui está o [___] de uma palestra sobre [___]. Assista e me entregue: os [___] principais abordados, as [___] mais citadas pelo apresentador, os momentos de maior [___] e um resumo de no máximo [___] linhas.\"",
     ["link", "liderança e gestão de equipes", "tópicos", "estatísticas e dados", "impacto", "10"],
     ["link", "liderança e gestão de equipes", "tópicos", "estatísticas e dados", "impacto", "10"],
     "Você pode fazer isso com eventos ou tutoriais longos para não perder tempo pulando capítulos."
@@ -157,7 +157,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Processe seu áudio!",
     "Automatize atas e memorandos.",
-    "\"Aqui está a [______] da reunião de hoje. Transcreva o conteúdo, identifique os [______] de cada participante, liste as [______] tomadas e os [______] com responsável e prazo definido. Formate como uma [______] profissional.\"",
+    "\"Aqui está a [___] da reunião de hoje. Transcreva o conteúdo, identifique os [___] de cada participante, liste as [___] tomadas e os [___] com responsável e prazo definido. Formate como uma [___] profissional.\"",
     ["gravação", "pontos levantados", "decisões", "próximos passos", "ata"],
     ["gravação", "pontos levantados", "decisões", "próximos passos", "ata"],
     "Gerar a estrutura completa com prazos dá aplicabilidade imediata a uma simples conversa oral."
@@ -181,7 +181,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Combine entradas diferentes!",
     "Tudo de uma vez por um mesmo objetivo.",
-    "\"Estou enviando [______]: a [______] da campanha atual, o [______] com os resultados e minhas [______] em texto sobre o que não está funcionando. Com base em tudo isso, me diga qual é o [______] central da campanha e sugira [______] ações concretas para melhorar os resultados.\"",
+    "\"Estou enviando [___]: a [___] da campanha atual, o [___] com os resultados e minhas [___] em texto sobre o que não está funcionando. Com base em tudo isso, me diga qual é o [___] central da campanha e sugira [___] ações concretas para melhorar os resultados.\"",
     ["3 arquivos", "imagem do criativo", "relatório em PDF", "anotações", "problema", "3"],
     ["3 arquivos", "imagem do criativo", "relatório em PDF", "anotações", "problema", "3"],
     "Essas referências contextuais são valiosas porque reúnem design, lógica quantitativa e o seu próprio julgamento humano."
@@ -205,7 +205,7 @@ export const GEMINI_MODULE_2_STEPS_PT = [
   fillStep(
     "Use multimodalidade com estratégia!",
     "Delimite o terreno para o assistente.",
-    "\"Ao enviar uma imagem, sempre [______] o que você quer que o Gemini [______] nela. Ao enviar um vídeo longo, especifique se quer o [______] completo ou apenas os [______] mais importantes. Para documentos com muitos dados visuais, peça ao Gemini para [______] antes de analisar.\"",
+    "\"Ao enviar uma imagem, sempre [___] o que você quer que o Gemini [___] nela. Ao enviar um vídeo longo, especifique se quer o [___] completo ou apenas os [___] mais importantes. Para documentos com muitos dados visuais, peça ao Gemini para [___] antes de analisar.\"",
     ["explique", "observe ou analise", "resumo", "momentos", "descrever o que vê"],
     ["explique", "observe ou analise", "resumo", "momentos", "descrever o que vê"],
     "Reduzir ambiguidades garante que o Gemini use as horas que você poupou focando nas coisas certas."
@@ -268,7 +268,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Combine text with context!",
     "Integrate diverse inputs for robust analysis.",
-    "\"Analyze the [______] I am attaching with this message. Based on the [______] and the presented [______], tell me what the most relevant [______] are and what they signify about the business's [______].\"",
+    "\"Analyze the [___] I am attaching with this message. Based on the [___] and the presented [___], tell me what the most relevant [___] are and what they signify about the business's [___].\"",
     ["performance chart", "visuals", "data", "trends", "current status"],
     ["performance chart", "visuals", "data", "trends", "current status"],
     "Providing multimodal cross-references immensely enriches AI analysis."
@@ -292,7 +292,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Analyze an image!",
     "Train Gemini to look closely as an observer.",
-    "\"Here is a [______] of my competitor's product. Analyze it and tell me: what visual [______] stand out, what [______] the design attempts to convey, which [______] are highlighted, and what I could [______] strictly for my own product line.\"",
+    "\"Here is a [___] of my competitor's product. Analyze it and tell me: what visual [___] stand out, what [___] the design attempts to convey, which [___] are highlighted, and what I could [___] strictly for my own product line.\"",
     ["photo", "elements", "emotions", "differentiators", "learn and apply"],
     ["photo", "elements", "emotions", "differentiators", "learn and apply"],
     "Focusing on the emotional and subjective metrics brings rich layers into the review process."
@@ -316,7 +316,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Process your visual document!",
     "Extract crucial metrics via the unified reader.",
-    "\"Here is the company’s [______] boasting [______] pages. Analyze the [______] and [______] scattered throughout, pull out the most vital [______], and highlight which [______] demand the management team's immediate attention.\"",
+    "\"Here is the company’s [___] boasting [___] pages. Analyze the [___] and [___] scattered throughout, pull out the most vital [___], and highlight which [___] demand the management team's immediate attention.\"",
     ["annual report", "45", "graphs", "tables", "indicators", "figures"],
     ["annual report", "45", "graphs", "tables", "indicators", "figures"],
     "Multimodal understanding correctly parses charts alongside their surrounding text paragraphs seamlessly."
@@ -340,7 +340,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Analyze a video!",
     "Save endless hours trying to transcribe or watch mammoth keynotes.",
-    "\"Here is the [______] to a keynote focused on [______]. Watch it and return: the main [______] covered, the most cited [______] brought up by the speaker, moments of highest [______], and a brief abstract of at most [______] lines.\"",
+    "\"Here is the [___] to a keynote focused on [___]. Watch it and return: the main [___] covered, the most cited [___] brought up by the speaker, moments of highest [___], and a brief abstract of at most [___] lines.\"",
     ["link", "team leadership and management", "topics", "statistics and data", "impact", "10"],
     ["link", "team leadership and management", "topics", "statistics and data", "impact", "10"],
     "Deploying this on extended seminars dramatically cuts the timeline to spot relevance."
@@ -364,7 +364,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Process your audio!",
     "Automate meeting minutes flawlessly.",
-    "\"Here is the [______] of today's meeting. Transcribe the log, pinpoint the specific [______] championed by each participant, list the [______] taken, and draft the [______] complete with owners and deadlines. Format everything as a professional [______].\"",
+    "\"Here is the [___] of today's meeting. Transcribe the log, pinpoint the specific [___] championed by each participant, list the [___] taken, and draft the [___] complete with owners and deadlines. Format everything as a professional [___].\"",
     ["recording", "points raised", "decisions", "next steps", "minute"],
     ["recording", "points raised", "decisions", "next steps", "minute"],
     "Creating an instantly accountable architecture around raw chatter secures project tracking."
@@ -388,7 +388,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Combine diverse formats!",
     "All at once aimed at a singular goal.",
-    "\"I am providing [______]: the [______] for the newest campaign, the [______] spelling out the revenue, and my own [______] complaining about our stagnating conversion. Review everything, locate the central [______] dragging the campaign down, and prescribe [______] actionable fixes.\"",
+    "\"I am providing [___]: the [___] for the newest campaign, the [___] spelling out the revenue, and my own [___] complaining about our stagnating conversion. Review everything, locate the central [___] dragging the campaign down, and prescribe [___] actionable fixes.\"",
     ["3 files", "creative image", "PDF report", "text notes", "problem", "3"],
     ["3 files", "creative image", "PDF report", "text notes", "problem", "3"],
     "This holistic bridging unites qualitative design, cold numeric truth, and your intuition seamlessly."
@@ -412,7 +412,7 @@ export const GEMINI_MODULE_2_STEPS_EN = [
   fillStep(
     "Utilize multimodality strategically!",
     "Box in your AI’s focus effectively.",
-    "\"Whenever attaching an image, precisely [______] what you expect Gemini to [______] within the frame. Given a long video, stipulate whether you want a full [______] or solely the peak [______]. Regarding visually heavy decks, tell Gemini to first [______] before rendering a verdict.\"",
+    "\"Whenever attaching an image, precisely [___] what you expect Gemini to [___] within the frame. Given a long video, stipulate whether you want a full [___] or solely the peak [___]. Regarding visually heavy decks, tell Gemini to first [___] before rendering a verdict.\"",
     ["explain", "observe or analyze", "summary", "moments", "describe what it sees"],
     ["explain", "observe or analyze", "summary", "moments", "describe what it sees"],
     "Narrowing ambiguities dictates how effectively Gemini allocates its reasoning engine."
@@ -475,7 +475,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Combina texto con contexto!",
     "Combina entradas variadas para obtener mejores análisis.",
-    "\"Analiza el [______] que envío junto con este mensaje. Con base en el [______] y en los [______] presentados, dime cuáles son las [______] más relevantes y qué indican sobre el [______] del negocio.\"",
+    "\"Analiza el [___] que envío junto con este mensaje. Con base en el [___] y en los [___] presentados, dime cuáles son las [___] más relevantes y qué indican sobre el [___] del negocio.\"",
     ["gráfico de rendimiento", "visual", "datos", "tendencias", "momento actual"],
     ["gráfico de rendimiento", "visual", "datos", "tendencias", "momento actual"],
     "Proporcionar referencias cruzadas enriquece increíblemente los análisis hechos por la IA."
@@ -499,7 +499,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Analiza una imagen!",
     "Enséñale a Gemini a observar de cerca.",
-    "\"Aquí hay una [______] del producto de mi competidor. Analízala y dime: cuáles [______] visuales destacan, qué [______] transmite el diseño, qué [______] se están comunicando y qué podría [______] en mi propia línea de productos.\"",
+    "\"Aquí hay una [___] del producto de mi competidor. Analízala y dime: cuáles [___] visuales destacan, qué [___] transmite el diseño, qué [___] se están comunicando y qué podría [___] en mi propia línea de productos.\"",
     ["foto", "elementos", "emociones", "diferenciadores", "aprender y aplicar"],
     ["foto", "elementos", "emociones", "diferenciadores", "aprender y aplicar"],
     "Enfocarse en los elementos visuales emocionales añade capas de profundidad a la revisión."
@@ -523,7 +523,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Procesa tu documento visual!",
     "Extrae datos cruciales usando el lector unificado.",
-    "\"Aquí tienes el [______] de la empresa con [______] páginas. Analiza los [______] y [______] presentes en él, extrae los [______] más importantes y dime qué [______] merecen atención gerencial prioritaria.\"",
+    "\"Aquí tienes el [___] de la empresa con [___] páginas. Analiza los [___] y [___] presentes en él, extrae los [___] más importantes y dime qué [___] merecen atención gerencial prioritaria.\"",
     ["informe anual", "45", "gráficos", "tablas", "indicadores", "números"],
     ["informe anual", "45", "gráficos", "tablas", "indicadores", "números"],
     "La IA procesa perfectamente los gráficos insertados junto con los párrafos de texto que los acompañan."
@@ -547,7 +547,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Analiza un video!",
     "Ahorra tiempo valioso sin escuchar horas seguidas.",
-    "\"Aquí tienes el [______] de una conferencia sobre [______]. Míralo y entrégame: los [______] principales abordados, las [______] más citadas, los momentos de mayor [______] y un resumen de hasta [______] líneas.\"",
+    "\"Aquí tienes el [___] de una conferencia sobre [___]. Míralo y entrégame: los [___] principales abordados, las [___] más citadas, los momentos de mayor [___] y un resumen de hasta [___] líneas.\"",
     ["enlace", "liderazgo y gestión de equipos", "temas", "estadísticas y datos", "impacto", "10"],
     ["enlace", "liderazgo y gestión de equipos", "temas", "estadísticas y datos", "impacto", "10"],
     "Hacer esto con simposios o conferencias gigantes reduce enormemente el tiempo de investigación."
@@ -571,7 +571,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Procesa tu audio!",
     "Automatiza tus actas al instante.",
-    "\"Aquí está la [______] de la reunión de hoy. Transcribe el contenido, identifica los [______] de cada participante, lista las [______] tomadas y formula los [______] con responsables y fechas límite. Todo tipo [______].\"",
+    "\"Aquí está la [___] de la reunión de hoy. Transcribe el contenido, identifica los [___] de cada participante, lista las [___] tomadas y formula los [___] con responsables y fechas límite. Todo tipo [___].\"",
     ["grabación", "puntos planteados", "decisiones", "próximos pasos", "acta"],
     ["grabación", "puntos planteados", "decisiones", "próximos pasos", "acta"],
     "Al unificar el audio con esquemas concretos de texto, transformas la charla en responsabilidad pura."
@@ -595,7 +595,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Combina entradas diferentes!",
     "Todo al mismo tiempo y guiado por ti.",
-    "\"Te envío [______]: la [______] de la campaña, el [______] de los resultados y mis [______] señalando el problema. Toma todo esto, destraba el [______] de conversión y sugiéreme [______] soluciones.\"",
+    "\"Te envío [___]: la [___] de la campaña, el [___] de los resultados y mis [___] señalando el problema. Toma todo esto, destraba el [___] de conversión y sugiéreme [___] soluciones.\"",
     ["3 archivos", "imagen del anuncio", "informe en PDF", "anotaciones", "problema", "3"],
     ["3 archivos", "imagen del anuncio", "informe en PDF", "anotaciones", "problema", "3"],
     "Hilar datos diversos bajo un pensamiento global es la definición de inteligencia integral."
@@ -619,7 +619,7 @@ export const GEMINI_MODULE_2_STEPS_ES = [
   fillStep(
     "¡Usa multimodalidad con estrategia!",
     "Perfila qué esperar del bot.",
-    "\"Si inserto material gráfico, antes [______] exactamente qué le pido que [______] allí. En un audio largo, puntualizo si reclamo un [______] general o aislar [______] críticos. De haber gran densidad gráfica, exijo que se moleste en [______].\"",
+    "\"Si inserto material gráfico, antes [___] exactamente qué le pido que [___] allí. En un audio largo, puntualizo si reclamo un [___] general o aislar [___] críticos. De haber gran densidad gráfica, exijo que se moleste en [___].\"",
     ["explico", "observe o analice", "resumen", "momentos", "describir lo que ve"],
     ["explico", "observe o analice", "resumen", "momentos", "describir lo que ve"],
     "Despejar la ambigüedad redirige el poder computacional a extraer conclusiones firmes."
@@ -681,7 +681,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Mêlez texte et contexte visuel !",
     "Conjuguez des entrées distinctes pour hisser vos résultats.",
-    "\"Analyse le [______] que je t'envoie avec ma requête. En te basant sur le [______] et les [______] apparents, indique-moi quelles sont les [______] majeures et ce que cela implique pour le [______] de l'entreprise.\"",
+    "\"Analyse le [___] que je t'envoie avec ma requête. En te basant sur le [___] et les [___] apparents, indique-moi quelles sont les [___] majeures et ce que cela implique pour le [___] de l'entreprise.\"",
     ["graphique de performance", "visuel", "données", "tendances", "moment actuel"],
     ["graphique de performance", "visuel", "données", "tendances", "moment actuel"],
     "Insérer des documents annexes transcende le simple jeu de la devinette algorithmique."
@@ -705,7 +705,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Faites parler la photographie !",
     "Donnez une direction claire de l'observation attendue.",
-    "\"Voici une [______] d'un produit concurrent. Examine-la attentivement et dis-moi : quels [______] graphiques priment, quelles [______] ce design suggère, les [______] qui sautent aux yeux, et en quoi je pourrais [______] ces atouts pour mes propres campagnes.\"",
+    "\"Voici une [___] d'un produit concurrent. Examine-la attentivement et dis-moi : quels [___] graphiques priment, quelles [___] ce design suggère, les [___] qui sautent aux yeux, et en quoi je pourrais [___] ces atouts pour mes propres campagnes.\"",
     ["photo", "éléments", "émotions", "différentiels", "apprendre et appliquer"],
     ["photo", "éléments", "émotions", "différentiels", "apprendre et appliquer"],
     "Solliciter le ressenti et les émotions tirés d'un visuel met à l'épreuve l'acuité analytique avancée du système."
@@ -729,7 +729,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Faites digérer votre paperasse !",
     "Sortez les chiffres clefs en confiant le balayage au lecteur centralisé.",
-    "\"Voici le [______] des actionnaires comptant [______] pages. Dissèque les [______] et les [______] éparpillés dans ce fascicule, ramène-moi les [______] capitaux, et spécifie quels [______] réclament la riposte managériale urgente.\"",
+    "\"Voici le [___] des actionnaires comptant [___] pages. Dissèque les [___] et les [___] éparpillés dans ce fascicule, ramène-moi les [___] capitaux, et spécifie quels [___] réclament la riposte managériale urgente.\"",
     ["rapport annuel", "45", "graphiques", "tableaux", "indicateurs", "chiffres"],
     ["rapport annuel", "45", "graphiques", "tableaux", "indicateurs", "chiffres"],
     "La force multimodale associe naturellement chaque pic d'un graphique à sa légende."
@@ -753,7 +753,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Le grand saut vidéo !",
     "Contournez le chronophage visionnage sans intérêt ciblé.",
-    "\"Ci-joint le [______] d'un sommet traitant de la [______]. Visionne ce contenu magistral, remonte-moi : les [______] prépondérants, les [______] lancées avec fracas par l'intervenant, les instants d'extrême [______], et un condensé strict de [______] lignes.\"",
+    "\"Ci-joint le [___] d'un sommet traitant de la [___]. Visionne ce contenu magistral, remonte-moi : les [___] prépondérants, les [___] lancées avec fracas par l'intervenant, les instants d'extrême [___], et un condensé strict de [___] lignes.\"",
     ["lien", "gestion et direction d'équipes", "sujets", "statistiques et données", "impact", "10"],
     ["lien", "gestion et direction d'équipes", "sujets", "statistiques et données", "impact", "10"],
     "Dégainer ce type de requêtes face à de volumineuses Masterclass sauve des semaines entières de labeur d'analyse."
@@ -777,7 +777,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Écoute et Synthèse",
     "Oubliez la tâche éreintante de la secrétaire d'hier.",
-    "\"Examine du début à la fin la [______] de la commission de la matinée. Reproduis la feuille de route intégrale en insistant sur les [______] posés par chacun, établis la liste des [______] incontestables, et précise clairement les [______] accompagnés de leur référent. Restitue le tout en [______] formelle.\"",
+    "\"Examine du début à la fin la [___] de la commission de la matinée. Reproduis la feuille de route intégrale en insistant sur les [___] posés par chacun, établis la liste des [___] incontestables, et précise clairement les [___] accompagnés de leur référent. Restitue le tout en [___] formelle.\"",
     ["vocalisation", "points soulevés", "décisions", "prochaines étapes", "charte"],
     ["vocalisation", "points soulevés", "décisions", "prochaines étapes", "charte"],
     "Mettre l'audio au service du pragmatisme convertit de vagues échanges en livrables d'entreprise irréprochables."
@@ -801,7 +801,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Mariez vos données !",
     "Converger l'arsenal sous le même prisme stratégique.",
-    "\"Je mets en pièces jointes les [______] : d'abord l'[______] affichant le design incriminé, ensuite le [______] des retombées mercantiles, sans omettre de consulter mes profondes [______] désabusées. Regarde ça fixement et annonce-moi quel [______] paralyse l'enjeu, et lance-moi illico [______] directives de corrections pour tout assainir.\"",
+    "\"Je mets en pièces jointes les [___] : d'abord l'[___] affichant le design incriminé, ensuite le [___] des retombées mercantiles, sans omettre de consulter mes profondes [___] désabusées. Regarde ça fixement et annonce-moi quel [___] paralyse l'enjeu, et lance-moi illico [___] directives de corrections pour tout assainir.\"",
     ["3 documents", "image visuelle", "rapport en PDF", "annotations textuelles", "défaut majeur", "3"],
     ["3 documents", "image visuelle", "rapport en PDF", "annotations textuelles", "défaut majeur", "3"],
     "C’est par le biais de la fusion d'éléments de formes divergentes (visuelles d'un côté, froides et mathématiques de l'autre) qu'opère la magie du calcul neuronal de pointe."
@@ -825,7 +825,7 @@ export const GEMINI_MODULE_2_STEPS_FR = [
   fillStep(
     "Dompter le dragon !",
     "Ne laissez plus l'I.A. dans le tâtonnement vague quant au décryptage réclamé.",
-    "\"Chaque envoi visuel doit l'avertir des éléments spécifiques à [______] dans ce cadre. Lorsqu'on s'essaie à transférer un film imposant, il faut souligner la primauté d'un strict [______] ou seulement la décortication d'un enchaînement de [______] distincts. Pour des PDF inondés d'infographies de gestion, on peut requérir qu'il [______] les diagrammes au lieu d'avancer une thèse hasardeuse sur la base de quelques termes génériques.\"",
+    "\"Chaque envoi visuel doit l'avertir des éléments spécifiques à [___] dans ce cadre. Lorsqu'on s'essaie à transférer un film imposant, il faut souligner la primauté d'un strict [___] ou seulement la décortication d'un enchaînement de [___] distincts. Pour des PDF inondés d'infographies de gestion, on peut requérir qu'il [___] les diagrammes au lieu d'avancer une thèse hasardeuse sur la base de quelques termes génériques.\"",
     ["scruter à la loupe", "triage", "blocs de données", "détaille scrupuleusement"],
     ["scruter à la loupe", "triage", "blocs de données", "détaille scrupuleusement"],
     "Fixer explicitement aux algorithmes des contours de réflexion limite considérablement les hors-sujets égarants."

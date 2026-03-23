@@ -61,7 +61,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Peça sua fórmula!",
     "Descreva o cálculo na linguagem humana e ganhe a linguagem das máquinas.",
-    "\"Preciso de uma fórmula no Google Sheets que [______] os valores da coluna [______] apenas quando a coluna [______] for igual a [______]. Explique como a fórmula funciona e onde devo [______] na planilha.\"",
+    "\"Preciso de uma fórmula no Google Sheets que [___] os valores da coluna [___] apenas quando a coluna [___] for igual a [___]. Explique como a fórmula funciona e onde devo [___] na planilha.\"",
     ["some", "B", "C", "\"Aprovado\"", "inseri-la"],
     ["some", "B", "C", "\"Aprovado\"", "inseri-la"],
     "Delegar não apenas a confecção da fórmula, mas a sua implantação guiada extingue a chance do famoso erro '#VALUE!' aparecer."
@@ -85,7 +85,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Analise seus dados!",
     "Transforme imensas colunas estáticas num resumo inteligente.",
-    "\"Aqui estão os dados de [______] da minha planilha: [cole os dados]. Analise e me diga: qual [______] teve melhor desempenho, quais [______] estão abaixo da média, qual é a [______] geral e quais [______] merecem investigação.\"",
+    "\"Aqui estão os dados de [___] da minha planilha: [cole os dados]. Analise e me diga: qual [___] teve melhor desempenho, quais [___] estão abaixo da média, qual é a [___] geral e quais [___] merecem investigação.\"",
     ["vendas por região", "região", "regiões", "tendência", "números fora do padrão"],
     ["vendas por região", "região", "regiões", "tendência", "números fora do padrão"],
     "Forçar o Gemini a destacar os desvios foca a análise para o campo da gestão e da solução em vez de um diagnóstico cego."
@@ -109,7 +109,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Revise sua planilha!",
     "Acabe com os erros de digitação e buracos no banco de dados.",
-    "\"Aqui estão os dados da minha planilha de [______]: [cole os dados]. Identifique: [______] duplicados, células que deveriam ter valor mas estão [______], números que parecem [______] para o contexto e qualquer [______] de formato entre as colunas.\"",
+    "\"Aqui estão os dados da minha planilha de [___]: [cole os dados]. Identifique: [___] duplicados, células que deveriam ter valor mas estão [___], números que parecem [___] para o contexto e qualquer [___] de formato entre as colunas.\"",
     ["cadastro de clientes", "registros", "vazias", "fora do padrão", "inconsistência"],
     ["cadastro de clientes", "registros", "vazias", "fora do padrão", "inconsistência"],
     "Um simples prompt elimina dias gastos passando pentes finos sobre centenas de listas intermináveis."
@@ -133,7 +133,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Transforme dados em decisões!",
     "Force o bot a ser seu Chief Data Officer.",
-    "\"Aqui estão os dados de [______] dos últimos [______] meses: [cole os dados]. Com base nesses números, me diga: qual é a [______] identificada, quais [______] merecem atenção, o que esses dados [______] sobre o comportamento do negócio e quais [______] você recomenda.\"",
+    "\"Aqui estão os dados de [___] dos últimos [___] meses: [cole os dados]. Com base nesses números, me diga: qual é a [___] identificada, quais [___] merecem atenção, o que esses dados [___] sobre o comportamento do negócio e quais [___] você recomenda.\"",
     ["faturamento e despesas", "6", "tendência principal", "pontos de alerta", "revelam", "3 ações"],
     ["faturamento e despesas", "6", "tendência principal", "pontos de alerta", "revelam", "3 ações"],
     "Exigir 'Ações Recomendadas' arranca a IA do seu papel contemplativo obrigando-a a ofertar saídas comerciais concretas."
@@ -157,7 +157,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Crie sua planilha do zero!",
     "Economize formatações cansativas e obtenha alicerces prontos.",
-    "\"Crie a estrutura de uma planilha de [______] para um [______]. Inclua: todas as [______] necessárias, a [______] lógica das informações, [______] sugeridas para automatizar os cálculos e uma aba de [______] para visualizar os totais.\"",
+    "\"Crie a estrutura de uma planilha de [___] para um [___]. Inclua: todas as [___] necessárias, a [___] lógica das informações, [___] sugeridas para automatizar os cálculos e uma aba de [___] para visualizar os totais.\"",
     ["controle financeiro mensal", "negócio de pequeno porte", "colunas", "organização", "fórmulas", "resumo"],
     ["controle financeiro mensal", "negócio de pequeno porte", "colunas", "organização", "fórmulas", "resumo"],
     "Dar o contexto do seu segmento garante que as abas e colunas sejam moldadas com o linguajar da sua indústria diária."
@@ -181,7 +181,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Automatize com o Gemini!",
     "Traga o poder de um programador para dentro do seu Sheets diário.",
-    "\"Escreva um script em Google Apps Script que [______] automaticamente os dados da aba [______] e os organize na aba [______] por ordem [______], agrupados por [______]. Explique passo a passo como [______] o script na minha planilha.\"",
+    "\"Escreva um script em Google Apps Script que [___] automaticamente os dados da aba [___] e os organize na aba [___] por ordem [___], agrupados por [___]. Explique passo a passo como [___] o script na minha planilha.\"",
     ["copie", "Dados Brutos", "Relatório", "decrescente de valor", "categoria", "instalar e executar"],
     ["copie", "Dados Brutos", "Relatório", "decrescente de valor", "categoria", "instalar e executar"],
     "Pedir um tutorial junto com o código previne que você fique olhando para a tela do computador sem ter a mínima ideia do que clicar."
@@ -205,7 +205,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Monte seu dashboard!",
     "Planeje o painel interativo inteiro numa única pergunta central.",
-    "\"Quero criar um dashboard no Google Sheets para acompanhar [______]. Me diga: quais [______] devo incluir, qual [______] de gráfico é mais adequado para cada métrica, como [______] os dados para alimentar o dashboard e quais [______] incluir para facilitar a leitura.\"",
+    "\"Quero criar um dashboard no Google Sheets para acompanhar [___]. Me diga: quais [___] devo incluir, qual [___] de gráfico é mais adequado para cada métrica, como [___] os dados para alimentar o dashboard e quais [___] incluir para facilitar a leitura.\"",
     ["o desempenho de vendas da minha equipe", "métricas principais", "tipo", "organizar", "elementos visuais"],
     ["o desempenho de vendas da minha equipe", "métricas principais", "tipo", "organizar", "elementos visuais"],
     "Você vira roteirista em vez de digitador: dita o painel de longe e deixa o bot mapear que estilo do gráfico expõe o volume com maior clareza visual."
@@ -229,7 +229,7 @@ export const GEMINI_MODULE_4_STEPS_PT = [
   fillStep(
     "Compare suas planilhas!",
     "Encontre rapidamente os descompassos perigosos ou mudanças.",
-    "\"Aqui estão duas versões da planilha de [______]: [cole versão 1] e [cole versão 2]. Compare e me diga: quais [______] foram alterados, quais [______] foram adicionados ou removidos e se existe alguma [______] que pode indicar um [______] nos dados.\"",
+    "\"Aqui estão duas versões da planilha de [___]: [cole versão 1] e [cole versão 2]. Compare e me diga: quais [___] foram alterados, quais [___] foram adicionados ou removidos e se existe alguma [___] que pode indicar um [___] nos dados.\"",
     ["inventário de produtos", "valores", "itens", "inconsistência", "erro de lançamento"],
     ["inventário de produtos", "valores", "itens", "inconsistência", "erro de lançamento"],
     "Deixe para os robôs o terrível martírio visual de confrontar linhas idênticas exaustivamente atrás de variações unitárias irrisórias no fim de um mês contábil conturbado."
@@ -276,7 +276,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Command your formula natively!",
     "Transmute human language over to machine calculation code.",
-    "\"I absolutely need a Google Sheets formula that [______] the values rooted inside column [______] strictly when column [______] explicitly matches [______]. Explain precisely how this exact formula operates and indicate where I must [______] it inside my grid.\"",
+    "\"I absolutely need a Google Sheets formula that [___] the values rooted inside column [___] strictly when column [___] explicitly matches [___]. Explain precisely how this exact formula operates and indicate where I must [___] it inside my grid.\"",
     ["sums", "B", "C", "\"Approved\"", "insert"],
     ["sums", "B", "C", "\"Approved\"", "insert"],
     "Delegating not just the code creation, but the exact deployment instructions nullifies the dreaded '#VALUE!' errors."
@@ -300,7 +300,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Crush your raw data!",
     "Summarize endless, mind-numbing static columns into a genius-level overview.",
-    "\"Here is the raw data concerning our [______] straight from my sheet: [paste data]. Audit it closely and dictate: which [______] outperformed the rest violently, which [______] are trailing terribly below baseline, the overarching general [______], and explicitly which [______] mandate an immediate deep-dive investigation.\"",
+    "\"Here is the raw data concerning our [___] straight from my sheet: [paste data]. Audit it closely and dictate: which [___] outperformed the rest violently, which [___] are trailing terribly below baseline, the overarching general [___], and explicitly which [___] mandate an immediate deep-dive investigation.\"",
     ["regional sales", "region", "regions", "trend", "anomalous numbers"],
     ["regional sales", "region", "regions", "trend", "anomalous numbers"],
     "Commanding Gemini to blatantly highlight deviations forces the output strictly toward management and resolution rather than passive descriptions."
@@ -324,7 +324,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Audit your spreadsheet ruthlessly!",
     "Vaporize typos and sinkholes inhabiting your databases.",
-    "\"Here are the raw metrics from my [______] sheet: [paste data]. Identify immediately: cloned [______], desolate cells that supposedly mandate values yet sit [______], specific figures that seem dangerously [______] inside this context, and any glaring formatting [______] sprawling across the varied columns.\"",
+    "\"Here are the raw metrics from my [___] sheet: [paste data]. Identify immediately: cloned [___], desolate cells that supposedly mandate values yet sit [___], specific figures that seem dangerously [___] inside this context, and any glaring formatting [___] sprawling across the varied columns.\"",
     ["client registry", "records", "empty", "off-standard", "inconsistency"],
     ["client registry", "records", "empty", "off-standard", "inconsistency"],
     "One robust prompt evaporates days otherwise wasted scraping fine-tooth combs across endless digital lists."
@@ -348,7 +348,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Weaponize flat data into decisions!",
     "Compel the bot into functioning as your Chief Data Officer.",
-    "\"Attached is the raw data enclosing our [______] spanning the trailing [______] months: [paste data]. Based stringently upon these metrics, dictate: what is the undeniable [______] surfaced, which precise [______] scream for triage, entirely what these figures [______] regarding our raw business behavior, and spell out exactly [______] you fiercely recommend.\"",
+    "\"Attached is the raw data enclosing our [___] spanning the trailing [___] months: [paste data]. Based stringently upon these metrics, dictate: what is the undeniable [___] surfaced, which precise [___] scream for triage, entirely what these figures [___] regarding our raw business behavior, and spell out exactly [___] you fiercely recommend.\"",
     ["revenue and expenses", "6", "main trend", "alert points", "reveal", "3 actions"],
     ["revenue and expenses", "6", "main trend", "alert points", "reveal", "3 actions"],
     "Mandating explicit 'Recommended Actions' violently yanks the AI out of its contemplative sandbox, forcing it to dispense aggressive commercial solutions."
@@ -372,7 +372,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Spawn your grid from zero!",
     "Bypass exhaustive formatting and secure pre-built foundations.",
-    "\"Design the exact structure for a highly proficient [______] spreadsheet catering strictly toward a [______]. Integrate: all essential [______] inherently required, the absolute [______] logic orchestrating the data, specific [______] recommended to automate the heavy lifting, and an isolated [______] tab to beautifully visualize the final totals.\"",
+    "\"Design the exact structure for a highly proficient [___] spreadsheet catering strictly toward a [___]. Integrate: all essential [___] inherently required, the absolute [___] logic orchestrating the data, specific [___] recommended to automate the heavy lifting, and an isolated [___] tab to beautifully visualize the final totals.\"",
     ["monthly financial control", "small-sized business", "columns", "organizational", "formulas", "summary"],
     ["monthly financial control", "small-sized business", "columns", "organizational", "formulas", "summary"],
     "Supplying the niche of your industry guarantees the generated tabs and tracking columns speak the precise jargon of your daily grind."
@@ -396,7 +396,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Automate visciously alongside Gemini!",
     "Summon a lead developer straight into your mundane Sheets.",
-    "\"Draft a highly resilient Google Apps Script codebase that aggressively [______] the raw data housed inside the [______] tab, dynamically sorts it inside the [______] tab strictly by [______], grouped categorically by [______]. Conclude with a painfully clear step-by-step masterclass on exactly how to [______] this script inside my live grid.\"",
+    "\"Draft a highly resilient Google Apps Script codebase that aggressively [___] the raw data housed inside the [___] tab, dynamically sorts it inside the [___] tab strictly by [___], grouped categorically by [___]. Conclude with a painfully clear step-by-step masterclass on exactly how to [___] this script inside my live grid.\"",
     ["copies", "Raw Data", "Report", "descending value", "category", "install and execute"],
     ["copies", "Raw Data", "Report", "descending value", "category", "install and execute"],
     "Requesting a foolproof tutorial alongside the raw code barricades you from staring blankly at your monitor having zero clue where the developer console even resides."
@@ -420,7 +420,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Erect your command dashboard!",
     "Blueprint the entire interactive panel utilizing a single master question.",
-    "\"I urgently need to construct a robust Google Sheets dashboard aimed squarely at tracking [______]. Dictate to me: specifically which core [______] demand inclusion, exactly what [______] of charting is brutally effective for each metric, entirely how to [______] the raw data pipelines feeding the beast, and explicitly what visual [______] to embed speeding up the executive read.\"",
+    "\"I urgently need to construct a robust Google Sheets dashboard aimed squarely at tracking [___]. Dictate to me: specifically which core [___] demand inclusion, exactly what [___] of charting is brutally effective for each metric, entirely how to [___] the raw data pipelines feeding the beast, and explicitly what visual [___] to embed speeding up the executive read.\"",
     ["my team's sales performance", "metrics", "type", "organize", "elements"],
     ["my team's sales performance", "metrics", "type", "organize", "elements"],
     "You ascend to director instead of typist: you dictate the panel broadly from afar, permitting the bot to obsess over which graph style exposes the absolute volume with maximum visual ferocity."
@@ -444,7 +444,7 @@ export const GEMINI_MODULE_4_STEPS_EN = [
   fillStep(
     "Cross-examine your sheets!",
     "Rapidly isolate dangerous desyncs or unauthorized overnight shifts.",
-    "\"Attached below lie two completely isolated versions involving our [______] sheet: [paste version 1] followed by [paste version 2]. Cross-examine them ruthlessly and expose: exactly which [______] mutated, explicitly which [______] were silently added or gutted, and alert me if a severe [______] surfaces hinting squarely at a catastrophic data [______].\"",
+    "\"Attached below lie two completely isolated versions involving our [___] sheet: [paste version 1] followed by [paste version 2]. Cross-examine them ruthlessly and expose: exactly which [___] mutated, explicitly which [___] were silently added or gutted, and alert me if a severe [___] surfaces hinting squarely at a catastrophic data [___].\"",
     ["product inventory", "values", "items", "inconsistency", "entry error"],
     ["product inventory", "values", "items", "inconsistency", "entry error"],
     "Discharge unto the robots the hellish visual martyrdom of manually cross-referencing brutally identical columns chasing microscopic numeric variations at the exhausted tail-end of chaotic fiscal cycles."
@@ -490,7 +490,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Pide tu fórmula!",
     "Describe el cálculo en lenguaje humano y obtén el lenguaje de las máquinas.",
-    "\"Necesito una fórmula en Google Sheets que [______] los valores de la columna [______] solo cuando la columna [______] sea igual a [______]. Explica cómo funciona la fórmula y dónde debo [______] en la planilla.\"",
+    "\"Necesito una fórmula en Google Sheets que [___] los valores de la columna [___] solo cuando la columna [___] sea igual a [___]. Explica cómo funciona la fórmula y dónde debo [___] en la planilla.\"",
     ["sume", "B", "C", "\"Aprobado\"", "insertarla"],
     ["sume", "B", "C", "\"Aprobado\"", "insertarla"],
     "Delegar no solo la creación de la fórmula, sino su implantación guiada extingue la posibilidad del famoso error '#VALUE!'."
@@ -514,7 +514,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Analiza tus datos!",
     "Transforma inmensas columnas estáticas en un resumen inteligente.",
-    "\"Aquí están los datos de [______] de mi planilla: [pegar los datos]. Analiza y dime: cuál [______] tuvo mejor desempeño, cuáles [______] están por debajo de la media, cuál es la [______] general y cuáles [______] merecen investigación.\"",
+    "\"Aquí están los datos de [___] de mi planilla: [pegar los datos]. Analiza y dime: cuál [___] tuvo mejor desempeño, cuáles [___] están por debajo de la media, cuál es la [___] general y cuáles [___] merecen investigación.\"",
     ["ventas por región", "región", "regiones", "tendencia", "números fuera de patrón"],
     ["ventas por región", "región", "regiones", "tendencia", "números fuera de patrón"],
     "Forzar a Gemini a destacar los desvíos enfoca el análisis al campo de la gestión directiva."
@@ -538,7 +538,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Revisa tu planilla!",
     "Termina con los errores de tipeo y agujeros en tu base de datos.",
-    "\"Aquí están los datos de mi planilla de [______]: [pega los datos]. Identifica: [______] duplicados, celdas que deberían tener valor pero están [______], números que parecen [______] para el contexto y cualquier [______] de formato entre columnas.\"",
+    "\"Aquí están los datos de mi planilla de [___]: [pega los datos]. Identifica: [___] duplicados, celdas que deberían tener valor pero están [___], números que parecen [___] para el contexto y cualquier [___] de formato entre columnas.\"",
     ["registro de clientes", "registros", "vacías", "fuera de patrón", "inconsistencia"],
     ["registro de clientes", "registros", "vacías", "fuera de patrón", "inconsistencia"],
     "Un simple prompt elimina horas gastadas revisando cientos de largas listas a ojo desnudo."
@@ -562,7 +562,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Transforma datos en decisiones!",
     "Obliga al bot a ser tu Analista de Datos Jefe.",
-    "\"Aquí están los datos de [______] de los últimos [______] meses: [pega los datos]. En base a estos números, dime: cuál es la [______] identificada, cuáles [______] merecen atención, qué [______] revelan sobre el comportamiento del negocio y cuáles [______] recomiendas.\"",
+    "\"Aquí están los datos de [___] de los últimos [___] meses: [pega los datos]. En base a estos números, dime: cuál es la [___] identificada, cuáles [___] merecen atención, qué [___] revelan sobre el comportamiento del negocio y cuáles [___] recomiendas.\"",
     ["facturación y gastos", "6", "tendencia principal", "puntos de alerta", "datos", "3 acciones"],
     ["facturación y gastos", "6", "tendencia principal", "puntos de alerta", "datos", "3 acciones"],
     "Exigir 'Acciones Recomendadas' saca a la IA de su rol pasivo obligándola a proponer salidas comerciales reales."
@@ -586,7 +586,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Crea tu planilla desde cero!",
     "Evita frustraciones de formato obteniendo cimientos sólidos de inmediato.",
-    "\"Crea la estructura de una planilla de [______] para un [______]. Incluye: todas las [______] necesarias, la [______] lógica de la información, [______] sugeridas para automatizar cálculos y una pestaña de [______] para visualizar totales.\"",
+    "\"Crea la estructura de una planilla de [___] para un [___]. Incluye: todas las [___] necesarias, la [___] lógica de la información, [___] sugeridas para automatizar cálculos y una pestaña de [___] para visualizar totales.\"",
     ["control financiero mensual", "negocio pequeño", "columnas", "organización", "fórmulas", "resumen"],
     ["control financiero mensual", "negocio pequeño", "columnas", "organización", "fórmulas", "resumen"],
     "Dar el contexto comercial garantiza que tu planilla hable la misma jerga que tu industria."
@@ -610,7 +610,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Automatiza ferozmente con Gemini!",
     "Trae un desarrollador ejecutivo directo a tus macros.",
-    "\"Escribe un script altamente resistente en Google Apps Script que [______] automáticamente los datos de la pestaña [______] y los organice en la pestaña [______] por orden [______], agrupados por [______]. Explica paso a paso cómo debo [______] este script en mi planilla en vivo.\"",
+    "\"Escribe un script altamente resistente en Google Apps Script que [___] automáticamente los datos de la pestaña [___] y los organice en la pestaña [___] por orden [___], agrupados por [___]. Explica paso a paso cómo debo [___] este script en mi planilla en vivo.\"",
     ["copie", "Datos Brutos", "Reporte", "descendente", "categoría", "instalar y ejecutar"],
     ["copie", "Datos Brutos", "Reporte", "descendente", "categoría", "instalar y ejecutar"],
     "Tener el script es medio camino; obligar al bot a explicarte cómo pegarlo sin explotar el editor técnico es la victoria completa."
@@ -634,7 +634,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Construye paneles ejecutivos!",
     "Forja la consola maestra usando la pregunta maestra.",
-    "\"Quiero estructurar un dashboard rudo en Google Sheets enfocado a auditar [______]. Dime sin rodeos: cuáles [______] centrales requiere, qué [______] de gráfico es indiscutiblemente letal para esa métrica, cómo [______] la tubería de datos y qué visuales [______] extras se imponen incluir.\"",
+    "\"Quiero estructurar un dashboard rudo en Google Sheets enfocado a auditar [___]. Dime sin rodeos: cuáles [___] centrales requiere, qué [___] de gráfico es indiscutiblemente letal para esa métrica, cómo [___] la tubería de datos y qué visuales [___] extras se imponen incluir.\"",
     ["rendimiento de volumen grupal", "métricas", "tipo", "organizar", "complementos"],
     ["rendimiento de volumen grupal", "métricas", "tipo", "organizar", "complementos"],
     "Dejas la labor trivial manual del cálculo al sistema y te conviertes velozmente en director absoluto de la visualización macro."
@@ -658,7 +658,7 @@ export const GEMINI_MODULE_4_STEPS_ES = [
   fillStep(
     "¡Somete al choque tus bases en disputa!",
     "Arranca al sistema las discordancias que enmascaran catástrofes de sincronización de versiones.",
-    "\"Inyecto enlazadas directamente a ti un par de sagradas versiones referidas al rastreo sobre nuestro [______]: [pega la versión inicial uno] y [pega la siguiente dos]. Chócalas inquisitivamente cara a cara sacando a flote qué [______] fue re-alterado, cuáles se [______] o eliminaron invisiblemente y alerta agresivamente indicando si salta un síntoma fatal que encare a un [______] desastroso contablemente irreversible.\"",
+    "\"Inyecto enlazadas directamente a ti un par de sagradas versiones referidas al rastreo sobre nuestro [___]: [pega la versión inicial uno] y [pega la siguiente dos]. Chócalas inquisitivamente cara a cara sacando a flote qué [___] fue re-alterado, cuáles se [___] o eliminaron invisiblemente y alerta agresivamente indicando si salta un síntoma fatal que encare a un [___] desastroso contablemente irreversible.\"",
     ["registro inventarial físico en almacén", "registro", "añadieron", "error humano de manipulación o copiado manual"],
     ["registro inventarial físico en almacén", "registro", "añadieron", "error humano de manipulación o copiado manual"],
     "Sacudir esta agobiante tortura comparativa manual pasándosela directamente a un ente computacional blinda fuertemente un plácido cierre de mes a milésimas del agotamiento."
@@ -705,7 +705,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Demandez votre formule !",
     "Décrivez le calcul en langage humain et obtenez le langage des machines.",
-    "\"J'ai besoin d'une formule dans Google Sheets qui [______] les valeurs de la colonne [______] uniquement lorsque la colonne [______] est égale à [______]. Explique comment fonctionne la formule et où je dois l'[______] dans le tableur.\"",
+    "\"J'ai besoin d'une formule dans Google Sheets qui [___] les valeurs de la colonne [___] uniquement lorsque la colonne [___] est égale à [___]. Explique comment fonctionne la formule et où je dois l'[___] dans le tableur.\"",
     ["additionne", "B", "C", "\"Approuvé\"", "insérer"],
     ["additionne", "B", "C", "\"Approuvé\"", "insérer"],
     "Déléguer non seulement la création de la formule, mais aussi son implantation guidée élimine la possibilité de la fameuse erreur '#VALUE!'."
@@ -729,7 +729,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Analysez vos données !",
     "Transformez d'immenses colonnes statiques en un résumé intelligent.",
-    "\"Voici les données des [______] de mon tableur : [coller les données]. Analyse et dis-moi : quelle [______] a eu les meilleures performances, quelles [______] sont en dessous de la moyenne, quelle est la [______] générale et quels [______] méritent d'être étudiés.\"",
+    "\"Voici les données des [___] de mon tableur : [coller les données]. Analyse et dis-moi : quelle [___] a eu les meilleures performances, quelles [___] sont en dessous de la moyenne, quelle est la [___] générale et quels [___] méritent d'être étudiés.\"",
     ["ventes par région", "région", "régions", "tendance", "nombres hors norme"],
     ["ventes par région", "région", "régions", "tendance", "nombres hors norme"],
     "Forcer Gemini à mettre en évidence les écarts dirige l'analyse vers le domaine de la gestion de direction."
@@ -753,7 +753,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Révisez votre tableur !",
     "Mettez fin aux fautes de frappe et aux trous dans votre base de données.",
-    "\"Voici les données de mon tableur de [______] : [coller les données]. Identifie : les [______] en double, les cellules qui devraient avoir une valeur mais sont [______], les nombres qui semblent [______] pour le contexte et toute [______] de format entre les colonnes.\"",
+    "\"Voici les données de mon tableur de [___] : [coller les données]. Identifie : les [___] en double, les cellules qui devraient avoir une valeur mais sont [___], les nombres qui semblent [___] pour le contexte et toute [___] de format entre les colonnes.\"",
     ["registre des clients", "registres", "vides", "hors norme", "incohérence"],
     ["registre des clients", "registres", "vides", "hors norme", "incohérence"],
     "Un simple prompt élimine les heures passées à vérifier à l'œil nu des centaines de longues listes."
@@ -777,7 +777,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Transformez les données en décisions !",
     "Forcez le bot à être votre Analyste de Données en Chef.",
-    "\"Voici les données de [______] des [______] derniers mois : [coller les données]. Sur la base de ces nombres, dis-moi : quelle est la [______] identifiée, quels [______] méritent une attention, que révèlent ces [______] sur le comportement de l'entreprise et quelles [______] recommandes-tu.\"",
+    "\"Voici les données de [___] des [___] derniers mois : [coller les données]. Sur la base de ces nombres, dis-moi : quelle est la [___] identifiée, quels [___] méritent une attention, que révèlent ces [___] sur le comportement de l'entreprise et quelles [___] recommandes-tu.\"",
     ["facturation et dépenses", "6", "tendance principale", "points d'alerte", "données", "3 actions"],
     ["facturation et dépenses", "6", "tendance principale", "points d'alerte", "données", "3 actions"],
     "L'exigence d''Actions Recommandées' sort l'IA de son rôle passif et l'oblige à proposer de véritables solutions commerciales."
@@ -801,7 +801,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Créez votre tableur à partir de zéro !",
     "Évitez les frustrations liées à la mise en forme en obtenant des fondations solides dès le départ.",
-    "\"Crée la structure d'un tableur de [______] pour une [______]. Inclus : toutes les [______] nécessaires, l'[______] logique des informations, les [______] suggérées pour automatiser les calculs et un onglet de [______] pour visualiser les totaux.\"",
+    "\"Crée la structure d'un tableur de [___] pour une [___]. Inclus : toutes les [___] nécessaires, l'[___] logique des informations, les [___] suggérées pour automatiser les calculs et un onglet de [___] pour visualiser les totaux.\"",
     ["contrôle financier mensuel", "petite entreprise", "colonnes", "organisation", "formules", "résumé"],
     ["contrôle financier mensuel", "petite entreprise", "colonnes", "organisation", "formules", "résumé"],
     "Donner le contexte commercial permet à votre feuille de calcul de parler le même jargon que votre secteur d'activité."
@@ -825,7 +825,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Automatisez de manière féroce avec Gemini !",
     "Faites appel à un développeur exécutif pour vos macros.",
-    "\"Écris un script très résistant dans Google Apps Script qui [______] automatiquement les données de l'onglet [______] et les organise dans l'onglet [______] par ordre [______], regroupées par [______]. Explique pas à pas comment je dois [______] ce script dans mon tableur en direct.\"",
+    "\"Écris un script très résistant dans Google Apps Script qui [___] automatiquement les données de l'onglet [___] et les organise dans l'onglet [___] par ordre [___], regroupées par [___]. Explique pas à pas comment je dois [___] ce script dans mon tableur en direct.\"",
     ["copie", "Données Brutes", "Rapport", "décroissant", "catégorie", "installer et exécuter"],
     ["copie", "Données Brutes", "Rapport", "décroissant", "catégorie", "installer et exécuter"],
     "Avoir le script est la moitié de la bataille ; forcer le bot à vous expliquer comment le coller sans exploiter l'éditeur technique est la victoire complète."
@@ -849,7 +849,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Construisez des panneaux exécutifs !",
     "Forgez la console principale en posant la question principale.",
-    "\"Je veux structurer un tableau de bord percutant sur Google Sheets, axé sur l'audit de [______]. Dis-moi franchement : quelles [______] principales nécessite-t-il, quel [______] de graphique est indiscutablement essentiel pour cette métrique, comment [______] le pipeline de données et quels [______] visuels supplémentaires doivent être inclus.\"",
+    "\"Je veux structurer un tableau de bord percutant sur Google Sheets, axé sur l'audit de [___]. Dis-moi franchement : quelles [___] principales nécessite-t-il, quel [___] de graphique est indiscutablement essentiel pour cette métrique, comment [___] le pipeline de données et quels [___] visuels supplémentaires doivent être inclus.\"",
     ["performance des volumes de groupe", "métriques", "type", "organiser", "compléments"],
     ["performance des volumes de groupe", "métriques", "type", "organiser", "compléments"],
     "Vous laissez le travail manuel fastidieux du calcul au système et devenez rapidement le maître absolu de la visualisation macro."
@@ -873,7 +873,7 @@ export const GEMINI_MODULE_4_STEPS_FR = [
   fillStep(
     "Confrontez vos bases discordantes !",
     "Arrachez au système les divergences qui masquent les catastrophes de synchronisation de version.",
-    "\"Je lie et injecte directement une paire de versions saintes se rapportant au suivi sur notre [______]: [coller la version unice initiale] et [coller la suivante deux]. Compare-les de manière inquisitionnelle l'une face à l'autre en soulignant ce qui a été [______], ce qui a été [______] ou retiré sans qu'on le remarque et alerte de façon agressive en signalant un symptôme fatal qui conduirait à une irréversible erreur de manipulation au niveau de la comptabilité : [______].\"",
+    "\"Je lie et injecte directement une paire de versions saintes se rapportant au suivi sur notre [___]: [coller la version unice initiale] et [coller la suivante deux]. Compare-les de manière inquisitionnelle l'une face à l'autre en soulignant ce qui a été [___], ce qui a été [___] ou retiré sans qu'on le remarque et alerte de façon agressive en signalant un symptôme fatal qui conduirait à une irréversible erreur de manipulation au niveau de la comptabilité : [___].\"",
     ["inventaire physique en entrepôt", "ré-altéré", "ajouté", "erreur humaine de saisie manuelle"],
     ["inventaire physique en entrepôt", "ré-altéré", "ajouté", "erreur humaine de saisie manuelle"],
     "Transférer cette torture comparative fastidieuse et manuelle directement à une entité informatique blinde un bouclage de mois en douceur, à des années-lumière de l'épuisement."

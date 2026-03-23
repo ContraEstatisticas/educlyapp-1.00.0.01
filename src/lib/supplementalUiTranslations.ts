@@ -1,4 +1,4 @@
-﻿import type { TFunction } from "i18next";
+import type { TFunction } from "i18next";
 
 const UI_LANGS = ["pt", "en", "es", "fr", "de", "it", "ru", "zh", "ja", "ko", "ar", "hi", "tr", "pl", "nl"] as const;
 
@@ -860,6 +860,7 @@ const uiLessonEdiGuideTranslations: Partial<Record<UiLang, Record<string, string
     "lesson.ediGuide.fillBlanks.stepDescription": "Agora coloque \"{{answer}}\" nesta lacuna.",
     "lesson.ediGuide.fillBlanks.action": "Preencher lacuna",
     "lesson.ediGuide.fillBlanks.summary": "O EDI pode completar com você, uma lacuna por vez.",
+    "lesson.fillBlanks.instructions": "Complete a frase clicando nas palavras corretas!",
     "lesson.fillBlanks.tryAgainHint": "Revise a frase e tente novamente."
   },
   en: {
@@ -891,6 +892,7 @@ const uiLessonEdiGuideTranslations: Partial<Record<UiLang, Record<string, string
     "lesson.ediGuide.fillBlanks.stepDescription": "Now place \"{{answer}}\" in this blank.",
     "lesson.ediGuide.fillBlanks.action": "Fill blank",
     "lesson.ediGuide.fillBlanks.summary": "EDI can complete it with you one blank at a time.",
+    "lesson.fillBlanks.instructions": "Complete the sentence by clicking on the correct words!",
     "lesson.fillBlanks.tryAgainHint": "Review the sentence and try again."
   },
   es: {
@@ -922,6 +924,7 @@ const uiLessonEdiGuideTranslations: Partial<Record<UiLang, Record<string, string
     "lesson.ediGuide.fillBlanks.stepDescription": "Ahora coloca \"{{answer}}\" en este espacio.",
     "lesson.ediGuide.fillBlanks.action": "Completar espacio",
     "lesson.ediGuide.fillBlanks.summary": "EDI puede completarlo contigo, un espacio a la vez.",
+    "lesson.fillBlanks.instructions": "¡Completa la frase haciendo clic en las palabras correctas!",
     "lesson.fillBlanks.tryAgainHint": "Revisa la frase e inténtalo de nuevo."
   },
   fr: {
@@ -953,6 +956,7 @@ const uiLessonEdiGuideTranslations: Partial<Record<UiLang, Record<string, string
     "lesson.ediGuide.fillBlanks.stepDescription": "Place maintenant \"{{answer}}\" dans ce blanc.",
     "lesson.ediGuide.fillBlanks.action": "Remplir le blanc",
     "lesson.ediGuide.fillBlanks.summary": "EDI peut le compléter avec toi, un blanc à la fois.",
+    "lesson.fillBlanks.instructions": "Complétez la phrase en cliquant sur les mots corrects !",
     "lesson.fillBlanks.tryAgainHint": "Relis la phrase et réessaie."
   },
   de: {

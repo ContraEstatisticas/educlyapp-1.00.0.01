@@ -61,7 +61,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Crie sua estratégia!",
     "Preencha a lacuna para estruturar um planejamento estratégico no Gemini.",
-    "\"Você é um estrategista de marketing digital. Crie uma estratégia de conteúdo para [______] para o mês de [______]. Inclua: [______] pilares temáticos, mix de [______], frequência de publicação, [______] ideias de pauta e as [______] métricas para acompanhar o sucesso.\"",
+    "\"Você é um estrategista de marketing digital. Crie uma estratégia de conteúdo para [___] para o mês de [___]. Inclua: [___] pilares temáticos, mix de [___], frequência de publicação, [___] ideias de pauta e as [___] métricas para acompanhar o sucesso.\"",
     ["o Instagram de uma clínica de estética", "agosto", "4", "formatos por plataforma", "12", "3 principais"],
     ["o Instagram de uma clínica de estética", "agosto", "4", "formatos por plataforma", "12", "3 principais"],
     "Sempre informe as restrições e o alvo para dar o direcionamento perfeito ao assistente."
@@ -85,7 +85,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Pesquise tendências!",
     "Peça para o Gemini encontrar padrões de aumento e comportamento recente.",
-    "\"Pesquise as principais [______] de marketing digital para o setor de [______] em [______]. Para cada tendência: explique o que é, por que está [______] e como uma marca de [______] pode aplicar nos próximos [______] dias.\"",
+    "\"Pesquise as principais [___] de marketing digital para o setor de [___] em [___]. Para cada tendência: explique o que é, por que está [___] e como uma marca de [___] pode aplicar nos próximos [___] dias.\"",
     ["tendências e estratégias", "alimentação saudável", "2025", "crescendo", "pequeno porte", "30"],
     ["tendências e estratégias", "alimentação saudável", "2025", "crescendo", "pequeno porte", "30"],
     "Estudar as tendências antes de produzir o conteúdo previne a queima gasta de cartuchos num formato ou tema defasado e clichê."
@@ -109,7 +109,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Crie sua copy!",
     "Utilize os famosos parâmetros PAS, AIDA ou PPPP na construção exata.",
-    "\"Usando o framework [______], escreva uma copy de [______] para [______]. Público: [______]. Dor central: [______]. Apresente a solução como [______]. Finalize com uma [______] clara e urgente. Tom: [______].\"",
+    "\"Usando o framework [___], escreva uma copy de [___] para [___]. Público: [___]. Dor central: [___]. Apresente a solução como [___]. Finalize com uma [___] clara e urgente. Tom: [___].\"",
     ["PAS — Problema, Agitação, Solução", "vendas", "um curso online de organização financeira", "pessoas entre 25 e 40 anos com dívidas e sem controle do dinheiro", "falta de método e disciplina financeira", "o primeiro passo concreto para a liberdade financeira", "CTA", "direto e empático"],
     ["PAS — Problema, Agitação, Solução", "vendas", "um curso online de organização financeira", "pessoas entre 25 e 40 anos com dívidas e sem controle do dinheiro", "falta de método e disciplina financeira", "o primeiro passo concreto para a liberdade financeira", "CTA", "direto e empático"],
     "Traçar limites aos modelos o forçará a apresentar textos muito voltados para a psicologia persuasiva, não apenas redacionais de belas palavras vazias."
@@ -133,7 +133,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Crie seus posts!",
     "Passe os limitadores e estipule os gatilhos a serem aplicados a sua sequência semanal.",
-    "\"Crie [______] posts para [______] sobre [______]. Para cada post: [______] que pare o scroll na primeira linha, [______] com no máximo [______] linhas e [______] clara no final. Tom: [______]. Inclua [______] hashtags relevantes.\"",
+    "\"Crie [___] posts para [___] sobre [___]. Para cada post: [___] que pare o scroll na primeira linha, [___] com no máximo [___] linhas e [___] clara no final. Tom: [___]. Inclua [___] hashtags relevantes.\"",
     ["5", "Instagram", "os benefícios do pilates para quem trabalha sentado", "gancho", "desenvolvimento", "4", "CTA", "informativo e próximo", "8"],
     ["5", "Instagram", "os benefícios do pilates para quem trabalha sentado", "gancho", "desenvolvimento", "4", "CTA", "informativo e próximo", "8"],
     "Fornecer parâmetros fixos confere segurança para posts muito alongados não assustarem seu provável seguidor do canal social digital específico que pede agilidade de scroll textuais dinâmicos."
@@ -157,7 +157,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Crie seus anúncios!",
     "Desenvolva ângulos psicológicos para os Ads da rede e estude quais convertem mais fortemente.",
-    "\"Crie [______] variações de anúncio para [______] no [______]. Público: [______]. Para cada variação: [______] com até 40 caracteres, [______] com até 125 caracteres e o [______] de abordagem usado — medo de perder, ganho desejado, [______] social ou urgência.\"",
+    "\"Crie [___] variações de anúncio para [___] no [___]. Público: [___]. Para cada variação: [___] com até 40 caracteres, [___] com até 125 caracteres e o [___] de abordagem usado — medo de perder, ganho desejado, [___] social ou urgência.\"",
     ["3", "um aplicativo de meditação para iniciantes", "Meta Ads", "adultos entre 28 e 45 anos com estresse e insônia", "headline", "texto principal", "ângulo", "prova"],
     ["3", "um aplicativo de meditação para iniciantes", "Meta Ads", "adultos entre 28 e 45 anos com estresse e insônia", "headline", "texto principal", "ângulo", "prova"],
     "Lembramos sempre do princípio dos gatilhos múltiplos. Tentar abordar uma objeção por vez possibilita achar rapidamente nosso ROI ideal ao subir o anúncio nas redes."
@@ -181,7 +181,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Analise seus concorrentes!",
     "Realce os buracos falhos do seu oponente direto nas mídias sociais a partir dessa prompt.",
-    "\"Pesquise e analise as estratégias de marketing digital de [______] no mercado de [______]. Me traga: como eles se [______] nas redes sociais, quais [______] de conteúdo usam, os [______] mais comentados pelos clientes e as [______] que aparecem nas avaliações e que eu poderia [______] como oportunidade.\"",
+    "\"Pesquise e analise as estratégias de marketing digital de [___] no mercado de [___]. Me traga: como eles se [___] nas redes sociais, quais [___] de conteúdo usam, os [___] mais comentados pelos clientes e as [___] que aparecem nas avaliações e que eu poderia [___] como oportunidade.\"",
     ["os 3 principais concorrentes", "moda sustentável feminina", "comunicam", "formatos", "pontos fortes", "fraquezas", "explorar"],
     ["os 3 principais concorrentes", "moda sustentável feminina", "comunicam", "formatos", "pontos fortes", "fraquezas", "explorar"],
     "Observar sem paixão as críticas nas postagens alheias dão pistas preciosas e ouro inestimável na sua oferta primária exclusiva do que não fazer mal feito de jeito nenhum no seu próprio jardim criativo."
@@ -205,7 +205,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Roteirize seu vídeo!",
     "Delimite não apenas as falas do vídeo da marca da campanha sua na rede ou blog ou youtube mas também todo roteiro de cortes da edição necessária de visual visualizações.",
-    "\"Crie um roteiro de [______] para [______] sobre [______]. Nos primeiros [______] segundos: [______] que gere curiosidade imediata. Desenvolvimento em [______] blocos com [______] de imagem para cada um. Finalização com [______] direta. Tom: [______].\"",
+    "\"Crie um roteiro de [___] para [___] sobre [___]. Nos primeiros [___] segundos: [___] que gere curiosidade imediata. Desenvolvimento em [___] blocos com [___] de imagem para cada um. Finalização com [___] direta. Tom: [___].\"",
     ["Reels de 45 segundos", "Instagram", "como dobrar as vendas em 30 dias com marketing orgânico", "3", "gancho", "3", "sugestão", "CTA", "confiante e direto"],
     ["Reels de 45 segundos", "Instagram", "como dobrar as vendas em 30 dias com marketing orgânico", "3", "gancho", "3", "sugestão", "CTA", "confiante e direto"],
     "Delegar o corte fílmico antecipadamente assegura que no set tudo estará fluído, ágil, assertivamente capturado ao estilo visual idealizado com o tom de brand planejado."
@@ -229,7 +229,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Monte seu calendário!",
     "Planeje sua agenda aprofundadamente sem sofrer de branco diário.",
-    "\"Crie um calendário editorial para [______] do mês de [______] para [______]. Inclua: [______] publicações por semana, [______] de cada post, [______] indicado para cada conteúdo e [______] especiais do mês que podem ser exploradas pela marca.\"",
+    "\"Crie um calendário editorial para [___] do mês de [___] para [___]. Inclua: [___] publicações por semana, [___] de cada post, [___] indicado para cada conteúdo e [___] especiais do mês que podem ser exploradas pela marca.\"",
     ["Instagram e LinkedIn", "setembro", "uma escola de idiomas", "4", "tema e formato", "melhor horário", "datas"],
     ["Instagram e LinkedIn", "setembro", "uma escola de idiomas", "4", "tema e formato", "melhor horário", "datas"],
     "Programe sazonalidades antes delas chegarem ajuda seu brand de surfar marés ricas gratuitas a bordo de pautas globais na tendência momentânea já predefinida e sem imprevistos estressantes sem fim."
@@ -253,7 +253,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Gerencie sua comunidade!",
     "Construa a estrutura de moderação acolhedora que blinda as relações e apaga incêndios na primeira chama sem se perder fora.",
-    "\"Crie [______] templates de resposta para comentários e DMs do [______]. Inclua respostas para: [______] ao produto, [______] sobre preço, [______] de entrega e [______] de mais informações. Tom: [______] e sempre [______].\"",
+    "\"Crie [___] templates de resposta para comentários e DMs do [___]. Inclua respostas para: [___] ao produto, [___] sobre preço, [___] de entrega e [___] de mais informações. Tom: [___] e sempre [___].\"",
     ["6", "Instagram da marca", "elogio", "dúvida", "reclamação", "pedido", "acolhedor e profissional", "direcionando para o próximo passo"],
     ["6", "Instagram da marca", "elogio", "dúvida", "reclamação", "pedido", "acolhedor e profissional", "direcionando para o próximo passo"],
     "Tratar as dores prontamente, seja com acolhimento afetuoso de gratidão ou calma institucional corporativa assertiva de suporte sem gaguejos ou lentidão prolongada constrói autoridade de ponta com excelência inquestionável frente do potencial faturamento do final da conversa via chat."
@@ -277,7 +277,7 @@ export const GEMINI_MODULE_7_STEPS_PT = [
   fillStep(
     "Analise seus resultados!",
     "Copie a planilha analítica bruta para pedir diagnósticos.",
-    "\"Aqui estão os dados de desempenho das minhas ações de marketing do último mês: [cole os dados]. Analise e me diga: o que [______] bem, o que [______] abaixo do esperado, qual [______] devo manter e o que devo [______] nos próximos 30 dias para melhorar os resultados.\"",
+    "\"Aqui estão os dados de desempenho das minhas ações de marketing do último mês: [cole os dados]. Analise e me diga: o que [___] bem, o que [___] abaixo do esperado, qual [___] devo manter e o que devo [___] nos próximos 30 dias para melhorar os resultados.\"",
     ["funcionou", "ficou", "estratégia", "ajustar"],
     ["funcionou", "ficou", "estratégia", "ajustar"],
     "Ler dados isolados cega diretores de criação ou donos inexperientes nas entrelinhas ou entrelaçamentos cruzados revelados pelas estatísticas ocultas lógicas interpretado ao largo pelo assistente de Inteligência Artificial para não recair jamais nelas outra oportunidade perdida novamente no ciclo das publicações adiante das vindouras datas no final de uma má e fracassada campanha atual de teste ou publicações fracas sem impacto social ou comercial desejado"
@@ -324,7 +324,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Create your strategy!",
     "Fill in the blank to structure a strategic plan in Gemini.",
-    "\"You are a digital marketing strategist. Create a content strategy for [______] for the month of [______]. Include: [______] thematic pillars, a mix of [______], posting frequency, [______] content ideas, and the [______] metrics to track success.\"",
+    "\"You are a digital marketing strategist. Create a content strategy for [___] for the month of [___]. Include: [___] thematic pillars, a mix of [___], posting frequency, [___] content ideas, and the [___] metrics to track success.\"",
     ["the Instagram of a beauty clinic", "August", "4", "formats per platform", "12", "top 3"],
     ["the Instagram of a beauty clinic", "August", "4", "formats per platform", "12", "top 3"],
     "Always state constraints and targets to give the assistant the perfect direction."
@@ -348,7 +348,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Research trends!",
     "Ask Gemini to find patterns of growth and recent behavior.",
-    "\"Research the main [______] of digital marketing for the [______] sector in [______]. For each trend: explain what it is, why it is [______], and how a [______] brand can apply it in the next [______] days.\"",
+    "\"Research the main [___] of digital marketing for the [___] sector in [___]. For each trend: explain what it is, why it is [___], and how a [___] brand can apply it in the next [___] days.\"",
     ["trends and strategies", "healthy eating", "2025", "growing", "small", "30"],
     ["trends and strategies", "healthy eating", "2025", "growing", "small", "30"],
     "Studying trends before producing content prevents burning through efforts on an outdated, cliché format or theme."
@@ -372,7 +372,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Create your copy!",
     "Use famous parameters like PAS, AIDA, or PPPP in the exact construction.",
-    "\"Using the [______] framework, write [______] copy for [______]. Audience: [______]. Core pain point: [______]. Present the solution as [______]. Finish with a clear and urgent [______]. Tone: [______].\"",
+    "\"Using the [___] framework, write [___] copy for [___]. Audience: [___]. Core pain point: [___]. Present the solution as [___]. Finish with a clear and urgent [___]. Tone: [___].\"",
     ["PAS — Problem, Agitation, Solution", "sales", "an online financial organization course", "people between 25 and 40 in debt and struggling with money", "lack of method and financial discipline", "the first concrete step towards financial freedom", "CTA", "direct and empathetic"],
     ["PAS — Problem, Agitation, Solution", "sales", "an online financial organization course", "people between 25 and 40 in debt and struggling with money", "lack of method and financial discipline", "the first concrete step towards financial freedom", "CTA", "direct and empathetic"],
     "Setting limits on frameworks forces it to generate texts sharply focused on persuasive psychology, not just empty, pretty words."
@@ -396,7 +396,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Create your posts!",
     "Provide limiters and stipulate the triggers to be applied to your weekly sequence.",
-    "\"Create [______] posts for [______] about [______]. For each post: a [______] that stops the scroll on the first line, a [______] with a maximum of [______] lines, and a clear [______] at the end. Tone: [______]. Include [______] relevant hashtags.\"",
+    "\"Create [___] posts for [___] about [___]. For each post: a [___] that stops the scroll on the first line, a [___] with a maximum of [___] lines, and a clear [___] at the end. Tone: [___]. Include [___] relevant hashtags.\"",
     ["5", "Instagram", "the benefits of pilates for those who work sitting down", "hook", "development", "4", "CTA", "informative and approachable", "8"],
     ["5", "Instagram", "the benefits of pilates for those who work sitting down", "hook", "development", "4", "CTA", "informative and approachable", "8"],
     "Providing fixed parameters provides safety so that excessively long posts don't scare off your likely follower on the specific social channel that demands quick dynamic text scrolling."
@@ -420,7 +420,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Create your ads!",
     "Develop psychological angles for network Ads and study which convert most strongly.",
-    "\"Create [______] ad variations for [______] on [______]. Audience: [______]. For each variation: an [______] of up to 40 characters, [______] of up to 125 characters, and the approach [______] used — fear of missing out, desired gain, social [______], or urgency.\"",
+    "\"Create [___] ad variations for [___] on [___]. Audience: [___]. For each variation: an [___] of up to 40 characters, [___] of up to 125 characters, and the approach [___] used — fear of missing out, desired gain, social [___], or urgency.\"",
     ["3", "a meditation app for beginners", "Meta Ads", "adults between 28 and 45 with stress and insomnia", "headline", "main text", "angle", "proof"],
     ["3", "a meditation app for beginners", "Meta Ads", "adults between 28 and 45 with stress and insomnia", "headline", "main text", "angle", "proof"],
     "We always remember the principle of multiple triggers. Attempting to address one objection at a time makes it possible to quickly find our ideal ROI when launching the ad on the networks."
@@ -444,7 +444,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Analyze your competitors!",
     "Highlight the blind spots of your direct opponent on social media using this prompt.",
-    "\"Research and analyze the digital marketing strategies of [______] in the [______] market. Bring me: how they [______] on social media, what content [______] they use, the [______] most commented on by customers, and the [______] appearing in reviews that I could [______] as an opportunity.\"",
+    "\"Research and analyze the digital marketing strategies of [___] in the [___] market. Bring me: how they [___] on social media, what content [___] they use, the [___] most commented on by customers, and the [___] appearing in reviews that I could [___] as an opportunity.\"",
     ["the top 3 competitors", "sustainable women's fashion", "communicate", "formats", "strengths", "weaknesses", "exploit"],
     ["the top 3 competitors", "sustainable women's fashion", "communicate", "formats", "strengths", "weaknesses", "exploit"],
     "Dispassionately observing criticisms on others' posts gives precious clues and priceless gold for your exclusive primary offer of what absolutely not to do poorly in your own creative garden."
@@ -468,7 +468,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Script your video!",
     "Define not just the spoken lines of your brand's video for social media, blogs, or YouTube, but the entire editing cut sequence needed for visual flair.",
-    "\"Create a [______] script for [______] about [______]. In the first [______] seconds: a [______] that generates immediate curiosity. Development spread over [______] blocks with an image [______] for each one. Direct [______] to finish. Tone: [______].\"",
+    "\"Create a [___] script for [___] about [___]. In the first [___] seconds: a [___] that generates immediate curiosity. Development spread over [___] blocks with an image [___] for each one. Direct [___] to finish. Tone: [___].\"",
     ["45-second Reel", "Instagram", "how to double sales in 30 days with organic marketing", "3", "hook", "3", "suggestion", "CTA", "confident and direct"],
     ["45-second Reel", "Instagram", "how to double sales in 30 days with organic marketing", "3", "hook", "3", "suggestion", "CTA", "confident and direct"],
     "Delegating film cuts in advance ensures that on set everything will be fluid, agile, and assertively captured in the idealized visual style aligned with the planned brand tone."
@@ -492,7 +492,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Plan your calendar!",
     "Plan your schedule deeply to avoid daily creative blocks.",
-    "\"Create an editorial calendar for [______] for the month of [______] for [______]. Include: [______] publications per week, the [______] of each post, the [______] indicated for each piece of content, and special [______] of the month that the brand could exploit.\"",
+    "\"Create an editorial calendar for [___] for the month of [___] for [___]. Include: [___] publications per week, the [___] of each post, the [___] indicated for each piece of content, and special [___] of the month that the brand could exploit.\"",
     ["Instagram and LinkedIn", "September", "a language school", "4", "theme and format", "best time", "dates"],
     ["Instagram and LinkedIn", "September", "a language school", "4", "theme and format", "best time", "dates"],
     "Programming seasonal peaks before they arrive helps your brand ride rich, free waves atop global trends that are predefined, averting endless stressful surprises."
@@ -516,7 +516,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Manage your community!",
     "Build a welcoming moderation structure that shields relationships and puts out fires right at the first spark without getting lost.",
-    "\"Create [______] reply templates for comments and DMs for [______]. Include responses for: a product [______], a pricing [______], a delivery [______], and a [______] for more info. Tone: [______] and always [______].\"",
+    "\"Create [___] reply templates for comments and DMs for [___]. Include responses for: a product [___], a pricing [___], a delivery [___], and a [___] for more info. Tone: [___] and always [___].\"",
     ["6", "the brand's Instagram", "compliment", "question", "complaint", "request", "welcoming and professional", "directing to the next step"],
     ["6", "the brand's Instagram", "compliment", "question", "complaint", "request", "welcoming and professional", "directing to the next step"],
     "Promptly addressing pain points—whether through warm institutional gratitude or calm, assertive corporate support without stutters—builds undisputed leading authority ahead of chat potential."
@@ -540,7 +540,7 @@ export const GEMINI_MODULE_7_STEPS_EN = [
   fillStep(
     "Analyze your results!",
     "Copy raw analytics spreadsheets to request diagnoses.",
-    "\"Here is the performance data for my marketing actions from last month: [paste data]. Analyze and tell me: what [______] well, what [______] below expectations, which [______] I should keep, and what I must [______] over the next 30 days to improve the outcomes.\"",
+    "\"Here is the performance data for my marketing actions from last month: [paste data]. Analyze and tell me: what [___] well, what [___] below expectations, which [___] I should keep, and what I must [___] over the next 30 days to improve the outcomes.\"",
     ["worked", "fell", "strategy", "adjust"],
     ["worked", "fell", "strategy", "adjust"],
     "Reading isolated data blinds creative directors or inexperienced owners between the lines revealed by hidden statistical logic, stopping them from wasting potential future campaigns."
@@ -586,7 +586,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Crea tu estrategia!",
     "Completa el espacio para estructurar un plan estratégico en Gemini.",
-    "\"Eres un estratega de marketing digital. Crea una estrategia de contenido para [______] para el mes de [______]. Incluye: [______] pilares temáticos, mix de [______], frecuencia de publicación, [______] ideas de pauta y las [______] métricas para medir el éxito.\"",
+    "\"Eres un estratega de marketing digital. Crea una estrategia de contenido para [___] para el mes de [___]. Incluye: [___] pilares temáticos, mix de [___], frecuencia de publicación, [___] ideas de pauta y las [___] métricas para medir el éxito.\"",
     ["el Instagram de una clínica de estética", "agosto", "4", "formatos por plataforma", "12", "3 principales"],
     ["el Instagram de una clínica de estética", "agosto", "4", "formatos por plataforma", "12", "3 principales"],
     "Siempre proporciona el contexto real y las restricciones deseadas para un plan certero y enfocado."
@@ -610,7 +610,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Investiga tendencias!",
     "Pídele a Gemini que descubra patrones de aumento y comportamientos actuales.",
-    "\"Investiga las principales [______] de marketing digital para el sector de [______] en [______]. Por cada tendencia: explica qué es, por qué está [______] y cómo una marca [______] puede aplicarla en los próximos [______] días.\"",
+    "\"Investiga las principales [___] de marketing digital para el sector de [___] en [___]. Por cada tendencia: explica qué es, por qué está [___] y cómo una marca [___] puede aplicarla en los próximos [___] días.\"",
     ["tendencias y estrategias", "alimentación saludable", "2025", "creciendo", "pequeña", "30"],
     ["tendencias y estrategias", "alimentación saludable", "2025", "creciendo", "pequeña", "30"],
     "Estudiar tendencias antes de producir previene gastar balas en temas pasados de moda."
@@ -634,7 +634,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Crea tu copy!",
     "Utiliza los conocidos parámetros PAS, AIDA o PPPP en la redacción persuasiva.",
-    "\"Usando el framework [______], escribe un copy de [______] para [______]. Público: [______]. Dolor central: [______]. Presenta la solución como [______]. Finaliza con un [______] claro y urgente. Tono: [______].\"",
+    "\"Usando el framework [___], escribe un copy de [___] para [___]. Público: [___]. Dolor central: [___]. Presenta la solución como [___]. Finaliza con un [___] claro y urgente. Tono: [___].\"",
     ["PAS — Problema, Agitación, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
     ["PAS — Problema, Agitation, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
     "Trazar límites metodológicos lo fuerza a entregar textos anclados en psicología pura de ventas, no palabrería vacía."
@@ -658,7 +658,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Crea tus posts!",
     "Estipula los disparadores y límites de volumen para la semana entera.",
-    "\"Crea [______] posts para [______] sobre [______]. Para cada post: un [______] que frene el scroll en la primera línea, el [______] con un máximo de [______] líneas y un [______] claro al final. Tono: [______]. Incluye [______] hashtags relevantes.\"",
+    "\"Crea [___] posts para [___] sobre [___]. Para cada post: un [___] que frene el scroll en la primera línea, el [___] con un máximo de [___] líneas y un [___] claro al final. Tono: [___]. Incluye [___] hashtags relevantes.\"",
     ["5", "Instagram", "los beneficios del pilates para quienes trabajan sentados", "gancho", "desarrollo", "4", "CTA", "informativo y cercano", "8"],
     ["5", "Instagram", "los beneficios del pilates para quienes trabajan sentados", "gancho", "desarrollo", "4", "CTA", "informativo y cercano", "8"],
     "Acotar la longitud le brinda al chatbot el límite necesario para no soltar muros de texto espantosos en redes dinámicas de consumo rápido."
@@ -682,7 +682,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Crea tus anuncios!",
     "Aborda distintas motivaciones psicológicas en Ads probando múltiples ganchos directos a la psiquis del cliente.",
-    "\"Crea [______] variaciones de anuncio para [______] en [______]. Público: [______]. Para cada variación: un [______] con hasta 40 caracteres, un [______] con hasta 125 caracteres y el [______] de abordaje usado — miedo a perderlo, ganancia deseada, [______] social o urgencia.\"",
+    "\"Crea [___] variaciones de anuncio para [___] en [___]. Público: [___]. Para cada variación: un [___] con hasta 40 caracteres, un [___] con hasta 125 caracteres y el [___] de abordaje usado — miedo a perderlo, ganancia deseada, [___] social o urgencia.\"",
     ["3", "una aplicación de meditación para principiantes", "Meta Ads", "adultos entre 28 y 45 años con estrés e insomnio", "título", "texto principal", "ángulo", "prueba"],
     ["3", "una aplicación de meditación para principiantes", "Meta Ads", "adultos entre 28 y 45 años con estrés e insomnio", "título", "texto principal", "ángulo", "prueba"],
     "Separar las motivaciones es la ley primera del test A/B en Ads. Probar distintos abordajes desvela rápidamente la ruta de oro para bajar el CPA."
@@ -706,7 +706,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Analiza a tus rivales!",
     "Destaca sin compasión los puntos flojos contrarios utilizando al chatbot espía.",
-    "\"Investiga y analiza las estrategias de marketing digital de [______] en el mercado de [______]. Tráeme: cómo se [______] en redes sociales, qué [______] de contenido usan, los [______] más elogiados por clientes y las [______] mostradas en reviews que yo podría [______] como gran oportunidad.\"",
+    "\"Investiga y analiza las estrategias de marketing digital de [___] en el mercado de [___]. Tráeme: cómo se [___] en redes sociales, qué [___] de contenido usan, los [___] más elogiados por clientes y las [___] mostradas en reviews que yo podría [___] como gran oportunidad.\"",
     ["los 3 principales competidores", "moda sustentable femenina", "comunican", "formatos", "puntos fuertes", "debilidades", "explotar"],
     ["los 3 principales competidores", "moda sustentable femenina", "comunican", "formatos", "puntos fuertes", "debilidades", "explotar"],
     "Sintetizar las miserias del rival reveladas al público te eleva naturalmente como el proveedor infalible superior prometiendo no repetirlas nunca jamás sobre una base fresca y blindada."
@@ -730,7 +730,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Guioniza tu rodaje!",
     "Marca a fuego la cadencia oral e impone la secuencia estricta visual que la narrativa requerirá simultáneamente al lector a cámara.",
-    "\"Crea un guion de [______] para [______] sobre [______]. En los primeros [______] segundos: un [______] que origine suma e inmediata curiosidad veloz. Desarrollo partido en [______] bloques, adjudicando valiosa [______] de imagen para cada uno. Cierre con la veloz [______] al fin de este clip publicitario. Tono de orador: [______].\"",
+    "\"Crea un guion de [___] para [___] sobre [___]. En los primeros [___] segundos: un [___] que origine suma e inmediata curiosidad veloz. Desarrollo partido en [___] bloques, adjudicando valiosa [___] de imagen para cada uno. Cierre con la veloz [___] al fin de este clip publicitario. Tono de orador: [___].\"",
     ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 días usando publicidad orgánica viva de mercado actual en auge", "3", "gancho rápido e intenso", "3", "sugerencia descriptiva", "CTA", "muy rítmico asertivo seguro directo franco y audaz total sin timidez alguna o rodeos innecesarios sobrantes para ir potente al punto del clip video este"],
     ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 dias usando publicidad orgánica viva de mercado actual en auge", "3", "gancho", "3", "sugerencia", "CTA", "franco y directo"],
     "Dirigir la pantalla secundaria desde el papel asevera la dinámica y el pulso vibrante, espantando el formato mortal de busto parlante sin cortes que la atención digital destruye."
@@ -754,7 +754,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Visualiza tu agenda planificada!",
     "Planea tu artillería futura previniendo apagones en tu constelación social sin quemarte por ideas en una hoja en blanco.",
-    "\"Crea un calendario editorial sólido para [______] abarcando el estricto mes venidero de [______] completo dedicado de pleno a [______]. Incluye firmemente: el monto fijo de [______] apariciones por semana en los feeds globales; destacando nítido el tipo puntual de [______] que adopte ahí ese contenido; apuntalado al precioso claro de [______] de salida al aire vivo. Acopla siempre sabias [______] del mes donde te subas a surfear tópicos al alza listos y servidos globales a fin allí presentes que sirvan comercialmente.\"",
+    "\"Crea un calendario editorial sólido para [___] abarcando el estricto mes venidero de [___] completo dedicado de pleno a [___]. Incluye firmemente: el monto fijo de [___] apariciones por semana en los feeds globales; destacando nítido el tipo puntual de [___] que adopte ahí ese contenido; apuntalado al precioso claro de [___] de salida al aire vivo. Acopla siempre sabias [___] del mes donde te subas a surfear tópicos al alza listos y servidos globales a fin allí presentes que sirvan comercialmente.\"",
     ["múltiples redes como Instagram y LinkedIn enteras", "octubre rojo e intenso venidero ya", "academia digital de artes", "4", "tema y formato", "mejor horario", "fechas especiales fijas"],
     ["Instagram y LinkedIn", "octubre", "academia", "4", "tema y formato", "horario", "fechas especiales"],
     "Predecir feriados o coyunturas mundiales permite cabalgar en tendencias a bajo coste al ser ya temas presentes y de charla por default."
@@ -778,7 +778,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Blinda y gerencia a tus masivos seguidores activos fervientes ya!",
     "Acuna respuestas blindadas modulares muy rápidas contra polémicas duras o halagos diarios sin trabas en ti mismo para ser líder claro e inmediato frente el otro al uso tuyo ahora y ya.",
-    "\"Crea un banco robusto firme certero para ti y claro listado completo estructurado bien de cerca de al menos [______] templates rápidos o guías modulares precisas bases seguras de pronta respuesta base fiel a utilizar en posibles comentarios duros e íntegros como en privados densos DMs recibidos del canal de [______]. Integra al paquete de base estricto estas directrices para ti mismo: devoluciones buenas para cuando haya un caluroso gran [______] hecho al perfil buen hombre, para una básica y típica [______] ingenua respecto a costes; otra para atajada rápida ante inminente terrible y amenazada de fea [______] del trato de delivery nuestro y el gentil rápido y seguro [______] general por info vaga diversa a dar la marca veloz al caso a caso al chat o correo allí. La vibra general del tono base puro para ti: será invariablemente ultra [______] y sin perder el foco en rematar encausándolo con fuerza o maestría impecable guiada muy sabiamente y directamente sin freno ni pausa y claro total [______] en el largo paso allí del funnel que queramos dictar nosotros mismos y serás maestro de esto a las masas ya total y sin fisuras desde hoy bien rápido allí y firme seguro como un roble viejo en la plaza pura.\"",
+    "\"Crea un banco robusto firme certero para ti y claro listado completo estructurado bien de cerca de al menos [___] templates rápidos o guías modulares precisas bases seguras de pronta respuesta base fiel a utilizar en posibles comentarios duros e íntegros como en privados densos DMs recibidos del canal de [___]. Integra al paquete de base estricto estas directrices para ti mismo: devoluciones buenas para cuando haya un caluroso gran [___] hecho al perfil buen hombre, para una básica y típica [___] ingenua respecto a costes; otra para atajada rápida ante inminente terrible y amenazada de fea [___] del trato de delivery nuestro y el gentil rápido y seguro [___] general por info vaga diversa a dar la marca veloz al caso a caso al chat o correo allí. La vibra general del tono base puro para ti: será invariablemente ultra [___] y sin perder el foco en rematar encausándolo con fuerza o maestría impecable guiada muy sabiamente y directamente sin freno ni pausa y claro total [___] en el largo paso allí del funnel que queramos dictar nosotros mismos y serás maestro de esto a las masas ya total y sin fisuras desde hoy bien rápido allí y firme seguro como un roble viejo en la plaza pura.\"",
     ["6", "el muy vivo movido o el duro Instagram oficial principal puro de nuestra amada marca esta o negocio de perfil propio general grande con gente a reventar de activa ruidosa", "elogio y afecto noble honesto", "duda u consulta", "queja seria y airada fea pero sana y resoluble", "pedido genérico suelto y breve o muy vago incierto ahí puro y vacío", "empático y ultra profesional total noble firme", "redirigiéndolo dócilmente pero muy tenaz directo y fuerte y encausándolo certero total firme hacia justo al preciso próximo claro gran firme escalón firme exactito del embudo paso allá seguro nuestro a vender u convencer ya bien al caso muy de seguro"],
     ["6", "Instagram de marca", "elogio", "duda", "reclama", "solicitud", "empática", "al siguiente paso"],
     "Las plantillas robustas evitan tropezar en peleas innecesarias o parecer fríos autómatas. Otorgan resoluciones veloces con aura empática institucional certera intachable muy pura de empresa madura con aplomo enorme genial al rubro."
@@ -802,7 +802,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
   fillStep(
     "¡Analiza el ROI e Insights vitales duros tuyos!",
     "Deposita métricas ciegas planas pidiéndole rumbos precisos y de cirugía mayor firme y seria audaz clara sin igual brillante ya para adelante a por más fuerte.",
-    "\"Amado asistente: toma este crudo set de puras cifras de performance general crudas reales duras inútiles e incomprensibles de mes pasado publicitario cerrado ya. : [pegar la tabla tuya aquí adentro]. Condensa e incinera paja allí, exuda oro al explicar y dime ya: donde fue claro donde en general nos [______] brillantemente bien y genial; qué plano nos [______] y anduvo con un asqueroso fétido patético lodo feo amargado por un y muy por muy por bien mal y del muy por bajo de todo vilmente obvio el triste promedio general del resto visto u de ese nuestro esperado ansiado; decime que tipo general duro inamovible de núcleo básico fuerte vital propio a pura de este genial modelo inmerso de la propia [______] general básica actual muy al fin debo por fuerza aferrar firme sostener duro blindada pura y cual en muy suma o y de qué purga o adenda yo debo o preciso por el deber inmenso y fatal [______] feroz urgente firme fuerte firme o extirpar sin mas ya para mejorar mis ratios del mes del próximo tiro de mes allí enfrente nuestro y así en verdad puro poder mejorar mis ingresos netos muy rápidos y muy seguros ahí general.\"",
+    "\"Amado asistente: toma este crudo set de puras cifras de performance general crudas reales duras inútiles e incomprensibles de mes pasado publicitario cerrado ya. : [pegar la tabla tuya aquí adentro]. Condensa e incinera paja allí, exuda oro al explicar y dime ya: donde fue claro donde en general nos [___] brillantemente bien y genial; qué plano nos [___] y anduvo con un asqueroso fétido patético lodo feo amargado por un y muy por muy por bien mal y del muy por bajo de todo vilmente obvio el triste promedio general del resto visto u de ese nuestro esperado ansiado; decime que tipo general duro inamovible de núcleo básico fuerte vital propio a pura de este genial modelo inmerso de la propia [___] general básica actual muy al fin debo por fuerza aferrar firme sostener duro blindada pura y cual en muy suma o y de qué purga o adenda yo debo o preciso por el deber inmenso y fatal [___] feroz urgente firme fuerte firme o extirpar sin mas ya para mejorar mis ratios del mes del próximo tiro de mes allí enfrente nuestro y así en verdad puro poder mejorar mis ingresos netos muy rápidos y muy seguros ahí general.\"",
     ["funcionó", "quedó o ubicó e instaló patético y de muy mal pésimo o pobre", "pilar de la estructura base táctica real total que poseemos al tiro acá o esa enorme colosal gran fina estrategia", "pulir afinar cortar alistar y alinear u así re adaptar duramente y arreglar con bisturí filoso o modificar y corregir ya en todo fuerte y con dureza o repensar un poco y ajustar"],
     ["funcionó", "quedó", "estrategia", "ajustar"],
     "La frialdad absoluta cibernética previene sesgos emocionales del creador dolido que suele ocultarse y culpar al resto ante fracasos del gráfico al ignorar los verdaderos datos lógicos inobjetables de ajuste por venir pronto puro allí inminentes de ver o actuar al toque al leer estos números puros finos decodificados tan a tiro brillante en minutos reales plenos y sanos."
@@ -849,7 +849,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Créez votre stratégie !",
     "Remplissez les espaces pour structurer un plan stratégique dans Gemini.",
-    "\"Tu es un stratège en marketing digital. Crée une stratégie de contenu pour [______] pour le mois d'[______]. Inclus : [______] piliers thématiques, un mix de [______], la fréquence de publication, [______] idées de sujets et les [______] métriques pour suivre le succès.\"",
+    "\"Tu es un stratège en marketing digital. Crée une stratégie de contenu pour [___] pour le mois d'[___]. Inclus : [___] piliers thématiques, un mix de [___], la fréquence de publication, [___] idées de sujets et les [___] métriques pour suivre le succès.\"",
     ["l'Instagram d'une clinique esthétique", "août", "4", "formats par plateforme", "12", "3 principales"],
     ["l'Instagram d'une clinique esthétique", "août", "4", "formats par plateforme", "12", "3 principales"],
     "Toujours encadrer et fournir votre cible permet au modèle d'offrir la direction parfaite sans divaguer."
@@ -873,7 +873,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Recherchez des tendances !",
     "Demandez à Gemini de chercher les motifs ascendants et les habitudes toutes récentes.",
-    "\"Recherche les principales [______] de marketing digital pour le secteur de [______] en [______]. Pour chaque tendance : explique ce que c'est, pourquoi c'est [______] et comment une marque de [______] peut l'appliquer dans les [______] prochains jours.\"",
+    "\"Recherche les principales [___] de marketing digital pour le secteur de [___] en [___]. Pour chaque tendance : explique ce que c'est, pourquoi c'est [___] et comment une marque de [___] peut l'appliquer dans les [___] prochains jours.\"",
     ["tendances et stratégies", "l'alimentation saine", "2025", "en croissance", "petite taille", "30"],
     ["tendances et stratégies", "l'alimentation saine", "2025", "en croissance", "petite taille", "30"],
     "Sonder judicieusement l'air du temps avant d'engager les rotatives de production empêche fermement la combustion stérile de trésorerie sur un format moribond."
@@ -897,7 +897,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Rédigez votre argumentaire de vente !",
     "Utilisez les grilles structurales implacables d'écriture reconnues que l'ordinateur intègre déjà parfaitement comme AIDA et PAS.",
-    "\"En utilisant la matrice [______], rédige une copie de [______] pour [______]. Public : [______]. Douleur centrale : [______]. Présente la solution comme [______]. Finalise avec un [______] clair et impératif. Ton : [______].\"",
+    "\"En utilisant la matrice [___], rédige une copie de [___] pour [___]. Public : [___]. Douleur centrale : [___]. Présente la solution comme [___]. Finalise avec un [___] clair et impératif. Ton : [___].\"",
     ["PAS — Problème, Agitation, Solution", "vente", "un cours en ligne sur l'organisation financière", "personnes entre 25 et 40 ans endettées et sans grand contrôle pécunier", "le manque de méthode et de discipline vis à vis de l'argent", "le grand premier pas concret vers la liberté financière sans détours", "Appel à l'Action (CTA)", "direct et très empathique au client"],
     ["PAS — Problème, Agitation, Solution", "vente", "un cours en ligne sur l'organisation financière", "personnes entre 25 et 40 ans endettées et sans contrôle financier", "manque de méthode et de discipline", "le premier pas vers la liberté financière", "CTA", "direct et empathique"],
     "Poser la chape formelle du script publicitaire contraint l’oracle virtuel à sortir l’arsenal purement orienté neuro-marketing au détriment du simple bel enchaînement inoffensif de verbes."
@@ -921,7 +921,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Générez vos posts d'auteur !",
     "Posez la bride serrée à l'étendue et nature du texte que lancera pour votre calendrier chaque instance au quotidien de votre cycle communautaire.",
-    "\"Crée [______] posts pour [______] sur [______]. Pour chaque post : une [______] qui arrête le scroll brut dès la sublime première ligne, un [______] comprenant un immense maximum de [______] phrases courtes et un strict [______] limpide a la fin. Ton : [______]. Inclus à ta convenance [______] hashtags très utiles là.\"",
+    "\"Crée [___] posts pour [___] sur [___]. Pour chaque post : une [___] qui arrête le scroll brut dès la sublime première ligne, un [___] comprenant un immense maximum de [___] phrases courtes et un strict [___] limpide a la fin. Ton : [___]. Inclus à ta convenance [___] hashtags très utiles là.\"",
     ["5", "Instagram", "les merveilleux bénéfices d'une séance rapide de pilates pour le travailleur hyper sédentaire d'ordinateur ou de bureau", "l'accroche forte", "développement utile et aisé rapide", "4", "Appel a l'action", "parfaitement amical chaud informatif sans jugement altier et distant proche dudit lecteur", "8"],
     ["5", "Instagram", "les bénéfices du pilates pour ceux qui travaillent assis", "accroche", "développement", "4", "CTA", "informatif et chaleureux", "8"],
     "Verrouiller le carcan physique (le nombre de phrases) préserve cruellement votre espace numérique de posts lourdement massifs indigestes que hait farouchement ce si volatil adepte du défilement avec le doigt très pressé de son cher petit smartphone en main !"
@@ -945,7 +945,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Faites ruisseler les Annonces Promues Payées Sans Gaspiller",
     "Éprouvez une palette neuro cognitive en réclame ciblée pour dénicher le puit d'or caché avec des variations fines depuis la logia.",
-    "\"Crée rigoureusement de fait [______] bonnes variantes pur de réclame Ad's très impactantes dédiées vers un immense et lourd ou majestueux [______] tournant actif en plein espace [______]. L'Audience dure que cherche ce but très bien défini sans autre fioriture ou écart: C'est un groupe composé pure [______]. Et voilà ce cher et précis ordre très juste pour chacune et de façon isolée: rédigez clair un de [______] n’outrepassant surtout la belle limite claire fixée de vos 40 petites frappes, idem pour cet [______] qu'on posera court frappant sous peine maximum et courte au plus au gros de par ses 125 stricts caractères et finalement veuillez m'indiquer avec fierté très pur nom et justesse claire ceci le nom noble exact de plein [______] profond persuasif et grand là que vous appliquez ci bas de soi fort (au nom bien vu exemple grand choix comme: pur gain escompté a court voir long et dur terrible manque via la bonne anxiété ou pure preuve pure du niveau inconditionnel très vrai très [______] etc).\".\"",
+    "\"Crée rigoureusement de fait [___] bonnes variantes pur de réclame Ad's très impactantes dédiées vers un immense et lourd ou majestueux [___] tournant actif en plein espace [___]. L'Audience dure que cherche ce but très bien défini sans autre fioriture ou écart: C'est un groupe composé pure [___]. Et voilà ce cher et précis ordre très juste pour chacune et de façon isolée: rédigez clair un de [___] n’outrepassant surtout la belle limite claire fixée de vos 40 petites frappes, idem pour cet [___] qu'on posera court frappant sous peine maximum et courte au plus au gros de par ses 125 stricts caractères et finalement veuillez m'indiquer avec fierté très pur nom et justesse claire ceci le nom noble exact de plein [___] profond persuasif et grand là que vous appliquez ci bas de soi fort (au nom bien vu exemple grand choix comme: pur gain escompté a court voir long et dur terrible manque via la bonne anxiété ou pure preuve pure du niveau inconditionnel très vrai très [___] etc).\".\"",
     ["3", "une application mobile de médiation bien ou sereine pour grands ou fins et réels complets purs purs purs débutant incompétents à l'art", "Meta grand groupe ou Meta Ads", "adultes situés pure ou durs calés a grand fort entre les 28 purs et a bons 45 purs de l'âge sous grand pic anxiété vrai", "titre clair", "corps texte", "le bel angle vif", "social"],
     ["3", "application de méditation pour débutants", "Meta Ads", "adultes de 28 à 45 ans", "titre", "texte", "angle de persuasion", "sociale"],
     "Séparer finement d'un laser chaque ligne frontale neuronale de chaque client évite avec maestria au budget engagé fort aux enchères virtuelles du CPC d'y bruler tout vif vos billets de par l'ignoble flou d'attraper sans tact sans méthode ou le mauvais dindon pas réceptif de tout."
@@ -969,7 +969,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Rayonnez votre lumière au creux et fort fort ou sombre chez du pauvre rival faible a découvert sur d'angle vif via chat !! ",
     "Dépecer en pleine et bonne grande pure et toute belle de cette très douce cruauté la plaie numérique béante d'un du méchant concurrent et y foncer lourd ou très du bel au vu pour un de votre pur a de belle grande prise sur du tout lourd et de lui pour a y exploiter avec un ce si beau de grand art sans frais de cette si et très pur de la ou IA de Google sans pitié ou faute et ca avec la très belle ou de bonne pure phrase ce ici : ",
-    "\"Je requière instamment que mon bot enquête là puis analyse très durement a de belles fortes grandes pur vues sur des cibles réelles d'eux de leurs fameuses toutes d'elles grandes pure stratégie a du marketing en ce digital fort des [______] sur a de plein sur a propos dudit secteur a de la [______]. Il m'importe pur et là beaucoup au vu d'ici a de comprendre fort ceci bien précis: comment se comportent ils tous au vu de la de ceci : ou [______] clair pur avec le quidam de follower sur page ou mur, les formats récurrent de leurs médias lourds de là :[______], avec de gros ou a grand ou quoi comme points de ou [______] que ceux applaudissent d'eux par dessus très pure ou fort la la et puis bien là à la bonne fin et grande et très grave oulala d'ou d'[______] qui fusent amères au vu au et lu en commentaire fielleux afin pour votre maitre là avec une très clair net fort majestueuse posture au de vol [______] comme trou beau pur sans fin.\"",
+    "\"Je requière instamment que mon bot enquête là puis analyse très durement a de belles fortes grandes pur vues sur des cibles réelles d'eux de leurs fameuses toutes d'elles grandes pure stratégie a du marketing en ce digital fort des [___] sur a de plein sur a propos dudit secteur a de la [___]. Il m'importe pur et là beaucoup au vu d'ici a de comprendre fort ceci bien précis: comment se comportent ils tous au vu de la de ceci : ou [___] clair pur avec le quidam de follower sur page ou mur, les formats récurrent de leurs médias lourds de là :[___], avec de gros ou a grand ou quoi comme points de ou [___] que ceux applaudissent d'eux par dessus très pure ou fort la la et puis bien là à la bonne fin et grande et très grave oulala d'ou d'[___] qui fusent amères au vu au et lu en commentaire fielleux afin pour votre maitre là avec une très clair net fort majestueuse posture au de vol [___] comme trou beau pur sans fin.\"",
     ["3 principaux rivaux du secteur", "mode vestimentaire du coton très bio", "prennent le ton avec ca en s'y très bon social ils", "de video ou d'écrit", "satisfaction ou pur eloges lourds de ca très grand la", "insatisfactions haineuse pures pur", "de la ou ma et mienne d'un très pure grande ou de d'une aubaine commercial lourd à pur saisir à de mon fort ce"],
     ["3 principaux concurrents", "mode", "communiquent", "format de contenu", "points forts", "faiblesses cachées", "exploiter pur"],
     "Cristalliser via un miroir déformant synthétisé les lacunes que son voisin laisse orphelines aux yeux de clients qui fuient à côté te tresse une couronne sans prix au de ta de toi vers ta de position royale imminente"
@@ -993,7 +993,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Écrivez les Tablettes Ou du Story Board Pour La Scène et Pour L'Acteur ! ",
     "Dictature absolue des encadrements techniques sur de mot pur sur feuille d'invite de du bot !",
-    "\"Produit sur très mesure un très de strict plan et d'écrit de film a savoir un clair [______] taillé ferme envers sa plateforme soit dit de ce de l'[______] parlant en fond avec maestria ferme et de sur les comment il faut pour ce la : [______]. Pour tes très premières secondes là soit de pur ce là lourd au de [______] seconde tu mettras d'ordre ou du bon ceci soit la a toi au [______] choc irrépressible foudroyant ! Sur sa de sa courbe du dur et d'un bon ventre central fort au récit il se dresse droit ce de bloc partagé a sur de bons [______] étapes bien définis tout agrémenté sur avec d'a peu près pour bien au ce de a de [______] de belle visuels net. Tirade final sèche en gros [______] au public. Archétype général pour ce beau [______].\"",
+    "\"Produit sur très mesure un très de strict plan et d'écrit de film a savoir un clair [___] taillé ferme envers sa plateforme soit dit de ce de l'[___] parlant en fond avec maestria ferme et de sur les comment il faut pour ce la : [___]. Pour tes très premières secondes là soit de pur ce là lourd au de [___] seconde tu mettras d'ordre ou du bon ceci soit la a toi au [___] choc irrépressible foudroyant ! Sur sa de sa courbe du dur et d'un bon ventre central fort au récit il se dresse droit ce de bloc partagé a sur de bons [___] étapes bien définis tout agrémenté sur avec d'a peu près pour bien au ce de a de [___] de belle visuels net. Tirade final sèche en gros [___] au public. Archétype général pour ce beau [___].\"",
     ["Reels et court vidéo de ça et du dur et bon de long 45 et secs sans d'autre au bout un peu ici de pur secondes", "l'instagram de là", "doubler cash au lourd le ou les beaux volumes en or et ventes via ou de a ce bon beau trafic et gratuit là par 30 ou nets jours de ca de", "de 3", "le grand ou fameux roi pur du ou de l'accroche et ou lourd", "de a bien vu au 3", "note pur ou conseil net sur la prise la ou sur au plan vidéo", "le beau Call to Action clair appel franc de ordre là", "l'air net assuré et franc très pur"],
     ["Reels de 45 secondes", "Instagram", "doubler vos ventes", "3", "accroche", "3", "suggestion visuelle", "CTA", "sûr et direct"],
     "Dicter fermement l'ambiance au papier empêche d'arriver ou de tourner avec d'angoisse très pur en vue sur les yeux car on a sur de sa vue et main ferme le de ce plan clair dénué toute improvisation stérile laborieuse sur au montage final du plan dur au plan sans de bon raccords"
@@ -1017,7 +1017,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Ficelez l'Agenda Maître Complet",
     "Fondez dans un tableur mental ferme ou virtuel la charpente indestructible de ce qui fera à de votre très haute belle au pur a en là un peu de réussite !.",
-    "\"Bâtis un superbe ou bel agenda calendrier très riche ou pur lourd plein ce d'un de pour la de ce [______] a ou d'ici pur du calendrier au là de [______] de ou pour le la ou un ce pur de pur un ou [______]. Et vous et d'y me pur de me mettre en dur des claires des : du [______] volume par de des pur de dates au de ou par sept ou par pure semaine de ci au delà de pur au format ou [______] clair et du post en lui et puis bien de dire du ou la la heure au bel horaire dit très [______] a chacun du jet pur et de de mention grand au de la de spéciale avec ces très purs [______] évènements au fond de au fond de pur date à bien la à ce pur à pur faire ici à tourner pour ma belle la ou pur campagne là à grand fin !\"",
+    "\"Bâtis un superbe ou bel agenda calendrier très riche ou pur lourd plein ce d'un de pour la de ce [___] a ou d'ici pur du calendrier au là de [___] de ou pour le la ou un ce pur de pur un ou [___]. Et vous et d'y me pur de me mettre en dur des claires des : du [___] volume par de des pur de dates au de ou par sept ou par pure semaine de ci au delà de pur au format ou [___] clair et du post en lui et puis bien de dire du ou la la heure au bel horaire dit très [___] a chacun du jet pur et de de mention grand au de la de spéciale avec ces très purs [___] évènements au fond de au fond de pur date à bien la à ce pur à pur faire ici à tourner pour ma belle la ou pur campagne là à grand fin !\"",
     ["au pur de la grosse bête LinkedIn a de Instagram a la belle grande et ce un peu forte a en de purs réseau", "ce beau doux de ce mois pur doux gentil d'être un bel et de de fin beau et gentil pur très septembre au vu de belle de belle très", "pour du mon ou ton ce bel ami au de mon au client ici dur sur au mon et de sur de mon belle très grande noble pur noble très classe très classe et d'un bon belle du d'école au ou de en cours a ici et pour bien la pur là en grande belle au belle ce a d'en du des langues purs ici amis au cours de", "pure 4 du pur 4 un bon a pur", "type un belle de type format de ou de ton pur thème dur avec du", "défini l'heure au ce très fin horaire et puis au très", "saisonniers d'agenda fort et de au fête au jour à la au date clair pure de la belle du"],
     ["Réseaux croisés", "Septembre", "école de langues linguistique", "4 post pur", "Thématique claire et format court", "Pic d'audience fort et horaire roi", "Dates opportunités pures du marché a exploiter claires"],
     "Bénéficier d'agendas par blocs prévient et de très de très pur lointain et sans et ou au risque grand sans et au sans faute a de ou sans de ce très lourd là ou de l'effet nul de stress ou sans le mauvais le hasard au vu la au du pur de à post pur pour pur a de bêtement"
@@ -1041,7 +1041,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Apprivoisez l'Abonné et Protégez",
     "Fondez a de l'aura a ou et de au a de son doux pur a aux DMs ou aux Dm une vrai au a pur rempart fort au ton a ou par au de dur et clair la",
-    "\"Dresse pour ma la et sa pur avec ce de dur [______] grand format de belles ou grand réponses aux clients purs ou grand DMs la ou a pour et par a de ce de lui ici soit le dit bien le fameux : [______]. Joignez de belles des des bonnes ripostes la ou a pour ceci; soit le gars au gentil qui de ça et nous jette gentil le ou la belle bonne le [______] bon au d'achat la ou doux; au client perdu sur ce grand ou sur [______] de combien ça en très peu pur d'euros lui en vaux et de frais; un client en rage très ou dur fou et vrai et fol la qui de nous sur ou et a la [______] au port pure du bien reçu ; avec celui pure aussi en vague qui pur fait du du la et très de [______] pur sans fin. Soigner du ou par ton et au a ceci: a pour au très [______] de ou du tout a pur et de du a chaud ou au ferme et de lui a dire où du ou le ou [______] ferme et sûr.\"",
+    "\"Dresse pour ma la et sa pur avec ce de dur [___] grand format de belles ou grand réponses aux clients purs ou grand DMs la ou a pour et par a de ce de lui ici soit le dit bien le fameux : [___]. Joignez de belles des des bonnes ripostes la ou a pour ceci; soit le gars au gentil qui de ça et nous jette gentil le ou la belle bonne le [___] bon au d'achat la ou doux; au client perdu sur ce grand ou sur [___] de combien ça en très peu pur d'euros lui en vaux et de frais; un client en rage très ou dur fou et vrai et fol la qui de nous sur ou et a la [___] au port pure du bien reçu ; avec celui pure aussi en vague qui pur fait du du la et très de [___] pur sans fin. Soigner du ou par ton et au a ceci: a pour au très [___] de ou du tout a pur et de du a chaud ou au ferme et de lui a dire où du ou le ou [___] ferme et sûr.\"",
     ["de de pur au dur oui 6", "instagram pro dit de a la marque a nous grand pur la a fort de pur et a de ça pur", "doux oulala très très et beau de belle grand mot d'éloge là", "sur ca pure très de la de au sur belle l'interrogation clair tarif prix la ici et ou là de la", "et oulala au vrai et très gronde de de la très dur grogne pur de la ou méchante grande réclamation", "à un ou à de dur petit doux bon a beau ou clair et ce de demande d'infos a nous", "bien veillant et chaud doux ou la au dur de pro", "mener de a la main pur et douce direct très la ou pure par devant sur un bon tunnel après clair pas pas oulala la a ce"],
     ["6 modèles", "Instagram officiel", "éloge ou compliment", "question sur le prix", "plainte de livraison", "demande d'information", "chaleureux et pro", "orientant vers l'action de pur et après"],
     "Prévenir la ou pure bavure a la faute et au pur à au a la d'adrénaline au de a faute du jour de la d'une réponse la ou à pur faite a au sur nerf pur garantît ou de à de a ou par pour ton pur l'empire web a ton au a ton pour un blanc manteau à pur du roi serein"
@@ -1065,7 +1065,7 @@ export const GEMINI_MODULE_7_STEPS_FR = [
   fillStep(
     "Réclamez ou et Exigez du Par Le Vrai d'Or Dur En Data ! ",
     "Envoyez vos tableau sales ou lourds et tristes aux bots et on ou au ce ou de vous pur de a aura d'exquis rapports a à a purs pour l'audace créative amont à du lendemain",
-    "\"Salut pur bot au a et la voici ce de par au lourd a de très a de ou pur de a pur ce bloc de données pur du la le a au au ou des de la a perf là claires : [a a tu vas a coller toi ton bon brol la ou à ci dedans de ta de pur a de perf la ici de du beau excel ] . Dis et sors à ma la vue la ce clair : le fort a de ce de où la s'est à ou on de l'[______] merveille la en ce pur haut de ce d'ou ; puis et quoi de a a de on n'ou oulala d'[______] pur comme et d'une fiente dure en fin a là ; là qu'est ce que j'ai dit de a à de je au à l'on de doit de a de quoi très garder fort pure le bon et chaud [______] bien pour on y retourne ; et là qu'il fait qu'au quoi la ou je pur du ce [______] pur à du le corriger on au ou pour de dans de trente très jours cliquables de de d'ici pur a pour a mieux bien mieux fort des de a a purs perfs ci demain !\"",
+    "\"Salut pur bot au a et la voici ce de par au lourd a de très a de ou pur de a pur ce bloc de données pur du la le a au au ou des de la a perf là claires : [a a tu vas a coller toi ton bon brol la ou à ci dedans de ta de pur a de perf la ici de du beau excel ] . Dis et sors à ma la vue la ce clair : le fort a de ce de où la s'est à ou on de l'[___] merveille la en ce pur haut de ce d'ou ; puis et quoi de a a de on n'ou oulala d'[___] pur comme et d'une fiente dure en fin a là ; là qu'est ce que j'ai dit de a à de je au à l'on de doit de a de quoi très garder fort pure le bon et chaud [___] bien pour on y retourne ; et là qu'il fait qu'au quoi la ou je pur du ce [___] pur à du le corriger on au ou pour de dans de trente très jours cliquables de de d'ici pur a pour a mieux bien mieux fort des de a a purs perfs ci demain !\"",
     ["la et on a du a fonctionné a ce", "resté ou il et ça et du ou y resta de ou la", "pur a cap a grand stratégie a de par", "changer un a au recadrer ou a pur au a dur ajuster oulala"],
     ["marché", "échoué", "cap", "ajuster"],
     "Confronter ses idées à leurs impacts arides épargne l'ego blessé qui coûte des sommes astronomiques et empêche de jeter un bébé publicitaire à l'eau sans fondement la a a au"

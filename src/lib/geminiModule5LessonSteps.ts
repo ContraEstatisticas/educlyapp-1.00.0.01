@@ -61,7 +61,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Peça seu texto!",
     "Determine todas as variáveis do seu texto em um único prompt de direcionamento.",
-    "\"Escreva um [______] sobre [______] para [______]. Tom: [______]. O objetivo é [______]. Inclua [______] no início para prender a atenção e uma [______] clara no final.\"",
+    "\"Escreva um [___] sobre [___] para [___]. Tom: [___]. O objetivo é [___]. Inclua [___] no início para prender a atenção e uma [___] clara no final.\"",
     ["artigo", "os benefícios do trabalho remoto para pequenas empresas", "gestores e empreendedores", "informativo e direto", "apresentar argumentos práticos e convincentes", "um dado surpreendente", "conclusão com chamada para reflexão"],
     ["artigo", "os benefícios do trabalho remoto para pequenas empresas", "gestores e empreendedores", "informativo e direto", "apresentar argumentos práticos e convincentes", "um dado surpreendente", "conclusão com chamada para reflexão"],
     "Isolar cada aspecto redatorial no prompt impede que a IA assuma posturas extremas ou estilos artificiais padronizados."
@@ -85,7 +85,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Revise seu texto!",
     "Transforme o modelo num experiente editor-chefe.",
-    "\"Aqui está o meu texto: [cole aqui]. Revise e identifique: trechos com [______] de clareza, partes que estão [______], erros de [______] e palavras [______] que podem ser substituídas por alternativas mais precisas. Depois reescreva mantendo minha [______] original.\"",
+    "\"Aqui está o meu texto: [cole aqui]. Revise e identifique: trechos com [___] de clareza, partes que estão [___], erros de [___] e palavras [___] que podem ser substituídas por alternativas mais precisas. Depois reescreva mantendo minha [___] original.\"",
     ["falta", "repetitivas ou longas demais", "coesão e concordância", "vagas", "voz e estilo"],
     ["falta", "repetitivas ou longas demais", "coesão e concordância", "vagas", "voz e estilo"],
     "Forçá-lo a manter a sua voz evita que o seu texto original pareça impessoal."
@@ -109,7 +109,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Adapte o tom do seu texto!",
     "Desdobre a mesma informação para plataformas diferentes.",
-    "\"Aqui está meu texto original: [cole aqui]. Reescreva em [______] versões com tons diferentes: uma [______] para um e-mail corporativo, uma [______] para um post no Instagram e uma [______] para um artigo técnico. Mantenha as [______] principais em todas as versões.\"",
+    "\"Aqui está meu texto original: [cole aqui]. Reescreva em [___] versões com tons diferentes: uma [___] para um e-mail corporativo, uma [___] para um post no Instagram e uma [___] para um artigo técnico. Mantenha as [___] principais em todas as versões.\"",
     ["3", "formal e objetiva", "descontraída e envolvente", "precisa e fundamentada", "ideias"],
     ["3", "formal e objetiva", "descontraída e envolvente", "precisa e fundamentada", "ideias"],
     "Com um único prompt você adota abordagens múltiplas."
@@ -133,9 +133,9 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Redija seu e-mail!",
     "Equilibre firmeza e elegância sem estresse e na velocidade máxima.",
-    "\"Escreva um e-mail [______] para [______] sobre [______]. O objetivo é [______]. Tom: [______]. Seja [______] e evite [______]. Inclua um assunto que [______] abertura.\"",
-    ["profissional", "um fornecedor com quem tivemos um problema de entrega", "solicitar reembolso ou reposição", "resolver a situação de forma amigável mas firme", "cordial e assertivo", "rodeios e linguagem agressiva", "gere"],
-    ["profissional", "um fornecedor com quem tivemos um problema de entrega", "solicitar reembolso ou reposição", "resolver a situação de forma amigável mas firme", "cordial e assertivo", "rodeios e linguagem agressiva", "gere"],
+    "\"Escreva um e-mail [___] para [___] sobre [___]. O objetivo é [___]. Tom: [___]. Seja [___] e evite [___]. Inclua um assunto que [___] abertura.\"",
+    ["profissional", "um fornecedor com quem tivemos um problema de entrega", "solicitar reembolso ou reposição", "resolver a situação de forma amigável mas firme", "cordial e assertivo", "profissional", "rodeios e linguagem agressiva", "gere"],
+    ["profissional", "um fornecedor com quem tivemos um problema de entrega", "solicitar reembolso ou reposição", "resolver a situação de forma amigável mas firme", "cordial e assertivo", "profissional", "rodeios e linguagem agressiva", "gere"],
     "Delegando as emoções textuais, você redige comunicações blindadas emocionalmente."
   ),
   quizStep(
@@ -157,7 +157,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Escreva para redes sociais!",
     "Crie munição sob medida.",
-    "\"Crie um texto para [______] sobre [______]. Inclua: um [______] na primeira linha, [______] no máximo, uma [______] clara no final e [______] relevantes. Tom: [______].\"",
+    "\"Crie um texto para [___] sobre [___]. Inclua: um [___] na primeira linha, [___] no máximo, uma [___] clara no final e [___] relevantes. Tom: [___].\"",
     ["LinkedIn", "como superei meu maior fracasso", "gancho", "5 parágrafos", "chamada para ação", "hashtags", "reflexivo e humano"],
     ["LinkedIn", "como superei meu maior fracasso", "gancho", "5 parágrafos", "chamada para ação", "hashtags", "reflexivo e humano"],
     "Estipular número de linhas e o uso mandatório de ganchos direciona o bot livremente."
@@ -181,7 +181,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Estruture seu texto longo!",
     "O segredo magnânimo da produção interativa.",
-    "\"Preciso escrever um [______] sobre [______] com aproximadamente [______] palavras. Primeiro crie um [______] completo com todas as seções. Depois desenvolva seção por seção, garantindo [______] entre os tópicos e um [______] progressivo do início ao fim.\"",
+    "\"Preciso escrever um [___] sobre [___] com aproximadamente [___] palavras. Primeiro crie um [___] completo com todas as seções. Depois desenvolva seção por seção, garantindo [___] entre os tópicos e um [___] progressivo do início ao fim.\"",
     ["guia completo", "uma rotina de estudos", "2.000", "índice", "coerência e fluidez", "aprofundamento"],
     ["guia completo", "uma rotina de estudos", "2.000", "índice", "coerência e fluidez", "aprofundamento"],
     "Cercá-lo primeiro no arranjo direciona o documento final a um trabalho brilhante."
@@ -205,7 +205,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Corrija seu texto!",
     "Nunca aceite a correção cega sem fundamentação lógica.",
-    "\"Revise o texto abaixo e corrija todos os erros de [______], [______] e [______]. Para cada correção, [______] o erro original, a versão corrigida e uma [______] breve do motivo da correção.\"",
+    "\"Revise o texto abaixo e corrija todos os erros de [___], [___] e [___]. Para cada correção, [___] o erro original, a versão corrigida e uma [___] breve do motivo da correção.\"",
     ["ortografia", "concordância", "pontuação", "mostre", "explicação"],
     ["ortografia", "concordância", "pontuação", "mostre", "explicação"],
     "Entender a regra garante a fixação gramatical no usuário."
@@ -229,7 +229,7 @@ export const GEMINI_MODULE_5_STEPS_PT = [
   fillStep(
     "Explore estilos diferentes!",
     "Transmute e experimente as facetas lúdicas redatoriais.",
-    "\"Reescreva o texto abaixo em [______] estilos diferentes: um [______], um [______] e um [______]. Mantenha as [______] centrais mas mude completamente a forma de [______] e o impacto [______].\"",
+    "\"Reescreva o texto abaixo em [___] estilos diferentes: um [___], um [___] e um [___]. Mantenha as [___] centrais mas mude completamente a forma de [___] e o impacto [___].\"",
     ["3", "narrativo e pessoal", "jornalístico e objetivo", "inspirador e motivacional", "ideias", "expressar", "emocional"],
     ["3", "narrativo e pessoal", "jornalístico e objective", "inspirador e motivacional", "ideias", "expressar", "emocional"],
     "Isolar cada faceta redatorial confere polaridades cruciais ao leitor nativo alvo."
@@ -276,7 +276,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Request your text!",
     "Determine the variables of your text in a single guiding prompt.",
-    "\"Write an [______] about [______] for [______]. Tone: [______]. The goal is to [______]. Include [______] at the beginning to grab attention and a clear [______] at the end.\"",
+    "\"Write an [___] about [___] for [___]. Tone: [___]. The goal is to [___]. Include [___] at the beginning to grab attention and a clear [___] at the end.\"",
     ["article", "the benefits of remote work for small businesses", "managers and entrepreneurs", "informative and direct", "present practical and convincing arguments", "a surprising fact", "conclusion with a call to reflection"],
     ["article", "the benefits of remote work for small businesses", "managers and entrepreneurs", "informative and direct", "present practical and convincing arguments", "a surprising fact", "conclusion with a call to reflection"],
     "Isolating editorial variables avoids purely robotic AI outputs."
@@ -300,7 +300,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Review your text!",
     "Turn the model into an experienced editor-in-chief.",
-    "\"Here is my text: [paste here]. Review and identify: sections with a [______] of clarity, parts that are [______], errors in [______], and [______] words that can be replaced. Then rewrite maintaining my original [______].\"",
+    "\"Here is my text: [paste here]. Review and identify: sections with a [___] of clarity, parts that are [___], errors in [___], and [___] words that can be replaced. Then rewrite maintaining my original [___].\"",
     ["lack", "repetitive", "cohesion", "vague", "voice"],
     ["lack", "repetitive", "cohesion", "vague", "voice"],
     "Keeping your original voice prevents a sterile tone."
@@ -324,7 +324,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Adapt the tone of your text!",
     "Modify the timbre of the same information for varied platforms.",
-    "\"Rewrite in [______] versions with different tones: one [______] for a corporate email, one [______] for an Instagram post, and one [______] for a technical article. Maintain the core [______] in all versions.\"",
+    "\"Rewrite in [___] versions with different tones: one [___] for a corporate email, one [___] for an Instagram post, and one [___] for a technical article. Maintain the core [___] in all versions.\"",
     ["3", "formal", "relaxed", "precise", "ideas"],
     ["3", "formal", "relaxed", "precise", "ideas"],
     "A single prompt prepares you for omnichannel publishing."
@@ -348,9 +348,9 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Draft your email!",
     "Balance diplomacy and directness without losing your entire morning.",
-    "\"Write a [______] email to [______] about [______]. The goal is to [______]. Tone: [______]. Be [______] and avoid [______]. Include a subject line that [______] opening.\"",
-    ["professional", "a supplier", "refund issues", "resolve the situation", "cordial", "assertive", "generates"],
-    ["professional", "a supplier", "refund issues", "resolve the situation", "cordial", "assertive", "generates"],
+    "\"Write a [___] email to [___] about [___]. The goal is to [___]. Tone: [___]. Be [___] and avoid [___]. Include a subject line that [___] opening.\"",
+    ["professional", "a supplier with whom we had a delivery problem", "requesting a refund or replacement", "resolving the situation in a friendly but firm way", "cordial and assertive", "professional", "beating around the bush and aggressive language", "generates"],
+    ["professional", "a supplier with whom we had a delivery problem", "requesting a refund or replacement", "resolving the situation in a friendly but firm way", "cordial and assertive", "professional", "beating around the bush and aggressive language", "generates"],
     "Outsourcing the emotional drafting ensures objective professional comms."
   ),
   quizStep(
@@ -372,7 +372,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Write for social media!",
     "Design algorithmic assets correctly.",
-    "\"Create a text for [______] about [______]. Include: a [______] in the first line, [______] maximum, a clear [______] at the end, and relevant [______]. Tone: [______].\"",
+    "\"Create a text for [___] about [___]. Include: a [___] in the first line, [___] maximum, a clear [___] at the end, and relevant [___]. Tone: [___].\"",
     ["LinkedIn", "overcoming failure", "hook", "5 paragraphs", "call to action", "hashtags", "human"],
     ["LinkedIn", "overcoming failure", "hook", "5 paragraphs", "call to action", "hashtags", "human"],
     "Enforcing hooks and word limits ensures platform-native appeal."
@@ -396,7 +396,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Structure your long text!",
     "Prevent hallucination through structural mapping.",
-    "\"First create a complete [______] with all sections. Then develop section by section, ensuring [______] between topics and a progressive [______] from start to finish.\"",
+    "\"First create a complete [___] with all sections. Then develop section by section, ensuring [___] between topics and a progressive [___] from start to finish.\"",
     ["index", "coherence", "deepening"],
     ["index", "coherence", "deepening"],
     "Structuring the index anchors the subsequent long-form generation."
@@ -420,7 +420,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Correct your text!",
     "Acquire grammatical insight along with structural fixes.",
-    "\"For each correction, [______] the original error, the corrected version, and a brief [______] of why it was corrected.\"",
+    "\"For each correction, [___] the original error, the corrected version, and a brief [___] of why it was corrected.\"",
     ["show", "explanation"],
     ["show", "explanation"],
     "Understanding the underlying mistake improves the human operator organically."
@@ -444,7 +444,7 @@ export const GEMINI_MODULE_5_STEPS_EN = [
   fillStep(
     "Explore different styles!",
     "Push the boundaries of standard formatting.",
-    "\"Rewrite in [______] different styles: one [______], one [______], and one [______].\"",
+    "\"Rewrite in [___] different styles: one [___], one [___], and one [___].\"",
     ["3", "narrative", "journalistic", "emotional"],
     ["3", "narrative", "journalistic", "emotional"],
     "Demanding extreme versions reveals unforeseen tonal advantages."
@@ -491,7 +491,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Pide tu texto!",
     "Determina todas las variables de tu texto en un único prompt de dirección.",
-    "\"Escribe un [______] sobre [______] para [______]. Tono: [______]. El objetivo es [______]. Incluye [______] al principio para captar la atención y una [______] clara al final.\"",
+    "\"Escribe un [___] sobre [___] para [___]. Tono: [___]. El objetivo es [___]. Incluye [___] al principio para captar la atención y una [___] clara al final.\"",
     ["artículo", "los beneficios del trabajo remoto para pequeñas empresas", "gestores y emprendedores", "informativo y directo", "presentar argumentos prácticos y convincentes", "un dato sorprendente", "conclusión con llamado a la reflexión"],
     ["artículo", "los beneficios del trabajo remoto para pequeñas empresas", "gestores y emprendedores", "informativo y directo", "presentar argumentos prácticos y convincentes", "un dato sorprendente", "conclusión con llamado a la reflexión"],
     "Aislar cada aspecto de redacción (extensión, público, estilo, formato) en el prompt impide que la IA asuma posturas extremas o estilos artificiales estandarizados."
@@ -515,7 +515,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Revisa tu texto!",
     "Transforma al modelo en un experimentado editor jefe.",
-    "\"Aquí está mi texto: [pega aquí]. Revisa e identifica: tramos con [______] de claridad, partes que son [______], errores de [______] y palabras [______] que pueden sustituirse por alternativas más precisas. Luego reescribe manteniendo mi [______] original.\"",
+    "\"Aquí está mi texto: [pega aquí]. Revisa e identifica: tramos con [___] de claridad, partes que son [___], errores de [___] y palabras [___] que pueden sustituirse por alternativas más precisas. Luego reescribe manteniendo mi [___] original.\"",
     ["falta", "repetitivas o demasiado largas", "cohesión y concordancia", "vagas", "voz y estilo"],
     ["falta", "repetitivas o demasiado largas", "cohesión y concordancia", "vagas", "voz y estilo"],
     "Obligarlo a mantener tu voz evita que tu texto original parezca escrito por un robot enciclopedista impersonal."
@@ -539,7 +539,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Adapta el tono de tu texto!",
     "Desdobla y modifica el timbre de la misma información para distintas plataformas.",
-    "\"Aquí está mi texto original: [pega aquí]. Reescribe en [______] versiones con tonos diferentes: una [______] para un correo corporativo, una [______] para un post en Instagram y una [______] para un artículo técnico. Mantén las [______] principales en todas las versiones.\"",
+    "\"Aquí está mi texto original: [pega aquí]. Reescribe en [___] versiones con tonos diferentes: una [___] para un correo corporativo, una [___] para un post en Instagram y una [___] para un artículo técnico. Mantén las [___] principales en todas las versiones.\"",
     ["3", "formal y objetiva", "descontraída y envolvente", "precisa y fundamentada", "ideas"],
     ["3", "formal y objetiva", "descontraída y envolvente", "precisa y fundamentada", "ideas"],
     "Con un único prompt adoptas enfoques múltiples listos para su difusión en tu ecosistema omnicanal."
@@ -563,9 +563,9 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Redacta tu correo!",
     "Equilibra firmeza y elegancia sin estrés y a máxima velocidad.",
-    "\"Escribe un correo [______] para [______] sobre [______]. El objetivo es [______]. Tono: [______]. Sé [______] y evita [______]. Incluye un asunto que [______] apertura.\"",
-    ["profesional", "un proveedor con quien tuvimos un problema de entrega", "solicitar reembolso o reposición", "resolver la situación de forma amigable pero firme", "cordial y asertivo", "rodeos y lenguaje agresivo", "genere"],
-    ["profesional", "un proveedor con quien tuvimos un problema de entrega", "solicitar reembolso o reposición", "resolver la situación de forma amigable pero firme", "cordial y asertivo", "rodeos y lenguaje agresivo", "genere"],
+    "\"Escribe un correo [___] para [___] sobre [___]. El objetivo es [___]. Tono: [___]. Sé [___] y evita [___]. Incluye un asunto que [___] apertura.\"",
+    ["profesional", "un proveedor con quien tuvimos un problema de entrega", "solicitar reembolso o reposición", "resolver la situación de forma amigable pero firme", "cordial y asertivo", "profesional", "rodeos y lenguaje agresivo", "genere"],
+    ["profesional", "un proveedor con quien tuvimos un problema de entrega", "solicitar reembolso o reposición", "resolver la situación de forma amigable pero firme", "cordial y asertivo", "profesional", "rodeos y lenguaje agresivo", "genere"],
     "Al delegar las emociones textuales, redactas comunicaciones urgentes blindadas emocionalmente y robustas a nivel corporativo."
   ),
   quizStep(
@@ -587,7 +587,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Escribe para redes sociales!",
     "El algoritmo generando munición a medida directamente para el scroll infinito de otras plataformas.",
-    "\"Crea un texto para [______] sobre [______]. Incluye: un [______] que frene el scroll en la primera línea, [______] como máximo, una [______] clara al final y [______] relevantes. Tono: [______].\"",
+    "\"Crea un texto para [___] sobre [___]. Incluye: un [___] que frene el scroll en la primera línea, [___] como máximo, una [___] clara al final y [___] relevantes. Tono: [___].\"",
     ["LinkedIn", "cómo superé mi mayor fracaso profesional y qué aprendí", "gancho", "5 párrafos", "llamada a la acción", "hashtags", "reflexivo y humano"],
     ["LinkedIn", "cómo superé mi mayor fracaso profesional y qué aprendí", "gancho", "5 párrafos", "llamada a la acción", "hashtags", "reflexivo y humano"],
     "Estipular el número de líneas y el uso obligatorio de ganchos es la regla de oro antes de soltar libremente al bot en posts orgánicos."
@@ -611,7 +611,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Estructura tu texto largo!",
     "El secreto espléndido de la producción másiva iterativa libre de alucinación discursiva.",
-    "\"Necesito escribir un [______] sobre [______] con aproximadamente [______] palabras. Primero crea un [______] completo con todas las secciones. Luego desarrolla sección por sección, garantizando [______] entre los temas y un [______] progresivo de principio a fin.\"",
+    "\"Necesito escribir un [___] sobre [___] con aproximadamente [___] palabras. Primero crea un [___] completo con todas las secciones. Luego desarrolla sección por sección, garantizando [___] entre los temas y un [___] progresivo de principio a fin.\"",
     ["guía completa", "cómo montar una rutina de estudios eficiente", "2.000", "índice", "coherencia y fluidez", "profundización"],
     ["guía completa", "cómo montar una rutina de estudios eficiente", "2.000", "índice", "coherencia y fluidez", "profundización"],
     "Cercarlo primero en la disposición del índice por temas evita el monótono bloque interminable en estilo robótico e incoherente."
@@ -635,7 +635,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Corrige tu texto!",
     "Nunca aceptes la corrección a ciegas sin captar los fundamentos del defecto gramatical subsanado.",
-    "\"Revisa el texto de abajo y corrige todos los errores de [______], [______] y [______]. Por cada corrección, [______] el error original, la versión corregida y una [______] breve del motivo de la rectificación. [Pega aquí el texto]\"",
+    "\"Revisa el texto de abajo y corrige todos los errores de [___], [___] y [___]. Por cada corrección, [___] el error original, la versión corregida y una [___] breve del motivo de la rectificación. [Pega aquí el texto]\"",
     ["ortografía", "concordancia", "puntuación", "muestra", "explicación"],
     ["ortografía", "concordancia", "puntuación", "muestra", "explicación"],
     "Al requerir un informe pedagógico por cada coma arreglada, la máquina actúa secretamente como un profesor particular de gramática de la propia lengua."
@@ -659,7 +659,7 @@ export const GEMINI_MODULE_5_STEPS_ES = [
   fillStep(
     "¡Explora estilos insólitos!",
     "Lleva las barreras al extremo pidiendo mutar las líneas a estilos completamente opuestos.",
-    "\"Vuelve a redactar el texto siguiente en [______] formatos dispares: un modo [______], otro esquema [______] y un corte enteramente [______]. Conserva el pilar de las [______] base, pero transforma el afán al [______] y el rebote [______] brindado en cada faceta. [Pega tu copia aquí]\"",
+    "\"Vuelve a redactar el texto siguiente en [___] formatos dispares: un modo [___], otro esquema [___] y un corte enteramente [___]. Conserva el pilar de las [___] base, pero transforma el afán al [___] y el rebote [___] brindado en cada faceta. [Pega tu copia aquí]\"",
     ["3", "narrativo e intimista", "jornalístico distante", "arengador emotivo", "ideas", "expresar", "emocional"],
     ["3", "narrativo e intimista", "jornalístico distante", "arengador emotivo", "ideas", "expresar", "emocional"],
     "Tensionar fronteras induce a la computadora a exhibir propuestas comunicativas potentísimas que, frente al lienzo en blanco humano, son inalcanzables al instante."
@@ -705,7 +705,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Demandez votre texte !",
     "Déterminez toutes les variables de votre texte en une seule instruction de guidage.",
-    "\"Écris un [______] sur [______] pour [______]. Ton : [______]. L'objectif est de [______]. Inclus [______] au début pour capter l'attention et une [______] claire à la fin.\"",
+    "\"Écris un [___] sur [___] pour [___]. Ton : [___]. L'objectif est de [___]. Inclus [___] au début pour capter l'attention et une [___] claire à la fin.\"",
     ["article", "les avantages du télétravail pour les petites entreprises", "des managers et entrepreneurs", "informativo y directo", "présenter des arguments pratiques et convaincants", "une donnée surprenante", "conclusion avec un appel à la réflexion"],
     ["article", "les avantages du télétravail pour les petites entreprises", "des managers et entrepreneurs", "informativo y directo", "présenter des arguments pratiques et convaincants", "une donnée surprenante", "conclusion avec un appel à la réflexion"],
     "Isoler chaque aspect rédactionnel (longueur, public cible, style, format) dans le prompt empêche l'IA d'adopter des positions extrêmes ou des styles artificiels standardisés."
@@ -729,7 +729,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Révisez votre texte !",
     "Transformez le modèle en un rédacteur en chef expérimenté.",
-    "\"Voici mon texte : [collez ici]. Révise-le et identifie : les passages avec un [______] de clarté, les parties qui sont [______], les fautes de [______] et les termes [______] qui peuvent être remplacés par des options plus précises. Ensuite, réécris-le en gardant mon [______] initial.\"",
+    "\"Voici mon texte : [collez ici]. Révise-le et identifie : les passages avec un [___] de clarté, les parties qui sont [___], les fautes de [___] et les termes [___] qui peuvent être remplacés par des options plus précises. Ensuite, réécris-le en gardant mon [___] initial.\"",
     ["manque", "répétitives ou trop longues", "syntaxe et d'accord", "vagues", "ton et ma voix d'auteur"],
     ["manque", "répétitives ou trop longues", "syntaxe et d'accord", "vagues", "ton et ma voix d'auteur"],
     "Le forcer à garder votre identité verbale évite que votre texte finisse calqué et modelé par un incommensurable esprit froid d'ordinateur."
@@ -753,7 +753,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Adaptez le ton de votre texte !",
     "Dupliquez finement le fond en altérant grandement l'apparence sur chaque point de contact.",
-    "\"Je te donne un texte premier : [collez ici]. Traduis-le sous [______] variantes d'adaptation au niveau du ton : il m'en faut une mouture [______] pour le réseau pro interne de mails, une forme très [______] pour notre vitrine Instagram et un ultime jet [______] pour une revue technique des pairs. Il ne faut pas omettre le socle des [______] fondatrices, bien entendu.\"",
+    "\"Je te donne un texte premier : [collez ici]. Traduis-le sous [___] variantes d'adaptation au niveau du ton : il m'en faut une mouture [___] pour le réseau pro interne de mails, une forme très [___] pour notre vitrine Instagram et un ultime jet [___] pour une revue technique des pairs. Il ne faut pas omettre le socle des [___] fondatrices, bien entendu.\"",
     ["3", "stricte et objective", "décontractée et accrocheuse", "méthodique et étayée", "idées"],
     ["3", "stricte et objective", "décontractée et accrocheuse", "méthodique et étayée", "idées"],
     "D'une phrase maîtresse, vous libérez la puissance d'un écosystème entier omnicanal, paré aux divers lancements."
@@ -777,9 +777,9 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Rédigez votre email !",
     "Mariez fermeté tactique et belle tournure sans aucun échauffement d'esprit.",
-    "\"Développe-moi un e-mail [______] à l'égard d'[______] concernant [______]. Le but final réside dans la ferme démarche visant à [______]. Le ton d'approche se doit d'être [______]. Prends garde d'exclure tout [______]. Coiffe ceci par une ligne d'objet qui force le clic et l'[______].\"",
-    ["professionnel", "un sous-traitant impliqué dans des litiges d'envoi", "lui intimer de rembourser ou remplacer le matériel", "solutionner cette brèche cordialement mais fixement", "diplomatique et intransigeant", "bavardage ou attaque accusatoire", "ouverture"],
-    ["professionnel", "un sous-traitant impliqué dans des litiges d'envoi", "lui intimer de rembourser ou remplacer le matériel", "solutionner cette brèche cordialement mais fixement", "diplomatique et intransigeant", "bavardage ou attaque accusatoire", "ouverture"],
+    "\"Développe-moi un e-mail [___] à l'égard d'[___] concernant [___]. Le but final réside dans la ferme démarche visant à [___]. Le ton d'approche se doit d'être [___]. Soyez [___] et évitez [___]. Coiffe ceci par une ligne d'objet qui force le clic et l'[___].\"",
+    ["professionnel", "un fournisseur avec qui nous avons eu un problème de livraison", "demander un remboursement ou un remplacement", "résoudre la situation de manière amicale mais ferme", "cordial et assertif", "professionnel", "des détours et un langage agressif", "ouverture"],
+    ["professionnel", "un fournisseur avec qui nous avons eu un problème de livraison", "demander un remboursement ou un remplacement", "résoudre la situation de manière amicale mais ferme", "cordial et assertif", "professionnel", "des détours et un langage agressif", "ouverture"],
     "Évacuer l'intense brûlure affective via le bouclier logiciel enfourne une objectivité percutante face aux affaires lourdes."
   ),
   quizStep(
@@ -801,7 +801,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Écrivez selon la tribu !",
     "Laisser les robots digérer intrinsèquement l'infinité capricieuse des algorithmes filaires extérieurs.",
-    "\"Produis un post taillé expressément pour le cercle [______] qui raconte [______]. N'oublie pas d'y forger : un immense [______] brisant le balayage passif à l'instant du premier regard, la limite totale s'échelonnant sur [______], l'incontournable [______] frontale clôturant et la liste de robustes [______]. Adopte sur l'ensemble une vue [______].\"",
+    "\"Produis un post taillé expressément pour le cercle [___] qui raconte [___]. N'oublie pas d'y forger : un immense [___] brisant le balayage passif à l'instant du premier regard, la limite totale s'échelonnant sur [___], l'incontournable [___] frontale clôturant et la liste de robustes [___]. Adopte sur l'ensemble une vue [___].\"",
     ["LinkedIn", "mon plus humiliant revers d'employé et ce qu'il m'a coûté avant de rebondir", "hameçon (hook)", "5 encarts descriptifs", "sollicitation au commentaire (call-to-action)", "tags (hashtags)", "très humaine et contemplative"],
     ["LinkedIn", "mon plus humiliant revers d'employé et ce qu'il m'a coûté avant de rebondir", "hameçon (hook)", "5 encarts descriptifs", "sollicitation au commentaire (call-to-action)", "tags (hashtags)", "très humaine et contemplative"],
     "Dicter des bornages et implanter des arrêts (les fameux 'hooks') forme le premier commandement impérieux encadrant une machinerie synthétisante générique."
@@ -825,7 +825,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Édifiez un gratte-ciel documentaire !",
     "La suprême clé du chantier textuel imposant épargnant au rédacteur humain l'essoufflement intellectuel de masse et prémunissant contre toute fabulation générée.",
-    "\"Il me faut déployer l'équivalent publicatif d'un [______] en enseignant [______] d'un volume textuel gravant les [______] termes à la balance. Pose en toute majesté l'[______] complet initial englobant les chapitres. Dans un second temps, accouche les paragraphes pièce par pièce tout en surveillant la [______] d'une partie vers l'autre assurant d'avoir un lent et robuste [______] logique jusqu'au terme ultime de l'œuvre.\"",
+    "\"Il me faut déployer l'équivalent publicatif d'un [___] en enseignant [___] d'un volume textuel gravant les [___] termes à la balance. Pose en toute majesté l'[___] complet initial englobant les chapitres. Dans un second temps, accouche les paragraphes pièce par pièce tout en surveillant la [___] d'une partie vers l'autre assurant d'avoir un lent et robuste [___] logique jusqu'au terme ultime de l'œuvre.\"",
     ["manifeste directeur absolu", "les piliers en or pour acquérir le savoir continuel auto-didacte", "2000", "arborescence (le squelette)", "suture fluide", "développement graduel"],
     ["manifeste directeur absolu", "les piliers en or pour acquérir le savoir continuel auto-didacte", "2000", "arborescence (le squelette)", "suture fluide", "développement graduel"],
     "Borner l'édifice mental à travers un sommaire tranché annule radicalement la menace d'un rendu lourd redondant au rythme cadavérique."
@@ -849,7 +849,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Guérissez votre composition en la comprenant !",
     "Devenez imbattable en excommuniant la passivité ; ne validez aucune correction obscure du système par le biais du mutisme.",
-    "\"Agis comme le correcteur suprême de ce fragment en bannissant les crimes d'[______], d'[______] et de stricte [______]. Face à tes redressements, j'exige d'y [______] le vice d'origine juxtaposé face à la guérison choisie puis une nette [______] didactique succincte arguant de ladite norme appliquée et réparée de mon lourd pêché textuel originel. [Déposer l'extrait cible ici]\"",
+    "\"Agis comme le correcteur suprême de ce fragment en bannissant les crimes d'[___], d'[___] et de stricte [___]. Face à tes redressements, j'exige d'y [___] le vice d'origine juxtaposé face à la guérison choisie puis une nette [___] didactique succincte arguant de ladite norme appliquée et réparée de mon lourd pêché textuel originel. [Déposer l'extrait cible ici]\"",
     ["orthographe", "accords de grammaire", "syntaxe de ponctuation", "constater", "règle enseignée"],
     ["orthographe", "accords de grammaire", "syntaxe de ponctuation", "constater", "règle enseignée"],
     "Exiger cette expertise méticuleuse du modèle propulse le dictionnaire virtuel dans l'arène inestimable d'un tuteur pédagogique."
@@ -873,7 +873,7 @@ export const GEMINI_MODULE_5_STEPS_FR = [
   fillStep(
     "Testez les prismes narratifs opposés !",
     "Ouvrir grand la porte dimensionnelle en convoquant trois orateurs invisibles s'entrechoquant.",
-    "\"Prends en charge cette prose initiale : [Copiez cela ci-dessous]. Modifie-la entièrement sous la contrainte de [______] gabarits d'éloquences bien distincts : délivre mon propos sous l'allure d'un conte [______], puis verse-le dans le moule d'une investigation [______], pour achever ta mue sous des accents criants d'un appel [______]. Verouille scrupuleusement les [______] mères mais réinvente intégralement ta façon d'[______] et la sève [______] qui les cimente.\"",
+    "\"Prends en charge cette prose initiale : [Copiez cela ci-dessous]. Modifie-la entièrement sous la contrainte de [___] gabarits d'éloquences bien distincts : délivre mon propos sous l'allure d'un conte [___], puis verse-le dans le moule d'une investigation [___], pour achever ta mue sous des accents criants d'un appel [___]. Verouille scrupuleusement les [___] mères mais réinvente intégralement ta façon d'[___] et la sève [___] qui les cimente.\"",
     ["3", "narratif intime", "journalistique distant", "inspirant enflammé", "idées", "exprimer", "émotive ressentie"],
     ["3", "narratif intime", "journalistique distant", "inspirant enflammé", "idées", "exprimer", "émotive ressentie"],
     "Commander de l'inattendu radical au programme l'oblige à se surpasser, déverrouillant une fraîcheur lexicale surprenante et inédite devant un brouillon asséché."
