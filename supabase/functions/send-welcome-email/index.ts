@@ -12,6 +12,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Sua conta está pronta.",
     heroSubtitle: "Clique no botão abaixo para entrar direto na sua conta, sem precisar de senha.",
     cta: "Acessar",
+    ctaNote: "Acesse com apenas 1 clique",
     directLogin: "Logue diretamente aqui",
     manualLogin: "Ou logue usando seus dados",
     manualAccessLink: "Acessar com seus dados",
@@ -34,6 +35,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Your account is ready to go.",
     heroSubtitle: "Click the button below to sign in instantly, no password needed.",
     cta: "Sign In",
+    ctaNote: "Access with just 1 click",
     directLogin: "Sign in directly here",
     manualLogin: "Or sign in with your credentials",
     manualAccessLink: "Sign in with your credentials",
@@ -56,6 +58,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Tu cuenta está lista.",
     heroSubtitle: "Haz clic en el botón de abajo para entrar directamente, sin necesidad de contraseña.",
     cta: "Acceder",
+    ctaNote: "Accede con solo 1 clic",
     directLogin: "Inicia sesión directamente aquí",
     manualLogin: "O inicia sesión con tus datos",
     manualAccessLink: "Acceder con tus datos",
@@ -78,6 +81,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Votre compte est prêt.",
     heroSubtitle: "Cliquez sur le bouton ci-dessous pour vous connecter instantanément.",
     cta: "Accéder",
+    ctaNote: "Accédez en 1 seul clic",
     directLogin: "Connectez-vous directement ici",
     manualLogin: "Ou connectez-vous avec vos identifiants",
     manualAccessLink: "Se connecter avec vos identifiants",
@@ -100,6 +104,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Ihr Konto ist bereit.",
     heroSubtitle: "Klicken Sie auf die Schaltfläche unten, um sich sofort anzumelden.",
     cta: "Zugreifen",
+    ctaNote: "Zugriff mit nur 1 Klick",
     directLogin: "Melden Sie sich direkt hier an",
     manualLogin: "Oder melden Sie sich mit Ihren Daten an",
     manualAccessLink: "Mit Ihren Daten anmelden",
@@ -122,6 +127,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Il tuo account è pronto.",
     heroSubtitle: "Clicca sul pulsante qui sotto per accedere direttamente, senza password.",
     cta: "Accedi",
+    ctaNote: "Accedi con solo 1 clic",
     directLogin: "Accedi direttamente qui",
     manualLogin: "Oppure accedi con i tuoi dati",
     manualAccessLink: "Accedi con i tuoi dati",
@@ -144,6 +150,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Ваш аккаунт готов.",
     heroSubtitle: "Нажмите кнопку ниже, чтобы войти мгновенно, без пароля.",
     cta: "Войти",
+    ctaNote: "Войдите в 1 клик",
     directLogin: "Войдите напрямую здесь",
     manualLogin: "Или войдите с вашими данными",
     manualAccessLink: "Войти с вашими данными",
@@ -245,6 +252,7 @@ function getEmailHtml(params: {
 <!-- Direct Login Section -->
 <tr><td style="padding:28px 40px 24px;">
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 16px;">${t(lang,'directLogin')}</p>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 12px;text-align:center;">${t(lang,'ctaNote')}</p>
   <!-- CTA Button -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
     <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${t(lang,'cta')} →</a>
