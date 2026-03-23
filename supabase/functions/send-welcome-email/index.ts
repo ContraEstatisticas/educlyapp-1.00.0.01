@@ -150,6 +150,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Ваш аккаунт готов.",
     heroSubtitle: "Нажмите кнопку ниже, чтобы войти мгновенно, без пароля.",
     cta: "Войти",
+    ctaNote: "Войдите в 1 клик",
     directLogin: "Войдите напрямую здесь",
     manualLogin: "Или войдите с вашими данными",
     manualAccessLink: "Войти с вашими данными",
