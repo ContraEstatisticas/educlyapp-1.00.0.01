@@ -24,6 +24,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Todos os direitos reservados.",
     help: "Ajuda",
     privacy: "Privacidade",
+    supportText: "Precisa de ajuda? Entre em contato:",
   },
   en: {
     subject: "🔓 Access Granted — Educly",
@@ -42,6 +43,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "All rights reserved.",
     help: "Help",
     privacy: "Privacy",
+    supportText: "Need help? Get in touch:",
   },
   es: {
     subject: "🔓 Acceso Liberado — Educly",
@@ -60,6 +62,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Todos los derechos reservados.",
     help: "Ayuda",
     privacy: "Privacidad",
+    supportText: "¿Necesitas ayuda? Contáctanos:",
   },
   fr: {
     subject: "🔓 Accès Accordé — Educly",
@@ -78,6 +81,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Tous droits réservés.",
     help: "Aide",
     privacy: "Confidentialité",
+    supportText: "Besoin d'aide ? Contactez-nous :",
   },
   de: {
     subject: "🔓 Zugang Freigeschaltet — Educly",
@@ -96,6 +100,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Alle Rechte vorbehalten.",
     help: "Hilfe",
     privacy: "Datenschutz",
+    supportText: "Brauchen Sie Hilfe? Kontaktieren Sie uns:",
   },
   it: {
     subject: "🔓 Accesso Sbloccato — Educly",
@@ -114,6 +119,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Tutti i diritti riservati.",
     help: "Aiuto",
     privacy: "Privacy",
+    supportText: "Hai bisogno di aiuto? Contattaci:",
   },
   ru: {
     subject: "🔓 Доступ Открыт — Educly",
@@ -132,6 +138,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Все права защищены.",
     help: "Помощь",
     privacy: "Конфиденциальность",
+    supportText: "Нужна помощь? Свяжитесь с нами:",
   },
 };
 
@@ -222,6 +229,16 @@ ${credentialsBlock}
   <!-- Copy-paste link -->
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 6px;line-height:1.4;">${t(lang,'copyLink')}</p>
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;margin:0;word-break:break-all;line-height:1.4;"><a href="${authUrl}" target="_blank" style="color:#7c3aed;text-decoration:underline;">${authUrl}</a></p>
+</td></tr>
+
+<!-- Support -->
+<tr><td style="padding:20px 40px 0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9fafb;border-radius:10px;">
+    <tr><td style="padding:16px 20px;text-align:center;">
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 4px;">📩 ${t(lang,'supportText')}</p>
+      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:600;color:#7c3aed;text-decoration:underline;">contact@educly.app</a>
+    </td></tr>
+  </table>
 </td></tr>
 
 <!-- Footer -->
