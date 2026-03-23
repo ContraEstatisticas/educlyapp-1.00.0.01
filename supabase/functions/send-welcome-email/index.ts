@@ -231,6 +231,16 @@ ${credentialsBlock}
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;margin:0;word-break:break-all;line-height:1.4;"><a href="${authUrl}" target="_blank" style="color:#7c3aed;text-decoration:underline;">${authUrl}</a></p>
 </td></tr>
 
+<!-- Support -->
+<tr><td style="padding:20px 40px 0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9fafb;border-radius:10px;">
+    <tr><td style="padding:16px 20px;text-align:center;">
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 4px;">📩 ${t(lang,'supportText')}</p>
+      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:600;color:#7c3aed;text-decoration:underline;">contact@educly.app</a>
+    </td></tr>
+  </table>
+</td></tr>
+
 <!-- Footer -->
 <tr><td style="padding:20px 40px;border-top:1px solid #e5e7eb;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
