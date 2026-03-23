@@ -9,6 +9,7 @@ import { useFreelancerContent } from "@/hooks/useFreelancerContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { useToast } from "@/hooks/use-toast";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
 
 const MatchWords = lazy(() => import("@/components/lesson/MatchWords").then((m) => ({ default: m.MatchWords })));
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((m) => ({ default: m.FillBlanks })));
@@ -65,6 +66,13 @@ const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProp
   );
 };
 
+interface EdiAssistState {
+  steps: EdiGuidedHelpStep[];
+  title?: string;
+  description?: string;
+  quizStepIndex: number;
+}
+
 const FreelancerLesson = () => {
   const { moduleId } = useParams<{ moduleId: string }>();
   const navigate = useNavigate();
@@ -79,6 +87,10 @@ const FreelancerLesson = () => {
   const [quizResults, setQuizResults] = useState<Record<number, boolean>>({});
   const [showExplanation, setShowExplanation] = useState<Record<number, boolean>>({});
   const [isSavingProgress, setIsSavingProgress] = useState(false);
+
+  // Edi Assist state - tracks wrong attempts and guided help
+  const wrongAttemptsRef = useRef<Record<number, number>>({});
+  const [ediAssistState, setEdiAssistState] = useState<EdiAssistState | null>(null);
 
   // Novo estado para controlar visibilidade do header
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -204,6 +216,53 @@ const FreelancerLesson = () => {
     }
   };
 
+  // Get Edi assist data for a quiz step
+  const getEdiAssistForQuiz = (stepIndex: number): EdiAssistState | null => {
+    const step = steps[stepIndex];
+    if (step?.type !== "quiz" || !step.options) return null;
+
+    const correctIndex = step.options.findIndex((opt) => opt.isCorrect);
+    const correctOption = correctIndex >= 0 ? step.options[correctIndex] : null;
+    if (!correctOption) return null;
+
+    return {
+      quizStepIndex: stepIndex,
+      title: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalTitle"),
+      description: tUi(t, i18n.language, "lesson.ediGuide.quiz.modalDescription"),
+      steps: [
+        {
+          id: `freelancer-quiz-${stepIndex}`,
+          title: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepTitle"),
+          description: tUi(t, i18n.language, "lesson.ediGuide.quiz.stepDescription", {
+            letter: String.fromCharCode(65 + correctIndex),
+            answer: correctOption.text,
+          }),
+          actionLabel: tUi(t, i18n.language, "lesson.ediGuide.quiz.action"),
+        },
+      ],
+    };
+  };
+
+  // Apply the Edi guided answer for quiz
+  const handleApplyEdiStep = () => {
+    if (!ediAssistState) return;
+    const idx = ediAssistState.quizStepIndex;
+    const step = steps[idx];
+    if (!step?.options) return;
+
+    const correctIndex = step.options.findIndex((opt) => opt.isCorrect);
+    if (correctIndex === -1) return;
+
+    // Apply the correct answer
+    setQuizAnswers((prev) => ({ ...prev, [idx]: correctIndex }));
+    setQuizResults((prev) => ({ ...prev, [idx]: true }));
+    setShowExplanation((prev) => ({ ...prev, [idx]: true }));
+    wrongAttemptsRef.current[idx] = 0;
+    setEdiAssistState(null);
+    playCorrect();
+    handleStepComplete(idx);
+  };
+
   const handleQuizAnswer = (stepIndex: number, optionIndex: number, isCorrect: boolean) => {
     setQuizAnswers((prev) => ({ ...prev, [stepIndex]: optionIndex }));
     setQuizResults((prev) => ({ ...prev, [stepIndex]: isCorrect }));
@@ -214,6 +273,18 @@ const FreelancerLesson = () => {
       handleStepComplete(stepIndex);
     } else {
       playIncorrect();
+
+      // Track wrong attempts for Edi assist (using ref to avoid stale closure)
+      const currentAttempts = (wrongAttemptsRef.current[stepIndex] || 0) + 1;
+      wrongAttemptsRef.current[stepIndex] = currentAttempts;
+
+      // After 3 wrong attempts, offer Edi help
+      if (currentAttempts >= 3) {
+        const assistState = getEdiAssistForQuiz(stepIndex);
+        if (assistState) {
+          setEdiAssistState(assistState);
+        }
+      }
     }
   };
 
@@ -425,7 +496,7 @@ const FreelancerLesson = () => {
                     {(() => {
                       const Component = getComponent(step.componentName!);
                       return Component ? (
-                        <Component {...(step.props || {})} onComplete={() => handleStepComplete(index)} />
+                        <Component {...(step.props || {})} onComplete={() => handleStepComplete(index)} ediHelpEnabled />
                       ) : null;
                     })()}
                   </Suspense>
@@ -436,6 +507,18 @@ const FreelancerLesson = () => {
         })}
 
         {/* Card Final */}
+        {/* Edi Guided Help Modal */}
+        {ediAssistState && (
+          <EdiGuidedHelp
+            isOpen={Boolean(ediAssistState)}
+            title={ediAssistState.title}
+            description={ediAssistState.description}
+            steps={ediAssistState.steps}
+            onApplyStep={handleApplyEdiStep}
+            onClose={() => setEdiAssistState(null)}
+          />
+        )}
+
         {completedSteps.size === steps.length && (
           <FinalCard 
             moduleNumber={moduleNumber}
