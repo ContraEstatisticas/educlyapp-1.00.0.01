@@ -100,6 +100,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Alle Rechte vorbehalten.",
     help: "Hilfe",
     privacy: "Datenschutz",
+    supportText: "Brauchen Sie Hilfe? Kontaktieren Sie uns:",
   },
   it: {
     subject: "🔓 Accesso Sbloccato — Educly",
