@@ -21,6 +21,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Usuário',
     help: 'Ajuda',
     privacy: 'Privacidade',
+    supportText: 'Precisa de ajuda? Entre em contato:',
   },
   en: {
     subject: '🔑 Your new access link — Educly',
@@ -34,6 +35,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'User',
     help: 'Help',
     privacy: 'Privacy',
+    supportText: 'Need help? Get in touch:',
   },
   es: {
     subject: '🔑 Tu nuevo enlace de acceso — Educly',
@@ -47,6 +49,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Usuario',
     help: 'Ayuda',
     privacy: 'Privacidad',
+    supportText: '¿Necesitas ayuda? Contáctanos:',
   },
   fr: {
     subject: '🔑 Votre nouveau lien d\'accès — Educly',
@@ -60,6 +63,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Utilisateur',
     help: 'Aide',
     privacy: 'Confidentialité',
+    supportText: "Besoin d'aide ? Contactez-nous :",
   },
   de: {
     subject: '🔑 Ihr neuer Zugangslink — Educly',
@@ -73,6 +77,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Benutzer',
     help: 'Hilfe',
     privacy: 'Datenschutz',
+    supportText: 'Brauchen Sie Hilfe? Kontaktieren Sie uns:',
   },
   it: {
     subject: '🔑 Il tuo nuovo link di accesso — Educly',
@@ -86,6 +91,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Utente',
     help: 'Aiuto',
     privacy: 'Privacy',
+    supportText: 'Hai bisogno di aiuto? Contattaci:',
   },
   ru: {
     subject: '🔑 Ваша новая ссылка для входа — Educly',
@@ -99,6 +105,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     credentialsEmail: 'Пользователь',
     help: 'Помощь',
     privacy: 'Конфиденциальность',
+    supportText: 'Нужна помощь? Свяжитесь с нами:',
   },
 };
 
@@ -158,6 +165,16 @@ function getMagicLinkEmailHtml(accessUrl: string, email: string, lang: string): 
   <!-- Copy-paste link -->
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 6px;line-height:1.4;">${tr(lang,'copyLink')}</p>
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;margin:0;word-break:break-all;line-height:1.4;"><a href="${authUrl}" target="_blank" style="color:#7c3aed;text-decoration:underline;">${authUrl}</a></p>
+</td></tr>
+
+<!-- Support -->
+<tr><td style="padding:20px 40px 0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f9fafb;border-radius:10px;">
+    <tr><td style="padding:16px 20px;text-align:center;">
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 4px;">📩 ${tr(lang,'supportText')}</p>
+      <a href="mailto:contact@educly.app" style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:600;color:#7c3aed;text-decoration:underline;">contact@educly.app</a>
+    </td></tr>
+  </table>
 </td></tr>
 
 <!-- Footer -->
