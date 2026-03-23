@@ -168,19 +168,19 @@ function getEmailHtml(params: {
 
   const authUrl = "https://educly.app/auth";
 
-  // Credentials block for new accounts
-  let credentialsBlock = '';
+  // Manual credentials block for new accounts
+  let manualBlock = '';
   if (mode === 'magic_link' && generatedPassword) {
-    credentialsBlock = `
+    manualBlock = `
     <!-- Divider -->
     <tr><td style="padding:0 40px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
         <td style="height:1px;background:#e5e7eb;"></td>
       </tr></table>
     </td></tr>
-    <!-- Credentials -->
+    <!-- Manual Login Section -->
     <tr><td style="padding:28px 40px 0;">
-      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:16px;font-weight:700;color:#111827;margin:0 0 20px;">${t(lang,'credentialsTitle')}</p>
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 20px;">${t(lang,'manualLogin')}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr><td style="padding:0 0 14px;">
           <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;font-weight:600;color:#f97316;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.05em;">${t(lang,'credentialsEmail')}</p>
@@ -191,7 +191,11 @@ function getEmailHtml(params: {
           <p style="font-family:'Courier New',monospace;font-size:15px;color:#111827;margin:0;">${generatedPassword}</p>
         </td></tr>
       </table>
-      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 0;line-height:1.5;">${t(lang,'credentialsChangeNote')}</p>
+      <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:4px 0 16px;line-height:1.5;">${t(lang,'credentialsChangeNote')}</p>
+      <!-- Manual login link -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#ffffff;border:2px solid #1f2937;border-radius:12px;text-align:center;">
+        <a href="${authUrl}" target="_blank" style="display:block;color:#1f2937;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:700;padding:14px 28px;">${t(lang,'manualAccessLink')} →</a>
+      </td></tr></table>
     </td></tr>`;
   }
 
@@ -209,7 +213,7 @@ function getEmailHtml(params: {
 <tr><td style="padding:40px 40px 32px;border-bottom:1px solid #e5e7eb;">
   <!-- Logo -->
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;"><tr>
-    <td style="width:36px;height:36px;background:#1f2937;border-radius:10px;text-align:center;vertical-align:middle;font-size:16px;">🎓</td>
+    <td style="width:36px;height:36px;vertical-align:middle;"><img src="https://educly.app/images/corujaLogo.svg" alt="Educly" width="36" height="36" style="display:block;border:0;" /></td>
     <td style="padding-left:10px;font-family:'Segoe UI',Tahoma,sans-serif;font-size:18px;font-weight:800;color:#111827;letter-spacing:-0.02em;">educly<span style="color:#f97316;">.</span></td>
   </tr></table>
   <!-- Headline -->
@@ -217,19 +221,16 @@ function getEmailHtml(params: {
   <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;color:#6b7280;line-height:1.6;margin:0;">${subtitle}</p>
 </td></tr>
 
-${credentialsBlock}
-
-<!-- Body / CTA -->
+<!-- Direct Login Section -->
 <tr><td style="padding:28px 40px 32px;">
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;color:#374151;margin:0 0 16px;">${t(lang,'accessBelow')}</p>
+  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:14px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">${t(lang,'directLogin')}</p>
   <!-- CTA Button -->
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#1f2937;border-radius:12px;text-align:center;">
     <a href="${ctaUrl}" target="_blank" style="display:block;color:#ffffff;text-decoration:none;font-family:'Segoe UI',Tahoma,sans-serif;font-size:15px;font-weight:700;padding:16px 28px;">${t(lang,'cta')} →</a>
   </td></tr></table>
-  <!-- Copy-paste link -->
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;color:#6b7280;margin:0 0 6px;line-height:1.4;">${t(lang,'copyLink')}</p>
-  <p style="font-family:'Segoe UI',Tahoma,sans-serif;font-size:13px;margin:0;word-break:break-all;line-height:1.4;"><a href="${authUrl}" target="_blank" style="color:#7c3aed;text-decoration:underline;">${authUrl}</a></p>
 </td></tr>
+
+${manualBlock}
 
 <!-- Support -->
 <tr><td style="padding:20px 40px 0;">
