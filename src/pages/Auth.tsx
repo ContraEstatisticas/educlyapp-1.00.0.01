@@ -93,47 +93,76 @@ const Auth = () => {
     if (!hash) return;
 
     const hashParams = new URLSearchParams(hash.replace("#", ""));
+    const accessToken = hashParams.get("access_token");
+    const refreshToken = hashParams.get("refresh_token");
 
-    // Detect access_token in hash → magic link being processed
-    if (hashParams.get("access_token")) {
+    const setExpiredUi = () => {
+      setShowExpiredLink(true);
+      const emailParam = searchParams.get("email") || "";
+      if (emailParam) {
+        setExpiredEmail(emailParam);
+      }
+    };
+
+    // Explicitly set session from hash tokens to avoid race conditions
+    // where URL hash is cleared before Supabase consumes it.
+    if (accessToken && refreshToken) {
+      let cancelled = false;
       setIsProcessingMagicLink(true);
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
 
-      // Fallback timeout: if onAuthStateChange doesn't fire within 10s
-      const timeout = setTimeout(async () => {
+      const processMagicLink = async () => {
         try {
-          const { data: { session } } = await supabase.auth.getSession();
-          if (session) {
-            navigate("/dashboard", { replace: true });
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+
+          if (error || !data.session) {
+            if (!cancelled) {
+              setExpiredUi();
+            }
             return;
           }
-        } catch (e) {
-          console.error("Fallback getSession failed:", e);
-        }
-        // No session after timeout → show expired link UI
-        setIsProcessingMagicLink(false);
-        setShowExpiredLink(true);
-      }, 10000);
 
-      return () => clearTimeout(timeout);
+          if (!cancelled) {
+            setShowExpiredLink(false);
+            navigate("/dashboard", { replace: true });
+          }
+        } catch (e) {
+          console.error("Magic link session processing failed:", e);
+          if (!cancelled) {
+            setExpiredUi();
+          }
+        } finally {
+          if (!cancelled) {
+            setIsProcessingMagicLink(false);
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+          }
+        }
+      };
+
+      void processMagicLink();
+
+      return () => {
+        cancelled = true;
+      };
     }
 
     // Check for error in hash (expired OTP etc.)
     const error = hashParams.get("error");
     const errorCode = hashParams.get("error_code");
     const errorDesc = hashParams.get("error_description");
+    const normalizedErrorDesc = (errorDesc || "").toLowerCase();
 
-    if (
-      error === "access_denied" ||
+    const isExpiredError =
       errorCode === "otp_expired" ||
-      (errorDesc && errorDesc.toLowerCase().includes("expired"))
-    ) {
-      setShowExpiredLink(true);
+      normalizedErrorDesc.includes("expired") ||
+      normalizedErrorDesc.includes("invalid") ||
+      normalizedErrorDesc.includes("already used") ||
+      (error === "access_denied" && normalizedErrorDesc.includes("email link"));
 
-      const emailParam = searchParams.get("email") || "";
-      if (emailParam) {
-        setExpiredEmail(emailParam);
-      }
+    if (isExpiredError) {
+      setExpiredUi();
 
       window.history.replaceState(null, "", window.location.pathname + window.location.search);
     }
