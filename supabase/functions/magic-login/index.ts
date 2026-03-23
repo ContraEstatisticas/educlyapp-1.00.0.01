@@ -13,7 +13,6 @@ const RATE_MAX = 10;
 
 function checkRate(token: string): boolean {
   const now = Date.now();
-  // Cleanup old entries
   if (tokenHits.size > 1000) {
     for (const [k, v] of tokenHits) {
       if (now - v.ts > RATE_WINDOW) tokenHits.delete(k);
@@ -44,7 +43,6 @@ serve(async (req) => {
     }
 
     // Sanitize: extract UUID from potentially corrupted token
-    // Some email clients (Hotmail, Outlook) append style attributes to the href
     const UUID_REGEX = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
     const token = rawToken ? (rawToken.match(UUID_REGEX)?.[0] || null) : null;
 
@@ -65,10 +63,10 @@ serve(async (req) => {
       });
     }
 
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL')!,
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-    );
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
 
     // 1. Look up token
     const { data: tokenRow, error: tokenError } = await supabase
@@ -96,7 +94,7 @@ serve(async (req) => {
 
     const email = userData.user.email;
 
-    // 3. Generate fresh magic link (valid 24h — but user never sees this limit)
+    // 3. Generate magic link OTP
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'magiclink',
       email,
@@ -110,10 +108,58 @@ serve(async (req) => {
       });
     }
 
-    console.log(`[magic-login] Fresh magic link generated for ${email}`);
+    // 4. Extract OTP hashed_token from action_link and verify it server-side
+    // The action_link looks like: https://PROJECT.supabase.co/auth/v1/verify?token=HASHED_TOKEN&type=magiclink&redirect_to=...
+    const actionUrl = new URL(linkData.properties.action_link);
+    const otpToken = actionUrl.searchParams.get('token');
+    const otpType = actionUrl.searchParams.get('type') || 'magiclink';
+
+    if (!otpToken) {
+      console.error(`[magic-login] No token found in action_link for ${email}`);
+      return new Response(JSON.stringify({ error: 'failed_to_extract_otp' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // 5. Use the Supabase Auth REST API to verify the OTP and get session tokens
+    // We call the verify endpoint directly to consume the OTP server-side
+    const verifyResponse = await fetch(`${supabaseUrl}/auth/v1/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': serviceRoleKey,
+      },
+      body: JSON.stringify({
+        token_hash: otpToken,
+        type: otpType,
+      }),
+    });
+
+    if (!verifyResponse.ok) {
+      const verifyError = await verifyResponse.text();
+      console.error(`[magic-login] OTP verification failed for ${email}:`, verifyResponse.status, verifyError);
+      return new Response(JSON.stringify({ error: 'otp_verification_failed' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const sessionData = await verifyResponse.json();
+
+    // The verify endpoint returns { access_token, refresh_token, ... }
+    if (!sessionData.access_token || !sessionData.refresh_token) {
+      console.error(`[magic-login] No session tokens in verify response for ${email}:`, JSON.stringify(sessionData).substring(0, 200));
+      return new Response(JSON.stringify({ error: 'no_session_tokens' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    console.log(`[magic-login] Session tokens generated server-side for ${email}`);
 
     return new Response(JSON.stringify({
-      action_link: linkData.properties.action_link,
+      access_token: sessionData.access_token,
+      refresh_token: sessionData.refresh_token,
+      expires_in: sessionData.expires_in,
+      token_type: sessionData.token_type || 'bearer',
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

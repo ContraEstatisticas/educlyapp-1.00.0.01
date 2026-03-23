@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
 const MagicLogin = () => {
   const [searchParams] = useSearchParams();
@@ -32,13 +33,31 @@ const MagicLogin = () => {
         }
         return res.json();
       })
-      .then((data) => {
-        if (data.action_link) {
-          // Redirect to Supabase's fresh magic link
-          window.location.href = data.action_link;
+      .then(async (data) => {
+        if (data.access_token && data.refresh_token) {
+          // Set session directly — no redirect chain, no OTP to be "burned"
+          const { error: sessionError } = await supabase.auth.setSession({
+            access_token: data.access_token,
+            refresh_token: data.refresh_token,
+          });
+
+          if (sessionError) {
+            console.error("[MagicLogin] setSession error:", sessionError);
+            setError("session_failed");
+            setLoading(false);
+            return;
+          }
+
+          // Success — go to dashboard
+          navigate("/dashboard", { replace: true });
         } else {
-          setError("no_link");
-          setLoading(false);
+          // Fallback: legacy action_link response (should not happen with new code)
+          if (data.action_link) {
+            window.location.href = data.action_link;
+          } else {
+            setError("no_link");
+            setLoading(false);
+          }
         }
       })
       .catch((err) => {
@@ -46,7 +65,7 @@ const MagicLogin = () => {
         setError(err.message || "unknown");
         setLoading(false);
       });
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   if (loading) {
     return (
