@@ -1,38 +1,65 @@
 
 
-## Plano: Senhas simples + link copiavel nos emails
+## Plano: Redesign dos emails — tema claro e limpo
 
-### 1. Simplificar gerador de senha (`auto-create-account`)
+Baseado no print de referencia (fundo branco, labels em laranja, texto escuro, layout limpo e espaçado).
 
-Alterar `generateSecurePassword()` para gerar apenas numeros + uma letra no final (x ou k):
+### Design novo
 
+- **Fundo**: branco (`#ffffff`) em vez do dark `#07080f`
+- **Card**: fundo branco com borda cinza clara (`#e5e7eb`), sem gradientes
+- **Titulos/textos**: preto/cinza escuro (`#111827`, `#374151`)
+- **Labels** (Usuário, Senha, etc): laranja (`#f97316`) como no print
+- **Botão CTA**: fundo escuro (`#1f2937`) com texto branco, bordas arredondadas — como o "Acessar" do print
+- **Link copiavel**: abaixo do botão, texto discreto apontando para `https://educly.app/auth`
+- **Logo**: manter `educly.` com ponto laranja
+- **Separadores**: linha cinza clara (`#e5e7eb`) em vez de `rgba(255,255,255,0.07)`
+- **Footer**: cinza claro, links em roxo (`#7c3aed`)
+
+### Estrutura do email (welcome)
+
+```text
+┌─────────────────────────────────┐
+│  🎓 educly.                    │
+│                                 │
+│  Sua conta está pronta.         │
+│  (subtitulo cinza)              │
+├─────────────────────────────────┤
+│  Seus dados de acesso.          │
+│                                 │
+│  Usuário:          (laranja)    │
+│  email@exemplo.com              │
+│                                 │
+│  Senha:            (laranja)    │
+│  483927561x                     │
+│                                 │
+│  Acesse através do botão abaixo │
+│                                 │
+│  ┌─────────────────────┐        │
+│  │     Acessar →       │        │
+│  └─────────────────────┘        │
+│                                 │
+│  Ou acesse: educly.app/auth     │
+├─────────────────────────────────┤
+│  © 2025 Educly · Ajuda · Priv.  │
+└─────────────────────────────────┘
 ```
-Antes: "kB7$mN3&xP9#fQ2%" (16 chars, simbolos)
-Depois: "483927561x" (9 digitos + 1 letra)
-```
-
-Logica: 9 digitos aleatorios + escolha aleatoria entre "x" e "k" no final.
-
-### 2. Adicionar link copiavel nos emails
-
-Em ambos os templates (`send-welcome-email` e `resend-magic-link`), adicionar abaixo do botao CTA um texto com o link visivel que o usuario pode copiar e colar:
-
-```
-Ou copie e cole este link no navegador:
-https://educly.app/magic-login?token=UUID
-```
-
-Estilizado discretamente (font-size pequeno, cor cinza, link sublinhado).
-
-Adicionar traducao `copyLink` nos 7 idiomas de ambas as funcoes.
 
 ### Arquivos modificados
 
 | Arquivo | Mudanca |
 |---------|---------|
-| `supabase/functions/auto-create-account/index.ts` | `generateSecurePassword()` → numeros + x/k |
-| `supabase/functions/send-welcome-email/index.ts` | Traducao `copyLink` + bloco HTML com link visivel |
-| `supabase/functions/resend-magic-link/index.ts` | Traducao `copyLink` + bloco HTML com link visivel |
+| `supabase/functions/send-welcome-email/index.ts` | Template HTML completo → tema claro, labels laranja, botão escuro |
+| `supabase/functions/resend-magic-link/index.ts` | Mesmo redesign tema claro (sem bloco de senha) |
 
-Tudo o mais permanece igual: senha continua sendo enviada no email de boas-vindas, botao CTA continua funcionando.
+### Traducoes
+
+Adicionar chave `accessBelow` nos 7 idiomas:
+- pt: "Acesse através do botão abaixo"
+- en: "Access through the button below"
+- es/fr/de/it/ru: equivalentes
+
+Atualizar `copyLink` para apontar a `educly.app/auth`. Manter botão CTA com magic link inalterado.
+
+Nenhuma mudanca de logica — apenas o HTML/CSS dos templates.
 
