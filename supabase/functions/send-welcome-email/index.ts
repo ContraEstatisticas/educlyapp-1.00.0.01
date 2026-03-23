@@ -58,6 +58,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     heroTitle: "Tu cuenta está lista.",
     heroSubtitle: "Haz clic en el botón de abajo para entrar directamente, sin necesidad de contraseña.",
     cta: "Acceder",
+    ctaNote: "Accede con solo 1 clic",
     directLogin: "Inicia sesión directamente aquí",
     manualLogin: "O inicia sesión con tus datos",
     manualAccessLink: "Acceder con tus datos",
