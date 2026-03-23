@@ -119,6 +119,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Tutti i diritti riservati.",
     help: "Aiuto",
     privacy: "Privacy",
+    supportText: "Hai bisogno di aiuto? Contattaci:",
   },
   ru: {
     subject: "🔓 Доступ Открыт — Educly",
