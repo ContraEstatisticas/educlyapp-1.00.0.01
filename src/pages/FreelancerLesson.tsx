@@ -10,6 +10,7 @@ import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { useToast } from "@/hooks/use-toast";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
+import { TrailChat } from "@/components/trail/TrailChat";
 
 const MatchWords = lazy(() => import("@/components/lesson/MatchWords").then((m) => ({ default: m.MatchWords })));
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((m) => ({ default: m.FillBlanks })));
@@ -87,6 +88,7 @@ const FreelancerLesson = () => {
   const [quizResults, setQuizResults] = useState<Record<number, boolean>>({});
   const [showExplanation, setShowExplanation] = useState<Record<number, boolean>>({});
   const [isSavingProgress, setIsSavingProgress] = useState(false);
+  const [showPracticeModal, setShowPracticeModal] = useState(false);
 
   // Edi Assist state - tracks wrong attempts and guided help
   const wrongAttemptsRef = useRef<Record<number, number>>({});
@@ -325,7 +327,9 @@ const FreelancerLesson = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white antialiased font-sans">
+    <div className="min-h-screen bg-white antialiased font-sans lg:flex">
+      {/* Main content column */}
+      <div className="flex-1 min-w-0 relative">
       {/* Header Fixo - Agora com animação de slide */}
       <div
         className={cn(
@@ -525,12 +529,22 @@ const FreelancerLesson = () => {
             isSavingProgress={isSavingProgress}
             onComplete={async () => {
               await saveModuleProgress(true);
-              navigate("/freelancer");
+              setShowPracticeModal(true);
             }}
           />
         )}
       </div>
     </div>
+
+    <TrailChat
+      isOpen={showPracticeModal}
+      onClose={() => { setShowPracticeModal(false); navigate("/freelancer"); }}
+      toolContext="Freelancer"
+      accentColor="#f97316"
+      language={i18n.language}
+      moduleSummary={steps.map((s) => [s.title, s.question, s.content].filter(Boolean).join(": ")).join("\n")}
+    />
+  </div>
   );
 };
 

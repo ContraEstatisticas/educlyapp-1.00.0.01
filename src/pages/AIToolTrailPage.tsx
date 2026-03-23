@@ -12,6 +12,7 @@ import { DaysProgressBar } from "@/components/lesson/DaysProgressBar";
 import { cn } from "@/lib/utils";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
 
+
 const PAGE_UI = {
   pt: {
     summaryBadge: "Mapa da trilha",

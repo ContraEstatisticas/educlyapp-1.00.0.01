@@ -799,7 +799,7 @@ const FreelancerContent = () => {
 
       {/* Container Principal adaptado para Dark Mode (bg-background) */}
       <div className="min-h-screen bg-background p-4 md:p-8 font-sans safe-area-inset relative pb-24">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1600px] mx-auto">
 
           {/* Header */}
           <div className="flex items-center justify-between mb-8 relative z-20">
@@ -841,10 +841,10 @@ const FreelancerContent = () => {
           </div>
 
           {/* GRID LAYOUT PRINCIPAL */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative z-10">
 
             {/* COLUNA ESQUERDA (Desktop apenas) */}
-            <div className="hidden lg:block lg:col-span-4 lg:sticky lg:top-8">
+            <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-8">
               <SidebarContent
                 allCompleted={allCompleted}
                 completedCount={completedCount}
@@ -855,8 +855,8 @@ const FreelancerContent = () => {
               />
             </div>
 
-            {/* COLUNA DIREITA (Conteúdo da Trilha) */}
-            <div className="col-span-1 lg:col-span-8 flex flex-col gap-8">
+            {/* COLUNA CENTRAL (Conteúdo da Trilha) */}
+            <div className="col-span-1 lg:col-span-6 flex flex-col gap-8">
 
               <div className="rounded-3xl border border-orange-200/70 bg-gradient-to-r from-orange-50 via-amber-50 to-background p-5 shadow-sm dark:border-orange-900/60 dark:from-orange-950/20 dark:via-amber-950/10 dark:to-background">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -900,9 +900,11 @@ const FreelancerContent = () => {
               </div>
 
             </div>
+
           </div>
         </div>
       </div>
+
       <MobileNav />
     </>
   );

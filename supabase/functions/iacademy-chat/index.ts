@@ -1129,10 +1129,14 @@ serve(async (req) => {
     const language = (body.language || "pt").split("-")[0].split("_")[0];
     const lastUserMessage = [...messages].reverse().find((m) => m.role === "user")?.content || "";
 
-    const quickReply = getKeywordQuickReply(lastUserMessage, language);
-    if (quickReply) {
-      console.log("Returning quick reply without AI token usage");
-      return createStreamingQuickReplyResponse(quickReply);
+    // Skip quick replies in prompt training mode — the student is practicing prompts, not asking about pricing/plans
+    const isPromptTraining = aiToolContext && (aiToolContext.includes("Treino") || aiToolContext.includes("Prompt") || aiToolContext.includes("Training"));
+    if (!isPromptTraining) {
+      const quickReply = getKeywordQuickReply(lastUserMessage, language);
+      if (quickReply) {
+        console.log("Returning quick reply without AI token usage");
+        return createStreamingQuickReplyResponse(quickReply);
+      }
     }
 
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
@@ -1165,7 +1169,7 @@ serve(async (req) => {
           model: "gemini-2.5-flash",
           messages: [{ role: "system", content: systemPrompt }, ...messages],
           stream: true,
-          max_tokens: 800,
+          max_tokens: isPromptTraining ? 1500 : 800,
           temperature: 0.7,
         }),
       });

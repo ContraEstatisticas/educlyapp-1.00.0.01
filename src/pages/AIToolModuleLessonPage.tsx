@@ -12,6 +12,7 @@ import { aiMasteryTrailsBySlug } from "@/lib/aiMasteryTrails";
 import { AiTrailLessonStep, getAiTrailContent, isAiTrailLive } from "@/lib/aiTrailContent";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import { TrailChat } from "@/components/trail/TrailChat";
 
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((module) => ({ default: module.FillBlanks })));
 
@@ -483,10 +484,17 @@ const AIToolModuleLessonPage = () => {
     }
   };
 
+  const [showPracticeModal, setShowPracticeModal] = useState(false);
+
   const finishLesson = async () => {
     if (!toolSlug || !moduleContent) return;
 
     await completeModule(moduleContent.number);
+    setShowPracticeModal(true);
+  };
+
+  const handleClosePractice = () => {
+    setShowPracticeModal(false);
     navigate(`/trilhas-ia/${toolSlug}`, { replace: true });
   };
 
@@ -536,6 +544,9 @@ const AIToolModuleLessonPage = () => {
   const needsVerification =
     (currentStep.type === "quiz" || currentStep.type === "practical") &&
     !currentStepAnswer.isAnswerChecked;
+  const moduleSummary = lessonSteps
+    .map((s) => [s.title, s.question, s.content].filter(Boolean).join(": "))
+    .join("\n");
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col">
@@ -563,6 +574,7 @@ const AIToolModuleLessonPage = () => {
         </span>
       </div>
 
+      <div className="flex-1 flex overflow-hidden">
       <div ref={containerRef} className="flex-1 overflow-y-auto flex justify-center bg-background scroll-smooth">
         <div className="w-full max-w-2xl px-6 py-8 pb-32 space-y-12">
           <div className="space-y-3">
@@ -843,6 +855,8 @@ const AIToolModuleLessonPage = () => {
         </div>
       </div>
 
+      </div>
+
       <div className="p-4 bg-card border-t border-border z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
         <div className="max-w-2xl mx-auto">
           <Button
@@ -884,6 +898,15 @@ const AIToolModuleLessonPage = () => {
           onClose={() => setEdiAssistState(null)}
         />
       ) : null}
+
+      <TrailChat
+        isOpen={showPracticeModal}
+        onClose={handleClosePractice}
+        toolContext={trail.name}
+        accentColor={trail.accent}
+        language={language}
+        moduleSummary={moduleSummary}
+      />
     </div>
   );
 };

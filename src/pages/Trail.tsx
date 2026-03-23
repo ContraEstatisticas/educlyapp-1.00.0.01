@@ -12,7 +12,7 @@ import { useTranslatedContent } from "@/hooks/useTranslatedContent";
 const Trail = () => {
   const { aiSlug } = useParams<{ aiSlug: string }>();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { getToolDescription, getTranslatedPhases } = useTranslatedContent();
 
   const { aiTool, phases, isLoading, isPhaseUnlocked, isPhaseCompleted } = useTrailProgress(aiSlug || "");
@@ -197,6 +197,7 @@ const Trail = () => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };

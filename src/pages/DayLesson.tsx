@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useTranslatedLessonContent } from "@/hooks/useTranslatedLessonContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import { TrailChat } from "@/components/trail/TrailChat";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -125,6 +126,7 @@ const DayLesson = () => {
   const [lessonSteps, setLessonSteps] = useState<LessonStep[]>([]);
   const [dayInfo, setDayInfo] = useState<{ dayNumber: number; title: string; challengeId: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showPracticeModal, setShowPracticeModal] = useState(false);
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
@@ -380,7 +382,7 @@ const DayLesson = () => {
             }
           }
         }
-        navigate("/dashboard");
+        setShowPracticeModal(true);
       } catch (error) {
         console.error("Error saving progress:", error);
         navigate("/dashboard");
@@ -542,6 +544,9 @@ const DayLesson = () => {
 
   // Só pede verificação se for Quiz ou Prática. Chat avança direto.
   const needsVerification = (currentStep.type === "quiz" || currentStep.type === "practical") && !isAnswerChecked;
+  const moduleSummary = lessonSteps
+    .map((s) => [s.title, s.question, s.content].filter(Boolean).join(": "))
+    .join("\n");
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col" onContextMenu={handleContextMenu}>
@@ -571,6 +576,7 @@ const DayLesson = () => {
       </div>
 
       {/* MAIN CONTENT AREA - Scroll contínuo suave */}
+      <div className="flex-1 flex overflow-hidden">
       <div ref={containerRef} className="flex-1 overflow-y-auto flex justify-center bg-background scroll-smooth">
         <div className="w-full max-w-2xl px-6 py-8 pb-32 space-y-12">
           {/* Renderiza todos os steps até o atual */}
@@ -874,6 +880,9 @@ const DayLesson = () => {
 
         </div>
       </div>
+
+      </div>
+
       {/* BOTTOM ACTION BAR - BOTÃO PRINCIPAL ATUALIZADO PARA PERMITIR APPPROMO */}
       {(!(currentStep.type === "component" && currentStep.componentName !== "AppPromo" && currentStep.componentName && getComponent(currentStep.componentName) && !componentCompleted)) && (
         <div className="p-4 bg-card border-t border-border z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
@@ -928,6 +937,15 @@ const DayLesson = () => {
           position="center"
         />
       )}
+
+      <TrailChat
+        isOpen={showPracticeModal}
+        onClose={() => { setShowPracticeModal(false); navigate("/dashboard"); }}
+        toolContext="Desafio 28 Dias"
+        accentColor="#6366f1"
+        language={i18n.language}
+        moduleSummary={moduleSummary}
+      />
     </div>
   );
 };
