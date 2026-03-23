@@ -62,6 +62,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     rights: "Todos los derechos reservados.",
     help: "Ayuda",
     privacy: "Privacidad",
+    supportText: "¿Necesitas ayuda? Contáctanos:",
   },
   fr: {
     subject: "🔓 Accès Accordé — Educly",
