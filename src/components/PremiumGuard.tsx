@@ -34,8 +34,21 @@ export const PremiumGuard = ({ children }: PremiumGuardProps) => {
 
     const checkAccess = async () => {
       try {
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        // Try to get current session first (triggers auto-refresh if expired)
+        await supabase.auth.getSession();
+
+        let { data: { user }, error: userError } = await supabase.auth.getUser();
         
+        // If getUser fails, try refreshing the session before giving up
+        if (userError) {
+          const { error: refreshError } = await supabase.auth.refreshSession();
+          if (!refreshError) {
+            const retry = await supabase.auth.getUser();
+            user = retry.data.user;
+            userError = retry.error;
+          }
+        }
+
         // Handle invalid JWT / 403 errors - clear tokens and redirect
         if (userError) {
           console.error('Auth error in PremiumGuard:', userError);
@@ -101,8 +114,8 @@ export const PremiumGuard = ({ children }: PremiumGuardProps) => {
     };
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_OUT' || !session) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_OUT') {
         if (isMounted) {
           setHasAccess(false);
           navigate('/auth', { replace: true });

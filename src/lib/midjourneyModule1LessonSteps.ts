@@ -42,41 +42,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_PT = [
     "MidJourney - Sua primeira arte com inteligencia artificial",
     "Bem-vindo de volta! Nesta licao, voce vai dar seus primeiros passos no MidJourney - uma das ferramentas de geracao de imagens com IA mais poderosas e usadas no mundo. Ao final, voce vai criar sua primeira arte com qualidade profissional.\n\nO MidJourney e uma ferramenta de geracao de imagens por inteligencia artificial. Voce descreve em texto o que quer ver - e ele cria. De ilustracoes artisticas a fotografias hiper-realistas, de conceitos abstratos a personagens detalhados, o MidJourney transforma palavras em imagens com uma qualidade visual que surpreende ate profissionais experientes.",
   ),
-  quizStep(
-    "O que diferencia o MidJourney",
-    "O que diferencia o MidJourney de outros geradores de imagem?",
-    [
-      "Sua qualidade estetica excepcional e capacidade de criar imagens com apelo artistico sofisticado.",
-      "E o unico gerador de imagens gratuito disponivel no mercado.",
-      "Funciona apenas para criar fotografias realistas.",
-      "E exclusivo para usuarios com conhecimento avancado em design grafico.",
-    ],
-    0,
-    "O diferencial do MidJourney esta na qualidade visual e no apelo artistico sofisticado, por isso ele e tao usado por designers, artistas e criativos.",
-  ),
   textStep(
     "Como acessar o MidJourney",
     "O MidJourney funciona principalmente dentro do Discord. Voce entra em um servidor, escreve seu prompt em um canal especifico e recebe as imagens geradas diretamente na conversa.\n\nEntender esse fluxo de acesso e importante porque ele molda toda a experiencia inicial dentro da ferramenta.",
-  ),
-  fillStep(
-    "Preencha a lacuna - Configure seu acesso",
-    "Complete a frase com a ordem correta de acesso ao MidJourney.",
-    "Para usar o MidJourney, voce precisa: criar uma conta no ___, entrar no servidor oficial do ___, ir ate um canal chamado ___, digitar o comando ___ seguido da sua descricao e aguardar aproximadamente ___ para receber suas imagens.",
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minuto"],
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minuto"],
-    "Esse e o fluxo basico de entrada: Discord, servidor oficial, canal newbies, comando /imagine e cerca de 1 minuto de espera.",
-  ),
-  quizStep(
-    "Por que Discord",
-    "Por que o MidJourney funciona dentro do Discord em vez de ter seu proprio site?",
-    [
-      "Porque o Discord e gratuito e reduz os custos do MidJourney.",
-      "Porque o MidJourney esta migrando para um site proprio e o Discord sera desativado.",
-      "Porque o Discord permite uma experiencia comunitaria onde usuarios veem as criacoes uns dos outros em tempo real.",
-      "Porque o MidJourney so funciona no Discord porque nao tem tecnologia para ter site proprio.",
-    ],
-    2,
-    "O Discord cria uma experiencia comunitaria: inspiracao, aprendizado coletivo e troca entre criadores acontecendo em tempo real.",
   ),
   textStep(
     "O comando principal - /imagine",
@@ -101,18 +69,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_PT = [
       "gostou",
     ],
     "A estrutura e simples: /imagine + prompt. Depois disso, o MidJourney gera 4 variacoes para voce avaliar.",
-  ),
-  quizStep(
-    "O que acontece apos enviar",
-    "O que acontece apos voce enviar o comando /imagine no MidJourney?",
-    [
-      "Uma unica imagem perfeita e gerada imediatamente.",
-      "O MidJourney pede confirmacao antes de gerar qualquer imagem.",
-      "O MidJourney gera 4 variacoes da imagem simultaneamente.",
-      "O comando /imagine so funciona em canais pagos do Discord.",
-    ],
-    2,
-    "O MidJourney gera 4 variacoes de uma vez para que voce compare, refine e escolha a direcao mais promissora.",
   ),
   textStep(
     "Entendendo as 4 imagens geradas",
@@ -180,18 +136,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_PT = [
     ["fotorrealista", "pintura a oleo", "arte conceitual", "aquarela"],
     "O estilo muda textura, paleta, atmosfera e leitura emocional da mesma cena.",
   ),
-  quizStep(
-    "Forca do estilo",
-    "O que acontece quando voce usa o mesmo sujeito com estilos diferentes no MidJourney?",
-    [
-      "O resultado e sempre o mesmo independentemente do estilo.",
-      "O MidJourney ignora o estilo e gera a imagem mais comum disponivel.",
-      "O mesmo sujeito pode gerar imagens completamente diferentes em textura, paleta, emocao e impacto visual.",
-      "Estilos diferentes so funcionam para imagens abstratas.",
-    ],
-    2,
-    "O estilo e uma das instrucoes mais poderosas do prompt porque redefine a aparencia e o clima da cena.",
-  ),
   fillStep(
     "Preencha a lacuna - Domine a iluminacao",
     "Complete cada tipo de luz para o retrato do guerreiro.",
@@ -224,18 +168,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_PT = [
     ["--ar 16:9", "--ar 9:16", "--ar 1:1"],
     "16:9 abre a cena, 9:16 domina o mobile e 1:1 funciona bem para composicoes quadradas e feed.",
   ),
-  quizStep(
-    "Quando usar 9:16",
-    "Quando usar o formato --ar 9:16 e a escolha mais estrategica?",
-    [
-      "Para imagens de paisagens amplas e panoramicas.",
-      "Para posts estaticos no feed do Instagram.",
-      "Para conteudo vertical como Reels, Stories e TikTok.",
-      "O formato --ar 9:16 so funciona para retratos de pessoas.",
-    ],
-    2,
-    "O 9:16 ocupa a tela inteira do celular em formato retrato, gerando mais impacto visual no consumo mobile.",
-  ),
   fillStep(
     "Preencha a lacuna - Monte seu prompt completo",
     "Agora junte sujeito, estilo, luz, composicao, cores e formato em um prompt so.",
@@ -258,41 +190,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_PT = [
     ],
     "Cada camada adiciona uma instrucao concreta: o que mostrar, como mostrar, com que luz, em que formato e com qual impacto visual.",
   ),
-  quizStep(
-    "Prompt completo",
-    "O que torna esse prompt mais eficaz do que um prompt de uma unica palavra?",
-    [
-      "O tamanho do prompt - quanto maior, melhor sempre.",
-      "Usar palavras em ingles em vez de portugues.",
-      "Cada elemento adicionado funciona como uma instrucao especifica que guia o MidJourney com clareza.",
-      "Prompts completos so funcionam para usuarios pagantes.",
-    ],
-    2,
-    "Estilo, iluminacao, composicao, cores e formato reduzem ambiguidade e fazem a IA chegar muito mais perto da visao que voce quer.",
-  ),
   textStep(
     "O que fazer quando nao gostou do resultado",
     "Nem sempre a primeira geracao entrega exatamente o que voce imaginou. Isso e normal e faz parte do processo criativo no MidJourney.\n\nA mentalidade correta e tratar cada geracao como uma conversa criativa: voce pede, observa, ajusta e refina.",
-  ),
-  fillStep(
-    "Preencha a lacuna - Reaja ao resultado",
-    "Complete a estrategia de iteracao quando a primeira geracao nao agradar.",
-    "Se nenhuma das ___ imagens agradou, clique em ___ para gerar ___ variacoes completamente novas com o mesmo prompt. Se o resultado foi proximo mas nao perfeito, clique em ___ na imagem mais parecida com sua visao para explorar variacoes dentro daquela ___ criativa.",
-    ["4", "Redo", "4", "V", "direcao"],
-    ["4", "Redo", "4", "V", "direcao"],
-    "Redo reinicia o conjunto de 4 geracoes com o mesmo prompt. V aprofunda a melhor direcao criativa.",
-  ),
-  quizStep(
-    "Mentalidade correta",
-    "Qual e a mentalidade correta ao usar o MidJourney pela primeira vez?",
-    [
-      "Esperar que o primeiro prompt gere a imagem perfeita imediatamente.",
-      "Desistir se as primeiras imagens nao ficarem como o esperado.",
-      "Tratar cada geracao como uma conversa criativa e refinar progressivamente.",
-      "Copiar prompts de outros usuarios sem entender como funcionam.",
-    ],
-    2,
-    "MidJourney funciona melhor quando voce itera com intencao. Cada tentativa ensina alguma coisa sobre como a ferramenta interpreta sua linguagem.",
   ),
   textStep(
     "Conclusao",
@@ -305,41 +205,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_EN = [
     "MidJourney - Your first AI artwork",
     "Welcome back! In this lesson, you will take your first steps inside MidJourney - one of the most powerful and widely used AI image generation tools in the world. By the end, you will create your first piece with professional-level quality.\n\nMidJourney is an AI image generation tool. You describe what you want to see in words - and it creates it. From artistic illustrations to hyper-realistic photography, from abstract concepts to detailed characters, MidJourney turns words into images with a visual quality that surprises even experienced professionals.",
   ),
-  quizStep(
-    "What makes MidJourney different",
-    "What makes MidJourney different from other image generators?",
-    [
-      "Its exceptional aesthetic quality and ability to create images with sophisticated artistic appeal.",
-      "It is the only free image generator on the market.",
-      "It only works for realistic photography.",
-      "It is exclusive to users with advanced graphic design knowledge.",
-    ],
-    0,
-    "MidJourney stands out because of its visual quality and strong artistic appeal, which is why it is so popular with designers, artists, and creative professionals.",
-  ),
   textStep(
     "How to access MidJourney",
     "MidJourney works mainly inside Discord. You join a server, type your prompt in a specific channel, and receive the generated images directly in the conversation.\n\nUnderstanding that access flow matters because it shapes your whole first experience with the tool.",
-  ),
-  fillStep(
-    "Fill in the blank - Set up your access",
-    "Complete the sentence with the correct MidJourney access flow.",
-    "To use MidJourney, you need to: create an account on ___, join the official ___ server, go to a channel called ___, type the command ___ followed by your description, and wait about ___ to receive your images.",
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minute"],
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minute"],
-    "That is the basic entry flow: Discord, official server, newbies channel, the /imagine command, and about 1 minute of waiting.",
-  ),
-  quizStep(
-    "Why Discord",
-    "Why does MidJourney run inside Discord instead of on its own website?",
-    [
-      "Because Discord is free and lowers MidJourney's costs.",
-      "Because MidJourney is moving to its own site and Discord will be shut down.",
-      "Because Discord creates a community experience where users see each other's creations in real time.",
-      "Because MidJourney only works on Discord because it lacks the technology for a website.",
-    ],
-    2,
-    "Discord makes the experience communal: inspiration, collective learning, and creator exchange all happen in real time.",
   ),
   textStep(
     "The main command - /imagine",
@@ -364,18 +232,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_EN = [
       "liked",
     ],
     "The structure is simple: /imagine + prompt. After that, MidJourney generates 4 variations for you to review.",
-  ),
-  quizStep(
-    "What happens after sending it",
-    "What happens after you send the /imagine command in MidJourney?",
-    [
-      "A single perfect image is generated immediately.",
-      "MidJourney asks for confirmation before generating anything.",
-      "MidJourney generates 4 image variations at the same time.",
-      "The /imagine command only works in paid Discord channels.",
-    ],
-    2,
-    "MidJourney gives you 4 variations at once so you can compare, refine, and choose the strongest direction.",
   ),
   textStep(
     "Understanding the 4 generated images",
@@ -443,18 +299,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_EN = [
     ["photorealistic", "oil painting", "concept art", "watercolor"],
     "Style changes texture, palette, atmosphere, and the emotional reading of the same scene.",
   ),
-  quizStep(
-    "The power of style",
-    "What happens when you use the same subject with different styles in MidJourney?",
-    [
-      "The result is always the same regardless of the style.",
-      "MidJourney ignores the style and generates the most common image available.",
-      "The same subject can generate completely different images in texture, palette, emotion, and visual impact.",
-      "Different styles only work for abstract images.",
-    ],
-    2,
-    "Style is one of the strongest prompt instructions because it redefines the look and emotional climate of the scene.",
-  ),
   fillStep(
     "Fill in the blank - Master the lighting",
     "Complete each lighting type for the warrior portrait.",
@@ -487,18 +331,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_EN = [
     ["--ar 16:9", "--ar 9:16", "--ar 1:1"],
     "16:9 opens the scene, 9:16 dominates mobile, and 1:1 works well for square compositions and feed assets.",
   ),
-  quizStep(
-    "When to use 9:16",
-    "When is using the --ar 9:16 format the most strategic choice?",
-    [
-      "For wide and panoramic landscape images.",
-      "For static posts in the Instagram feed.",
-      "For vertical content such as Reels, Stories, and TikTok.",
-      "The --ar 9:16 format only works for portraits of people.",
-    ],
-    2,
-    "9:16 fills the entire phone screen in portrait mode, which creates far more impact on mobile consumption.",
-  ),
   fillStep(
     "Fill in the blank - Build your complete prompt",
     "Now combine subject, style, light, composition, color, and format in a single prompt.",
@@ -521,41 +353,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_EN = [
     ],
     "Each layer adds a concrete instruction: what to show, how to show it, with what light, in what format, and with what visual intensity.",
   ),
-  quizStep(
-    "Complete prompt",
-    "What makes this prompt more effective than a one-word prompt?",
-    [
-      "The length of the prompt - longer is always better.",
-      "Using English words instead of another language.",
-      "Each added element works like a specific instruction that guides MidJourney clearly.",
-      "Complete prompts only work for paid users.",
-    ],
-    2,
-    "Style, lighting, composition, color, and format reduce ambiguity and bring the AI much closer to the vision you want.",
-  ),
   textStep(
     "What to do when you do not like the result",
     "The first generation will not always deliver exactly what you imagined. That is normal and part of the creative process in MidJourney.\n\nThe right mindset is to treat each generation like a creative conversation: you ask, observe, adjust, and refine.",
-  ),
-  fillStep(
-    "Fill in the blank - React to the result",
-    "Complete the iteration strategy for when the first generation does not work.",
-    "If none of the ___ images worked, click ___ to generate ___ completely new variations with the same prompt. If the result was close but not perfect, click ___ on the image closest to your vision to explore variations inside that creative ___.",
-    ["4", "Redo", "4", "V", "direction"],
-    ["4", "Redo", "4", "V", "direction"],
-    "Redo restarts the set of 4 generations with the same prompt. V deepens the strongest creative direction.",
-  ),
-  quizStep(
-    "The right mindset",
-    "What is the right mindset when using MidJourney for the first time?",
-    [
-      "Expect the first prompt to generate the perfect image immediately.",
-      "Give up if the first images are not what you expected.",
-      "Treat each generation like a creative conversation and refine progressively.",
-      "Copy prompts from other users without understanding how they work.",
-    ],
-    2,
-    "MidJourney works best when you iterate with intention. Every attempt teaches you something about how the tool interprets language.",
   ),
   textStep(
     "Conclusion",
@@ -568,41 +368,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_ES = [
     "MidJourney - Tu primera obra con inteligencia artificial",
     "Bienvenido de nuevo. En esta leccion, vas a dar tus primeros pasos en MidJourney - una de las herramientas de generacion de imagenes con IA mas potentes y usadas del mundo. Al final, vas a crear tu primera pieza con calidad profesional.\n\nMidJourney es una herramienta de generacion de imagenes por inteligencia artificial. Describes en texto lo que quieres ver - y la herramienta lo crea. Desde ilustraciones artisticas hasta fotografias hiperrealistas, desde conceptos abstractos hasta personajes detallados, MidJourney convierte palabras en imagenes con una calidad visual que sorprende incluso a profesionales experimentados.",
   ),
-  quizStep(
-    "Que diferencia a MidJourney",
-    "Que diferencia a MidJourney de otros generadores de imagen?",
-    [
-      "Su calidad estetica excepcional y su capacidad para crear imagenes con un atractivo artistico sofisticado.",
-      "Es el unico generador de imagenes gratuito del mercado.",
-      "Solo funciona para crear fotografias realistas.",
-      "Es exclusivo para usuarios con conocimientos avanzados de diseno grafico.",
-    ],
-    0,
-    "MidJourney destaca por su calidad visual y su fuerte atractivo artistico, por eso es tan usado por disenadores, artistas y perfiles creativos.",
-  ),
   textStep(
     "Como acceder a MidJourney",
     "MidJourney funciona principalmente dentro de Discord. Entras en un servidor, escribes tu prompt en un canal especifico y recibes las imagenes generadas directamente en la conversacion.\n\nEntender ese flujo de acceso es importante porque define toda tu experiencia inicial con la herramienta.",
-  ),
-  fillStep(
-    "Completa el espacio - Configura tu acceso",
-    "Completa la frase con el flujo correcto de acceso a MidJourney.",
-    "Para usar MidJourney, necesitas: crear una cuenta en ___, entrar en el servidor oficial de ___, ir a un canal llamado ___, escribir el comando ___ seguido de tu descripcion y esperar aproximadamente ___ para recibir tus imagenes.",
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minuto"],
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minuto"],
-    "Ese es el flujo basico de entrada: Discord, servidor oficial, canal newbies, comando /imagine y cerca de 1 minuto de espera.",
-  ),
-  quizStep(
-    "Por que Discord",
-    "Por que MidJourney funciona dentro de Discord en lugar de tener su propio sitio?",
-    [
-      "Porque Discord es gratuito y reduce los costos de MidJourney.",
-      "Porque MidJourney esta migrando a un sitio propio y Discord se desactivara.",
-      "Porque Discord permite una experiencia comunitaria donde los usuarios ven las creaciones de los demas en tiempo real.",
-      "Porque MidJourney solo funciona en Discord porque no tiene tecnologia para tener sitio propio.",
-    ],
-    2,
-    "Discord crea una experiencia comunitaria: inspiracion, aprendizaje colectivo e intercambio entre creadores en tiempo real.",
   ),
   textStep(
     "El comando principal - /imagine",
@@ -627,18 +395,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_ES = [
       "gusto",
     ],
     "La estructura es simple: /imagine + prompt. Despues de eso, MidJourney genera 4 variaciones para que las evalues.",
-  ),
-  quizStep(
-    "Que pasa despues de enviarlo",
-    "Que ocurre despues de enviar el comando /imagine en MidJourney?",
-    [
-      "Se genera inmediatamente una sola imagen perfecta.",
-      "MidJourney pide confirmacion antes de generar cualquier imagen.",
-      "MidJourney genera 4 variaciones de la imagen al mismo tiempo.",
-      "El comando /imagine solo funciona en canales pagos de Discord.",
-    ],
-    2,
-    "MidJourney genera 4 variaciones de una vez para que compares, refines y elijas la direccion mas prometedora.",
   ),
   textStep(
     "Entendiendo las 4 imagenes generadas",
@@ -706,18 +462,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_ES = [
     ["fotorrealista", "pintura al oleo", "arte conceptual", "acuarela"],
     "El estilo cambia la textura, la paleta, la atmosfera y la lectura emocional de la misma escena.",
   ),
-  quizStep(
-    "La fuerza del estilo",
-    "Que ocurre cuando usas el mismo sujeto con estilos diferentes en MidJourney?",
-    [
-      "El resultado siempre es el mismo sin importar el estilo.",
-      "MidJourney ignora el estilo y genera la imagen mas comun disponible.",
-      "El mismo sujeto puede generar imagenes completamente distintas en textura, paleta, emocion e impacto visual.",
-      "Los estilos diferentes solo funcionan para imagenes abstractas.",
-    ],
-    2,
-    "El estilo es una de las instrucciones mas poderosas del prompt porque redefine la apariencia y el clima emocional de la escena.",
-  ),
   fillStep(
     "Completa el espacio - Domina la iluminacion",
     "Completa cada tipo de luz para el retrato del guerrero.",
@@ -750,18 +494,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_ES = [
     ["--ar 16:9", "--ar 9:16", "--ar 1:1"],
     "16:9 abre la escena, 9:16 domina el movil y 1:1 funciona bien para composiciones cuadradas y piezas de feed.",
   ),
-  quizStep(
-    "Cuando usar 9:16",
-    "Cuando usar el formato --ar 9:16 es la eleccion mas estrategica?",
-    [
-      "Para imagenes de paisajes amplios y panoramicos.",
-      "Para posts estaticos en el feed de Instagram.",
-      "Para contenido vertical como Reels, Stories y TikTok.",
-      "El formato --ar 9:16 solo funciona para retratos de personas.",
-    ],
-    2,
-    "El 9:16 ocupa toda la pantalla del movil en formato retrato y genera mucho mas impacto en consumo mobile.",
-  ),
   fillStep(
     "Completa el espacio - Arma tu prompt completo",
     "Ahora une sujeto, estilo, luz, composicion, colores y formato en un solo prompt.",
@@ -784,41 +516,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_ES = [
     ],
     "Cada capa agrega una instruccion concreta: que mostrar, como mostrarlo, con que luz, en que formato y con que impacto visual.",
   ),
-  quizStep(
-    "Prompt completo",
-    "Que hace que este prompt sea mas eficaz que un prompt de una sola palabra?",
-    [
-      "La longitud del prompt - cuanto mas largo, mejor siempre.",
-      "Usar palabras en ingles en lugar de otro idioma.",
-      "Cada elemento agregado funciona como una instruccion especifica que guia a MidJourney con claridad.",
-      "Los prompts completos solo funcionan para usuarios de pago.",
-    ],
-    2,
-    "Estilo, iluminacion, composicion, color y formato reducen la ambiguedad y acercan mucho mas la IA a la vision que quieres.",
-  ),
   textStep(
     "Que hacer cuando no te gusta el resultado",
     "La primera generacion no siempre entrega exactamente lo que imaginaste. Eso es normal y forma parte del proceso creativo en MidJourney.\n\nLa mentalidad correcta es tratar cada generacion como una conversacion creativa: pides, observas, ajustas y refinas.",
-  ),
-  fillStep(
-    "Completa el espacio - Reacciona al resultado",
-    "Completa la estrategia de iteracion para cuando la primera generacion no convence.",
-    "Si ninguna de las ___ imagenes te gusto, haz clic en ___ para generar ___ variaciones completamente nuevas con el mismo prompt. Si el resultado estuvo cerca pero no perfecto, haz clic en ___ sobre la imagen mas parecida a tu vision para explorar variaciones dentro de esa ___ creativa.",
-    ["4", "Redo", "4", "V", "direccion"],
-    ["4", "Redo", "4", "V", "direccion"],
-    "Redo reinicia el conjunto de 4 generaciones con el mismo prompt. V profundiza la mejor direccion creativa.",
-  ),
-  quizStep(
-    "Mentalidad correcta",
-    "Cual es la mentalidad correcta al usar MidJourney por primera vez?",
-    [
-      "Esperar que el primer prompt genere la imagen perfecta de inmediato.",
-      "Rendirse si las primeras imagenes no salen como esperabas.",
-      "Tratar cada generacion como una conversacion creativa y refinar progresivamente.",
-      "Copiar prompts de otros usuarios sin entender como funcionan.",
-    ],
-    2,
-    "MidJourney funciona mejor cuando iteras con intencion. Cada intento ensenia algo sobre como la herramienta interpreta tu lenguaje.",
   ),
   textStep(
     "Conclusion",
@@ -831,41 +531,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_FR = [
     "MidJourney - Votre premiere creation avec l'intelligence artificielle",
     "Bon retour. Dans cette lecon, vous allez faire vos premiers pas avec MidJourney - l'un des outils de generation d'images par IA les plus puissants et les plus utilises au monde. A la fin, vous aurez cree votre premiere image avec une qualite professionnelle.\n\nMidJourney est un outil de generation d'images par intelligence artificielle. Vous decrivez en texte ce que vous voulez voir - et il le cree. Des illustrations artistiques aux photographies hyperrealistes, des concepts abstraits aux personnages tres detailles, MidJourney transforme des mots en images avec une qualite visuelle qui impressionne meme les professionnels experimentes.",
   ),
-  quizStep(
-    "Ce qui distingue MidJourney",
-    "Qu'est-ce qui distingue MidJourney des autres generateurs d'images ?",
-    [
-      "Sa qualite esthetique exceptionnelle et sa capacite a produire des images avec une forte valeur artistique.",
-      "C'est le seul generateur d'images gratuit du marche.",
-      "Il fonctionne uniquement pour des photographies realistes.",
-      "Il est reserve aux utilisateurs ayant un niveau avance en design graphique.",
-    ],
-    0,
-    "MidJourney se distingue par sa qualite visuelle et son impact artistique, ce qui explique pourquoi il est si apprecie des designers, artistes et profils creatifs.",
-  ),
   textStep(
     "Comment acceder a MidJourney",
     "MidJourney fonctionne principalement dans Discord. Vous entrez dans un serveur, vous ecrivez votre prompt dans un canal specifique et vous recevez les images generees directement dans la conversation.\n\nComprendre ce flux d'acces est important, car il structure toute votre premiere experience avec l'outil.",
-  ),
-  fillStep(
-    "Completez le vide - Configurez votre acces",
-    "Completez la phrase avec le bon parcours d'acces a MidJourney.",
-    "Pour utiliser MidJourney, vous devez : creer un compte sur ___, entrer dans le serveur officiel de ___, aller dans un canal appele ___, taper la commande ___ suivie de votre description, puis attendre environ ___ pour recevoir vos images.",
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minute"],
-    ["Discord", "MidJourney", "newbies", "/imagine", "1 minute"],
-    "Voici le flux de base : Discord, serveur officiel, canal newbies, commande /imagine et environ 1 minute d'attente.",
-  ),
-  quizStep(
-    "Pourquoi Discord",
-    "Pourquoi MidJourney fonctionne-t-il dans Discord au lieu d'avoir son propre site ?",
-    [
-      "Parce que Discord est gratuit et reduit les couts de MidJourney.",
-      "Parce que MidJourney est en train de migrer vers son propre site et que Discord sera desactive.",
-      "Parce que Discord permet une experience communautaire ou les utilisateurs voient les creations des autres en temps reel.",
-      "Parce que MidJourney fonctionne uniquement dans Discord faute de technologie pour avoir son propre site.",
-    ],
-    2,
-    "Discord cree une experience communautaire : inspiration, apprentissage collectif et echanges entre createurs en temps reel.",
   ),
   textStep(
     "La commande principale - /imagine",
@@ -890,18 +558,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_FR = [
       "preferez",
     ],
     "La structure est simple : /imagine + prompt. Ensuite, MidJourney genere 4 variations pour que vous puissiez les evaluer.",
-  ),
-  quizStep(
-    "Ce qui se passe apres l'envoi",
-    "Que se passe-t-il apres l'envoi de la commande /imagine dans MidJourney ?",
-    [
-      "Une seule image parfaite est generee immediatement.",
-      "MidJourney demande une confirmation avant de generer quoi que ce soit.",
-      "MidJourney genere 4 variations de l'image en meme temps.",
-      "La commande /imagine fonctionne uniquement dans des canaux Discord payants.",
-    ],
-    2,
-    "MidJourney produit 4 variations d'un coup pour que vous puissiez comparer, affiner et choisir la direction la plus prometteuse.",
   ),
   textStep(
     "Comprendre les 4 images generees",
@@ -969,18 +625,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_FR = [
     ["photorrealiste", "peinture a l'huile", "art conceptuel", "aquarelle"],
     "Le style modifie la texture, la palette, l'atmosphere et la lecture emotionnelle d'une meme scene.",
   ),
-  quizStep(
-    "La force du style",
-    "Que se passe-t-il quand vous utilisez le meme sujet avec des styles differents dans MidJourney ?",
-    [
-      "Le resultat est toujours le meme, quel que soit le style.",
-      "MidJourney ignore le style et genere l'image la plus commune disponible.",
-      "Le meme sujet peut produire des images completement differentes en texture, palette, emotion et impact visuel.",
-      "Les styles differents ne fonctionnent que pour les images abstraites.",
-    ],
-    2,
-    "Le style est l'une des instructions les plus puissantes du prompt, car il redefine l'apparence et le climat emotionnel de la scene.",
-  ),
   fillStep(
     "Completez le vide - Maitrisez l'eclairage",
     "Completez chaque type de lumiere pour le portrait du guerrier.",
@@ -1013,18 +657,6 @@ export const MIDJOURNEY_MODULE_1_STEPS_FR = [
     ["--ar 16:9", "--ar 9:16", "--ar 1:1"],
     "16:9 ouvre la scene, 9:16 domine le mobile et 1:1 fonctionne tres bien pour les compositions carrees et les publications de feed.",
   ),
-  quizStep(
-    "Quand utiliser 9:16",
-    "Quand utiliser le format --ar 9:16 est-il le choix le plus strategique ?",
-    [
-      "Pour des images de paysages larges et panoramiques.",
-      "Pour des publications statiques dans le feed Instagram.",
-      "Pour du contenu vertical comme Reels, Stories et TikTok.",
-      "Le format --ar 9:16 fonctionne uniquement pour des portraits de personnes.",
-    ],
-    2,
-    "Le 9:16 occupe tout l'ecran du telephone en mode portrait, ce qui cree beaucoup plus d'impact dans un usage mobile.",
-  ),
   fillStep(
     "Completez le vide - Construisez votre prompt complet",
     "Assemblez maintenant sujet, style, lumiere, composition, couleurs et format dans un seul prompt.",
@@ -1047,41 +679,9 @@ export const MIDJOURNEY_MODULE_1_STEPS_FR = [
     ],
     "Chaque couche ajoute une instruction concrete : quoi montrer, comment le montrer, avec quelle lumiere, dans quel format et avec quel impact visuel.",
   ),
-  quizStep(
-    "Prompt complet",
-    "Qu'est-ce qui rend ce prompt plus efficace qu'un prompt en un seul mot ?",
-    [
-      "La longueur du prompt - plus il est long, mieux c'est.",
-      "Utiliser des mots en anglais plutot que dans une autre langue.",
-      "Chaque element ajoute agit comme une instruction specifique qui guide clairement MidJourney.",
-      "Les prompts complets fonctionnent uniquement pour les utilisateurs payants.",
-    ],
-    2,
-    "Style, eclairage, composition, couleurs et format reduisent l'ambiguite et rapprochent l'IA de la vision que vous voulez obtenir.",
-  ),
   textStep(
     "Que faire quand le resultat ne vous plait pas",
     "La premiere generation ne livre pas toujours exactement ce que vous imaginiez. C'est normal et cela fait partie du processus creatif avec MidJourney.\n\nLe bon etat d'esprit consiste a traiter chaque generation comme une conversation creative : vous demandez, vous observez, vous ajustez et vous affinez.",
-  ),
-  fillStep(
-    "Completez le vide - Reagissez au resultat",
-    "Completez la strategie d'iteration quand la premiere generation ne convient pas.",
-    "Si aucune des ___ images ne vous plait, cliquez sur ___ pour generer ___ variations completement nouvelles avec le meme prompt. Si le resultat est proche mais pas encore parfait, cliquez sur ___ sur l'image la plus proche de votre vision pour explorer des variations dans cette ___ creative.",
-    ["4", "Redo", "4", "V", "direction"],
-    ["4", "Redo", "4", "V", "direction"],
-    "Redo relance un nouveau groupe de 4 generations avec le meme prompt. V approfondit la meilleure direction creative.",
-  ),
-  quizStep(
-    "Le bon etat d'esprit",
-    "Quel est le bon etat d'esprit quand on utilise MidJourney pour la premiere fois ?",
-    [
-      "Attendre que le premier prompt genere immediatement l'image parfaite.",
-      "Abandonner si les premieres images ne correspondent pas a vos attentes.",
-      "Traiter chaque generation comme une conversation creative et affiner progressivement.",
-      "Copier les prompts d'autres utilisateurs sans comprendre comment ils fonctionnent.",
-    ],
-    2,
-    "MidJourney fonctionne mieux quand vous iterez avec intention. Chaque tentative vous apprend quelque chose sur la maniere dont l'outil interprete votre langage.",
   ),
   textStep(
     "Conclusion",

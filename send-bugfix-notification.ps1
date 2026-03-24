@@ -5,13 +5,25 @@ param (
 )
 
 # ---- CONFIGURACAO ----
-$SUPABASE_URL     = "https://dqlcxpbfemhzzetwaxsa.supabase.co"
-$SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxbGN4cGJmZW1oenpldHdheHNhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NDY4NTE5MCwiZXhwIjoyMDgwMjYxMTkwfQ.mtROIpVO45WOOAV9g-CMEaWYxdipK2siBwfFsy1qRlQ"
-$RESEND_API_KEY   = "re_L6bNDBay_JcehQZPKrK2xwTKt7sUQxsJg"
+$SUPABASE_URL     = $env:SUPABASE_URL
+$SERVICE_ROLE_KEY = $env:SUPABASE_SERVICE_ROLE_KEY
+$RESEND_API_KEY   = $env:RESEND_API_KEY
 $FROM_EMAIL       = "Educly <noreply@educly.app>"
 $BATCH_SIZE       = 50
 $CACHE_RESET_URL  = "https://educly.app/reset-cache"
 # ---- FIM ----
+
+if (-not $SUPABASE_URL) {
+    throw "Missing environment variable: SUPABASE_URL"
+}
+
+if (-not $SERVICE_ROLE_KEY) {
+    throw "Missing environment variable: SUPABASE_SERVICE_ROLE_KEY"
+}
+
+if (-not $RESEND_API_KEY) {
+    throw "Missing environment variable: RESEND_API_KEY"
+}
 
 $TRANSLATIONS = @{
     "pt" = @{ subject="[Educly] Atualizamos o sistema!"; title="Melhorias no Educly"; greeting="Olá!"; body="Informamos que o sistema passou por diversas correções de bugs e melhorias para tornar sua experiência ainda melhor e mais estável."; instruction="Para garantir que todas as alterações mais recentes sejam aplicadas corretamente em seu navegador, recomendamos que utilize o link abaixo:"; linkText="Aplicar Atualizações (Reset Cache)"; thanks="Obrigado pela confiança!"; team="Equipe Educly"; privacy="Politica de Privacidade"; terms="Termos de Uso"; rights="Todos os direitos reservados." }
