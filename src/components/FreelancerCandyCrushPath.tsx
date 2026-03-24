@@ -99,12 +99,11 @@ export const FreelancerCandyCrushPath = ({
       .join(" ");
 
   return (
-    <div className="py-8 flex justify-center w-full overflow-x-hidden">
-      <div className="relative w-full max-w-[400px]" style={{ height: `${svgHeight}px` }}>
+    <div className="py-8 relative flex justify-center w-full overflow-hidden">
+      <div className="relative w-[400px] min-w-[400px]" style={{ height: `${svgHeight}px` }}>
         <svg
           className="absolute top-0 left-0 w-full h-full pointer-events-none"
           viewBox={`0 0 ${VIEWBOX_WIDTH} ${svgHeight}`}
-          preserveAspectRatio="xMidYMin meet"
         >
           {/* Base path */}
           <path
