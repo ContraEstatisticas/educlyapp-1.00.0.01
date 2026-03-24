@@ -213,7 +213,7 @@
 
 /* 5. Posicionamento do botão flutuante acima da MobileNav com safe area */
 .floating-edi-btn {
-  bottom: calc(5rem + env(safe-area-inset-bottom));
+  bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px) + 0.5rem);
 }
 @media (min-width: 768px) {
   .floating-edi-btn {
