@@ -3309,7 +3309,7 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
     }
   },
   deepseek: {
-    status: "coming_soon",
+    status: "live",
     locales: {
       pt: {
         statusBadge: "Em breve",
