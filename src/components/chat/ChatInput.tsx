@@ -41,7 +41,7 @@ export const ChatInput = ({ onSend, isLoading, placeholder }: ChatInputProps) =>
           rows={1}
           className={cn(
             "w-full resize-none rounded-xl border border-input bg-background px-4 py-3 pr-12",
-            "text-sm placeholder:text-muted-foreground",
+            "text-base sm:text-sm placeholder:text-muted-foreground",
             "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             "min-h-[48px] max-h-[120px]"
