@@ -450,10 +450,13 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background safe-area-inset text-foreground transition-colors duration-300 pb-mobile-nav md:pb-24">
+    <div className="min-h-screen bg-background pl-safe pr-safe text-foreground transition-colors duration-300 pb-mobile-nav md:pb-24">
 
       {/* Header */}
-      <header className="sticky top-safe z-50 backdrop-blur-md border-b bg-background/80 px-4 min-h-16 flex items-center justify-between">
+      <header
+        className="sticky top-0 z-50 backdrop-blur-md border-b bg-background/80 px-4 min-h-16 flex items-center justify-between"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.5rem)", paddingBottom: "0.5rem" }}
+      >
         <Button
           variant="ghost"
           onClick={() => navigate(-1)}

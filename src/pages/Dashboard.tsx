@@ -180,7 +180,7 @@ const Dashboard = () => {
 
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground safe-area-inset pb-mobile-nav md:pb-20 transition-colors duration-300">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20 transition-colors duration-300">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -272,7 +272,10 @@ const Dashboard = () => {
 
       <ProductOnboarding />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4">
+      <div
+        className="max-w-6xl mx-auto px-4 sm:px-6 pb-8"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1rem)" }}
+      >
         <DashboardHeader onLogout={handleLogout} />
 
         {/* Welcome Banner */}
