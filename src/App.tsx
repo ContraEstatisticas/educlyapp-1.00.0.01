@@ -138,26 +138,33 @@ const App = () => {
       return;
     }
 
-    const handleThemeChange = (theme: string) => {
+    const normalizeTheme = (theme: string | null) => theme === "dark" ? "dark" : "light";
+
+    const handleThemeChange = (theme: "dark" | "light") => {
       const html = document.documentElement;
+      const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+      html.classList.remove("light", "dark");
+      html.classList.add(theme);
+      html.style.colorScheme = theme;
 
       if (theme === "dark") {
-        html.classList.add("dark");
         html.style.backgroundColor = "#0f172a";
         document.body.style.backgroundColor = "#0f172a";
+        themeColorMeta?.setAttribute("content", "#0f172a");
       } else {
-        html.classList.remove("dark");
         html.style.backgroundColor = "#ffffff";
         document.body.style.backgroundColor = "#ffffff";
+        themeColorMeta?.setAttribute("content", "#ffffff");
       }
     };
 
-    const themeStore = localStorage.getItem("educly-theme") || "dark";
+    const themeStore = normalizeTheme(localStorage.getItem("educly-theme"));
     handleThemeChange(themeStore);
 
     const handleStorage = (e: StorageEvent) => {
       if (e.key === "educly-theme") {
-        handleThemeChange(e.newValue || "dark");
+        handleThemeChange(normalizeTheme(e.newValue));
       }
     };
 
@@ -171,7 +178,7 @@ const App = () => {
     <GlobalErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider
-            defaultTheme="dark"
+            defaultTheme="light"
             storageKey="educly-theme">
           <TooltipProvider>
             <SoundSettingsProvider>

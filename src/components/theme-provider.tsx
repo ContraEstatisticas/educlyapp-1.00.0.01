@@ -2,6 +2,7 @@ import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "dark" | "light" | "system"
+type ResolvedTheme = "dark" | "light"
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -10,12 +11,15 @@ type ThemeProviderProps = {
 }
 
 type ThemeProviderState = {
-  theme: Theme
+  theme: ResolvedTheme
   setTheme: (theme: Theme) => void
 }
 
+const normalizeTheme = (theme?: string | null): ResolvedTheme =>
+  theme === "dark" ? "dark" : "light"
+
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "light",
   setTheme: () => null,
 }
 
@@ -23,43 +27,36 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
   const isBrowser = typeof window !== "undefined" && typeof localStorage !== "undefined"
-  const [theme, setTheme] = useState<Theme>(
-    () => (isBrowser ? (localStorage.getItem(storageKey) as Theme | null) : null) || defaultTheme
-  )
+  const [theme, setTheme] = useState<ResolvedTheme>(() => {
+    const storedTheme = isBrowser ? localStorage.getItem(storageKey) : null
+    return normalizeTheme(storedTheme ?? defaultTheme)
+  })
 
   useEffect(() => {
     if (typeof window === "undefined") return
     const root = window.document.documentElement
+    const resolvedTheme = normalizeTheme(theme)
 
     root.classList.remove("light", "dark")
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      root.style.colorScheme = systemTheme
-      return
-    }
-
-    root.classList.add(theme)
-    root.style.colorScheme = theme
+    root.classList.add(resolvedTheme)
+    root.style.colorScheme = resolvedTheme
   }, [theme])
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
+      const normalizedTheme = normalizeTheme(theme)
+
       if (typeof localStorage !== "undefined") {
-        localStorage.setItem(storageKey, theme)
+        localStorage.setItem(storageKey, normalizedTheme)
       }
-      setTheme(theme)
+
+      setTheme(normalizedTheme)
     },
   }
 
