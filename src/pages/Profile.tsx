@@ -1020,8 +1020,8 @@ const Profile = () => {
                     </div>
 
                     <div className="bg-muted/30 rounded-3xl p-6 flex flex-col items-center justify-center text-center border border-dashed border-border/60">
-                      <div className="w-32 h-32 mb-4 bg-card rounded-2xl shadow-sm border border-border/40 flex items-center justify-center p-3">
-                         <img src="/logo192.png" alt="Educly Logo" className="w-full h-full object-contain rounded-lg" />
+                      <div className="w-32 h-32 mb-4 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-border/40 flex items-center justify-center p-3 transition-transform hover:scale-105 duration-300">
+                         <img src="/pwa-192x192.png" alt="Educly Logo" className="w-full h-full object-contain rounded-lg" />
                       </div>
                       <h5 className="font-bold text-sm text-foreground mb-2">{t('pwa.desktopPrompt', 'No Desktop?')}</h5>
                       <p className="text-xs text-muted-foreground leading-relaxed">

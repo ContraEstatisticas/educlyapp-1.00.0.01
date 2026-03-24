@@ -2688,7 +2688,10 @@
       "step2": "Select \"Install app\"",
       "stepTitle1": "Step 1",
       "stepTitle2": "Step 2"
-    }
+    },
+    "installInstructions": "Installation Instructions",
+    "alreadyInstalledDesc": "You are already using the App version of Educly. Enjoy direct access!",
+    "desktopPrompt": "On Desktop?"
   },
   "assistants": {
     "title": "AI Assistants",

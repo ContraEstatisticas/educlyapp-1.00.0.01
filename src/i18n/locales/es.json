@@ -4117,6 +4117,31 @@
         "category": "Vídeo con IA",
         "description": "La IA de vídeo de Google: transforma texto e imágenes en vídeos cinematográficos."
       }
+    },
+    "pwa": {
+      "title": "Instalar Educly",
+      "description": "¡Accede más rápido directamente desde tu pantalla de inicio!",
+      "install": "Instalar ahora",
+      "installApp": "Instalar App",
+      "installed": "Instalado",
+      "installTitle": "Instalar Educly",
+      "installDescription": "Sigue los pasos a continuación para instalar la app:",
+      "desktop": "Usa el menú del navegador para instalar",
+      "ios": {
+        "step1": "Toca el botón de compartir",
+        "step2": "Selecciona \"Añadir a la pantalla de inicio\"",
+        "stepTitle1": "Paso 1",
+        "stepTitle2": "Paso 2"
+      },
+      "android": {
+        "step1": "Toca el menú del navegador (⋮)",
+        "step2": "Selecciona \"Instalar aplicación\"",
+        "stepTitle1": "Paso 1",
+        "stepTitle2": "Paso 2"
+      },
+      "installInstructions": "Instrucciones de instalación",
+      "alreadyInstalledDesc": "Ya estás usando la versión App de Educly. ¡Disfruta del acceso directo!",
+      "desktopPrompt": "¿En el ordenador?"
     }
   }
 }
