@@ -780,7 +780,10 @@ const FreelancerContent = () => {
           <div className="absolute right-0 top-0 bottom-0 w-[85%] max-w-[350px] bg-background shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col h-full border-l border-border">
 
             {/* Cabeçalho da Gaveta */}
-            <div className="p-4 flex justify-end border-b border-border bg-card">
+            <div
+              className="px-4 pb-4 flex justify-end border-b border-border bg-card"
+              style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1.25rem)" }}
+            >
               <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-6 h-6 text-muted-foreground" />
               </Button>
@@ -802,11 +805,11 @@ const FreelancerContent = () => {
       )}
 
       {/* Container Principal adaptado para Dark Mode (bg-background) */}
-      <div className="min-h-screen bg-background p-4 md:p-8 font-sans safe-area-inset relative pb-mobile-nav md:pb-24">
-        <div className="max-w-[1600px] mx-auto">
+      <div className="min-h-screen bg-background font-sans safe-area-inset relative pb-mobile-nav md:pb-24">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-5 md:px-8 py-4 md:py-8">
 
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 relative z-20">
+          <div className="flex items-center justify-between mb-8 relative z-20 pt-2 md:pt-0">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"

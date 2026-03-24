@@ -18,6 +18,7 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
     const currentStepRef = useRef<HTMLButtonElement>(null);
     const [showLeftFade, setShowLeftFade] = useState(false);
     const [showRightFade, setShowRightFade] = useState(false);
+    const fadeWidth = 18;
 
     useEffect(() => {
         const container = scrollRef.current;
@@ -63,19 +64,30 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
         }
     }, [currentStep, steps.length]);
 
+    const maskImage =
+        showLeftFade && showRightFade
+            ? `linear-gradient(to right, transparent 0, black ${fadeWidth}px, black calc(100% - ${fadeWidth}px), transparent 100%)`
+            : showLeftFade
+                ? `linear-gradient(to right, transparent 0, black ${fadeWidth}px, black 100%)`
+                : showRightFade
+                    ? `linear-gradient(to right, black 0, black calc(100% - ${fadeWidth}px), transparent 100%)`
+                    : "none";
+
     return (
         <div className="w-full relative py-2 overflow-visible">
-            {showLeftFade && (
-                <div className="absolute left-0 top-0 bottom-0 w-5 bg-gradient-to-r from-background/90 to-transparent z-10 pointer-events-none" />
-            )}
-            {showRightFade && (
-                <div className="absolute right-0 top-0 bottom-0 w-5 bg-gradient-to-l from-background/90 to-transparent z-10 pointer-events-none" />
-            )}
-
             <div
                 ref={scrollRef}
                 className="w-full overflow-x-auto overflow-y-visible px-4 py-2 no-scrollbar snap-x"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                style={{
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
+                    maskImage,
+                    WebkitMaskImage: maskImage,
+                    maskRepeat: "no-repeat",
+                    WebkitMaskRepeat: "no-repeat",
+                    maskSize: "100% 100%",
+                    WebkitMaskSize: "100% 100%",
+                }}
             >
                 <div className="mx-auto flex w-max min-w-full items-center justify-between sm:justify-center gap-3 sm:gap-4">
                     {steps.map((step) => {
