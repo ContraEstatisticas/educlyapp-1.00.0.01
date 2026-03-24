@@ -248,7 +248,7 @@ const Chat = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col safe-area-inset">
+    <div className="h-dvh bg-background flex flex-col safe-area-inset">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border pt-safe">
         <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">

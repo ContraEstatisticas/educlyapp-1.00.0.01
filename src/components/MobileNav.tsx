@@ -19,11 +19,11 @@ export const MobileNav = () => {
             <NavLink
               key={item.to}
               to={item.to}
-              className="flex w-full flex-col items-center gap-1 rounded-lg px-2 py-2 text-xs font-medium text-muted-foreground transition-colors"
+              className="flex w-full flex-col items-center gap-1 rounded-lg px-2 py-3 text-xs font-medium text-muted-foreground transition-colors min-h-[44px] justify-center"
               activeClassName={cn("text-primary", "bg-primary/10")}
               aria-label={item.label}
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-6 w-6" />
               <span>{item.label}</span>
             </NavLink>
           );

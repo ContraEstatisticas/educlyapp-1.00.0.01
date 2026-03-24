@@ -102,6 +102,102 @@
   }
 }
 
+/* ============================================================
+   iOS / Mobile Fixes
+   ============================================================ */
+
+/* 1. Safe area insets (notch / home indicator) */
+@layer utilities {
+  .safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* 2. Corrige o bug do 100vh no iOS Safari (inclui barra do browser)
+      Usa 100dvh (Dynamic Viewport Height) quando disponível */
+@layer utilities {
+  @supports (height: 100dvh) {
+    .min-h-screen {
+      min-height: 100dvh;
+    }
+    .h-screen {
+      height: 100dvh;
+    }
+  }
+}
+
+/* 3. Scroll com momentum nativo (inércia) no iOS */
+@layer utilities {
+  .overflow-y-auto,
+  .overflow-y-scroll,
+  .overflow-x-auto,
+  .overflow-x-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Evita que o bounce do scroll interno transborde para a página */
+  .overflow-y-auto,
+  .overflow-y-scroll {
+    overscroll-behavior-y: contain;
+  }
+
+  .overflow-x-auto,
+  .overflow-x-scroll {
+    overscroll-behavior-x: contain;
+  }
+}
+
+/* 4. Remove o highlight cinza ao tocar em elementos no iOS */
+@layer base {
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* 5. Posicionamento do botão flutuante acima da MobileNav com safe area */
+.floating-edi-btn {
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .floating-edi-btn {
+    bottom: 1.5rem;
+  }
+}
+
+/* 6. Fallback para backdrop-blur em iOS < 15 */
+@supports not (backdrop-filter: blur(1px)) {
+  .backdrop-blur,
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    backdrop-filter: none !important;
+  }
+}
+
 /* Utilitários para cores de fundo dos ícones no modo escuro */
 .dark .bg-blue-50 { background-color: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.15); color: #60a5fa; }
 .dark .bg-purple-50 { background-color: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.15); color: #c084fc; }
