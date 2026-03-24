@@ -225,8 +225,8 @@ const Chat = () => {
 
   if (!hasChatAccess) {
     return (
-      <div className="min-h-screen bg-background">
-        <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
+      <div className="min-h-screen bg-background safe-area-inset">
+        <header className="sticky top-safe z-50 bg-background/95 backdrop-blur border-b border-border">
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
             <button
               onClick={() => navigate("/dashboard")}
@@ -250,7 +250,7 @@ const Chat = () => {
   return (
     <div className="h-dvh bg-background flex flex-col safe-area-inset">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border pt-safe">
+      <header className="sticky top-safe z-50 bg-background/95 backdrop-blur border-b border-border">
         <div className="max-w-2xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button

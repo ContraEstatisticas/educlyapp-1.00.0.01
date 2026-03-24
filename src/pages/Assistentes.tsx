@@ -536,7 +536,7 @@ const AssistentesContent = () => {
     : t(AI_MODELS.find((m) => m.id === activeModel)?.nameKey || "assistants.chatgpt.name");
 
   return (
-    <div className="h-[100dvh] bg-background flex overflow-hidden">
+    <div className="h-[100dvh] bg-background flex overflow-hidden pb-mobile-nav md:pb-0">
       <AssistantsTutorial />
 
       {/* Desktop sidebar */}
@@ -545,7 +545,7 @@ const AssistentesContent = () => {
       {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <div className="sticky top-0 z-10 px-3 py-2.5 border-b border-border bg-card/80 backdrop-blur-sm">
+        <div className="sticky top-safe z-10 px-3 py-2.5 border-b border-border bg-card/80 backdrop-blur-sm">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               {/* Mobile hamburger */}

@@ -327,13 +327,13 @@ const FreelancerLesson = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white antialiased font-sans lg:flex">
+    <div className="min-h-screen bg-white safe-area-inset antialiased font-sans lg:flex">
       {/* Main content column */}
       <div className="flex-1 min-w-0 relative">
       {/* Header Fixo - Agora com animação de slide */}
       <div
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md px-4 py-6 border-b border-slate-50 transition-transform duration-300",
+          "fixed top-safe left-0 right-0 z-50 bg-white/95 backdrop-blur-md px-4 py-6 border-b border-slate-50 transition-transform duration-300",
           isHeaderVisible ? "translate-y-0" : "-translate-y-full",
         )}
       >
@@ -356,7 +356,7 @@ const FreelancerLesson = () => {
       {!isHeaderVisible && (
         <button
           onClick={showHeader}
-          className="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium text-slate-600 hover:bg-white transition-all animate-in fade-in slide-in-from-top-2"
+          className="fixed top-safe-offset-6 left-1/2 transform -translate-x-1/2 z-40 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full px-4 py-2 shadow-lg flex items-center gap-2 text-sm font-medium text-slate-600 hover:bg-white transition-all animate-in fade-in slide-in-from-top-2"
         >
           <ArrowLeft className="w-4 h-4" />
           {t("common.back", "Back")}

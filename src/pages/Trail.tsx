@@ -113,9 +113,9 @@ const Trail = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background safe-area-inset">
       {/* Header */}
-      <div className="sticky top-0 z-20 bg-background border-b border-border">
+      <div className="sticky top-safe z-20 bg-background border-b border-border">
         <div className="max-w-2xl mx-auto px-4 py-3">
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon" onClick={() => navigate("/dashboard")} className="flex-shrink-0">

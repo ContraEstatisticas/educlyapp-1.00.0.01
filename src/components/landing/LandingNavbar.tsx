@@ -30,7 +30,7 @@ export const LandingNavbar = ({ variant = "default" }: { variant?: NavbarVariant
     isRoute: true
   }];
 
-  const baseClass = "fixed top-0 left-0 right-0 z-50 border-b border-border";
+  const baseClass = "fixed top-0 left-0 right-0 z-50 border-b border-border pt-safe";
   const bgClass = variant === "white" ? "bg-white" : "bg-background/80 backdrop-blur-md";
 
   return (

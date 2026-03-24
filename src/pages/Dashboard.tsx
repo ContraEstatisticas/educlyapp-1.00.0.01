@@ -180,7 +180,7 @@ const Dashboard = () => {
 
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground safe-area-inset pb-20 transition-colors duration-300">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground safe-area-inset pb-mobile-nav md:pb-20 transition-colors duration-300">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }

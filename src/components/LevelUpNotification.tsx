@@ -28,7 +28,8 @@ export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotifi
           initial={{ opacity: 0, scale: 0.5, y: -100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: -100 }}
-          className="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] pointer-events-none"
+          className="fixed left-1/2 -translate-x-1/2 z-[9999] pointer-events-none"
+          style={{ top: "calc(env(safe-area-inset-top, 0px) + 5rem)" }}
         >
           <div className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-1 rounded-2xl shadow-2xl">
             <div className="bg-background rounded-xl px-8 py-6 text-center relative overflow-hidden">

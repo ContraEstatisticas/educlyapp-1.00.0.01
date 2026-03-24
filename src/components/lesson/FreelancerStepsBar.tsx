@@ -1,4 +1,4 @@
-﻿import { useRef, useEffect } from "react";
+﻿import { useRef, useEffect, useState } from "react";
 import { Check, Lock, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,28 +15,69 @@ interface FreelancerStepsBarProps {
 
 export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: FreelancerStepsBarProps) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const currentStepRef = useRef<HTMLButtonElement>(null);
+    const [showLeftFade, setShowLeftFade] = useState(false);
+    const [showRightFade, setShowRightFade] = useState(false);
 
     useEffect(() => {
-        if (scrollRef.current) {
-            const currentElement = document.getElementById(`step-bar-node-${currentStep}`);
-            if (currentElement) {
-                const container = scrollRef.current;
-                // LÃ³gica de scroll ajustada para garantir visibilidade no mobile
-                const scrollLeft = currentElement.offsetLeft - container.offsetWidth / 2 + currentElement.offsetWidth / 2;
-                container.scrollTo({ left: scrollLeft, behavior: "smooth" });
-            }
+        const container = scrollRef.current;
+        if (!container) return;
+
+        const updateFades = () => {
+            const maxScrollLeft = Math.max(0, container.scrollWidth - container.clientWidth);
+            const scrollLeft = container.scrollLeft;
+            const threshold = 2;
+
+            setShowLeftFade(scrollLeft > threshold);
+            setShowRightFade(scrollLeft < maxScrollLeft - threshold);
+        };
+
+        updateFades();
+        container.addEventListener("scroll", updateFades, { passive: true });
+        window.addEventListener("resize", updateFades);
+
+        return () => {
+            container.removeEventListener("scroll", updateFades);
+            window.removeEventListener("resize", updateFades);
+        };
+    }, [steps.length]);
+
+    useEffect(() => {
+        if (!scrollRef.current || !currentStepRef.current) return;
+
+        const container = scrollRef.current;
+        const button = currentStepRef.current;
+        const visibleStart = container.scrollLeft;
+        const visibleEnd = visibleStart + container.clientWidth;
+        const buttonStart = button.offsetLeft;
+        const buttonEnd = buttonStart + button.offsetWidth;
+        const edgePadding = 24;
+
+        // So move when the current node reaches visible edges.
+        if (buttonStart < visibleStart + edgePadding || buttonEnd > visibleEnd - edgePadding) {
+            const rawTarget = buttonStart - container.clientWidth / 2 + button.offsetWidth / 2;
+            const maxScrollLeft = Math.max(0, container.scrollWidth - container.clientWidth);
+            const target = Math.min(Math.max(0, rawTarget), maxScrollLeft);
+
+            container.scrollTo({ left: target, behavior: "smooth" });
         }
-    }, [currentStep]);
+    }, [currentStep, steps.length]);
 
     return (
-        <div className="w-full relative">
-            {/* Container de scroll com padding generoso (py-6) para nÃ£o cortar o efeito pulsante */}
+        <div className="w-full relative py-2 overflow-visible">
+            {showLeftFade && (
+                <div className="absolute left-0 top-0 bottom-0 w-5 bg-gradient-to-r from-background/90 to-transparent z-10 pointer-events-none" />
+            )}
+            {showRightFade && (
+                <div className="absolute right-0 top-0 bottom-0 w-5 bg-gradient-to-l from-background/90 to-transparent z-10 pointer-events-none" />
+            )}
+
             <div
                 ref={scrollRef}
-                className="w-full overflow-x-auto overflow-y-visible py-6 px-4 no-scrollbar snap-x"
+                className="w-full overflow-x-auto overflow-y-visible px-4 py-2 no-scrollbar snap-x"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
-                {/* Wrapper interno que garante centralizaÃ§Ã£o se houver poucos itens, e scroll seguro se houver muitos */}
-                <div className="flex items-center justify-center min-w-full gap-4">
+                <div className="mx-auto flex w-max min-w-full items-center justify-between sm:justify-center gap-3 sm:gap-4">
                     {steps.map((step) => {
                         const isCurrent = step.stepNumber === currentStep;
                         const isCompleted = step.status === "completed";
@@ -45,55 +86,33 @@ export const FreelancerStepsBar = ({ steps, currentStep, onStepClick }: Freelanc
                         return (
                             <div
                                 key={step.stepNumber}
-                                id={`step-bar-node-${step.stepNumber}`}
-                                className="flex flex-col items-center gap-2 flex-shrink-0 snap-center group"
+                                className="flex flex-col items-center gap-1.5 flex-shrink-0 snap-center group"
                             >
                                 <button
+                                    ref={isCurrent ? currentStepRef : null}
                                     onClick={() => !isLocked && onStepClick(step.stepNumber)}
                                     disabled={isLocked}
                                     className={cn(
-                                        "rounded-full flex items-center justify-center transition-all duration-300 relative",
-
-                                        // ESTADO ATUAL (Pulsante)
-                                        // scale-105: levemente maior, mas sem exageros
-                                        isCurrent
-                                            ? "w-12 h-12 bg-primary text-primary-foreground shadow-md shadow-primary/25 scale-105 z-10 ring-2 ring-primary/20"
-                                            : "w-10 h-10 hover:scale-105",
-
-                                        // ESTADO COMPLETADO
-                                        isCompleted && !isCurrent
-                                            ? "bg-green-500 text-white shadow-sm hover:shadow-md hover:bg-green-600"
-                                            : "",
-
-                                        // ESTADO BLOQUEADO
-                                        isLocked
-                                            ? "bg-gray-100 text-gray-300 border border-gray-200 cursor-not-allowed"
-                                            : "",
-
-                                        // ESTADO DISPONÃVEL
-                                        !isCompleted && !isCurrent && !isLocked
-                                            ? "bg-white border border-gray-200 text-gray-700 hover:border-primary/50 hover:text-primary"
-                                            : "",
+                                        "w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border transition-colors duration-200",
+                                        isCurrent && "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/30 ring-2 ring-primary/20",
+                                        isCompleted && !isCurrent && "bg-success text-success-foreground border-success shadow-sm",
+                                        isLocked && "bg-muted/50 text-muted-foreground/40 border-border cursor-not-allowed",
+                                        !isCompleted && !isCurrent && !isLocked && "bg-card text-foreground border-border hover:border-primary/40",
                                     )}
                                 >
-                                    {isCurrent && <Play className="w-5 h-5 fill-current ml-0.5" />}
-                                    {isCompleted && !isCurrent && <Check className="w-5 h-5 stroke-[3]" />}
-                                    {isLocked && <Lock className="w-4 h-4" />}
-
-                                    {/* Efeito Pulsante (Ping) contido dentro do padding do container pai */}
-                                    {isCurrent && (
-                                        <span className="absolute inset-0 rounded-full animate-ping bg-primary/20" />
-                                    )}
+                                    {isCurrent && <Play className="w-4 h-4 fill-current ml-0.5" />}
+                                    {isCompleted && !isCurrent && <Check className="w-4 h-4 stroke-[3]" />}
+                                    {isLocked && <Lock className="w-3.5 h-3.5" />}
                                 </button>
 
                                 <span
                                     className={cn(
-                                        "text-[10px] font-bold uppercase tracking-wider transition-colors",
-                                        isCurrent ? "text-primary" : "text-gray-400 group-hover:text-gray-600",
+                                        "text-[10px] font-semibold uppercase tracking-wide transition-colors",
+                                        isCurrent ? "text-primary" : "text-muted-foreground",
                                     )}
                                 >
                                     {step.stepNumber}
-                </span>
+                                </span>
                             </div>
                         );
                     })}

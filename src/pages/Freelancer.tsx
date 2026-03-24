@@ -723,7 +723,11 @@ const FreelancerContent = () => {
     const current = modules.find(
       (m) => isModuleUnlocked(m.moduleNumber) && !isModuleCompleted(m.moduleNumber)
     );
-    return current?.moduleNumber || 1;
+    if (current) return current.moduleNumber;
+
+    // Se tudo estiver completo, mantém o foco no último módulo para evitar
+    // reposicionamento estranho da barra de progresso.
+    return modules.length > 0 ? modules[modules.length - 1].moduleNumber : 1;
   }, [modules, moduleProgress]);
 
   const tutorialLocale = useMemo(() => normalizeTutorialLocale(i18n.language), [i18n.language]);
@@ -798,7 +802,7 @@ const FreelancerContent = () => {
       )}
 
       {/* Container Principal adaptado para Dark Mode (bg-background) */}
-      <div className="min-h-screen bg-background p-4 md:p-8 font-sans safe-area-inset relative pb-24">
+      <div className="min-h-screen bg-background p-4 md:p-8 font-sans safe-area-inset relative pb-mobile-nav md:pb-24">
         <div className="max-w-[1600px] mx-auto">
 
           {/* Header */}
@@ -879,7 +883,7 @@ const FreelancerContent = () => {
               </div>
 
               {/* Barra Horizontal (Módulos) */}
-              <div className="bg-card rounded-2xl p-4 shadow-sm border border-border relative z-20">
+              <div className="bg-card rounded-2xl p-2 sm:p-4 shadow-sm border border-border relative z-20">
                 <FreelancerStepsBar
                   steps={stepsForBar}
                   currentStep={currentModuleNumber}

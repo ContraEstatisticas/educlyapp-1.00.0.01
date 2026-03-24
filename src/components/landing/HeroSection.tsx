@@ -5,7 +5,7 @@ export const HeroSection = () => {
     const { t } = useTranslation();
 
     return (
-        <section id="inicio" className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden bg-white dark:bg-slate-900">
+        <section id="inicio" className="relative pt-hero-safe pb-16 md:pb-24 overflow-hidden bg-white dark:bg-slate-900">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl" />
