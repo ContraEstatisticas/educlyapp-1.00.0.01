@@ -120,7 +120,10 @@ const Certificate = () => {
 
       const navy = '#1e3a5f';
       const lineColor = '#c8ced5';
-      const challengeName = certificate.challenges?.name || certificate.tool_slug;
+      const challengeName =
+        certificate.challenges?.name ||
+        toolSpecialization[certificate.tool_slug] ||
+        certificate.tool_slug;
       const studentName = certificate.user_full_name || 'Aluno';
       const locale = i18n.language === 'pt' ? 'pt-BR' : i18n.language;
       const earnedDate = new Date(certificate.earned_at).toLocaleDateString(locale);
@@ -211,11 +214,15 @@ const Certificate = () => {
     if (!imageUrl || !certificate) return;
     if (navigator.share) {
       try {
+        const shareName =
+          certificate.challenges?.name ||
+          toolSpecialization[certificate.tool_slug] ||
+          certificate.tool_slug;
         const blob = await (await fetch(imageUrl)).blob();
         const file = new File([blob], `certificado-${certificate.tool_slug}.png`, { type: 'image/png' });
         await navigator.share({
           title: t('certificate.shareTitle'),
-          text: t('certificate.shareText', { challenge: certificate.challenges?.name }),
+          text: t('certificate.shareText', { challenge: shareName }),
           files: [file]
         });
       } catch (err) {

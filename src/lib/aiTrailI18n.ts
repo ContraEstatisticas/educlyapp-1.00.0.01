@@ -36,6 +36,14 @@ interface AiTrailUiCopy {
   pageLockedTitle: string;
   pageLockedDesc: string;
   pageUnderstand: string;
+  doneBadge: string;
+  certificateTitle: string;
+  certificateDescription: string;
+  generateCertificate: string;
+  generatingCertificate: string;
+  viewCertificate: string;
+  certificateError: string;
+  certificateIncomplete: string;
 }
 
 interface TrailMetaCopy {
@@ -77,6 +85,14 @@ const EN_UI: AiTrailUiCopy = {
   pageLockedTitle: "Access is closed for now",
   pageLockedDesc: "When this trail is ready, it will appear in the app with normal access.",
   pageUnderstand: "Got it",
+  doneBadge: "Completed",
+  certificateTitle: "Certificate unlocked!",
+  certificateDescription: "You completed all the modules in this trail. Generate your specialization certificate.",
+  generateCertificate: "Generate certificate",
+  generatingCertificate: "Generating...",
+  viewCertificate: "View certificate",
+  certificateError: "Error generating certificate",
+  certificateIncomplete: "Complete all modules first.",
 };
 
 const PT_UI: AiTrailUiCopy = {
@@ -113,6 +129,14 @@ const PT_UI: AiTrailUiCopy = {
   pageLockedTitle: "Acesso fechado por enquanto",
   pageLockedDesc: "Quando essa trilha estiver pronta, ela vai aparecer no app com acesso normal.",
   pageUnderstand: "Entendi",
+  doneBadge: "Concluida",
+  certificateTitle: "Certificado desbloqueado!",
+  certificateDescription: "Voce concluiu todos os modulos desta trilha. Gere seu certificado de especializacao.",
+  generateCertificate: "Gerar certificado",
+  generatingCertificate: "Gerando...",
+  viewCertificate: "Ver certificado",
+  certificateError: "Erro ao gerar certificado",
+  certificateIncomplete: "Conclua todos os modulos primeiro.",
 };
 
 const ES_UI: AiTrailUiCopy = {
@@ -149,6 +173,14 @@ const ES_UI: AiTrailUiCopy = {
   pageLockedTitle: "Acceso cerrado por ahora",
   pageLockedDesc: "Cuando esta ruta este lista, aparecera en la app con acceso normal.",
   pageUnderstand: "Entendido",
+  doneBadge: "Completada",
+  certificateTitle: "Certificado desbloqueado!",
+  certificateDescription: "Completaste todos los modulos de esta ruta. Genera tu certificado de especializacion.",
+  generateCertificate: "Generar certificado",
+  generatingCertificate: "Generando...",
+  viewCertificate: "Ver certificado",
+  certificateError: "Error al generar el certificado",
+  certificateIncomplete: "Completa primero todos los modulos.",
 };
 
 const FR_UI: AiTrailUiCopy = {
@@ -185,6 +217,14 @@ const FR_UI: AiTrailUiCopy = {
   pageLockedTitle: "Acces ferme pour le moment",
   pageLockedDesc: "Quand ce parcours sera pret, il apparaitra dans l'app avec un acces normal.",
   pageUnderstand: "Compris",
+  doneBadge: "Termine",
+  certificateTitle: "Certificat debloque !",
+  certificateDescription: "Vous avez termine tous les modules de ce parcours. Generez votre certificat de specialisation.",
+  generateCertificate: "Generer le certificat",
+  generatingCertificate: "Generation...",
+  viewCertificate: "Voir le certificat",
+  certificateError: "Erreur lors de la generation du certificat",
+  certificateIncomplete: "Terminez d'abord tous les modules.",
 };
 
 const UI_COPY_BY_LANG: Record<AiTrailLang, AiTrailUiCopy> = {

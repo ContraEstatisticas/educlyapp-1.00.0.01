@@ -17,7 +17,7 @@ interface CertificateProgressCardProps {
 export const CertificateProgressCard = ({
   challengeName,
   challengeId,
-  challengeSlug,
+  challengeSlug: _challengeSlug,
   completedDays,
   totalDays,
   themeColor
@@ -38,7 +38,8 @@ export const CertificateProgressCard = ({
         .from('user_certificates')
         .select('id')
         .eq('user_id', user.id)
-        .eq('tool_slug', challengeSlug)
+        .eq('challenge_id', challengeId)
+        .eq('certificate_type', 'completion')
         .maybeSingle();
       
       return data;

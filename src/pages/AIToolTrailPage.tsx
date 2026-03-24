@@ -1,6 +1,8 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, BookOpen, CheckCircle2, Lock, Play, Sparkles, Trophy } from "lucide-react";
+import { ArrowLeft, Award, BookOpen, CheckCircle2, Lock, Loader2, Play, Sparkles, Trophy } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -167,6 +169,75 @@ const AIToolTrailPage = () => {
     isLoading: isProgressLoading,
   } = useAiTrailProgress(trail?.slug, totalModules);
 
+  const [isGeneratingCert, setIsGeneratingCert] = useState(false);
+
+  const allDone = completedModules.length >= totalModules && totalModules > 0;
+
+  const {
+    data: existingCertificate,
+    isLoading: isCertificateLoading,
+    refetch: refetchCert,
+  } = useQuery({
+    queryKey: ["trail-certificate", toolSlug],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+      const { data } = await supabase
+        .from("user_certificates")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("tool_slug", toolSlug!)
+        .eq("certificate_type", "trail_completion")
+        .maybeSingle();
+      return data;
+    },
+    enabled: allDone && !!toolSlug,
+  });
+
+  const handleGenerateTrailCertificate = async () => {
+    if (!toolSlug || !allDone) return;
+    setIsGeneratingCert(true);
+    try {
+      if (existingCertificate?.id) {
+        navigate(`/certificado/${existingCertificate.id}`);
+        return;
+      }
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const fullName = profile?.full_name || user.user_metadata?.full_name || user.email?.split("@")[0] || "Student";
+
+      const { data: certId, error } = await supabase.rpc("generate_trail_certificate", {
+        p_tool_slug: toolSlug,
+        p_user_full_name: fullName,
+      });
+
+      if (error) {
+        console.error("Trail certificate error:", error);
+        toast({ title: aiTrailUi.certificateError, description: error.message, variant: "destructive" as const });
+        return;
+      }
+
+      if (certId) {
+        await refetchCert();
+        navigate(`/certificado/${certId}`);
+      } else {
+        toast({ title: aiTrailUi.certificateError, description: aiTrailUi.certificateIncomplete, variant: "destructive" as const });
+      }
+    } catch (err) {
+      console.error("Trail certificate error:", err);
+    } finally {
+      setIsGeneratingCert(false);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [toolSlug]);
@@ -325,6 +396,40 @@ const AIToolTrailPage = () => {
                   </div>
                 </div>
               </div>
+
+              {allDone ? (
+                <div className="mb-6 rounded-3xl border border-success/25 bg-[linear-gradient(135deg,rgba(34,197,94,0.08),rgba(255,255,255,0))] p-5 shadow-sm">
+                  <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                    <div className="max-w-2xl">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-success/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-success">
+                        <Award className="h-3.5 w-3.5" />
+                        {aiTrailUi.doneBadge}
+                      </div>
+                      <h3 className="mt-3 text-2xl font-bold text-foreground">{aiTrailUi.certificateTitle}</h3>
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                        {aiTrailUi.certificateDescription}
+                      </p>
+                    </div>
+
+                    <Button
+                      onClick={handleGenerateTrailCertificate}
+                      disabled={isGeneratingCert || isCertificateLoading}
+                      className="h-12 px-6 text-sm font-semibold"
+                    >
+                      {isGeneratingCert || isCertificateLoading ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <Award className="mr-2 h-4 w-4" />
+                      )}
+                      {existingCertificate?.id
+                        ? aiTrailUi.viewCertificate
+                        : isGeneratingCert || isCertificateLoading
+                          ? aiTrailUi.generatingCertificate
+                          : aiTrailUi.generateCertificate}
+                    </Button>
+                  </div>
+                </div>
+              ) : null}
 
               <div className="mb-4">
                 <DaysProgressBar
