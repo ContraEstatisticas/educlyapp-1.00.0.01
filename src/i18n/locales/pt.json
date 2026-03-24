@@ -1520,7 +1520,8 @@
     },
     "installInstructions": "Instruções de Instalação",
     "alreadyInstalledDesc": "Você já está usando a versão App do Educly. Aproveite o acesso direto!",
-    "desktopPrompt": "No Desktop?"
+    "desktopPrompt": "No Desktop?",
+    "downloadAppPrompt": "Fazer download do app?"
   },
   "certificate": {
     "obtained": "Certificado Obtido!",
@@ -1627,7 +1628,8 @@
     "progress": "Progresso",
     "seeAll": "Ver tudo",
     "ok": "OK",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "close": "Fechar"
   },
   "quiz": {
     "selectAllAnswers": "Selecione todas as respostas corretas",

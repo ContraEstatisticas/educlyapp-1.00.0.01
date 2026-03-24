@@ -675,7 +675,7 @@ const Profile = () => {
                         <div className="p-2.5 rounded-xl bg-orange-500/10 group-hover:bg-orange-500/20 transition-colors duration-200">
                           <Smartphone className="w-5 h-5 text-orange-500" />
                         </div>
-                        <span className="font-bold text-foreground">Fazer download do app?</span>
+                        <span className="font-bold text-foreground">{t('pwa.downloadAppPrompt', 'Fazer download do app?')}</span>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 group-hover:text-orange-500 transition-all duration-200" />
                     </div>

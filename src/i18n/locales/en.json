@@ -2035,7 +2035,8 @@
     "progress": "Progress",
     "seeAll": "See all",
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "close": "Close"
   },
   "settings": {
     "soundOn": "Sound on",
@@ -2691,7 +2692,8 @@
     },
     "installInstructions": "Installation Instructions",
     "alreadyInstalledDesc": "You are already using the App version of Educly. Enjoy direct access!",
-    "desktopPrompt": "On Desktop?"
+    "desktopPrompt": "On Desktop?",
+    "downloadAppPrompt": "Download the app?"
   },
   "assistants": {
     "title": "AI Assistants",
