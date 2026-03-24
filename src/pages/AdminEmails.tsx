@@ -434,9 +434,9 @@ const AdminEmails = () => {
 
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background safe-area-inset">
         {/* ── Header ── */}
-        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div className="sticky top-safe z-20 bg-background/80 backdrop-blur-lg border-b border-border">
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Button variant="ghost" size="icon" className="rounded-full" onClick={() => navigate("/admin/analytics")}>

@@ -55,9 +55,9 @@ export const UpgradeUpsell = ({ productType }: UpgradeUpsellProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background safe-area-inset">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <header className="sticky top-safe z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
           <Button
             variant="ghost"

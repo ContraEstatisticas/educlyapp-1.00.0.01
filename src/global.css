@@ -108,27 +108,60 @@
 
 /* 1. Safe area insets (notch / home indicator) */
 @layer utilities {
+  .no-scrollbar::-webkit-scrollbar,
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar,
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .safe-area-inset {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   .pt-safe {
-    padding-top: env(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top, 0px);
   }
 
   .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   .pl-safe {
-    padding-left: env(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left, 0px);
   }
 
   .pr-safe {
-    padding-right: env(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  .top-safe {
+    top: env(safe-area-inset-top, 0px);
+  }
+
+  .top-safe-offset-6 {
+    top: calc(env(safe-area-inset-top, 0px) + 1.5rem);
+  }
+
+  .pt-hero-safe {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 6rem);
+  }
+
+  .pb-mobile-nav {
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .pt-hero-safe {
+      padding-top: calc(env(safe-area-inset-top, 0px) + 8rem);
+    }
   }
 }
 
