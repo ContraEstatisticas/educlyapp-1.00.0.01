@@ -34,6 +34,7 @@ interface Message {
 }
 
 const MAX_CONTEXT_MESSAGES = 24;
+const MAX_PERSISTED_HISTORY_MESSAGES = 100;
 const GREETING_MESSAGE_ID = "greeting";
 const AI_HUB_CHAT_CONTEXT = "assistentes_hub";
 const ASSISTANTS_MODE_STORAGE_KEY = "educly-assistants-mode";
@@ -218,13 +219,15 @@ const AssistentesContent = () => {
           .from("chat_messages")
           .select("id, role, content, created_at")
           .eq("user_id", user.id)
-          .eq("ai_assistant_type", currentAiType);
+          .eq("ai_assistant_type", currentAiType)
+          .order("created_at", { ascending: false })
+          .limit(MAX_PERSISTED_HISTORY_MESSAGES);
 
         query = currentAiType === "edi"
           ? query.eq("ai_tool_context", AI_HUB_CHAT_CONTEXT)
           : query.or(`ai_tool_context.eq.${AI_HUB_CHAT_CONTEXT},ai_tool_context.is.null`);
 
-        const { data, error } = await query.order("created_at", { ascending: true });
+        const { data, error } = await query;
 
         if (cancelled) return;
 

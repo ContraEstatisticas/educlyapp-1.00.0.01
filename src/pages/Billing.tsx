@@ -41,11 +41,14 @@ interface ProductAccess {
   expires_at: string | null;
 }
 
+const BILLING_HISTORY_PAGE_SIZE = 20;
+
 const Billing = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [userId, setUserId] = useState<string | null>(null);
+  const [historyPage, setHistoryPage] = useState(0);
 
   useEffect(() => {
     const getUser = async () => {
@@ -59,21 +62,39 @@ const Billing = () => {
     getUser();
   }, [navigate]);
 
-  const { data: billingHistory, isLoading: isLoadingHistory } = useQuery({
-    queryKey: ["billing-history", userId],
+  useEffect(() => {
+    setHistoryPage(0);
+  }, [userId]);
+
+  const { data: billingHistoryData, isLoading: isLoadingHistory } = useQuery({
+    queryKey: ["billing-history", userId, historyPage],
     queryFn: async () => {
-      if (!userId) return [];
+      if (!userId) {
+        return { rows: [] as BillingHistory[], hasMore: false };
+      }
+
+      const from = historyPage * BILLING_HISTORY_PAGE_SIZE;
+      const to = from + BILLING_HISTORY_PAGE_SIZE;
       const { data, error } = await supabase
         .from("billing_event_logs")
-        .select("*")
+        .select("id, event_type, status, created_at, email, processed_at, error_message")
         .eq("user_id", userId)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false })
+        .range(from, to);
 
       if (error) throw error;
-      return data as BillingHistory[];
+      const rows = (data || []) as BillingHistory[];
+
+      return {
+        rows: rows.slice(0, BILLING_HISTORY_PAGE_SIZE),
+        hasMore: rows.length > BILLING_HISTORY_PAGE_SIZE,
+      };
     },
     enabled: !!userId,
   });
+
+  const billingHistory = billingHistoryData?.rows || [];
+  const hasMoreBillingHistory = billingHistoryData?.hasMore || false;
 
   const { data: activeProducts, isLoading: isLoadingProducts } = useQuery({
     queryKey: ["active-products", userId],
@@ -239,45 +260,73 @@ const Billing = () => {
                   <Skeleton className="h-10 w-full" />
                 </div>
               ) : billingHistory && billingHistory.length > 0 ? (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
-                    <thead>
-                      <tr className="border-b border-slate-100 dark:border-slate-800">
-                        <th className="py-3 font-semibold text-slate-500">Data</th>
-                        <th className="py-3 font-semibold text-slate-500">Evento</th>
-                        <th className="py-3 font-semibold text-slate-500">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                      {billingHistory.map((event) => (
-                        <tr key={event.id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                          <td className="py-4 text-slate-600 dark:text-slate-400">
-                            {new Date(event.created_at).toLocaleDateString()}
-                          </td>
-                          <td className="py-4">
-                            <span className="font-medium text-slate-900 dark:text-white capitalize">
-                              {event.event_type.replace(/_/g, " ")}
-                            </span>
-                          </td>
-                          <td className="py-4">
-                            <Badge
-                              variant="outline"
-                              className={cn(
-                                "capitalize",
-                                event.status === "processed" || event.status === "completed"
-                                  ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
-                                  : event.status === "failed" || event.status === "error"
-                                  ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
-                                  : "bg-amber-500/10 text-amber-600 border-amber-500/20"
-                              )}
-                            >
-                              {event.status}
-                            </Badge>
-                          </td>
+                <div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-100 dark:border-slate-800">
+                          <th className="py-3 font-semibold text-slate-500">Data</th>
+                          <th className="py-3 font-semibold text-slate-500">Evento</th>
+                          <th className="py-3 font-semibold text-slate-500">Status</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {billingHistory.map((event) => (
+                          <tr key={event.id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                            <td className="py-4 text-slate-600 dark:text-slate-400">
+                              {new Date(event.created_at).toLocaleDateString()}
+                            </td>
+                            <td className="py-4">
+                              <span className="font-medium text-slate-900 dark:text-white capitalize">
+                                {event.event_type.replace(/_/g, " ")}
+                              </span>
+                            </td>
+                            <td className="py-4">
+                              <Badge
+                                variant="outline"
+                                className={cn(
+                                  "capitalize",
+                                  event.status === "processed" || event.status === "completed"
+                                    ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
+                                    : event.status === "failed" || event.status === "error"
+                                    ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
+                                    : "bg-amber-500/10 text-amber-600 border-amber-500/20"
+                                )}
+                              >
+                                {event.status}
+                              </Badge>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      {billingHistory.length} eventos nesta pagina · pagina {historyPage + 1}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      {historyPage > 0 && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setHistoryPage((page) => Math.max(0, page - 1))}
+                        >
+                          ← Anterior
+                        </Button>
+                      )}
+                      {hasMoreBillingHistory && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setHistoryPage((page) => page + 1)}
+                        >
+                          Próxima →
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="text-center py-12">

@@ -42,18 +42,6 @@ export const GEMINI_MODULE_3_STEPS_PT = [
     "Gemini Pesquisando na Internet em Tempo Real",
     "Bem-vindo de volta! Nesta lição, você vai aprender a usar uma das capacidades mais exclusivas do Gemini — o acesso nativo à internet em tempo real. Enquanto outros assistentes trabalham com um conhecimento fixo até uma data de corte, o Gemini pode buscar informações atualizadas agora, neste momento.\n\nPor que o Acesso à Internet Muda Tudo?\nA maioria dos assistentes de IA responde com base no que aprendeu até uma determinada data. O Gemini vai além — ele acessa a web em tempo real, trazendo notícias, dados, tendências e informações que surgiram hoje, esta semana ou este mês."
   ),
-  quizStep(
-    "Busca Inteligente vs Tradicional",
-    "O que torna o acesso à internet do Gemini diferente de uma busca comum no Google?",
-    [
-      "O Gemini não apenas encontra as informações — ele as lê, interpreta, cruza e entrega uma resposta já organizada e contextualizada para o seu objetivo",
-      "O Gemini apenas mostra os links dos resultados como uma busca normal",
-      "O acesso à internet do Gemini é mais lento do que uma busca no Google",
-      "O Gemini só acessa sites em inglês"
-    ],
-    0,
-    "Ao contrário da busca clássica que exige clique e leitura manual, o Gemini funciona como o leitor, o sintetizador e o apresentador dos dados de uma só vez."
-  ),
   textStep(
     "Pesquisando Informações Atuais",
     "A primeira aplicação mais direta é pesquisar o que está acontecendo agora — notícias, atualizações de mercado, lançamentos, mudanças de legislação e muito mais."
@@ -65,18 +53,6 @@ export const GEMINI_MODULE_3_STEPS_PT = [
     ["notícias e atualizações", "mudanças na legislação trabalhista brasileira", "5 principais", "informações", "cite"],
     ["notícias e atualizações", "mudanças na legislação trabalhista brasileira", "5 principais", "informações", "cite"],
     "Sempre force o bot a listar fontes para que você evite cair em qualquer alucinação."
-  ),
-  quizStep(
-    "Auditoria e Veracidade",
-    "Por que pedir ao Gemini para citar as fontes ao pesquisar na internet é importante?",
-    [
-      "Para deixar a resposta mais longa e completa",
-      "Porque o Gemini inventa informações quando não cita fontes",
-      "Para que você possa verificar a precisão das informações diretamente na fonte original antes de tomar qualquer decisão com base nelas",
-      "Citar fontes é apenas uma formalidade sem impacto prático"
-    ],
-    2,
-    "Checar diretamente no domínio apontado é a validação de segurança fundamental de todos os profissionais seniores ao usar IA."
   ),
   textStep(
     "Pesquisando Tendências de Mercado",
@@ -138,18 +114,6 @@ export const GEMINI_MODULE_3_STEPS_PT = [
     ["abrir um negócio de alimentação saudável na minha cidade", "tamanho e crescimento", "casos de sucesso e fracasso", "principais riscos", "estudo ou pesquisa"],
     "Toda tomada de risco requer fundamentos. Deixe a parte mecânica de achar artigos sob o comando da IA."
   ),
-  quizStep(
-    "Otimização do Fluxo de Trabalho",
-    "Por que usar o Gemini para pesquisar antes de uma decisão importante é mais eficiente do que pesquisar manualmente?",
-    [
-      "Porque o Gemini garante que a decisão será correta",
-      "Para evitar qualquer tipo de pesquisa adicional",
-      "Porque em vez de visitar dezenas de páginas e organizar as informações manualmente, você recebe uma síntese já estruturada e direcionada para o seu contexto específico",
-      "O Gemini é mais preciso do que qualquer fonte humana"
-    ],
-    2,
-    "Enquanto humanos se afogam no número de guias abertas, o Gemini traça correlações perfeitas gerando sínteses legíveis de imediato."
-  ),
   textStep(
     "Pesquisando Preços e Comparando Produtos",
     "O Gemini consegue rastrear preços, comparar características de produtos e serviços e montar comparativos que ajudam em decisões de compra ou contratação."
@@ -161,18 +125,6 @@ export const GEMINI_MODULE_3_STEPS_PT = [
     ["principais", "ferramentas de gestão de projetos", "preço", "funcionalidades", "limitações", "tamanho"],
     ["principais", "ferramentas de gestão de projetos", "preço", "funcionalidades", "limitações", "tamanho"],
     "Pedir o comparativo num formato de tabela é a técnica essencial para simplificar escolhas gerenciais."
-  ),
-  quizStep(
-    "Parâmetros Exatos",
-    "Qual é a melhor forma de usar o Gemini para comparar produtos ou serviços?",
-    [
-      "Pedir uma recomendação direta sem especificar critérios",
-      "Pesquisar apenas o produto mais barato disponível",
-      "Definir seus critérios de avaliação antes de pedir a comparação — assim o Gemini filtra e organiza os resultados com base no que realmente importa para você",
-      "O Gemini não consegue comparar preços em tempo real"
-    ],
-    2,
-    "Dar os pesos de decisão exatos nas instruções livra a resposta de interpretações inúteis."
   ),
   textStep(
     "Pesquisando Notícias e Monitorando Temas",
@@ -210,33 +162,9 @@ export const GEMINI_MODULE_3_STEPS_PT = [
     ["uma escola de idiomas com 3 unidades", "aumentar a retenção de alunos", "superaram", "aplicáveis", "porte e setor", "3 caminhos"],
     "Fornecer um contexto seu converte uma busca simples parecida à de qualquer pessoa num projeto de consultoria supernicho."
   ),
-  quizStep(
-    "Acionabilidade Personalizada",
-    "O que torna uma pesquisa personalizada no Gemini mais poderosa do que uma busca genérica no Google?",
-    [
-      "O Gemini acessa sites exclusivos que o Google não indexa",
-      "Pesquisas personalizadas são mais rápidas do que buscas normais",
-      "O Gemini filtra, interpreta e adapta os resultados ao seu contexto específico — entregando insights acionáveis em vez de uma lista de links para você organizar sozinho",
-      "Não faz diferença fornecer contexto ao pesquisar"
-    ],
-    2,
-    "Essa é a mudança do século na economia da informação: passar da compilação de links para o plano tático imediato."
-  ),
   textStep(
     "Boas Práticas ao Pesquisar com o Gemini",
     "Ditar as regras é importante para refinar seu pesquisador virtual de estimação."
-  ),
-  quizStep(
-    "Prática Fundamental",
-    "Qual das opções abaixo representa uma boa prática ao usar o Gemini para pesquisas?",
-    [
-      "Aceitar todos os resultados como verdade absoluta sem verificação",
-      "Fazer perguntas vagas e esperar que o Gemini interprete o que você quer",
-      "Sempre especificar o período de tempo da pesquisa, pedir que as fontes sejam citadas e verificar as informações mais críticas diretamente na fonte original",
-      "Usar o Gemini para pesquisas apenas quando o Google não encontrar resultados"
-    ],
-    2,
-    "O profissional superior não abdica de sua responsabilidade criadora, ele domina a operação mas inspeciona ativamente o produto."
   ),
   textStep(
     "Conclusão",
@@ -249,18 +177,6 @@ export const GEMINI_MODULE_3_STEPS_EN = [
     "Gemini Researching the Internet in Real-Time",
     "Welcome back! In this lesson, you will learn to harness one of Gemini's most exclusive capabilities — its native, real-time access to the internet. While other assistants rely on a frozen set of knowledge cut off at an arbitrary past date, Gemini actively fetches the latest information available today, right at this moment.\n\nWhy Does Internet Access Change Everything?\nMost AI assistants answer based exclusively on historical training. Gemini eclipses this standard — it seamlessly accesses the live web, instantly bringing up news, analytics, trends, and facts bubbling up today, this week, or this month."
   ),
-  quizStep(
-    "Smart Search vs Traditional Web",
-    "What sets Gemini's active internet access apart from a common Google search?",
-    [
-      "Gemini does not merely fetch links — it actively reads, digests, cross-references, and returns a tailored, fully structured answer mapped directly to your exact goals",
-      "Gemini superficially prints out raw links exactly like standard search engines do",
-      "Gemini's active web pinging operates palpably slower than standard Google operations",
-      "Gemini restricts its browsing algorithm solely to English domains"
-    ],
-    0,
-    "Unlike classic search tasks which impose manual loading, scanning, and digesting, Gemini simultaneously performs the fetching, synthesizing, and formatting."
-  ),
   textStep(
     "Researching Current Events",
     "The first and most direct application lies in investigating exactly what is happening globally right now — breaking news, market updates, cutting-edge launches, legislative shifts, and much more."
@@ -272,18 +188,6 @@ export const GEMINI_MODULE_3_STEPS_EN = [
     ["news and updates", "changes in Brazilian labor laws", "top 5", "information points", "cite"],
     ["news and updates", "changes in Brazilian labor laws", "top 5", "information points", "cite"],
     "Enforcing that the bot explicitly lists URLs acts as your prime safeguard against AI-generated hallucinations."
-  ),
-  quizStep(
-    "Auditing and Veracity",
-    "Why is it crucial that you command Gemini to cite its sources when performing web searches?",
-    [
-      "Merely to inflate the textual length and density of the response output",
-      "Because failure to explicitly request sources guarantees that Gemini will fabricate facts",
-      "So you can personally verify the precision of the claims directly at their origin prior to executing critical decisions",
-      "Sourcing is just an academic formality lacking genuine practical impact"
-    ],
-    2,
-    "Validating core claims over origin links is the absolute fundamental safety practice for any senior professional adopting AI."
   ),
   textStep(
     "Investigating Market Trends",
@@ -345,18 +249,6 @@ export const GEMINI_MODULE_3_STEPS_EN = [
     ["open a healthy food business in my city", "size and growth", "cases of success and failure", "main risks", "study or research"],
     "Assuming massive risk mandates proper groundwork. Assign the mechanical grind of collating relevant studies entirely to the AI."
   ),
-  quizStep(
-    "Workflow Optimization",
-    "Why does using Gemini to research massive life or business moves trump older manual surfing significantly?",
-    [
-      "Because Gemini possesses an omniscient ability to guarantee perfect success",
-      "In order to skip any real additional studying safely",
-      "Because rather than suffering through reading dozens of disjointed landing pages manually, you receive a meticulously organized synopsis tailor-made to your contextual variables",
-      "Gemini happens to be factually more accurate than all human scholars alive"
-    ],
-    2,
-    "Where human minds fatigue flipping through endless browser tabs, Gemini spots intricate correlations and prints immediately usable briefs."
-  ),
   textStep(
     "Comparing Products & Crunching Prices",
     "Gemini possesses the reach to track pricing ladders, contrast dense product features, and output neat comparison matrices that alleviate purchasing friction severely."
@@ -368,18 +260,6 @@ export const GEMINI_MODULE_3_STEPS_EN = [
     ["main", "project management tools", "price", "functionalities", "limitations", "size"],
     ["main", "project management tools", "price", "functionalities", "limitations", "size"],
     "Forcing analytical comparisons to render inside a Markdown-style table remains the master key to effortlessly digesting market offerings."
-  ),
-  quizStep(
-    "Rigid Parameters",
-    "What symbolizes the undeniable supreme method to employ Gemini as your personal shopper or software procurement officer?",
-    [
-      "Blindly begging for a direct recommendation without defining your restraints",
-      "Hunting strictly for the absolute cheapest SaaS available on the network",
-      "Predefining rigid filters and evaluating variables inside your prompt — ensuring Gemini restricts its sorting logic exactly around metrics that genuinely matter to you",
-      "Gemini utterly fails at tracking modern pricing tiers on live domains"
-    ],
-    2,
-    "Binding exact analytical weights inside the prompt barricades the final response from drifting into meaningless, generic advertising fluff."
   ),
   textStep(
     "Tracking News and Monitoring Deep Concepts",
@@ -417,33 +297,9 @@ export const GEMINI_MODULE_3_STEPS_EN = [
     ["language school with 3 branches", "increase student retention rates", "overcame", "applicable", "size and sector", "3 paths"],
     "Pumping personal constraints directly into the command flips a standard web query into an elite, bespoke corporate consultancy review."
   ),
-  quizStep(
-    "Bespoke Actionability",
-    "Why does weaving heavy custom context into Gemini outclass generalized search engines resoundingly?",
-    [
-      "It magically tricks Google servers into displaying entirely un-indexed domain structures",
-      "It actively runs servers faster, bypassing global queue lags intrinsically",
-      "Gemini inherently parses, interprets, and molds raw web results violently against your specified restrictions — outputting ready-to-launch tactics instead of dumping a list of useless blue hyperlinks",
-      "Adding custom flavors theoretically accomplishes nothing"
-    ],
-    2,
-    "This shift represents the single greatest leap in information economics this decade: graduating from merely gathering scattered links to receiving tactical playbooks ready for production."
-  ),
   textStep(
     "Best Practices When Hunting with Gemini",
     "Dictating rigid operational boundaries guarantees your virtual subordinate won't stray off mission."
-  ),
-  quizStep(
-    "Golden Procedure",
-    "Which selection fundamentally enforces the highest standard of practice when executing Gemini internet sweeps?",
-    [
-      "Submitting to all generated data sets as undisputed gospel inherently devoid of error",
-      "Casting remarkably vague descriptions and crossing fingers for the system to mind-read intents natively",
-      "Unyieldingly boxing in the dates of search, vigorously forcing source checks iteratively, and personally validating heavily impactful claims utilizing direct origin links",
-      "Deploying the interface strictly when standard Google instances return completely empty feeds"
-    ],
-    2,
-    "A senior professional completely commands the investigative narrative; they wield the speed of the machine while steadfastly guarding qualitative accountability."
   ),
   textStep(
     "Conclusion",
@@ -456,18 +312,6 @@ export const GEMINI_MODULE_3_STEPS_ES = [
     "Gemini Investigando en Internet en Tiempo Real",
     "¡Bienvenido de vuelta! En esta lección, aprenderás a usar una de las capacidades más exclusivas de Gemini: su acceso nativo a internet en tiempo real. Mientras que otros asistentes operan con un conjunto de conocimientos congelados en una fecha arbitraria pasada, Gemini recopila activamente la información más reciente disponible hoy mismo, justo en este instante.\n\n¿Por Qué el Acceso a Internet Cambia Todo?\nLa mayoría de los asistentes de IA responden basándose exclusivamente en su entrenamiento histórico. Gemini eclipsa este estándar: accede sin problemas a la web en vivo, trayendo instantáneamente noticias, análisis, tendencias y hechos que están surgiendo hoy, esta semana o este mes."
   ),
-  quizStep(
-    "Búsqueda Inteligente vs Web Tradicional",
-    "¿Qué diferencia la búsqueda web activa de Gemini de una búsqueda tradicional en Google?",
-    [
-      "Gemini no solo presenta enlaces — sino que lee, digiere, cruza información y devuelve una respuesta completamente estructurada y alineada a tus objetivos exactos",
-      "Gemini superficialmente imprime los enlaces en bruto, exactamente como hacen los motores de búsqueda estándar",
-      "La consulta activa de Gemini en la web funciona de forma notablemente más lenta que un escaneo estándar de Google",
-      "Gemini restringe su algoritmo de búsqueda exclusivamente a dominios angloparlantes"
-    ],
-    0,
-    "A diferencia de la búsqueda clásica que requiere carga, escaneo y lectura manual, Gemini realiza simultáneamente la extracción, síntesis y formato."
-  ),
   textStep(
     "Investigando a la Velocidad de Hoy",
     "La primera y más directa aplicación reside en investigar con precisión lo que ocurre globalmente en este momento — noticias de última hora, actualizaciones del mercado, lanzamientos, cambios legislativos y mucho más."
@@ -479,18 +323,6 @@ export const GEMINI_MODULE_3_STEPS_ES = [
     ["noticias y actualizaciones", "cambios en las leyes laborales brasileñas", "5 eventos principales", "punto de información", "fuentes consultadas"],
     ["noticias y actualizaciones", "cambios en las leyes laborales brasileñas", "5 eventos principales", "punto de información", "fuentes consultadas"],
     "Exigirle al bot que enumere las URLs actuales es tu salvaguarda principal frente a las especulaciones generadas por la IA."
-  ),
-  quizStep(
-    "Auditoría y Veracidad",
-    "¿Por qué es crucial que le exijas a Gemini citar las fuentes cuando escanea la web?",
-    [
-      "Solamente para inflar la longitud y la densidad de su respuesta",
-      "Porque omitir explícitamente las fuentes garantiza de manera inevitable que Gemini fabricará hechos sin fundamento",
-      "Para que puedas verificar de forma independiente y personal la precisión técnica de los reclamos en el punto de origen antes de ejecutar una decisión importante",
-      "Listar fuentes es apenas una convención académica carente de impacto operativo"
-    ],
-    2,
-    "Validar las afirmaciones críticas accediendo directamente al enlace aportado es el escudo fundamental para todo ejecutivo que adopte IA de forma profesional."
   ),
   textStep(
     "Analizando las Tendencias de Mercado",
@@ -552,18 +384,6 @@ export const GEMINI_MODULE_3_STEPS_ES = [
     ["abrir un negocio de comida sana en mi ciudad", "tamaño y crecimiento", "casos de éxito y fracaso", "riesgos primarios", "estudio de mercado"],
     "Incluso con resúmenes ágiles, externalizar a favor de una máquina exploradora anula un sinfín incalculable de callejones ciegos bibliográficos."
   ),
-  quizStep(
-    "Fluidez en la Toma de Decisiones",
-    "¿En qué rincón exacto el apoyarse en la inteligencia viva de Gemini rebasa las destrezas de cualquier analista que navegue ciegamente por la barra convencional?",
-    [
-      "Principalmente por su capacidad vidente incuestionable de asegurarte victorias perennes",
-      "Porque anula para siempre la necesidad y compromiso de estudiar seriamente algún día",
-      "Al condensar miles de clics por pestañas fragmentadas de forma simultánea, te otorga un mapa aéreo nítidamente adaptado a tus exigencias puntuales desde la consulta número uno",
-      "No existe supremacía sobre alguien que emplea el método buscador físico incesante y con tesón absoluto durante meses"
-    ],
-    2,
-    "Tu mente colapsaría leyendo todas las fuentes dispersas; Gemini capta redes neuronales y lo simplifica todo en viñetas directas."
-  ),
   textStep(
     "Cruzar Cuadros de Rendimiento Económico Real",
     "Gemini opera excepcionalmente escalando listas y contraponiendo de inmediato el catálogo brutal de las tarifas, entregándote esquemas comparativos."
@@ -575,18 +395,6 @@ export const GEMINI_MODULE_3_STEPS_ES = [
     ["principales", "herramientas de gestión de proyectos", "precio", "funcionalidades robustas", "limitaciones técnicas", "tamaño empresarial ideal"],
     ["principales", "herramientas de gestión de proyectos", "precio", "funcionalidades robustas", "limitaciones técnicas", "tamaño empresarial ideal"],
     "Forzar el formato por tabla es de uso obligatorio, facilitando brutalmente la lectura en cualquier consejo."
-  ),
-  quizStep(
-    "Arquitectura de Parámetros Inflexibles",
-    "¿A qué se acude obligatoriamente como método sagrado si esperamos que la máquina arroje dictámenes de coste u opciones viables exentas de relleno comercial genérico?",
-    [
-      "Rendir y suplicar que expulse el elemento milagroso del gran baúl sin más requisitos limitando su inventiva",
-      "Apresurarse en requerir, y nada más, qué servicio es absurdamente hiperbarato",
-      "Erigir las cortapisas cualitativas, cuantitativas, presupuestarias y sectoriales inamovibles antes de lanzar al asistente a comparar activamente bases de precios en la red",
-      "Gemini, en honor a la verdad, carece en directo y francamente de destreza frente a los listados tasadores"
-    ],
-    2,
-    "Puntualizar tus balanzas o pesos es vital; sin estas cadenas atadas, simplemente copiará y pegará la folletería publicitaria más vacía que localice a la mano."
   ),
   textStep(
     "Persecución Táctica Constante en la Red",
@@ -624,33 +432,9 @@ export const GEMINI_MODULE_3_STEPS_ES = [
     ["escuela de idiomas con 3 unidades pequeñas", "incrementar las permanencias mensuales", "superaron las incidencias", "tácticas aplicables aquí y ahora", "tamaño", "3 caminos directos"],
     "El inyectar minuciosamente veneno, fallas, ambiciones o métricas desesperadas es catapultar por los aires de internet un bólido implacablemente programado para obsequiar exclusivas consultas privadas personalizadas corporativas en una mera pantalla plana reluciente de destellos blancos."
   ),
-  quizStep(
-    "Acción Concreta Destilada en Segundos",
-    "¿Bajo qué precepto exacto inocular crudas y abyectas verdades contextuales o empresariales a este inerte buscador demuele sin discusión la navegación típica tradicional esparcida generalizadamente?",
-    [
-      "Produce y genera una grieta sistémica de código inalienable forzando mágicamente los dominios sellados",
-      "Se dispara un protocolo de hardware velozmente indomable encriptando más ciclos veloces internamente anulando la recesión al segundo",
-      "El ecosistema, una vez empoderado en base a sus límites explícitos con rudeza extrema y su norte indudable, descarta de plano el vómito bibliográfico global infinito y, violentándolo desde los bordes marginales, obsequia una tabla de vida con resoluciones acopladas perfectamente como piezas de reloj táctico a tu enmarañado marco de sufrimiento y acción",
-      "Sazonar así en realidad termina en redundancias ornamentadas, resultando nulas empíricamente"
-    ],
-    2,
-    "El salto evolutivo fundamental del decenio entero no radica de facto en recolectar más recortes informativos dispersos por la faz del plano de cables; es poseer entre nuestras yemas sudorosas un asistente táctico de consultorio en jefe listo para entrar en fase de combate asimilado desde las penumbras de hoy."
-  ),
   textStep(
     "El Mandato Gerencial Firme del Nuevo Operario Global del Mundo del Entorno Virtual",
     "Delinear fronteras en los dominios del robot exige a nivel imperativo restringir drásticamente cada resquicio a la libertad que este posea, ahondando un control sin merma."
-  ),
-  quizStep(
-    "Mandamientos Básicos",
-    "Analizando pragmáticamente todas tus opciones al manipular y empoderar a la red neuronal frente a un sondeo vivo global desbocado, ¿cuál decisión sella e irgue incontestablemente tu inexpugnabilidad profesional indiscutida antes del fin del ensayo técnico final evaluativo?",
-    [
-      "Beber plácidamente de todas sus aguas e inventarios asumidos enteramente como evangelios puros caídos de lo más infaliblemente correcto e inalienablemente preciso sin ninguna tachadura concebible",
-      "Echar vagas redes anchas llenas de brisas conceptuales esperando ciegamente en lo recóndito y profundo un desenlace genial por acto milagroso del código indescifrable al cual nos sujetamos de fe inquebrantable",
-      "Circunscribir categóricamente de forma brutal con fronteras la temporalidad exigida, requerir incesantemente links oficiales citados bajo coacción sistémica, e inspeccionar físicamente bajo control humano propio los asertos decisivos antes del estampido táctico irreversible definitivo en tu mesa gerencial.",
-      "Confinar a las utilidades IA exclusivamente ante la catástrofe del desplome funcional infructífero e inútil global ante los buscadores de hace dos décadas atrás del siglo anticuado."
-    ],
-    2,
-    "Ser profesional hoy invoca ostentar un escrutinio celoso superior; tú posees bajo encomienda la agilidad indómita y arrolladora cibernética global pero sigues comandando irrevocablemente la sanción cualitativa infalible ante todos."
   ),
   textStep(
     "Resoluciones Inalienables de Cierre en Marcha Frontal y Decisivo",
@@ -661,18 +445,6 @@ export const GEMINI_MODULE_3_STEPS_FR = [
   textStep(
     "Gemini : Piloter la Recherche Virtuelle en Temps Réel",
     "Bon retour parmi nous ! Cette leçon aborde l'atout sans doute le plus ravageur de Gemini : l'interrogation intégrée du Web en direct. Tandis que l'écrasante majorité des I.A. restent figées dans un apprentissage daté, Gemini aspire les données du présent et s'enrichit des courants de l'instant T.\n\nEn Quoi le Net Change-t-il la Donne ?\nLes autres se contentent de répéter l'histoire. Gemini balaie l'horizon immédiat, ramenant les dernières nouvelles, cours boursiers, et législations parues à la minute même."
-  ),
-  quizStep(
-    "Google Search Contre Intelligence de Recherche",
-    "Quelle démarcation fondamentale éloigne la routine de requête de Gemini d'une vulgaire plongée sous Google ?",
-    [
-      "Gemini ne se borne pas à aligner bêtement des hyperliens bleus — il étudie, décortique, synthétise chaque source pour recracher une réponse façonnée au millimètre selon votre cahier des charges.",
-      "L'I.A. liste banalement les dix premiers titres sans aucun regard critique comme un moteur classique.",
-      "Le mécanisme embarqué est prodigieusement plus lent sous Gemini en raison de la lourdeur des calculs.",
-      "L'assistant refuse catégoriquement d'ausculter les serveurs qui ne sont pas anglophones."
-    ],
-    0,
-    "L'avantage brutal réside dans la sous-traitance intégrale : il joue à la fois le rôle de documentaliste acharné, d'analyste et de rédacteur final en une seule passe."
   ),
   textStep(
     "Récolter l'Actualité Vive",
@@ -685,18 +457,6 @@ export const GEMINI_MODULE_3_STEPS_FR = [
     ["actualités brûlantes", "réformes du droit du travail français", "5 événements phares", "détail décisif", "sources consultées"],
     ["actualités brûlantes", "réformes du droit du travail français", "5 événements phares", "détail décisif", "sources consultées"],
     "Bloquer l'I.A. en l'obligeant à sourcer son récit érige un mur infranchissable contre le fléau des fausses informations générées."
-  ),
-  quizStep(
-    "Paranoïa et Audits Internes",
-    "Pourquoi exiger que Gemini prouve ses affirmations chiffrées par des URL valides est-il d'une importance capitale ?",
-    [
-      "Pour s'assurer d'obtenir un texte virtuellement plus massif et imposant.",
-      "Car s'il n'est pas contraint de citer, le cœur du système programmera nécessairement des mensonges grotesques.",
-      "Pour vous garantir le pouvoir de contre-vérifier l'exactitude chirurgicale du renseignement à la racine avant d'oser baser une stratégie implacable dessus.",
-      "Le référencement n'est qu'un snobisme lettré dénué de la moindre réelle implication dans les affaires courantes."
-    ],
-    2,
-    "Faire aveuglément confiance sans remonter au filon d'origine est l'erreur que paient très cher les amateurs du numérique."
   ),
   textStep(
     "Capter les Vents Nouveaux du Marché",
@@ -758,18 +518,6 @@ export const GEMINI_MODULE_3_STEPS_FR = [
     ["lancer une chaîne de fast-food vegan locale", "croissance et d'espace", "succès fulgurants", "risques majeurs", "législation"],
     "Avoir recourt aux sondes du Web épargne au stratège les tâtonnements coûteux."
   ),
-  quizStep(
-    "Le Raccourci de Survie",
-    "En quoi solliciter Gemini supplantera-t-il systématiquement des heures de veille au cours des processus de validation d'un investissement critique ?",
-    [
-      "Du fait d'un pouvoir chamanique de prophétiser l'avenir avec certitude.",
-      "Puisqu'il octroie l'autorisation de signer des contrats les yeux fermés.",
-      "En broyant la nécessité infernale d'ouvrir cent-vingt fenêtres de navigateurs pour restituer un schéma intelligible ajusté sans faille aucune autour des critères soulevés.",
-      "Peu importe la machine, son travail reste notoirement inférieur à celui d'un stagiaire."
-    ],
-    2,
-    "Là où l'attention organique lâche prise, l'informatique repère les récurrences et formalise en trois paragraphes cinglants le mur d'obstacles de votre marché."
-  ),
   textStep(
     "Filtrage Budgétaire et Achat Comparé",
     "Le radar s'avère intraitable lors des séances d'achats : l'orchestre compile instantanément les colonnes budgétaires et les plans d'abonnements adverses dans des cadres stricts et faciles à avaler."
@@ -781,18 +529,6 @@ export const GEMINI_MODULE_3_STEPS_FR = [
     ["quatre", "suivi de management en SaaS", "prix net mensuel", "fonctions phares de compétition", "contraintes", "dimension d'entreprise"],
     ["quatre", "suivi de management en SaaS", "prix net mensuel", "fonctions phares de compétition", "contraintes", "dimension d'entreprise"],
     "Mettre les plaquettes tarifaires côte à côte désamorce la magie des discours marketing au profit de la stricte vérité marchande."
-  ),
-  quizStep(
-    "Verrouiller les Filtres",
-    "Le summum de l'emploi pour de la délégation d'achats ou du criblage de logiciels requiert d'emblée quelle attitude préventive ?",
-    [
-      "Solliciter passivement l'oracle pour récolter l'avis le plus partagé.",
-      "Cibler le bas coût et lui adjoindre l'odre de rayer le reste.",
-      "Boucler systématiquement un encadrement redoutable de paramètres en imposant vos propres filtres métriques drastiques, le contraignant de fait à laisser le marketing publicitaire de côté.",
-      "Le comparateur Gemini n'étant pas actualisé pour l'aspect de caisse en direct, l'emploi en est proscrit."
-    ],
-    2,
-    "L'absence de contrainte de votre part le pousse à vous livrer la plaquette officielle publicitaire de l'entreprise ; imposez le filtre de la fonctionnalité froide pour avancer."
   ),
   textStep(
     "Vigie Technologique et Sectorielle Inébranlable",
@@ -830,33 +566,9 @@ export const GEMINI_MODULE_3_STEPS_FR = [
     ["école de danse urbaine modeste", "perdre des abonnés dès février", "ont remédié", "transposables dans une TPE", "trois"],
     "La profondeur d'immersion personnalisée garantit que le remède prodigué épouse l'échelle réelle de votre enjeu évitant les envolées de budgets illusoires destinés aux méga-corporations."
   ),
-  quizStep(
-    "L'Ascendant Ultime",
-    "Quel paradigme garantit au processus sur mesure le couronnement, loin au-dessus de la masse laborieuse exploitant à bas niveau et dans l'errance les fonctionnalités brutes internet standard ?",
-    [
-      "Il perfore discrètement et active des bases secrètes des services de renseignements de l'appareil d'état mondial en dépit du droit informatique conventionnel, décuplant sa force brute de renseignement et de filtrage sans le moindre obstacle technique insurmontable ou impossible.",
-      "L'acheminement est rendu fluide grâce au délestage artificiel de l'ordre d'évaluation des charges globales réseaux assurant une primauté algorithmique immédiate et quasi simultanée in fine.",
-      "L'effarante capacité du réseau d'opérer la filtration foudroyante conjugué simultanément avec un façonnage de tous les résidus de la fouille visant expressément votre périmètre restreint défini initialement ce qui délivre une directive actionnable, expurgeant par le fait la vulgaire ribambelle stérile de liens bleus usuels livrés morts au sein de la page de la veille.",
-      "Cet ajout d'ego narratif n'emporte aucune conséquence d'envergure sur la finalité tangible du rendu final."
-    ],
-    2,
-    "Ce glissement colossal modifie la base même de la consommation du net. Il n'est plus question d'archiver de l'infomation : le produit d'arrivée correspond précisément désormais ni plus ni moins au diagnostic final exécutable sur le terrain de bataille réel."
-  ),
   textStep(
     "Préceptes du Général Virtuel au Cœur des Réseaux Bruts Mondiaux",
     "Mener les régiments de calculs neuronaux à la moisson extérieure sans risquer la débâcle de sens impose le déploiement implacable d'un commandement stricte et ordonné refusant le libre arbitre abstrait ou aléatoire."
-  ),
-  quizStep(
-    "Prévenir la Dispersion Absolue de l'Expert Technique",
-    "Tranchant dans le vif et repoussant toute dégradation due aux hallucinations éventuelles du moteur à fond face à son propre vide, quel impératif régalien se doit d'être invoqué ?",
-    [
-      "S'incliner obséquieusement et religieusement face aux déductions sorties mystiquement en ligne et admettre les propositions formulées par les puces comme une entité absolue d'exactitude mathématique pure, excluant les corrections futures.",
-      "Généraliser au maximum l'énoncé du prompt en vue de stimuler sans le limiter les talents occultes algorithmiques à surcompenser dans les tréfonds non explorés du dictionnaire mondial.",
-      "Limiter au couteau les horizons de requêtes sur des créneaux temporels inamovibles, persécuter impitoyablement le bot quant à l'indication infaillible de son maillage de référencement, et se soumettre personnellement in situ et physiquement à l'astreinte d'un vérificationisme par lien manuel quant aux piliers de voûte de ses déductions les plus risquées et engageantes vis à vis d'un projet du grand monde réel en souffrance et impliquant les capitaux directs de ses donneurs d'ordre finaux assumés frontalement par toi.",
-      "Se délester de la machine dès lors que les navigateurs à onglets archaïques parviennent timidement à isoler une correspondance acceptable."
-    ],
-    2,
-    "Le grand professionnel trône fièrement souverain sans faire fi du devoir de diligence ultime. Seul face à l'étendue de la galaxie numérique et virtuelle déchaînée à chaque ordre dicté, il régentera indéfiniment du sommet l'armada sans âme en usant inéluctablement de validation du feu sacré par des garde-fous forgés dans l'expertise et adoubé fermement de l'esprit critique d'exception humaine."
   ),
   textStep(
     "Conclusion Irrévocable et Mise en Route Définitive",
