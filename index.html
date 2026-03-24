@@ -109,6 +109,18 @@
         }
       }
 
+      // Skip force reset on authentication routes (magic-login, auth with hash tokens)
+      var authRoutes = ['magic-login', 'auth'];
+      var isAuthRoute = authRoutes.some(function(r) {
+        return path === r || path.indexOf(r + '/') === 0;
+      });
+      var hasAuthHash = location.hash && location.hash.indexOf('access_token') !== -1;
+
+      if (!forceParam && !isCacheRoute && (isAuthRoute || hasAuthHash)) {
+        try { localStorage.setItem(KEY, FORCE_RESET_V); } catch(e) {}
+        return;
+      }
+
       // Skip if already done (unless force param or cache route)
       try {
         if (!forceParam && !isCacheRoute && localStorage.getItem(KEY) === FORCE_RESET_V) return;
