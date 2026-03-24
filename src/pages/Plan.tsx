@@ -28,62 +28,70 @@ const Plan = () => {
   const { data: trailsData } = useQuery({
     queryKey: ["all-trails-progress"],
     queryFn: async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const [
+        {
+          data: { user },
+        },
+        { data: tools, error: toolsError },
+        { data: phases, error: phasesError },
+      ] = await Promise.all([
+        supabase.auth.getUser(),
+        supabase.from("ai_tools").select("*").order("name"),
+        supabase.from("trail_phases").select("id, ai_tool_id"),
+      ]);
+
       if (!user) return [];
 
-      // Buscar todas as ferramentas
-      const { data: tools, error: toolsError } = await supabase.from("ai_tools").select("*").order("name");
-
       if (toolsError) throw toolsError;
+      if (phasesError) throw phasesError;
 
-      // Para cada ferramenta, buscar fases e progresso
-      const trailsWithProgress = await Promise.all(
-        tools.map(async (tool) => {
-          // Buscar fases
-          const { data: phases } = await supabase.from("trail_phases").select("id").eq("ai_tool_id", tool.id);
+      const phaseIdsByTool = new Map<string, string[]>();
 
-          const totalPhases = phases?.length || 0;
+      (phases || []).forEach((phase) => {
+        const currentPhaseIds = phaseIdsByTool.get(phase.ai_tool_id) || [];
+        currentPhaseIds.push(phase.id);
+        phaseIdsByTool.set(phase.ai_tool_id, currentPhaseIds);
+      });
 
-          // Buscar progresso
-          const phaseIds = phases?.map((p) => p.id) || [];
-          if (phaseIds.length === 0) {
-            return {
-              ...tool,
-              totalPhases,
-              completedPhases: 0,
-              status: "not-started" as const,
-              progressPercentage: 0,
-            };
-          }
+      const allPhaseIds = (phases || []).map((phase) => phase.id);
+      const completedPhaseIds = new Set<string>();
 
-          const { data: progress } = await supabase
-            .from("user_progress")
-            .select("*")
-            .eq("user_id", user.id)
-            .in("phase_id", phaseIds)
-            .eq("completed", true);
+      if (allPhaseIds.length > 0) {
+        const { data: progress, error: progressError } = await supabase
+          .from("user_progress")
+          .select("phase_id")
+          .eq("user_id", user.id)
+          .in("phase_id", allPhaseIds)
+          .eq("completed", true);
 
-          const completedPhases = progress?.length || 0;
-          const progressPercentage = totalPhases > 0 ? Math.round((completedPhases / totalPhases) * 100) : 0;
+        if (progressError) throw progressError;
 
-          let status: "not-started" | "in-progress" | "completed" = "not-started";
-          if (completedPhases === totalPhases && totalPhases > 0) {
-            status = "completed";
-          } else if (completedPhases > 0) {
-            status = "in-progress";
-          }
+        (progress || []).forEach((entry) => {
+          completedPhaseIds.add(entry.phase_id);
+        });
+      }
 
-          return {
-            ...tool,
-            totalPhases,
-            completedPhases,
-            status,
-            progressPercentage,
-          };
-        }),
-      );
+      const trailsWithProgress = (tools || []).map((tool) => {
+        const phaseIds = phaseIdsByTool.get(tool.id) || [];
+        const totalPhases = phaseIds.length;
+        const completedPhases = phaseIds.filter((phaseId) => completedPhaseIds.has(phaseId)).length;
+        const progressPercentage = totalPhases > 0 ? Math.round((completedPhases / totalPhases) * 100) : 0;
+
+        let status: "not-started" | "in-progress" | "completed" = "not-started";
+        if (completedPhases === totalPhases && totalPhases > 0) {
+          status = "completed";
+        } else if (completedPhases > 0) {
+          status = "in-progress";
+        }
+
+        return {
+          ...tool,
+          totalPhases,
+          completedPhases,
+          status,
+          progressPercentage,
+        };
+      });
 
       return trailsWithProgress;
     },

@@ -42,18 +42,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     "Combinando modos no MidJourney - Camadas de intencao no mesmo prompt",
     "Bem-vindo de volta. Nesta licao, voce vai aprender a combinar modos, estilos, iluminacoes, pontos de vista, paletas e parametros no mesmo prompt. A ideia aqui nao e empilhar termos bonitos. E construir uma imagem em camadas, em que cada decisao reforca a anterior e empurra o MidJourney para uma visao muito mais precisa.\n\nIniciantes descrevem o sujeito. Intermediarios adicionam estilo e luz. Avancados combinam multiplas camadas com intencao, criando um resultado que parece pensado por uma direcao criativa inteira, nao por um prompt generico.",
   ),
-  quizStep(
-    "O que torna um prompt combinado avancado",
-    "O que diferencia um prompt com modos combinados de um prompt simples?",
-    [
-      "Cada elemento funciona como uma instrucao especifica que guia o MidJourney em uma direcao criativa precisa.",
-      "Prompts com mais elementos sao sempre mais longos e lentos para gerar.",
-      "Combinar modos so funciona para quem tem plano premium.",
-      "Adicionar muitos elementos sempre confunde o modelo e piora o resultado.",
-    ],
-    0,
-    "O valor nao esta na quantidade de palavras. Esta em como cada camada reforca uma intencao criativa clara.",
-  ),
   fillStep(
     "Preencha a lacuna - Entenda a estrutura",
     "Organize a estrutura logica de um prompt combinado do mais essencial ao mais refinado.",
@@ -77,18 +65,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
       "parametros tecnicos",
     ],
     "Cada camada responde a uma pergunta diferente: o que, onde, como, de qual angulo, com qual luz, em quais cores e em qual formato.",
-  ),
-  quizStep(
-    "Por que a estrutura melhora o resultado",
-    "Por que seguir uma estrutura logica ao combinar modos melhora o resultado?",
-    [
-      "Porque o MidJourney le o prompt em ordem e ignora o resto.",
-      "Para deixar o prompt visualmente bonito, sem impacto real.",
-      "Porque cada camada responde a uma pergunta especifica e juntas formam uma instrucao visual completa.",
-      "Porque a ordem nao influencia nada, mas deixa o criador mais calmo.",
-    ],
-    2,
-    "Estrutura nao e enfeite. E organizacao de pensamento. Quanto mais coerente a ordem, mais clara fica a imagem final.",
   ),
   textStep(
     "Estilo + iluminacao",
@@ -117,18 +93,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "Quando estilo, luz, atmosfera e cor falam a mesma lingua emocional, a imagem parece muito mais intencional.",
   ),
-  quizStep(
-    "Cyberpunk + Neon",
-    "Por que combinar Cyberpunk com Neon Lighting cria um resultado mais coeso do que Cyberpunk com Golden Hour?",
-    [
-      "Porque o MidJourney tem restricoes tecnicas para Golden Hour.",
-      "Porque toda combinacao urbana precisa seguir essa convencao.",
-      "Porque o cyberpunk depende de artificialidade urbana noturna, e o neon reforca exatamente essa identidade.",
-      "Porque qualquer combinacao de estilo e iluminacao gera resultados equivalentes.",
-    ],
-    2,
-    "Cyberpunk e sintese de cidade, artificialidade e noite. Neon amplifica isso. Golden Hour empurra a imagem para outra atmosfera.",
-  ),
   fillStep(
     "Preencha a lacuna - Adicione ponto de vista",
     "Complete o prompt combinando ponto de vista, estilo e luz na mesma cena.",
@@ -152,18 +116,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
       "--ar 9:16",
     ],
     "Aqui voce ja nao esta so descrevendo um sujeito. Esta dizendo como ele deve ser visto, sentido e enquadrado.",
-  ),
-  quizStep(
-    "Low Angle + Rim + cinematografico",
-    "O que a combinacao de Low Angle com Rim Lighting e estilo cinematografico cria nessa imagem?",
-    [
-      "Uma imagem tecnica e informativa sobre exploracao espacial.",
-      "Um retrato documental simples de uma astronauta em trabalho.",
-      "Uma composicao epica em que angulo, luz e estilo se unem como um frame de filme de grande orcamento.",
-      "Um conflito visual em que as tecnicas se anulam.",
-    ],
-    2,
-    "O angulo amplia poder, a rim light adiciona presenca e o estilo cinematografico costura tudo em uma linguagem unica.",
   ),
   textStep(
     "Referencias artisticas hibridas",
@@ -194,18 +146,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "As referencias se tornam originais quando cada uma entrega um valor claro: uma traz heranca visual, a outra traz leitura contemporanea.",
   ),
-  quizStep(
-    "Por que o hibrido gera originalidade",
-    "Por que combinar duas referencias artisticas diferentes cria resultados mais originais?",
-    [
-      "Porque o MidJourney nao entende estilos hibridos e improvisa.",
-      "Para criar imagens que ninguem consiga identificar.",
-      "Porque cada referencia contribui com elementos reconheciveis e a fusao cria uma estetica nova sem copiar nenhuma delas por inteiro.",
-      "Porque combinar referencias sempre gera imagens confusas e experimentais.",
-    ],
-    2,
-    "Originalidade vem de fusao coerente, nao de aleatoriedade. Hibrido bom soma identidades sem destruir legibilidade.",
-  ),
   textStep(
     "Paleta + mood",
     "Paleta de cores e mood sao dois dos elementos mais importantes para decidir como o espectador vai se sentir diante da imagem. Quando eles estao alinhados, a emocao chega rapido. Quando entram em conflito, a mensagem perde forca.",
@@ -235,18 +175,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "Quando paleta, clima e atmosfera contam a mesma historia, a emocao da imagem chega de forma muito mais imediata.",
   ),
-  quizStep(
-    "Paleta e mood no marketing",
-    "Por que alinhar paleta de cores e mood e essencial em imagens para marketing?",
-    [
-      "Porque cada cor tem um significado universal fixo.",
-      "Porque isso torna a imagem tecnicamente mais correta.",
-      "Porque quando paleta e mood estao alinhados, o cerebro le a emocao da imagem de forma coerente e imediata.",
-      "Porque paleta e mood sao independentes e servem apenas como decoracao.",
-    ],
-    2,
-    "Marketing visual depende de leitura rapida. Se cor e emocao brigam entre si, a mensagem enfraquece.",
-  ),
   fillStep(
     "Preencha a lacuna - Crie produto avancado",
     "Complete o prompt de fotografia de produto premium.",
@@ -272,18 +200,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
       "--ar 4:5",
     ],
     "Produto premium nasce de contexto visual. Angulo, luz, fundo e estilo criam valor antes mesmo da pessoa saber o preco.",
-  ),
-  quizStep(
-    "Luxo visual em produto",
-    "Qual combinacao de modos cria a percepcao de luxo e premium em fotografia de produto?",
-    [
-      "High Angle com Soft Box e fundo branco limpo.",
-      "Bird's Eye View com luz natural e cores neutras.",
-      "Low Angle para grandiosidade, rim light para presenca, fundo escuro para sofisticacao e estilo editorial para posicionamento premium.",
-      "A percepcao de luxo vem apenas da qualidade do produto, nao do prompt.",
-    ],
-    2,
-    "Antes de conhecer o produto, o publico ja le status, valor e desejo por meio da imagem.",
   ),
   fillStep(
     "Preencha a lacuna - Crie retrato cinematografico",
@@ -311,18 +227,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "Aqui as camadas funcionam juntas para fazer a imagem parecer um retrato vivido, nao apenas bonito.",
   ),
-  quizStep(
-    "Retrato cinematografico poderoso",
-    "Por que a combinacao de Close Up com Chiaroscuro e estilo documentario cria um retrato tao poderoso?",
-    [
-      "Porque sao tres tecnicas avancadas e raras no MidJourney.",
-      "Porque geram um retrato tecnicamente chamativo, mesmo sem emocao.",
-      "Porque o Close Up revela o humano, o Chiaroscuro traz profundidade dramatica e o documentario adiciona autenticidade.",
-      "Porque essas tecnicas sempre produzem o mesmo retrato, independentemente do sujeito.",
-    ],
-    2,
-    "O rosto deixa de ser so um rosto. Ele passa a carregar tempo, historia e presenca emocional.",
-  ),
   fillStep(
     "Preencha a lacuna - Crie paisagem epica",
     "Complete o prompt de paisagem com escala e atmosfera.",
@@ -348,18 +252,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
       "--ar 16:9",
     ],
     "Paisagem epica nao depende so de tamanho. Depende de contraste de escala, atmosfera e leitura emocional.",
-  ),
-  quizStep(
-    "Silhueta em paisagem epica",
-    "Por que adicionar uma figura humana em silhueta a uma paisagem epica amplifica o impacto visual?",
-    [
-      "Para mostrar que a cena e segura para o ser humano.",
-      "Porque MidJourney gera paisagens melhores quando ha personagens.",
-      "Porque o contraste entre a escala minuscula da figura e a imensidao da paisagem comunica grandiosidade e aventura de forma imediata.",
-      "Porque figuras humanas sempre desviam o olhar do elemento principal.",
-    ],
-    2,
-    "Sem comparacao de escala, o espectador pode ate achar a paisagem bonita, mas sente menos a sua grandeza.",
   ),
   fillStep(
     "Preencha a lacuna - Monte o prompt definitivo",
@@ -389,18 +281,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "Esse tipo de prompt funciona porque todas as camadas estao alinhadas. Nada esta sobrando. Nada esta competindo.",
   ),
-  quizStep(
-    "Quando todas as camadas encaixam",
-    "Qual e o resultado quando todas as camadas de um prompt estao perfeitamente alinhadas?",
-    [
-      "Uma imagem tecnicamente perfeita, mas emocionalmente vazia.",
-      "Uma imagem confusa, com muitos elementos competindo.",
-      "Uma imagem com identidade visual unica e coerente, em que cada camada reforca as outras.",
-      "Um resultado pior do que um prompt simples.",
-    ],
-    2,
-    "Coerencia nao simplifica a imagem. Ela da direcao. E direcao e o que faz o visual parecer profissional.",
-  ),
   fillStep(
     "Preencha a lacuna - Evite os erros",
     "Complete a frase com os erros mais comuns ao combinar modos.",
@@ -421,18 +301,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_PT = [
     ],
     "O problema nao e ter varias camadas. O problema e ter varias camadas puxando para direcoes diferentes.",
   ),
-  quizStep(
-    "Erro mais comum em modos avancados",
-    "Qual e o erro mais comum ao tentar combinar modos avancados no MidJourney?",
-    [
-      "Usar mais de dois tipos de iluminacao no mesmo prompt.",
-      "Combinar estilos de periodos historicos diferentes.",
-      "Adicionar elementos sem intencao criativa clara, acumulando termos fortes que nao se comunicam entre si.",
-      "Combinar ponto de vista com iluminacao no mesmo prompt.",
-    ],
-    2,
-    "Prompt avancado nao e lista de palavras impressionantes. E composicao intencional. Sem isso, o resultado fica confuso.",
-  ),
   textStep(
     "Conclusao",
     "Combinar modos e a habilidade que transforma o MidJourney de um gerador de imagens em um estudio criativo. Estilo com iluminacao, ponto de vista com mood, paleta com atmosfera, referencias artisticas hibridas e todas as camadas unidas em um unico prompt com intencao clara criam possibilidades que nenhum elemento isolado conseguiria produzir.\n\nO segredo nao e usar mais elementos. E usar os elementos certos, na ordem certa, reforcando a mesma ideia visual do inicio ao fim.",
@@ -443,18 +311,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
   textStep(
     "Combining modes in MidJourney - Building images with layered intent",
     "Welcome back. In this lesson, you will learn how to combine modes, styles, lighting, point of view, palettes, and parameters inside the same prompt. The goal is not to stack impressive words. The goal is to build an image in layers, where each choice reinforces the previous one and pushes MidJourney toward a much more precise vision.\n\nBeginners describe the subject. Intermediate users add style and light. Advanced users combine multiple layers with intent, creating results that feel directed instead of generic.",
-  ),
-  quizStep(
-    "What makes a combined prompt advanced",
-    "What differentiates a prompt with combined modes from a simple prompt?",
-    [
-      "Each added element works as a specific instruction that guides MidJourney toward a precise creative direction.",
-      "Prompts with more elements are always longer and slower to generate.",
-      "Combining modes only works for premium subscribers.",
-      "Adding many elements always confuses the model and worsens the result.",
-    ],
-    0,
-    "The power does not come from word count. It comes from how each layer reinforces a clear creative intention.",
   ),
   fillStep(
     "Fill in the blanks - Understand the structure",
@@ -479,18 +335,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
       "technical parameters",
     ],
     "Each layer answers a different question: what, where, how, from which angle, with what light, in which colors, and in what format.",
-  ),
-  quizStep(
-    "Why structure improves results",
-    "Why does following a logical structure improve the result when combining modes?",
-    [
-      "Because MidJourney reads prompts in order and ignores the end.",
-      "Because it makes the prompt look neat without any real benefit.",
-      "Because each layer answers a specific question and together they create a complete visual instruction.",
-      "Because order does not matter, but it helps the creator feel organized.",
-    ],
-    2,
-    "Structure is not decoration. It is organized thinking. The more coherent the order, the clearer the image becomes.",
   ),
   textStep(
     "Style + lighting",
@@ -519,18 +363,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "When style, light, atmosphere, and color all push in the same emotional direction, the image feels far more intentional.",
   ),
-  quizStep(
-    "Cyberpunk + Neon",
-    "Why does pairing Cyberpunk with Neon Lighting feel more cohesive than Cyberpunk with Golden Hour?",
-    [
-      "Because MidJourney technically restricts Golden Hour with cyberpunk.",
-      "Because every urban style must follow that convention.",
-      "Because cyberpunk depends on synthetic urban night energy, and neon reinforces that identity directly.",
-      "Because any style and lighting combination works equally well.",
-    ],
-    2,
-    "Cyberpunk is built on artificial city energy and night atmosphere. Neon supports that. Golden Hour pushes the image somewhere else.",
-  ),
   fillStep(
     "Fill in the blanks - Add point of view",
     "Complete the prompt by combining viewpoint, style, and lighting in one scene.",
@@ -554,18 +386,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
       "--ar 9:16",
     ],
     "At this point you are no longer only describing a subject. You are directing how it must be seen, felt, and framed.",
-  ),
-  quizStep(
-    "Low Angle + Rim + cinematic",
-    "What does the combination of Low Angle, Rim Lighting, and cinematic style create in this image?",
-    [
-      "A technical and informative image about space exploration.",
-      "A documentary portrait of an astronaut at work.",
-      "An epic composition where angle, light, and style work together like a large-budget film frame.",
-      "A visual conflict in which the techniques cancel one another out.",
-    ],
-    2,
-    "The angle expands power, the rim light adds presence, and the cinematic style unifies everything into one language.",
   ),
   textStep(
     "Hybrid artistic references",
@@ -596,18 +416,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "References become original when each one contributes a clear value: one brings historical weight, the other brings contemporary readability.",
   ),
-  quizStep(
-    "Why hybrid references feel original",
-    "Why does combining two different artistic references create more original results?",
-    [
-      "Because MidJourney does not understand hybrid styles and improvises.",
-      "To make images that nobody can identify.",
-      "Because each reference contributes recognizable elements, and their fusion creates a new aesthetic without copying either one fully.",
-      "Because combining references always produces confusing experimental images.",
-    ],
-    2,
-    "Originality comes from coherent fusion, not from randomness. A good hybrid adds identities without breaking legibility.",
-  ),
   textStep(
     "Palette + mood",
     "Color palette and mood are two of the strongest elements for deciding how the viewer will feel in front of the image. When they align, emotion lands quickly. When they clash, the message loses force.",
@@ -637,18 +445,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "When palette, mood, and atmosphere tell the same story, emotion reaches the viewer much faster.",
   ),
-  quizStep(
-    "Palette and mood in marketing",
-    "Why is aligning color palette and mood essential in marketing images?",
-    [
-      "Because every color has a fixed universal meaning.",
-      "Because it makes the image technically more correct.",
-      "Because when palette and mood align, the brain reads the emotion of the image in a coherent and immediate way.",
-      "Because palette and mood are decorative and independent.",
-    ],
-    2,
-    "Visual marketing depends on fast reading. If color and emotion fight each other, the message weakens.",
-  ),
   fillStep(
     "Fill in the blanks - Create advanced product imagery",
     "Complete the premium product photography prompt.",
@@ -674,18 +470,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
       "--ar 4:5",
     ],
     "Premium product perception starts in context. Angle, light, background, and style create value before the viewer even knows the price.",
-  ),
-  quizStep(
-    "Luxury visual language",
-    "Which combination of modes creates the strongest luxury and premium perception in product photography?",
-    [
-      "High Angle with Soft Box and a clean white background.",
-      "Bird's Eye View with natural lighting and neutral colors.",
-      "Low Angle for grandeur, rim light for presence, dark background for sophistication, and editorial style for premium positioning.",
-      "Luxury comes only from product quality, not from prompt choices.",
-    ],
-    2,
-    "Before the product is understood, the audience is already reading status, value, and desire through the image.",
   ),
   fillStep(
     "Fill in the blanks - Create a cinematic portrait",
@@ -713,18 +497,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "Here the layers work together to make the image feel lived-in, not merely attractive.",
   ),
-  quizStep(
-    "Why the portrait feels powerful",
-    "Why does combining Close Up, Chiaroscuro, and documentary style create such a powerful portrait?",
-    [
-      "Because they are three rare advanced techniques in MidJourney.",
-      "Because they generate a technically striking image, even without emotion.",
-      "Because Close Up reveals the human details, Chiaroscuro adds dramatic depth, and documentary style adds authenticity.",
-      "Because those techniques always create the same portrait no matter the subject.",
-    ],
-    2,
-    "The face stops being just a face. It starts carrying time, history, and emotional presence.",
-  ),
   fillStep(
     "Fill in the blanks - Create an epic landscape",
     "Complete the landscape prompt with scale and atmosphere.",
@@ -750,18 +522,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
       "--ar 16:9",
     ],
     "Epic landscape work is not only about size. It is about scale contrast, atmosphere, and emotional framing.",
-  ),
-  quizStep(
-    "Silhouette in an epic landscape",
-    "Why does adding a silhouetted human figure amplify the impact of an epic landscape?",
-    [
-      "To show that the environment is safe for humans.",
-      "Because MidJourney always generates better landscapes when a character is present.",
-      "Because the contrast between tiny human scale and environmental immensity communicates grandeur and adventure immediately.",
-      "Because human figures always pull focus away from the landscape.",
-    ],
-    2,
-    "Without scale comparison, the viewer may find the landscape beautiful, but will feel less of its true magnitude.",
   ),
   fillStep(
     "Fill in the blanks - Build the definitive prompt",
@@ -791,18 +551,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "This kind of prompt works because all layers align. Nothing feels wasted. Nothing competes with the main idea.",
   ),
-  quizStep(
-    "When every layer aligns",
-    "What happens when all layers of a prompt are perfectly aligned?",
-    [
-      "You get a technically perfect but emotionally empty image.",
-      "You get a confused image with too many competing elements.",
-      "You get a unique and coherent visual identity where every layer reinforces the others.",
-      "You get a worse result than a simpler prompt.",
-    ],
-    2,
-    "Coherence does not flatten the image. It gives it direction, and direction is what makes the visual feel professional.",
-  ),
   fillStep(
     "Fill in the blanks - Avoid the mistakes",
     "Complete the sentence with the most common mistakes when combining modes.",
@@ -823,18 +571,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_EN = [
     ],
     "The issue is not having many layers. The issue is having many layers pulling in different directions.",
   ),
-  quizStep(
-    "Most common advanced-mode mistake",
-    "What is the most common mistake when trying to combine advanced modes in MidJourney?",
-    [
-      "Using more than two lighting styles in the same prompt.",
-      "Combining styles from different historical periods.",
-      "Adding elements without clear creative intent, stacking strong terms that do not communicate with one another.",
-      "Combining point of view with lighting in the same prompt.",
-    ],
-    2,
-    "An advanced prompt is not a list of impressive words. It is intentional composition. Without that, the image turns muddy.",
-  ),
   textStep(
     "Conclusion",
     "Combining modes is the skill that turns MidJourney from an image generator into a creative studio. Style with lighting, point of view with mood, palette with atmosphere, hybrid artistic references, and all layers unified inside one clear prompt create possibilities that no isolated element could produce.\n\nThe secret is not using more elements. The secret is using the right elements in the right order, reinforcing the same visual idea from start to finish.",
@@ -845,18 +581,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
   textStep(
     "Combinar modos en MidJourney - Construir imagenes con capas de intencion",
     "Bienvenido de nuevo. En esta leccion vas a aprender a combinar modos, estilos, iluminaciones, puntos de vista, paletas y parametros dentro del mismo prompt. La idea no es acumular palabras llamativas. La idea es construir una imagen por capas, donde cada decision refuerza la anterior y empuja a MidJourney hacia una vision mucho mas precisa.\n\nLos principiantes describen el sujeto. Los intermedios agregan estilo y luz. Los avanzados combinan multiples capas con intencion y consiguen resultados dirigidos, no genericos.",
-  ),
-  quizStep(
-    "Que vuelve avanzado a un prompt combinado",
-    "Que diferencia a un prompt con modos combinados de un prompt simple?",
-    [
-      "Cada elemento agregado funciona como una instruccion especifica que guia a MidJourney hacia una direccion creativa precisa.",
-      "Los prompts con mas elementos siempre son mas largos y tardan mas.",
-      "Combinar modos solo funciona para usuarios premium.",
-      "Agregar muchos elementos siempre confunde al modelo y empeora el resultado.",
-    ],
-    0,
-    "El poder no viene de la cantidad de palabras. Viene de como cada capa refuerza una intencion creativa clara.",
   ),
   fillStep(
     "Completa los espacios - Entiende la estructura",
@@ -881,18 +605,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
       "parametros tecnicos",
     ],
     "Cada capa responde una pregunta distinta: que, donde, como, desde que angulo, con que luz, en que colores y en que formato.",
-  ),
-  quizStep(
-    "Por que la estructura mejora el resultado",
-    "Por que seguir una estructura logica mejora el resultado al combinar modos?",
-    [
-      "Porque MidJourney lee en orden y luego ignora el resto.",
-      "Porque hace que el prompt se vea ordenado sin beneficio real.",
-      "Porque cada capa responde una pregunta concreta y juntas forman una instruccion visual completa.",
-      "Porque el orden no importa, pero deja tranquilo al creador.",
-    ],
-    2,
-    "La estructura no es decoracion. Es pensamiento organizado. Cuanto mas coherente es el orden, mas clara sale la imagen.",
   ),
   textStep(
     "Estilo + iluminacion",
@@ -921,18 +633,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "Cuando estilo, luz, atmosfera y color empujan en la misma direccion emocional, la imagen se siente mucho mas intencional.",
   ),
-  quizStep(
-    "Cyberpunk + Neon",
-    "Por que combinar Cyberpunk con Neon Lighting se siente mas coherente que combinar Cyberpunk con Golden Hour?",
-    [
-      "Porque MidJourney restringe tecnicamente Golden Hour con cyberpunk.",
-      "Porque todo estilo urbano debe seguir esa convencion.",
-      "Porque el cyberpunk depende de energia urbana nocturna y sintetica, y el neon refuerza exactamente esa identidad.",
-      "Porque cualquier combinacion de estilo e iluminacion funciona igual de bien.",
-    ],
-    2,
-    "Cyberpunk esta construido sobre artificialidad, ciudad y noche. Neon lo empuja aun mas hacia esa identidad.",
-  ),
   fillStep(
     "Completa los espacios - Agrega punto de vista",
     "Completa el prompt combinando punto de vista, estilo e iluminacion.",
@@ -956,18 +656,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
       "--ar 9:16",
     ],
     "Aqui ya no solo describes un sujeto. Estas dirigiendo como debe verse, sentirse y encuadrarse.",
-  ),
-  quizStep(
-    "Low Angle + Rim + cinematografico",
-    "Que crea la combinacion de Low Angle, Rim Lighting y estilo cinematografico en esta imagen?",
-    [
-      "Una imagen tecnica e informativa sobre exploracion espacial.",
-      "Un retrato documental sencillo de una astronauta trabajando.",
-      "Una composicion epica donde angulo, luz y estilo se unen como un fotograma de gran presupuesto.",
-      "Un conflicto visual en el que las tecnicas se anulan.",
-    ],
-    2,
-    "El angulo amplifica poder, la rim light agrega presencia y el estilo cinematografico unifica todo en un mismo lenguaje.",
   ),
   textStep(
     "Referencias artisticas hibridas",
@@ -998,18 +686,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "Las referencias se vuelven originales cuando cada una aporta un valor claro: una da peso historico y la otra legibilidad contemporanea.",
   ),
-  quizStep(
-    "Por que el hibrido se siente original",
-    "Por que combinar dos referencias artisticas diferentes produce resultados mas originales?",
-    [
-      "Porque MidJourney no entiende estilos hibridos y improvisa.",
-      "Para crear imagenes que nadie pueda identificar.",
-      "Porque cada referencia aporta elementos reconocibles y la fusion crea una estetica nueva sin copiar ninguna por completo.",
-      "Porque combinar referencias siempre produce imagenes confusas.",
-    ],
-    2,
-    "La originalidad nace de una fusion coherente, no del caos. Un buen hibrido suma identidades sin romper legibilidad.",
-  ),
   textStep(
     "Paleta + mood",
     "La paleta de color y el mood son dos de los elementos mas fuertes para decidir como se va a sentir el espectador frente a la imagen. Cuando se alinean, la emocion llega rapido. Cuando chocan, el mensaje pierde fuerza.",
@@ -1039,18 +715,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "Cuando paleta, mood y atmosfera cuentan la misma historia, la emocion llega al espectador mucho mas rapido.",
   ),
-  quizStep(
-    "Paleta y mood en marketing",
-    "Por que alinear paleta de colores y mood es esencial en imagenes de marketing?",
-    [
-      "Porque cada color tiene un significado universal fijo.",
-      "Porque vuelve la imagen tecnicamente mas correcta.",
-      "Porque cuando paleta y mood se alinean, el cerebro lee la emocion de forma coherente e inmediata.",
-      "Porque paleta y mood son decorativos e independientes.",
-    ],
-    2,
-    "El marketing visual depende de lectura rapida. Si color y emocion chocan, el mensaje pierde fuerza.",
-  ),
   fillStep(
     "Completa los espacios - Crea producto avanzado",
     "Completa el prompt de fotografia premium de producto.",
@@ -1076,18 +740,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
       "--ar 4:5",
     ],
     "La percepcion premium del producto empieza en el contexto. Angulo, luz, fondo y estilo crean valor antes de conocer el precio.",
-  ),
-  quizStep(
-    "Lenguaje visual del lujo",
-    "Que combinacion de modos crea la percepcion mas fuerte de lujo y premium en fotografia de producto?",
-    [
-      "High Angle con Soft Box y fondo blanco limpio.",
-      "Bird's Eye View con luz natural y colores neutros.",
-      "Low Angle para grandeza, rim light para presencia, fondo oscuro para sofisticacion y estilo editorial para posicionamiento premium.",
-      "El lujo depende solo de la calidad del producto, no del prompt.",
-    ],
-    2,
-    "Antes de entender el producto, el publico ya esta leyendo estatus, valor y deseo a traves de la imagen.",
   ),
   fillStep(
     "Completa los espacios - Crea retrato cinematografico",
@@ -1115,18 +767,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "Aqui las capas trabajan juntas para que la imagen se sienta vivida, no solo bonita.",
   ),
-  quizStep(
-    "Por que el retrato se siente potente",
-    "Por que la combinacion de Close Up, Chiaroscuro y estilo documental crea un retrato tan poderoso?",
-    [
-      "Porque son tres tecnicas raras y avanzadas de MidJourney.",
-      "Porque generan una imagen tecnicamente llamativa, aunque no tenga emocion.",
-      "Porque Close Up revela lo humano, Chiaroscuro agrega profundidad dramatica y el documental aporta autenticidad.",
-      "Porque esas tecnicas siempre generan el mismo retrato sin importar el sujeto.",
-    ],
-    2,
-    "El rostro deja de ser solo un rostro. Empieza a cargar tiempo, historia y presencia emocional.",
-  ),
   fillStep(
     "Completa los espacios - Crea paisaje epico",
     "Completa el prompt de paisaje con escala y atmosfera.",
@@ -1152,18 +792,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
       "--ar 16:9",
     ],
     "El paisaje epico no depende solo del tamano. Depende del contraste de escala, de la atmosfera y del encuadre emocional.",
-  ),
-  quizStep(
-    "Silueta en paisaje epico",
-    "Por que agregar una figura humana en silueta amplifica el impacto de un paisaje epico?",
-    [
-      "Para mostrar que el entorno es seguro para el ser humano.",
-      "Porque MidJourney genera mejores paisajes si hay personajes.",
-      "Porque el contraste entre la escala minuscula de la figura y la inmensidad del entorno comunica grandeza y aventura de inmediato.",
-      "Porque las figuras humanas siempre distraen del paisaje.",
-    ],
-    2,
-    "Sin comparacion de escala, el espectador puede ver belleza, pero sentir menos la verdadera magnitud del entorno.",
   ),
   fillStep(
     "Completa los espacios - Construye el prompt definitivo",
@@ -1193,18 +821,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "Este tipo de prompt funciona porque todas las capas estan alineadas. Nada sobra. Nada compite.",
   ),
-  quizStep(
-    "Cuando todas las capas encajan",
-    "Que ocurre cuando todas las capas de un prompt estan perfectamente alineadas?",
-    [
-      "Obtienes una imagen tecnicamente perfecta pero emocionalmente vacia.",
-      "Obtienes una imagen confusa con demasiados elementos compitiendo.",
-      "Obtienes una identidad visual unica y coherente donde cada capa refuerza a las demas.",
-      "Obtienes un resultado peor que con un prompt simple.",
-    ],
-    2,
-    "La coherencia no simplifica la imagen. Le da direccion, y la direccion es lo que hace que el visual se sienta profesional.",
-  ),
   fillStep(
     "Completa los espacios - Evita los errores",
     "Completa la frase con los errores mas comunes al combinar modos.",
@@ -1225,18 +841,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_ES = [
     ],
     "El problema no es tener muchas capas. El problema es tener muchas capas tirando hacia direcciones distintas.",
   ),
-  quizStep(
-    "Error mas comun en modos avanzados",
-    "Cual es el error mas comun al intentar combinar modos avanzados en MidJourney?",
-    [
-      "Usar mas de dos tipos de iluminacion en el mismo prompt.",
-      "Combinar estilos de periodos historicos distintos.",
-      "Agregar elementos sin intencion creativa clara, apilando terminos fuertes que no se comunican entre si.",
-      "Combinar punto de vista con iluminacion en el mismo prompt.",
-    ],
-    2,
-    "Un prompt avanzado no es una lista de palabras impresionantes. Es composicion intencional. Sin eso, la imagen se ensucia.",
-  ),
   textStep(
     "Conclusion",
     "Combinar modos es la habilidad que convierte MidJourney de generador de imagenes en estudio creativo. Estilo con iluminacion, punto de vista con mood, paleta con atmosfera, referencias artisticas hibridas y todas las capas reunidas en un solo prompt claro abren posibilidades que ningun elemento aislado podria producir.\n\nEl secreto no es usar mas elementos. El secreto es usar los elementos correctos, en el orden correcto, reforzando la misma idea visual de principio a fin.",
@@ -1247,18 +851,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
   textStep(
     "Combiner les modes dans MidJourney - Construire des images en couches d'intention",
     "Bon retour. Dans cette lecon, tu vas apprendre a combiner modes, styles, lumieres, points de vue, palettes et parametres dans un seul prompt. L'objectif n'est pas d'empiler des mots impressionnants. L'objectif est de construire une image par couches, ou chaque decision renforce la precedente et pousse MidJourney vers une vision beaucoup plus precise.\n\nLes debutants decrivent le sujet. Les intermediaires ajoutent style et lumiere. Les avances combinent plusieurs couches avec intention et obtiennent un resultat dirige, pas generique.",
-  ),
-  quizStep(
-    "Ce qui rend un prompt avance",
-    "Qu'est-ce qui differencie un prompt a modes combines d'un prompt simple ?",
-    [
-      "Chaque element ajoute agit comme une instruction precise qui guide MidJourney vers une direction creative claire.",
-      "Les prompts avec plus d'elements sont toujours plus longs et plus lents.",
-      "Combiner les modes fonctionne seulement pour les abonnements premium.",
-      "Ajouter beaucoup d'elements embrouille toujours le modele et degrade le resultat.",
-    ],
-    0,
-    "La force ne vient pas du nombre de mots. Elle vient de la maniere dont chaque couche renforce une intention creative nette.",
   ),
   fillStep(
     "Complete les blancs - Comprends la structure",
@@ -1283,18 +875,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
       "parametres techniques",
     ],
     "Chaque couche repond a une question differente : quoi, ou, comment, sous quel angle, avec quelle lumiere, dans quelles couleurs et dans quel format.",
-  ),
-  quizStep(
-    "Pourquoi la structure ameliore le resultat",
-    "Pourquoi suivre une structure logique ameliore-t-il le resultat quand on combine les modes ?",
-    [
-      "Parce que MidJourney lit dans l'ordre puis ignore la fin.",
-      "Parce que cela rend le prompt plus propre sans vrai effet.",
-      "Parce que chaque couche repond a une question precise et qu'ensemble elles forment une instruction visuelle complete.",
-      "Parce que l'ordre n'a pas d'importance, mais rassure le createur.",
-    ],
-    2,
-    "La structure n'est pas decorative. C'est une pensee organisee. Plus l'ordre est coherent, plus l'image devient claire.",
   ),
   textStep(
     "Style + lumiere",
@@ -1323,18 +903,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
     ],
     "Quand style, lumiere, atmosphere et couleur avancent dans la meme direction emotionnelle, l'image parait beaucoup plus intentionnelle.",
   ),
-  quizStep(
-    "Cyberpunk + Neon",
-    "Pourquoi l'association Cyberpunk + Neon Lighting parait-elle plus coherente que Cyberpunk + Golden Hour ?",
-    [
-      "Parce que MidJourney limite techniquement Golden Hour avec cyberpunk.",
-      "Parce que tout style urbain doit suivre cette convention.",
-      "Parce que le cyberpunk repose sur une energie nocturne, urbaine et artificielle, que le neon renforce directement.",
-      "Parce que toutes les combinaisons style + lumiere fonctionnent de la meme maniere.",
-    ],
-    2,
-    "Le cyberpunk est construit sur l'artificialite, la ville et la nuit. Le neon pousse encore plus cette identite.",
-  ),
   fillStep(
     "Complete les blancs - Ajoute le point de vue",
     "Complete le prompt en combinant point de vue, style et lumiere.",
@@ -1358,18 +926,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
       "--ar 9:16",
     ],
     "A ce stade, tu ne decris plus seulement un sujet. Tu diriges la facon dont il doit etre vu, ressenti et cadre.",
-  ),
-  quizStep(
-    "Low Angle + Rim + cinematographique",
-    "Que cree la combinaison Low Angle + Rim Lighting + style cinematographique dans cette image ?",
-    [
-      "Une image technique et informative sur l'exploration spatiale.",
-      "Un portrait documentaire simple d'une astronaute au travail.",
-      "Une composition epique ou angle, lumiere et style s'unissent comme un plan de film a gros budget.",
-      "Un conflit visuel dans lequel les techniques s'annulent.",
-    ],
-    2,
-    "L'angle amplifie la puissance, la rim light ajoute de la presence et le style cinematographique relie le tout dans un seul langage.",
   ),
   textStep(
     "References artistiques hybrides",
@@ -1400,18 +956,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
     ],
     "Les references deviennent originales quand chacune apporte une valeur claire : l'une apporte le poids historique, l'autre une lecture contemporaine.",
   ),
-  quizStep(
-    "Pourquoi l'hybride parait original",
-    "Pourquoi combiner deux references artistiques differentes produit-il des resultats plus originaux ?",
-    [
-      "Parce que MidJourney ne comprend pas les styles hybrides et improvise.",
-      "Pour creer des images que personne ne peut identifier.",
-      "Parce que chaque reference apporte des elements reconnaissables et leur fusion cree une esthetique nouvelle sans copier entierement l'une d'elles.",
-      "Parce que combiner des references produit toujours des images confuses.",
-    ],
-    2,
-    "L'originalite vient d'une fusion coherente, pas du chaos. Un bon hybride additionne les identites sans casser la lisibilite.",
-  ),
   textStep(
     "Palette + mood",
     "La palette de couleurs et le mood sont deux des elements les plus forts pour decider de ce que le spectateur va ressentir face a l'image. Lorsqu'ils sont alignes, l'emotion arrive vite. Lorsqu'ils s'opposent, le message perd de sa force.",
@@ -1441,18 +985,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
     ],
     "Quand palette, mood et atmosphere racontent la meme histoire, l'emotion atteint le spectateur beaucoup plus vite.",
   ),
-  quizStep(
-    "Palette et mood en marketing",
-    "Pourquoi aligner palette de couleurs et mood est-il essentiel dans les images marketing ?",
-    [
-      "Parce que chaque couleur a une signification universelle fixe.",
-      "Parce que cela rend l'image techniquement plus correcte.",
-      "Parce que lorsque palette et mood sont alignes, le cerveau lit l'emotion de facon coherente et immediate.",
-      "Parce que palette et mood sont decoratifs et independants.",
-    ],
-    2,
-    "Le marketing visuel depend d'une lecture rapide. Si couleur et emotion s'opposent, le message faiblit.",
-  ),
   fillStep(
     "Complete les blancs - Cree un produit avance",
     "Complete le prompt de photographie premium de produit.",
@@ -1478,18 +1010,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
       "--ar 4:5",
     ],
     "La perception premium d'un produit commence dans son contexte visuel. Angle, lumiere, fond et style creent de la valeur avant meme de connaitre le prix.",
-  ),
-  quizStep(
-    "Langage visuel du luxe",
-    "Quelle combinaison de modes cree la perception de luxe la plus forte en photographie de produit ?",
-    [
-      "High Angle avec Soft Box et fond blanc propre.",
-      "Bird's Eye View avec lumiere naturelle et couleurs neutres.",
-      "Low Angle pour la grandeur, rim light pour la presence, fond sombre pour la sophistication et style editorial pour le positionnement premium.",
-      "Le luxe depend uniquement de la qualite du produit, pas du prompt.",
-    ],
-    2,
-    "Avant de comprendre le produit, le public lit deja le statut, la valeur et le desir a travers l'image.",
   ),
   fillStep(
     "Complete les blancs - Cree un portrait cinematographique",
@@ -1517,18 +1037,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
     ],
     "Ici, les couches travaillent ensemble pour que l'image paraisse vecue, pas seulement jolie.",
   ),
-  quizStep(
-    "Pourquoi le portrait semble puissant",
-    "Pourquoi la combinaison Close Up + Chiaroscuro + style documentaire cree-t-elle un portrait si puissant ?",
-    [
-      "Parce qu'il s'agit de trois techniques rares et avancees de MidJourney.",
-      "Parce qu'elles produisent une image techniquement frappante, meme sans emotion.",
-      "Parce que Close Up revele l'humain, Chiaroscuro ajoute de la profondeur dramatique et le documentaire apporte de l'authenticite.",
-      "Parce que ces techniques creent toujours le meme portrait, quel que soit le sujet.",
-    ],
-    2,
-    "Le visage cesse d'etre seulement un visage. Il commence a porter du temps, de l'histoire et une presence emotionnelle.",
-  ),
   fillStep(
     "Complete les blancs - Cree un paysage epique",
     "Complete le prompt de paysage avec echelle et atmosphere.",
@@ -1554,18 +1062,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
       "--ar 16:9",
     ],
     "Le paysage epique ne depend pas seulement de la taille. Il depend du contraste d'echelle, de l'atmosphere et du cadrage emotionnel.",
-  ),
-  quizStep(
-    "Silhouette dans un paysage epique",
-    "Pourquoi ajouter une figure humaine en silhouette amplifie-t-il l'impact d'un paysage epique ?",
-    [
-      "Pour montrer que l'environnement est sur pour l'humain.",
-      "Parce que MidJourney genere toujours de meilleurs paysages quand un personnage est present.",
-      "Parce que le contraste entre la petite echelle humaine et l'immensite du decor communique grandeur et aventure immediatement.",
-      "Parce que les figures humaines detournent toujours l'attention du paysage.",
-    ],
-    2,
-    "Sans comparaison d'echelle, le spectateur peut voir la beaute, mais ressent moins la veritable ampleur du decor.",
   ),
   fillStep(
     "Complete les blancs - Construis le prompt definitif",
@@ -1595,18 +1091,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
     ],
     "Ce type de prompt fonctionne parce que toutes les couches sont alignees. Rien n'est de trop. Rien ne se bat contre l'idee centrale.",
   ),
-  quizStep(
-    "Quand toutes les couches s'alignent",
-    "Que se passe-t-il quand toutes les couches d'un prompt sont parfaitement alignees ?",
-    [
-      "On obtient une image techniquement parfaite mais vide emotionnellement.",
-      "On obtient une image confuse avec trop d'elements en concurrence.",
-      "On obtient une identite visuelle unique et coherente ou chaque couche renforce les autres.",
-      "On obtient un resultat pire qu'avec un prompt plus simple.",
-    ],
-    2,
-    "La coherence ne simplifie pas l'image. Elle lui donne une direction, et c'est cette direction qui donne une impression professionnelle.",
-  ),
   fillStep(
     "Complete les blancs - Evite les erreurs",
     "Complete la phrase avec les erreurs les plus courantes quand on combine les modes.",
@@ -1626,18 +1110,6 @@ export const MIDJOURNEY_MODULE_5_STEPS_FR = [
       "accumuler",
     ],
     "Le probleme n'est pas d'avoir beaucoup de couches. Le probleme, c'est d'avoir beaucoup de couches qui tirent dans des directions opposees.",
-  ),
-  quizStep(
-    "Erreur la plus courante en mode avance",
-    "Quelle est l'erreur la plus courante lorsqu'on essaie de combiner des modes avances dans MidJourney ?",
-    [
-      "Utiliser plus de deux types de lumiere dans le meme prompt.",
-      "Combiner des styles de periodes historiques differentes.",
-      "Ajouter des elements sans intention creative claire, en empilant des termes forts qui ne communiquent pas entre eux.",
-      "Combiner point de vue et eclairage dans le meme prompt.",
-    ],
-    2,
-    "Un prompt avance n'est pas une liste de mots impressionnants. C'est une composition intentionnelle. Sans cela, l'image devient confuse.",
   ),
   textStep(
     "Conclusion",

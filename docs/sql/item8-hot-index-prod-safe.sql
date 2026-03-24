@@ -1,11 +1,15 @@
 -- Item 8/20 - Hot column indexes
 -- Safer production variant.
--- Use this in Supabase SQL Editor during low traffic.
+-- Prefer running this through a direct Postgres client (psql, Supabase-linked CLI, or another tool
+-- that does not wrap statements in a transaction).
 --
 -- Notes:
 -- 1) CREATE INDEX CONCURRENTLY reduces lock impact on writes, but can take longer.
--- 2) Do NOT wrap this script in an explicit transaction.
--- 3) The validation script remains: docs/sql/item8-hot-index-check.sql
+-- 2) CREATE INDEX CONCURRENTLY cannot run inside a transaction block.
+--    Supabase SQL Editor may wrap execution in a transaction and fail with SQLSTATE 25001.
+-- 3) If you need to execute from Supabase SQL Editor, use the transaction-safe migration:
+--    supabase/migrations/20260324190000_item8_hot_column_indexes.sql
+-- 4) The validation script remains: docs/sql/item8-hot-index-check.sql
 
 CREATE SCHEMA IF NOT EXISTS extensions;
 CREATE EXTENSION IF NOT EXISTS "pg_trgm" WITH SCHEMA extensions;

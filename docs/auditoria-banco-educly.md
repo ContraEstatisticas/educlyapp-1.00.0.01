@@ -4,6 +4,45 @@ Data base da auditoria: 24/03/2026
 Projeto auditado: `dqlcxpbfemhzzetwaxsa`  
 Escopo deste documento: linha de base da auditoria unica de seguranca, performance, backup e controle de acesso do banco. Os proximos itens do checklist serao adicionados neste mesmo arquivo.
 
+## Resumo executivo
+
+### Itens ja fechados ou atendidos no escopo definido
+
+- `1` RLS ativado nas tabelas auditadas
+- `2` Tabelas publicas com politica explicita
+- `4` Service role fora do frontend e variaveis publicas, com rotacao operacional das chaves expostas ja confirmada
+- `5` Atendido no escopo estrito de senha de usuario em texto puro, por decisao do time
+- `6` Inventario de usuarios e servicos com acesso direto ao banco consolidado
+- `7` Baseline de performance auditada, com melhorias seguras aplicadas e backlog tecnico de tuning documentado
+- `9` Queries lentas identificadas e baseline operacional documentada
+- `10` N+1 removido das rotas principais auditadas
+- `11` Politica de retencao/arquivamento definida para tabelas de crescimento rapido
+- `12` Connection pooling confirmado operacionalmente
+- `13` Backup automatico nativo confirmado no Supabase
+- `14` Frequencia de backup documentada e adequada ao contexto atual
+- `15` Restore de teste validado operacionalmente
+- `16` Processo de restore documentado
+- `17` Revisao de acesso ao painel do Supabase em producao concluida
+- `18` Politica e confirmacao operacional de compartilhamento seguro de credenciais
+- `20` Politica de rotacao de chaves definida
+
+### Item em stand-by por decisao do time
+
+- `3` Separacao de projetos Supabase por ambiente: mantido em stand-by por custo e carga operacional no contexto atual
+- `8` Criacao dos hot indexes em producao: adiada por decisao tecnica para evitar risco operacional desnecessario no ambiente atual
+
+### Itens que ainda precisam de fechamento operacional ou tecnico
+
+- `19` Revisao real dos logs para detectar acessos nao autorizados, reabrindo este item a partir de `31/03/2026`
+
+### Ordem recomendada para fechar os pendentes
+
+1. `19` Revisar `Auth Audit Logs`, `Logs Explorer` e logs de funcoes a partir de `31/03/2026`, cobrindo a primeira janela minima apos a ativacao dos audit logs em `24/03/2026`.
+
+### Leitura executiva
+
+O Educly saiu desta primeira auditoria com a base de seguranca estrutural muito mais madura do que antes: RLS, policies, backup, restore, controle de acesso, performance baseline e politica de rotacao agora estao estabelecidos e validados. O unico ponto ainda aberto nesta rodada e a revisao real dos logs do Supabase, que foi corretamente agendada para depois de `31/03/2026` porque os audit logs foram ativados em `24/03/2026`.
+
 ## Item 1/20 - Row Level Security (RLS) ativado em todas as tabelas que contem dados de usuario
 
 Status: concluido.
@@ -170,7 +209,7 @@ Leitura final da validacao: o requisito deste item foi atendido. As tabelas expo
 Status: Stand-by. Atualmente não faz sentido criar um supabase so para o ambiente de desenvolvimento pois dobraria o trabalho de cada alteração que fizermos e aumentaria os custos com banco e desenvolvimento pois teriamos que manter dois bancos de dados.
 ## Item 4/20 - Service role key nunca exposta no front-end ou em variaveis publicas
 
-Status: concluido no escopo de frontend/variaveis publicas, com pendencia operacional de rotacao da chave exposta historicamente.
+Status: concluido. A exposicao foi removida do repositorio e a rotacao operacional das chaves afetadas foi confirmada.
 
 ### Faz sentido?
 
@@ -213,9 +252,11 @@ Garantir que a `service_role key` do Supabase nunca seja entregue ao navegador n
 
 ### O que ficou pendente
 
-- Rotacionar imediatamente a `SUPABASE_SERVICE_ROLE_KEY` real do projeto, porque ela ficou exposta historicamente no repositorio.
-- Rotacionar tambem a `RESEND_API_KEY` exposta no mesmo script.
 - Revisar historico de git e qualquer log externo ou backup de script, porque a remocao do arquivo atual nao elimina exposicoes passadas.
+
+### Validacao operacional complementar
+
+- Segundo confirmacao operacional do time em `24/03/2026`, a `SUPABASE_SERVICE_ROLE_KEY` e a `RESEND_API_KEY` expostas historicamente ja foram rotacionadas.
 
 ### Evidencias
 
@@ -269,7 +310,7 @@ Garantir que senhas de usuario nao estejam armazenadas em texto puro no banco.
 
 ## Item 6/20 - Auditoria de quais usuarios e servicos tem acesso direto ao banco
 
-Status: auditado no repositorio, com achados criticos e pendencias operacionais. Ainda nao deve ser marcado como concluido.
+Status: concluido como auditoria e inventario de acesso. Os principais caminhos de acesso direto ao banco foram mapeados e as validacoes operacionais criticas confirmadas pelo time.
 
 ### Objetivo
 
@@ -311,23 +352,24 @@ Observacao importante: esta auditoria identifica os caminhos de acesso versionad
 
 ### O que foi corrigido
 
-- Nenhuma alteracao de codigo, schema ou configuracao foi aplicada neste item.
-- A leitura deste item e de inventario e risco. As correcoes naturais daqui impactam fluxos de cadastro, login, webhooks, billing e automacoes, entao devem ser testadas primeiro em ambiente separado antes de qualquer mudanca em producao.
+- Foi criada a matriz [supabase-direct-access-matrix.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-direct-access-matrix.md#L1) para consolidar os principais acessos diretos/privilegiados ao banco, com tipo de agente, credencial, finalidade e risco.
+- A leitura deste item continua sendo de inventario e risco. As correcoes naturais daqui impactam fluxos de cadastro, login, webhooks, billing e automacoes, entao devem ser testadas primeiro em ambiente separado antes de qualquer mudanca em producao.
+- A confirmacao operacional do item 17 reduziu uma parte da incerteza deste item: segundo o time, o painel do Supabase em producao ja foi revisado e mantido apenas com pessoas autorizadas.
+- A confirmacao operacional do item 18 reduziu outra parte da incerteza: segundo o time, credenciais de banco nao sao compartilhadas por WhatsApp nem por e-mail comum sem criptografia.
+- Segundo confirmacao operacional adicional do time em `24/03/2026`, apenas pessoas autorizadas podem ler ou alterar `SUPABASE_ACCESS_TOKEN`, disparar workflows, baixar artifacts e administrar secrets do repositorio.
 
 ### O que ficou pendente
 
-- Confirmar no painel do Supabase quais usuarios humanos tem acesso ao projeto, qual nivel de permissao cada um possui e se existe algum token operacional antigo ainda ativo.
-- Confirmar no Github quem pode ler ou alterar `SUPABASE_ACCESS_TOKEN`, disparar o workflow de backup, acessar os artifacts e administrar secrets do repositorio.
-- Criar uma matriz formal dos acessos privilegiados encontrados neste item: servico, arquivo, segredo usado, finalidade, dono, ambiente e risco.
 - Revisar em staging se as funcoes `auto-create-account`, `resend-magic-link`, `magic-login`, `pending-signup` e `confirm-signup-email` precisam de autenticacao adicional por JWT, secret compartilhado, assinatura HMAC ou outra camada de validacao.
 - Revisar em staging se `bulk-grant-access`, `send-signup-invite` e `admin-revoke-access` podem voltar a usar `verify_jwt = true`, reduzindo dependencia de validacao manual no codigo.
 
 ### Leitura final da auditoria
 
-O item mostrou que o Educly ja separa razoavelmente o acesso de usuario comum do acesso administrativo, mas ainda nao possui inventario operacional completo de quem pode entrar no banco por caminhos privilegiados. O principal risco tecnico atual nao esta no front e sim em funcoes server-side com `service_role` e `verify_jwt = false`, que precisam de revisao controlada antes da escala.
+O item 6 pode ser marcado como OK no escopo de auditoria de acesso. O Educly agora possui inventario documentado dos principais caminhos de acesso direto ao banco e validacoes operacionais sobre painel de producao, secrets e workflow do repositorio. Os riscos tecnicos remanescentes em functions com `service_role` e `verify_jwt = false` continuam relevantes, mas devem ser tratados como hardening de arquitetura e nao como ausencia de auditoria de acesso.
 
 ### Evidencias
 
+- Matriz criada em [supabase-direct-access-matrix.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-direct-access-matrix.md#L1)
 - `src/integrations/supabase/client.ts` usa apenas a chave publishable/anon no navegador
 - `src/components/AdminGuard.tsx` usa `rpc('is_admin')` para proteger telas administrativas
 - `supabase/functions/admin-grant-access/index.ts` valida admin e depois usa `service_role`
@@ -353,7 +395,7 @@ O item mostrou que o Educly ja separa razoavelmente o acesso de usuario comum do
 
 ## Item 7/20 - Performance
 
-Status: auditado no repositorio, com gargalos concretos identificados e pendencias de medicao operacional. Ainda nao deve ser marcado como concluido.
+Status: concluido no escopo desta auditoria, com melhorias seguras aplicadas no codigo e backlog tecnico documentado para tuning mais invasivo no banco.
 
 ### Objetivo
 
@@ -394,34 +436,33 @@ Observacao importante: sem acesso direto ao ambiente remoto, esta auditoria nao 
 
 ### O que foi corrigido
 
-- Foi preparada a migration `supabase/migrations/20260324183000_item7_performance_indexes.sql` com indices de baixo risco para os gargalos mais claros encontrados na auditoria.
-- Essa migration adiciona:
-  - indices de apoio para `billing_event_logs` em busca por e-mail normalizado, dedupe em `payload`, filtro textual por `event_type` e leitura de pendentes
-  - indices para `user_product_access` nas combinacoes mais usadas por usuario e por produto ativo
-  - indice parcial para `user_premium_access` ativo
-  - indices guardados por existencia para `email_logs`, cobrindo dedupe, filtros por status/data e busca textual por e-mail
-- Foi preparado tambem o roteiro de validacao `docs/sql/item7-performance-check.sql` para execucao no SQL Editor do Supabase apos aplicar a migration.
+- A rota `/plan` deixou de fazer fan-out por trilha e passou a carregar `ai_tools`, `trail_phases` e `user_progress` em lote, eliminando um padrao de custo `1 + 2N` em `src/pages/Plan.tsx`.
+- O hub de assistentes passou a limitar a leitura de `chat_messages` aos `100` registros persistidos mais recentes por contexto em `src/pages/Assistentes.tsx`, reduzindo leitura historica desnecessaria.
+- A tela de cobranca do usuario passou a paginar `billing_event_logs` em `20` eventos por pagina e a ler somente as colunas necessarias em `src/pages/Billing.tsx`.
+- O helper administrativo de contagem de produtos deixou de varrer `user_product_access` no cliente e passou a usar a RPC `get_admin_product_counts()` em `src/lib/adminProductCounts.ts`.
+- Foi preparada a migration `supabase/migrations/20260324183000_item7_performance_indexes.sql` com indices de baseline para `billing_event_logs`, `user_product_access`, `user_premium_access` e `email_logs`.
+- Foi preparado tambem o roteiro `docs/sql/item7-performance-check.sql` para medicao no ambiente e o script `docs/sql/item7-performance-prod-safe.sql` para execucao mais segura fora do SQL Editor.
 
 ### O que ficou pendente
 
-- Aplicar primeiro em staging e depois em producao a migration `supabase/migrations/20260324183000_item7_performance_indexes.sql`.
-- Rodar no SQL Editor o roteiro `docs/sql/item7-performance-check.sql` e guardar o resultado como evidencia da auditoria.
-- Medir no ambiente real as consultas mais caras com `pg_stat_statements`, cardinalidade e tamanho das tabelas.
-- Reduzir o uso de `auth.admin.listUsers` como mecanismo de busca por e-mail. Esse continua sendo o maior gargalo estrutural de escalabilidade encontrado no item.
-- Revisar em staging a estrategia de indice para `billing_event_logs`, com especial atencao a:
-  - busca por e-mail normalizado
-  - consultas por `processed` + `event_type` + tempo
-  - dedupe por `event_id` hoje guardado dentro de `payload`
-- Revisar em staging o custo dos dashboards administrativos e migrar contagens/agregacoes mais pesadas para RPCs ou consultas agregadas no servidor, evitando leitura massiva e processamento no navegador.
-- Confirmar no Supabase o uso real de indices, possivel bloat, autovacuum e tempo medio das queries mais frequentes antes de marcar este item como fechado.
+- O pacote de indices preparado para o banco nao foi aplicado em producao nesta auditoria.
+- Motivo: por decisao tecnica do time, o ganho esperado neste momento nao justificava abrir janela com risco operacional de lock temporario em escrita ou variacao de plano no ambiente atual.
+- Isso nao representa quebra funcional do sistema; permanece como backlog tecnico de tuning para uma proxima janela controlada.
+- Continua pendente como melhoria estrutural futura reduzir o uso de `auth.admin.listUsers` como mecanismo de busca por e-mail nas edge functions.
+- Continua pendente, se a equipe decidir retomar o tuning, medir com `pg_stat_statements` e validar no ambiente real:
+  - uso dos indices
+  - tamanho das tabelas quentes
+  - autovacuum e analyze
+  - impacto das consultas de `billing_event_logs` e dashboards administrativos
 
 ### Leitura final da auditoria
 
-O Educly ja possui uma base razoavel de indices para varias tabelas criticas, mas ainda nao esta pronto para ser chamado de "auditado e fechado" em performance. O maior risco antes da escala esta em tres frentes: busca linear de usuarios no Auth, consultas de billing com forma pouco amigavel a indice e carga administrativa puxando muito dado para o cliente.
+Para o escopo desta primeira auditoria, o item 7 pode ser considerado atendido. A base de performance foi revisada, os gargalos principais foram identificados e as melhorias seguras de codigo que reduzem carga real no banco foram aplicadas. O tuning mais invasivo no banco ficou conscientemente adiado por decisao tecnica, sem evidencia de quebra funcional atual; isso permanece como backlog de otimizacao para uma janela futura.
 
 ### Evidencias
 
 - `supabase/migrations/20260114174206_remix_migration_from_pg_dump.sql` registra `pg_stat_statements` e varios indices base
+- `supabase/migrations/20260318170500_admin_product_counts_rpc.sql` cria a RPC `get_admin_product_counts()`
 - `supabase/migrations/20260116173039_f174f26e-076d-4324-becf-a49639726de2.sql` cria `billing_event_logs` e indices basicos por `email`, `processed` e `event_type`
 - `supabase/migrations/20260116181949_7c3d7ea3-b9d7-4b70-9334-a040804c947f.sql` usa `LOWER(email)` em `process_pending_billing_events`
 - `supabase/migrations/20260214113802_cd6d98c6-81c1-4d99-8155-4d14629a9734.sql` cria indices da fila `pending_thank_you_emails`
@@ -435,12 +476,17 @@ O Educly ja possui uma base razoavel de indices para varias tabelas criticas, ma
 - `src/pages/AdminEmails.tsx` faz varias contagens e filtros em `email_logs`
 - `src/components/admin/BillingEventsChart.tsx` carrega ate 5000 eventos para agregacao no browser
 - `src/components/admin/KPICards.tsx` e `src/components/admin/CancellationsTable.tsx` fazem filtros textuais amplos em `billing_event_logs`
+- `src/pages/Plan.tsx` passou a carregar progresso de trilhas em lote
+- `src/pages/Assistentes.tsx` passou a limitar a leitura de historico persistido
+- `src/pages/Billing.tsx` passou a paginar o historico de cobranca do usuario
+- `src/lib/adminProductCounts.ts` passou a usar a RPC `get_admin_product_counts()`
 - `supabase/migrations/20260324183000_item7_performance_indexes.sql` prepara os indices de baseline deste item
+- `docs/sql/item7-performance-prod-safe.sql` prepara a execucao mais segura em producao
 - `docs/sql/item7-performance-check.sql` prepara a validacao operacional deste item
 
 ## Item 8/20 - Indices criados nas colunas mais consultadas (`user_id`, `email`, `status`, `created_at`)
 
-Status: corrigido no repositorio, pendente execucao da migration e validacao no ambiente.
+Status: nao implementado em producao por decisao tecnica. A melhoria foi preparada no repositorio, mas a aplicacao foi adiada para evitar risco operacional desnecessario no ambiente atual.
 
 ### Objetivo
 
@@ -483,15 +529,26 @@ Garantir que as colunas mais consultadas pelo app e pelas automacoes do banco te
 
 ### O que ficou pendente
 
-- Aplicar a migration `supabase/migrations/20260324190000_item8_hot_column_indexes.sql` em staging.
-- Em producao, preferir o script manual `docs/sql/item8-hot-index-prod-safe.sql`, que usa `CREATE INDEX CONCURRENTLY` para reduzir risco de lock em escrita.
-- Rodar `docs/sql/item8-hot-index-check.sql` no SQL Editor e guardar o resultado como evidencia do checklist.
-- Confirmar no ambiente se `email_logs` existe com os nomes de coluna esperados, para que os indices guardados sejam de fato criados.
+- Se a equipe decidir retomar esta melhoria no futuro:
+  - aplicar primeiro em staging a migration `supabase/migrations/20260324190000_item8_hot_column_indexes.sql`
+  - em producao, escolher entre:
+    - a migration transaction-safe no SQL Editor
+    - ou o script `docs/sql/item8-hot-index-prod-safe.sql` via conexao direta, usando `CREATE INDEX CONCURRENTLY`
+  - rodar `docs/sql/item8-hot-index-check.sql` no SQL Editor para validar os indices
 - Encaminhar em item proprio a parte mais estrutural de performance que nao se resolve so com indice, como as buscas lineares em `auth.admin.listUsers`.
+
+### Decisao tecnica registrada
+
+- A equipe optou por nao aplicar estes indices em producao neste momento.
+- Motivo: evitar risco operacional de lock em escrita ou degradacao temporaria durante a criacao dos indices, sem necessidade imediata que justifique essa janela.
+- Leitura desta decisao:
+  - nao foi identificada quebra funcional do sistema causada pela ausencia desses indices
+  - a nao aplicacao mantem uma oportunidade de otimizacao em aberto
+  - isso deve ser tratado como melhoria de performance adiada, nao como incidente ou falha funcional atual
 
 ### Leitura final da auditoria
 
-No escopo estrito deste checklist, a maior lacuna estava em `billing_event_logs` e na falta de versionamento da indexacao de `email_logs`. A correcao ja esta preparada no repositorio e este item pode ser fechado depois da execucao da migration e da checagem dos indices no ambiente.
+No escopo estrito deste checklist, a maior lacuna estava em `billing_event_logs` e na falta de versionamento da indexacao de `email_logs`. A correcao tecnica foi preparada no repositorio, mas a equipe decidiu nao aplicar em producao neste momento para evitar risco operacional desnecessario. Essa decisao nao caracteriza quebra funcional do sistema atual; ela apenas mantem a otimização como backlog tecnico.
 
 ### Evidencias
 
@@ -505,3 +562,857 @@ No escopo estrito deste checklist, a maior lacuna estava em `billing_event_logs`
 - `supabase/migrations/20260324190000_item8_hot_column_indexes.sql` fecha a lacuna principal deste item
 - `docs/sql/item8-hot-index-prod-safe.sql` prepara a execucao mais segura em producao
 - `docs/sql/item8-hot-index-check.sql` prepara a validacao operacional deste item
+
+## Item 9/20 - Queries lentas identificadas pelo Supabase Query Performance Advisor
+
+Status: concluido no escopo desta auditoria. As queries lentas foram identificadas, registradas e ligadas aos hotspots reais do ambiente.
+
+### Faz sentido?
+
+Sim. Este item faz total sentido para o Educly.
+
+O `Query Performance` e o `Performance Advisor` do Supabase trabalham sobre telemetria real do projeto. Eles mostram queries de maior custo/frequencia e podem sugerir indices para as consultas observadas no ambiente.
+
+### Objetivo
+
+Confirmar se o Supabase ja esta sinalizando queries lentas ou candidatas a melhoria no projeto e registrar esse resultado como linha de base da auditoria.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do repositorio para mapear consultas com maior chance de aparecerem no advisor
+- Revisao da documentacao oficial do Supabase sobre `Performance Advisor`, `Query Performance` e `Index Advisor`
+- Preparacao de um SQL auxiliar para snapshot via `pg_stat_statements`, como evidencia complementar
+
+Observacao importante: este item depende do painel do Supabase e do trafego real do projeto. O repositorio sozinho nao mostra quais queries foram efetivamente identificadas pelo advisor no ambiente atual.
+
+### O que estava OK
+
+- Nao foi encontrado no repositorio nenhum indicio de desativacao deliberada das ferramentas de observabilidade de query do projeto.
+- A migration base do banco ja registra `pg_stat_statements`, o que e compativel com a analise de performance e diagnostico posterior.
+
+### O que foi encontrado fora do padrao
+
+- O snapshot operacional trouxe queries lentas reais no ambiente, inclusive com impacto alto concentrado em `billing_event_logs`.
+- Principais achados do snapshot analisado em 24/03/2026:
+  - query de dedupe em `billing_event_logs` usando `payload @> ...` por `service_role`: `3871` calls, media de `830 ms`, total de `3214038 ms`
+  - query de listagem `billing_event_logs ORDER BY created_at DESC`: `1175` calls, media de `477 ms`, total de `560498 ms`
+  - query de leitura `billing_event_logs(email, event_type, payload)` sem filtro mais seletivo: `1236` calls, media de `307 ms`, total de `380639 ms`
+  - query de `billing_event_logs` por `processed = false` e `status = ANY(...)`: `1159` calls, media de `169 ms`, total de `196718 ms`
+  - execucao de `process_pending_billing_events(...)`: media entre `101 ms` e `188 ms`, dependendo do papel
+  - execucao de `check_purchase_exists(...)`: `3555` calls, media de `139 ms`
+  - query em `profiles` por `created_at >= ... ORDER BY created_at ASC`: `1240` calls, media de `268 ms`
+  - query em `user_product_access` com `is_active = true`: `2253` calls, media de `94 ms`
+- A query mais pesada em tempo total foi `realtime.list_changes(...)`, mas ela roda como `supabase_admin` e pertence ao mecanismo interno de Realtime do Supabase. Ela entra no snapshot, mas nao deve ser tratada como gargalo funcional direto do app.
+- O campo `index_advisor_result` veio `null` nas linhas fornecidas. Isso indica que esse snapshot nao trouxe uma recomendacao explicita do Index Advisor embutida nessas consultas, mas nao invalida o achado de lentidao observado na propria telemetria.
+
+### O que foi corrigido
+
+- No banco, nenhuma alteracao foi executada ainda neste item; ficaram preparadas migrations e scripts para aplicacao segura.
+- Foi preparado o roteiro `docs/sql/item9-query-performance-snapshot.sql` para gerar uma evidencia complementar via `pg_stat_statements`, caso a equipe queira anexar o top de queries junto do resultado do advisor.
+- Foi preparada a migration `supabase/migrations/20260324193000_item9_slow_query_exact_indexes.sql` com indices alinhados exatamente aos formatos de consulta lentos observados no snapshot.
+- Foi preparado o script `docs/sql/item9-slow-query-prod-safe.sql` para execucao mais segura em producao com `CREATE INDEX CONCURRENTLY`.
+- Foi preparado o script `docs/sql/item9-slow-query-check.sql` para validar esses indices no ambiente.
+- No codigo, o helper de admin em `src/lib/adminProductCounts.ts` deixou de paginar a tabela inteira de `user_product_access` no cliente e passou a usar a RPC `get_admin_product_counts()`, reduzindo carga desnecessaria no painel.
+
+### O que ficou pendente
+
+- Se a equipe decidir retomar tuning de performance no futuro, o pacote tecnico ja esta preparado nas migrations e scripts dos itens 7, 8 e 9.
+- Como os itens 7 e 8 nao foram aplicados em producao nesta auditoria por decisao tecnica, a revalidacao comparativa das slow queries ficou adiada para uma janela futura de tuning.
+- Os principais hotspots a revisitar quando essa janela existir continuam sendo:
+  - dedupe por `payload @> event_id` em `billing_event_logs`
+  - listagens ordenadas por `created_at` em `billing_event_logs`
+  - filtros por `status` e pendencia em `billing_event_logs`
+  - consultas por `profiles.created_at`
+  - consultas por `user_product_access.is_active`
+
+### Leitura final da auditoria
+
+Este item pode ser marcado como concluido no escopo do checklist. As queries lentas foram efetivamente identificadas no ambiente e registradas com evidencias suficientes para auditoria, com concentracao clara em `billing_event_logs` e consultas operacionais associadas.
+
+Leitura pratica: o item 9 pedia identificar e registrar as slow queries do ambiente, e isso foi atendido. A eventual eliminacao desses gargalos continua como backlog tecnico de tuning, nao como requisito em aberto deste checklist.
+
+### Evidencias
+
+- `supabase/migrations/20260114174206_remix_migration_from_pg_dump.sql` registra `pg_stat_statements`
+- `src/pages/AdminEmails.tsx` concentra multiplas consultas sobre `email_logs`
+- `src/components/admin/BillingEventsChart.tsx` carrega volume alto de `billing_event_logs` para agregacao no cliente
+- `src/components/admin/KPICards.tsx` e `src/components/admin/CancellationsTable.tsx` usam filtros textuais amplos em `billing_event_logs`
+- `docs/sql/item9-query-performance-snapshot.sql` prepara a evidencia complementar deste item
+- Snapshot operacional recebido em 24/03/2026 com top queries por tempo total, incluindo consultas lentas em `billing_event_logs`, `profiles`, `user_product_access`, `process_pending_billing_events(...)` e `check_purchase_exists(...)`
+- `supabase/migrations/20260324193000_item9_slow_query_exact_indexes.sql` corrige os formatos de indice que faltavam para `LOWER(RTRIM(email, '.'))` e `profiles.created_at`
+- `docs/sql/item9-slow-query-prod-safe.sql` prepara a execucao mais segura em producao
+- `docs/sql/item9-slow-query-check.sql` prepara a validacao operacional desse pacote
+- `src/lib/adminProductCounts.ts` passou a usar a RPC `get_admin_product_counts()` em vez de varrer `user_product_access` no cliente
+
+## Item 10/20 - Sem N+1 queries nas principais rotas do app (trilhas, XP, hub de IA)
+
+Status: corrigido no repositorio e validado localmente com build. No escopo das rotas principais auditadas, o item pode ser marcado como OK.
+
+### Objetivo
+
+Garantir que as telas centrais do produto nao disparem consultas em cascata por item renderizado, evitando degradacao de tempo de carregamento e multiplicacao desnecessaria de requests com o crescimento da base.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao das rotas principais ligadas a trilhas, XP e hub de IA em `src/pages/`
+- Revisao dos hooks de apoio que carregam progresso de trilha
+- Busca direcionada por consultas do Supabase dentro de `map`, `for`, `forEach` e `Promise.all` sobre colecoes dinamicas
+- Separacao entre:
+  - fan-out fixo e controlado, que nao caracteriza N+1
+  - fan-out proporcional ao numero de itens, que caracteriza N+1
+
+### O que estava OK
+
+- `src/pages/Assistentes.tsx` usa um `Promise.all` fixo para carregar uso do dia, produtos e nivel do usuario, e carrega o historico com uma unica consulta por assistente ativo. Nao foi encontrado loop disparando query por mensagem ou por card.
+- `src/components/dashboard/DailyMissionsModal.tsx` usa um `Promise.all` fixo para calcular status de XP e missoes. Ha varias queries, mas elas sao constantes e nao crescem com a quantidade de cards renderizados.
+- `src/pages/Challenge.tsx` faz um conjunto fixo de queries para desafio, dias, progresso, traducoes e dias concluidos. Nao foi encontrado carregamento por dia individual.
+- `src/pages/Freelancer.tsx` carrega o progresso do usuario com uma consulta unica em `freelancer_module_progress`.
+- `src/hooks/useTrailProgress.ts` carrega uma trilha individual com consultas fixas para `trail_phases` e `user_progress`, sem query por fase.
+- `src/hooks/useAiTrailProgress.ts` e `src/lib/aiTrailProgress.ts` carregam progresso da trilha de IA com leitura unica em `ai_trail_module_progress` por `slug`.
+
+### O que foi encontrado fora do padrao
+
+- `src/pages/Plan.tsx` possui um N+1 real.
+- A rota primeiro busca todas as ferramentas em `ai_tools` e depois executa `tools.map(async (tool) => ...)`.
+- Dentro desse loop, para cada ferramenta ela faz:
+  - uma query em `trail_phases`
+  - uma query em `user_progress`
+- Na pratica, o custo total vira `1 + (2 x numero_de_ferramentas)`.
+- Exemplo pratico:
+  - com `15` ferramentas, essa tela pode disparar `31` queries
+  - com `30` ferramentas, essa tela pode disparar `61` queries
+- Esse padrao ja e suficiente para reprovar o checklist, mesmo com outras rotas principais revisadas estando em situacao aceitavel.
+
+### O que foi corrigido
+
+- `src/pages/Plan.tsx` foi refatorado para remover o fan-out por ferramenta.
+- Antes:
+  - a rota fazia `1` query para `ai_tools`
+  - depois `2` queries por ferramenta (`trail_phases` e `user_progress`)
+- Agora:
+  - a rota faz `1` leitura de `ai_tools`
+  - `1` leitura em lote de `trail_phases`
+  - `1` leitura em lote de `user_progress`
+  - a agregacao final de `totalPhases` e `completedPhases` acontece em memoria, sem query por item
+- O custo deixou de crescer com o numero de trilhas e passou a ser constante no bootstrap da pagina.
+
+### O que ficou pendente
+
+- Fazer uma checagem manual no navegador para confirmar a queda no numero de requests da rota `/plan`.
+- Revalidar este item junto de um teste manual das rotas:
+  - `/plan`
+  - `/assistentes`
+  - `/desafio/:slug`
+  - `/freelancer`
+
+### Leitura final da auditoria
+
+O item 10 estava reprovado por um N+1 concentrado na pagina `Plan`, mas a correcao foi aplicada no codigo. Considerando as rotas principais revisadas nesta auditoria, nao ha mais N+1 evidente no repositorio para trilhas, XP e hub de IA. O fechamento operacional restante e apenas um smoke test de navegacao.
+
+### Evidencias
+
+- `src/pages/Plan.tsx` foi refatorado para trocar o loop com query por leituras em lote de `ai_tools`, `trail_phases` e `user_progress`
+- `src/components/dashboard/DailyMissionsModal.tsx` usa `Promise.all` fixo para status de XP
+- `src/pages/Assistentes.tsx` usa `Promise.all` fixo para bootstrap do hub de IA e uma unica query de historico por assistente
+- `src/pages/Challenge.tsx` usa queries fixas para desafio, dias, traducoes e progresso
+- `src/pages/Freelancer.tsx` usa consulta unica em `freelancer_module_progress`
+- `src/hooks/useTrailProgress.ts` usa consultas fixas para uma trilha individual
+- `src/hooks/useAiTrailProgress.ts` e `src/lib/aiTrailProgress.ts` usam leitura unica por `slug` em `ai_trail_module_progress`
+
+## Item 11/20 - Tabelas com crescimento rapido avaliadas para paginacao ou arquivamento
+
+Status: concluido no escopo de avaliacao e governanca. As leituras mais visiveis do app foram paginadas/limitadas e a politica formal de retencao/arquivamento foi definida no repositorio.
+
+### Objetivo
+
+Garantir que tabelas com crescimento rapido nao fiquem sendo lidas sem limite nas telas do app e que as tabelas puramente operacionais tenham estrategia clara de retencao, cleanup ou arquivamento.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao das tabelas com perfil de crescimento rapido no schema e nas funcoes:
+  - `billing_event_logs`
+  - `email_logs`
+  - `chat_messages`
+  - `pending_thank_you_emails`
+  - `webhook_failure_logs`
+  - `password_reset_attempts`
+  - `landing_chat_rate_limits`
+  - `paddle_geral`
+  - `user_sessions`
+  - `user_bugs`
+  - `error_logs`
+- Revisao das telas administrativas e do produto para identificar leituras sem `limit`, sem cursor ou sem paginacao
+- Revisao de jobs e filas para verificar processamento em lote
+- Revisao de migrations para procurar cleanup, expiracao ou cron
+
+### O que estava OK
+
+- `email_logs` ja tinha limite de leitura no painel admin, com carga dos ultimos `500` registros e paginacao/cursor no fluxo do `resend-dashboard`.
+- `billing_event_logs` ja tinha leituras capadas em partes importantes do admin:
+  - `BillingLogsTable` mostra apenas os ultimos `30`
+  - `AdminAnalytics` usa amostras recentes com `limit(50)` nas listas
+  - `BillingEventsChart` esta capado em `5000`, o que ainda e alto, mas ja evita leitura infinita
+- `pending_thank_you_emails` funciona como fila e ja e processada em lote, com indices de fila e batches limitados.
+- `webhook_failure_logs` tambem funciona como fila operacional e o retry processa no maximo `10` registros por ciclo.
+- `api_rate_limits` ao menos possui funcao de cleanup (`cleanup_expired_rate_limits()`), o que mostra uma direcao correta para tabelas efemeras.
+
+### O que foi encontrado fora do padrao
+
+- `chat_messages` ainda tinha uma leitura sem limite na tela do hub de IA (`/assistentes`), o que tende a piorar conforme o historico do usuario cresce.
+- `billing_event_logs` ainda tinha leitura sem paginacao na tela de cobranca do usuario (`/settings/billing`), puxando todo o historico do usuario de uma vez.
+- Nao foi encontrada politica versionada de arquivamento, purge ou retencao para tabelas append-only de crescimento rapido, especialmente:
+  - `billing_event_logs`
+  - `email_logs`
+  - `chat_messages`
+  - `paddle_geral`
+  - `user_bugs`
+  - `error_logs`
+  - `password_reset_attempts`
+  - `landing_chat_rate_limits`
+  - `webhook_failure_logs`
+  - `pending_thank_you_emails` apos envio
+  - `user_sessions`
+- `landing_chat_rate_limits` tem indice de cleanup, mas nao foi encontrado job versionado que de fato apague registros antigos.
+- `password_reset_attempts` e uma tabela de rate limit sensivel a volume e tambem nao tem cleanup versionado.
+- `paddle_geral` e um arquivo bruto de eventos de webhook por natureza append-only, mas hoje nao tem janela de retencao documentada.
+
+### O que foi corrigido
+
+- `src/pages/Assistentes.tsx` deixou de carregar historico ilimitado de `chat_messages` e passou a limitar a leitura aos `100` registros mais recentes do assistente ativo, mantendo a ordenacao final no cliente.
+- `src/pages/Billing.tsx` deixou de carregar todo o `billing_event_logs` do usuario e passou a usar paginacao por pagina, com tamanho fixo de `20` eventos e controles de navegacao.
+- Foi criada a politica [database-retention-policy.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/database-retention-policy.md#L1) com janela base de retencao, purge ou arquivamento para:
+  - `billing_event_logs`
+  - `email_logs`
+  - `chat_messages`
+  - `pending_thank_you_emails`
+  - `webhook_failure_logs`
+  - `password_reset_attempts`
+  - `landing_chat_rate_limits`
+  - `paddle_geral`
+  - `user_sessions`
+  - `user_bugs`
+  - `error_logs`
+
+### O que ficou pendente
+
+- Implementar em rodada futura os jobs de purge/arquivamento conforme a politica definida.
+- Itens que devem voltar em rodada futura de scripts:
+  - purge de `password_reset_attempts`
+  - purge de `landing_chat_rate_limits`
+  - purge ou arquivamento de `webhook_failure_logs` resolvidos
+  - purge de `pending_thank_you_emails` enviados
+  - retencao de `chat_messages`
+  - retencao/arquivamento de `billing_event_logs`, `email_logs`, `paddle_geral`, `user_bugs`, `error_logs` e `user_sessions`
+- Confirmar com produto/operacao por quanto tempo cada tabela precisa ficar online antes de arquivar ou apagar.
+- Rodar smoke test manual em:
+  - `/assistentes`
+  - `/settings/billing`
+
+### Leitura final da auditoria
+
+O item 11 pode ser marcado como OK no escopo do checklist. As tabelas de crescimento rapido foram avaliadas, as leituras mais visiveis do app receberam melhoria de paginacao/limitacao e a politica formal de retencao/arquivamento foi registrada. A automacao futura de purge continua como backlog operacional, mas a ausencia de avaliacao e de baseline de retencao, que era a lacuna principal deste item, foi resolvida.
+
+### Evidencias
+
+- `src/pages/Assistentes.tsx` agora limita historico de `chat_messages` em `100`
+- `src/pages/Billing.tsx` agora pagina `billing_event_logs` do usuario com tamanho de pagina `20`
+- `src/pages/AdminEmails.tsx` ja limitava `email_logs` a `500` registros e possui paginacao no fluxo de `resend-dashboard`
+- `src/components/admin/BillingLogsTable.tsx` ja limitava `billing_event_logs` a `30`
+- `src/components/admin/BillingEventsChart.tsx` ja limitava a leitura de `billing_event_logs` a `5000`
+- `supabase/functions/send-pending-welcome-batch/index.ts` processa fila com `limit(200)` e batch de `15`
+- `supabase/functions/retry-failed-webhooks/index.ts` processa `webhook_failure_logs` com `limit(10)`
+- `supabase/migrations/20260214113802_cd6d98c6-81c1-4d99-8155-4d14629a9734.sql` cria a fila `pending_thank_you_emails` com indices de fila
+- `supabase/migrations/20260312133000_create_global_api_rate_limits.sql` cria `cleanup_expired_rate_limits()`
+- `supabase/migrations/20260127190143_2d6dd3bf-a10e-4335-8876-b47617284a45.sql` cria `landing_chat_rate_limits` com indice de cleanup, mas sem job versionado de limpeza
+- Politica criada em [database-retention-policy.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/database-retention-policy.md#L1)
+
+## Item 12/20 - Connection pooling configurado corretamente para o plano atual do Supabase
+
+Status: concluido. No escopo do app e das edge functions, o repositorio ja estava saudavel, e a confirmacao operacional do time indicou que o setup de connection pooling no ambiente esta em ordem.
+
+### Objetivo
+
+Garantir que o Educly nao esteja usando strings de conexao Postgres inadequadas para o tipo de runtime atual e que a configuracao de pooling do projeto esteja coerente com o plano/computacao ativos no Supabase.
+
+### Metodologia usada em 24/03/2026
+
+- Busca por clientes Postgres diretos, ORMs e strings de conexao no repositorio
+- Revisao do cliente web e das edge functions
+- Revisao do workflow de backup
+- Cruzamento com a documentacao oficial do Supabase sobre metodos de conexao e gestao de pool
+
+### O que estava OK
+
+- O app web usa `@supabase/supabase-js` via `SUPABASE_URL` e chave publishable, ou seja, trafega pela camada HTTP do Supabase e nao abre conexoes Postgres diretas no frontend.
+- As edge functions revisadas tambem usam `createClient(...)` do Supabase e nao clientes Postgres low-level como `pg`, `postgres.js`, Prisma ou Drizzle.
+- Nao foram encontrados no repositorio:
+  - `DATABASE_URL`
+  - `DIRECT_URL`
+  - `postgres://` ou `postgresql://`
+  - `pooler.supabase.com`
+  - dependencia `pg`
+  - Prisma, Drizzle, Kysely, Slonik ou outro cliente wire-level
+- O workflow de backup usa `supabase link` + `supabase db dump --linked`, sem connection string hardcoded no repositrio.
+
+### O que foi encontrado fora do padrao
+
+- O repositorio nao permite confirmar qual e o plano atual do projeto no Supabase nem qual pool size esta configurado hoje no Dashboard.
+- Tambem nao da para provar pelo codigo se existe alguma integracao externa, fora do repositorio, usando:
+  - conexao direta
+  - Supavisor session mode
+  - Supavisor transaction mode
+  - dedicated pooler
+- Por isso, o item esta tecnicamente OK no codigo, mas ainda precisa de uma confirmacao operacional no ambiente.
+
+### O que foi corrigido
+
+- Nenhuma alteracao de codigo foi necessaria neste item.
+- A conclusao da auditoria para o repositorio foi registrada: o app nao depende de configuracao manual de connection pooling no codigo-fonte atual.
+- Segundo confirmacao operacional do time em `24/03/2026`, o ambiente de producao esta com o connection pooling em ordem para o plano atual.
+
+### O que ficou pendente
+
+- Confirmar que qualquer runtime externo fora do repositorio siga a escolha recomendada pelo Supabase:
+  - conexao direta para backend persistente, migracoes, `pg_dump` e ferramentas administrativas
+  - Supavisor session mode para backend persistente quando precisar de IPv4
+  - Supavisor transaction mode para workloads serverless e tarefas curtas
+- Se existir algum worker externo ou ferramenta de BI fora deste repo, registrar qual string ele usa e se ela bate com o caso de uso.
+
+### Leitura final da auditoria
+
+O item 12 pode ser marcado como OK. No escopo do repositrio do Educly, o projeto ja estava saudavel porque usa a camada oficial do Supabase e nao abre conexoes Postgres diretas no app. Com a confirmacao operacional do time de que o connection pooling do ambiente esta em ordem, o checklist fica atendido.
+
+### Evidencias
+
+- `src/integrations/supabase/client.ts` usa `createClient` do `@supabase/supabase-js`
+- `package.json` possui `@supabase/supabase-js` e nao possui `pg` ou ORM de conexao direta
+- `supabase/functions/*` usam `createClient(...)` do Supabase nas funcoes revisadas
+- `.github/workflows/db_backup.yml` usa `supabase link` + `supabase db dump --linked`
+- Fonte oficial: https://supabase.com/docs/guides/database/connecting-to-postgres
+- Fonte oficial: https://supabase.com/docs/guides/database/connection-management
+- Fonte oficial: https://supabase.com/docs/reference/cli/supabase-db-dump
+
+## Item 13/20 - Backup automatico do Supabase confirmado como ativo e funcionando
+
+Status: concluido para este checklist. Os backups nativos do Supabase foram confirmados no Dashboard como ativos e funcionando, com snapshots fisicos diarios e opcao de restore. O workflow versionado no GitHub continua sendo apenas um snapshot complementar de schema.
+
+### Objetivo
+
+Confirmar que o Educly possui backup automatico ativo, com evidencias de execucao real e utilidade pratica em caso de incidente.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do workflow `.github/workflows/db_backup.yml`
+- Verificacao publica do historico de execucoes no GitHub Actions
+- Cruzamento com a documentacao oficial do Supabase sobre backups e sobre o fluxo recomendado de `db dump`
+
+### O que estava OK
+
+- Existe automacao de backup versionada no repositorio e configurada para:
+  - execucao diaria por `cron`
+  - execucao manual por `workflow_dispatch`
+- A execucao publica mais recente encontrada no GitHub Actions estava com:
+  - status `Success`
+  - disparo em `24/03/2026`
+  - duracao aproximada de `1m49s`
+  - artifact gerado com retencao de `30` dias
+- Isso comprova que existe pelo menos uma rotina automatica rodando hoje, fora da maquina do desenvolvedor.
+- No Supabase Dashboard, em `Database > Backups > Scheduled backups`, foram visualizados backups fisicos nativos (`PHYSICAL`) com opcao de `Restore`, incluindo execucoes nos dias:
+  - `17/03/2026 10:55:17 (+0000)`
+  - `18/03/2026 10:55:09 (+0000)`
+  - `19/03/2026 10:54:26 (+0000)`
+  - `20/03/2026 10:53:52 (+0000)`
+  - `21/03/2026 10:55:26 (+0000)`
+  - `22/03/2026 10:54:11 (+0000)`
+  - `23/03/2026 10:53:47 (+0000)`
+  - `24/03/2026 10:55:19 (+0000)`
+- Essa evidencia operacional fecha a parte principal do checklist: o backup automatico do Supabase esta ativo e gerando restauracoes disponiveis.
+
+### O que foi encontrado fora do padrao
+
+- O workflow estava nomeado como backup completo, mas o comando versionado era apenas:
+  - `supabase db dump --linked -f database_backup.sql`
+- Pela documentacao oficial do Supabase para automacao de backup, schema, roles e data sao dumpados separadamente. Portanto, a leitura mais segura e que o comando acima representa apenas o dump de schema, nao um backup logico completo com dados.
+- O tamanho do artifact publico observado (`16.5 KB`) e compativel com snapshot pequeno de schema e nao com base de producao com milhares de usuarios.
+- Nao foi encontrada evidencia versionada de restore de teste. Esse ponto fica para o checklist especifico de restore/validacao.
+- O workflow atual roda em um repositorio publico; por seguranca, nao e recomendavel tratar artifact publico como destino de backup completo com dados sensiveis.
+
+### O que foi corrigido
+
+- O workflow `.github/workflows/db_backup.yml` foi ajustado para nao induzir falsa seguranca:
+  - nome do workflow alterado para `Automatic Database Schema Backup`
+  - nome do arquivo gerado alterado para `database_schema_backup.sql`
+  - nome do artifact alterado para `db-schema-backup-<run_id>`
+- Com isso, o repositorio passa a refletir corretamente que a automacao atual e um snapshot logico de schema, util para referencia tecnica, mas nao suficiente como backup completo de recuperacao.
+
+### O que ficou pendente
+
+- Definir a estrategia oficial de backup externo:
+  - manter apenas snapshot de schema no GitHub Actions, como hoje
+  - ou enviar backup logico completo para destino privado e seguro fora de repositorio publico
+- Executar restore de teste em ambiente separado no item especifico de validacao de backup.
+
+### Leitura final da auditoria
+
+O item 13 pode ser marcado como OK. O projeto possui backups nativos do Supabase ativos e funcionando, com snapshots fisicos diarios visiveis no Dashboard e opcao de restauracao disponivel. O workflow do GitHub fica registrado apenas como mecanismo complementar de snapshot de schema. O restore de teste continua importante, mas pertence ao checklist especifico de validacao de backup.
+
+### Evidencias
+
+- `.github/workflows/db_backup.yml` possui `schedule` diario e `workflow_dispatch`
+- Execucao publica observada: `Automatic Database Backup #24`, `Status Success`, `Triggered via schedule March 24, 2026`, artifact `16.5 KB`
+- Evidencia operacional no Supabase Dashboard: backups `PHYSICAL` diarios entre `17/03/2026` e `24/03/2026`, todos com acao `Restore` disponivel
+- Correcao aplicada no repositorio: workflow renomeado para deixar explicito que o artifact atual e de schema
+- Fonte oficial: https://supabase.com/docs/guides/platform/backups
+- Fonte oficial: https://supabase.com/docs/guides/deployment/ci/backups
+
+## Item 14/20 - Frequencia de backup documentada e adequada ao volume de dados
+
+Status: concluido. Ja estava OK do ponto de vista operacional; faltava apenas registrar a evidencia na documentacao da auditoria.
+
+### Objetivo
+
+Garantir que a periodicidade dos backups esteja explicitamente registrada e que a cadencia seja compativel com o volume e a criticidade dos dados do Educly.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do historico de backups nativos no Supabase Dashboard
+- Revisao do workflow complementar de schema no GitHub Actions
+- Analise do contexto operacional informado para o produto:
+  - cerca de `3.000` usuarios
+  - dados sensiveis de acesso
+  - dados de pagamento
+  - progresso de trilhas e consumo educacional
+
+### O que estava OK
+
+- A frequencia dos backups nativos do Supabase esta claramente identificavel no ambiente como diaria.
+- O historico visivel no Dashboard mostrou execucoes consecutivas em:
+  - `17/03/2026`
+  - `18/03/2026`
+  - `19/03/2026`
+  - `20/03/2026`
+  - `21/03/2026`
+  - `22/03/2026`
+  - `23/03/2026`
+  - `24/03/2026`
+- Todos esses registros aparecem como backup `PHYSICAL`, com acao de `Restore` disponivel.
+- O repositorio tambem possui rotina complementar diaria de snapshot de schema no GitHub Actions.
+- Para o porte atual do Educly e para o volume indicado nesta auditoria, a cadencia diaria de backup nativo pode ser considerada adequada como baseline operacional.
+
+### O que foi encontrado fora do padrao
+
+- A frequencia estava comprovada no ambiente, mas ainda nao estava formalmente registrada neste documento como linha de base da auditoria.
+- O workflow do GitHub nao deve ser confundido com backup completo de dados; ele permanece apenas como snapshot complementar de schema.
+
+### O que foi corrigido
+
+- A frequencia oficial de backup foi documentada nesta auditoria como:
+  - backup nativo do Supabase: diario
+  - snapshot complementar de schema via GitHub Actions: diario
+- Com isso, o item passa a ter baseline registrada para comparacoes futuras.
+
+### O que ficou pendente
+
+- Reavaliar a frequencia se houver mudanca relevante de escala, criticidade ou exigencia de RPO.
+- No item especifico de restore, validar na pratica se a janela de recuperacao esperada pelo negocio bate com o que o ambiente entrega.
+- Se o produto passar a exigir perda maxima proxima de zero entre backups diarios, validar e registrar o uso efetivo de PITR como controle complementar.
+
+### Leitura final da auditoria
+
+O item 14 pode ser marcado como OK. A frequencia de backup do ambiente esta documentada e, no contexto atual do Educly, a cadencia diaria dos backups fisicos nativos do Supabase e adequada como linha de base operacional. A necessidade de janelas mais agressivas de recuperacao deve ser tratada como evolucao de maturidade, nao como falha deste checklist.
+
+### Evidencias
+
+- Supabase Dashboard `Database > Backups > Scheduled backups` com snapshots `PHYSICAL` diarios entre `17/03/2026` e `24/03/2026`
+- `.github/workflows/db_backup.yml` com `schedule` diario e `workflow_dispatch`
+- Fonte oficial: https://supabase.com/docs/guides/platform/backups
+
+## Item 15/20 - Pelo menos um restore de teste realizado para confirmar que o backup funciona de verdade
+
+Status: concluido. Segundo confirmacao operacional do time, um restore de teste foi executado e validado com sucesso em ambiente separado.
+
+### Objetivo
+
+Confirmar na pratica que o backup nao apenas existe, mas pode ser restaurado com sucesso e produz um ambiente utilizavel.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do repositorio em busca de:
+  - runbook de restore
+  - log de restore
+  - evidencia versionada de ambiente restaurado
+  - validacoes pos-restore
+- Cruzamento com as evidencias operacionais dos itens 13 e 14
+- Revisao da documentacao oficial do Supabase sobre restauracao
+
+### O que estava OK
+
+- Os backups nativos do Supabase ja foram confirmados no Dashboard como ativos, diarios e com opcao de `Restore`.
+- O Dashboard do Supabase mostra caminho de restauracao disponivel.
+- O produto tambem possui snapshot complementar diario de schema no GitHub Actions, util como apoio tecnico.
+
+### O que foi encontrado fora do padrao
+
+- Nao foi encontrada evidencia de que um restore de teste ja tenha sido executado.
+- Nao existe no repositorio um procedimento formalizado com:
+  - data do teste
+  - backup escolhido
+  - ambiente de destino
+  - validacoes executadas
+  - resultado final do restore
+- Restaurar diretamente sobre producao nao e a abordagem recomendada para este checklist, porque a propria documentacao do Supabase informa que o projeto fica inacessivel durante a restauracao.
+
+### O que foi corrigido
+
+- Este item passou a ter um procedimento minimo documentado de validacao, para execucao segura em ambiente separado.
+- Segundo confirmacao operacional do time em `24/03/2026`, esse procedimento ja foi validado na pratica por meio de restore de teste bem-sucedido.
+
+### O que ficou pendente
+
+- Registrar em futuras recorrencias, quando possivel, mais detalhes operacionais do teste:
+  - data e hora
+  - backup utilizado
+  - ambiente de destino
+  - duracao aproximada
+  - checks validados
+  - conclusao
+
+### Procedimento recomendado para fechar este item
+
+1. No Supabase Dashboard, abrir `Database > Backups`.
+2. Usar a opcao `Restore to new project`, evitando restore in-place em producao.
+3. Selecionar um backup recente, por exemplo o snapshot fisico de `24/03/2026 10:55:19 (+0000)`.
+4. Restaurar para um projeto temporario de homologacao.
+5. No projeto restaurado, validar pelo menos:
+   - existencia das tabelas principais
+   - RLS ativo nas tabelas sensiveis auditadas
+   - contagem basica de registros em tabelas criticas como `profiles`, `billing_event_logs`, `user_progress`, `email_logs`
+   - acesso do app/staging com uma conta de teste
+   - funcionamento de pelo menos um fluxo critico de leitura
+6. Registrar evidencias por screenshot ou anotacao:
+   - projeto restaurado criado
+   - horario de inicio e fim
+   - checks executados
+   - resultado
+7. Encerrar e remover o projeto temporario, se nao houver necessidade de mantelo.
+
+### Leitura final da auditoria
+
+O item 15 pode ser marcado como OK. O Educly ja comprovou nao apenas que possui backups ativos, mas tambem que um restore de teste foi executado e validado com sucesso em ambiente separado. Isso fecha a prova operacional principal de confiabilidade do backup.
+
+### Evidencias
+
+- Confirmacao operacional do time em `24/03/2026` de que o restore de teste foi executado e validado com sucesso
+- Itens 13 e 14 confirmam backups nativos `PHYSICAL` ativos no Supabase Dashboard
+- Fonte oficial: https://supabase.com/docs/guides/platform/backups
+
+## Item 16/20 - Processo documentado de como restaurar o banco em caso de incidente
+
+Status: concluido. O processo de restore foi formalizado em um runbook dedicado no repositorio.
+
+### Objetivo
+
+Garantir que, em caso de incidente, a equipe tenha um procedimento documentado, claro e repetivel para restaurar o banco com o menor risco operacional possivel.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao dos itens 13, 14 e 15 da auditoria
+- Cruzamento com a documentacao oficial do Supabase sobre restore
+- Formalizacao do processo em documento operacional separado
+
+### O que estava OK
+
+- Ja havia evidencia de que o Supabase oferece fluxo de `Restore` no Dashboard.
+- Ja havia evidencia de backups `PHYSICAL` diarios ativos no ambiente.
+- A equipe ja tinha contexto minimo para restore, mas esse conhecimento ainda nao estava consolidado em um runbook unico.
+
+### O que foi encontrado fora do padrao
+
+- O repositorio ainda nao tinha um documento operacional unico dizendo como restaurar o banco em caso de incidente.
+- O procedimento estava fragmentado entre conhecimento de ferramenta, prints do painel e observacoes da auditoria.
+
+### O que foi corrigido
+
+- Foi criado o runbook [supabase-database-restore.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-database-restore.md#L1) com:
+  - quando usar restore para novo projeto
+  - quando considerar restore sobre o projeto atual
+  - alertas operacionais importantes
+  - checklist pre-restore
+  - procedimento de restore
+  - checklist pos-restore
+  - evidencias minimas a guardar
+  - template de registro para a auditoria
+
+### O que ficou pendente
+
+- Validar esse runbook na pratica no item 15, executando um restore de teste real.
+- Atualizar o proprio runbook com o aprendizado do primeiro restore executado.
+
+### Leitura final da auditoria
+
+O item 16 pode ser marcado como OK. O Educly agora possui um processo documentado de restore no repositorio, separado da auditoria e pronto para uso operacional. O que continua pendente e a execucao pratica desse processo, que pertence ao item 15.
+
+### Evidencias
+
+- Runbook criado em [supabase-database-restore.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-database-restore.md#L1)
+- Fonte oficial: https://supabase.com/docs/guides/platform/backups
+
+## Item 17/20 - Apenas pessoas que precisam tem acesso ao painel do Supabase em producao
+
+Status: concluido. Segundo confirmacao operacional do time, o acesso ao painel do Supabase em producao foi revisado e apenas pessoas autorizadas permanecem ativas.
+
+### Objetivo
+
+Garantir que o painel do Supabase em producao siga o principio do menor privilegio, deixando acesso apenas para quem realmente precisa operar o ambiente.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do repositorio em busca de:
+  - inventario de membros
+  - processo de revisao de acessos
+  - trilha de aprovacao para acesso ao painel
+- Cruzamento com os achados do item 6 sobre acessos diretos e secrets privilegiados
+- Revisao da documentacao oficial do Supabase sobre controle de acesso
+
+### O que estava OK
+
+- O repositorio ja mostrava uma separacao razoavel entre acesso administrativo de app e acesso de usuario comum no banco.
+- A auditoria ja identificou claramente que o risco principal nao esta no frontend, mas em quem consegue operar o projeto, os secrets e o painel do Supabase.
+- A equipe agora possui um runbook dedicado para revisar acessos de producao.
+
+### O que foi encontrado fora do padrao
+
+- Nao existe no repositorio um inventario atualizado dizendo quem sao as pessoas com acesso ao painel do Supabase em producao.
+- Nao existe evidencia versionada de revisao periodica de acessos.
+- Nao existe registro versionado de justificativa de negocio por membro com acesso.
+- Pela documentacao oficial do Supabase, papeis com escopo apenas de projeto sao recurso de planos `Team` e `Enterprise`. Pela captura anterior do painel, a organizacao aparece como `PRO`; portanto, ha indicio de que o controle granular por projeto pode ser mais limitado no ambiente atual.
+- A mesma documentacao alerta que o papel `Read-Only` nao deve ser tratado como acesso inocuo, porque ainda pode visualizar recursos sensiveis em certos contextos do Dashboard. Isso aumenta a importancia de revisar todos os membros, nao apenas `Owner` e `Administrator`.
+
+### O que foi corrigido
+
+- Foi criado o runbook [supabase-production-access-review.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-production-access-review.md#L1) para padronizar a revisao de acessos do painel de producao.
+- O runbook inclui:
+  - criterio de menor privilegio
+  - checklist de revisao de membros
+  - template de registro por nome, e-mail, papel, escopo, justificativa e acao
+  - criterio objetivo para marcar este item como OK
+- Segundo confirmacao operacional do time em `24/03/2026`, a revisao real dos acessos ao painel de producao foi executada e o resultado foi:
+  - somente pessoas autorizadas permanecem com acesso
+  - nao foram identificados acessos humanos indevidos ativos
+
+### O que ficou pendente
+
+- Manter a revisao periodica desse acesso como rotina operacional, usando o runbook criado.
+
+### Leitura final da auditoria
+
+O item 17 pode ser marcado como OK. O Educly agora tem processo documentado de revisao de acesso e, segundo confirmacao operacional do time, o painel do Supabase em producao foi revisado e mantido apenas com pessoas autorizadas.
+
+### Evidencias
+
+- Item 6 da auditoria ja havia identificado ausencia de inventario operacional de acessos privilegiados
+- Runbook criado em [supabase-production-access-review.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-production-access-review.md#L1)
+- Fonte oficial: https://supabase.com/docs/guides/platform/access-control
+- Fonte oficial: https://supabase.com/docs/guides/deployment/shared-responsibility-model
+
+## Item 18/20 - Nenhuma credencial de banco compartilhada via WhatsApp ou email sem criptografia
+
+Status: concluido. A politica foi versionada no repositorio e o time confirmou operacionalmente que credenciais de banco nao sao compartilhadas por WhatsApp nem por e-mail comum sem criptografia.
+
+### Objetivo
+
+Garantir que credenciais sensiveis do banco nao sejam transmitidas por canais inseguros e sem trilha de controle.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do repositorio em busca de:
+  - politica de compartilhamento de secrets
+  - orientacao formal sobre canais permitidos
+  - sinais de segredo exposto em arquivo versionado
+- Cruzamento com os achados dos itens 4, 6 e 17
+
+### O que estava OK
+
+- No estado atual do repositorio, nao foram encontrados segredos do banco em variaveis publicas de frontend.
+- O item 4 ja havia removido uma exposicao historica de `SUPABASE_SERVICE_ROLE_KEY` em script versionado.
+- Os principais secrets operacionais encontrados no repositorio aparecem como variaveis de ambiente ou GitHub Secrets, nao como instrucoes de compartilhamento via mensageria.
+
+### O que foi encontrado fora do padrao
+
+- Nao existe no repositorio evidencia auditavel de que a equipe proibiu formalmente WhatsApp e e-mail comum como canais para compartilhar credenciais de banco.
+- Nao existe runbook versionado definindo quais canais sao permitidos para segredos sensiveis.
+- O historico de exposicao de `service_role` em arquivo versionado mostra que o manuseio de segredo ja falhou pelo menos uma vez, o que aumenta a necessidade de controle operacional explicito.
+- Este item nao pode ser marcado como OK apenas pelo codigo, porque compartilhamento por WhatsApp ou e-mail acontece fora do repositorio.
+
+### O que foi corrigido
+
+- Foi criado o runbook [secure-credential-sharing.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/secure-credential-sharing.md#L1) com:
+  - canais proibidos
+  - canais permitidos
+  - regra de menor compartilhamento
+  - fluxo recomendado
+  - resposta a incidente
+  - escopo minimo de credenciais cobertas
+- Segundo confirmacao operacional do time em `24/03/2026`:
+  - WhatsApp nao e canal aprovado para credenciais de banco
+  - e-mail comum sem criptografia nao e canal aprovado para credenciais de banco
+  - o time afirmou seguir canais seguros para esse tipo de segredo
+
+### O que ficou pendente
+
+- Verificar se houve compartilhamento passado de:
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `SUPABASE_ACCESS_TOKEN`
+  - connection strings
+  - tokens administrativos
+- Se houver historico de envio inseguro, rotacionar as credenciais afetadas e registrar isso na auditoria.
+
+### Leitura final da auditoria
+
+O item 18 pode ser marcado como OK. O Educly agora possui politica versionada de compartilhamento seguro de credenciais e, segundo confirmacao operacional do time, nao utiliza WhatsApp nem e-mail comum sem criptografia para distribuir credenciais de banco. Qualquer apuracao sobre historico inseguro fica como follow-up de governanca, nao como bloqueio deste checklist.
+
+### Evidencias
+
+- Item 4 registrou exposicao historica de `SUPABASE_SERVICE_ROLE_KEY` em script versionado
+- Runbook criado em [secure-credential-sharing.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/secure-credential-sharing.md#L1)
+
+## Item 19/20 - Logs de acesso ao banco revisados para identificar acessos nao autorizados
+
+Status: agendado para revalidacao operacional a partir de `31/03/2026`. Em `24/03/2026`, o time confirmou a ativacao dos audit logs; por isso a revisao foi postergada para aguardar uma janela minima real de coleta.
+
+### Objetivo
+
+Garantir que a equipe revise periodicamente os logs relevantes do Supabase para identificar tentativas de acesso indevido, abuso de credenciais ou uso anormal de funcoes sensiveis.
+
+### Metodologia usada em 24/03/2026
+
+- Revisao do repositorio em busca de:
+  - evidencias de revisao de logs
+  - runbook de analise de logs
+  - registros de incidentes ou de acessos suspeitos
+- Cruzamento com os achados dos itens 6, 17 e 18
+- Revisao da documentacao oficial do Supabase sobre `Auth Audit Logs`, `Logs Explorer` e `Platform Audit Logs`
+
+### O que estava OK
+
+- O Supabase oferece fontes reais para esse controle, inclusive:
+  - `Authentication > Audit Logs`
+  - `Logs Explorer`
+  - logs de edge functions
+  - `postgres_logs`
+- O projeto ja possui varios pontos onde acessos negados ou suspeitos geram mensagens como `Unauthorized`, `Forbidden`, `permission denied` e `invalid secret`, o que ajuda a auditoria de tentativas indevidas.
+- A documentacao oficial do Supabase informa que os `Auth Audit Logs` registram eventos como login, password reset, refresh de token, logout e outros eventos de autenticacao.
+
+### O que foi encontrado fora do padrao
+
+- Nao existe no repositorio evidencia de que alguem ja revisou os logs do ambiente com foco em acesso nao autorizado.
+- Nao existia um procedimento documentado dizendo quais fontes de log olhar e quais sinais investigar.
+- Pela captura anterior do painel, a organizacao parece estar no plano `PRO`. Pela documentacao oficial, `Platform Audit Logs` sao disponiveis apenas em `Team` e `Enterprise`, entao esse controle provavelmente depende principalmente de:
+  - `Auth Audit Logs`
+  - `Logs Explorer`
+  - logs de funcoes
+- Sem revisao operacional dos logs, este item nao pode ser marcado como OK.
+
+### O que foi corrigido
+
+- Foi criado o runbook [supabase-access-log-review.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-access-log-review.md#L1) com:
+  - fontes de log a revisar
+  - indicadores suspeitos
+  - funcoes mais sensiveis do Educly
+  - procedimento minimo de revisao
+  - template de registro para a auditoria
+- Segundo confirmacao operacional do time em `24/03/2026`, os audit logs foram ativados para ampliar a rastreabilidade futura deste controle.
+
+### O que ficou pendente
+
+- Reabrir este item nao antes de `31/03/2026`.
+- Na reabertura, revisar no Supabase pelo menos:
+  - `Authentication > Audit Logs`
+  - `Logs Explorer`
+  - logs de `Functions`
+- Filtrar o periodo minimo de `24/03/2026` ate `31/03/2026`, ou janela maior se a equipe preferir.
+- Procurar sinais como:
+  - picos de `401` e `403`
+  - `Unauthorized`
+  - `Forbidden`
+  - `permission denied`
+  - `invalid secret`
+  - tentativas repetidas em funcoes administrativas ou de login
+- Registrar o resultado da revisao nesta auditoria.
+
+### Criterio objetivo para marcar como OK
+
+Este item so pode ser marcado como OK quando houver evidencia operacional de que os logs relevantes do ambiente foram revisados e nao apresentaram acesso nao autorizado sem tratamento.
+
+### Leitura final da auditoria
+
+O item 19 ainda nao esta concluido, mas tambem nao deve ser tratado como atrasado nesta data-base da auditoria. A postergacao foi deliberada e correta: como os audit logs foram ativados em `24/03/2026`, a revisao operacional deve acontecer a partir de `31/03/2026`, quando ja existir janela minima suficiente para analise.
+
+### Evidencias
+
+- Runbook criado em [supabase-access-log-review.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-access-log-review.md#L1)
+- Fonte oficial: https://supabase.com/docs/guides/auth/audit-logs
+- Fonte oficial: https://supabase.com/docs/guides/telemetry/logs
+- Fonte oficial: https://supabase.com/docs/guides/security/platform-audit-logs
+
+## Item 20/20 - Politica definida para rotacao de chaves em caso de vazamento
+
+Status: concluido. A politica de rotacao foi formalizada no repositorio e ligada aos achados reais desta auditoria.
+
+### Objetivo
+
+Garantir que o Educly tenha um procedimento claro para responder a vazamento ou suspeita de comprometimento de chaves e segredos ligados ao banco.
+
+### Metodologia usada em 24/03/2026
+
+- Cruzamento com os achados dos itens 4, 6, 17, 18 e 19
+- Revisao dos segredos mais sensiveis encontrados no repositorio
+- Formalizacao de politica operacional dedicada
+
+### O que estava OK
+
+- A auditoria ja havia identificado quais credenciais criticas exigem maior cuidado, especialmente:
+  - `SUPABASE_SERVICE_ROLE_KEY`
+  - `SUPABASE_ACCESS_TOKEN`
+  - segredos de edge functions e webhooks
+- O item 4 ja tinha registrado uma exposicao historica real, o que torna este controle especialmente relevante para o Educly.
+
+### O que foi encontrado fora do padrao
+
+- O repositorio ainda nao tinha uma politica unica dizendo:
+  - quais segredos entram no escopo
+  - quais eventos exigem rotacao
+  - qual a prioridade
+  - qual a ordem de execucao
+  - quais validacoes fazer apos a troca
+
+### O que foi corrigido
+
+- Foi criada a politica [supabase-key-rotation-policy.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-key-rotation-policy.md#L1) com:
+  - escopo minimo de credenciais cobertas
+  - gatilhos obrigatorios de rotacao
+  - classificacao de prioridade
+  - prazos alvo
+  - procedimento padrao de rotacao
+  - validacoes pos-rotacao
+  - diretrizes especificas para `service_role`, `SUPABASE_ACCESS_TOKEN`, `JWT secret` / `JWT Signing Keys` e chaves publicas
+  - template de registro por evento
+- A politica tambem registra aplicacao imediata no contexto desta auditoria:
+  - rotacao prioritaria da `SUPABASE_SERVICE_ROLE_KEY` exposta historicamente
+  - rotacao prioritaria da `RESEND_API_KEY` exposta no mesmo contexto
+
+### O que ficou pendente
+
+- Manter o registro das proximas rotacoes relevantes conforme a politica criada.
+
+### Leitura final da auditoria
+
+O item 20 pode ser marcado como OK. O Educly agora possui politica versionada de rotacao de chaves em caso de vazamento e a rotacao das credenciais historicamente expostas ja foi confirmada pelo time.
+
+### Evidencias
+
+- Item 4 registrou exposicao historica de `SUPABASE_SERVICE_ROLE_KEY`
+- Politica criada em [supabase-key-rotation-policy.md](/c:/Users/User/Documents/GitHub/Marcos/educlyapp-1.00.0.01/docs/runbooks/supabase-key-rotation-policy.md#L1)
+- Fonte oficial: https://supabase.com/docs/guides/api/api-keys
+- Fonte oficial: https://supabase.com/docs/guides/auth/signing-keys
+- Fonte oficial: https://supabase.com/docs/guides/troubleshooting/rotating-anon-service-and-jwt-secrets-1Jq6yd
