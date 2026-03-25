@@ -1440,6 +1440,23 @@
   },
   "dashboard": {
     "greeting": "Hallo",
+    "nav_edi_button": "Mit EDI sprechen",
+    "nav_trails_button": "Unsere Pfade",
+    "nav_trails_list_title": "Spezialisierte Pfade",
+    "nav_level": "Level {{level}}",
+    "nav_close_trails_panel": "Pfade-Panel schliessen",
+    "nav_close": "Schliessen",
+    "unlock_to_access": "Freischalten, um zuzugreifen",
+    "unlock_hint": "Klicke auf die Karte, um Plaene anzusehen und freizuschalten",
+    "greetings": {
+      "morning": "Guten Morgen",
+      "afternoon": "Guten Tag",
+      "evening": "Guten Abend"
+    },
+    "hero_subtitle_prefix": "Willkommen bei",
+    "hero_subtitle_suffix": ", mach weiter mit deinem Fortschritt!",
+    "streak_in_sequence": "in Folge",
+    "loading_user_name": "Benutzername wird geladen",
     "welcome_title": "Deine KI-Reise geht weiter! 🚀",
     "welcome_subtitle": "Du hast {{completed}} von {{total}} Tagen abgeschlossen. Bleib dran!",
     "status_in_progress": "In Bearbeitung",

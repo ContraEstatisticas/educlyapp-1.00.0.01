@@ -2588,6 +2588,23 @@
     "noPurchaseContact": "Contactar con soporte"
   },
   "dashboard": {
+    "nav_edi_button": "Habla con EDI",
+    "nav_trails_button": "Nuestras rutas",
+    "nav_trails_list_title": "Rutas especializadas",
+    "nav_level": "Nivel {{level}}",
+    "nav_close_trails_panel": "Cerrar panel de rutas",
+    "nav_close": "Cerrar",
+    "unlock_to_access": "Desbloquea para acceder",
+    "unlock_hint": "Haz clic en la tarjeta para ver los planes y desbloquear",
+    "greetings": {
+      "morning": "Buenos dias",
+      "afternoon": "Buenas tardes",
+      "evening": "Buenas noches"
+    },
+    "hero_subtitle_prefix": "Bienvenido(a) a",
+    "hero_subtitle_suffix": ", continua tu progreso!",
+    "streak_in_sequence": "en secuencia",
+    "loading_user_name": "Cargando nombre del usuario",
     "greeting": "Hola",
     "welcome_title": "¡Tu Viaje en IA Continúa! 🚀",
     "welcome_subtitle": "Has completado {{completed}} de {{total}} días. ¡Sigue avanzando!",

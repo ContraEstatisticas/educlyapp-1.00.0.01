@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const languages = [
   { code: 'pt', name: 'Português', flag: '🇧🇷' },
@@ -18,7 +19,11 @@ const languages = [
   { code: 'ru', name: 'Русский', flag: '🇷🇺' },
 ];
 
-export const LanguageSelector = () => {
+interface LanguageSelectorProps {
+  className?: string;
+}
+
+export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
 
   const handleLanguageChange = (languageCode: string) => {
@@ -30,7 +35,7 @@ export const LanguageSelector = () => {
 
   return (
     <Select value={i18n.language} onValueChange={handleLanguageChange}>
-      <SelectTrigger className="w-[60px] sm:w-[140px] bg-background/50 backdrop-blur-sm hover:bg-background/70 transition-all border-border">
+      <SelectTrigger className={cn("w-[60px] sm:w-[140px] bg-background/50 backdrop-blur-sm hover:bg-background/70 transition-all border-border", className)}>
         <div className="flex items-center gap-1 sm:gap-2">
           <Globe className="h-4 w-4 text-primary hidden sm:block" />
           <SelectValue>

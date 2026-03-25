@@ -2459,6 +2459,23 @@
   },
   "dashboard": {
     "greeting": "Hello",
+    "nav_edi_button": "Talk to EDI",
+    "nav_trails_button": "Our trails",
+    "nav_trails_list_title": "Specialized trails",
+    "nav_level": "Level {{level}}",
+    "nav_close_trails_panel": "Close trails panel",
+    "nav_close": "Close",
+    "unlock_to_access": "Unlock to access",
+    "unlock_hint": "Click the card to view plans and unlock",
+    "greetings": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
+    "hero_subtitle_prefix": "Welcome to",
+    "hero_subtitle_suffix": ", keep your progress going!",
+    "streak_in_sequence": "in a row",
+    "loading_user_name": "Loading user name",
     "welcome_title": "Your AI Journey Continues! 🚀",
     "welcome_subtitle": "You have completed {{completed}} of {{total}} days. Keep moving forward!",
     "status_in_progress": "In Progress",
