@@ -1820,16 +1820,16 @@ export type Database = {
         Args: { p_challenge_id: string; p_user_full_name: string }
         Returns: string
       }
-      generate_trail_certificate: {
-        Args: { p_tool_slug: string; p_user_full_name: string }
-        Returns: string
-      }
       generate_tool_certificate: {
         Args: {
           p_challenge_id: string
           p_tool_slug: string
           p_user_full_name: string
         }
+        Returns: string
+      }
+      generate_trail_certificate: {
+        Args: { p_tool_slug: string; p_user_full_name: string }
         Returns: string
       }
       get_avg_first_session_minutes: { Args: never; Returns: number }
