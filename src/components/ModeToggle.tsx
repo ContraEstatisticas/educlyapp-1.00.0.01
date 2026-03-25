@@ -27,7 +27,7 @@ export function ModeToggle({ className }: ModeToggleProps) {
 
   const isDarkTheme =
     theme === "dark" ||
-    (theme === "system" &&
+    ((theme as string) === "system" &&
       typeof document !== "undefined" &&
       document.documentElement.classList.contains("dark"))
 
