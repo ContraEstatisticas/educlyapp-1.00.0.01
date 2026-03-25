@@ -69,7 +69,6 @@ const Dashboard = () => {
   const [missionsOpen, setMissionsOpen] = useState(false);
   const [trailsPanelOpen, setTrailsPanelOpen] = useState(false);
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
-  const [isEdiChatOpen, setIsEdiChatOpen] = useState(false);
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
   const greeting = t(getGreetingKeyByHour(new Date()));
 
@@ -88,18 +87,6 @@ const Dashboard = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const handleEdiChatVisibility = (event: Event) => {
-      const customEvent = event as CustomEvent<{ open?: boolean }>;
-      setIsEdiChatOpen(Boolean(customEvent.detail?.open));
-    };
-
-    window.addEventListener("edi-chat-visibility", handleEdiChatVisibility as EventListener);
-    return () => window.removeEventListener("edi-chat-visibility", handleEdiChatVisibility as EventListener);
   }, []);
 
   const handleLogout = async () => {
@@ -669,7 +656,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <section id="dashboard-quick-cards" className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <section id="dashboard-quick-cards" className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <button
               className="group rounded-2xl border border-border bg-card px-5 py-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md"
               onClick={() => setMissionsOpen(true)}
@@ -703,6 +690,25 @@ const Dashboard = () => {
                   </p>
                   <p className="text-sm text-slate-600 dark:text-muted-foreground">
                     {t("dashboard.medals.quickSubtitle", "Seu progresso e conquistas")}
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            <button
+              className="group rounded-2xl border border-border bg-card px-5 py-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md"
+              onClick={() => navigate("/trilhas-ia")}
+            >
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Compass className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {t("dashboard.specialty_trails.title", "Trilhas de especialidades")}
+                  </p>
+                  <p className="text-sm text-slate-600 dark:text-muted-foreground">
+                    {t("dashboard.specialty_trails.quickSubtitle", "Explore trilhas por especialidade")}
                   </p>
                 </div>
               </div>
@@ -972,18 +978,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
-        <button
-          className={`trails-fab-focus fixed bottom-6 z-[90] hidden items-center gap-2 rounded-full border px-4 py-3 text-sm font-bold shadow-[0_16px_28px_-18px_rgba(249,115,22,0.85)] transition-all duration-300 hover:scale-[1.02] md:inline-flex ${
-            trailsPanelOpen
-              ? "border-primary/45 bg-primary text-primary-foreground hover:bg-primary"
-              : "border-primary/30 bg-primary text-primary-foreground hover:bg-primary/95"
-          } ${isEdiChatOpen ? "right-[26rem]" : "right-6"}`}
-          onClick={() => setTrailsPanelOpen((prev) => !prev)}
-        >
-          <Compass className="h-4 w-4" />
-          {t("dashboard.nav_trails_button")}
-        </button>
 
         <FloatingEdiChat showLauncher={false} />
 

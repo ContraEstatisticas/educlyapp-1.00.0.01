@@ -1,11 +1,11 @@
-import { LogOut, Shield, Mail, MessageCircle, Compass, ChevronRight } from "lucide-react";
+import { LogOut, Shield, Mail, MessageCircle, Compass, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ModeToggle } from "@/components/ModeToggle";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
@@ -20,6 +20,7 @@ interface DashboardHeaderProps {
 export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProps) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
 
   const { data: profile, isLoading: isProfileLoading } = useQuery({
@@ -101,10 +102,37 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
   const standardControlClass =
     "h-10 rounded-xl border border-slate-300/90 dark:border-border/70 bg-card/70 backdrop-blur-sm hover:border-slate-400 dark:hover:border-primary/35 hover:bg-card";
   const standardIconControlClass = `${standardControlClass} w-10 p-0`;
+  const isDashboardPage = location.pathname === "/dashboard";
+
+  const handleBackNavigation = () => {
+    const historyIndex =
+      typeof window !== "undefined" && typeof window.history.state?.idx === "number"
+        ? window.history.state.idx
+        : 0;
+
+    if (historyIndex > 0) {
+      navigate(-1);
+      return;
+    }
+
+    navigate("/dashboard");
+  };
 
   return (
     <header className="flex flex-col gap-3 py-4 md:flex-row md:items-center md:justify-between">
       <div className="hidden md:flex md:items-center md:gap-3">
+        {!isDashboardPage && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleBackNavigation}
+            className={`${standardControlClass} px-3 text-sm font-semibold text-foreground`}
+          >
+            <ArrowLeft className="mr-1.5 h-4 w-4" />
+            {t("common.back")}
+          </Button>
+        )}
+
         <Button
           type="button"
           onClick={onOpenEdiChat}
@@ -296,14 +324,31 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
         </Button>
       </div>
 
-      <Button
-        type="button"
-        onClick={onOpenEdiChat}
-        className="md:hidden h-11 rounded-full bg-gradient-to-r from-primary to-orange-500 px-4 text-sm font-semibold text-white shadow-md shadow-primary/30 hover:from-primary/90 hover:to-orange-500/90"
-      >
-        <MessageCircle className="mr-2 h-4 w-4" />
-        {t("dashboard.nav_edi_button")}
-      </Button>
+      <div className="md:hidden flex items-center gap-2">
+        {!isDashboardPage && (
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={handleBackNavigation}
+            className="h-11 w-11 shrink-0 rounded-full border border-slate-300/90 bg-card/75 dark:border-border/70"
+            aria-label={t("common.back")}
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+        )}
+
+        <Button
+          type="button"
+          onClick={onOpenEdiChat}
+          className={`h-11 rounded-full bg-gradient-to-r from-primary to-orange-500 px-4 text-sm font-semibold text-white shadow-md shadow-primary/30 hover:from-primary/90 hover:to-orange-500/90 ${
+            isDashboardPage ? "w-full" : "flex-1"
+          }`}
+        >
+          <MessageCircle className="mr-2 h-4 w-4" />
+          {t("dashboard.nav_edi_button")}
+        </Button>
+      </div>
     </header>
   );
 };
