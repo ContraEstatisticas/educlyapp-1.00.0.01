@@ -107,7 +107,7 @@ const PT_UI: AiTrailUiCopy = {
   seeLater: "Ver depois",
   openTrail: "Abrir trilha",
   pageCategoryFallback: "Trilha por IA",
-  pageDescription: "Essa trilha ainda esta em preparacao. O design ja foi reservado, mas o acesso vai ser liberado em breve.",
+  pageDescription: "Estamos finalizando esta trilha com todo cuidado para entregar a melhor experiencia para voce. Em breve, o acesso sera liberado com conteudo completo.",
   pageBuildTitle: "Conteudo em montagem",
   pageBuildDesc: "Estamos organizando aulas, modulos e entregas dessa IA antes de liberar o acesso.",
   pageLockedTitle: "Acesso fechado por enquanto",

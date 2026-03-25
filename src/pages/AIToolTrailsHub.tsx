@@ -249,6 +249,13 @@ const AIToolTrailsHub = () => {
     () => aiMasteryTrails.filter((trail) => isAiTrailLive(trail.slug)).length,
     [],
   );
+  const orderedBoardTrails = useMemo(() => {
+    return [...aiMasteryTrails].sort((a, b) => {
+      const aLive = isAiTrailLive(a.slug) ? 1 : 0;
+      const bLive = isAiTrailLive(b.slug) ? 1 : 0;
+      return bLive - aLive;
+    });
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -415,7 +422,7 @@ const AIToolTrailsHub = () => {
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(249,115,22,0.12),transparent_48%),radial-gradient(circle_at_83%_75%,rgba(59,130,246,0.10),transparent_48%)]" />
 
-              {aiMasteryTrails.map((trail, index) => {
+              {orderedBoardTrails.map((trail, index) => {
                 const trailIsLive = isAiTrailLive(trail.slug);
                 const bubble = BUBBLE_LAYOUT[index % BUBBLE_LAYOUT.length];
                 const position = bubblePositions[index] || {
