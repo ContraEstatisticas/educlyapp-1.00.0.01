@@ -361,7 +361,7 @@ const buildDashboardSnapshot = async (
       .select("user_id, current_streak, longest_streak, last_activity_date")
       .filter("last_activity_date", "gte", yesterdayKey)
       .order("current_streak", { ascending: false })
-      .limit(10),
+      .limit(100),
     supabaseAdmin
       .from("user_premium_access")
       .select("user_id, is_premium, plan_type, purchased_at")

@@ -6,8 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Flame } from "lucide-react";
+import { Flame, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { AdminDataTable } from "./AdminDataTable";
 import { formatAdminDate } from "@/lib/adminTimeZone";
 import {
@@ -17,7 +19,9 @@ import {
 
 export const TopStreaksTable = () => {
   const { data, isLoading, error, refetch } = useAdminAnalyticsDashboard();
+  const [visibleCount, setVisibleCount] = useState(10);
   const topUsers = data?.tables.topStreaks || [];
+  const visibleUsers = topUsers.slice(0, visibleCount);
 
   const getMedal = (index: number) => {
     if (index === 0) return <span className="text-lg">🥇</span>;
@@ -26,9 +30,13 @@ export const TopStreaksTable = () => {
     return <span className="text-sm font-bold text-muted-foreground">{index + 1}</span>;
   };
 
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 10);
+  };
+
   return (
     <AdminDataTable
-      title="Top 10 Streaks"
+      title="Top Streaks"
       emoji="🏆"
       isLoading={isLoading}
       errorMessage={error ? formatAdminAnalyticsError(error) : undefined}
@@ -48,7 +56,7 @@ export const TopStreaksTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {topUsers.map((user, index) => (
+            {visibleUsers.map((user, index) => (
               <TableRow key={user.user_id} className="border-b border-border/30 hover:bg-muted/30">
                 <TableCell className="py-3 pl-5">{getMedal(index)}</TableCell>
                 <TableCell className="text-sm font-medium truncate max-w-[150px]">{user.full_name}</TableCell>
@@ -75,6 +83,20 @@ export const TopStreaksTable = () => {
           </TableBody>
         </Table>
       </div>
+
+      {topUsers.length > visibleCount && (
+        <div className="flex justify-center mt-6 pb-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLoadMore}
+            className="text-xs font-semibold gap-2 px-6"
+          >
+            Carregar mais 10
+            <ChevronDown className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      )}
     </AdminDataTable>
   );
 };
