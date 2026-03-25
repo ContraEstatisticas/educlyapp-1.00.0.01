@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,15 +7,13 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { MobileNav } from "@/components/MobileNav";
 import { WeeklyStreakBar } from "@/components/WeeklyStreakBar";
 import { ProductOnboarding } from "@/components/onboarding";
-import { usePremiumAccess } from "@/hooks/usePremiumAccess";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useTranslation } from "react-i18next";
-import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
 import { TrailContentModal } from "@/components/dashboard/TrailContentModal";
 import { DailyMissionsModal } from "@/components/dashboard/DailyMissionsModal";
-import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight } from "lucide-react";
+import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
+import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight, Flame, Compass, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { useDailyLoginXP } from "@/hooks/useDailyLoginXP";
 import { Badge } from "@/components/ui/badge";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
@@ -42,6 +40,14 @@ const getTrailInitials = (name: string) =>
 
 const CHALLENGE_28_DAYS_ID = "dfb76f1b-d272-4e4d-96b2-0bc4d3392489";
 
+const getGreetingKeyByHour = (date: Date) => {
+  const hour = date.getHours();
+
+  if (hour < 12) return "dashboard.greetings.morning";
+  if (hour < 18) return "dashboard.greetings.afternoon";
+  return "dashboard.greetings.evening";
+};
+
 const MOCK_ACTIVE_SESSION = {
   current_day: 1,
   challenges: {
@@ -57,21 +63,42 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
-  const { isPremium, isLoading: isPremiumLoading } = usePremiumAccess();
   const productAccess = useProductAccess();
-  const [userId, setUserId] = useState<string | undefined>();
   const [trailModalOpen, setTrailModalOpen] = useState(false);
   const [missionsOpen, setMissionsOpen] = useState(false);
+  const [trailsPanelOpen, setTrailsPanelOpen] = useState(false);
+  const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
+  const [isEdiChatOpen, setIsEdiChatOpen] = useState(false);
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
+  const greeting = t(getGreetingKeyByHour(new Date()));
 
   useDailyLoginXP();
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) setUserId(user.id);
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      setIsNavbarScrolled(window.scrollY > 12);
     };
-    getUser();
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleEdiChatVisibility = (event: Event) => {
+      const customEvent = event as CustomEvent<{ open?: boolean }>;
+      setIsEdiChatOpen(Boolean(customEvent.detail?.open));
+    };
+
+    window.addEventListener("edi-chat-visibility", handleEdiChatVisibility as EventListener);
+    return () => window.removeEventListener("edi-chat-visibility", handleEdiChatVisibility as EventListener);
   }, []);
 
   const handleLogout = async () => {
@@ -80,11 +107,15 @@ const Dashboard = () => {
     navigate("/auth");
   };
 
-  const openSpecializedTrailsHub = () => navigate("/trilhas-ia");
+  const handleOpenEdiChat = () => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(new Event("toggle-edi-chat"));
+  };
 
   const handleSpecializedTrailClick = (slug: string) => {
     if (isAiTrailLive(slug)) {
       navigate(`/trilhas-ia/${slug}`);
+      setTrailsPanelOpen(false);
       return;
     }
 
@@ -107,17 +138,85 @@ const Dashboard = () => {
     }
   });
 
+  const { data: userDisplayName, isLoading: isUserDisplayNameLoading } = useQuery({
+    queryKey: ["dashboard-welcome-user"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return t("dashboard.student");
+
+      const { data } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      return data?.full_name || user.email?.split("@")[0] || t("dashboard.student");
+    }
+  });
+
+  const { data: streakData } = useQuery({
+    queryKey: ["dashboard-user-streak-card"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        return { current_streak: 0, longest_streak: 0 };
+      }
+
+      const { data } = await supabase
+        .from("user_streaks")
+        .select("current_streak, longest_streak")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      return data || { current_streak: 0, longest_streak: 0 };
+    }
+  });
+
   const activeChallenge = MOCK_ACTIVE_SESSION.challenges;
   const totalDays = 28;
   const hasProgress = completedDaysCount > 0;
   const isCompleted = completedDaysCount >= totalDays;
   const progressPercentage = Math.round(completedDaysCount / totalDays * 100);
+  const currentStreak = streakData?.current_streak || 0;
+  const [animatedStreak, setAnimatedStreak] = useState(0);
+  const normalizedProgress = Math.min(100, Math.max(0, progressPercentage));
+  const progressRadius = 34;
+  const progressCircumference = 2 * Math.PI * progressRadius;
+  const progressOffset = progressCircumference - (normalizedProgress / 100) * progressCircumference;
+
+  useEffect(() => {
+    const target = Math.max(0, currentStreak);
+    setAnimatedStreak(0);
+
+    if (target === 0) return;
+
+    const duration = 1100;
+    const startTime = performance.now();
+    let frameId = 0;
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setAnimatedStreak(Math.round(target * easedProgress));
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [currentStreak]);
 
   const bookmarkLabel = isCompleted
-    ? t("challenge.review", "Revisar")
+    ? t("challenge.review")
     : hasProgress
-      ? t("common.continue", "Continuar")
-      : t("challenge.start", "Iniciar");
+      ? t("common.continue")
+      : t("challenge.start");
+  const handleContinueChallenge = () => navigate(`/desafio/${activeChallenge.slug}`);
 
   // --- CORREÇÃO DE SEGURANÇA AQUI ---
   // Verifica se o retorno é realmente um array antes de tentar usar.
@@ -153,34 +252,8 @@ const Dashboard = () => {
       productType: "freelancer" as const
     }];
 
-
-  const secondaryCards = [
-    {
-      icon: Target,
-      title: t("dashboard.missions.title"),
-      subtitle: t("dashboard.missions.subtitle"),
-      colorClass: "text-rose-500",
-      link: "/dashboard",
-      showFooter: true,
-      gradient: "from-rose-500/20 to-pink-500/10",
-      cta: t("dashboard.missions.cta"),
-      iconBg: "bg-rose-500/10"
-    },
-    {
-      icon: Medal,
-      title: t("dashboard.medals.title"),
-      subtitle: t("dashboard.medals.subtitle"),
-      colorClass: "text-amber-500 dark:text-amber-400",
-      link: "/medalhas",
-      showFooter: false,
-      gradient: "from-amber-500/20 to-yellow-500/10",
-      cta: t("dashboard.medals.cta"),
-      iconBg: "bg-amber-500/10"
-    }];
-
-
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100/50 dark:from-background dark:to-slate-950 text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20 transition-colors duration-300">
+    <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -205,409 +278,641 @@ const Dashboard = () => {
           animation: shimmer 3s infinite;
         }
 
-        .card-3d-container {
-          perspective: 1200px;
-          position: relative;
+        @keyframes productCardEnter {
+          0% {
+            opacity: 0;
+            transform: translateY(12px) scale(0.985);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
 
-        .card-surface-3d {
+        @keyframes productLockPulse {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.2);
+          }
+          55% {
+            transform: scale(1.06);
+            box-shadow: 0 0 0 12px rgba(249, 115, 22, 0);
+          }
+        }
+
+        .product-showcase-card {
           position: relative;
-          z-index: 1;
-          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-          transform-style: preserve-3d;
-          background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card)/0.95) 100%);
-          border: 1px solid rgba(0, 0, 0, 0.08);
           overflow: hidden;
+          border-radius: 1.75rem;
+          border: 1px solid hsl(var(--border));
+          background: linear-gradient(155deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.95) 100%);
+          box-shadow: 0 24px 42px -36px rgba(15, 23, 42, 0.58);
+          transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+          animation: productCardEnter 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
-        .dark .card-surface-3d {
-          background: linear-gradient(135deg, hsla(var(--card)/0.9) 0%, hsla(var(--card)/0.7) 100%);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+        .product-showcase-card:hover {
+          transform: translateY(-5px);
+          border-color: hsl(var(--primary) / 0.36);
+          box-shadow: 0 30px 58px -36px rgba(15, 23, 42, 0.7);
         }
 
-        .card-3d-container:hover .card-surface-3d {
-          transform: rotateX(5deg) rotateY(-3deg) translateY(-12px);
-          box-shadow: 
-            0 25px 50px -12px rgba(0, 0, 0, 0.25),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-        }
-
-        .card-surface-3d::before {
+        .product-showcase-card::after {
           content: "";
           position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+          inset: -18% 40% auto -42%;
+          height: 120%;
+          transform: rotate(18deg);
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.34) 50%,
+            transparent 100%
+          );
           opacity: 0;
-          transition: opacity 0.3s ease;
+          transition: opacity 0.28s ease;
           pointer-events: none;
         }
 
-        .card-3d-container:hover .card-surface-3d::before {
-          opacity: 1;
+        .product-showcase-card:hover::after {
+          opacity: 0.58;
         }
 
-        .card-surface-3d::after {
+        .dark .product-showcase-card::after {
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.16) 50%,
+            transparent 100%
+          );
+        }
+
+        .product-lock-pulse {
+          animation: productLockPulse 2.6s ease-in-out infinite;
+        }
+
+        .name-loading-skeleton {
+          display: inline-block;
+          border-radius: 9999px;
+          background: linear-gradient(
+            90deg,
+            rgba(148, 163, 184, 0.2) 0%,
+            rgba(148, 163, 184, 0.45) 50%,
+            rgba(148, 163, 184, 0.2) 100%
+          );
+          background-size: 200% 100%;
+          animation: shimmer 1.35s ease-in-out infinite;
+        }
+
+        .dark .name-loading-skeleton {
+          background: linear-gradient(
+            90deg,
+            rgba(148, 163, 184, 0.22) 0%,
+            rgba(148, 163, 184, 0.4) 50%,
+            rgba(148, 163, 184, 0.22) 100%
+          );
+        }
+
+        @keyframes mergedHeroCardEnter {
+          0% {
+            opacity: 0;
+            transform: translateY(14px) scale(0.985);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .dashboard-hero-merged {
+          animation: mergedHeroCardEnter 0.62s cubic-bezier(0.2, 0.82, 0.2, 1) both;
+        }
+
+        @keyframes heroOrbFloat {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
+        }
+
+        @keyframes heroOrbRotate {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes heroOrbPulse {
+          0%, 100% {
+            box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.22);
+          }
+          60% {
+            box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+          }
+        }
+
+        .hero-decorative-orb {
+          position: relative;
+          width: 54px;
+          height: 54px;
+          border-radius: 9999px;
+          border: 1px solid rgba(249, 115, 22, 0.28);
+          background: radial-gradient(circle at 35% 35%, rgba(251, 146, 60, 0.3), rgba(249, 115, 22, 0.08));
+          animation: heroOrbFloat 3.2s ease-in-out infinite;
+        }
+
+        .hero-decorative-orb::before {
+          content: "";
+          position: absolute;
+          inset: -8px;
+          border-radius: 9999px;
+          border: 1px dashed rgba(249, 115, 22, 0.22);
+          animation: heroOrbRotate 8.5s linear infinite;
+        }
+
+        .hero-decorative-orb::after {
           content: "";
           position: absolute;
           inset: 0;
-          border-radius: inherit;
-          padding: 1px;
-          background: linear-gradient(135deg, 
-            rgba(255,255,255,0.6) 0%, 
-            rgba(255,255,255,0.2) 50%, 
-            transparent 100%);
-          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          mask-composite: exclude;
-          pointer-events: none;
+          border-radius: 9999px;
+          animation: heroOrbPulse 2.3s ease-out infinite;
         }
 
-        .dark .card-surface-3d::after {
-          background: linear-gradient(135deg, 
-            rgba(255,255,255,0.2) 0%, 
-            rgba(255,255,255,0.1) 50%, 
-            transparent 100%);
+        .hero-decorative-icon {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: hsl(var(--primary));
+        }
+
+        @keyframes trailsFabPulse {
+          0%, 100% {
+            box-shadow: 0 10px 22px -14px rgba(249, 115, 22, 0.5);
+          }
+          50% {
+            box-shadow: 0 14px 28px -14px rgba(249, 115, 22, 0.72);
+          }
+        }
+
+        @keyframes trailsFabFloat {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-2px);
+          }
+        }
+
+        @keyframes trailsPanelIn {
+          0% {
+            opacity: 0;
+            transform: translateY(10px) scale(0.97);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .trails-fab-focus {
+          animation: trailsFabPulse 2.8s ease-in-out infinite, trailsFabFloat 3.1s ease-in-out infinite;
+        }
+
+        .trails-panel-open {
+          animation: trailsPanelIn 0.28s ease-out both;
         }
       `}</style>
 
       <ProductOnboarding />
-
       <div
-        className="max-w-6xl mx-auto px-4 sm:px-6 pb-8"
-        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1rem)" }}
+        className={`sticky top-0 !z-[130] w-full border-b transition-all duration-300 pt-safe ${
+          isNavbarScrolled
+            ? "border-border/60 bg-background/55 shadow-[0_14px_32px_-28px_rgba(15,23,42,0.7)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/45"
+            : "border-transparent bg-transparent"
+        }`}
       >
-        <DashboardHeader onLogout={handleLogout} />
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+          <DashboardHeader onLogout={handleLogout} onOpenEdiChat={handleOpenEdiChat} />
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4 !z-auto">
 
         {/* Welcome Banner */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
-            {t("dashboard.welcome_title")}
-          </h1>
-          <p className="text-slate-600 dark:text-muted-foreground">
-            {t("dashboard.welcome_subtitle", { completed: completedDaysCount, total: totalDays })}
-          </p>
+        <div className="dashboard-hero-merged mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="w-full md:max-w-[680px]">
+              <h1 className="mb-2 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                {greeting},{" "}
+                {isUserDisplayNameLoading ? (
+                  <span
+                    className="name-loading-skeleton h-[0.9em] w-[9.2rem] align-[-0.08em] md:w-[12rem]"
+                    aria-label={t("dashboard.loading_user_name")}
+                  />
+                ) : (
+                  userDisplayName || t("dashboard.student")
+                )}
+                .
+              </h1>
+              <p className="text-slate-600 dark:text-muted-foreground">
+                {t("dashboard.hero_subtitle_prefix")}{" "}
+                <span className="inline-block bg-gradient-to-r from-primary via-orange-500 to-primary bg-clip-text font-extrabold tracking-tight text-transparent drop-shadow-[0_2px_8px_rgba(249,115,22,0.28)]">
+                  Educly
+                </span>
+                {t("dashboard.hero_subtitle_suffix")}
+              </p>
+
+              <div className="mt-4 flex items-center gap-3" aria-hidden>
+                <div className="hero-decorative-orb">
+                  <span className="hero-decorative-icon">
+                    <Sparkles className="h-5 w-5" />
+                  </span>
+                </div>
+                <div className="h-px w-16 bg-gradient-to-r from-primary/45 to-transparent" />
+              </div>
+            </div>
+
+            <div className="w-full min-w-[210px] rounded-[24px] border border-primary/25 bg-gradient-to-br from-primary/15 via-orange-500/10 to-primary/5 px-4 py-5 shadow-[0_18px_32px_-26px_rgba(249,115,22,0.55)] sm:w-[240px]">
+              <div className="flex flex-col items-center justify-center text-center">
+                <div className="relative mb-3">
+                  <span className="absolute inset-0 rounded-full bg-primary/30 blur-lg animate-pulse" />
+                  <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 ring-4 ring-primary/10">
+                    <Flame className="h-8 w-8 text-primary fill-current animate-streak-glow" />
+                  </span>
+                </div>
+
+                <div className="flex items-end justify-center gap-2">
+                  <span className="text-6xl font-extrabold leading-none text-primary">{animatedStreak}</span>
+                  <span className="pb-2 text-lg font-semibold text-primary/85">
+                    {animatedStreak === 1 ? t("challenge.day") : t("challenge.days")}
+                  </span>
+                </div>
+
+                <p className="mt-1 text-sm font-medium text-primary/80">
+                  {t("dashboard.streak_in_sequence")}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="weekly-streak" className="mt-6 border-t border-border/70 pt-4">
+            <WeeklyStreakBar />
+          </div>
         </div>
 
         <div className="space-y-10 mt-[10px] my-[3px]">
-          <div id="weekly-streak">
-            <WeeklyStreakBar />
-          </div>
-
           {/* CARD PRINCIPAL */}
-          <div id="active-challenge" className="card-3d-container">
-            <div
-              onClick={() => navigate(`/desafio/${activeChallenge.slug}`)}
-              className="card-surface-3d relative group overflow-hidden rounded-3xl p-6 md:p-8 cursor-pointer">
-
-              {/* Bookmark badge */}
+          <div id="active-challenge" className="rounded-3xl border border-border bg-card/95 p-4 shadow-sm md:p-6">
+            <div className="grid gap-7 lg:grid-cols-[300px_1fr_190px] lg:items-center lg:gap-10">
               <button
-                className="absolute top-3 right-4 z-20 bg-primary hover:bg-primary/90 active:scale-95 text-primary-foreground px-4 py-2 rounded-xl shadow-lg hover:shadow-xl flex items-center gap-2 transition-all duration-200 font-bold text-xs uppercase tracking-wide"
-                onClick={(e) => { e.stopPropagation(); navigate(`/desafio/${activeChallenge.slug}`); }}
+                type="button"
+                onClick={handleContinueChallenge}
+                className="group/challenge-image overflow-hidden rounded-2xl border border-border/70 bg-muted/20 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-18px_rgba(249,115,22,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                aria-label={t("dashboard.continue_button")}
               >
-                {isCompleted ? (
-                  <RotateCcw className="w-3.5 h-3.5" />
-                ) : hasProgress ? (
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                ) : (
-                  <Bookmark className="w-3.5 h-3.5 fill-current" />
-                )}
-                {bookmarkLabel}
+                <img
+                  src={challengeInicianteImg}
+                  className="h-44 w-full object-cover transition-transform duration-500 ease-out group-hover/challenge-image:scale-[1.05] md:h-[200px]"
+                  alt={t("challenges.iniciante-ia.name")}
+                />
               </button>
 
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-              <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <div className="space-y-4 lg:pr-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
+                  {t("challenges.iniciante-ia.name")}
+                </h3>
 
-              <div className="flex flex-col md:flex-row gap-8 items-center relative z-10">
-                <div className="w-full md:w-2/5 relative">
-                  <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border border-black/5 dark:border-white/10 group-hover:shadow-3xl transition-all duration-500">
-                    <img
-                      src={challengeInicianteImg}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      alt="Challenge" />
+                <p className="max-w-2xl text-slate-600 dark:text-muted-foreground text-base leading-relaxed">
+                  {t("challenges.iniciante-ia.description")}
+                </p>
 
-                  </div>
-                  <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-primary to-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                    <Zap className="w-3 h-3" /> {t("dashboard.status_in_progress")}
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                    {completedDaysCount}/{totalDays} {t("dashboard.days_label")}
+                  </span>
+                  <span className="text-sm font-medium text-slate-500 dark:text-muted-foreground/80">
+                    {t("dashboard.challenge_progress")}
+                  </span>
                 </div>
-                <div className="flex-1 w-full space-y-6">
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                        {completedDaysCount}/{totalDays} {t("dashboard.days_label")}
-                      </Badge>
-                      <Badge variant="outline" className="border-emerald-500/30 text-emerald-600">
-                        <Sparkles className="w-3 h-3 mr-1" /> {t("dashboard.status_active")}
-                      </Badge>
-                    </div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight mb-3">
-                      {t("challenges.iniciante-ia.name")}
-                    </h3>
-                    <p className="text-slate-600 dark:text-muted-foreground text-base leading-relaxed">
-                      {t("challenges.iniciante-ia.description")}
-                    </p>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex justify-between text-sm font-medium text-slate-500 dark:text-muted-foreground/80">
-                      <span className="flex items-center gap-2">
-                        <Play className="w-4 h-4 fill-current text-primary" />
-                        {t("dashboard.challenge_progress")}
-                      </span>
-                      <span className="font-bold">{progressPercentage}%</span>
-                    </div>
-                    <div className="relative">
-                      <Progress
-                        value={progressPercentage}
-                        className="h-3 bg-slate-100 dark:bg-secondary/50" />
+              </div>
 
-                      <div className="absolute top-1/2 left-0 right-0 h-1 -translate-y-1/2 bg-gradient-to-r from-transparent via-primary/20 to-transparent shimmer-effect" />
-                    </div>
+              <div className="rounded-2xl border border-primary/20 bg-gradient-to-b from-primary/10 to-primary/[0.03] p-4">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative h-24 w-24">
+                    <svg
+                      className="h-24 w-24 -rotate-90"
+                      viewBox="0 0 88 88"
+                      aria-label={t("dashboard.challenge_progress")}
+                    >
+                      <circle
+                        cx="44"
+                        cy="44"
+                        r={progressRadius}
+                        fill="none"
+                        stroke="hsl(var(--border))"
+                        strokeWidth="8"
+                      />
+                      <circle
+                        cx="44"
+                        cy="44"
+                        r={progressRadius}
+                        fill="none"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeDasharray={`${progressCircumference} ${progressCircumference}`}
+                        strokeDashoffset={progressOffset}
+                        className="transition-all duration-700 ease-out"
+                      />
+                    </svg>
+                    <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-primary">
+                      {normalizedProgress}%
+                    </span>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                    <Button className="rounded-xl px-8 h-12 bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-600 text-white font-bold shadow-lg shadow-primary/25 transition-all active:scale-95 group/btn">
-                      <span>{t("dashboard.continue_button")}</span>
-                      <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="rounded-xl px-6 h-12 border-2"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setTrailModalOpen(true);
-                      }}>
-                      {t("dashboard.view_content")}
-                    </Button>
-                  </div>
+
+                  <Button
+                    className="mt-3 h-10 w-full rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+                    onClick={handleContinueChallenge}
+                  >
+                    {bookmarkLabel}
+                    <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="mt-2 h-10 w-full rounded-xl border-border/80 bg-background/75 font-semibold text-foreground hover:bg-background"
+                    onClick={() => setTrailModalOpen(true)}
+                  >
+                    {t("dashboard.view_content")}
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
 
-          <section id="ai-specialized-trails" className="space-y-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <section id="dashboard-quick-cards" className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <button
+              className="group rounded-2xl border border-border bg-card px-5 py-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md"
+              onClick={() => setMissionsOpen(true)}
+            >
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Target className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {t("dashboard.missions.title")}
+                  </p>
+                  <p className="text-sm text-slate-600 dark:text-muted-foreground">
+                    {t("dashboard.missions.quickSubtitle", "Tarefas de hoje em um clique")}
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            <button
+              className="group rounded-2xl border border-border bg-card px-5 py-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md"
+              onClick={() => navigate("/medalhas")}
+            >
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Medal className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {t("dashboard.medals.title")}
+                  </p>
+                  <p className="text-sm text-slate-600 dark:text-muted-foreground">
+                    {t("dashboard.medals.quickSubtitle", "Seu progresso e conquistas")}
+                  </p>
+                </div>
+              </div>
+            </button>
+          </section>
+
+          {/* GRID DE CARDS DESTAQUE */}
+          <div>
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+              {featuredCards.map((card, index) => {
+                const hasCardAccess = productAccess.hasAccess(card.productType);
+                const isAccessLoading = productAccess.isLoading;
+                const isAIPack = card.productType === "ai_hub";
+                const aiLogos = [chatgptLogo, geminiLogo, claudeLogo, grokLogo, nanobananaLogo, ediLogo];
+                const visibleFeatures = Array.isArray(card.features) ? card.features.slice(0, 3) : [];
+                const statusLabel = hasCardAccess
+                  ? t("dashboard.card_status.active", "Ativo")
+                  : t("dashboard.card_status.locked", "Bloqueado");
+
+                return (
+                  <div id={`card-${index}`} key={index} className="h-full">
+                    <button
+                      type="button"
+                      onClick={() => navigate(card.link)}
+                      className={`product-showcase-card group flex h-full w-full flex-col p-6 text-left ${
+                        !hasCardAccess ? "border-primary/25" : ""
+                      }`}
+                      style={{ animationDelay: `${index * 85}ms` }}
+                    >
+                      <div
+                        className={`pointer-events-none absolute inset-0 ${
+                          isAIPack
+                            ? "bg-[radial-gradient(circle_at_10%_12%,rgba(139,92,246,0.2),transparent_44%),radial-gradient(circle_at_96%_84%,rgba(168,85,247,0.16),transparent_40%)]"
+                            : "bg-[radial-gradient(circle_at_10%_12%,rgba(16,185,129,0.2),transparent_44%),radial-gradient(circle_at_96%_84%,rgba(20,184,166,0.16),transparent_40%)]"
+                        }`}
+                      />
+
+                      <div className="relative z-10 mb-5 flex items-start justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border ${
+                              isAIPack
+                                ? "border-violet-200/70 bg-violet-50/80 dark:border-violet-500/40 dark:bg-violet-500/15"
+                                : "border-emerald-200/70 bg-emerald-50/80 dark:border-emerald-500/40 dark:bg-emerald-500/15"
+                            }`}
+                          >
+                            <img src={card.img} className="h-10 w-10 object-contain" alt={card.title} />
+                          </div>
+
+                          <div className="min-w-0">
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                              {t(`dashboard.premium_labels.${card.productType}`)}
+                            </p>
+                            <h3 className="mt-1 truncate text-2xl font-bold text-slate-900 dark:text-white">
+                              {card.title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.09em] ${
+                            hasCardAccess
+                              ? "border-emerald-300/70 bg-emerald-50 text-emerald-700 dark:border-emerald-500/50 dark:bg-emerald-500/15 dark:text-emerald-300"
+                              : "border-orange-300/70 bg-orange-50 text-orange-700 dark:border-orange-500/50 dark:bg-orange-500/15 dark:text-orange-300"
+                          }`}
+                        >
+                          {hasCardAccess ? <LockOpen className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                          {statusLabel}
+                        </span>
+                      </div>
+
+                      <p className="relative z-10 mb-5 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-muted-foreground">
+                        {card.subtitle}
+                      </p>
+
+                      {isAIPack ? (
+                        <div className="relative z-10 mb-5 space-y-3">
+                          <div className="grid grid-cols-6 gap-2">
+                            {aiLogos.map((logo, idx) => (
+                              <div
+                                key={idx}
+                                className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/70 bg-background/80 p-1.5"
+                              >
+                                <img src={logo} alt="" className="h-full w-full rounded-md object-contain" />
+                              </div>
+                            ))}
+                          </div>
+                          <p className="text-sm font-medium text-violet-700 dark:text-violet-300">{card.stats}</p>
+                        </div>
+                      ) : (
+                        <div className="relative z-10 mb-5 space-y-2">
+                          {visibleFeatures.map((feature, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/65 px-3 py-2"
+                            >
+                              <Zap className="h-3.5 w-3.5 text-primary" />
+                              <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="relative z-10 mt-auto flex items-center justify-between rounded-2xl border border-border/70 bg-background/70 px-4 py-3">
+                        <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                          <card.icon className="h-4 w-4 text-primary" />
+                          <span>{card.stats}</span>
+                        </div>
+                        <span className={`inline-flex items-center gap-1 text-sm font-semibold ${hasCardAccess ? "text-foreground" : "text-primary"}`}>
+                          {hasCardAccess
+                            ? t("common.continue", "Continuar")
+                            : t("dashboard.unlock_to_access", "Desbloqueie para acessar")}
+                          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        </span>
+                      </div>
+
+                      {!isAccessLoading && !hasCardAccess && (
+                        <div className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center rounded-[inherit] bg-background/62 px-8 text-center backdrop-blur-[2.5px]">
+                          <div
+                            className={`product-lock-pulse mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border ${
+                              isAIPack
+                                ? "border-violet-300/75 bg-violet-100/85 dark:border-violet-500/55 dark:bg-violet-500/20"
+                                : "border-emerald-300/75 bg-emerald-100/85 dark:border-emerald-500/55 dark:bg-emerald-500/20"
+                            }`}
+                          >
+                            <Lock className="h-6 w-6 text-primary" />
+                          </div>
+                          <p className="text-base font-bold text-foreground">
+                            {t("dashboard.unlock_to_access", "Desbloqueie para acessar")}
+                          </p>
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {t("dashboard.unlock_hint", "Clique no card para ver os planos e adquirir")}
+                          </p>
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
+
+        {trailsPanelOpen && (
+          <button
+            aria-label={t("dashboard.nav_close_trails_panel")}
+            className="fixed inset-0 z-[310] bg-black/25 backdrop-blur-[1px]"
+            onClick={() => setTrailsPanelOpen(false)}
+          />
+        )}
+
+        <div
+          className={`fixed right-4 z-[320] w-[min(92vw,460px)] transition-all duration-300 md:right-6 ${
+            trailsPanelOpen
+              ? "trails-panel-open bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+5.2rem)] opacity-100"
+              : "bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+4.7rem)] pointer-events-none translate-y-3 opacity-0"
+          } md:bottom-[6.25rem]`}
+        >
+          <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_28px_56px_-34px_rgba(15,23,42,0.6)]">
+            <div className="flex items-center justify-between border-b border-border/70 px-4 py-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                  {aiTrailUi.dashboardEyebrow}
-                </p>
-                <h3 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
-                  {aiTrailUi.dashboardTitle}
-                </h3>
+                <p className="text-sm font-bold text-foreground">{t("dashboard.nav_trails_button")}</p>
+                <p className="text-xs text-muted-foreground">{aiTrailUi.dashboardTitle}</p>
               </div>
 
-              <Button
-                variant="outline"
-                className="h-12 rounded-xl border-2"
-                onClick={openSpecializedTrailsHub}
+              <button
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setTrailsPanelOpen(false)}
+                aria-label={t("dashboard.nav_close")}
               >
-                {aiTrailUi.dashboardButton}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {aiMasteryTrails.slice(0, 4).map((trail) => {
+            <div className="max-h-[58vh] space-y-3 overflow-y-auto p-4">
+              {aiMasteryTrails.map((trail) => {
                 const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
                 const trailIsLive = isAiTrailLive(trail.slug);
+
                 return (
                   <button
                     key={trail.slug}
                     onClick={() => handleSpecializedTrailClick(trail.slug)}
-                    className="group relative overflow-hidden rounded-3xl border border-border bg-card p-5 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+                    className="group w-full rounded-2xl border border-border bg-background/70 p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-card"
                   >
-                    <div
-                      className="absolute inset-x-0 top-0 h-1"
-                      style={{ background: `linear-gradient(90deg, ${trail.accent}, ${trail.accent}66)` }}
-                    />
-                    <div
-                      className="absolute -right-10 -top-10 h-28 w-28 rounded-full blur-3xl"
-                      style={{ backgroundColor: `${trail.accent}18` }}
-                    />
-
-                    <div className="relative z-10 flex items-start justify-between gap-3">
-                      <div
-                        className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10"
-                        style={{ backgroundColor: `${trail.accent}18` }}
-                      >
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/15 bg-primary/10">
                         {trail.logo ? (
-                          <img src={trail.logo} alt={trail.name} className="h-8 w-8 object-contain" />
+                          <img src={trail.logo} alt={trail.name} className="h-7 w-7 object-contain" />
                         ) : (
-                          <span className="text-lg font-black" style={{ color: trail.accent }}>
-                            {getTrailInitials(trail.name)}
-                          </span>
+                          <span className="text-sm font-black text-primary">{getTrailInitials(trail.name)}</span>
                         )}
                       </div>
-                      <Badge
-                        variant="secondary"
-                        className={trailIsLive ? "border-0 bg-emerald-500/15 text-emerald-700 dark:text-emerald-200" : "border-0 bg-muted text-foreground"}
-                      >
-                        {trailIsLive ? aiTrailUi.availableNow : aiTrailUi.comingSoon}
-                      </Badge>
-                    </div>
 
-                    <div className="relative z-10 mt-4">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                        {trailMeta.category}
-                      </p>
-                      <h4 className="mt-2 text-xl font-bold text-foreground">{trail.name}</h4>
-                    </div>
-
-                    <div className="relative z-10 mt-5 flex items-center justify-between">
-                      <p className="max-w-[70%] text-sm font-medium text-foreground">{trailMeta.signature}</p>
-                      <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: trail.accent }}>
-                        {trailIsLive ? aiTrailUi.openTrail : aiTrailUi.dashboardCardAction}
-                        <ChevronRight className="h-4 w-4" />
+                      <div className="min-w-0">
+                        <p className="line-clamp-1 text-sm font-bold text-foreground">{trail.name}</p>
+                        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{trailMeta.signature}</p>
+                        <p className="mt-2 text-xs font-semibold text-primary">
+                          {trailIsLive ? aiTrailUi.openTrail : aiTrailUi.comingSoon}
+                        </p>
                       </div>
                     </div>
                   </button>
                 );
               })}
             </div>
-          </section>
-
-          {/* GRID DE CARDS DESTAQUE */}
-          <div>
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featuredCards.map((card, index) => {
-                const hasCardAccess = productAccess.hasAccess(card.productType);
-                const isAccessLoading = productAccess.isLoading;
-                const isAIPack = card.productType === "ai_hub";
-                const aiLogos = [chatgptLogo, geminiLogo, claudeLogo, grokLogo, nanobananaLogo, ediLogo];
-                return (
-                  <div id={`card-${index}`} key={index} className="card-3d-container h-full">
-                    <div
-                      onClick={() => navigate(card.link)}
-                      className="card-surface-3d group p-6 rounded-3xl h-full flex flex-col cursor-pointer relative overflow-hidden">
-
-                      {/* Gradient accent for AI Pack */}
-                      {isAIPack && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/8 via-transparent to-purple-500/5 pointer-events-none" />
-                      )}
-
-                      <div className="flex items-start justify-between mb-5 relative z-10">
-                        <div className="relative">
-                          <div className={`absolute -inset-4 ${card.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity`} />
-                          <div className="relative w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg">
-                            <img src={card.img} className="w-12 h-12 object-contain" alt={card.title} />
-                          </div>
-                        </div>
-                        <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
-                          {hasCardAccess ?
-                            <>
-                              <LockOpen className="w-3 h-3 text-emerald-500" />
-                              {t(`dashboard.premium_labels.${card.productType}`)}
-                            </> :
-                            <>
-                              <Lock className="w-3 h-3 text-amber-500" />
-                              {t(`dashboard.premium_labels.${card.productType}`)}
-                            </>
-                          }
-                        </div>
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 relative z-10">{card.title}</h3>
-                      <p className="text-slate-600 dark:text-muted-foreground text-sm mb-4 flex-1 relative z-10 leading-relaxed">{card.subtitle}</p>
-
-                      {/* AI logos strip for AI Pack */}
-                      {isAIPack ? (
-                        <div className="space-y-4 relative z-10">
-                          <div className="flex items-center gap-2">
-                            {aiLogos.map((logo, idx) => (
-                              <div
-                                key={idx}
-                                className="w-9 h-9 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-1.5 shadow-sm group-hover:shadow-md transition-shadow"
-                              >
-                                <img src={logo} alt="" className="w-full h-full object-contain rounded-md" />
-                              </div>
-                            ))}
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-violet-50 dark:bg-violet-500/10 rounded-xl border border-violet-100 dark:border-violet-500/20">
-                            <div className="flex items-center gap-2">
-                              <Sparkles className="w-4 h-4 text-violet-500" />
-                              <span className="text-sm font-semibold text-violet-700 dark:text-violet-300">
-                                {card.stats}
-                              </span>
-                            </div>
-                            <ArrowRight className="w-4 h-4 text-violet-400 group-hover:translate-x-1 transition-transform" />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="space-y-4 relative z-10">
-                          <div className="flex flex-wrap gap-2 mb-3">
-                            {Array.isArray(card.features) && card.features.map((feature, idx) =>
-                              <span key={idx} className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300">
-                                {feature}
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                            <div className="flex items-center gap-2">
-                              <card.icon className="w-4 h-4 text-slate-500" />
-                              <span className="text-sm font-medium text-slate-600 dark:text-slate-300">
-                                {card.stats}
-                              </span>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-slate-400" />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Glass lock overlay */}
-                      {!isAccessLoading && !hasCardAccess && (
-                        <div className="absolute inset-0 z-30 bg-gray-300/40 dark:bg-gray-700/50 backdrop-blur-[1.5px] flex flex-col items-center justify-center gap-3 rounded-3xl">
-                          <div className="w-14 h-14 rounded-full bg-white/80 dark:bg-slate-800/80 flex items-center justify-center shadow-xl border border-white/50 dark:border-slate-600/50">
-                            <Lock className="w-7 h-7 text-gray-500 dark:text-gray-400" />
-                          </div>
-                          <span className="text-sm font-bold text-white dark:text-white drop-shadow-md">
-                            {t("dashboard.unlock_to_access", "Desbloqueie para acessar")}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* GRID DE CARDS SECUNDÁRIOS */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {secondaryCards.map((card, index) =>
-              <div id={index < 2 ? `card-${index + 2}` : undefined} key={index} className="card-3d-container h-full">
-                <div
-                  onClick={() => {
-                    if (card.title === t("dashboard.missions.title")) {
-                      setMissionsOpen(true);
-                    } else {
-                      navigate(card.link);
-                    }
-                  }}
-                  className={`card-surface-3d group p-6 rounded-3xl h-full flex flex-col justify-between cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 transition-colors relative overflow-hidden`}>
-
-                  <div className={`absolute -inset-4 ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl`} />
-
-                  <div className="relative z-10">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 ${card.iconBg}`}>
-                      <card.icon className={`w-6 h-6 ${card.colorClass}`} />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{card.title}</h3>
-                    <p className="text-slate-600 dark:text-muted-foreground text-sm leading-relaxed mb-4">
-                      {card.subtitle}
-                    </p>
-                  </div>
-
-                  {card.showFooter &&
-                    <div className="relative z-10 mt-auto pt-4 flex items-center text-sm font-medium text-primary">
-                      {card.cta} <ChevronRight className="w-4 h-4 ml-1" />
-                    </div>
-                  }
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
-        <FloatingEdiChat />
+        <button
+          className={`trails-fab-focus fixed bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+0.75rem)] z-[90] inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_28px_-18px_rgba(249,115,22,0.85)] transition-all duration-300 hover:scale-[1.02] hover:bg-primary/95 md:bottom-6 ${
+            isEdiChatOpen ? "right-[5.5rem] md:right-[26rem]" : "right-4 md:right-6"
+          }`}
+          onClick={() => setTrailsPanelOpen((prev) => !prev)}
+        >
+          <Compass className="h-4 w-4" />
+          {t("dashboard.nav_trails_button")}
+        </button>
+
+        <FloatingEdiChat showLauncher={false} />
+
         <MobileNav />
       </div>
 

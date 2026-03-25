@@ -1468,6 +1468,23 @@
   },
   "dashboard": {
     "greeting": "Ciao",
+    "nav_edi_button": "Parla con EDI",
+    "nav_trails_button": "I nostri percorsi",
+    "nav_trails_list_title": "Percorsi specializzati",
+    "nav_level": "Livello {{level}}",
+    "nav_close_trails_panel": "Chiudi pannello percorsi",
+    "nav_close": "Chiudi",
+    "unlock_to_access": "Sblocca per accedere",
+    "unlock_hint": "Clicca sulla card per vedere i piani e sbloccare",
+    "greetings": {
+      "morning": "Buongiorno",
+      "afternoon": "Buon pomeriggio",
+      "evening": "Buonasera"
+    },
+    "hero_subtitle_prefix": "Benvenuto su",
+    "hero_subtitle_suffix": ", continua i tuoi progressi!",
+    "streak_in_sequence": "in sequenza",
+    "loading_user_name": "Caricamento nome utente",
     "welcome_title": "Il Tuo Viaggio nell'IA Continua! 🚀",
     "welcome_subtitle": "Hai completato {{completed}} di {{total}} giorni. Continua così!",
     "status_in_progress": "In Corso",

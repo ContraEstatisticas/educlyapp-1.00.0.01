@@ -15,19 +15,71 @@ interface Message {
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/iacademy-chat`;
 
-export const FloatingEdiChat = () => {
+interface FloatingEdiChatProps {
+  showLauncher?: boolean;
+}
+
+export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasGreeted, setHasGreeted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatTitle = t("supportChat.title", { defaultValue: "EDI" });
+  const chatOnline = t("supportChat.online", {
+    defaultValue: t("chat.online", { defaultValue: "Online" }),
+  });
+  const chatGreeting = t("supportChat.greeting", {
+    defaultValue: t("chat.greeting.default", {
+      defaultValue: "Hello! I'm EDI, your assistant. How can I help you today?",
+    }),
+  });
+  const chatPlaceholder = t("supportChat.placeholder", {
+    defaultValue: t("chat.input.placeholder", { defaultValue: "Type your question..." }),
+  });
+  const chatLoginRequired = t("supportChat.loginRequired", {
+    defaultValue: t("chat.error.notLoggedIn", {
+      defaultValue: "You need to be logged in to use chat.",
+    }),
+  });
+  const chatSendError = t("supportChat.error", {
+    defaultValue: t("chat.error.sendError", { defaultValue: "Error sending message" }),
+  });
+  const openChatAria = t("supportChat.openAria", {
+    defaultValue: t("chat.openChat", { defaultValue: "Open chat" }),
+  });
+  const closeChatAria = t("supportChat.closeAria", {
+    defaultValue: t("common.close", { defaultValue: "Close" }),
+  });
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleOpenChat = () => setIsOpen(true);
+    const handleCloseChat = () => setIsOpen(false);
+    const handleToggleChat = () => setIsOpen((prev) => !prev);
+
     window.addEventListener("open-edi-chat", handleOpenChat);
-    return () => window.removeEventListener("open-edi-chat", handleOpenChat);
+    window.addEventListener("close-edi-chat", handleCloseChat);
+    window.addEventListener("toggle-edi-chat", handleToggleChat);
+
+    return () => {
+      window.removeEventListener("open-edi-chat", handleOpenChat);
+      window.removeEventListener("close-edi-chat", handleCloseChat);
+      window.removeEventListener("toggle-edi-chat", handleToggleChat);
+    };
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    window.dispatchEvent(
+      new CustomEvent("edi-chat-visibility", {
+        detail: { open: isOpen },
+      }),
+    );
+  }, [isOpen]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,11 +87,18 @@ export const FloatingEdiChat = () => {
 
   useEffect(() => {
     if (isOpen && !hasGreeted) {
-      const greeting = t("supportChat.greeting", "Olá! 👋 Eu sou o assistente da Educly. Estou aqui para te ajudar a praticar o uso de ferramentas de IA. Como posso te ajudar hoje?");
-      setMessages([{ role: "assistant", content: greeting }]);
+      setMessages([{ role: "assistant", content: chatGreeting }]);
       setHasGreeted(true);
     }
-  }, [isOpen, hasGreeted, t]);
+  }, [isOpen, hasGreeted, chatGreeting]);
+
+  useEffect(() => {
+    if (!hasGreeted) return;
+    const hasUserMessages = messages.some((msg) => msg.role === "user");
+    if (hasUserMessages || messages.length !== 1 || messages[0]?.role !== "assistant") return;
+    if (messages[0]?.content === chatGreeting) return;
+    setMessages([{ role: "assistant", content: chatGreeting }]);
+  }, [chatGreeting, hasGreeted, i18n.language, messages]);
 
   const handleSend = async (message: string) => {
     const userMessage: Message = { role: "user", content: message };
@@ -75,7 +134,7 @@ export const FloatingEdiChat = () => {
       if (!session?.access_token) {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: t("supportChat.loginRequired") || "Você precisa estar logado para usar o chat. Faça login e tente novamente! 🔐" },
+          { role: "assistant", content: chatLoginRequired },
         ]);
         setIsLoading(false);
         return;
@@ -153,7 +212,7 @@ export const FloatingEdiChat = () => {
       }
     } catch (error) {
       console.error("EDI chat error:", error);
-      toast.error(t("supportChat.error") || "Error sending message");
+      toast.error(chatSendError);
       setMessages((prev) => prev.slice(0, -1));
     } finally {
       setIsLoading(false);
@@ -163,9 +222,10 @@ export const FloatingEdiChat = () => {
   return (
     <>
       {/* Floating Button - FIXED / STATIC VERSION */}
+      {showLauncher && (
       <button
         onClick={() => setIsOpen(true)}
-        // O segredo está aqui: style mata qualquer animação teimosa
+        // Keep launcher static: avoid inherited transforms/animations.
         style={{ transform: "none", transition: "none", animation: "none" }}
         className={cn(
           "fixed right-4 md:right-6 z-[60] floating-edi-btn",
@@ -178,7 +238,7 @@ export const FloatingEdiChat = () => {
           "overflow-hidden",
           isOpen && "hidden",
         )}
-        aria-label="Open Educly chat"
+        aria-label={openChatAria}
       >
         <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
         {/* Removido: animate-pulse da bolinha verde */}
@@ -187,6 +247,7 @@ export const FloatingEdiChat = () => {
           className="absolute top-0.5 right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white"
         />
       </button>
+      )}
 
       {/* Chat Window */}
       {isOpen && (
@@ -205,18 +266,18 @@ export const FloatingEdiChat = () => {
                   <img src={mascoteEducly} alt="Educly" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">EDI</h3>
+                  <h3 className="font-semibold text-sm">{chatTitle}</h3>
                   <div className="flex items-center gap-1.5">
                     {/* Removido: animate-pulse */}
                     <span className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span className="text-xs text-white/80">{t("supportChat.online")}</span>
+                    <span className="text-xs text-white/80">{chatOnline}</span>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                aria-label="Close chat"
+                aria-label={closeChatAria}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -271,7 +332,7 @@ export const FloatingEdiChat = () => {
 
             {/* Input */}
             <div className="p-4 border-t border-border bg-background">
-              <ChatInput onSend={handleSend} isLoading={isLoading} placeholder={t("supportChat.placeholder")} />
+              <ChatInput onSend={handleSend} isLoading={isLoading} placeholder={chatPlaceholder} />
             </div>
           </div>
         </div>

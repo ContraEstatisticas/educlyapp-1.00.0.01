@@ -2049,6 +2049,23 @@
     "noPurchaseContact": "Falar com o suporte"
   },
   "dashboard": {
+    "nav_edi_button": "Fale com o EDI",
+    "nav_trails_button": "Nossas trilhas",
+    "nav_trails_list_title": "Trilhas especializadas",
+    "nav_level": "Nivel {{level}}",
+    "nav_close_trails_panel": "Fechar painel de trilhas",
+    "nav_close": "Fechar",
+    "unlock_to_access": "Desbloqueie para acessar",
+    "unlock_hint": "Clique no card para ver os planos e adquirir",
+    "greetings": {
+      "morning": "Bom dia",
+      "afternoon": "Boa tarde",
+      "evening": "Boa noite"
+    },
+    "hero_subtitle_prefix": "Bem vindo(a) ao",
+    "hero_subtitle_suffix": ", continue seu progresso!",
+    "streak_in_sequence": "em sequencia",
+    "loading_user_name": "Carregando nome do usuario",
     "greeting": "Olá",
     "welcome_title": "Sua Jornada de IA Continua! 🚀",
     "welcome_subtitle": "Você completou {{completed}} de {{total}} dias. Continue avançando!",

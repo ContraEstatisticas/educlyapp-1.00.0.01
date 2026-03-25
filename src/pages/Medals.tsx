@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { DashboardHeader } from "@/components/DashboardHeader";
@@ -122,6 +123,22 @@ const Medals = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { getMedalsByCategory, isLoading, earnedCount, totalCount } = useAllMedals();
+  const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      setIsNavbarScrolled(window.scrollY > 12);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -219,12 +236,23 @@ const Medals = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background safe-area-inset">
+    <div className="min-h-screen bg-background pl-safe pr-safe pb-safe">
+      <div
+        className={`sticky top-0 !z-[130] w-full border-b transition-all duration-300 pt-safe ${
+          isNavbarScrolled
+            ? "border-border/60 bg-background/55 shadow-[0_14px_32px_-28px_rgba(15,23,42,0.7)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/45"
+            : "border-transparent bg-transparent"
+        }`}
+      >
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <DashboardHeader onLogout={handleLogout} />
+        </div>
+      </div>
+
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-8 pt-4">
-        <DashboardHeader onLogout={handleLogout} />
 
         {/* Header */}
-        <div className="mt-6 mb-8">
+        <div className="mt-2 mb-8">
           <Button
             variant="ghost"
             onClick={() => navigate("/dashboard")}
