@@ -20,7 +20,8 @@ import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
 
-import challengeInicianteImg from "@/assets/Edi-dashboard.png";
+import mountainBackground from "../../assets/mountainBackground.png";
+import mountainPerson from "../../assets/mountainPerson.png";
 import corujaIA from "@/assets/IA.png";
 import corujaFreelancerImg from "@/assets/coruja-freelancer.png";
 import chatgptLogo from "@/assets/ai-logos/chatgpt.png";
@@ -253,7 +254,7 @@ const Dashboard = () => {
     }];
 
   return (
-    <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20">
+    <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-[calc(9.75rem+env(safe-area-inset-bottom,0px))] md:pb-20">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -505,7 +506,7 @@ const Dashboard = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4 !z-auto">
 
         {/* Welcome Banner */}
-        <div className="dashboard-hero-merged mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6">
+        <div className="dashboard-hero-merged relative z-10 mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="w-full md:max-w-[680px]">
               <h1 className="mb-2 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
@@ -566,20 +567,31 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="space-y-10 mt-[10px] my-[3px]">
+        <div className="relative z-20 space-y-10 mt-14 md:mt-20 lg:mt-[10px] mb-[3px]">
           {/* CARD PRINCIPAL */}
-          <div id="active-challenge" className="rounded-3xl border border-border bg-card/95 p-4 shadow-sm md:p-6">
+          <div id="active-challenge" className="relative z-20 overflow-visible rounded-3xl border border-border bg-card/95 p-4 shadow-sm md:p-6">
             <div className="grid gap-7 lg:grid-cols-[300px_1fr_190px] lg:items-center lg:gap-10">
               <button
                 type="button"
                 onClick={handleContinueChallenge}
-                className="group/challenge-image overflow-hidden rounded-2xl border border-border/70 bg-muted/20 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-18px_rgba(249,115,22,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
+                className="group/challenge-image relative overflow-visible rounded-2xl text-left transition-transform duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                 aria-label={t("dashboard.continue_button")}
               >
+                <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-muted/20 transition-all duration-300 group-hover/challenge-image:border-primary/30 group-hover/challenge-image:shadow-[0_20px_34px_-20px_rgba(249,115,22,0.5)]">
+                  <img
+                    src={mountainBackground}
+                    className="h-44 w-full object-cover object-center transition-transform duration-500 ease-out group-hover/challenge-image:scale-[1.015] md:h-[200px] md:object-top lg:object-center"
+                    alt={t("challenges.iniciante-ia.name")}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(15,23,42,0.12),inset_0_-24px_34px_rgba(15,23,42,0.34)] dark:shadow-[inset_0_0_0_1px_rgba(148,163,184,0.14),inset_0_-28px_38px_rgba(2,6,23,0.58)]" />
+                </div>
+
                 <img
-                  src={challengeInicianteImg}
-                  className="h-44 w-full object-cover transition-transform duration-500 ease-out group-hover/challenge-image:scale-[1.05] md:h-[200px]"
-                  alt={t("challenges.iniciante-ia.name")}
+                  src={mountainPerson}
+                  alt=""
+                  aria-hidden
+                  className="pointer-events-none absolute left-0 -top-12 z-20 h-[calc(100%+3rem)] w-full rounded-2xl object-cover object-top drop-shadow-[0_16px_24px_rgba(15,23,42,0.52)] transition-transform duration-500 ease-out will-change-transform group-hover/challenge-image:-translate-y-0.5 md:top-0 md:h-full md:object-top lg:-top-14 lg:h-[calc(100%+3.6rem)] lg:object-center"
                 />
               </button>
 
@@ -846,8 +858,8 @@ const Dashboard = () => {
         <div
           className={`fixed right-4 z-[320] w-[min(92vw,460px)] transition-all duration-300 md:right-6 ${
             trailsPanelOpen
-              ? "trails-panel-open bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+5.2rem)] opacity-100"
-              : "bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+4.7rem)] pointer-events-none translate-y-3 opacity-0"
+              ? "trails-panel-open bottom-[calc(7.9rem+env(safe-area-inset-bottom,0px))] opacity-100"
+              : "bottom-[calc(7.4rem+env(safe-area-inset-bottom,0px))] pointer-events-none translate-y-3 opacity-0"
           } md:bottom-[6.25rem]`}
         >
           <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_28px_56px_-34px_rgba(15,23,42,0.6)]">
@@ -902,9 +914,11 @@ const Dashboard = () => {
         </div>
 
         <button
-          className={`trails-fab-focus fixed bottom-[calc(6.5rem+env(safe-area-inset-bottom,0px)+0.75rem)] z-[90] inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_28px_-18px_rgba(249,115,22,0.85)] transition-all duration-300 hover:scale-[1.02] hover:bg-primary/95 md:bottom-6 ${
-            isEdiChatOpen ? "right-[5.5rem] md:right-[26rem]" : "right-4 md:right-6"
-          }`}
+          className={`trails-fab-focus fixed bottom-6 z-[90] hidden items-center gap-2 rounded-full border px-4 py-3 text-sm font-bold shadow-[0_16px_28px_-18px_rgba(249,115,22,0.85)] transition-all duration-300 hover:scale-[1.02] md:inline-flex ${
+            trailsPanelOpen
+              ? "border-primary/45 bg-primary text-primary-foreground hover:bg-primary"
+              : "border-primary/30 bg-primary text-primary-foreground hover:bg-primary/95"
+          } ${isEdiChatOpen ? "right-[26rem]" : "right-6"}`}
           onClick={() => setTrailsPanelOpen((prev) => !prev)}
         >
           <Compass className="h-4 w-4" />
@@ -913,7 +927,11 @@ const Dashboard = () => {
 
         <FloatingEdiChat showLauncher={false} />
 
-        <MobileNav />
+        <MobileNav
+          onTrailsClick={() => setTrailsPanelOpen((prev) => !prev)}
+          trailsCount={aiMasteryTrails.length}
+          trailsOpen={trailsPanelOpen}
+        />
       </div>
 
       <TrailContentModal open={trailModalOpen} onOpenChange={setTrailModalOpen} />

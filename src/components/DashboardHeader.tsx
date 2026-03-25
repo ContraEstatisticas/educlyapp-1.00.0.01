@@ -181,10 +181,10 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-2 md:hidden">
+      <div className="flex items-center justify-between gap-2.5 md:hidden">
         <button
           onClick={() => navigate("/profile")}
-          className="group flex min-h-[54px] min-w-0 flex-1 items-center gap-2.5 rounded-xl border border-slate-300/90 dark:border-border/70 bg-card/70 pl-2 pr-2.5 py-1.5 transition-all hover:border-slate-400 dark:hover:border-primary/35 hover:bg-card"
+          className="group flex h-14 min-w-0 flex-[1.35] items-center gap-2.5 rounded-2xl border border-slate-300/90 dark:border-border/70 bg-card/70 pl-2 pr-2.5 py-1.5 shadow-sm transition-all hover:border-slate-400 dark:hover:border-primary/35 hover:bg-card"
         >
           <Avatar className="h-10 w-10 border border-border">
             <AvatarImage src={profile?.avatarUrl || `https://img.freepik.com/vetores-premium/ilustracao-sem-rosto-avatar_573563-12088.jpg?semt=ais_hybrid&w=740&q=80`} />
@@ -193,7 +193,7 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
             </AvatarFallback>
           </Avatar>
           <div className="min-w-0 flex-1 text-left leading-tight">
-            <p className="truncate text-[0.98rem] font-semibold text-foreground max-w-[146px]">
+            <p className="truncate text-[0.98rem] font-semibold text-foreground">
               {isProfileLoading ? (
                 <span
                   className="name-loading-skeleton inline-block h-[0.9em] w-[8.6rem] align-[-0.06em]"
@@ -216,14 +216,15 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
           </div>
         </button>
 
-        <div className="flex shrink-0 items-center gap-1">
-          <div className="flex items-center gap-1 rounded-lg border border-slate-300/90 bg-secondary/50 px-1.5 py-1 dark:border-border">
-            <LanguageSelector className="h-9 w-[64px] rounded-xl border border-slate-300/90 bg-card/70 px-1.5 dark:border-border/70" />
-            <div className="mx-0.5 h-6 w-px bg-border" />
-            <ModeToggle className="h-9 w-9 rounded-xl border border-slate-300/90 bg-card/70 dark:border-border/70" />
-          </div>
-
-          <Button variant="ghost" size="icon" onClick={onLogout} className="h-8 w-8 text-muted-foreground">
+        <div className="flex h-14 w-[148px] shrink-0 items-center gap-1.5 rounded-2xl border border-slate-300/90 bg-card/70 px-1.5 py-2 shadow-sm dark:border-border/70">
+          <LanguageSelector className="h-10 w-[70px] rounded-xl border border-slate-300/90 bg-card/70 px-1 dark:border-border/70" />
+          <ModeToggle className="h-10 w-10 rounded-xl border border-slate-300/90 bg-card/70 dark:border-border/70" />
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={onLogout}
+            className="h-10 w-10 rounded-xl border border-slate-300/90 bg-card/70 text-muted-foreground hover:bg-accent/60 dark:border-border/70"
+          >
             <LogOut className="h-4 w-4" />
           </Button>
         </div>
@@ -298,7 +299,7 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
       <Button
         type="button"
         onClick={onOpenEdiChat}
-        className="md:hidden h-10 rounded-full bg-gradient-to-r from-primary to-orange-500 px-4 text-sm font-semibold text-white shadow-md shadow-primary/30 hover:from-primary/90 hover:to-orange-500/90"
+        className="md:hidden h-11 rounded-full bg-gradient-to-r from-primary to-orange-500 px-4 text-sm font-semibold text-white shadow-md shadow-primary/30 hover:from-primary/90 hover:to-orange-500/90"
       >
         <MessageCircle className="mr-2 h-4 w-4" />
         {t("dashboard.nav_edi_button")}
