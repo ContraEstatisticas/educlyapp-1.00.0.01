@@ -1768,6 +1768,16 @@ export type Database = {
       }
     }
     Functions: {
+      admin_export_first_session_details: {
+        Args: never
+        Returns: {
+          email: string | null
+          inicio: string | null
+          minutos_ativos: number | null
+          nome: string | null
+          ultimo_sinal: string | null
+        }[]
+      }
       admin_lookup_email: { Args: { p_email: string }; Returns: Json }
       apply_level_rewards: {
         Args: { p_current_level: number; p_user_id: string }

@@ -46,16 +46,14 @@ export const KPICards = () => {
 
   const exportSessionsToCSV = async () => {
     try {
-      const { data, error: exportError } = await supabase
-        .from("user_session_details")
-        .select("*");
+      const { data, error: exportError } = await supabase.rpc("admin_export_first_session_details");
 
       if (exportError) {
         console.error("Erro ao buscar dados para exportacao:", exportError);
         toast({
           variant: "destructive",
           title: "Erro no relatorio",
-          description: "Verifique se a View foi criada no banco de dados.",
+          description: "Verifique se a migration de seguranca mais recente foi aplicada no banco.",
         });
         return;
       }
