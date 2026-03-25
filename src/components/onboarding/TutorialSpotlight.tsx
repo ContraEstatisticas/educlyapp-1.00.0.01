@@ -32,6 +32,8 @@ interface TargetRect {
   height: number;
 }
 
+const ONBOARDING_ROOT_Z_INDEX = 2147483000;
+
 // Variant styling config
 const VARIANT_STYLES: Record<TutorialVariant, { border: string; shadow: string; badgeKey: string; badgeClass: string; spotlightColor: string }> = {
   base: {
@@ -256,7 +258,10 @@ export const TutorialSpotlight = ({
   const message = t(step.messageKey);
 
   return (
-    <div className="fixed inset-0 z-[100] pointer-events-none overflow-hidden">
+    <div
+      className="fixed inset-0 pointer-events-none overflow-hidden"
+      style={{ zIndex: ONBOARDING_ROOT_Z_INDEX }}
+    >
       <div className="absolute inset-0 bg-black/75 pointer-events-auto" onClick={handleClose} />
 
       {targetRect && (
