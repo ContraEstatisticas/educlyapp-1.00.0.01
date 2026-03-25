@@ -1677,6 +1677,23 @@
   },
   "dashboard": {
     "greeting": "Bonjour",
+    "nav_edi_button": "Parler avec EDI",
+    "nav_trails_button": "Nos parcours",
+    "nav_trails_list_title": "Parcours specialises",
+    "nav_level": "Niveau {{level}}",
+    "nav_close_trails_panel": "Fermer le panneau des parcours",
+    "nav_close": "Fermer",
+    "unlock_to_access": "Debloquez pour acceder",
+    "unlock_hint": "Cliquez sur la carte pour voir les offres et debloquer",
+    "greetings": {
+      "morning": "Bonjour",
+      "afternoon": "Bon apres-midi",
+      "evening": "Bonsoir"
+    },
+    "hero_subtitle_prefix": "Bienvenue sur",
+    "hero_subtitle_suffix": ", continuez votre progression !",
+    "streak_in_sequence": "en sequence",
+    "loading_user_name": "Chargement du nom utilisateur",
     "welcome_title": "Votre Voyage IA Continue ! 🚀",
     "welcome_subtitle": "Vous avez terminé {{completed}} sur {{total}} jours. Continuez d'avancer !",
     "status_in_progress": "En cours",

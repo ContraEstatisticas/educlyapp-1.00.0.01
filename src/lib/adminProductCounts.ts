@@ -1,13 +1,13 @@
 import { supabase } from "@/integrations/supabase/client";
 
 export const getAdminProductCounts = async () => {
-  const { data, error } = await supabase.rpc("get_admin_product_counts");
+  const { data, error } = await supabase.rpc("get_admin_product_counts" as any);
 
   if (error) {
     throw error;
   }
 
-  const row = Array.isArray(data) ? data[0] : null;
+  const row = Array.isArray(data) ? (data[0] as any) : null;
 
   return {
     baseUsers: Number(row?.base_users ?? 0),

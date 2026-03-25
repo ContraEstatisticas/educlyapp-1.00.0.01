@@ -29,7 +29,7 @@ export const CertificateProgressCard = ({
 
   // Check if certificate exists
   const { data: certificate } = useQuery({
-    queryKey: ['user-certificate', challengeSlug],
+    queryKey: ['user-certificate', _challengeSlug],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return null;

@@ -1771,11 +1771,11 @@ export type Database = {
       admin_export_first_session_details: {
         Args: never
         Returns: {
-          email: string | null
-          inicio: string | null
-          minutos_ativos: number | null
-          nome: string | null
-          ultimo_sinal: string | null
+          email: string
+          inicio: string
+          minutos_ativos: number
+          nome: string
+          ultimo_sinal: string
         }[]
       }
       admin_lookup_email: { Args: { p_email: string }; Returns: Json }
