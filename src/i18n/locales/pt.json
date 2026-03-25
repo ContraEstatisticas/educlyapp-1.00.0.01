@@ -3425,6 +3425,22 @@
     "autoReloadIn": "Atualizando automaticamente em {{seconds}}s...",
     "offlineReady": "App pronto para uso offline"
   },
+  "nameConfirmation": {
+    "title": "Confirme seu nome",
+    "description": "Encontramos um nome salvo automaticamente para sua conta. Confirme se ele esta correto ou ajuste agora para aparecer certo nos proximos acessos.",
+    "savedNameLabel": "Nome salvo no momento",
+    "inputLabel": "Se nao for o seu nome, digite o nome correto",
+    "inputPlaceholder": "Digite seu nome",
+    "helperText": "Esse nome sera usado na sua conta e nos proximos logins.",
+    "keepButton": "Sim, este e meu nome",
+    "saveButton": "Salvar novo nome",
+    "savingButton": "Salvando...",
+    "validationError": "Digite um nome com pelo menos 2 caracteres.",
+    "successTitle": "Nome confirmado",
+    "successDescription": "Seu nome foi atualizado com sucesso.",
+    "errorTitle": "Nao foi possivel salvar",
+    "errorDescription": "Tente novamente em alguns instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudante",
@@ -3765,5 +3781,19 @@
         "description": "A IA de vídeo do Google: transforme texto e imagens em vídeos cinematográficos."
       }
     }
+  },
+  "pushNotifications": {
+    "title": "Não perca nenhuma novidade!",
+    "description": "Ative as notificações para receber lembretes de aula, conquistas e manter sua sequência!",
+    "activate": "Ativar",
+    "activating": "Ativando...",
+    "later": "Depois",
+    "dismiss": "Fechar",
+    "streakAtRisk": "Sua sequência de {{days}} dias está em risco! Não perca seu progresso!",
+    "dailyReminder": "Sua aula do dia está te esperando! 5 min é tudo que você precisa.",
+    "newAchievement": "Parabéns! Você desbloqueou a medalha \"{{medal}}\"!",
+    "newContent": "Novidades no Educly! Confira os novos módulos disponíveis.",
+    "levelUp": "Incrível! Você alcançou o nível {{level}}! Continue evoluindo!",
+    "welcomeBack": "Faz tempo que não te vemos! Volte e continue de onde parou."
   }
 }

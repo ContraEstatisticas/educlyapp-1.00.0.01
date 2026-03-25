@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-03-25T20:14:07.528Z",
+  "days_scanned": 120,
+  "resend_pages_scanned": 50,
+  "resend_emails_scanned": 5000,
+  "welcome_emails_found": 535,
+  "already_reminded_recipients": 0,
+  "sendable_recipients": 135,
+  "opened_recipients": 338,
+  "skipped_recipients": 61
+}

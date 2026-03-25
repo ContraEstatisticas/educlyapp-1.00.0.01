@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { clearAuthStorage } from "@/lib/authStorage";
@@ -20,6 +20,8 @@ import { Badge } from "@/components/ui/badge";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
+import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
+import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 
 import mountainBackground from "../../assets/mountainBackground.png";
 import mountainPerson from "../../assets/mountainPerson.png";
@@ -63,6 +65,7 @@ const MOCK_ACTIVE_SESSION = {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const productAccess = useProductAccess();
@@ -155,6 +158,30 @@ const Dashboard = () => {
 
       return data?.full_name || user.email?.split("@")[0] || t("dashboard.student");
     }
+  });
+
+  const { data: nameConfirmationData } = useQuery({
+    queryKey: ["dashboard-name-confirmation"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, name_confirmation_completed")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const metadataName =
+        typeof user.user_metadata?.full_name === "string" ? user.user_metadata.full_name.trim() : "";
+      const savedName = profile?.full_name?.trim() || metadataName;
+
+      return {
+        userId: user.id,
+        savedName,
+        needsConfirmation: shouldPromptForNameConfirmation(savedName, profile?.name_confirmation_completed ?? false),
+      };
+    },
   });
 
   const { data: streakData } = useQuery({
@@ -257,6 +284,23 @@ const Dashboard = () => {
 
   return (
     <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20">
+      {nameConfirmationData?.needsConfirmation ? (
+        <NameConfirmationDialog
+          open={nameConfirmationData.needsConfirmation}
+          savedName={nameConfirmationData.savedName}
+          userId={nameConfirmationData.userId}
+          onCompleted={(nextName) => {
+            queryClient.setQueryData(["dashboard-welcome-user"], nextName);
+            queryClient.setQueryData(["dashboard-name-confirmation"], {
+              ...nameConfirmationData,
+              savedName: nextName,
+              needsConfirmation: false,
+            });
+            queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+          }}
+        />
+      ) : null}
+
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }

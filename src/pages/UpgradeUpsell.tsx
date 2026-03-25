@@ -15,7 +15,7 @@ const productConfig = {
   freelancer: {
     icon: Briefcase,
     gradient: "from-emerald-500 to-teal-600",
-    checkoutUrl: "https://pay.hotmart.com/F103975080O?off=dcrrw2vo",
+    checkoutUrl: "https://pay.hotmart.com/F103975080O?off=dcrrw2vo&bid=1773855997932&sck=app&utm_source=UPapp",
     features: [
       "freelancer.feature1",
       "freelancer.feature2",
@@ -26,7 +26,7 @@ const productConfig = {
   ai_hub: {
     icon: Bot,
     gradient: "from-violet-500 to-purple-600",
-    checkoutUrl: "https://pay.hotmart.com/P104360708Q?off=nnp1mth1",
+    checkoutUrl: "https://pay.hotmart.com/P104360708Q?off=nnp1mth1&bid=1773855842344&sck=app&utm_source=UPapp",
     features: [
       "ai_hub.feature1",
       "ai_hub.feature2",

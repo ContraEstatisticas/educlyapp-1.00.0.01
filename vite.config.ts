@@ -93,6 +93,8 @@ export default defineConfig(({ mode }) => ({
         // Force immediate activation of new service worker
         skipWaiting: true,
         clientsClaim: true,
+        // Import custom push notification handler
+        importScripts: ['/sw-push.js'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         globIgnores: [

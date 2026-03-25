@@ -3825,6 +3825,22 @@
       "feature4": "Acceso ilimitado a los asistentes"
     }
   },
+  "nameConfirmation": {
+    "title": "Confirma tu nombre",
+    "description": "Encontramos un nombre guardado automaticamente para tu cuenta. Confirma si es correcto o corrigelo ahora para que aparezca bien en tus proximos accesos.",
+    "savedNameLabel": "Nombre guardado actualmente",
+    "inputLabel": "Si no es tu nombre, escribe el correcto",
+    "inputPlaceholder": "Escribe tu nombre",
+    "helperText": "Este nombre se usara en tu cuenta y en tus proximos inicios de sesion.",
+    "keepButton": "Si, este es mi nombre",
+    "saveButton": "Guardar nuevo nombre",
+    "savingButton": "Guardando...",
+    "validationError": "Escribe un nombre con al menos 2 caracteres.",
+    "successTitle": "Nombre confirmado",
+    "successDescription": "Tu nombre se actualizo correctamente.",
+    "errorTitle": "No fue posible guardar",
+    "errorDescription": "Vuelve a intentarlo en unos instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudiante",
@@ -4162,5 +4178,19 @@
     "alreadyInstalledDesc": "Ya estás usando la versión App de Educly. ¡Disfruta del acceso directo!",
     "desktopPrompt": "¿En el ordenador?",
     "downloadAppPrompt": "¿Descargar la aplicación?"
+  },
+  "pushNotifications": {
+    "title": "¡No te pierdas ninguna novedad!",
+    "description": "¡Activa las notificaciones para recibir recordatorios de clase, logros y mantener tu racha!",
+    "activate": "Activar",
+    "activating": "Activando...",
+    "later": "Después",
+    "dismiss": "Cerrar",
+    "streakAtRisk": "¡Tu racha de {{days}} días está en riesgo! ¡No pierdas tu progreso!",
+    "dailyReminder": "¡Tu clase del día te está esperando! Solo 5 minutos es todo lo que necesitas.",
+    "newAchievement": "¡Felicidades! ¡Desbloqueaste la medalla \"{{medal}}\"!",
+    "newContent": "¡Novedades en Educly! Descubre los nuevos módulos disponibles.",
+    "levelUp": "¡Increíble! ¡Alcanzaste el nivel {{level}}! ¡Sigue evolucionando!",
+    "welcomeBack": "¡Hace tiempo que no te vemos! Vuelve y continúa donde lo dejaste."
   }
 }

@@ -10,6 +10,7 @@ import { LevelRewardMilestonePopup } from "@/components/level/LevelRewardMilesto
 import { SoundSettingsProvider } from "@/contexts/SoundSettingsContext";
 import { PremiumGuard } from "@/components/PremiumGuard";
 import { UpdateNotification } from "@/components/UpdateNotification";
+import { PushNotificationPrompt } from "@/components/PushNotificationPrompt";
 import { ThemeProvider } from "@/components/theme-provider";
 import { supabase } from "@/integrations/supabase/client";
 import { useSessionTracking } from "@/hooks/useSessionTracking";
@@ -190,6 +191,7 @@ const App = () => {
                 <UpdateNotification autoReloadSeconds={15} />
                 <PWARedirect />
 {/* <PWAInstallPrompt /> */}
+                <PushNotificationPrompt />
                 <LevelRewardMilestonePopup />
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}

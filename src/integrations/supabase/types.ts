@@ -983,6 +983,7 @@ export type Database = {
           created_at: string | null
           full_name: string | null
           id: string
+          name_confirmation_completed: boolean
           onboarding_quiz_completed: boolean | null
           personalized_trail_quiz_completed: boolean | null
           preferred_language: string | null
@@ -995,6 +996,7 @@ export type Database = {
           created_at?: string | null
           full_name?: string | null
           id: string
+          name_confirmation_completed?: boolean
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
           preferred_language?: string | null
@@ -1007,6 +1009,7 @@ export type Database = {
           created_at?: string | null
           full_name?: string | null
           id?: string
+          name_confirmation_completed?: boolean
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
           preferred_language?: string | null

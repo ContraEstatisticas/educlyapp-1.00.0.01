@@ -36,7 +36,9 @@ serve(async (req) => {
     }
 
     const email = normalizeEmail(rawEmail);
-    const name = buyer_name || 'Aluno';
+    const normalizedBuyerName = typeof buyer_name === 'string' ? buyer_name.trim() : '';
+    const usedFallbackName = normalizedBuyerName.length === 0;
+    const name = normalizedBuyerName || 'Aluno';
     const lang = (language || 'es').toLowerCase().split('-')[0];
     const redirectTo = 'https://educly.app/auth';
 
@@ -88,9 +90,10 @@ serve(async (req) => {
       accountCreated = true;
       console.log(`[auto-create-account] User created: ${userId}`);
 
-      // Update profile with language
+      // Update profile with language and whether the name already came from the buyer data
       await supabase.from('profiles').update({
         preferred_language: lang,
+        name_confirmation_completed: !usedFallbackName,
       }).eq('id', userId);
     }
 

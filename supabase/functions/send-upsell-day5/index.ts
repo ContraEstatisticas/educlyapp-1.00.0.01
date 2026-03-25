@@ -39,8 +39,8 @@ function tr(lang: string, key: keyof typeof TRANSLATIONS["pt"]): string {
 }
 
 function getCheckoutUrl(product: "ai_hub" | "freelancer"): string {
-  if (product === "ai_hub") return "https://pay.hotmart.com/P104360708Q?off=nnp1mth1";
-  return "https://pay.hotmart.com/F103975080O?off=dcrrw2vo";
+  if (product === "ai_hub") return "https://pay.hotmart.com/P104360708Q?off=nnp1mth1&bid=1773855842344&sck=app&utm_source=emailRS";
+  return "https://pay.hotmart.com/F103975080O?off=dcrrw2vo&bid=1773855997932&sck=app&utm_source=emailRS";
 }
 
 function emailHtml(userName: string, language: string, product: "ai_hub" | "freelancer"): string {

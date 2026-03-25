@@ -2892,6 +2892,22 @@
       "feature4": "Accès illimité aux assistants"
     }
   },
+  "nameConfirmation": {
+    "title": "Confirmez votre nom",
+    "description": "Nous avons trouve un nom enregistre automatiquement pour votre compte. Confirmez s'il est correct ou modifiez-le maintenant pour qu'il apparaisse correctement lors de vos prochaines connexions.",
+    "savedNameLabel": "Nom actuellement enregistre",
+    "inputLabel": "Si ce n'est pas votre nom, saisissez le bon",
+    "inputPlaceholder": "Saisissez votre nom",
+    "helperText": "Ce nom sera utilise sur votre compte et lors de vos prochaines connexions.",
+    "keepButton": "Oui, c'est mon nom",
+    "saveButton": "Enregistrer le nouveau nom",
+    "savingButton": "Enregistrement...",
+    "validationError": "Saisissez un nom avec au moins 2 caracteres.",
+    "successTitle": "Nom confirme",
+    "successDescription": "Votre nom a ete mis a jour avec succes.",
+    "errorTitle": "Impossible d'enregistrer",
+    "errorDescription": "Veuillez reessayer dans quelques instants."
+  },
   "profile": {
     "title": "Profil",
     "defaultName": "Étudiant",
@@ -3229,5 +3245,19 @@
     "alreadyInstalledDesc": "Vous utilisez déjà la version App d'Educly. Profitez de l'accès direct !",
     "desktopPrompt": "Sur ordinateur ?",
     "downloadAppPrompt": "Télécharger l'application ?"
+  },
+  "pushNotifications": {
+    "title": "Ne manquez aucune nouveauté !",
+    "description": "Activez les notifications pour recevoir des rappels de cours, des succès et maintenir votre série !",
+    "activate": "Activer",
+    "activating": "Activation...",
+    "later": "Plus tard",
+    "dismiss": "Fermer",
+    "streakAtRisk": "Votre série de {{days}} jours est en danger ! Ne perdez pas votre progression !",
+    "dailyReminder": "Votre leçon du jour vous attend ! 5 minutes suffisent.",
+    "newAchievement": "Félicitations ! Vous avez débloqué la médaille \"{{medal}}\" !",
+    "newContent": "Nouveautés sur Educly ! Découvrez les nouveaux modules disponibles.",
+    "levelUp": "Incroyable ! Vous avez atteint le niveau {{level}} ! Continuez à évoluer !",
+    "welcomeBack": "Cela fait longtemps ! Revenez et continuez où vous en étiez."
   }
 }

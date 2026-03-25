@@ -1,5 +1,9 @@
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import {
+  getWelcomeReminderSubject,
+  renderWelcomeReminderEmail,
+} from "../_shared/welcome-reminder-email.mjs";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -466,18 +470,25 @@ serve(async (req) => {
     createdMetadata = metadata;
 
     const subject = mode === "magic_link_reminder"
-      ? t(normalizedLang, "subjectReminder")
+      ? getWelcomeReminderSubject(normalizedLang)
       : t(normalizedLang, "subject");
     const accessUrl = accessToken
       ? `https://educly.app/magic-login?token=${accessToken}`
       : undefined;
-    const html = getEmailHtml({
-      userEmail: email,
-      language: normalizedLang,
-      mode,
-      accessUrl,
-      generatedPassword,
-    });
+    const html = mode === "magic_link_reminder"
+      ? renderWelcomeReminderEmail({
+        userEmail: email,
+        language: normalizedLang,
+        accessUrl,
+        generatedPassword,
+      })
+      : getEmailHtml({
+        userEmail: email,
+        language: normalizedLang,
+        mode,
+        accessUrl,
+        generatedPassword,
+      });
 
     const { data: logEntry, error: logInsertError } = await supabaseAdmin
       .from("email_logs")

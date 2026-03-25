@@ -4274,6 +4274,22 @@
     "autoReloadIn": "Updating automatically in {{seconds}}s...",
     "offlineReady": "App ready for offline use"
   },
+  "nameConfirmation": {
+    "title": "Confirm your name",
+    "description": "We found a name that was saved automatically for your account. Confirm if it is correct or update it now so it shows properly on your next logins.",
+    "savedNameLabel": "Name currently saved",
+    "inputLabel": "If this is not your name, type the correct one",
+    "inputPlaceholder": "Type your name",
+    "helperText": "This name will be used on your account and in your future logins.",
+    "keepButton": "Yes, this is my name",
+    "saveButton": "Save new name",
+    "savingButton": "Saving...",
+    "validationError": "Enter a name with at least 2 characters.",
+    "successTitle": "Name confirmed",
+    "successDescription": "Your name has been updated successfully.",
+    "errorTitle": "Could not save your name",
+    "errorDescription": "Please try again in a moment."
+  },
   "profile": {
     "title": "Profile",
     "defaultName": "Student",
@@ -4585,5 +4601,19 @@
         "description": "Google's video AI: transform text and images into cinematic videos."
       }
     }
+  },
+  "pushNotifications": {
+    "title": "Don't miss any updates!",
+    "description": "Enable notifications to receive lesson reminders, achievements and keep your streak alive!",
+    "activate": "Enable",
+    "activating": "Enabling...",
+    "later": "Later",
+    "dismiss": "Close",
+    "streakAtRisk": "Your {{days}}-day streak is at risk! Don't lose your progress!",
+    "dailyReminder": "Your daily lesson is waiting for you! Just 5 minutes is all you need.",
+    "newAchievement": "Congratulations! You unlocked the \"{{medal}}\" medal!",
+    "newContent": "What's new on Educly! Check out the new modules available.",
+    "levelUp": "Amazing! You reached level {{level}}! Keep evolving!",
+    "welcomeBack": "It's been a while! Come back and continue where you left off."
   }
 }

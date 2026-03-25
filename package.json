@@ -8,6 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "docs:api": "node scripts/generate-api-docs.cjs",
+    "emails:welcome-reminder:preview": "node scripts/send-unopened-welcome-reminders.mjs",
+    "emails:welcome-reminder:send": "node scripts/send-unopened-welcome-reminders.mjs --send",
     "lint": "eslint .",
     "preview": "vite preview"
   },
