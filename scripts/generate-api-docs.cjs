@@ -244,6 +244,11 @@ const ptTranslations = {
   "Cron/internal route that replays failed webhook payloads against the original target edge function. Auth is accepted either as `Authorization: Bearer <CRON_SECRET|service_role>` or as body `{ secret }`.\n\nSource: `supabase/functions/retry-failed-webhooks/index.ts`.":
     "Rota interna/de cron que reexecuta payloads de webhook com falha contra a edge function original. A autenticação é aceita via `Authorization: Bearer <CRON_SECRET|service_role>` ou pelo corpo `{ secret }`.\n\nFonte: `supabase/functions/retry-failed-webhooks/index.ts`.",
   "Retry cycle summary.": "Resumo do ciclo de retry.",
+  "Send hourly welcome-email reminders for unopened onboarding emails":
+    "Enviar lembretes horarios para e-mails de onboarding nao abertos",
+  "Cron/internal route that checks recent welcome-flow emails, verifies open state in Resend, and sends one reminder with a fresh magic link after 6 hours when needed. Auth is accepted either as `Authorization: Bearer <CRON_SECRET|service_role>` or as body `{ secret }`.\n\nSource: `supabase/functions/send-unopened-welcome-reminders/index.ts`.":
+    "Rota interna/de cron que verifica e-mails recentes do fluxo de boas-vindas, consulta o estado de abertura no Resend e envia um unico lembrete com novo magic link apos 6 horas quando necessario. A autenticacao e aceita via `Authorization: Bearer <CRON_SECRET|service_role>` ou pelo corpo `{ secret }`.\n\nFonte: `supabase/functions/send-unopened-welcome-reminders/index.ts`.",
+  "Reminder batch summary.": "Resumo do lote de lembretes.",
   "Send a bulk welcome-style email blast to users":
     "Enviar disparo em lote de e-mail estilo welcome para usuários",
   "Internal route protected by a body secret. Iterates over users (optionally filtered by `targetEmails`) and sends a transactional HTML email through Resend.\n\nSource: `supabase/functions/send-bulk-emails/index.ts`.":
@@ -271,7 +276,7 @@ const ptTranslations = {
   "Invite batch summary.": "Resumo do lote de convites.",
   "Send welcome or magic-link email":
     "Enviar e-mail de welcome ou magic link",
-  "Transactional email route used by purchase/signup workflows. Supports legacy CTA email, new-account magic-link email, and existing-account magic-link email.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/send-welcome-email/index.ts`.":
+  "Transactional email route used by purchase/signup workflows. Supports legacy CTA email, new-account magic-link email, existing-account magic-link email, and the one-time unopened-email reminder flow.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/send-welcome-email/index.ts`.":
     "Rota de e-mail transacional usada por fluxos de compra/cadastro. Suporta e-mail legado com CTA, e-mail de magic link para conta nova e e-mail de magic link para conta existente.\n\nAviso: o handler atual não impõe autenticação dentro da função e deve ser tratado como uso interno service-to-service.\n\nFonte: `supabase/functions/send-welcome-email/index.ts`.",
   "Email sent or deduplicated.": "E-mail enviado ou deduplicado.",
   "Track email open via 1x1 pixel":
@@ -746,11 +751,17 @@ const spec = {
           language: { type: "string" },
           mode: {
             type: "string",
-            enum: ["legacy", "magic_link", "magic_link_existing"],
+            enum: ["legacy", "magic_link", "magic_link_existing", "magic_link_reminder"],
             default: "legacy",
           },
           access_token: { type: ["string", "null"] },
           generated_password: { type: ["string", "null"] },
+          user_id: { type: ["string", "null"], format: "uuid" },
+          parent_email_log_id: { type: ["string", "null"], format: "uuid" },
+          metadata: {
+            type: "object",
+            additionalProperties: true,
+          },
         },
         required: ["email", "userName"],
         additionalProperties: false,
@@ -1525,6 +1536,37 @@ spec.paths["/retry-failed-webhooks"] = {
   },
 };
 
+spec.paths["/send-unopened-welcome-reminders"] = {
+  post: {
+    tags: ["Operations"],
+    summary: "Send hourly welcome-email reminders for unopened onboarding emails",
+    description:
+      "Cron/internal route that checks recent welcome-flow emails, verifies open state in Resend, and sends one reminder with a fresh magic link after 6 hours when needed. Auth is accepted either as `Authorization: Bearer <CRON_SECRET|service_role>` or as body `{ secret }`.\n\nSource: `supabase/functions/send-unopened-welcome-reminders/index.ts`.",
+    operationId: "sendUnopenedWelcomeReminders",
+    "x-internal": true,
+    security: [{ cronBearer: [] }],
+    requestBody: jsonRequestBody(schemaRef("RetryFailedWebhooksRequest"), {
+      secret: "CRON_SECRET",
+    }),
+    responses: {
+      "200": {
+        description: "Reminder batch summary.",
+        content: jsonContent(schemaRef("LooseObject"), {
+          success: true,
+          processed: 4,
+          sent: 1,
+          skipped_opened: 2,
+          skipped_already_reminded: 1,
+          errors: 0,
+          results: [],
+        }),
+      },
+      "401": responseRef("Unauthorized"),
+      "500": responseRef("InternalError"),
+    },
+  },
+};
+
 spec.paths["/send-bulk-emails"] = {
   post: {
     tags: ["Email / Messaging"],
@@ -1659,16 +1701,19 @@ spec.paths["/send-welcome-email"] = {
     tags: ["Email / Messaging"],
     summary: "Send welcome or magic-link email",
     description:
-      "Transactional email route used by purchase/signup workflows. Supports legacy CTA email, new-account magic-link email, and existing-account magic-link email.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/send-welcome-email/index.ts`.",
+      "Transactional email route used by purchase/signup workflows. Supports legacy CTA email, new-account magic-link email, existing-account magic-link email, and the one-time unopened-email reminder flow.\n\nWarning: the current handler does not enforce auth inside the function and should be treated as internal service-to-service only.\n\nSource: `supabase/functions/send-welcome-email/index.ts`.",
     operationId: "sendWelcomeEmail",
     "x-internal": true,
     requestBody: jsonRequestBody(schemaRef("SendWelcomeEmailRequest"), {
       email: "student@example.com",
       userName: "Maria",
       language: "pt",
-      mode: "magic_link",
+      mode: "magic_link_reminder",
       access_token: "1fb05610-3fef-49d8-b4ec-e1d62aaf97ff",
-      generated_password: "Abcd1234!xYz",
+      parent_email_log_id: "d1234567-89ab-4cde-8f01-234567890abc",
+      metadata: {
+        original_resend_email_id: "f0b1c2d3-e4f5-6789-abcd-ef0123456789",
+      },
     }),
     responses: {
       "200": {

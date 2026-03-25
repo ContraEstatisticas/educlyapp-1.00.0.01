@@ -699,7 +699,8 @@
             "enum": [
               "legacy",
               "magic_link",
-              "magic_link_existing"
+              "magic_link_existing",
+              "magic_link_reminder"
             ],
             "default": "legacy"
           },
@@ -714,6 +715,24 @@
               "string",
               "null"
             ]
+          },
+          "user_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "parent_email_log_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
           }
         },
         "required": [
@@ -2148,6 +2167,62 @@
         }
       }
     },
+    "/send-unopened-welcome-reminders": {
+      "post": {
+        "tags": [
+          "Operações"
+        ],
+        "summary": "Enviar lembretes horarios para e-mails de onboarding nao abertos",
+        "description": "Rota interna/de cron que verifica e-mails recentes do fluxo de boas-vindas, consulta o estado de abertura no Resend e envia um unico lembrete com novo magic link apos 6 horas quando necessario. A autenticacao e aceita via `Authorization: Bearer <CRON_SECRET|service_role>` ou pelo corpo `{ secret }`.\n\nFonte: `supabase/functions/send-unopened-welcome-reminders/index.ts`.",
+        "operationId": "sendUnopenedWelcomeReminders",
+        "x-internal": true,
+        "security": [
+          {
+            "cronBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetryFailedWebhooksRequest"
+              },
+              "example": {
+                "secret": "CRON_SECRET"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resumo do lote de lembretes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LooseObject"
+                },
+                "example": {
+                  "success": true,
+                  "processed": 4,
+                  "sent": 1,
+                  "skipped_opened": 2,
+                  "skipped_already_reminded": 1,
+                  "errors": 0,
+                  "results": []
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
     "/send-bulk-emails": {
       "post": {
         "tags": [
@@ -2396,9 +2471,12 @@
                 "email": "student@example.com",
                 "userName": "Maria",
                 "language": "pt",
-                "mode": "magic_link",
+                "mode": "magic_link_reminder",
                 "access_token": "1fb05610-3fef-49d8-b4ec-e1d62aaf97ff",
-                "generated_password": "Abcd1234!xYz"
+                "parent_email_log_id": "d1234567-89ab-4cde-8f01-234567890abc",
+                "metadata": {
+                  "original_resend_email_id": "f0b1c2d3-e4f5-6789-abcd-ef0123456789"
+                }
               }
             }
           }

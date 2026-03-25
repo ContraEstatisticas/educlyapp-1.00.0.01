@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.admin-revoke-access]
 verify_jwt = false
+
+[functions.send-unopened-welcome-reminders]
+verify_jwt = false
