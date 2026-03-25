@@ -254,7 +254,7 @@ const Dashboard = () => {
     }];
 
   return (
-    <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-[calc(9.75rem+env(safe-area-inset-bottom,0px))] md:pb-20">
+    <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -850,17 +850,17 @@ const Dashboard = () => {
         {trailsPanelOpen && (
           <button
             aria-label={t("dashboard.nav_close_trails_panel")}
-            className="fixed inset-0 z-[310] bg-black/25 backdrop-blur-[1px]"
+            className="fixed inset-0 z-[310] hidden bg-black/25 backdrop-blur-[1px] md:block"
             onClick={() => setTrailsPanelOpen(false)}
           />
         )}
 
         <div
-          className={`fixed right-4 z-[320] w-[min(92vw,460px)] transition-all duration-300 md:right-6 ${
+          className={`fixed right-4 z-[320] hidden w-[min(92vw,460px)] transition-all duration-300 md:right-6 ${
             trailsPanelOpen
-              ? "trails-panel-open bottom-[calc(7.9rem+env(safe-area-inset-bottom,0px))] opacity-100"
-              : "bottom-[calc(7.4rem+env(safe-area-inset-bottom,0px))] pointer-events-none translate-y-3 opacity-0"
-          } md:bottom-[6.25rem]`}
+              ? "trails-panel-open bottom-[6.25rem] opacity-100"
+              : "bottom-[5.8rem] pointer-events-none translate-y-3 opacity-0"
+          } md:block`}
         >
           <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_28px_56px_-34px_rgba(15,23,42,0.6)]">
             <div className="flex items-center justify-between border-b border-border/70 px-4 py-3">
@@ -913,6 +913,66 @@ const Dashboard = () => {
           </div>
         </div>
 
+        <div
+          className={`fixed right-3 z-[320] w-[min(94vw,430px)] transition-all duration-300 md:hidden ${
+            trailsPanelOpen
+              ? "trails-panel-open bottom-[calc(5.2rem+env(safe-area-inset-bottom,0px))] opacity-100"
+              : "bottom-[calc(4.8rem+env(safe-area-inset-bottom,0px))] pointer-events-none translate-y-3 opacity-0"
+          }`}
+        >
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-[0_24px_44px_-28px_rgba(15,23,42,0.72)]">
+            <span className="pointer-events-none absolute -bottom-1.5 right-[2.85rem] h-3 w-3 rotate-45 border-b border-r border-border bg-card" />
+
+            <div className="flex items-center justify-between border-b border-border/70 px-3.5 py-2.5">
+              <div>
+                <p className="text-sm font-bold text-foreground">Trilhas</p>
+                <p className="text-[11px] text-muted-foreground">{aiTrailUi.dashboardTitle}</p>
+              </div>
+
+              <button
+                className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setTrailsPanelOpen(false)}
+                aria-label={t("dashboard.nav_close")}
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="max-h-[48vh] space-y-2.5 overflow-y-auto p-3.5">
+              {aiMasteryTrails.map((trail) => {
+                const trailMeta = getAiTrailLocalizedMeta(trail.slug, i18n.resolvedLanguage || i18n.language);
+                const trailIsLive = isAiTrailLive(trail.slug);
+
+                return (
+                  <button
+                    key={trail.slug}
+                    onClick={() => handleSpecializedTrailClick(trail.slug)}
+                    className="group w-full rounded-xl border border-border bg-background/75 p-2.5 text-left transition-all duration-200 active:scale-[0.995]"
+                  >
+                    <div className="flex items-start gap-2.5">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/15 bg-primary/10">
+                        {trail.logo ? (
+                          <img src={trail.logo} alt={trail.name} className="h-6 w-6 object-contain" />
+                        ) : (
+                          <span className="text-xs font-black text-primary">{getTrailInitials(trail.name)}</span>
+                        )}
+                      </div>
+
+                      <div className="min-w-0">
+                        <p className="line-clamp-1 text-sm font-bold text-foreground">{trail.name}</p>
+                        <p className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{trailMeta.signature}</p>
+                        <p className="mt-1.5 text-[11px] font-semibold text-primary">
+                          {trailIsLive ? aiTrailUi.openTrail : aiTrailUi.comingSoon}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
         <button
           className={`trails-fab-focus fixed bottom-6 z-[90] hidden items-center gap-2 rounded-full border px-4 py-3 text-sm font-bold shadow-[0_16px_28px_-18px_rgba(249,115,22,0.85)] transition-all duration-300 hover:scale-[1.02] md:inline-flex ${
             trailsPanelOpen
@@ -929,7 +989,6 @@ const Dashboard = () => {
 
         <MobileNav
           onTrailsClick={() => setTrailsPanelOpen((prev) => !prev)}
-          trailsCount={aiMasteryTrails.length}
           trailsOpen={trailsPanelOpen}
         />
       </div>

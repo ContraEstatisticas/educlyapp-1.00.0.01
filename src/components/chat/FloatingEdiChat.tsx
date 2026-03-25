@@ -228,7 +228,7 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
         // Keep launcher static: avoid inherited transforms/animations.
         style={{ transform: "none", transition: "none", animation: "none" }}
         className={cn(
-          "fixed right-4 md:right-6 z-[60] floating-edi-btn",
+          "fixed right-4 md:right-6 z-[140] floating-edi-btn",
           "w-14 h-14 rounded-full",
           "bg-white",
           "shadow-lg shadow-primary/30",
@@ -253,7 +253,7 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
       {isOpen && (
         <div
           className={cn(
-            "fixed z-[60] animate-fade-in",
+            "fixed z-[220] animate-fade-in",
             "bottom-6 right-6 w-[380px] h-[520px] rounded-2xl",
             "max-md:inset-x-0 max-md:top-0 max-md:bottom-16 max-md:w-full max-md:h-auto max-md:rounded-none",
           )}
