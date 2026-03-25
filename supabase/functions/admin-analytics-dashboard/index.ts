@@ -288,6 +288,7 @@ const buildDashboardSnapshot = async (
     : DEFAULT_ERROR_RANGE_DAYS;
 
   const todayKey = getAdminDateKey();
+  const yesterdayKey = getAdminDateKey(getAdminDaysAgoStartIso(1));
   const todayStartIso = getAdminDayStartIso();
   const tomorrowStartIso = getAdminDayEndIso();
   const lastSevenDaysStartIso = getAdminDaysAgoStartIso(6);
@@ -358,6 +359,7 @@ const buildDashboardSnapshot = async (
     supabaseAdmin
       .from("user_streaks")
       .select("user_id, current_streak, longest_streak, last_activity_date")
+      .filter("last_activity_date", "gte", yesterdayKey)
       .order("current_streak", { ascending: false })
       .limit(10),
     supabaseAdmin
@@ -474,17 +476,27 @@ const buildDashboardSnapshot = async (
   const topStreaks = topStreaksResult.data || [];
   const premiumAccess = premiumAccessResult.data || [];
 
-  const activeStreaks = streakData.filter((streak: { last_activity_date: string | null }) =>
-    streak.last_activity_date && streak.last_activity_date >= sevenDaysAgoKey
-  );
+  const processedStreaks = streakData.map((streak: {
+    user_id: string;
+    current_streak: number | null;
+    longest_streak: number | null;
+    last_activity_date: string | null;
+  }) => ({
+    ...streak,
+    current_streak: streak.last_activity_date && streak.last_activity_date >= yesterdayKey
+      ? Number(streak.current_streak || 0)
+      : 0,
+  }));
 
-  const avgStreak = activeStreaks.length
+  const actuallyActiveStreaks = processedStreaks.filter(s => s.current_streak > 0);
+
+  const avgStreak = actuallyActiveStreaks.length
     ? Number(
         (
-          activeStreaks.reduce(
-            (acc: number, streak: { current_streak: number | null }) => acc + Number(streak.current_streak || 0),
+          actuallyActiveStreaks.reduce(
+            (acc: number, streak) => acc + streak.current_streak,
             0,
-          ) / activeStreaks.length
+          ) / actuallyActiveStreaks.length
         ).toFixed(1),
       )
     : 0;
@@ -766,8 +778,8 @@ const buildDashboardSnapshot = async (
     "15+ dias": 0,
   };
 
-  streakData.forEach((streak: { current_streak: number | null }) => {
-    const value = Number(streak.current_streak || 0);
+  processedStreaks.forEach((streak) => {
+    const value = streak.current_streak;
     if (value === 0) streakDistribution["0 dias"] += 1;
     else if (value <= 3) streakDistribution["1-3 dias"] += 1;
     else if (value <= 7) streakDistribution["4-7 dias"] += 1;
