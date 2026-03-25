@@ -60,12 +60,12 @@ export const CHATGPT_MODULE_8_STEPS_PT = [
     "O Poder da Ferramenta de Estudo",
     "Por que o ChatGPT difere formidavelmente dos antigos guias estáticos de aprendizado ao tentar dominar um assunto complexo acadêmico ou corporativo?",
     [
-      "Substitui completamente a necessidade das fontes originais dos livros.",
       "Garante que você vai memorizar o conteúdo de forma automática sem nenhum esforço intelectual ativo subsequente seu.",
       "Adapta ativamente a clareza teórica e a velocidade das explicações ao seu nível atual, moldando-se ao seu exato conhecimento prévio dinâmico.",
+      "Substitui completamente a necessidade das fontes originais dos livros.",
       "Costuma funcionar cada vez de forma mais eficiente quanto menos informação você fornece para testar sua inteligência base."
     ],
-    2,
+    1,
     "A maleabilidade do modelo destrói o conceito impiedoso de uma 'classe' genérica nivelando o nível do material na sua exata frequência e tempo de abstração pessoal sem julgamentos ansiosos."
   ),
   textStep(
@@ -84,12 +84,12 @@ export const CHATGPT_MODULE_8_STEPS_PT = [
     "Eficácia do Prompt Inicial",
     "Por qual exato mecanismo técnico esse aviso prévio excede ridiculamente o mero disparo de 'o que é física' na janela do chatbot cega?",
     [
+      "Pois disparar títulos como 'Professor' religa por instinto o roteador a usar estritamente bases de dados do MEC oficialmente fechadas de segurança.",
       "O uso compulsivo de um teto rígido longo em caracteres destrava limites internos das chaves bloqueadas da API mestre superior VIP paga.",
       "Ele define com brutal assertividade o papel do modelo, seu próprio nível vulnerável perante a matéria, e impõe a obrigação mecânica de fornecer vínculos práticos ilustrativos familiares.",
-      "Pois disparar títulos como 'Professor' religa por instinto o roteador a usar estritamente bases de dados do MEC oficialmente fechadas de segurança.",
       "Ambos os rumos geram exatamente o mesmíssimo emaranhado teórico padrão indiferenciado longo exato global formal seco cansativo."
     ],
-    1,
+    2,
     "Você amarra quem a máquina será, onde você está e o formato exato da transmissão mental (analogias). Isso arranca do sistema sua tendência fria à Wikipédia global acadêmica."
   ),
   textStep(
@@ -108,12 +108,12 @@ export const CHATGPT_MODULE_8_STEPS_PT = [
     "A Lente das Analogias Transversais Fáceis",
     "Frente à densidade de barreiras técnicas (cripto, inflações macro, bolsa de valores lógicas teóricas duras cruéis frias), qual pedido dissolve prontamente tais granitos intelectuais formidáveis em pluma mansa acessível total imediata pura?",
     [
-      '"Vomite-me a definição institucional formal acadêmica técnica engessada do conceito agora."',
-      '"Ensine perfeitamente esse assunto para iniciantes rasteiros de plantão rápido veloz logo sem paradas."',
+      '"Resume breve o conceito geral de forma neutra global." ',
       '"Desenhe e transmita mentalmente o conceito em pauta fingindo severamente que dirijo 15 singelos anos de idade e uso um objeto prosaico corriqueiro matutino clássico ordinário que cada passante citadino identifique cegamente como ponte real de enlace na visualização do que isto significa na física teórica exata de rua."',
-      '"Resume breve o conceito geral de forma neutra global." '
+      '"Ensine perfeitamente esse assunto para iniciantes rasteiros de plantão rápido veloz logo sem paradas."',
+      '"Vomite-me a definição institucional formal acadêmica técnica engessada do conceito agora."'
     ],
-    2,
+    1,
     "Rebaixar drasticamente a faixa etária técnica percebida empurra a IA para metáforas ricas cruamente descritivas que ancoram ideias difusas impalpáveis às rotinas da sala civil humana cotidiana banal real do dia a dia comum de imediato sem fricções."
   ),
   textStep(
@@ -172,12 +172,12 @@ export const CHATGPT_MODULE_8_STEPS_EN = [
     "The True Dominance in Studying",
     "Why does utilizing ChatGPT for learning effortlessly obliterate traditional static sources when plunging into heavy modern subjects?",
     [
-      "It mathematically promises to etch data into your brain cells without any functional effort from you aside from reading text lightly.",
       "It totally suppresses the core necessity to actually absorb true academic books.",
-      "It dynamically adapts the depth, pace, and vocabulary to precisely match your exact isolated point of comprehension instantaneously without judgment.",
-      "It magically speeds up performance the fewer context clues you dump into the prompt box."
+      "It magically speeds up performance the fewer context clues you dump into the prompt box.",
+      "It mathematically promises to etch data into your brain cells without any functional effort from you aside from reading text lightly.",
+      "It dynamically adapts the depth, pace, and vocabulary to precisely match your exact isolated point of comprehension instantaneously without judgment."
     ],
-    2,
+    3,
     "The sheer adaptability destroys the outdated 'one-size-fits-all' curriculum. You force the machine to scale to your exact moment of ignorance and walk you up the staircase."
   ),
   textStep(
@@ -200,10 +200,10 @@ export const CHATGPT_MODULE_8_STEPS_EN = [
     "The Razor's Edge of Learning",
     "Why does forcing the machine into Socratic questioning yield dramatically superior cognitive retention versus a typical summary readout command?",
     [
-      "It forces the system to spend less server energy and prints responses dramatically faster.",
       "It strictly prohibits the machine from utilizing English language shortcuts making it formal.",
+      "It is an old myth, it does not actually have any tangible psychological benefit during tech sessions.",
       "It weaponizes the neural network to drag you into active real-time struggling problem-solving making the data physically stick to your brain pathways forever.",
-      "It is an old myth, it does not actually have any tangible psychological benefit during tech sessions."
+      "It forces the system to spend less server energy and prints responses dramatically faster."
     ],
     2,
     "The struggle is the glue. Dodging immediate answers to fight through guided logic builds unbreakable permanent comprehension compared to passive scrolling."
@@ -227,12 +227,12 @@ export const CHATGPT_MODULE_8_STEPS_ES = [
     "El Filo Trascendente del Aprendizaje por Prompts Estrictos Dirigidos Certeros",
     "Frente al desafío tortuoso de triturar una disciplina arcana, ¿Por qué ChatGPT destroza metódicamente a la arcaica pedagogía formal de masas regulares viejas polvorientas largas tediosas teóricas pesadas lentas aburridas tradicionales de antes?",
     [
-      "Puesto que inocula de por sí y automáticamente todo el saber directo al neocórtex humano prescindiendo en su plenitud del más ligero escrutinio o rastro procesal activo mental del usuario lector pasivo espectador vago adormecido relajado quieto ausente de labor de esfuerzo intelectual o desgaste de repetición o falla en práctica de ejercicio mental vivo calurso.",
-      "Extingue para toda la eternidad laboral la necesidad pura genuina válida firme y viva de la lectura base oficial certificada tradicional formadora de criterio profundo denso macizo total.",
+      "Por norma de desarrollo de red lógica abstracta del programa general matriz original principal, opera fabulosamente mejorando sus retornos y la contundencia abstracta pura mientras menor información real y variables directrices concisas precisas puras inyectemos al motor vacío blanco ciego neutro gris nulo inicial al abrir el chat.",
       "Adapta milimétricamente el grosor semántico, el veloz paso, y el escarpado terreno al preciso umbral cognoscitivo suyo del momento presente vivo en la sala, amoldando su cerebro ciego artificial al paso mental vivo real del alumno en trinchera.",
-      "Por norma de desarrollo de red lógica abstracta del programa general matriz original principal, opera fabulosamente mejorando sus retornos y la contundencia abstracta pura mientras menor información real y variables directrices concisas precisas puras inyectemos al motor vacío blanco ciego neutro gris nulo inicial al abrir el chat."
+      "Extingue para toda la eternidad laboral la necesidad pura genuina válida firme y viva de la lectura base oficial certificada tradicional formadora de criterio profundo denso macizo total.",
+      "Puesto que inocula de por sí y automáticamente todo el saber directo al neocórtex humano prescindiendo en su plenitud del más ligero escrutinio o rastro procesal activo mental del usuario lector pasivo espectador vago adormecido relajado quieto ausente de labor de esfuerzo intelectual o desgaste de repetición o falla en práctica de ejercicio mental vivo calurso."
     ],
-    2,
+    1,
     "Su versatilidad liquida el modelo educativo masivo. Tú impones al servidor descender hasta tu propio peldaño de ignorancia puntual y obligar que moldee el escalón y te suba de la mano a paso seguro."
   ),
   textStep(
@@ -266,10 +266,10 @@ export const CHATGPT_MODULE_8_STEPS_FR = [
     "La Mue Formative Absolue Puissante Vraie de la Singularité Éducative Actuelle Technologique Face au Mur Fixe et Long de l'Ouvrage Matériel Ancestral de Lecture Classique",
     "Quel paradigme détache si furieusement l'alliance d'apprentissage soutenu appuyée ardemment activement vigoureusement puissamment vivement techniquement de l'Intelligence Informatique par devant des formats lourds séculaires d'érudition stricte en bibliothèque d'antan des gloires nobles passées dures à vaincre?",
     [
-      "S'évanouit alors formellement le dur fardeau réel obligatoire et sévère long pesant de la mise en œuvre pratique rigoureuse mentale profonde en aval suite des lignes ingérées sans action formelle derrière.",
+      "Toutes les commandes sans exception se transmutent en même réponse uniforme stable répétable parfaite plate sans nuance formelle exacte claire égale pour tous les lecteurs indifféremment sur terre de tous les niveaux confondus réels unis plats de profil identique nul ou puissant égal par tous.",
       "Le procédé remplace physiquement toute la somme de diplômes académiques et éradique les professionnels enseignants humains de valeur d'expertise formelle mondiale des établissements complets d'une seule commande magique exécutive directe de la touche pure clavier vif.",
       "La flexibilité farouche paramétrique de synchroniser mathématiquement de manière automatique exacte pointilleuse précise sans concession ou flou absolu le calibrage cognitif brut à la circonférence précise singulière étroite et exclusive de vos capacités prééminentes natives de connaissances du jour pur vrai fixe clair limité strict exact.",
-      "Toutes les commandes sans exception se transmutent en même réponse uniforme stable répétable parfaite plate sans nuance formelle exacte claire égale pour tous les lecteurs indifféremment sur terre de tous les niveaux confondus réels unis plats de profil identique nul ou puissant égal par tous."
+      "S'évanouit alors formellement le dur fardeau réel obligatoire et sévère long pesant de la mise en œuvre pratique rigoureuse mentale profonde en aval suite des lignes ingérées sans action formelle derrière."
     ],
     2,
     "Briser les carcans formatés d'études d'âge passés. Votre ordre dicte au processeur de s'écraser précisément à hauteur d'yeux ignorant absolus et de bâtir marche après marche stricte en synergie avec la rapidité intime de vos connexions cérébrales seules pures et sans moquerie ou accélération d'un groupe en classe bruyante de pairs d'âge égal ou supérieur avançant plus fort brutalement vite et sans pitié sur l'orgueil de l'apprenant."

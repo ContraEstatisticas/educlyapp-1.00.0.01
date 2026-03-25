@@ -56,12 +56,12 @@ export const CHATGPT_MODULE_4_STEPS_PT = [
     "A Importância dos Dados",
     "Por que é importante fornecer dados ao ChatGPT?",
     [
-      "Fornece o contexto e as informações necessárias para gerar respostas precisas e relevantes",
-      "Acelera o tempo de resposta",
       "Limita as capacidades da IA",
-      "Torna o modelo mais divertido"
+      "Fornece o contexto e as informações necessárias para gerar respostas precisas e relevantes",
+      "Torna o modelo mais divertido",
+      "Acelera o tempo de resposta"
     ],
-    0,
+    1,
     "Ao fornecer informações relevantes de antemão, você orienta a IA para gerar resultados mais contextuais e úteis."
   ),
   textStep(
@@ -84,12 +84,12 @@ export const CHATGPT_MODULE_4_STEPS_PT = [
     "Garantindo a Compreensão",
     "O que você deve considerar para garantir que o ChatGPT entenda sua consulta?",
     [
-      "Como confundir a IA com informações vagas para testá-la",
-      "Como tornar o prompt o mais curto possível cortando descrições",
       "O conhecimento de base necessário, incluindo terminologia específica, fatos ou restrições",
-      "Os tópicos favoritos e hobbies da IA"
+      "Como confundir a IA com informações vagas para testá-la",
+      "Os tópicos favoritos e hobbies da IA",
+      "Como tornar o prompt o mais curto possível cortando descrições"
     ],
-    2,
+    0,
     "Entregar os contornos, terminologias exclusivas e regras claras formam a barreira para resultados ruins."
   ),
   textStep(
@@ -100,12 +100,12 @@ export const CHATGPT_MODULE_4_STEPS_PT = [
     "Contexto x Perguntas Genéricas",
     "Por que fornecer contexto ao ChatGPT é melhor do que fazer perguntas genéricas?",
     [
-      "Garante que as respostas sejam mais longas, independentemente de sua relevância",
+      "Evita que o ChatGPT consuma seus créditos diários",
       "Faz a IA trabalhar mais rápido ao fornecer menos informações",
-      "Prepara o ChatGPT para gerar ideias mais relevantes e personalizadas, com base no seu objetivo, público e contexto real",
-      "Evita que o ChatGPT consuma seus créditos diários"
+      "Garante que as respostas sejam mais longas, independentemente de sua relevância",
+      "Prepara o ChatGPT para gerar ideias mais relevantes e personalizadas, com base no seu objetivo, público e contexto real"
     ],
-    2,
+    3,
     "Fornecer contexto ancora a IA na sua realidade, em vez de deixá-la voar sobre médias estatísticas."
   ),
   textStep(
@@ -120,12 +120,12 @@ export const CHATGPT_MODULE_4_STEPS_PT = [
     "Iniciando em um Projeto Longo",
     "Se você está trabalhando em um projeto longo e abre uma nova conversa com o ChatGPT, o que deve fazer primeiro?",
     [
-      "Começar a fazer perguntas diretas sem contexto",
-      "Esperar que o modelo lembre do que foi discutido antes",
+      "Criar uma conta nova para reiniciar tudo do zero",
       "Reafirmar os pontos-chave e fornecer o contexto necessário para continuar de onde parou",
-      "Criar uma conta nova para reiniciar tudo do zero"
+      "Começar a fazer perguntas diretas sem contexto",
+      "Esperar que o modelo lembre do que foi discutido antes"
     ],
-    2,
+    1,
     "Cada conversa em branco é como se o modelo tivesse acabado de acordar sem memórias, a menos que o sistema de Memória Persistente atue. Sempre reinsira os fatos."
   ),
   textStep(
@@ -140,12 +140,12 @@ export const CHATGPT_MODULE_4_STEPS_PT = [
     "Configuração Pessoal",
     "Qual das opções abaixo é um bom texto de personalização para o ChatGPT?",
     [
-      '"Responda sempre de forma longa e com palavras difíceis"',
+      '"Pode responder do jeito que quiser, tanto faz"',
       '"Não preciso de contexto, só me dê a resposta"',
-      '"Prefiro respostas diretas, com exemplos práticos e linguagem simples. Uso o ChatGPT principalmente para aprender coisas novas e organizar minhas ideias"',
-      '"Pode responder do jeito que quiser, tanto faz"'
+      '"Responda sempre de forma longa e com palavras difíceis"',
+      '"Prefiro respostas diretas, com exemplos práticos e linguagem simples. Uso o ChatGPT principalmente para aprender coisas novas e organizar minhas ideias"'
     ],
-    2,
+    3,
     "Este texto dá tom e finalidade de forma transparente para guiar todo output da máquina."
   ),
   textStep(
@@ -163,12 +163,12 @@ export const CHATGPT_MODULE_4_STEPS_EN = [
     "The Importance of Data",
     "Why is providing data to ChatGPT so important?",
     [
-      "It provides the context and necessary information to generate precise and relevant responses",
-      "It accelerates response time",
+      "It makes the model more fun",
       "It limits AI capabilities",
-      "It makes the model more fun"
+      "It accelerates response time",
+      "It provides the context and necessary information to generate precise and relevant responses"
     ],
-    0,
+    3,
     "By supplying relevant information upfront, you guide the AI to generate much more contextual and useful outputs."
   ),
   textStep(
@@ -191,12 +191,12 @@ export const CHATGPT_MODULE_4_STEPS_EN = [
     "Ensuring Comprehension",
     "What should you consider to make sure ChatGPT truly understands your query?",
     [
+      "The AI's favorite topics and hobbies",
       "How to confuse the AI with vague details to test it",
       "How to make the prompt as short as possible by cutting descriptions",
-      "The required background knowledge, including specific terminology, facts, or constraints",
-      "The AI's favorite topics and hobbies"
+      "The required background knowledge, including specific terminology, facts, or constraints"
     ],
-    2,
+    3,
     "Delivering boundaries, exclusive terminologies, and clear rules form the wall against bad results."
   ),
   textStep(
@@ -207,12 +207,12 @@ export const CHATGPT_MODULE_4_STEPS_EN = [
     "Context x Generic Questions",
     "Why is feeding context to ChatGPT better than asking generic questions?",
     [
+      "It prevents ChatGPT from using up your daily credits",
       "It ensures answers be incredibly long, regardless of relevance",
       "It makes the AI work faster because it limits options",
-      "It preps ChatGPT to generate highly relevant and personalized ideas based on your real goal, audience, and constraints",
-      "It prevents ChatGPT from using up your daily credits"
+      "It preps ChatGPT to generate highly relevant and personalized ideas based on your real goal, audience, and constraints"
     ],
-    2,
+    3,
     "Providing context anchors the AI in your reality instead of letting it drift over statistical average responses."
   ),
   textStep(
@@ -247,12 +247,12 @@ export const CHATGPT_MODULE_4_STEPS_EN = [
     "Personal Setup",
     "Which of the following is a fantastic set of custom instructions for ChatGPT?",
     [
-      "\"Always respond in heavily elongated text with tough vocabulary\"",
+      "\"You can reply however you feel like, it's whatever\"",
       "\"I don't need context, just spit the answer\"",
-      "\"I prefer direct answers, practical examples, and straightforward language. I mainly use ChatGPT to learn things and organize my thoughts.\"",
-      "\"You can reply however you feel like, it's whatever\""
+      "\"Always respond in heavily elongated text with tough vocabulary\"",
+      "\"I prefer direct answers, practical examples, and straightforward language. I mainly use ChatGPT to learn things and organize my thoughts.\""
     ],
-    2,
+    3,
     "This establishes tone and purpose transparently guiding all machine output."
   ),
   textStep(
@@ -270,12 +270,12 @@ export const CHATGPT_MODULE_4_STEPS_ES = [
     "La Importancia de los Datos",
     "¿Por qué es importante proveer datos a ChatGPT?",
     [
-      "Provee el contexto y la información necesaria para generar respuestas precisas y relevantes",
       "Acelera el tiempo de respuesta",
+      "Provee el contexto y la información necesaria para generar respuestas precisas y relevantes",
       "Limita las capacidades de la IA",
       "Hace que el modelo sea más divertido"
     ],
-    0,
+    1,
     "Al proporcionar información relevante de antemano, orientas a la IA para generar resultados más contextuales y útiles."
   ),
   textStep(
@@ -298,12 +298,12 @@ export const CHATGPT_MODULE_4_STEPS_ES = [
     "Asegurando la Comprensión",
     "¿Qué debes considerar para asegurar que ChatGPT entienda tu consulta?",
     [
-      "Cómo confundir a la IA con detalles vagos",
-      "Cómo hacer el prompt lo más corto posible cortando variables",
+      "Los temas favoritos de la IA",
       "El conocimiento base necesario, incluyendo terminología específica, hechos o restricciones",
-      "Los temas favoritos de la IA"
+      "Cómo confundir a la IA con detalles vagos",
+      "Cómo hacer el prompt lo más corto posible cortando variables"
     ],
-    2,
+    1,
     "Entregar los contornos de reglas, las palabras exactas y la base empírica forjan el baluarte contra malos resultados."
   ),
   textStep(
@@ -314,12 +314,12 @@ export const CHATGPT_MODULE_4_STEPS_ES = [
     "Contexto x Preguntas Genéricas",
     "¿Por qué brindar contexto a ChatGPT es mejor que realizarle simples preguntas genéricas?",
     [
-      "Garantiza que las contestaciones resulten interminables, independiente a su calidad",
-      "Logra que la IA accione con mayor velocidad",
       "Prepara a ChatGPT para parir sugerencias ricas y personalizadas cimentadas en tus objetivos y contexto directo",
-      "Previene que el ChatGPT descuente créditos de conexión"
+      "Previene que el ChatGPT descuente créditos de conexión",
+      "Garantiza que las contestaciones resulten interminables, independiente a su calidad",
+      "Logra que la IA accione con mayor velocidad"
     ],
-    2,
+    0,
     "Brindar variables ancla a la máquina en la realidad del problema evitando que deambule por lo plano y genérico."
   ),
   textStep(
@@ -334,12 +334,12 @@ export const CHATGPT_MODULE_4_STEPS_ES = [
     "Emprendiendo Proyectos Grandes",
     "Sí te encuentras trabajando un extenso plan de negocios y creas un nuevo chat... ¿Cuál es tu primera movida intelectual?",
     [
-      "Preguntar a bocajarro cuestiones de cálculo",
-      "Esperar ingenuamente a que reconstruya lo debatido la semana anterior",
       "Afirmar las cimas conceptuales y la brújula contextual en un prompt de resumen para retornar exactamente donde terminaste",
-      "Hacerte un usuario inédito para recomenzar"
+      "Hacerte un usuario inédito para recomenzar",
+      "Preguntar a bocajarro cuestiones de cálculo",
+      "Esperar ingenuamente a que reconstruya lo debatido la semana anterior"
     ],
-    2,
+    0,
     "Conversación en blanco implica reset algorítmico, a no ser del manejo de Memoria Persistente. Repasa el ecosistema inicial siempre."
   ),
   textStep(
@@ -354,10 +354,10 @@ export const CHATGPT_MODULE_4_STEPS_ES = [
     "Setup Permanente",
     "En términos de la sección 'Personalización', ¿Qué variante constituye un acierto contundente?",
     [
+      '"Realiza el encargo como prefieras, carezco de un molde ideal"',
       '"Comunícate ostentosamente despachando tecnicismos oscuros por doquier"',
-      '"A mí me da igual, vomita el dato numérico y ya"',
       '"Anhelo respuestas certeras, esquemas ejemplificativos y una escritura lisa sin adornos. Te recabaré para consolidar reflexiones de estudiante"',
-      '"Realiza el encargo como prefieras, carezco de un molde ideal"'
+      '"A mí me da igual, vomita el dato numérico y ya"'
     ],
     2,
     "Ese enunciado impone matriz, motivo de consulta e idiosincrasia lingüística de un plumazo sólido a lo largo de las futuras interacciones."
@@ -377,12 +377,12 @@ export const CHATGPT_MODULE_4_STEPS_FR = [
     "La Charge Contextuelle Principale",
     "Quel fondement justifie de confier un contexte généreux au robot ?",
     [
-      "Il établit un socle informatif indispensable au calcul d'une proposition millimétrée",
-      "Il dynamise grandement la rapidité d'affichage pure des pixels mots",
+      "Il donne l'opportunité au système virtuel de jouer",
       "Il réduit violemment sa latence technique",
-      "Il donne l'opportunité au système virtuel de jouer"
+      "Il établit un socle informatif indispensable au calcul d'une proposition millimétrée",
+      "Il dynamise grandement la rapidité d'affichage pure des pixels mots"
     ],
-    0,
+    2,
     "Transférer les bases concrètes à l'algorithme aplanit la direction d'investigation pour qu'une utilité totale en sorte."
   ),
   textStep(
@@ -406,11 +406,11 @@ export const CHATGPT_MODULE_4_STEPS_FR = [
     "Si l'on cherche la pure exactitude algorithmique, quelle donnée demeure inéluctable à inscrire ?",
     [
       "Fomenter un chaos volontaire par ambiguïté textuelle pure",
-      "L'économie extrême de lettres frénétique par soustraction des verbes",
       "L'historique académique, terminologies précises, règles empiriques limitatives de l'ouvrage",
-      "L'énonciation des films adorés du processeur"
+      "L'énonciation des films adorés du processeur",
+      "L'économie extrême de lettres frénétique par soustraction des verbes"
     ],
-    2,
+    1,
     "Déposer vos règles du jeu sans faille, des bornes irréductibles de faisabilité et la sémantique noble élèveront prodigieusement les rendements."
   ),
   textStep(
@@ -422,11 +422,11 @@ export const CHATGPT_MODULE_4_STEPS_FR = [
     "Pourquoi l'injonction contextuelle balaie logiquement sans pitié la simple requête superficielle classique ?",
     [
       "Elle provoque l'étirement des caractères sortants peu importent l'intelligence du propos global",
-      "Elle abaisse miraculeusement la consommation énergétique réseau de votre ordinateur personnel",
       "Elle arme l'outil jusqu'aux dents afin d'extruder du pertinent et du chirurgical adéquat face au dessein espéré et du terreau initial",
+      "Elle abaisse miraculeusement la consommation énergétique réseau de votre ordinateur personnel",
       "Défend farouchement votre compteur algorithmique de crédit artificiel"
     ],
-    2,
+    1,
     "Injecter le tableau l'ancre solidement dans le réalisme de la vie active sans flottements sur un axe théorique purement stérile."
   ),
   textStep(
@@ -441,10 +441,10 @@ export const CHATGPT_MODULE_4_STEPS_FR = [
     "Architecture du Chantier Prolongé",
     "Lorsque la situation s'étale sur des jours et que vous déverrouillez fatalement une session de traitement toute neuve du lundi, quelle serait l'attitude primordiale indiscutable ?",
     [
-      "Fondre à tombeau ouvert sans une Once d'historisation sur de l'ingénierie pointue",
       "Faire foi d'une souvenance aveugle du programme algorithmique",
+      "Re-configurer un profil utilisateur exclusif en amont absolu",
       "Assener un prompt massif réconciliant tout l'envers du tableau afin de coudre précisément le bout du sillage en suspens",
-      "Re-configurer un profil utilisateur exclusif en amont absolu"
+      "Fondre à tombeau ouvert sans une Once d'historisation sur de l'ingénierie pointue"
     ],
     2,
     "La ligne vide de réinitialisation provoque d'amblée une mémoire blanche ; hors de systèmes pro gérants le suivi de logs. On refaçade la fondation sans exception."
@@ -461,12 +461,12 @@ export const CHATGPT_MODULE_4_STEPS_FR = [
     "Setup Personnel Ultime",
     "Au rang des Directives Personnalisées permanentes du fond, laquelle des propositions brille comme le grand vainqueur absolu de cette démarche ?",
     [
-      "\"Force systématique à une volumétrie extrême et au vocabulaire académique d'histoire moyen-âge\"",
-      "\"Aucune patience, balance l'élémentaire solution immédiatement sans un mot additionnel ou politesse d'usage\"",
       "\"Ma délectation réside du rapide et du pratique et je proscris vivement l'artifice pompeux. Mon utilisation cimente rudement de la formation personnelle sur de la technologie informatique moderne.\"",
-      "\"Procede selon l'humeur logistique instantanée, ni de moule formel ni de dictées fermement arrêtées en ma demeure textuelle\""
+      "\"Procede selon l'humeur logistique instantanée, ni de moule formel ni de dictées fermement arrêtées en ma demeure textuelle\"",
+      "\"Aucune patience, balance l'élémentaire solution immédiatement sans un mot additionnel ou politesse d'usage\"",
+      "\"Force systématique à une volumétrie extrême et au vocabulaire académique d'histoire moyen-âge\""
     ],
-    2,
+    0,
     "La charte encadre l'exactitude logistique de verve, la finalité globale du bot, et la méthode verbale la plus probante à l'opérateur pour l'ensemble des futurs entretiens ouverts."
   ),
   textStep(

@@ -62,20 +62,20 @@ export const CHATGPT_MODULE_6_STEPS_PT = [
     [
       '"Veja esses três exemplos de resumos e crie um no mesmo estilo"',
       '"Com base nos exemplos abaixo, gere uma resposta similar"',
-      '"Explique o conceito de inteligência artificial em linguagem simples para um estudante do ensino médio"',
-      '"Primeiro analise o exemplo, depois repita o mesmo formato"'
+      '"Primeiro analise o exemplo, depois repita o mesmo formato"',
+      '"Explique o conceito de inteligência artificial em linguagem simples para um estudante do ensino médio"'
     ],
-    2,
+    3,
     "Você comandou a ação sem usar contexto pregresso ou fornecer exemplos prontos."
   ),
   quizStep(
     "Aplicando o Zero-Shot",
     "Imagine que você precisa planejar uma viagem internacional pela primeira vez e não sabe por onde começar. Qual prompt de zero-shot você usaria para pedir ajuda ao ChatGPT?",
     [
+      '"Fale sobre viagens"',
       '"Me ajude com viagem"',
-      '"O que fazer?"',
       '"Liste os 5 primeiros passos que alguém deve seguir ao planejar sua primeira viagem internacional, incluindo documentos, passagem, hospedagem e seguro viagem"',
-      '"Fale sobre viagens"'
+      '"O que fazer?"'
     ],
     2,
     "Instruções claras e delimitações (5 passos) formam um tiro 'zero-shot' perfeito."
@@ -88,12 +88,12 @@ export const CHATGPT_MODULE_6_STEPS_PT = [
     "Identifique o Few-Shot Correto",
     "Você quer que o ChatGPT classifique frases como positivas ou negativas. Qual prompt usa a técnica few-shot corretamente?",
     [
-      '"Classifique as frases abaixo como positivas ou negativas"',
-      '"Me diga o sentimento dessas frases"',
       '"Classifique o sentimento de cada frase. Exemplos: \'O dia estava lindo\' → Positivo. \'Fiquei muito frustrado com o atraso\' → Negativo. \'O atendimento foi incrível\' → Positivo. Agora classifique: \'Não gostei nada do resultado\'"',
-      '"Veja alguns exemplos e depois me explique o conceito de sentimento"'
+      '"Veja alguns exemplos e depois me explique o conceito de sentimento"',
+      '"Classifique as frases abaixo como positivas ou negativas"',
+      '"Me diga o sentimento dessas frases"'
     ],
-    2,
+    0,
     "Fornecer múltiplos gabaritos antes da pergunta final condiciona perfeitamente o formato da resposta."
   ),
   fillStep(
@@ -112,12 +112,12 @@ export const CHATGPT_MODULE_6_STEPS_PT = [
     "A Vantagem das Etapas",
     "Qual é a principal vantagem do Chain-of-Thought Prompting?",
     [
-      "Simplifica o prompt removendo etapas",
-      "Acelera o tempo de resposta ao pular detalhes",
       "Divide tarefas complexas em sequências lógicas, aumentando a precisão",
-      "Torna os prompts menos compreensíveis"
+      "Torna os prompts menos compreensíveis",
+      "Acelera o tempo de resposta ao pular detalhes",
+      "Simplifica o prompt removendo etapas"
     ],
-    2,
+    0,
     "A divisão sequencial impede que o modelo 'alucine' ou engula etapas essenciais de raciocínio profundo."
   ),
   textStep(
@@ -128,10 +128,10 @@ export const CHATGPT_MODULE_6_STEPS_PT = [
     "Etapa 1 — Coleta de informações",
     "Qual é o melhor primeiro prompt para entender a situação do seu amigo?",
     [
-      '"O que você deve fazer na sua carreira?"',
+      '"Liste prós e contras de mudar de carreira"',
       '"Mude de emprego logo"',
       '"Para ajudar na decisão de mudança de carreira, preciso entender melhor a situação. Me responda: qual é sua área atual, há quanto tempo trabalha nela, o que te faz querer mudar e qual área te atrai?"',
-      '"Liste prós e contras de mudar de carreira"'
+      '"O que você deve fazer na sua carreira?"'
     ],
     2,
     "Você coleta as bases antes de forçar o modelo a deduzir estratégias às cegas."
@@ -140,21 +140,21 @@ export const CHATGPT_MODULE_6_STEPS_PT = [
     "Etapa 2 — Análise das informações",
     "Seu amigo respondeu que tem 6 anos como contador, mas quer tentar design gráfico. Ele tem família e não pode perder a renda. Qual prompt analisa isso corretamente na sequência?",
     [
-      '"O que ele deve fazer?"',
       '"Design é uma boa carreira?"',
       '"Com base nessas informações, analise os principais riscos e oportunidades dessa transição de carreira. Considere o tempo de experiência, as responsabilidades financeiras e o interesse pela nova área. Liste caminhos possíveis que permitam a transição sem abrir mão da estabilidade"',
-      '"Faça uma lista de cursos de design"'
+      '"Faça uma lista de cursos de design"',
+      '"O que ele deve fazer?"'
     ],
-    2,
+    1,
     "Ao pedir foco em riscos financeiros e estabilidade, a análise do bot será pragmática e não romântica."
   ),
   quizStep(
     "Etapa 3 — Conclusão e próximo passo",
     "A análise foi feita. Agora qual prompt encerra o processo de forma útil?",
     [
-      '"Obrigado, pode parar por aqui"',
-      '"Com base em tudo que analisamos, sugira um plano de transição realista para os próximos 12 meses, com ações concretas mês a mês que permitam desenvolver as habilidades de design sem abrir mão da renda atual"',
       '"Repita tudo de novo de forma resumida"',
+      '"Com base em tudo que analisamos, sugira um plano de transição realista para os próximos 12 meses, com ações concretas mês a mês que permitam desenvolver as habilidades de design sem abrir mão da renda atual"',
+      '"Obrigado, pode parar por aqui"',
       '"Agora fale sobre outros tipos de carreira"'
     ],
     1,
@@ -183,24 +183,24 @@ export const CHATGPT_MODULE_6_STEPS_EN = [
     "Zero-Shot Comprehension",
     "Which of these perfectly represents Zero-Shot Prompting?",
     [
-      '"Look at these three summary formats and mimic them"',
-      '"Based on the examples below, yield a similar copy"',
+      '"First analyze the template, then replicate its format"',
       '"Explain the core concept of artificial intelligence using simple language suited for a high school student"',
-      '"First analyze the template, then replicate its format"'
+      '"Look at these three summary formats and mimic them"',
+      '"Based on the examples below, yield a similar copy"'
     ],
-    2,
+    1,
     "You successfully commanded an action without supplying pre-made variables or structural examples."
   ),
   quizStep(
     "Applying Zero-Shot",
     "Imagine you need to plan an international trip for the first time. Which zero-shot prompt efficiently asks ChatGPT for guidance?",
     [
+      '"List the very first 5 steps someone should take when planning an international trip, including passports, flights, housing, and travel insurance"',
       '"Help me travel"',
       '"What should I do?"',
-      '"List the very first 5 steps someone should take when planning an international trip, including passports, flights, housing, and travel insurance"',
       '"Talk to me about tourism"'
     ],
-    2,
+    0,
     "Explicit outlines (the 5 steps limitation) forge a crisp 'zero-shot' instruction."
   ),
   textStep(
@@ -211,12 +211,12 @@ export const CHATGPT_MODULE_6_STEPS_EN = [
     "Spotting the Few-Shot",
     "You want ChatGPT to label sentences as positive or negative. Which prompt properly utilizes Few-Shot mechanics?",
     [
-      '"Classify the text below as positive or negative"',
       '"Tell me to tone of the following"',
       '"Classify the sentiment of each phrase. Examples: \'The day was gorgeous\' → Positive. \'I got frustrated by the lag\' → Negative. \'The service was stunning\' → Positive. Now classify: \'I really disliked the final score\'"',
+      '"Classify the text below as positive or negative"',
       '"Read some reviews and tell me about feelings"'
     ],
-    2,
+    1,
     "Providing the template solutions directly coaches the algorithm exactly how to behave on the ensuing final test."
   ),
   fillStep(
@@ -235,12 +235,12 @@ export const CHATGPT_MODULE_6_STEPS_EN = [
     "The Benefit of Phases",
     "What is the ultimate upside of using Chain-of-Thought Prompting?",
     [
-      "It makes the prompt shorter",
-      "It boosts generating speed by omitting details",
       "It fragments a complex puzzle into logical sequences, heavily increasing mathematical and deduction accuracy",
-      "It corrupts outputs but makes them look smarter"
+      "It corrupts outputs but makes them look smarter",
+      "It boosts generating speed by omitting details",
+      "It makes the prompt shorter"
     ],
-    2,
+    0,
     "Sequential fragmentation stops the model from hallucinating or skipping deep logic tiers."
   ),
   textStep(
@@ -251,34 +251,34 @@ export const CHATGPT_MODULE_6_STEPS_EN = [
     "Stage 1 — Gathering Intelligence",
     "Which is the best opener prompt to understand their landscape?",
     [
-      '"What career is good?"',
       '"Quit your job today"',
-      '"To help chart a career pivot, I need background context. Answer me: what is your current field, how long have you been there, what drives the desire to change, and what new area sparks your interest?"',
-      '"Give me pros and cons of working"'
+      '"What career is good?"',
+      '"Give me pros and cons of working"',
+      '"To help chart a career pivot, I need background context. Answer me: what is your current field, how long have you been there, what drives the desire to change, and what new area sparks your interest?"'
     ],
-    2,
+    3,
     "You establish baseline variables before forcing the engine to blindly advise anything."
   ),
   quizStep(
     "Stage 2 — Data Analysis",
     "Your friend answers: 'I have been an accountant for 6 years but lack motivation. I always liked graphic design but never formally studied it. I have a family to feed and cannot lose my income stream.' What prompt follows next?",
     [
-      '"What should they do?"',
-      '"Is design a decent job?"',
       '"Based on this feedback, analyze the main risks and opportunities of this transition. Factor in current experience, financial burdens, and interest in design. Draft paths that allow a transition without threatening household stability."',
+      '"Is design a decent job?"',
+      '"What should they do?"',
       '"List 10 cheap design courses"'
     ],
-    2,
+    0,
     "Forcing focus onto financial constraints and safety nets guides the analysis to be highly pragmatic, avoiding romanticized useless answers."
   ),
   quizStep(
     "Stage 3 — Final Masterplan",
     "The analysis is complete. What prompt perfectly closes the process into action?",
     [
-      '"Thanks, you can log off now"',
+      '"Talk to me about being an engineer"',
       '"Based on everything we analyzed, pitch a realistic 12-month transition roadmap. Build month-to-month concrete actions allowing them to cultivate design skills without sacrificing the current accounting paycheck."',
-      '"Repeat everything we just discussed randomly"',
-      '"Talk to me about being an engineer"'
+      '"Thanks, you can log off now"',
+      '"Repeat everything we just discussed randomly"'
     ],
     1,
     "Demanding a realistic timeline is the ultimate executable step born strictly from the previous thought chain."
@@ -306,24 +306,24 @@ export const CHATGPT_MODULE_6_STEPS_ES = [
     "Comprensión del Zero-Shot",
     "¿Cuál de las siguientes premisas encarna limpiamente al Zero-Shot?",
     [
-      '"Mira estos tres resúmenes y clónalos"',
       '"Habiendo leído los ejemplos anexados, propón uno equivalente"',
       '"Explica el marco teórico de la inteligencia generativa empleando una narrativa afable para estudiantes de secundaria"',
+      '"Mira estos tres resúmenes y clónalos"',
       '"Primero consume los patrones, luego emula la estructura"'
     ],
-    2,
+    1,
     "Lanzaste una solicitud sólida libre de maquetas o modelos guías."
   ),
   quizStep(
     "Impactando el Zero-Shot",
     "Imagina organizar tu primer vuelo transatlántico. ¿Qué mandato Zero-Shot le pedirías al ChatGPT?",
     [
-      '"Ayúdame a salir del país"',
-      '"¿Qué hago para viajar?"',
       '"Enlista concretamente los primeros 5 peldaños organizativos al trazar un viaje internacional. Incluye papelería, logística de vuelos, techo y seguros."',
-      '"Inyéctame motivación viajera"'
+      '"¿Qué hago para viajar?"',
+      '"Inyéctame motivación viajera"',
+      '"Ayúdame a salir del país"'
     ],
-    2,
+    0,
     "Forzar escalones precisos (los 5 peldaños) levanta una orden magistral directa al grano."
   ),
   textStep(
@@ -334,12 +334,12 @@ export const CHATGPT_MODULE_6_STEPS_ES = [
     "Identificando el Few-Shot",
     "Deseas clasiﬁcar el termómetro emocional de ciertas reseñas. ¿Qué texto invoca la mecánica Few-Shot?",
     [
-      '"Clasifica las oraciones entre luz y sombra"',
-      '"Dime si están tristes o contentos"',
+      '"Lee algunos casos allá afuera y dime tus impresiones"',
       '"Clasifica la vibra textual. Casos: \'La tarde es un sol brillante\' → Positivo. \'Odio con mi ser este atasco\' → Negativo. \'Servicio 5 estrellas\' → Positivo. Turno actual, clasifica: \'Repudio la entrega defectuosa\'"',
-      '"Lee algunos casos allá afuera y dime tus impresiones"'
+      '"Clasifica las oraciones entre luz y sombra"',
+      '"Dime si están tristes o contentos"'
     ],
-    2,
+    1,
     "Regalarle ejemplos resueltos entrena al vuelo el núcleo duro del procesador para su próxima jugada."
   ),
   fillStep(
@@ -358,12 +358,12 @@ export const CHATGPT_MODULE_6_STEPS_ES = [
     "El Filo de las Fases",
     "¿Dónde radica el verdadero genio de segmentar el mandato en Cadenas de Pensamiento?",
     [
-      "Acorta drásticamente el texto en pantalla",
-      "Vuelve a la IA perezosa saltando pasos grises",
+      "Ensucia los textos y los vuelve irrelegibles",
       "Desguaza algoritmos enormes en piezas digeribles, exterminando márgenes de error deductivo",
-      "Ensucia los textos y los vuelve irrelegibles"
+      "Acorta drásticamente el texto en pantalla",
+      "Vuelve a la IA perezosa saltando pasos grises"
     ],
-    2,
+    1,
     "Pausar las etapas evita de facto que la IA sufra alucinaciones o puentee bloques críticos racionales."
   ),
   textStep(
@@ -374,12 +374,12 @@ export const CHATGPT_MODULE_6_STEPS_ES = [
     "Fase 1 — Extracción Pericial",
     "¿Qué tiro de apertura desentraña limpio su mapa de vida?",
     [
-      '"Dime qué empleo le dejo"',
+      '"Pásame beneficios de cambiar de rubro"',
       '"Renuncia a tu puesto mañana a primera hora"',
-      '"Para esculpir un puente de trancisión laboral, urjo armar un perfil tuyo: ¿Cuál es tu actual circuito laboral, años de maduración ahí, el motor real de escape y el sector hacia el cual vibras ahora mismo?"',
-      '"Pásame beneficios de cambiar de rubro"'
+      '"Dime qué empleo le dejo"',
+      '"Para esculpir un puente de trancisión laboral, urjo armar un perfil tuyo: ¿Cuál es tu actual circuito laboral, años de maduración ahí, el motor real de escape y el sector hacia el cual vibras ahora mismo?"'
     ],
-    2,
+    3,
     "Consolidar pilares biográficos primeramente frena sugerencias vacías y estadísticas genéricas de la máquina."
   ),
   quizStep(
@@ -388,22 +388,22 @@ export const CHATGPT_MODULE_6_STEPS_ES = [
     [
       '"Dime qué hacer velozmente"',
       '"Pregúntale si diseñar le gusta bastante"',
-      '"Consumiendo esa crónica, radiografía amenazas y ventanas maestras del cambio. Basa tu foco inviolablemente en los deberes económicos, la madurez en su área y su interés en arte gráfico. Esboza puentes viables que anclen su seguridad financiera integral."',
-      '"Tírame academias online de ilustración"'
+      '"Tírame academias online de ilustración"',
+      '"Consumiendo esa crónica, radiografía amenazas y ventanas maestras del cambio. Basa tu foco inviolablemente en los deberes económicos, la madurez en su área y su interés en arte gráfico. Esboza puentes viables que anclen su seguridad financiera integral."'
     ],
-    2,
+    3,
     "Fijar restricciones de fuego en compromisos familiares vuelve pragmático e implacable al consejo del bot."
   ),
   quizStep(
     "Fase 3 — Masterplan Táctico",
     "Análisis gestado. ¿Bajo qué orden coronamos la obra operativa?",
     [
+      '"Vomita un resumen relámpago inofensivo"',
       '"Se acabó, apágate"',
       '"Cimentados en la inspección de riesgos, parpadea un itinerario cronológico de 12 meses implacables. Funda accionables mes a mes permitiendo su formación en lo gráfico pero reteniendo su nómina como contable base."',
-      '"Vomita un resumen relámpago inofensivo"',
       '"Comienza a redactarme sobre ser veterinario"'
     ],
-    1,
+    2,
     "Extraer la tabla cronometrada remata a la perfección la arquitectura previa, volviéndolo material factible y accionable."
   ),
   textStep(
@@ -429,8 +429,8 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "Diagnostics de Base",
     "Qu'est-ce qui caractérise parfaitement l'emploi du canon Zero-Shot dans l'action ?",
     [
-      '"Observe ces extraits narratifs et craches-en un calque"',
       '"Analyse méticuleusement les formats suivants pour me plier un résumé conforme"',
+      '"Observe ces extraits narratifs et craches-en un calque"',
       '"Vulgariser magistralement le concept de matrice informatique pour les yeux d\'un adolescent de seconde générale"',
       '"Lis mon patron avant de répéter la boucle"'
     ],
@@ -442,11 +442,11 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "Supposez l'ordonnancement d'un grand départ aérien inédit vers l'autre hémisphère. Quelle formule Zero-Shot sonne magistralement claire ?",
     [
       '"Aide mon départ au plus vite"',
-      '"As-tu des astuces loisirs ?"',
       '"Inventorie brutalement les 5 prémices obligatoires encadrant un départ intercontinental vierge. Fusionne documents légaux, transit aérien, hébergement et barrières d\'assurance."',
+      '"As-tu des astuces loisirs ?"',
       '"Cause-moi de gares et d\'avions"'
     ],
-    2,
+    1,
     "En posant directement la limitation au chiffre 5 et les secteurs exacts, l'esprit de l'engin percute le mille sans fioritures."
   ),
   textStep(
@@ -457,12 +457,12 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "Détecter l'Injection de Gabarits",
     "Vous ordonnez au bot le triage émotionnel de citations brutes. Quelle formule exploite la fibre Few-Shot ?",
     [
-      '"Sépare les affirmations belles des tristes"',
       '"Quelle est leur température d\'humeur globale ?"',
-      '"Sonde rigoureusement la sentence. Étalonnage : \'L\'aube fut dorée\' → Positif. \'Je suffoque d\'horreur au milieu de cet embouteillage\' → Négatif. \'Prestation royale du serveur\' → Positif. Ton tour : \'J\'abhorre radicalement votre produit bas de gamme\'"',
-      '"Sais-tu ce qu\'est la colère ?"'
+      '"Sais-tu ce qu\'est la colère ?"',
+      '"Sépare les affirmations belles des tristes"',
+      '"Sonde rigoureusement la sentence. Étalonnage : \'L\'aube fut dorée\' → Positif. \'Je suffoque d\'horreur au milieu de cet embouteillage\' → Négatif. \'Prestation royale du serveur\' → Positif. Ton tour : \'J\'abhorre radicalement votre produit bas de gamme\'"'
     ],
-    2,
+    3,
     "Lui concéder les solutions étalons à l'avance calque son architecture neuronale pour livrer un jugement sur le même axe."
   ),
   fillStep(
@@ -481,12 +481,12 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "La Supériorité de Fragmenter l'Intellect",
     "Qu'est-ce qui différencie farouchement un ordre segmenté du chaos généralisé ?",
     [
-      "Le texte défile moins longtemps",
-      "Le système ignore joyeusement les consignes de fond",
       "Couper un drame insoluble en paliers mathématiques endigue farouchement l'hérésie de fond et magnifie la justesse d'impact logique",
-      "Rien ne change fondamentalement dans l'appareil de calcul"
+      "Le système ignore joyeusement les consignes de fond",
+      "Rien ne change fondamentalement dans l'appareil de calcul",
+      "Le texte défile moins longtemps"
     ],
-    2,
+    0,
     "L'interdire de sauter par-dessus les noeuds d'analyse l'oblige à bâtir les fondations avant de monter le mur déductif."
   ),
   textStep(
@@ -498,19 +498,19 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "Comment déminer d'entrée la cartographie vitale du naufragé ?",
     [
       '"Vends moi ton poste en or"',
+      '"Liste moi gentiment les tares de ton job"',
       '"Fuis ta boîte avant qu\'elle coule"',
-      '"Générons un pont de sauvegarde vital concernant ce pivot. Confie-moi sans trahir ta matrice ambiante : domaine actif, durée d\'emprisonnement là-bas, catalyseur fort provoquant l\'envie d\'ailleurs, et le rêve professionnel qui te consume à l\'instant t ?"',
-      '"Liste moi gentiment les tares de ton job"'
+      '"Générons un pont de sauvegarde vital concernant ce pivot. Confie-moi sans trahir ta matrice ambiante : domaine actif, durée d\'emprisonnement là-bas, catalyseur fort provoquant l\'envie d\'ailleurs, et le rêve professionnel qui te consume à l\'instant t ?"'
     ],
-    2,
+    3,
     "Agripper l'architecture des contraintes bride le bot pour qu'il n'avance aucune fumisterie hasardeuse d'emblée."
   ),
   quizStep(
     "Étage Numéro 2 — Laboratoire Déductif",
     "Votre compagnon fige les faits : '6 années plombées dans la comptabilité, morosité intense. Fasciné viscéralement par le web-design sans palmarès existant. Responsable des frais du foyer et interdiction totale de rupture de versement salarial'. Comment enclencher l'analyse frontale du processeur ?",
     [
-      '"Donne un métier rapide à ce type perdu"',
       '"Penses-tu que l\'art c\'est viable financièrement sur le long cours ?"',
+      '"Donne un métier rapide à ce type perdu"',
       '"À la racine pure des aveux : ausculte âprement les gouffres de risques et les ascenseurs potentiels d\'un tel saut ! Accroche vigoureusement l\'algorithme à la charge pécuniaire inconditionnelle et son parcours natif. Traces les artères du possible n\'écorchant aucunement la fiabilité de son maintien salarial."',
       '"Quels cours d\'ordinateur peut-il suivre ?"'
     ],
@@ -522,11 +522,11 @@ export const CHATGPT_MODULE_6_STEPS_FR = [
     "Le cadastre des peurs est dressé. Quel acte impérial entérine ce chantier d'assistance sur une note brillante ?",
     [
       '"C\'est noté, l\'exercice prend fin"',
-      '"Emmenant l\'ensemble des bilans épluchés, dresse l\'ossature mathématique de mois en mois pour cette année test. Conçois des blocs opérationnels précis liant l\'avancée frénétique sur palette graphique au chevet de sa routine comptable immuable."',
       '"Récapitules platement ces données de nouveau mais très très vite"',
+      '"Emmenant l\'ensemble des bilans épluchés, dresse l\'ossature mathématique de mois en mois pour cette année test. Conçois des blocs opérationnels précis liant l\'avancée frénétique sur palette graphique au chevet de sa routine comptable immuable."',
       '"Change d\'axe et aborde gentiment les métiers d\'ingénieur"'
     ],
-    1,
+    2,
     "Arracher le calendrier prévisionnel des mains de la machine exprime le rendement optimal final justifié par la chaîne déductive intégrale."
   ),
   textStep(

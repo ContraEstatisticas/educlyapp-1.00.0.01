@@ -66,12 +66,12 @@ export const CHATGPT_MODULE_1_STEPS_PT = [
     "Origem das Respostas",
     "O que você acha que o ChatGPT respondeu quando você pediu a receita?",
     [
-      "Ele repete um preparo que já viu antes nos dados de treinamento",
       "Ele copia a receita de um site de culinária específico",
-      "Ele cria receitas aleatórias escolhendo palavras",
-      "Ele procura a receita no Google em tempo real"
+      "Ele repete um preparo que já viu antes nos dados de treinamento",
+      "Ele procura a receita no Google em tempo real",
+      "Ele cria receitas aleatórias escolhendo palavras"
     ],
-    0,
+    1,
     "O ChatGPT gera o texto combinando os padrões estatísticos que internalizou durante o treinamento e não copiando de uma única fonte."
   ),
   textStep(
@@ -109,12 +109,12 @@ export const CHATGPT_MODULE_1_STEPS_EN = [
     "Origin of the Answers",
     "What do you think ChatGPT answered when you asked for the recipe?",
     [
-      "It repeats a preparation it has seen before in the training data",
       "It copies the recipe from a specific cooking website",
+      "It repeats a preparation it has seen before in the training data",
       "It creates random recipes by choosing words",
       "It searches for the recipe on Google in real time"
     ],
-    0,
+    1,
     "ChatGPT generates text by combining the statistical patterns it internalized during training and not by copying from a single source."
   ),
   textStep(
@@ -152,12 +152,12 @@ export const CHATGPT_MODULE_1_STEPS_ES = [
     "Origen de las Respuestas",
     "¿Qué crees que respondió ChatGPT cuando le pediste la receta?",
     [
-      "Repite una preparación que ya ha visto antes en los datos de entrenamiento",
-      "Copia la receta de un sitio web de cocina específico",
+      "Busca la receta en Google en tiempo real",
       "Crea recetas aleatorias eligiendo palabras",
-      "Busca la receta en Google en tiempo real"
+      "Copia la receta de un sitio web de cocina específico",
+      "Repite una preparación que ya ha visto antes en los datos de entrenamiento"
     ],
-    0,
+    3,
     "ChatGPT genera texto combinando los patrones estadísticos que internalizó durante el entrenamiento y no copiando de una sola fuente."
   ),
   textStep(
@@ -196,9 +196,9 @@ export const CHATGPT_MODULE_1_STEPS_FR = [
     "Que pensez-vous que ChatGPT a répondu lorsque vous avez demandé la recette ?",
     [
       "Il répète une préparation qu'il a déjà vue dans les données d'entraînement",
-      "Il copie la recette à partir d'un site Web de cuisine spécifique",
       "Il crée des recettes aléatoires en choisissant des mots",
-      "Il cherche la recette sur Google en temps réel"
+      "Il cherche la recette sur Google en temps réel",
+      "Il copie la recette à partir d'un site Web de cuisine spécifique"
     ],
     0,
     "ChatGPT génère du texte en combinant les modèles statistiques qu'il a intériorisés pendant la formation et non en copiant à partir d'une seule source."

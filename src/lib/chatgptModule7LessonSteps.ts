@@ -85,11 +85,11 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     "Após colar um contrato no ChatGPT e receber um belo resumo, o que você deve fazer a seguir?",
     [
       "Assinar o contrato imediatamente com base no resumo",
-      "Ignorar o resumo e ler o documento do zero mesmo assim",
+      "Usar o resumo como guia e verificar os pontos críticos diretamente no documento original",
       "Compartilhar o resumo como versão oficial do contrato",
-      "Usar o resumo como guia e verificar os pontos críticos diretamente no documento original"
+      "Ignorar o resumo e ler o documento do zero mesmo assim"
     ],
-    3,
+    1,
     "O resumo não substitui a verdade legal. Ele guia seus olhos para as cláusulas certas no documento original validado."
   ),
   textStep(
@@ -108,12 +108,12 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     "A Busca por Riscos",
     "Qual prompt é mais eficaz para auditar um contrato procurando armadilhas?",
     [
-      '"O que você acha desse contrato?"',
-      '"Esse contrato é bom ou ruim?"',
       '"Analise esse contrato e liste todas as cláusulas que podem ser desvantajosas para o contratante, explicando o risco de cada uma em linguagem simples"',
-      '"Leia o contrato e me diga se posso assinar"'
+      '"O que você acha desse contrato?"',
+      '"Leia o contrato e me diga se posso assinar"',
+      '"Esse contrato é bom ou ruim?"'
     ],
-    2,
+    0,
     "Instruções abertas trazem respostas abertas. Pedir clareza nos riscos com linguagem simples garante controle e alerta legal."
   ),
   textStep(
@@ -124,10 +124,10 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     "A Tabela de Decisão",
     "Você recebeu duas propostas comerciais de fornecedores diferentes. Qual prompt usaria para compará-las da melhor forma?",
     [
-      '"Qual das duas propostas é melhor?"',
+      '"Me diga qual proposta aceitar"',
       '"Compare as propostas"',
       '"Compare as duas propostas abaixo com base nos critérios: preço, prazo de entrega, pagamento, garantias e rescisão. Apresente em uma tabela e aponte qual oferece mais vantagens para uma empresa pequena."',
-      '"Me diga qual proposta aceitar"'
+      '"Qual das duas propostas é melhor?"'
     ],
     2,
     "Isso estabelece dimensões fixas de análise (preço, prazo) e exige um formato tabular, gerando clareza imbatível para sua leitura."
@@ -150,10 +150,10 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     [
       "Porque o ChatGPT cria uma versão juridicamente válida de qualquer termo inventado.",
       "Para substituir severamente a leitura da versão formal.",
-      "Para entender claramente o que cada cláusula significa na prática antes de consultar um especialista.",
-      "Porque contratos em linguagem simples ganham mais poder jurídico perante juízes."
+      "Porque contratos em linguagem simples ganham mais poder jurídico perante juízes.",
+      "Para entender claramente o que cada cláusula significa na prática antes de consultar um especialista."
     ],
-    2,
+    3,
     "Você destrava o entendimento das bases de negociação da oferta do contrato sem precisar da intervenção custosa antecipada de advogados."
   ),
   textStep(
@@ -176,12 +176,12 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     "Inspeção Pré-Envio",
     "Qual comando prova ser o supremo modelo revisor para blindar o envio de propostas ao seu público?",
     [
-      '"Revise minha proposta"',
       '"Esse texto está bacana?"',
-      '"Corrija os erros de português e espaçamentos da proposta"',
-      '"Revise a proposta abaixo e identifique: erros de clareza, falhas geradoras de dúvida, tópicos em aberto e trechos dispostos que possam prejudicar gravemente as finanças da nossa firma."'
+      '"Revise minha proposta"',
+      '"Revise a proposta abaixo e identifique: erros de clareza, falhas geradoras de dúvida, tópicos em aberto e trechos dispostos que possam prejudicar gravemente as finanças da nossa firma."',
+      '"Corrija os erros de português e espaçamentos da proposta"'
     ],
-    3,
+    2,
     "Ativar modo crítico defensivo no modelo (buscando prejudicar gravamente finanças) obriga a IA a avaliar o texto sob uma lupa pessimista extrema."
   ),
   textStep(
@@ -192,9 +192,9 @@ export const CHATGPT_MODULE_7_STEPS_PT = [
     "Onde o Robô Falha?",
     "Na auditoria pura, o que o ChatGPT NÃO É ESTRITAMENTE CAPAZ de fazer legalmente com a papelada da sua empresa?",
     [
-      "Resumir de modo inteligente termos confusos de 20 páginas longas.",
-      "Listar buracos vermelhos (claúsulas crueis de risco).",
       "Traduzir dialeto judiciário esnobe em linguagem diária e fluída.",
+      "Listar buracos vermelhos (claúsulas crueis de risco).",
+      "Resumir de modo inteligente termos confusos de 20 páginas longas.",
       "Oferecer parecer jurídico imaculado com total validade legal, assumindo assim a responsabilidade em caso de processos e prejuízos baseados no conteúdo operado."
     ],
     3,
@@ -219,12 +219,12 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "The True Value of AI Reading",
     "Why precisely does leveraging ChatGPT upon these documents present an immeasurable edge?",
     [
-      "It totally fires and supplants specialized legal attorneys.",
       "It mathematically guarantees your contract carries absolutely zero legal flaws.",
-      "It saves monumental effort by intelligently extracting and summarily spotlighting pivotal points instantly.",
-      "It auto-reworks any document without prior user boundaries."
+      "It auto-reworks any document without prior user boundaries.",
+      "It totally fires and supplants specialized legal attorneys.",
+      "It saves monumental effort by intelligently extracting and summarily spotlighting pivotal points instantly."
     ],
-    2,
+    3,
     "AI operates as a brilliant initial triaging filter making your deep comprehension far faster and shielding your effort."
   ),
   textStep(
@@ -243,12 +243,12 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "Post-Summary Action",
     "After handing a massive contract over to ChatGPT and securing a glossy summary, what constitutes the correct next real-world move?",
     [
+      "Use the summary matrix strictly as a guiding map and forcefully inspect the mentioned critical segments inside the authentic original file.",
       "Instantly execute and sign the documents relying completely on the short bot text.",
-      "Ignore the summary outputs and proceed to violently read the gigantic original layout anyway.",
       "Publish the summary text to act as the legal finalized paperwork instead.",
-      "Use the summary matrix strictly as a guiding map and forcefully inspect the mentioned critical segments inside the authentic original file."
+      "Ignore the summary outputs and proceed to violently read the gigantic original layout anyway."
     ],
-    3,
+    0,
     "The summary is a map to navigate the heavy woods. It highlights the focal points so you target them inside the verified dense source."
   ),
   textStep(
@@ -268,9 +268,9 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "Which exact text architecture excels aggressively to trap and locate document flaws?",
     [
       '"What are your thoughts on this entire setup?"',
-      '"Is this document nice to sign?"',
+      '"Read this text immediately and grant me permission to sign it."',
       '"Critique this contract by listing out any clause showcasing structural disadvantages for the executing side, laying plain English impact warnings for each listed item."',
-      '"Read this text immediately and grant me permission to sign it."'
+      '"Is this document nice to sign?"'
     ],
     2,
     "Wide instructions prompt useless wide answers. Confining the engine to exclusively pinpoint and explain detriments grants extreme legal vigilance."
@@ -283,10 +283,10 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "The Decision Matrix",
     "Handling two varying supplier business proposals, how should you extract the maximum comparison layout from ChatGPT?",
     [
+      '"Confirm to me which sheet I sign today"',
       '"Which one shines best?"',
-      '"Tell me differences between them"',
       '"Dissect and parallel the two proposals underneath analyzing rigidly against: bulk price scale, shipment windows, monetary terms, warranty length and breach. Chart findings on a unified table directly citing which benefits a smaller operational enterprise."',
-      '"Confirm to me which sheet I sign today"'
+      '"Tell me differences between them"'
     ],
     2,
     "Pre-assigning evaluation columns (price, windows, terms) while forcing the display into a visual table generates unparalleled speed."
@@ -309,10 +309,10 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     [
       "It completely and totally prints out finalized valid jurisprudence documents avoiding state fees.",
       "It allows you to skip entirely the authentic text.",
-      "It shatters the opacity letting you comprehensively swallow exactly what is demanded before blowing cash paying a supreme expert.",
-      "It magically boosts the raw legitimacy of your files before real courtmen."
+      "It magically boosts the raw legitimacy of your files before real courtmen.",
+      "It shatters the opacity letting you comprehensively swallow exactly what is demanded before blowing cash paying a supreme expert."
     ],
-    2,
+    3,
     "Puncturing through confusing clauses permits transparent business maneuvers beforehand saving heavy initial lawyer consultation hours."
   ),
   textStep(
@@ -335,12 +335,12 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "Final Proofing Shield",
     "Which definitive command activates the engine into maximum defensive editing ahead of a massive client send-off?",
     [
+      '"Scrutinize the impending business proposal beneath actively tracking: clarity glitches, client-facing ambiguity traps, omitted elements leaving us exposed, and entirely highlight any sentence exposing severe financial weakness for our agency."',
       '"Review the work"',
       '"Does this look nice enough?"',
-      '"Proofread for standard English slips"',
-      '"Scrutinize the impending business proposal beneath actively tracking: clarity glitches, client-facing ambiguity traps, omitted elements leaving us exposed, and entirely highlight any sentence exposing severe financial weakness for our agency."'
+      '"Proofread for standard English slips"'
     ],
-    3,
+    0,
     "Switching the tool onto an extremely harsh pessimistic auditor role guarantees it scans your document hunting only for severe weak links."
   ),
   textStep(
@@ -351,9 +351,9 @@ export const CHATGPT_MODULE_7_STEPS_EN = [
     "Where the Machine Hits a Wall?",
     "When strictly judging pure institutional vetting, what action is absolutely BEYOND ChatGPT's operational capabilities?",
     [
+      "Converting insanely deep jargon into casual fluid dialogue.",
       "Condensing aggressively 20 long-winded complex pages.",
       "Locating hidden terrifying red-flag corporate clauses.",
-      "Converting insanely deep jargon into casual fluid dialogue.",
       "Tendering flawless, irrefutable and legally-binding jurisprudence counsel thus acting directly responsible in the event of lawsuits yielding hard damages."
     ],
     3,
@@ -378,12 +378,12 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "El Plus Inestimable de Auditar con IA",
     "¿Cuál es verdaderamente la joya de someter sus papeles complejos bajo la lupa artificial?",
     [
-      "Aniquila la urgencia total de costear abogados formales.",
-      "Emite un sello que garantiza total validez pericial ante organismos legales.",
       "Destruye pavorosos intervalos de lectura muerta sacando lo primordial e indispensable de forma fugaz.",
-      "Modifica autónomamente tus acuerdos sin reglas estipuladas previas salvándote horas."
+      "Emite un sello que garantiza total validez pericial ante organismos legales.",
+      "Modifica autónomamente tus acuerdos sin reglas estipuladas previas salvándote horas.",
+      "Aniquila la urgencia total de costear abogados formales."
     ],
-    2,
+    0,
     "La inteligencia sirve como su filtro de choque primerizo, elevando agresivamente su nivel comprensivo antes de gastar recursos supremos."
   ),
   textStep(
@@ -402,12 +402,12 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "La Rutina Pos-Resumen",
     "Una vez vertidas docenas de hojas letales en el bot y arrebatado tu resumen diamante, ¿Cuál es la jugada operativa verídica recomendada?",
     [
-      "Sellar legalmente el acuerdo dejándose ir únicamente sobre lo dicho por el robot.",
       "Tirar el resumen y regresar arrepentido a leer la masa textual integra original de todas formas.",
       "Compartir y empadronar el resumen sintético creyéndolo el acta genuinamente oficial ante entablamientos.",
-      "Sostener la sábana de resumen como puro faro visual y comprobar mecánicamente dentro del contrato matriz las cláusulas ardientes."
+      "Sostener la sábana de resumen como puro faro visual y comprobar mecánicamente dentro del contrato matriz las cláusulas ardientes.",
+      "Sellar legalmente el acuerdo dejándose ir únicamente sobre lo dicho por el robot."
     ],
-    3,
+    2,
     "Ese mapa sintetizado orienta directamente el rastreo puntual de lo vital que luego el abogado terminará por revisar validado frente a la matriz original."
   ),
   textStep(
@@ -427,11 +427,11 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "Si precisas una barrida pericial rigurosa tras peligros, ¿qué secuencia aniquila el mandato genérico ineficiente?",
     [
       '"¿Qué vibra te transmite esto?"',
-      '"¿Este folio conviene a los míos?"',
       '"Revoluciona este contrato arrojando cada minuciosa cláusula en la sombra que afecte drásticamente a nuestra parte, diseccionando la naturaleza del daño en lenguaje nítido y terrenal."',
-      '"Procesa el escrito y da luz verde final a la rúbrica."'
+      '"Procesa el escrito y da luz verde final a la rúbrica."',
+      '"¿Este folio conviene a los míos?"'
     ],
-    2,
+    1,
     "No pida 'pareceres'; reclame disecciones con impacto detallado eximiendo dialectos oscuros."
   ),
   textStep(
@@ -443,11 +443,11 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "Al encarar un par letal de requerimientos de negocios compitiendo, ¿Cómo le sacas cruda tabla comparativa al sistema?",
     [
       '"A ver, ¿Quién gana por más margen?"',
-      '"Crúzamelos un ratito"',
       '"Mide y cruza drásticamente los presentes archivos rigiéndote en: flujo monetario total, intervalos pre-despachos, lapsos morosos, resguardos legales. Edifica los datos en retícula estricta e infórmame estadísticamente el victorioso operativo final para micro y pequeñas ligas."',
+      '"Crúzamelos un ratito"',
       '"Dime cuál debo ir imprimiendo."'
     ],
-    2,
+    1,
     "Al marcar tú mismo los pilares paramétricos (flujo monetario, despachos), dictas maestría visual forzosa matando vaguedades teóricas molestas."
   ),
   textStep(
@@ -466,12 +466,12 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "Rentabilidad de Desencriptado",
     "¿En dónde figura el brutal y salvaje valor principal en hacer a ChatGPT traducir el pesado vocabulario jurista perenne?",
     [
-      "El bot genera una copia de alta validez oficialista evadiendo honorarios al gestor.",
       "Para jamás, en todo tu andar corporativo, voltear a leer un solo tratado extenso en formato matriz.",
-      "Para iluminar ferozmente qué terreno transitarás y las ataduras impuestas, prefigurando blindaje veloz y crudo libre de minutas largas antes de ir ante grandes burós.",
-      "Puesto que imprimir actas en formato simplista gana favoritismos en cortes modernas locales."
+      "El bot genera una copia de alta validez oficialista evadiendo honorarios al gestor.",
+      "Puesto que imprimir actas en formato simplista gana favoritismos en cortes modernas locales.",
+      "Para iluminar ferozmente qué terreno transitarás y las ataduras impuestas, prefigurando blindaje veloz y crudo libre de minutas largas antes de ir ante grandes burós."
     ],
-    2,
+    3,
     "Acapararás un plano mental pre-negociante colosal; descifras tú solo y entiendes las pautas con lucidez brutal antes de entablar peleas verbales frente al oponente perito legal."
   ),
   textStep(
@@ -510,12 +510,12 @@ export const CHATGPT_MODULE_7_STEPS_ES = [
     "¿El Escollo Irrompible del Entrenado?",
     "En una balanza neta y puritana, ¿qué límite NO CUMPLE tajantemente el modelo informático frente a tu gran empresa legalmente regida mundialmente con miles a su cargo?",
     [
+      "Prescribir rotunda e intocablemente asesoramiento blindándolo frente litigantes e imputando toda responsabilidad y gravámenes judiciales penales pesados de su maquinaria ante dictámines desatinados de operación formal que incurrieren tu ruina material pura.",
       "Destilar sumarios crudos con alta carga conceptual provenientes de extensísimos legajos burocráticos engorrosos perjudiciales al ojo natural cansado humano de golpe.",
-      "Destripar pasivos hostiles oscurecidos y penalizaciones mortales entre el laberinto documentar de la propuesta que podrías firmar desapercibido mañana pronto al despunte alba.",
       "Voltear dialectos pesados que no se entienden hacia jerga y formatos simplificados digeribles del diario casual que domina todo humano en oficina regular para el entendimiento rápido masivo de tus allegados sin titubear formal.",
-      "Prescribir rotunda e intocablemente asesoramiento blindándolo frente litigantes e imputando toda responsabilidad y gravámenes judiciales penales pesados de su maquinaria ante dictámines desatinados de operación formal que incurrieren tu ruina material pura."
+      "Destripar pasivos hostiles oscurecidos y penalizaciones mortales entre el laberinto documentar de la propuesta que podrías firmar desapercibido mañana pronto al despunte alba."
     ],
-    3,
+    0,
     "Como radar de primera incursión y copiloto en tinieblas analíticas, es irremplazable el ente sintético para potenciar al perito; sin embargo, no porta en estrado ninguna licencia válida para amortizar o salvar sus bienes."
   ),
   textStep(
@@ -537,12 +537,12 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "L'Ascension Majeure par l'Audit Virtuel",
     "Quel argument irréfutable justifie férocement le passage des textes massifs via l'Intelligence Artificielle de commande analytique ?",
     [
-      "Il raye définitivement et physiquement la pertinence monétaire cruelle du consultant juridique accrédité de la surface de la terre moderne.",
       "Lui conférer le texte bloque légalement la fraude contractuelle vis-à-vis d'une cour de justice d'État et des magistrats professionnels assermentés mondiaux.",
       "L'engin brûle instantanément l'errance verbale en surlignant rigoureusement au marqueur virtuel vos nœuds critiques qui menacent réellement de faire mal, sauvant la vélocité crépitante pure de votre lecture décisive exécutive.",
-      "La matrice efface aléatoirement votre clause et réagence l'accord sans directives selon l'alignement préconçu idéal moral théorique."
+      "La matrice efface aléatoirement votre clause et réagence l'accord sans directives selon l'alignement préconçu idéal moral théorique.",
+      "Il raye définitivement et physiquement la pertinence monétaire cruelle du consultant juridique accrédité de la surface de la terre moderne."
     ],
-    2,
+    1,
     "L'informatique joue un bouclier triage impitoyable épongeant le gras ennuyeux pour offrir à vos yeux aguerris les seuls crocs que vous auriez pris dix nuits à traquer dans la confusion sombre textuelle du dossier dense fourni à ses serveurs numériques d'analyse algorithmique sans élan émotionnel perturbateur à la lecture initiale."
   ),
   textStep(
@@ -561,12 +561,12 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "Post-Extraction Opérationnelle Réelle",
     "Ayant soutiré une synthèse impeccable et froudroyante du filet contractuel lourd, que prescrit la haute doctrine exécutive humaine pour la bascule concrète de l'action de signature ?",
     [
-      "Enchaîner à l'aveugle par signature scellée en se basant sur la seule vérité proclamée des paragraphes robotiques de son écran plasma sans recul formel.",
+      "Agripper la synthèse obtenue telle une lanterne d'alerte, afin de pointer minutieusement ses regards éclairés sur les clauses exactes signalées comme cratères inflammables d'importance dans les profondeurs de l'opus véridique authentique de base initial en vérifiant leur nature.",
       "Chiffonner sa synthèse virtuelle instantanée afin de retourner plonger à l'ancienne dans le livre originel ligne après ligne durant plusieurs nuits perdues vaines.",
       "Apposer le certificat officiel par signature du condensé virtuel en place de l'original originel complet d'usage en se fiant au résumé pour le remplacer devant la loi d'instance.",
-      "Agripper la synthèse obtenue telle une lanterne d'alerte, afin de pointer minutieusement ses regards éclairés sur les clauses exactes signalées comme cratères inflammables d'importance dans les profondeurs de l'opus véridique authentique de base initial en vérifiant leur nature."
+      "Enchaîner à l'aveugle par signature scellée en se basant sur la seule vérité proclamée des paragraphes robotiques de son écran plasma sans recul formel."
     ],
-    3,
+    0,
     "Le rendu synthétique artificiel se fait cartographie du danger pur, vous ciblant directement sur le terrain légal pour votre examen authentique final et décision souveraine sans noyer vos sens."
   ),
   textStep(
@@ -585,11 +585,11 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "Attaque Périmétrale Évasive et Fine",
     "Si votre sang froid commande la détection chirurgicale des puits sans fond vicieux de l'entente pour un client en urgence absolue au nez du marché en place, quelle matrice écrase les concurrents sur l'écran ?",
     [
-      '"Quelle ambiance dégage vraiment ce texte formel là ?"',
+      '"Audite froidement cette charte globale dans l\'optique exclusive de cracher méthodiquement chaque condition fâcheuse pesant sur notre épaule, en transmutant chaque danger potentiel via une explication simple en langage de tous les jours éloignée des arcanes de la loi obscure."',
       '"M\'es-t-il profitable au sens large ou catastrophique un peu ?"',
-      '"Audite froidement cette charte globale dans l\'optique exclusive de cracher méthodiquement chaque condition fâcheuse pesant sur notre épaule, en transmutant chaque danger potentiel via une explication simple en langage de tous les jours éloignée des arcanes de la loi obscure."'
+      '"Quelle ambiance dégage vraiment ce texte formel là ?"'
     ],
-    2,
+    0,
     "Fermer les contours en imposant la liste formelle des dangers via vulgarisation limpide accule la machine à se transformer en garde du corps brutal au lieu d'intellectuel rêveur passif et niaisement optimiste globalement hors d'usage pratique d'entreprise de choc violent du quotidien du commerce d'affaire courant rapide et sûr par principe d'usage du dirigeant avisé en veille."
   ),
   textStep(
@@ -601,10 +601,10 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "Recevant 2 énormes pavés de conditions parallèles d'usines lourdes s'affrontant pour votre marché local unique à conquérir formellement pour l'an 2029 sans rater la phase, quel lancement optimal brise le mythe ?",
     [
       '"Quel manufacturier remportera potentiellement le pactole financier ici d\'après toi franchement un peu ?"',
-      '"Observe s\'il te plaît les deux pavés et mêles les doucement"',
-      '"Analyse férocement et croise au millimètre les deux offres marchandes soumises selon ces axes non-négociables suivants : devis absolu, bornes de livraisons garanties express, flux de transferts de paiement fixes, pénalité ruptures claires des contrats rudes de garanties de retours fermes absolus sans flou. Tabularise formellement ces écarts monstrueux et pointe le vainqueur suprême de la charge logistique et l\'épargne favorable aux Très Petites Entreprises locales aux reins fragiles avec fermeté argumentée mathématique logique."'
+      '"Analyse férocement et croise au millimètre les deux offres marchandes soumises selon ces axes non-négociables suivants : devis absolu, bornes de livraisons garanties express, flux de transferts de paiement fixes, pénalité ruptures claires des contrats rudes de garanties de retours fermes absolus sans flou. Tabularise formellement ces écarts monstrueux et pointe le vainqueur suprême de la charge logistique et l\'épargne favorable aux Très Petites Entreprises locales aux reins fragiles avec fermeté argumentée mathématique logique."',
+      '"Observe s\'il te plaît les deux pavés et mêles les doucement"'
     ],
-    2,
+    1,
     "Fixer implacablement le terrain (délais, prix de gros, ruptures) combiné à l'exigence formelle du rendu tabulaire de colonnes assassine la théorisation verbeuse floue en restituant du graphique chirurgical propulsant l'analyse managériale crue."
   ),
   textStep(
@@ -623,9 +623,9 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "L'Utilité Radicale de Décriptage du Verbiage Légal via Modèle",
     "Quel attribut d'envergure fondamentale confère l'acte impérial de décryptage des écritures de loi ténébreuses via intelligence computationnelle pour le chef de projet ?",
     [
-      "Car les accords redessinés syntaxiquement de façon commune accèdent magiquement à un degré d'importance majeur d'approbation d'urgence judiciaire surpasseur sur le terrain pénal civil de par la constitution validée d'emblée globalement sans rien formaliser sur papier initial.",
-      "Afin d'anesthésier définitivement l'étape redoutable de passage sur l'opus source dense, se lavant de tout examen initial pour l'éternité et la nuit aveugle totale en la matière formelle précise complexe complète ardue sans doute ou peur du reste formaliste complexe.",
       "Car le système édifie d'emblée l'alternative légiférée intouchable au document officiel et peut-être certifiée notariée d'elle-même virtuellement validant le flux numérisé pur.",
+      "Afin d'anesthésier définitivement l'étape redoutable de passage sur l'opus source dense, se lavant de tout examen initial pour l'éternité et la nuit aveugle totale en la matière formelle précise complexe complète ardue sans doute ou peur du reste formaliste complexe.",
+      "Car les accords redessinés syntaxiquement de façon commune accèdent magiquement à un degré d'importance majeur d'approbation d'urgence judiciaire surpasseur sur le terrain pénal civil de par la constitution validée d'emblée globalement sans rien formaliser sur papier initial.",
       "Afin d'illuminer l'esprit sur la véritable charge tactique imposée brutalement par la ligne incrustée préalablement à de pesantes interrogatoires budgétaires requérant les avis qualifiés officiels qui pèsent massivement sur vos fonds libres vitaux annuels financiers normaux."
     ],
     3,
@@ -651,12 +651,12 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "Le Censeur Destructeur Testant La Coque Interne Externe Formelle :",
     "Quelle requête arme le plus impitoyablement le jugement de votre missive avant son lancer lourd ?",
     [
-      '"Vois un peu si tu aimes l\'allure de la chose ? Fais de ton mieux avec ce que j\'ai mis là en gros."',
+      '"Peux-tu me garantir à plat que ça ne sera pas du tout recalé lors du passage de commission par la grande firme locale du bout de ma rue s\'il te plaît sans rien changer de plus qu\'une ou deux lettres ou mots max de ce que j\'ai fais seul dans mon coin sombre la veille avec passion et ferveur grande pure humble en vérité?"',
       '"Recadre tranquillement mon affaire afin qu\'elle coule bien sous l\'œil humain sans fautes d\'orthographe svp merci simple direct en général sur ce texte."',
-      '"Analyse férocement au scalpel l\'approche commerciale en contrebas pour moi et cible de suite là maintenant avec dureté: les fractures de clarté lourdes, le périmètre sémantique brouillé capable d\'engendrer la méfiance incrédule de la cible, les vides criants menottant sa qualité ferme achevée d\'ensemble entier pur, ou n\'importe quel pont ou abîme rhétorique pouvant être retourné agressivement par les hyènes adverses afin de nuire sans vergogne aux fondations d\'argent et aux remparts de capital de notre illustre guilde sans défense aucune possible suite à cette erreur tragique formelle à colmater d\'urgence absolue avant départ."',
-      '"Peux-tu me garantir à plat que ça ne sera pas du tout recalé lors du passage de commission par la grande firme locale du bout de ma rue s\'il te plaît sans rien changer de plus qu\'une ou deux lettres ou mots max de ce que j\'ai fais seul dans mon coin sombre la veille avec passion et ferveur grande pure humble en vérité?"'
+      '"Vois un peu si tu aimes l\'allure de la chose ? Fais de ton mieux avec ce que j\'ai mis là en gros."',
+      '"Analyse férocement au scalpel l\'approche commerciale en contrebas pour moi et cible de suite là maintenant avec dureté: les fractures de clarté lourdes, le périmètre sémantique brouillé capable d\'engendrer la méfiance incrédule de la cible, les vides criants menottant sa qualité ferme achevée d\'ensemble entier pur, ou n\'importe quel pont ou abîme rhétorique pouvant être retourné agressivement par les hyènes adverses afin de nuire sans vergogne aux fondations d\'argent et aux remparts de capital de notre illustre guilde sans défense aucune possible suite à cette erreur tragique formelle à colmater d\'urgence absolue avant départ."'
     ],
-    2,
+    3,
     "Instiller un prisme d'animosité défensive contraint le réseau de neurones artificiels froids mathématiques et logiques lourds d'une base infaillible pure à dépouiller l'arrogance de votre prose naïve première et initiale brute de conception d'un jour de fatigue usante et vaine devant l'exigence magistrale absolue irréfutable du monde des affaires violentes sans remord d'aucun sort dans l'univers impitoyable de marché cruel sans fards faux ami protecteurs inutiles vrais réels."
   ),
   textStep(
@@ -667,12 +667,12 @@ export const CHATGPT_MODULE_7_STEPS_FR = [
     "Le Mur de Verre de l'Intelligence Formelle de Ligne de Commande Brutale Fausse en Fait Pur Vrai Légal Réel Authentique Strict Juridique et Sanctionnable Jugeant Devant La Cour Suprême Jugeant du Fait Définitif Fort :",
     "Sur l'axe législateur d'arbitrage de vie et de mort en trésorerie formelle en cours d'action et d'engagement direct ferme d'entreprise sous responsabilité totale lourde engageant ses fds et la sûreté sociale globale complète entière de ses ressources, qu'est-ce que l'intellect de silicium froid NE PRODUIT JAMAIS en AUCUN CAS ABSOLUMENT JAMAIS de Droit ?",
     [
-      "Condenser à une vitesse terrifiante des rouleaux de centaines de lettres et pages formatives longues inadaptées à l'heure du monde d'aujourd'hui d'urgence temporelle pressée sans faille ou repos calme constant fluide paisible lent lointain du passé d'hier en fait clair net juste et fort concis et brutalement net à l'œil.",
-      "Ouvrir une fissure lumineuse sur les fosses tarifaires obscures camouflées sadiquement par un concurrent lors d'une guerre de position sur un marché de conquête difficile en territoire hostile agressif sous stress fort extrême pour sauver le soldat engagé d'un piège.",
       "Dénicher l'aberration technique formelle cachée masquée pour traduire celle-ci de suite au citoyen sans code barre diplômé ignorant d'un milieu savant aride dur sec pointu élitiste secret clos fermé pour l'initier d'un éclair de génie magique clair accessible par de petits mots amusants légers et clairs nets du terrain d'homme normal de la rue passant innocent et gentil simple d'un coup parfait merveilleux bon d'intelligence souple et directe d'aide de bonté divine magique fantastique et douce formelle parfaite adéquate pure sans problème d'anxiété d'approche lourde au lecteur simple honnête pur bon.",
-      "Offrir impérialement un arrêt de certitude doctrinale garantissant de sa propre main de fer froide incorruptible et ferme l'innocuité parfaite textuelle absolue totale indéniable du dossier en acceptant sciemment d'un contrat moral infaillible d'essuyer physiquement et budgétairement l'entièreté abyssale écrasante des affres ou banqueroutes ou de désastre final destructeur mortifère pour l'entité civile que vous êtes s'il s'avérait l'erreur grossière ou l'anomalie de la faille fatale tueuse passée ignorée silencieuse et funeste en cas de drame effectif accompli acté et jugé scellé réel fait accompli puni sans discussion retour impossible."
+      "Condenser à une vitesse terrifiante des rouleaux de centaines de lettres et pages formatives longues inadaptées à l'heure du monde d'aujourd'hui d'urgence temporelle pressée sans faille ou repos calme constant fluide paisible lent lointain du passé d'hier en fait clair net juste et fort concis et brutalement net à l'œil.",
+      "Offrir impérialement un arrêt de certitude doctrinale garantissant de sa propre main de fer froide incorruptible et ferme l'innocuité parfaite textuelle absolue totale indéniable du dossier en acceptant sciemment d'un contrat moral infaillible d'essuyer physiquement et budgétairement l'entièreté abyssale écrasante des affres ou banqueroutes ou de désastre final destructeur mortifère pour l'entité civile que vous êtes s'il s'avérait l'erreur grossière ou l'anomalie de la faille fatale tueuse passée ignorée silencieuse et funeste en cas de drame effectif accompli acté et jugé scellé réel fait accompli puni sans discussion retour impossible.",
+      "Ouvrir une fissure lumineuse sur les fosses tarifaires obscures camouflées sadiquement par un concurrent lors d'une guerre de position sur un marché de conquête difficile en territoire hostile agressif sous stress fort extrême pour sauver le soldat engagé d'un piège."
     ],
-    3,
+    2,
     "La machine reste le prodigieux veilleur d'horizon, le lévrier flaireur de piste rapide brutal fort efficace sans pareil inégalable parfait monstre utile de première ligne d'avant garde pour éclairer le sentinelle humain, MAIS le sceptre définitif du risque mesuré d'engagement et le sceau final de signature relèvent incontestablement à perpétuité et dans l'histoire pour les âges, à votre instinct conjugué à la parole solennelle souveraine inattaquable unique seule vraie certifiée exclusive ferme sacrée noble sérieuse de l'Avocat inscrit au barreau officiel. Toujours sans faille jamais oublié de la raison d'homme de mesure de responsabilité et de sens parfait des devoirs de l'acte et de l'âme du pouvoir d'écrit formel pur d'engagement engageant la destinée."
   ),
   textStep(

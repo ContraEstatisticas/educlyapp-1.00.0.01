@@ -74,10 +74,10 @@ export const CHATGPT_MODULE_5_STEPS_PT = [
     [
       "Fazer uma pausa e voltar mais tarde",
       "Publicar conteúdo aleatório sem um plano",
-      "Selecionar as melhores ideias e pedir ao ChatGPT textos específicos para cada uma",
-      "Ignorar as ideias e começar de novo"
+      "Ignorar as ideias e começar de novo",
+      "Selecionar as melhores ideias e pedir ao ChatGPT textos específicos para cada uma"
     ],
-    2,
+    3,
     "Use a lista gerada como base para iterar o conteúdo um a um com a IA."
   ),
   textStep(
@@ -96,10 +96,10 @@ export const CHATGPT_MODULE_5_STEPS_PT = [
     "Descrições de Produto Eficazes",
     "Após criar a legenda, você precisa adicionar a descrição de um produto ao post. Qual prompt é mais eficaz?",
     [
-      '"Fale algo sobre nosso novo produto"',
       '"Descreva o produto o máximo que puder"',
+      '"O que você pode dizer sobre suplementos naturais?"',
       '"Escreva uma descrição de produto para nossa nova linha de suplementos naturais da Viva Fit, destacando os benefícios para a saúde, os ingredientes principais e por que ele se diferencia dos concorrentes. Tom: confiante e acolhedor"',
-      '"O que você pode dizer sobre suplementos naturais?"'
+      '"Fale algo sobre nosso novo produto"'
     ],
     2,
     "Quanto mais detalhes como benefícios e contexto da marca, melhor."
@@ -113,11 +113,11 @@ export const CHATGPT_MODULE_5_STEPS_PT = [
     "Nova tarefa! A Viva Fit quer uma série de posts para o Dia Mundial da Saúde. Qual prompt você usaria?",
     [
       '"Me dê fatos sobre o Dia Mundial da Saúde"',
-      '"Escreva sobre saúde"',
       '"Crie uma série de 5 posts para o Dia Mundial da Saúde para a Viva Fit, uma marca de saúde e bem-estar. Cada post deve ter um ângulo diferente: dado surpreendente, dica prática, motivação, produto e convite à comunidade. Tom: inspirador e próximo"',
+      '"Escreva sobre saúde"',
       '"Sugira alguns posts sobre saúde para o dia 7 de abril"'
     ],
-    2,
+    1,
     "O agrupamento de posts em 'série', forçando múltiplos ângulos (dado, dica, motivação) é altamente estratégico."
   ),
   textStep(
@@ -136,12 +136,12 @@ export const CHATGPT_MODULE_5_STEPS_PT = [
     "Estrutura Condicionada",
     "Por que especificar o tempo e a estrutura do roteiro no prompt melhora o resultado?",
     [
-      "Porque o ChatGPT só funciona com prompts curtos",
-      "Para deixar o texto mais longo",
+      "Não faz diferença especificar a estrutura",
       "Porque o modelo entrega um roteiro já adaptado ao formato do vídeo, sem precisar de ajustes manuais",
-      "Não faz diferença especificar a estrutura"
+      "Para deixar o texto mais longo",
+      "Porque o ChatGPT só funciona com prompts curtos"
     ],
-    2,
+    1,
     "Se você omitir o tempo, a IA pode entregar um texto de 5 páginas para um vídeo vertical."
   ),
   textStep(
@@ -164,12 +164,12 @@ export const CHATGPT_MODULE_5_STEPS_PT = [
     "Calendário Mensal",
     "Qual prompt geraria a estratégia de conteúdo mais completa para a Viva Fit?",
     [
-      '"Crie um calendário de posts para o mês"',
+      '"Planeje o conteúdo da Viva Fit para maio com bastante criatividade"',
       '"Me dê ideias de conteúdo para saúde"',
-      '"Você é um estrategista de marketing digital. Crie uma estratégia de conteúdo para o Instagram da Viva Fit para o mês de maio. Inclua: 4 pilares temáticos, frequência de postagem, mix de formatos (reels, carrossel, story, estático), 12 ideias de pauta e as 3 métricas principais para medir o sucesso"',
-      '"Planeje o conteúdo da Viva Fit para maio com bastante criatividade"'
+      '"Crie um calendário de posts para o mês"',
+      '"Você é um estrategista de marketing digital. Crie uma estratégia de conteúdo para o Instagram da Viva Fit para o mês de maio. Inclua: 4 pilares temáticos, frequência de postagem, mix de formatos (reels, carrossel, story, estático), 12 ideias de pauta e as 3 métricas principais para medir o sucesso"'
     ],
-    2,
+    3,
     "Definir pilares temáticos, frequência e mix de formatos é a base profissional de um Social Media."
   ),
   textStep(
@@ -215,12 +215,12 @@ export const CHATGPT_MODULE_5_STEPS_EN = [
     "Next Steps",
     "What should you do after generating the batch of post ideas?",
     [
-      "Take a break and come back much later",
+      "Ignore the ideas and restart entirely",
       "Randomly publish without any plan",
-      "Select the best ideas and prompt ChatGPT for the specific scripts/copies of each",
-      "Ignore the ideas and restart entirely"
+      "Take a break and come back much later",
+      "Select the best ideas and prompt ChatGPT for the specific scripts/copies of each"
     ],
-    2,
+    3,
     "Use the broad list to iterate deeper on the selected winners, tasking the AI step-by-step."
   ),
   textStep(
@@ -239,12 +239,12 @@ export const CHATGPT_MODULE_5_STEPS_EN = [
     "Effective Product Descriptions",
     "You now need to attach a product description to the post. Which prompt is the most effective?",
     [
-      '"Say something about our new item"',
-      '"Describe the product as much as possible"',
       '"Write a product description for our new natural supplement line at Viva Fit, highlighting the health benefits, core ingredients, and what sets it apart from competitors. Tone: confident and welcoming"',
-      '"What can you say about natural supplements?"'
+      '"What can you say about natural supplements?"',
+      '"Say something about our new item"',
+      '"Describe the product as much as possible"'
     ],
-    2,
+    0,
     "The more explicit the boundaries (benefits, ingredients, uniqueness), the richer the copy."
   ),
   textStep(
@@ -255,12 +255,12 @@ export const CHATGPT_MODULE_5_STEPS_EN = [
     "Seasonal Campaigning",
     "New task! Viva Fit wants a series for World Health Day. Which prompt hits the mark?",
     [
-      '"Give me facts about World Health Day"',
-      '"Write about health"',
       '"Create a 5-post series for World Health Day for Viva Fit, a health and wellness brand. Each post needs a distinct angle: a surprising stat, a practical tip, motivation, a product push, and a community question. Tone: inspiring and close"',
-      '"Suggest posts on health for April 7th"'
+      '"Suggest posts on health for April 7th"',
+      '"Write about health"',
+      '"Give me facts about World Health Day"'
     ],
-    2,
+    0,
     "Forcing multiple unique angles (stat, tip, push) provides a well-rounded and strategic marketing series."
   ),
   textStep(
@@ -279,12 +279,12 @@ export const CHATGPT_MODULE_5_STEPS_EN = [
     "Conditioned Formatting",
     "Why does specifying the time constraint and structure improve the output drastically?",
     [
-      "Because ChatGPT only accepts brief inputs",
-      "To purposefully make the output much longer",
       "Because the model delivers a script already tailored to the video format length, skipping manual edits",
-      "It makes no real difference"
+      "To purposefully make the output much longer",
+      "It makes no real difference",
+      "Because ChatGPT only accepts brief inputs"
     ],
-    2,
+    0,
     "Without constraints, the AI could deliver a 5-minute monologue that ruins a short-form video idea."
   ),
   textStep(
@@ -307,12 +307,12 @@ export const CHATGPT_MODULE_5_STEPS_EN = [
     "Monthly Calendar",
     "Which prompt commands the most robust content strategy for Viva Fit?",
     [
-      '"Create a posting calendar for this month"',
-      '"Give me health content ideas"',
+      '"Plan Viva Fit content for May with lots of creativity"',
       '"You are a digital marketing strategist. Outline a content strategy for Viva Fit\'s Instagram for the month of May. Include: 4 thematic pillars, posting frequency, format mix (reels, carousel, static, stories), 12 topic ideas, and the 3 main metrics we should track for success"',
-      '"Plan Viva Fit content for May with lots of creativity"'
+      '"Create a posting calendar for this month"',
+      '"Give me health content ideas"'
     ],
-    2,
+    1,
     "Defining pillars, frequencies, and KPIs mimics the exact breakdown a real agency operates on."
   ),
   textStep(
@@ -358,12 +358,12 @@ export const CHATGPT_MODULE_5_STEPS_ES = [
     "Siguiente Movimiento",
     "Al tener la ráfaga de ideas frente a tu pantalla, ¿Cuál es la ruta óptima?",
     [
+      "Desecharlas de golpe y cambiar de tema",
       "Exigir descansar la tarde entera",
       "Publicarlas ciegamente saltando lineamientos",
-      "Filtrar las más sobresalientes y exigirle al bot textos minuciosos de cada vertiente",
-      "Desecharlas de golpe y cambiar de tema"
+      "Filtrar las más sobresalientes y exigirle al bot textos minuciosos de cada vertiente"
     ],
-    2,
+    3,
     "La lista ancha inicial funciona como vitrina, tras escoger tus preferidas, profundizas la producción de cada una con la IA."
   ),
   textStep(
@@ -382,12 +382,12 @@ export const CHATGPT_MODULE_5_STEPS_ES = [
     "Reseñas de Producto Letales",
     "Llega el instante de colgar la descripción técnica de un suplemento de la marca, ¿Cuál instrucción rendirá mejores cuentas?",
     [
-      '"Habla un rato sobre el suplemento nuevo que sacamos"',
-      '"Extiéndete sin límite respecto a la nueva botella de pastillas"',
       '"Redacta la descripción para la flamante línea de suplementos orgánicos de Viva Fit; reluce las bondades vitales, el corazón de sus ingredientes y la ventaja fulminante sobre competidores. Tono seguro y cálido."',
-      '"¿Qué nociones recabas tú sobre salud natural?"'
+      '"Habla un rato sobre el suplemento nuevo que sacamos"',
+      '"¿Qué nociones recabas tú sobre salud natural?"',
+      '"Extiéndete sin límite respecto a la nueva botella de pastillas"'
     ],
-    2,
+    0,
     "Otorgar cauces obligatorios (ingredientes, beneficios y ventajas competitivas) erradica la divagación vacía."
   ),
   textStep(
@@ -398,10 +398,10 @@ export const CHATGPT_MODULE_5_STEPS_ES = [
     "Estrategia Feriada",
     "¡Misión entrante! Viva Fit anhela una docena de cartuchos por el Día Mundial de la Salud. ¿Qué prompt los elabora mejor?",
     [
-      '"Tírame algunos datos locos del Día de la Salud"',
+      '"Sugiéreme subidas para enmarcar el mes patrio"',
       '"Desarrolla filosofía médica"',
       '"Fabrícame una serie de 5 posteos del Día de la Salud para Viva Fit. Cada post debe acariciar una curva independiente: dato de shock, tip utilizable, inyección de motivación, producto y pregunta abierta. Tono: Inspiracional e íntimo."',
-      '"Sugiéreme subidas para enmarcar el mes patrio"'
+      '"Tírame algunos datos locos del Día de la Salud"'
     ],
     2,
     "Fragmentar temáticamente el tema principal brinda oxígeno a una campaña evitando estancarse en felicitar mecánicamente."
@@ -422,12 +422,12 @@ export const CHATGPT_MODULE_5_STEPS_ES = [
     "Arquitectura Formateada",
     "¿Qué motivo central te obliga a imponer el minutaje riguroso en los guiones?",
     [
-      "Ya que de por sí la IA censura líneas gigantescas",
       "Para estirar innecesariamente el trabajo de lectura del cliente",
       "Garantizar que el modelo nos devuelva un manuscrito meticulosamente ceñido a las barreras del audiovisual ágil, evitando purgas manuales",
+      "Ya que de por sí la IA censura líneas gigantescas",
       "Son manías vacías de forma"
     ],
-    2,
+    1,
     "Es vital, un video vertical carece de oxígeno para locuciones pesadas de documentalista. ChatGPT debe saberlo."
   ),
   textStep(
@@ -450,12 +450,12 @@ export const CHATGPT_MODULE_5_STEPS_ES = [
     "Arquitectura a Escala",
     "Para mapear la estrategia del mes, ¿Qué comando despliega la artillería completa?",
     [
-      '"Dibuja mi calendario de posteos para el mes"',
-      '"Busca ideas sueltas de salud"',
+      '"Sorpréndeme subiendo algo estacional en mayo"',
       '"Ejerce de estratega digital. Crea una estrategia de contenido en el Instagram de Viva Fit para mayo. Incluye: 4 pilares temáticos, frecuencia, mix de formatos (reels, muro, stories), 12 ideas de temas y las 3 métricas de éxito (KPI)."',
-      '"Sorpréndeme subiendo algo estacional en mayo"'
+      '"Dibuja mi calendario de posteos para el mes"',
+      '"Busca ideas sueltas de salud"'
     ],
-    2,
+    1,
     "Al instruir pilares, formatos y KPIs te alineas a la ingeniería de planificación industrial verdadera y no improvisada."
   ),
   textStep(
@@ -501,12 +501,12 @@ export const CHATGPT_MODULE_5_STEPS_FR = [
     "Suite Logique du Rendu",
     "Après avoir généré ces fameuses idées, quelle décision est magistrale ?",
     [
-      "Fermer les onglets et reporter à un autre jour",
-      "Actionner la publication intégrale automatique sans modifier",
+      "Balayer la console et tout jeter",
       "Épurer vigoureusement l'essaim pour ne sélectionner que les pointes de diamant et demander au bot le texte de chacune",
-      "Balayer la console et tout jeter"
+      "Fermer les onglets et reporter à un autre jour",
+      "Actionner la publication intégrale automatique sans modifier"
     ],
-    2,
+    1,
     "La première liste IA sert d'écran radar. Ce n'est qu'après sélection féroce que vous attaquez l'écriture pointue par délégation."
   ),
   textStep(
@@ -525,12 +525,12 @@ export const CHATGPT_MODULE_5_STEPS_FR = [
     "Radiographie de Produit Intelligente",
     "Après la légende, il faut ajouter le feu descriptif du produit. Quelle injonction est la plus efficace ?",
     [
-      '"Parle de ce produit vaguement"',
       '"Mache-moi au maximum de textes ce que fait cela"',
-      '"Rédige la description produit de la nouvelle ligne de compléments naturels de Viva Fit. Souligne les bienfaits vitaux, les ingrédients clés, et sa différence concurrentielle. Ton : Confiant et accueillant."',
-      '"Quels sont des bons suppléments globaux ?"'
+      '"Parle de ce produit vaguement"',
+      '"Quels sont des bons suppléments globaux ?"',
+      '"Rédige la description produit de la nouvelle ligne de compléments naturels de Viva Fit. Souligne les bienfaits vitaux, les ingrédients clés, et sa différence concurrentielle. Ton : Confiant et accueillant."'
     ],
-    2,
+    3,
     "Orienter farouchement l'IA sur le distinguo (ingrédients, bienfaits) écarte le rendu bas de gamme universel."
   ),
   textStep(
@@ -541,12 +541,12 @@ export const CHATGPT_MODULE_5_STEPS_FR = [
     "Stratège des Fêtes Mondiales",
     "Viva Fit attend urgemment une série pour la Journée Mondiale de la Santé. Quel prompt l'emporte haut la main ?",
     [
-      '"Génère des faits sur la journée de la santé"',
-      '"Fournis une histoire médicale"',
       '"Crée une série de 5 posts pour la Journée Mondiale de la Santé au nom de Viva Fit, marque de bien-être. Chaque post doit aborder un angle précis : chiffre surprenant, astuce pratique, motivation quotidienne, incitation produit, appel à la communauté. Ton : Inspirant et proche."',
-      '"Juste un petit post du 7 avril s\'il te plaît"'
+      '"Génère des faits sur la journée de la santé"',
+      '"Juste un petit post du 7 avril s\'il te plaît"',
+      '"Fournis une histoire médicale"'
     ],
-    2,
+    0,
     "Contraindre les multiples publications à s'appuyer chacune sur une variation sémantique (chiffre, astuce, vente) offre une dimension très stratégique."
   ),
   textStep(
@@ -565,8 +565,8 @@ export const CHATGPT_MODULE_5_STEPS_FR = [
     "Conditionnement Vertical",
     "En quoi spécifier drastiquement le chronométrage et l'ossature d'un Reel améliore l'output ?",
     [
-      "Le bot accepte seulement les textes très courts",
       "Pour faire transpirer le présentateur video en accéléré",
+      "Le bot accepte seulement les textes très courts",
       "Assurer un rendu directement profilé et ajusté à la taille d'un clip court vertical, réduisant grandement les retouches complexes ou résumés à postériori",
       "Il n'y a pas d'importance"
     ],
@@ -595,10 +595,10 @@ export const CHATGPT_MODULE_5_STEPS_FR = [
     [
       '"Crée un calendrier des posts d\'ici fin mai"',
       '"Donne des idées vastes orientées hôpital et bien-être"',
-      '"Agis en majestueux directeur webmarketing : Délimite la stratégie éditoriale Instagram complête de Viva Fit en mai. Oblige-toi à unifier 4 piliers thématiques, la fréquence hebdomadaire idéale, un dosage juste des formats (Reels, carrousels, fixes, stories), tes 12 meilleures pistes précises et les 3 grands leviers KPI pour estimer une prouesse chiffrée."',
-      '"Écris joliment un mois de plan de com"'
+      '"Écris joliment un mois de plan de com"',
+      '"Agis en majestueux directeur webmarketing : Délimite la stratégie éditoriale Instagram complête de Viva Fit en mai. Oblige-toi à unifier 4 piliers thématiques, la fréquence hebdomadaire idéale, un dosage juste des formats (Reels, carrousels, fixes, stories), tes 12 meilleures pistes précises et les 3 grands leviers KPI pour estimer une prouesse chiffrée."'
     ],
-    2,
+    3,
     "Instaurer des règles de formats mixtes, des cadences et dicter les piliers sont le code pur de la machinerie des experts webmarketing véritables."
   ),
   textStep(

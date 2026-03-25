@@ -160,7 +160,48 @@ import {
   DEEPSEEK_MODULE_6_STEPS_FR,
   DEEPSEEK_MODULE_6_STEPS_PT,
 } from "@/lib/deepseekModule6LessonSteps";
-import { CLAUDE_MODULE_1_STEPS_PT } from "@/lib/claudeModule1LessonSteps";
+import {
+  CLAUDE_MODULE_1_STEPS_EN,
+  CLAUDE_MODULE_1_STEPS_ES,
+  CLAUDE_MODULE_1_STEPS_FR,
+  CLAUDE_MODULE_1_STEPS_PT,
+} from "@/lib/claudeModule1LessonSteps";
+import {
+  CLAUDE_MODULE_2_STEPS_EN,
+  CLAUDE_MODULE_2_STEPS_ES,
+  CLAUDE_MODULE_2_STEPS_FR,
+  CLAUDE_MODULE_2_STEPS_PT,
+} from "@/lib/claudeModule2LessonSteps";
+import {
+  CLAUDE_MODULE_3_STEPS_EN,
+  CLAUDE_MODULE_3_STEPS_ES,
+  CLAUDE_MODULE_3_STEPS_FR,
+  CLAUDE_MODULE_3_STEPS_PT,
+} from "@/lib/claudeModule3LessonSteps";
+import {
+  CLAUDE_MODULE_4_STEPS_EN,
+  CLAUDE_MODULE_4_STEPS_ES,
+  CLAUDE_MODULE_4_STEPS_FR,
+  CLAUDE_MODULE_4_STEPS_PT,
+} from "@/lib/claudeModule4LessonSteps";
+import {
+  CLAUDE_MODULE_5_STEPS_EN,
+  CLAUDE_MODULE_5_STEPS_ES,
+  CLAUDE_MODULE_5_STEPS_FR,
+  CLAUDE_MODULE_5_STEPS_PT,
+} from "@/lib/claudeModule5LessonSteps";
+import {
+  CLAUDE_MODULE_6_STEPS_EN,
+  CLAUDE_MODULE_6_STEPS_ES,
+  CLAUDE_MODULE_6_STEPS_FR,
+  CLAUDE_MODULE_6_STEPS_PT,
+} from "@/lib/claudeModule6LessonSteps";
+import {
+  CLAUDE_MODULE_7_STEPS_EN,
+  CLAUDE_MODULE_7_STEPS_ES,
+  CLAUDE_MODULE_7_STEPS_FR,
+  CLAUDE_MODULE_7_STEPS_PT,
+} from "@/lib/claudeModule7LessonSteps";
 
 
 
@@ -4203,10 +4244,10 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
     }
   },
   claude: {
-    status: "coming_soon",
+    status: "live",
     locales: {
       pt: {
-        statusBadge: "Em breve",
+        statusBadge: "Trilha ativa",
         heroEyebrow: "Claude",
         heroTitle: "Claude como seu assistente inteligente.",
         heroDescription:
@@ -4270,6 +4311,1166 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "O melhor uso do Claude nasce de conversas bem construidas, com contexto claro, refinamento iterativo e expectativa realista sobre seus limites."
+          },
+          {
+            number: 2,
+            title: "Aprendendo Qualquer Coisa com o Claude",
+            summary: "Aprendizado do zero, plano de estudos, quizzes, metodo socratico, revisao e idiomas.",
+            outcome: "Sistema de estudo com Claude para aprender com mais estrutura e profundidade.",
+            intro:
+              "Nesta licao, voce vai transformar o Claude em professor particular, parceiro de estudo e guia de aprendizado para qualquer assunto, em qualquer nivel e no seu proprio ritmo.",
+            keyPoints: [
+              "O Claude aprende melhor sobre voce quando voce informa nivel atual, objetivo e forma de aprender.",
+              "Ele pode montar planos de estudo completos, progressivos e adaptados ao seu tempo disponivel.",
+              "Quizzes, revisoes, metodo socratico e analogias ajudam a consolidar o que foi estudado.",
+              "O Claude tambem pode apoiar idiomas e aprofundar temas que voce ja conhece em nivel intermediario ou avancado."
+            ],
+            lessonSteps: CLAUDE_MODULE_2_STEPS_PT,
+            promptExample:
+              "Voce e um professor especialista em historia. Quero aprender a Segunda Guerra Mundial do zero. Meu nivel atual e basico. Comece pelo conceito mais fundamental, use exemplos do cotidiano e ao final me diga quais sao os proximos topicos que devo estudar.",
+            practice: {
+              title: "Prompt de inicio de aprendizado",
+              instruction: "Monte um prompt para aprender um assunto novo com contexto claro.",
+              terms: ["historia", "a Segunda Guerra Mundial", "basico", "fundamental", "exemplos", "topicos"],
+              solution:
+                "Um bom prompt de estudo informa especialista, assunto, nivel atual, profundidade inicial, tipo de exemplo e proximos passos."
+            },
+            quiz: {
+              question: "Qual prompt gera a melhor revisao para uma prova?",
+              options: [
+                "\"Resuma esse assunto\"",
+                "\"Me fale os pontos principais\"",
+                "\"Crie uma revisao sobre [tema] com os 10 conceitos mais importantes, uma frase que resume cada um e um exemplo pratico. Organize do mais basico ao mais avancado e destaque os 3 que mais costumam aparecer em provas\"",
+                "\"Fale sobre o tema de forma curta\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quanto mais clara a estrutura da revisao, maior a chance de receber um material realmente util para revisar rapido."
+            },
+            takeaway:
+              "O Claude acelera o aprendizado quando voce o usa com estrutura, pratica deliberada e pedidos que transformam explicacao em raciocinio ativo."
+          },
+          {
+            number: 3,
+            title: "Projetos no Claude - Organize, Contextualize e Produza Mais",
+            summary: "Projetos, instrucoes fixas, documentos, equipe e boas praticas de organizacao.",
+            outcome: "Sistema de projetos no Claude para ganhar contexto, consistencia e velocidade.",
+            intro:
+              "Nesta licao, voce vai aprender a usar Projetos no Claude para organizar contextos, centralizar documentos, manter instrucoes fixas e transformar o assistente em um parceiro dedicado para cada area da sua vida.",
+            keyPoints: [
+              "Projetos funcionam como espacos tematicos com contexto persistente e conversas organizadas.",
+              "Instrucoes fixas ajudam o Claude a responder no tom, formato e nivel adequados em todas as conversas do projeto.",
+              "Documentos adicionados ao projeto servem como referencia permanente para respostas mais consistentes.",
+              "Projetos compartilhados e revisoes periodicas das instrucoes melhoram colaboracao e qualidade ao longo do tempo."
+            ],
+            lessonSteps: CLAUDE_MODULE_3_STEPS_PT,
+            promptExample:
+              "Este projeto e sobre meu negocio de confeitaria artesanal. Meu objetivo principal aqui e criar conteudo para redes sociais e responder clientes. Sempre que eu trouxer uma tarefa, considere que estou falando com um publico jovem e informal e use um tom descontraido e proximo.",
+            practice: {
+              title: "Primeiro projeto configurado",
+              instruction: "Monte uma configuracao inicial clara para um projeto no Claude.",
+              terms: [
+                "meu negocio de confeitaria artesanal",
+                "criar conteudo para redes sociais e responder clientes",
+                "estou falando com um publico jovem e informal",
+                "descontraido e proximo"
+              ],
+              solution:
+                "Um projeto bem configurado define area, objetivo, publico e tom logo no inicio para economizar repeticao nas conversas futuras."
+            },
+            quiz: {
+              question: "Qual prompt de instrucao fixa voce usaria para um projeto de estudos de longo prazo?",
+              options: [
+                "\"Responda qualquer coisa que eu perguntar\"",
+                "\"Seja breve em todas as respostas\"",
+                "\"Este projeto e dedicado ao meu estudo de [tema]. Meu nivel atual e iniciante. Conforme as conversas avancarem, ajuste a complexidade das explicacoes. Sempre que eu aprender um conceito novo, conecte com o que ja estudamos antes neste projeto\"",
+                "\"Guarde todas as minhas respostas para usar depois\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "A melhor instrucao fixa de estudo deixa claro o tema, o nivel, a progressao esperada e a necessidade de conectar o novo ao historico do projeto."
+            },
+            takeaway:
+              "Projetos bem configurados transformam o Claude em um parceiro de longo prazo, com mais memoria contextual, menos retrabalho e respostas mais alinhadas ao que voce realmente precisa."
+          },
+          {
+            number: 4,
+            title: "🎨 Criando com os Artefatos do Claude",
+            summary: "Artefatos, documentos, HTML, React, visualização de dados e refinamento.",
+            outcome: "Produção de conteúdo visual e funcional diretamente no Claude com Artefatos.",
+            intro: "Nesta lição, você vai aprender a usar uma das funcionalidades mais visuais e práticas do Claude — os Artefatos. Com eles, você cria documentos, códigos, páginas, apresentações e muito mais diretamente na conversa, sem precisar de nenhuma ferramenta externa.",
+            keyPoints: [
+              "Artefatos aparecem em uma janela separada para visualizar, editar e exportar o conteúdo.",
+              "Suportam Markdown, páginas HTML, componentes React e visualizações de dados.",
+              "Permitem prototipagem rápida de interfaces e ferramentas interativas.",
+              "Podem ser refinados e atualizados em tempo real através da conversa."
+            ],
+            lessonSteps: CLAUDE_MODULE_4_STEPS_PT,
+            promptExample: "Crie um componente React interativo de calculadora de IMC. O usuário insere peso e altura, e o resultado aparece com a classificação e uma cor diferente para cada faixa. Gere como Artefato.",
+            practice: {
+              title: "Seu primeiro Artefato",
+              instruction: "Peça ao Claude para criar um documento estruturado e visualizá-lo como Artefato.",
+              terms: ["plano estratégico trimestral", "consultoria de RH", "principais desafios", "5", "acompanhamento"],
+              solution: "Solicitar a criação de um documento específico (como um plano estratégico) e pedir explicitamente para 'gerar como Artefato em Markdown' ativa a visualização lateral."
+            },
+            quiz: {
+              question: "Qual é a principal vantagem de usar Artefatos em vez de uma resposta de texto comum?",
+              options: [
+                "Permite visualizar, interagir e exportar o conteúdo renderizado em uma janela dedicada.",
+                "O Claude responde mais rápido quando usa Artefatos.",
+                "Artefatos consomem menos limite de mensagens.",
+                "Eles funcionam apenas para quem sabe programar."
+              ],
+              correctIndex: 0,
+              explanation: "Os Artefatos oferecem um espaço de trabalho dedicado para lidar com conteúdo que precisa de visualização ou estrutura clara."
+            },
+            takeaway: "Os Artefatos transformam o Claude de um chatbot em uma ferramenta de criação completa, permitindo ver e interagir com o resultado final instantaneamente."
+          },
+          {
+            number: 5,
+            title: "Claude para Criatividade - Ideias Sem Limite",
+            summary: "Brainstorming, escrita com voz, storytelling, originalidade, video e refinamento.",
+            outcome: "Uso do Claude como parceiro criativo para gerar, destravar e evoluir ideias com mais identidade.",
+            intro:
+              "Nesta licao, voce vai aprender a usar o Claude como parceiro criativo para gerar ideias originais, escrever com personalidade, criar historias, roteiros e conteudos que realmente se destacam.",
+            keyPoints: [
+              "Pedir variedade explicita ajuda o Claude a explorar caminhos menos obvios e mais originais.",
+              "Definir voz, tom, ritmo e referencias deixa a escrita mais alinhada com sua identidade criativa.",
+              "Storytelling, roteiros curtos e perguntas provocativas ajudam a transformar bloqueio em producao.",
+              "A criatividade mais forte aparece no refinamento iterativo, nao na primeira resposta."
+            ],
+            lessonSteps: CLAUDE_MODULE_5_STEPS_PT,
+            promptExample:
+              "Quero uma abordagem contraintuitiva e surpreendente para uma campanha sobre coragem. Evite os cliches mais comuns sobre esse tema. Pense em um angulo que a maioria das pessoas nao consideraria imediatamente e que seja ao mesmo tempo autentico e memoravel.",
+            practice: {
+              title: "Ideias com diversidade",
+              instruction: "Monte um prompt que peca um brainstorming criativo com angulos variados.",
+              terms: [
+                "15",
+                "o nome de uma marca de moda sustentavel",
+                "obvias",
+                "poeticas",
+                "provocativas",
+                "3"
+              ],
+              solution:
+                "Um bom prompt criativo pede quantidade, contexto, variedade explicita de angulos e uma selecao final das ideias com maior potencial."
+            },
+            quiz: {
+              question: "Qual prompt tende a tirar o Claude do generico em tarefas criativas?",
+              options: [
+                "\"Escreva algo criativo sobre coragem\"",
+                "\"Quero uma abordagem contraintuitiva e surpreendente para uma campanha sobre coragem. Evite os cliches mais comuns sobre esse tema e pense em um angulo autentico e memoravel\"",
+                "\"Faca uma campanha padrao sobre coragem\"",
+                "\"Escreva qualquer ideia que vier a mente\""
+              ],
+              correctIndex: 1,
+              explanation:
+                "Quando voce pede ruptura com os cliches e define o tipo de originalidade que quer, o Claude tem mais chance de sair do lugar comum."
+            },
+            takeaway:
+              "O Claude funciona melhor como parceiro criativo quando voce combina direcao clara, referencias fortes, abertura para iteracao e coragem para pedir algo menos obvio."
+          },
+          {
+            number: 6,
+            title: "Claude para Analise de Documentos e Contratos Longos",
+            summary: "Leitura de documentos extensos, resumos, riscos, extracao de dados e comparacao de versoes.",
+            outcome: "Uso do Claude como primeira camada de analise para contratos, relatorios e documentos longos com mais clareza.",
+            intro:
+              "Nesta licao, voce vai aprender como o Claude pode ajudar na leitura, interpretacao e analise de documentos extensos, como contratos, relatorios tecnicos e propostas comerciais, de forma simples e pratica.",
+            keyPoints: [
+              "A grande vantagem do Claude em documentos longos e manter contexto ao longo de todo o material.",
+              "Prompts estruturados ajudam a resumir, extrair informacoes e localizar riscos com mais rapidez.",
+              "Claude pode comparar versoes, simplificar linguagem tecnica e responder perguntas objetivas sobre o documento.",
+              "Ele ajuda muito na primeira analise, mas nao substitui validacao profissional em decisoes importantes."
+            ],
+            lessonSteps: CLAUDE_MODULE_6_STEPS_PT,
+            promptExample:
+              "Analise este contrato e identifique clausulas que possam representar risco ou desvantagem. Para cada uma, cite o trecho, explique em linguagem simples, classifique o risco e sugira uma redacao mais equilibrada.",
+            practice: {
+              title: "Primeira leitura guiada",
+              instruction: "Monte um prompt inicial para pedir uma visao geral de um documento longo.",
+              terms: [
+                "qual e o objetivo principal",
+                "quais sao os pontos centrais",
+                "se existe algo que merece atencao imediata"
+              ],
+              solution:
+                "Um bom prompt inicial pede leitura completa, objetivo principal, pontos centrais e alerta sobre o que merece atencao imediata."
+            },
+            quiz: {
+              question: "Mesmo sendo muito forte com documentos longos, o que o Claude nao substitui?",
+              options: [
+                "A validacao de um especialista em decisoes com impacto juridico, financeiro ou tecnico.",
+                "A leitura inicial de um documento.",
+                "A extracao de informacoes objetivas.",
+                "A comparacao entre duas versoes de um contrato."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude acelera muito a primeira analise, mas decisoes importantes ainda exigem confirmacao profissional."
+            },
+            takeaway:
+              "O melhor uso do Claude com documentos longos e transformar leitura cansativa em analise orientada, sem confundir apoio inteligente com substituicao de um especialista."
+          },
+          {
+            number: 7,
+            title: "Claude com Outras Ferramentas - Expandindo suas Possibilidades",
+            summary: "Docs, planilhas, tarefas, apresentacoes, e-mails, design, audio e fluxos de trabalho.",
+            outcome: "Uso do Claude como centro de raciocinio dentro de um ecossistema de ferramentas do dia a dia.",
+            intro:
+              "Nesta licao, voce vai aprender como o Claude pode trabalhar junto com outras ferramentas para aumentar produtividade, automatizar etapas e criar fluxos de trabalho mais inteligentes.",
+            keyPoints: [
+              "Claude gera estrutura, raciocinio e direcao enquanto outras ferramentas executam partes especificas do fluxo.",
+              "Ele funciona muito bem com documentos, planilhas, gestores de tarefas, apresentacoes e e-mails.",
+              "Tambem pode preparar briefs para design e transformar transcricoes em acoes objetivas.",
+              "O maior ganho vem de usar Claude como cerebro central, nao como substituto absoluto das outras ferramentas."
+            ],
+            lessonSteps: CLAUDE_MODULE_7_STEPS_PT,
+            promptExample:
+              "Quero montar um fluxo de trabalho com Claude e Google Docs, Sheets, Trello e Canva. Me sugira como integrar essas ferramentas no meu dia a dia.",
+            practice: {
+              title: "Ecossistema pessoal",
+              instruction: "Monte um prompt para pedir um fluxo com Claude e outras ferramentas.",
+              terms: ["ferramentas", "dia a dia"],
+              solution:
+                "Um bom prompt de integracao deixa claro quais ferramentas fazem parte do fluxo e pede aplicacao pratica na rotina."
+            },
+            quiz: {
+              question: "Qual afirmacao descreve melhor o papel do Claude nesse ecossistema?",
+              options: [
+                "Substitui todas as ferramentas.",
+                "So deve ser usado em ultimo caso.",
+                "Atua como centro de raciocinio e criacao.",
+                "Funciona melhor isolado."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Claude conecta, organiza e pensa; as outras ferramentas entram para executar, formatar, acompanhar e compartilhar."
+            },
+            takeaway:
+              "O melhor uso do Claude com outras ferramentas e coloca-lo no centro do fluxo, aproveitando o melhor de cada plataforma sem tentar transformar tudo em uma unica ferramenta."
+          }
+        ]
+      },
+      en: {
+        statusBadge: "Trail live",
+        heroEyebrow: "Claude",
+        heroTitle: "Claude as your intelligent assistant.",
+        heroDescription:
+          "A trail for using Claude with more context, stronger writing quality, and greater depth in analysis and decision-making.",
+        overviewTitle: "What you will master",
+        overviewItems: [
+          "How to structure requests with context, objective, and knowledge level for stronger answers.",
+          "How to use Claude for analysis, writing, revision, and reasoning in complex situations.",
+          "How to turn Claude into a thinking partner for daily work and study."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final reading",
+        modules: [
+          {
+            number: 1,
+            title: "Claude as Your Intelligent Assistant",
+            summary: "Claude fundamentals, context, refinement, analysis, writing, and honesty.",
+            outcome: "A solid base for working with Claude more effectively in daily life.",
+            intro:
+              "In this lesson, you will understand what makes Claude different, why it responds better to well-framed context, and how to use its strengths in analysis, writing, and decision-making.",
+            keyPoints: [
+              "Claude was created with a focus on usefulness, honesty, and safety.",
+              "The more context, objective, and knowledge level you provide, the better the answer tends to be.",
+              "It stands out in analysis, writing, revision, and structured reasoning.",
+              "When uncertainty exists, the expected behavior is to signal limits and recommend verification."
+            ],
+            lessonSteps: CLAUDE_MODULE_1_STEPS_EN,
+            promptExample:
+              "You are a personal finance expert with experience in beginner investing. I need help to build my first investment portfolio. My current knowledge level is basic and my final goal is to build a solid emergency fund in 12 months.",
+            practice: {
+              title: "Context-rich prompt",
+              instruction: "Build a clear request that brings out Claude's best.",
+              terms: [
+                "personal finance expert",
+                "beginner investing",
+                "build my first investment portfolio",
+                "basic",
+                "build a solid emergency fund in 12 months"
+              ],
+              solution:
+                "A strong study prompt defines role, specialty, task, current level, and final goal to produce a far more contextual answer."
+            },
+            quiz: {
+              question: "What best describes Claude's differentiator?",
+              options: [
+                "It was developed with a focus on deep reasoning, honesty, and contextualized responses.",
+                "It automatically remembers every past conversation.",
+                "It accesses the internet in real time without setup.",
+                "It never makes mistakes in any situation."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude stands out because it combines deep reasoning, honesty about limits, and stronger use of context."
+            },
+            takeaway:
+              "The best use of Claude comes from well-built conversations, clear context, iterative refinement, and realistic expectations about its limits."
+          },
+          {
+            number: 2,
+            title: "Learning Anything with Claude",
+            summary: "Learning from zero, study plans, quizzes, Socratic method, review, and languages.",
+            outcome: "A study system with Claude for learning with more structure and depth.",
+            intro:
+              "In this lesson, you will turn Claude into a private teacher, study partner, and learning guide for any subject, at any level, and at your own pace.",
+            keyPoints: [
+              "Claude helps more when you inform your current level, goal, and way of learning.",
+              "It can build complete study plans that are progressive and adapted to your available time.",
+              "Quizzes, reviews, the Socratic method, and analogies help consolidate what you studied.",
+              "Claude can also support language learning and deepen subjects you already know."
+            ],
+            lessonSteps: CLAUDE_MODULE_2_STEPS_EN,
+            promptExample:
+              "You are an expert history teacher. I want to learn World War II from zero. My current level is basic. Start with the most fundamental concept, use everyday examples, and at the end tell me which next topics I should study.",
+            practice: {
+              title: "Learning kickoff prompt",
+              instruction: "Build a prompt to learn a new subject with clear context.",
+              terms: ["history", "World War II", "basic", "fundamental", "examples", "topics"],
+              solution:
+                "A good learning prompt informs expert role, subject, current level, initial depth, example style, and next steps."
+            },
+            quiz: {
+              question: "Which prompt generates the best review for a test?",
+              options: [
+                "\"Summarize this subject\"",
+                "\"Tell me the main points\"",
+                "\"Create a review about [topic] with the 10 most important concepts, one sentence that summarizes each one, and one practical example. Organize it from the most basic to the most advanced and highlight the 3 that appear most often in tests\"",
+                "\"Talk about the topic briefly\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "The clearer the review structure is, the greater the chance of receiving material that is actually useful for fast revision."
+            },
+            takeaway:
+              "Claude accelerates learning when you use it with structure, deliberate practice, and requests that turn explanation into active reasoning."
+          },
+          {
+            number: 3,
+            title: "Projects in Claude - Organize, Add Context, and Produce More",
+            summary: "Projects, fixed instructions, documents, teamwork, and organization best practices.",
+            outcome: "A Claude project system for stronger context, consistency, and speed.",
+            intro:
+              "In this lesson, you will learn how to use Projects in Claude to organize context, centralize documents, maintain fixed instructions, and turn the assistant into a dedicated partner for each area of your life.",
+            keyPoints: [
+              "Projects work as thematic spaces with persistent context and organized conversations.",
+              "Fixed instructions help Claude answer in the right tone, format, and depth across every project conversation.",
+              "Documents added to the project serve as standing references for more consistent answers.",
+              "Shared projects and periodic instruction reviews improve collaboration and quality over time."
+            ],
+            lessonSteps: CLAUDE_MODULE_3_STEPS_EN,
+            promptExample:
+              "This project is about my handmade bakery business. My main goal here is to create social media content and reply to customers. Whenever I bring a task, consider that I am speaking to a young and informal audience and use a relaxed and approachable tone.",
+            practice: {
+              title: "First configured project",
+              instruction: "Build a clear initial setup for a Claude project.",
+              terms: [
+                "my handmade bakery business",
+                "create social media content and reply to customers",
+                "I am speaking to a young and informal audience",
+                "relaxed and approachable"
+              ],
+              solution:
+                "A well-configured project defines area, objective, audience, and tone at the start so future conversations need less repetition."
+            },
+            quiz: {
+              question: "Which fixed instruction prompt would you use for a long-term study project?",
+              options: [
+                "\"Answer anything I ask\"",
+                "\"Be brief in every answer\"",
+                "\"This project is dedicated to my study of [topic]. My current level is beginner. As the conversations progress, adjust the complexity of the explanations. Whenever I learn a new concept, connect it with what we have already studied in this project\"",
+                "\"Store all of my answers for later use\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "The best fixed study instruction states the topic, the level, the expected progression, and the need to connect new material to the project's history."
+            },
+            takeaway:
+              "Well-configured projects turn Claude into a long-term partner with better contextual memory, less rework, and answers that stay aligned with what you actually need."
+          },
+          {
+            number: 4,
+            title: "🎨 Creating with Claude Artifacts",
+            summary: "Artifacts, documents, HTML, React, data visualization, and refinement.",
+            outcome: "Production of visual and functional content directly in Claude with Artifacts.",
+            intro: "In this lesson, you will learn how to use one of Claude's most visual and practical features — Artifacts. With them, you create documents, code, pages, presentations, and much more directly in the conversation, without needing any external tools.",
+            keyPoints: [
+              "Artifacts appear in a separate window to view, edit, and export content.",
+              "They support Markdown, HTML pages, React components, and data visualizations.",
+              "They allow for rapid prototyping of interfaces and interactive tools.",
+              "They can be refined and updated in real-time through the conversation."
+            ],
+            lessonSteps: CLAUDE_MODULE_4_STEPS_EN,
+            promptExample: "Create an interactive React BMI calculator component. The user enters weight and height, and the result appears with the classification and a different color for each range. Generate as an Artifact.",
+            practice: {
+              title: "Your first Artifact",
+              instruction: "Ask Claude to create a structured document and view it as an Artifact.",
+              terms: ["quarterly strategic plan", "HR consulting", "key challenges", "5", "follow-up"],
+              solution: "Requesting a specific document (like a strategic plan) and explicitly asking to 'generate as a Markdown Artifact' activates the side view."
+            },
+            quiz: {
+              question: "What is the main advantage of using Artifacts instead of a common text response?",
+              options: [
+                "It allows you to view, interact with, and export rendered content in a dedicated window.",
+                "Claude responds faster when using Artifacts.",
+                "Artifacts consume less message limit.",
+                "They only work for those who know how to code."
+              ],
+              correctIndex: 0,
+              explanation: "Artifacts provide a dedicated workspace for handling content that needs clear visualization or structure."
+            },
+            takeaway: "Artifacts transform Claude from a chatbot into a complete creation tool, allowing you to see and interact with the final result instantly."
+          },
+          {
+            number: 5,
+            title: "Claude for Creativity - Limitless Ideas",
+            summary: "Brainstorming, writing voice, storytelling, originality, video, and refinement.",
+            outcome: "Using Claude as a creative partner to generate, unblock, and evolve ideas with more identity.",
+            intro:
+              "In this lesson, you will learn how to use Claude as a creative partner to generate original ideas, write with personality, create stories, shape scripts, and build content that truly stands out.",
+            keyPoints: [
+              "Asking for explicit variety helps Claude explore less obvious and more original directions.",
+              "Defining voice, tone, rhythm, and references makes the writing more aligned with your creative identity.",
+              "Storytelling, short scripts, and provocative questions help turn creative block into momentum.",
+              "The strongest creative work appears in iterative refinement, not in the first response."
+            ],
+            lessonSteps: CLAUDE_MODULE_5_STEPS_EN,
+            promptExample:
+              "I want a counterintuitive and surprising approach for a campaign about courage. Avoid the most common cliches around this theme. Think of an angle that most people would not immediately consider and that feels both authentic and memorable.",
+            practice: {
+              title: "Diverse idea generation",
+              instruction: "Build a prompt that asks for a creative brainstorm with varied angles.",
+              terms: [
+                "15",
+                "the name of a sustainable fashion brand",
+                "obvious",
+                "poetic",
+                "provocative",
+                "3"
+              ],
+              solution:
+                "A strong creative prompt asks for quantity, context, explicit variation in angles, and a final selection of the ideas with the greatest potential."
+            },
+            quiz: {
+              question: "Which prompt is most likely to push Claude beyond generic creative output?",
+              options: [
+                "\"Write something creative about courage\"",
+                "\"I want a counterintuitive and surprising approach for a campaign about courage. Avoid the most common cliches around this theme and think of an authentic and memorable angle\"",
+                "\"Make a standard campaign about courage\"",
+                "\"Write any idea that comes to mind\""
+              ],
+              correctIndex: 1,
+              explanation:
+                "When you ask Claude to break away from cliches and define the kind of originality you want, it is more likely to produce something less generic."
+            },
+            takeaway:
+              "Claude works best as a creative partner when you combine clear direction, strong references, openness to iteration, and the courage to ask for something less obvious."
+          },
+          {
+            number: 6,
+            title: "Claude for Long Document and Contract Analysis",
+            summary: "Reading long documents, summaries, risks, data extraction, and version comparison.",
+            outcome: "Using Claude as a first layer of analysis for contracts, reports, and long documents with more clarity.",
+            intro:
+              "In this lesson, you will learn how Claude can help with reading, interpreting, and analyzing long documents such as contracts, technical reports, and commercial proposals in a simple and practical way.",
+            keyPoints: [
+              "Claude's main advantage with long documents is preserving context across the full material.",
+              "Structured prompts help you summarize, extract information, and locate risks faster.",
+              "Claude can compare versions, simplify technical language, and answer focused questions about the document.",
+              "It is very strong in first-pass analysis, but it does not replace professional validation for important decisions."
+            ],
+            lessonSteps: CLAUDE_MODULE_6_STEPS_EN,
+            promptExample:
+              "Analyze this contract and identify clauses that may represent risk or disadvantage. For each one, quote the passage, explain it in simple language, classify the risk, and suggest more balanced wording.",
+            practice: {
+              title: "First guided reading",
+              instruction: "Build an opening prompt to request a high-level view of a long document.",
+              terms: [
+                "what the main objective is",
+                "what the central points are",
+                "whether there is anything that deserves immediate attention"
+              ],
+              solution:
+                "A strong opening prompt asks for a full reading, the main objective, the central points, and anything that needs immediate attention."
+            },
+            quiz: {
+              question: "Even though Claude is very strong with long documents, what does it not replace?",
+              options: [
+                "Validation by a specialist in decisions with legal, financial, or technical impact.",
+                "The initial reading of a document.",
+                "Extraction of objective information.",
+                "Comparison between two versions of a contract."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude greatly accelerates the first analysis, but important decisions still require professional confirmation."
+            },
+            takeaway:
+              "The best way to use Claude with long documents is to turn exhausting reading into guided analysis without confusing intelligent support with replacing a specialist."
+          },
+          {
+            number: 7,
+            title: "Claude with Other Tools - Expanding What You Can Do",
+            summary: "Docs, spreadsheets, tasks, presentations, email, design, audio, and workflows.",
+            outcome: "Using Claude as a reasoning hub inside an everyday tool ecosystem.",
+            intro:
+              "In this lesson, you will learn how Claude can work together with other tools to increase productivity, automate steps, and build smarter workflows.",
+            keyPoints: [
+              "Claude creates structure, reasoning, and direction while other tools execute specialized parts of the workflow.",
+              "It works especially well with documents, spreadsheets, task managers, presentations, and email.",
+              "It can also prepare design briefs and turn transcripts into concrete actions.",
+              "The biggest gain comes from using Claude as a central brain, not as a total replacement for every other tool."
+            ],
+            lessonSteps: CLAUDE_MODULE_7_STEPS_EN,
+            promptExample:
+              "I want to build a workflow with Claude and Google Docs, Sheets, Trello, and Canva. Suggest how to integrate these tools into my daily routine.",
+            practice: {
+              title: "Personal ecosystem",
+              instruction: "Build a prompt that asks for a workflow using Claude and other tools.",
+              terms: ["tools", "daily routine"],
+              solution:
+                "A strong integration prompt makes the tools explicit and asks for practical day-to-day use instead of abstract advice."
+            },
+            quiz: {
+              question: "Which statement best describes Claude's role in this ecosystem?",
+              options: [
+                "It replaces every other tool.",
+                "It should only be used as a last resort.",
+                "It acts as a center of reasoning and creation.",
+                "It works best in isolation."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Claude connects, organizes, and thinks; the other tools handle execution, formatting, tracking, and sharing."
+            },
+            takeaway:
+              "The best way to use Claude with other tools is to place it at the center of the flow while still taking advantage of what each platform does best."
+          }
+        ]
+      },
+      es: {
+        statusBadge: "Ruta activa",
+        heroEyebrow: "Claude",
+        heroTitle: "Claude como tu asistente inteligente.",
+        heroDescription:
+          "Una ruta para usar Claude con mas contexto, mejor calidad de escritura y mayor profundidad en analisis y toma de decisiones.",
+        overviewTitle: "Lo que vas a dominar",
+        overviewItems: [
+          "Como estructurar pedidos con contexto, objetivo y nivel de conocimiento para obtener respuestas mas fuertes.",
+          "Como usar Claude para analisis, escritura, revision y razonamiento en situaciones complejas.",
+          "Como convertir a Claude en un socio de pensamiento para el trabajo y el estudio diario."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Practica guiada",
+        termsLabel: "Terminos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "Claude como tu Asistente Inteligente",
+            summary: "Fundamentos de Claude, contexto, refinamiento, analisis, escritura y honestidad.",
+            outcome: "Base solida para trabajar mejor con Claude en el dia a dia.",
+            intro:
+              "En esta leccion entenderas que hace diferente a Claude, por que responde mejor a un contexto bien dado y como aprovechar sus fortalezas en analisis, escritura y toma de decisiones.",
+            keyPoints: [
+              "Claude fue creado con foco en utilidad, honestidad y seguridad.",
+              "Cuanto mas contexto, objetivo y nivel de conocimiento informas, mejor suele ser la respuesta.",
+              "Destaca en analisis, escritura, revision y razonamiento estructurado.",
+              "Cuando hay incertidumbre, el comportamiento esperado es senalar limites y recomendar verificacion."
+            ],
+            lessonSteps: CLAUDE_MODULE_1_STEPS_ES,
+            promptExample:
+              "Eres un especialista en finanzas personales con experiencia en inversiones para principiantes. Necesito ayuda para armar mi primera cartera de inversiones. Mi nivel actual es basico y mi objetivo final es tener un fondo de emergencia solido en 12 meses.",
+            practice: {
+              title: "Prompt con contexto",
+              instruction: "Construye una solicitud clara para sacar lo mejor de Claude.",
+              terms: [
+                "especialista en finanzas personales",
+                "inversiones para principiantes",
+                "armar mi primera cartera de inversiones",
+                "basico",
+                "tener un fondo de emergencia solido en 12 meses"
+              ],
+              solution:
+                "Un buen prompt define rol, especialidad, tarea, nivel actual y objetivo final para producir una respuesta mucho mas contextualizada."
+            },
+            quiz: {
+              question: "Que describe mejor el diferencial de Claude?",
+              options: [
+                "Fue desarrollado con foco en razonamiento profundo, honestidad y respuestas contextualizadas.",
+                "Memoriza automaticamente todas las conversaciones pasadas.",
+                "Accede a internet en tiempo real sin configuracion.",
+                "Nunca comete errores en ninguna situacion."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude se diferencia por combinar razonamiento profundo, honestidad sobre limites y un uso mas fuerte del contexto."
+            },
+            takeaway:
+              "El mejor uso de Claude nace de conversaciones bien construidas, contexto claro, refinamiento iterativo y expectativas realistas sobre sus limites."
+          },
+          {
+            number: 2,
+            title: "Aprendiendo Cualquier Cosa con Claude",
+            summary: "Aprendizaje desde cero, planes de estudio, quizzes, metodo socratico, repaso e idiomas.",
+            outcome: "Sistema de estudio con Claude para aprender con mas estructura y profundidad.",
+            intro:
+              "En esta leccion convertiras a Claude en profesor particular, companero de estudio y guia de aprendizaje para cualquier tema, en cualquier nivel y a tu propio ritmo.",
+            keyPoints: [
+              "Claude ayuda mas cuando informas tu nivel actual, objetivo y forma de aprender.",
+              "Puede construir planes de estudio completos, progresivos y adaptados a tu tiempo disponible.",
+              "Los quizzes, repasos, analogias y metodo socratico ayudan a consolidar lo que estudiaste.",
+              "Claude tambien puede apoyar idiomas y profundizar temas que ya conoces."
+            ],
+            lessonSteps: CLAUDE_MODULE_2_STEPS_ES,
+            promptExample:
+              "Eres un profesor experto en historia. Quiero aprender la Segunda Guerra Mundial desde cero. Mi nivel actual es basico. Empieza por el concepto mas fundamental, usa ejemplos cotidianos y al final dime cuales son los proximos temas que debo estudiar.",
+            practice: {
+              title: "Prompt de inicio de aprendizaje",
+              instruction: "Construye un prompt para aprender un tema nuevo con contexto claro.",
+              terms: ["historia", "la Segunda Guerra Mundial", "basico", "fundamental", "ejemplos", "temas"],
+              solution:
+                "Un buen prompt de estudio informa rol experto, tema, nivel actual, profundidad inicial, tipo de ejemplo y proximos pasos."
+            },
+            quiz: {
+              question: "Que prompt genera el mejor repaso para una prueba?",
+              options: [
+                "\"Resume este tema\"",
+                "\"Dime los puntos principales\"",
+                "\"Crea un repaso sobre [tema] con los 10 conceptos mas importantes, una frase que resuma cada uno y un ejemplo practico. Organiza todo de lo mas basico a lo mas avanzado y destaca los 3 que mas suelen aparecer en examenes\"",
+                "\"Habla del tema de forma breve\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "Cuanto mas clara sea la estructura del repaso, mayor sera la probabilidad de recibir un material realmente util para revisar rapido."
+            },
+            takeaway:
+              "Claude acelera el aprendizaje cuando lo usas con estructura, practica deliberada y pedidos que convierten explicacion en razonamiento activo."
+          },
+          {
+            number: 3,
+            title: "Proyectos en Claude - Organize, Contextualize y Produzca Más",
+            summary: "Proyectos, instrucciones fijas, documentos, equipo y buenas prácticas de organización.",
+            outcome: "Sistema de proyectos en Claude para ganar contexto, consistencia y velocidad.",
+            intro:
+              "En esta lección aprenderás a usar Proyectos en Claude para organizar contextos, centralizar documentos, mantener instrucciones fijas y transformar al asistente en un socio dedicado para cada área de tu vida.",
+            keyPoints: [
+              "Los Proyectos funcionan como espacios temáticos con contexto persistente y conversaciones organizadas.",
+              "Las instrucciones fijas ayudan a Claude a responder con el tono, el formato y el nivel adecuados en todas las conversaciones del proyecto.",
+              "Los documentos agregados al proyecto funcionan como referencia permanente para respuestas más consistentes.",
+              "Los proyectos compartidos y la revisión periódica de instrucciones mejoran la colaboración y la calidad con el tiempo."
+            ],
+            lessonSteps: CLAUDE_MODULE_3_STEPS_ES,
+            promptExample:
+              "Este proyecto es sobre mi negocio de repostería artesanal. Mi objetivo principal aquí es crear contenido para redes sociales y responder clientes. Siempre que traiga una tarea, considera que estoy hablando con un público joven e informal y usa un tono relajado y cercano.",
+            practice: {
+              title: "Primer proyecto configurado",
+              instruction: "Construye una configuración inicial clara para un proyecto en Claude.",
+              terms: [
+                "mi negocio de repostería artesanal",
+                "crear contenido para redes sociales y responder clientes",
+                "estoy hablando con un público joven e informal",
+                "relajado y cercano"
+              ],
+              solution:
+                "Un proyecto bien configurado define área, objetivo, público y tono desde el principio para ahorrar repetición en las conversaciones futuras."
+            },
+            quiz: {
+              question: "¿Qué prompt de instrucción fija usarías para un proyecto de estudios de largo plazo?",
+              options: [
+                "\"Responde cualquier cosa que pregunte\"",
+                "\"Sé breve en todas las respuestas\"",
+                "\"Este proyecto está dedicado a mi estudio de [tema]. Mi nivel actual es principiante. A medida que las conversaciones avancen, ajusta la complejidad de las explicaciones. Siempre que aprenda un concepto nuevo, conéctalo con lo que ya estudiamos antes en este proyecto\"",
+                "\"Guarda todas mis respuestas para usarlas después\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "La mejor instrucción fija de estudio deja claro el tema, el nivel, la progresión esperada y la necesidad de conectar lo nuevo con el historial del proyecto."
+            },
+            takeaway:
+              "Los proyectos bien configurados convierten a Claude en un socio de largo plazo, con más memoria contextual, menos retrabajo y respuestas más alineadas con lo que realmente necesitas."
+          },
+          {
+            number: 4,
+            title: "🎨 Creando con los Artefactos de Claude",
+            summary: "Artefactos, documentos, HTML, React, visualización de datos y refinamiento.",
+            outcome: "Producción de contenido visual y funcional directamente en Claude con Artefactos.",
+            intro: "En esta lección, aprenderás a usar una de las funcionalidades más visuales y prácticas de Claude: los Artefactos. Con ellos, creas documentos, códigos, páginas, presentaciones y mucho más directamente en la conversación, sin necesidad de herramientas externas.",
+            keyPoints: [
+              "Los Artefactos aparecen en una ventana separada para visualizar, editar y exportar el contenido.",
+              "Soportan Markdown, páginas HTML, componentes React y visualizaciones de datos.",
+              "Permiten el prototipado rápido de interfaces y herramientas interactivas.",
+              "Pueden ser refinados y actualizados en tiempo real a través de la conversación."
+            ],
+            lessonSteps: CLAUDE_MODULE_4_STEPS_ES,
+            promptExample: "Crea un componente React interactivo de calculadora de IMC. El usuario ingresa peso y altura, y el resultado aparece con la clasificación y un color diferente para cada rango. Genera como Artefacto.",
+            practice: {
+              title: "Tu primer Artefacto",
+              instruction: "Pide a Claude que cree un documento estructurado y visualízalo como Artefacto.",
+              terms: ["plan estratégico trimestral", "consultoría de RRHH", "desafíos principales", "5", "seguimiento"],
+              solution: "Solicitar la creación de un documento específico (como un plan estratégico) y pedir explícitamente 'generar como Artefacto en Markdown' activa la vista lateral."
+            },
+            quiz: {
+              question: "¿Cuál es la principal ventaja de usar Artefactos en lugar de una respuesta de texto común?",
+              options: [
+                "Permite visualizar, interactuar y exportar el contenido renderizado en una ventana dedicada.",
+                "Claude responde más rápido cuando usa Artefactos.",
+                "Los Artefactos consumen menos límite de mensajes.",
+                "Funcionan solo para quienes saben programar."
+              ],
+              correctIndex: 0,
+              explanation: "Los Artefactos proporcionan un espacio de trabajo dedicado para manejar contenido que necesita una visualización o estructura clara."
+            },
+            takeaway: "Los Artefactos transforman a Claude de un chatbot en una herramienta de creación completa, permitiéndote ver e interactuar con el resultado final al instante."
+          },
+          {
+            number: 5,
+            title: "Claude para Creatividad - Ideas Sin Limite",
+            summary: "Brainstorming, voz escrita, storytelling, originalidad, video y refinamiento.",
+            outcome: "Uso de Claude como socio creativo para generar, destrabar y evolucionar ideas con mas identidad.",
+            intro:
+              "En esta leccion aprenderas a usar Claude como socio creativo para generar ideas originales, escribir con personalidad, crear historias, guiones y contenidos que realmente destaquen.",
+            keyPoints: [
+              "Pedir variedad explicita ayuda a Claude a explorar caminos menos obvios y mas originales.",
+              "Definir voz, tono, ritmo y referencias hace que la escritura se alinee mejor con tu identidad creativa.",
+              "Storytelling, guiones cortos y preguntas provocadoras ayudan a convertir el bloqueo en produccion.",
+              "La creatividad mas fuerte aparece en el refinamiento iterativo, no en la primera respuesta."
+            ],
+            lessonSteps: CLAUDE_MODULE_5_STEPS_ES,
+            promptExample:
+              "Quiero un enfoque contraintuitivo y sorprendente para una campana sobre el coraje. Evita los cliches mas comunes sobre este tema. Piensa en un angulo que la mayoria de las personas no consideraria de inmediato y que sea al mismo tiempo autentico y memorable.",
+            practice: {
+              title: "Ideas con diversidad",
+              instruction: "Construye un prompt que pida un brainstorming creativo con angulos variados.",
+              terms: [
+                "15",
+                "el nombre de una marca de moda sostenible",
+                "obvias",
+                "poeticas",
+                "provocadoras",
+                "3"
+              ],
+              solution:
+                "Un buen prompt creativo pide cantidad, contexto, variedad explicita de angulos y una seleccion final de las ideas con mayor potencial."
+            },
+            quiz: {
+              question: "Que prompt tiene mas probabilidad de sacar a Claude de lo generico en tareas creativas?",
+              options: [
+                "\"Escribe algo creativo sobre el coraje\"",
+                "\"Quiero un enfoque contraintuitivo y sorprendente para una campana sobre el coraje. Evita los cliches mas comunes sobre este tema y piensa en un angulo autentico y memorable\"",
+                "\"Haz una campana estandar sobre el coraje\"",
+                "\"Escribe cualquier idea que se te ocurra\""
+              ],
+              correctIndex: 1,
+              explanation:
+                "Cuando pides a Claude que se aleje de los cliches y defines el tipo de originalidad que buscas, es mas probable que salga de lo comun."
+            },
+            takeaway:
+              "Claude funciona mejor como socio creativo cuando combinas direccion clara, referencias fuertes, apertura a iterar y valentia para pedir algo menos obvio."
+          },
+          {
+            number: 6,
+            title: "Claude para Analisis de Documentos y Contratos Largos",
+            summary: "Lectura de documentos extensos, resumenes, riesgos, extraccion de datos y comparacion de versiones.",
+            outcome: "Uso de Claude como primera capa de analisis para contratos, informes y documentos largos con mas claridad.",
+            intro:
+              "En esta leccion aprenderas como Claude puede ayudar en la lectura, interpretacion y analisis de documentos extensos, como contratos, informes tecnicos y propuestas comerciales, de forma simple y practica.",
+            keyPoints: [
+              "La gran ventaja de Claude con documentos largos es mantener el contexto a lo largo de todo el material.",
+              "Los prompts estructurados ayudan a resumir, extraer informacion y localizar riesgos con mayor rapidez.",
+              "Claude puede comparar versiones, simplificar lenguaje tecnico y responder preguntas concretas sobre el documento.",
+              "Ayuda mucho en la primera analisis, pero no sustituye la validacion profesional en decisiones importantes."
+            ],
+            lessonSteps: CLAUDE_MODULE_6_STEPS_ES,
+            promptExample:
+              "Analiza este contrato e identifica clausulas que puedan representar riesgo o desventaja. Para cada una, cita el fragmento, explicalo en lenguaje simple, clasifica el riesgo y sugiere una redaccion mas equilibrada.",
+            practice: {
+              title: "Primera lectura guiada",
+              instruction: "Construye un prompt inicial para pedir una vision general de un documento largo.",
+              terms: [
+                "cual es el objetivo principal",
+                "cuales son los puntos centrales",
+                "si hay algo que merece atencion inmediata"
+              ],
+              solution:
+                "Un buen prompt inicial pide lectura completa, objetivo principal, puntos centrales y alerta sobre lo que merece atencion inmediata."
+            },
+            quiz: {
+              question: "Aunque Claude es muy fuerte con documentos largos, que es lo que no sustituye?",
+              options: [
+                "La validacion de un especialista en decisiones con impacto juridico, financiero o tecnico.",
+                "La lectura inicial de un documento.",
+                "La extraccion de informacion objetiva.",
+                "La comparacion entre dos versiones de un contrato."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude acelera mucho la primera analisis, pero las decisiones importantes siguen necesitando confirmacion profesional."
+            },
+            takeaway:
+              "La mejor manera de usar Claude con documentos largos es convertir una lectura agotadora en una analisis guiada, sin confundir apoyo inteligente con sustitucion de un especialista."
+          },
+          {
+            number: 7,
+            title: "Claude con Otras Herramientas - Expandiendo sus Posibilidades",
+            summary: "Docs, hojas de calculo, tareas, presentaciones, correo, diseno, audio y flujos.",
+            outcome: "Uso de Claude como centro de razonamiento dentro de un ecosistema cotidiano de herramientas.",
+            intro:
+              "En esta leccion aprenderas como Claude puede trabajar junto con otras herramientas para aumentar la productividad, automatizar pasos y crear flujos de trabajo mas inteligentes.",
+            keyPoints: [
+              "Claude genera estructura, razonamiento y direccion mientras otras herramientas ejecutan partes especificas del flujo.",
+              "Funciona muy bien con documentos, hojas de calculo, gestores de tareas, presentaciones y correo.",
+              "Tambien puede preparar briefings de diseno y convertir transcripciones en acciones concretas.",
+              "La mayor ganancia aparece cuando Claude actua como cerebro central y no como sustituto absoluto de las demas herramientas."
+            ],
+            lessonSteps: CLAUDE_MODULE_7_STEPS_ES,
+            promptExample:
+              "Quiero montar un flujo de trabajo con Claude y Google Docs, Sheets, Trello y Canva. Sugiereme como integrar estas herramientas en mi dia a dia.",
+            practice: {
+              title: "Ecosistema personal",
+              instruction: "Construye un prompt para pedir un flujo usando Claude y otras herramientas.",
+              terms: ["herramientas", "dia a dia"],
+              solution:
+                "Un buen prompt de integracion deja claras las herramientas que forman parte del flujo y pide aplicacion practica en la rutina."
+            },
+            quiz: {
+              question: "Que afirmacion describe mejor el papel de Claude en este ecosistema?",
+              options: [
+                "Sustituye todas las herramientas.",
+                "Solo debe usarse como ultimo recurso.",
+                "Actua como centro de razonamiento y creacion.",
+                "Funciona mejor aislado."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Claude conecta, organiza y piensa; las otras herramientas ejecutan, formatean, acompanian y comparten."
+            },
+            takeaway:
+              "La mejor forma de usar Claude con otras herramientas es colocarlo en el centro del flujo y aprovechar al mismo tiempo el punto fuerte de cada plataforma."
+          }
+        ]
+      },
+      fr: {
+        statusBadge: "Parcours actif",
+        heroEyebrow: "Claude",
+        heroTitle: "Claude comme votre assistant intelligent.",
+        heroDescription:
+          "Un parcours pour utiliser Claude avec plus de contexte, une meilleure qualité d'écriture et une plus grande profondeur en analyse et prise de décision.",
+        overviewTitle: "Ce que vous allez maîtriser",
+        overviewItems: [
+          "Comment structurer des demandes avec contexte, objectif et niveau de connaissance pour obtenir de meilleures reponses.",
+          "Comment utiliser Claude pour l'analyse, l'ecriture, la revision et le raisonnement dans des situations complexes.",
+          "Comment transformer Claude en partenaire de reflexion pour le travail et l'etude au quotidien."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points cles",
+        promptLabel: "Prompt de reference",
+        practiceLabel: "Pratique guidee",
+        termsLabel: "Termes",
+        solutionLabel: "Reponse attendue",
+        quizLabel: "Checkpoint",
+        correctLabel: "Bonne reponse",
+        takeawayLabel: "Lecture finale",
+        modules: [
+          {
+            number: 1,
+            title: "Claude comme Votre Assistant Intelligent",
+            summary: "Fondamentaux de Claude, contexte, refinement, analyse, ecriture et honnetete.",
+            outcome: "Base solide pour mieux travailler avec Claude au quotidien.",
+            intro:
+              "Dans cette lecon, vous allez comprendre ce qui rend Claude different, pourquoi il repond mieux a un contexte bien formule et comment exploiter ses forces en analyse, ecriture et prise de decision.",
+            keyPoints: [
+              "Claude a ete cree avec un accent sur l'utilite, l'honnetete et la securite.",
+              "Plus vous fournissez de contexte, d'objectif et de niveau de connaissance, meilleure sera souvent la reponse.",
+              "Il se distingue en analyse, ecriture, revision et raisonnement structure.",
+              "Quand il y a de l'incertitude, le comportement attendu est de signaler les limites et recommander une verification."
+            ],
+            lessonSteps: CLAUDE_MODULE_1_STEPS_FR,
+            promptExample:
+              "Vous etes un expert en finances personnelles avec de l'experience en investissement pour debutants. J'ai besoin d'aide pour construire mon premier portefeuille d'investissement. Mon niveau actuel est basique et mon objectif final est de constituer un fonds d'urgence solide en 12 mois.",
+            practice: {
+              title: "Prompt avec contexte",
+              instruction: "Construisez une demande claire pour activer le meilleur de Claude.",
+              terms: [
+                "expert en finances personnelles",
+                "investissement pour debutants",
+                "construire mon premier portefeuille d'investissement",
+                "basique",
+                "constituer un fonds d'urgence solide en 12 mois"
+              ],
+              solution:
+                "Un bon prompt definit le role, la specialite, la tache, le niveau actuel et l'objectif final pour produire une reponse bien plus contextualisee."
+            },
+            quiz: {
+              question: "Qu'est-ce qui decrit le mieux le point fort de Claude ?",
+              options: [
+                "Il a ete developpe avec un accent sur le raisonnement approfondi, l'honnetete et les reponses contextualisees.",
+                "Il memorise automatiquement toutes les conversations passees.",
+                "Il accede a internet en temps reel sans configuration.",
+                "Il ne fait jamais d'erreur dans aucune situation."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude se distingue par la combinaison de raisonnement approfondi, d'honnetete sur ses limites et d'un usage plus fort du contexte."
+            },
+            takeaway:
+              "Le meilleur usage de Claude nait de conversations bien construites, d'un contexte clair, d'un refinement iteratif et d'attentes realistes sur ses limites."
+          },
+          {
+            number: 2,
+            title: "Apprendre N'importe Quoi avec Claude",
+            summary: "Apprentissage depuis zero, plans d'etude, quiz, methode socratique, revision et langues.",
+            outcome: "Systeme d'etude avec Claude pour apprendre avec plus de structure et de profondeur.",
+            intro:
+              "Dans cette lecon, vous allez transformer Claude en professeur particulier, partenaire d'etude et guide d'apprentissage pour n'importe quel sujet, a n'importe quel niveau et a votre propre rythme.",
+            keyPoints: [
+              "Claude aide davantage quand vous indiquez votre niveau actuel, votre objectif et votre facon d'apprendre.",
+              "Il peut construire des plans d'etude complets, progressifs et adaptes a votre temps disponible.",
+              "Les quiz, revisions, analogies et methode socratique aident a consolider ce que vous avez etudie.",
+              "Claude peut aussi soutenir l'apprentissage des langues et approfondir les sujets que vous connaissez deja."
+            ],
+            lessonSteps: CLAUDE_MODULE_2_STEPS_FR,
+            promptExample:
+              "Vous etes un professeur expert en histoire. Je veux apprendre la Seconde Guerre mondiale a partir de zero. Mon niveau actuel est basique. Commencez par le concept le plus fondamental, utilisez des exemples du quotidien et dites-moi a la fin quels sont les prochains themes que je dois etudier.",
+            practice: {
+              title: "Prompt de depart d'apprentissage",
+              instruction: "Construisez un prompt pour apprendre un nouveau sujet avec un contexte clair.",
+              terms: ["histoire", "la Seconde Guerre mondiale", "basique", "fondamental", "exemples", "themes"],
+              solution:
+                "Un bon prompt d'etude indique le role expert, le sujet, le niveau actuel, la profondeur initiale, le type d'exemple et les prochaines etapes."
+            },
+            quiz: {
+              question: "Quel prompt genere la meilleure revision pour un examen ?",
+              options: [
+                "\"Resume ce sujet\"",
+                "\"Dis-moi les points principaux\"",
+                "\"Cree une revision sur [theme] avec les 10 concepts les plus importants, une phrase qui resume chacun et un exemple pratique. Organise le tout du plus basique au plus avance et mets en evidence les 3 qui tombent le plus souvent aux examens\"",
+                "\"Parle du sujet de facon breve\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "Plus la structure de revision est claire, plus la probabilite de recevoir un materiel vraiment utile pour une revision rapide est elevee."
+            },
+            takeaway:
+              "Claude accelere l'apprentissage quand vous l'utilisez avec structure, pratique deliberee et demandes qui transforment l'explication en raisonnement actif."
+          },
+          {
+            number: 3,
+            title: "Projets dans Claude - Organisez, Contextualisez et Produisez Davantage",
+            summary: "Projets, instructions fixes, documents, equipe et bonnes pratiques d'organisation.",
+            outcome: "Systeme de projets dans Claude pour gagner en contexte, en coherence et en vitesse.",
+            intro:
+              "Dans cette lecon, vous allez apprendre a utiliser les Projets dans Claude pour organiser les contextes, centraliser les documents, maintenir des instructions fixes et transformer l'assistant en partenaire dedie pour chaque domaine de votre vie.",
+            keyPoints: [
+              "Les Projets fonctionnent comme des espaces thematiques avec contexte persistant et conversations organisees.",
+              "Les instructions fixes aident Claude a repondre avec le bon ton, le bon format et le bon niveau dans toutes les conversations du projet.",
+              "Les documents ajoutes au projet servent de reference permanente pour des reponses plus coherentes.",
+              "Les projets partages et la revision periodique des instructions ameliorent la collaboration et la qualite au fil du temps."
+            ],
+            lessonSteps: CLAUDE_MODULE_3_STEPS_FR,
+            promptExample:
+              "Ce projet porte sur mon entreprise de patisserie artisanale. Mon objectif principal ici est de creer du contenu pour les reseaux sociaux et repondre aux clients. Chaque fois que j'apporte une tache, considerez que je parle a un public jeune et informel et utilisez un ton detendu et proche.",
+            practice: {
+              title: "Premier projet configure",
+              instruction: "Construisez une configuration initiale claire pour un projet dans Claude.",
+              terms: [
+                "mon entreprise de patisserie artisanale",
+                "creer du contenu pour les reseaux sociaux et repondre aux clients",
+                "je parle a un public jeune et informel",
+                "detendu et proche"
+              ],
+              solution:
+                "Un projet bien configure definit le domaine, l'objectif, le public et le ton des le debut pour reduire les repetitions dans les conversations futures."
+            },
+            quiz: {
+              question: "Quel prompt d'instruction fixe utiliseriez-vous pour un projet d'etude a long terme ?",
+              options: [
+                "\"Reponds a tout ce que je demande\"",
+                "\"Sois bref dans toutes les reponses\"",
+                "\"Ce projet est dedie a mon etude de [theme]. Mon niveau actuel est debutant. A mesure que les conversations avancent, ajuste la complexite des explications. Chaque fois que j'apprends un nouveau concept, relie-le a ce que nous avons deja etudie dans ce projet\"",
+                "\"Garde toutes mes reponses pour les utiliser plus tard\""
+              ],
+              correctIndex: 2,
+              explanation:
+                "La meilleure instruction fixe d'etude precise le theme, le niveau, la progression attendue et la necessite de relier le nouveau contenu a l'historique du projet."
+            },
+            takeaway:
+              "Des projets bien configures transforment Claude en partenaire de long terme, avec plus de memoire contextuelle, moins de retravail et des reponses mieux alignees sur vos besoins reels."
+          },
+          {
+            number: 4,
+            title: "🎨 Créer avec les Artefacts de Claude",
+            summary: "Artefacts, documents, HTML, React, visualisation de données et affinement.",
+            outcome: "Production de contenu visuel et fonctionnel directement dans Claude avec les Artefacts.",
+            intro: "Dans cette leçon, vous allez apprendre à utiliser l'une des fonctionnalités les plus visuelles et pratiques de Claude — les Artefacts. Avec eux, vous créez des documents, du code, des pages, des présentations et bien plus encore directement dans la conversation, sans aucun outil externe.",
+            keyPoints: [
+              "Les Artefacts apparaissent dans une fenêtre séparée pour visualiser, modifier et exporter le contenu.",
+              "Ils supportent Markdown, les pages HTML, les composants React et les visualisations de données.",
+              "Ils permettent le prototypage rapide d'interfaces et d'outils interactifs.",
+              "Ils peuvent être affinés et mis à jour en temps réel via la conversation."
+            ],
+            lessonSteps: CLAUDE_MODULE_4_STEPS_FR,
+            promptExample: "Crée un composant React interactif de calcul de l'IMC. L'utilisateur saisit son poids et sa taille, et le résultat s'affiche avec la classification et une couleur différente pour chaque tranche. Génère comme un Artefact.",
+            practice: {
+              title: "Votre premier Artefact",
+              instruction: "Demandez à Claude de créer un document structuré et de le visualiser comme un Artefact.",
+              terms: ["plan stratégique trimestriel", "conseil en RH", "défis principaux", "5", "suivi"],
+              solution: "Demander la création d'un document spécifique et demander explicitement de 'générer comme un Artefact en Markdown' active la vue latérale."
+            },
+            quiz: {
+              question: "Quel est le principal avantage d'utiliser des Artefacts plutôt qu'une réponse textuelle classique ?",
+              options: [
+                "Cela permet de visualiser, d'interagir avec et d'exporter le contenu rendu dans une fenêtre dédiée.",
+                "Claude répond plus vite lorsqu'il utilise des Artefacts.",
+                "Les Artefacts consomment moins de limite de messages.",
+                "Ils ne fonctionnent que pour ceux qui savent programmer."
+              ],
+              correctIndex: 0,
+              explanation: "Les Artefacts offrent un espace de travail dédié pour gérer du contenu nécessitant une visualisation ou une structure claire."
+            },
+            takeaway: "Les Artefacts transforment Claude d'un chatbot en un outil de création complet, vous permettant de voir et d'interagir avec le résultat final instantanément."
+          },
+          {
+            number: 5,
+            title: "Claude pour la Creativite - Des Idees Sans Limite",
+            summary: "Brainstorming, voix d'ecriture, storytelling, originalite, video et affinement.",
+            outcome: "Usage de Claude comme partenaire creatif pour generer, debloquer et faire evoluer des idees avec plus d'identite.",
+            intro:
+              "Dans cette lecon, vous allez apprendre a utiliser Claude comme partenaire creatif pour generer des idees originales, ecrire avec de la personnalite, creer des histoires, des scripts et des contenus qui se distinguent vraiment.",
+            keyPoints: [
+              "Demander une variete explicite aide Claude a explorer des pistes moins evidentes et plus originales.",
+              "Definir la voix, le ton, le rythme et les references rend l'ecriture plus coherente avec votre identite creative.",
+              "Storytelling, scripts courts et questions provocatrices aident a transformer le blocage en production.",
+              "La creativite la plus forte apparait dans l'affinement iteratif, pas dans la premiere reponse."
+            ],
+            lessonSteps: CLAUDE_MODULE_5_STEPS_FR,
+            promptExample:
+              "Je veux une approche contre-intuitive et surprenante pour une campagne sur le courage. Evite les cliches les plus courants sur ce theme. Pense a un angle que la plupart des gens ne considereraient pas immediatement et qui soit a la fois authentique et memorable.",
+            practice: {
+              title: "Idees variees",
+              instruction: "Construisez un prompt qui demande un brainstorming creatif avec des angles varies.",
+              terms: [
+                "15",
+                "le nom d'une marque de mode durable",
+                "evidentes",
+                "poetiques",
+                "provocatrices",
+                "3"
+              ],
+              solution:
+                "Un bon prompt creatif demande une quantite, un contexte, une variation explicite des angles et une selection finale des idees au plus fort potentiel."
+            },
+            quiz: {
+              question: "Quel prompt a le plus de chances de pousser Claude au-dela du generique dans une tache creative ?",
+              options: [
+                "\"Ecris quelque chose de creatif sur le courage\"",
+                "\"Je veux une approche contre-intuitive et surprenante pour une campagne sur le courage. Evite les cliches les plus courants sur ce theme et pense a un angle authentique et memorable\"",
+                "\"Fais une campagne standard sur le courage\"",
+                "\"Ecris n'importe quelle idee qui te vient\""
+              ],
+              correctIndex: 1,
+              explanation:
+                "Quand vous demandez a Claude de s'ecarter des cliches et que vous precisez le type d'originalite souhaite, il a plus de chances de sortir du conventionnel."
+            },
+            takeaway:
+              "Claude fonctionne mieux comme partenaire creatif lorsque vous combinez direction claire, references solides, ouverture a l'iteration et courage de demander quelque chose de moins evident."
+          },
+          {
+            number: 6,
+            title: "Claude pour l'Analyse de Documents et de Contrats Longs",
+            summary: "Lecture de documents longs, resumes, risques, extraction d'informations et comparaison de versions.",
+            outcome: "Usage de Claude comme premiere couche d'analyse pour les contrats, rapports et documents longs avec plus de clarte.",
+            intro:
+              "Dans cette lecon, vous allez apprendre comment Claude peut aider a lire, interpreter et analyser des documents longs, comme des contrats, des rapports techniques et des propositions commerciales, de maniere simple et pratique.",
+            keyPoints: [
+              "Le grand avantage de Claude avec les documents longs est de conserver le contexte sur l'ensemble du materiel.",
+              "Des prompts structures aident a resumer, extraire des informations et localiser les risques plus rapidement.",
+              "Claude peut comparer des versions, simplifier le langage technique et repondre a des questions precises sur le document.",
+              "Il aide beaucoup dans la premiere analyse, mais ne remplace pas une validation professionnelle pour les decisions importantes."
+            ],
+            lessonSteps: CLAUDE_MODULE_6_STEPS_FR,
+            promptExample:
+              "Analyse ce contrat et identifie les clauses qui peuvent representer un risque ou un desavantage. Pour chacune, cite le passage, explique-le en langage simple, classe le risque et suggere une redaction plus equilibree.",
+            practice: {
+              title: "Premiere lecture guidee",
+              instruction: "Construisez un prompt initial pour demander une vue generale d'un document long.",
+              terms: [
+                "quel est l'objectif principal",
+                "quels sont les points centraux",
+                "s'il existe quelque chose qui merite une attention immediate"
+              ],
+              solution:
+                "Un bon prompt initial demande une lecture complete, l'objectif principal, les points centraux et ce qui merite une attention immediate."
+            },
+            quiz: {
+              question: "Meme si Claude est tres fort avec les documents longs, qu'est-ce qu'il ne remplace pas ?",
+              options: [
+                "La validation par un specialiste pour les decisions a impact juridique, financier ou technique.",
+                "La lecture initiale d'un document.",
+                "L'extraction d'informations objectives.",
+                "La comparaison entre deux versions d'un contrat."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Claude accelere beaucoup la premiere analyse, mais les decisions importantes demandent toujours une confirmation professionnelle."
+            },
+            takeaway:
+              "La meilleure facon d'utiliser Claude avec des documents longs est de transformer une lecture fatigante en analyse guidee, sans confondre aide intelligente et remplacement d'un specialiste."
+          },
+          {
+            number: 7,
+            title: "Claude avec d'Autres Outils - Etendre ses Possibilites",
+            summary: "Docs, tableurs, taches, presentations, e-mails, design, audio et flux de travail.",
+            outcome: "Usage de Claude comme centre de raisonnement dans un ecosysteme d'outils du quotidien.",
+            intro:
+              "Dans cette lecon, vous allez apprendre comment Claude peut travailler avec d'autres outils pour augmenter la productivite, automatiser certaines etapes et construire des flux de travail plus intelligents.",
+            keyPoints: [
+              "Claude genere structure, raisonnement et direction tandis que les autres outils executent des parties specialisees du flux.",
+              "Il fonctionne tres bien avec les documents, tableurs, gestionnaires de taches, presentations et e-mails.",
+              "Il peut aussi preparer des briefs de design et transformer des transcriptions en actions concretes.",
+              "Le plus grand gain apparait quand Claude agit comme cerveau central plutot que comme remplacant absolu des autres outils."
+            ],
+            lessonSteps: CLAUDE_MODULE_7_STEPS_FR,
+            promptExample:
+              "Je veux construire un flux de travail avec Claude, Google Docs, Sheets, Trello et Canva. Suggere-moi comment integrer ces outils dans mon quotidien.",
+            practice: {
+              title: "Ecosysteme personnel",
+              instruction: "Construisez un prompt pour demander un flux avec Claude et d'autres outils.",
+              terms: ["outils", "quotidien"],
+              solution:
+                "Un bon prompt d'integration rend les outils explicites et demande une application pratique dans la routine."
+            },
+            quiz: {
+              question: "Quelle affirmation decrit le mieux le role de Claude dans cet ecosysteme ?",
+              options: [
+                "Il remplace tous les outils.",
+                "Il ne doit etre utilise qu'en dernier recours.",
+                "Il agit comme centre de raisonnement et de creation.",
+                "Il fonctionne mieux en isolement."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Claude connecte, organise et pense; les autres outils executent, mettent en forme, suivent et partagent."
+            },
+            takeaway:
+              "La meilleure facon d'utiliser Claude avec d'autres outils est de le placer au centre du flux tout en profitant du meilleur de chaque plateforme."
           }
         ]
       }

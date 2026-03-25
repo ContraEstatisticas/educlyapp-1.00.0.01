@@ -61,12 +61,12 @@ export const CHATGPT_MODULE_2_STEPS_PT = [
     "Limitações do GPT-4o",
     "O modelo GPT-4o suporta fluxos de trabalho automatizados em várias etapas?",
     [
-      "Sim, é o modelo mais indicado para isso",
       "Não é adequado para gerenciar fluxos em múltiplas etapas automaticamente",
       "Apenas na versão gratuita",
+      "Sim, é o modelo mais indicado para isso",
       "Depende do idioma utilizado"
     ],
-    1,
+    0,
     "Em comparação ao GPT-5.2, o GPT-4o não possui agentes autônomos nem a capacidade de gerenciar fluxos complexos."
   ),
   quizStep(
@@ -74,35 +74,35 @@ export const CHATGPT_MODULE_2_STEPS_PT = [
     "Qual modelo se destaca de forma inquestionável em codificação e programação?",
     [
       "Apenas o GPT-3.5",
-      "GPT-5.2, pois executa tarefas complexas e possui raciocínio mais avançado",
       "O ChatGPT não deveria ser usado para programação",
-      "Nenhum, não há diferença técnica na geração de códigos."
+      "Nenhum, não há diferença técnica na geração de códigos.",
+      "GPT-5.2, pois executa tarefas complexas e possui raciocínio mais avançado"
     ],
-    1,
+    3,
     "O GPT-5.2 é a opção avançada, ideal para análises lógicas complexas e programação passo a passo."
   ),
   quizStep(
     "Utilizando o Pro Mode",
     "Qual destas tarefas NÃO é a recomendação ideal para o Pro Mode?",
     [
+      "Perguntas de 'Sim/Não' no chat rápido",
       "Gerenciar fluxos de trabalho em várias etapas",
       "Projetos de pesquisa super complexos",
-      "Tutoria detalhada e suporte educacional",
-      "Perguntas de 'Sim/Não' no chat rápido"
+      "Tutoria detalhada e suporte educacional"
     ],
-    3,
+    0,
     "Perguntas de 'sim ou não' não exigem ferramentas avançadas ou agentes no escopo secundário; o Instant Mode seria muito mais eficiente e veloz."
   ),
   quizStep(
     "Usos do GPT-4o",
     "Qual situação abaixo é mais adequada e costuma brilhar ao utilizar o GPT-4o?",
     [
-      "Continuidade de projetos a longo prazo com memória persistente",
       "Tarefas de resposta rápida, rascunhos de layout e uso básico no dia a dia",
-      "Fluxos de trabalho em várias etapas com agentes autônomos",
-      "Análise aprofundada via Deep Research"
+      "Continuidade de projetos a longo prazo com memória persistente",
+      "Análise aprofundada via Deep Research",
+      "Fluxos de trabalho em várias etapas com agentes autônomos"
     ],
-    1,
+    0,
     "O GPT-4o permanece excelente e incrivelmente rápido para rotinas corriqueiras num cenário de single-session."
   ),
   textStep(
@@ -141,23 +141,23 @@ export const CHATGPT_MODULE_2_STEPS_EN = [
     "Is Instant Mode better suited for speed or deep reasoning?",
     [
       "Depth",
-      "Speed",
       "Persistent Memory",
+      "Speed",
       "Database connection"
     ],
-    1,
+    2,
     "Instant Mode delivers fast and lightweight answers when response time matters more than exhaustive detailing."
   ),
   quizStep(
     "GPT-4o Limitations",
     "Does the GPT-4o model support automated multi-step workflows naturally?",
     [
-      "Yes, it is the best model for this",
       "No, it's not suitable for autonomously managing multi-step workflows",
+      "Yes, it is the best model for this",
       "Only in the free version",
       "It depends on the language utilized"
     ],
-    1,
+    0,
     "Compared to GPT-5.2, GPT-4o lacks autonomous background agents or the ability to execute complex ongoing workflows."
   ),
   quizStep(
@@ -166,8 +166,8 @@ export const CHATGPT_MODULE_2_STEPS_EN = [
     [
       "Only GPT-3.5",
       "GPT-5.2, due to its deep reasoning and complex task execution",
-      "ChatGPT shouldn't be used for programming",
-      "Neither, they share the exact same technical level."
+      "Neither, they share the exact same technical level.",
+      "ChatGPT shouldn't be used for programming"
     ],
     1,
     "GPT-5.2 acts as the advanced option, absolutely perfect for logical problem-solving and coding."
@@ -177,23 +177,23 @@ export const CHATGPT_MODULE_2_STEPS_EN = [
     "Which of these tasks is NOT optimal to run on Pro Mode?",
     [
       "Managing multi-step workflows",
-      "Highly complex research projects",
+      "A quick 'Yes/No' everyday question",
       "Detailed tutoring sessions",
-      "A quick 'Yes/No' everyday question"
+      "Highly complex research projects"
     ],
-    3,
+    1,
     "Quick 'Yes or No' loops don't require advanced agents; Instant Mode hits the mark much more efficiently."
   ),
   quizStep(
     "GPT-4o Sweet Spots",
     "Which situation below is best addressed by using GPT-4o?",
     [
-      "Long-term continuity relying on persistent memory",
-      "Fast Q&A, basic layout drafts, and everyday quick interactions",
+      "Prolonged evaluations utilizing Deep Research",
       "Multi-step workloads with autonomous agents",
-      "Prolonged evaluations utilizing Deep Research"
+      "Fast Q&A, basic layout drafts, and everyday quick interactions",
+      "Long-term continuity relying on persistent memory"
     ],
-    1,
+    2,
     "GPT-4o remains an incredibly fast, capable, and responsive workhorse for single-session routines."
   ),
   textStep(
@@ -232,35 +232,35 @@ export const CHATGPT_MODULE_2_STEPS_ES = [
     "El Instant Mode, ¿se destaca estrictamente en la precisión reflexiva o en la agilidad de entrega?",
     [
       "Precisión reflexiva (Profundidad)",
-      "Agilidad de entrega (Velocidad)",
+      "Exige base de datos externa",
       "Ninguna de las dos",
-      "Exige base de datos externa"
+      "Agilidad de entrega (Velocidad)"
     ],
-    1,
+    3,
     "Como su nombre indica, Instant Mode brinda un alivio dinámico y raudo."
   ),
   quizStep(
     "Limitaciones de GPT-4o",
     "¿Podemos exigirle al GPT-4o que corra secuencias de análisis o flujos autogestionables profundos a su aire?",
     [
-      "Sí, ha sido calibrado especialmente para eso.",
       "Para nada, ese no es su ecosistema diseñado debido a que carece de estos agentes libres.",
+      "Sí, ha sido calibrado especialmente para eso.",
       "Sólo ocurre si habilitas un código extraña.",
       "Depende puramente de la base documental."
     ],
-    1,
+    0,
     "El modelo 4o asimila peticiones unitarias impecables, más no puede ir de la mano trabajando subyacentemente tus pasos automáticos a futuro."
   ),
   quizStep(
     "Estructuración Lógica",
     "Ante las matemáticas fuertes, desarrollo de código y raciocinio programático, ¿qué motor fulgura un éxito evidente?",
     [
-      "El modelo clásico 3.5",
-      "GPT-5.2; es un genio capaz de realizar deducción a escala superior",
+      "No existe modelo diferencial",
       "Ambos fracasan fatalmente",
-      "No existe modelo diferencial"
+      "GPT-5.2; es un genio capaz de realizar deducción a escala superior",
+      "El modelo clásico 3.5"
     ],
-    1,
+    2,
     "Tener Thinking y Pro Modes devela al GPT-5.2 como la cumbre arquitectónica algorítmica y deductiva actual de OpenAI."
   ),
   quizStep(
@@ -268,23 +268,23 @@ export const CHATGPT_MODULE_2_STEPS_ES = [
     "¿Bajo cuál de estos escenarios invocar al costoso Pro Mode es totalmente intrascendente y un desperdicio neto?",
     [
       "Organización en segundo plano de hojas complejas.",
-      "Tutelas universitarias recurrentes.",
+      "Efectuar una consulta trivial de \"Si o No\" sobre el clíma",
       "Desarrollar una aplicación de principio a fin.",
-      "Efectuar una consulta trivial de \"Si o No\" sobre el clíma"
+      "Tutelas universitarias recurrentes."
     ],
-    3,
+    1,
     "No emplees cohetes espaciales para cruzar una calle; Instant Mode se hace cargo de interrogantes básicas sobradamente."
   ),
   quizStep(
     "Mejores Casos Prácticos",
     "Ubica al GPT-4o en su trono particular en la siguiente lista comparativa:",
     [
-      "Continuidad proyectual extendida mes a mes con memoria",
-      "Gestión de rutinas diarias instantáneas, redacciones veloces y chat intermitente",
       "Agentes operacionales desatendidos a largo plazo",
-      "Reportes de Deep Research con múltiples fuentes anexadas"
+      "Reportes de Deep Research con múltiples fuentes anexadas",
+      "Continuidad proyectual extendida mes a mes con memoria",
+      "Gestión de rutinas diarias instantáneas, redacciones veloces y chat intermitente"
     ],
-    1,
+    3,
     "Esta versión domina por su fluidez imbatible cuando requieres tareas sencillas finalizadas estupendamente en un único intercambio charlado directo."
   ),
   textStep(
@@ -322,12 +322,12 @@ export const CHATGPT_MODULE_2_STEPS_FR = [
     "Mode Instantané",
     "L'Instant Mode est-il plus réputé pour sa vitesse de réaction ou pour son décaissement laborieux d'une donnée exhaustive ?",
     [
-      "Donnée exhaustive (Profondeur)",
-      "Vitesse de réaction (Rapidité)",
       "Les deux conjointement systématiquement",
-      "Il analyse un serveur local prioritairement"
+      "Il analyse un serveur local prioritairement",
+      "Vitesse de réaction (Rapidité)",
+      "Donnée exhaustive (Profondeur)"
     ],
-    1,
+    2,
     "L'Instant Mode fournit d'abord une réponse instantanée délestée de lourd processus séquentiel superflu."
   ),
   quizStep(
@@ -335,11 +335,11 @@ export const CHATGPT_MODULE_2_STEPS_FR = [
     "Le système antérieur GPT-4o supporte-t-il les flux d'actions en plusieurs branches travaillant par elles-mêmes sans interaction ?",
     [
       "Absolument, l'outil sert fondamentalement par essence à cette fin",
-      "Non, le 4o manque viscéralement des modules cognitifs semi-autonomes d'agents",
+      "Cela concerne une application annexe tierce",
       "En version gratuite uniquement",
-      "Cela concerne une application annexe tierce"
+      "Non, le 4o manque viscéralement des modules cognitifs semi-autonomes d'agents"
     ],
-    1,
+    3,
     "Dépourvu d'agent, le GPT-4o répond ponctuellement à une consigne sans anticiper un flux programmé en série."
   ),
   quizStep(
@@ -348,8 +348,8 @@ export const CHATGPT_MODULE_2_STEPS_FR = [
     [
       "Le grand GPT-3.5 originel d'antan",
       "Incorruptible GPT-5.2 qui articule et dérive l'information via un Thinking de niveau exceptionnel",
-      "Ne pas du tout impliquer ChatGPT là où ça concerne du pur algorithme délicat",
-      "Il n'existe aucune distinction en codage entre les modèles d'OpenAI connus"
+      "Il n'existe aucune distinction en codage entre les modèles d'OpenAI connus",
+      "Ne pas du tout impliquer ChatGPT là où ça concerne du pur algorithme délicat"
     ],
     1,
     "En sélectionnant GPT-5.2, vous engagez une force analytique faite sur-mesure pour pulvériser les pannes et édifier de l'architecture code complexe."
@@ -358,24 +358,24 @@ export const CHATGPT_MODULE_2_STEPS_FR = [
     "Filtre du Pro Mode",
     "Identifiez la tâche inappropriée qui gaspilleraient notoirement tout le flux de puissance d'un Pro Mode lourd et étendu.",
     [
-      "Scénarisation en dix phases de déploiement de logiciels",
       "Recherches bibliographiques encyclopédiques liées",
       "Mentorat d'éducation prolongée nécessitant mémorisation sur des mois",
-      "Formuler une question creuse de oui/non sur une information basique au quotidien"
+      "Formuler une question creuse de oui/non sur une information basique au quotidien",
+      "Scénarisation en dix phases de déploiement de logiciels"
     ],
-    3,
+    2,
     "Si l'objectif ne va pas plus loin qu'un renseignement flash sans mémoire à stocker, Pro Mode représente une consommation superflue."
   ),
   quizStep(
     "Légitimité de 4o",
     "Dans quelle circonstance le bon format de GPT-4o continue sans effort de distancer les lourdes attentes de son ainé de par sa simplicité brute ?",
     [
-      "Construction de long projet en agent programmé",
-      "Interventions de la routine ponctuelle ou rédaction de simples emails expéditifs rapides",
+      "Compilation de liens universitaires vastes en utilisant l'assistant d'exploration Web multi-sources",
       "Mémorisation vitale des attributs charismatiques d'un profil écrivain de six mois",
-      "Compilation de liens universitaires vastes en utilisant l'assistant d'exploration Web multi-sources"
+      "Interventions de la routine ponctuelle ou rédaction de simples emails expéditifs rapides",
+      "Construction de long projet en agent programmé"
     ],
-    1,
+    2,
     "Rapide et perspicace en 'one-shot', l'ancien modèle offre l'ergonomie agile nécessaire où l'intervention ne vise ni la profondeur séquentielle absolue ni la mémorisation tenace."
   ),
   textStep(

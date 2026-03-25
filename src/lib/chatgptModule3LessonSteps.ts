@@ -61,11 +61,11 @@ export const CHATGPT_MODULE_3_STEPS_PT = [
     "Por que a ordem das palavras importa em um prompt de imagem?",
     [
       "Porque o modelo lê apenas as últimas palavras do prompt",
-      "Porque os elementos descritos no início têm mais peso na geração da imagem",
+      "A ordem não faz diferença alguma",
       "Porque palavras no final definem o estilo da imagem com mais força",
-      "A ordem não faz diferença alguma"
+      "Porque os elementos descritos no início têm mais peso na geração da imagem"
     ],
-    1,
+    3,
     "No treinamento desses modelos, os tokens iniciais guiam de forma mais robusta a estruturação principal do quadro gerado."
   ),
   textStep(
@@ -96,12 +96,12 @@ export const CHATGPT_MODULE_3_STEPS_PT = [
     "Como a Iluminação Muda Tudo",
     "A iluminação é responsável por até 60% do impacto emocional de uma imagem. Qual tipo de iluminação você usaria para gerar uma imagem com sensação de nostalgia e calor emocional?",
     [
-      "Luzes de neon brilhantes",
       "Iluminação dramática fria",
       "Golden hour (luz do entardecer)",
-      "Flash de estúdio muito forte"
+      "Flash de estúdio muito forte",
+      "Luzes de neon brilhantes"
     ],
-    2,
+    1,
     "Golden hour traz os tons alaranjados do sol no fim do dia, perfeitamente atrelados com vibrações de nostalgia e memórias quentes."
   ),
   fillStep(
@@ -130,10 +130,10 @@ export const CHATGPT_MODULE_3_STEPS_PT = [
     [
       "Para descrever incisivamente o que você quer ver na imagem",
       "Para definir com contornos o estilo artístico",
-      "Para eliminar elementos indesejados e artefatos comuns do resultado",
-      "Para acelerar o processamento dos pixels"
+      "Para acelerar o processamento dos pixels",
+      "Para eliminar elementos indesejados e artefatos comuns do resultado"
     ],
-    2,
+    3,
     "É a borracha da IA: retira características indesejadas que poderiam contaminar a qualidade e a estrutura da cena final."
   ),
   textStep(
@@ -156,11 +156,11 @@ export const CHATGPT_MODULE_3_STEPS_EN = [
     "Why does word placement matter inside an image prompt?",
     [
       "Because the model only reads the trailing words of your prompt",
-      "Because the elements listed early on carry more weight when building the image",
+      "Word placement makes absolutely no difference",
       "Because words at the end define the style stronger",
-      "Word placement makes absolutely no difference"
+      "Because the elements listed early on carry more weight when building the image"
     ],
-    1,
+    3,
     "During the training of these visual models, initial tokens strongly guide the main layout of the generated output frame."
   ),
   textStep(
@@ -191,12 +191,12 @@ export const CHATGPT_MODULE_3_STEPS_EN = [
     "How Lighting Shapes Everything",
     "Lighting is responsible for up to 60% of an image's emotional strike. What form of lighting would you pick to generate an image radiating pure emotional warmth and nostalgia?",
     [
-      "Neon lights",
-      "Dramatic cold lighting",
       "Golden hour lighting",
-      "Harsh flash lighting"
+      "Neon lights",
+      "Harsh flash lighting",
+      "Dramatic cold lighting"
     ],
-    2,
+    0,
     "Golden hour bestows the orange and warm hues of a sunset, naturally tying the image to deep nostalgia and heartfelt memories."
   ),
   fillStep(
@@ -223,12 +223,12 @@ export const CHATGPT_MODULE_3_STEPS_EN = [
     "Why use Negative Prompts?",
     "When generating AI art, what is the prime objective of inputting a negative prompt?",
     [
-      "To describe with heavy focus what must be shown",
-      "To perfectly trace the bounds of the artistic style",
       "To eliminate undesirable elements and clean common rendering artifacts",
-      "To massively speed up pixel generation time"
+      "To massively speed up pixel generation time",
+      "To describe with heavy focus what must be shown",
+      "To perfectly trace the bounds of the artistic style"
     ],
-    2,
+    0,
     "They act as the AI's eraser: carving out traits that could otherwise contaminate the visual sanctity of the final scene."
   ),
   textStep(
@@ -250,12 +250,12 @@ export const CHATGPT_MODULE_3_STEPS_ES = [
     "Distribución del Mensaje",
     "¿Por qué el orden sintáctico se torna un asunto elemental en prompts destinados a generar cuadros o fotografías?",
     [
-      "Porque la máquina asimila sólo las oraciones del final",
       "Debido a que los términos ubicados al principio irradian más autoridad al definir los elementos de la imagen",
       "Porque las palabras del final dominan siempre el estilo artístico",
-      "El orden de ingreso no repercute en lo absoluto"
+      "El orden de ingreso no repercute en lo absoluto",
+      "Porque la máquina asimila sólo las oraciones del final"
     ],
-    1,
+    0,
     "En la concepción de las redes difusivas, la jerarquía incide; los términos principales al inicio fijan fuertemente el destino de la composición entera."
   ),
   textStep(
@@ -286,8 +286,8 @@ export const CHATGPT_MODULE_3_STEPS_ES = [
     "Luces que Comunican",
     "La iluminación controla hasta un 60% del impacto emocional. ¿Qué tipo de luz usarías para pintar una fotografía de honda nostalgia y cobijo de memoria cálida?",
     [
-      "Luces de neón rojas",
       "Iluminación dramática y fría",
+      "Luces de neón rojas",
       "Hora dorada (golden hour)",
       "Un flash quemante frontal"
     ],
@@ -318,10 +318,10 @@ export const CHATGPT_MODULE_3_STEPS_ES = [
     "Ancla Analítica de Repulsión",
     "¿Qué necesidad soluciona emplear la herramienta del 'Prompt Negativo'?",
     [
-      "Imprimir exigencias inamovibles sobre el estilo del protagonista principal",
+      "Evitar tiempos de carga reduciendo drásticamente el uso del GPU",
       "Consolidar firmemente las emociones y filtros del encuadre central",
       "Purificar la maqueta eliminando elementos repulsivos, defectos y marcas de agua de los resultados",
-      "Evitar tiempos de carga reduciendo drásticamente el uso del GPU"
+      "Imprimir exigencias inamovibles sobre el estilo del protagonista principal"
     ],
     2,
     "Funciona como un filtro de imperfecciones; la IA repudia estas directrices impidiendo que contaminen la imagen con defectos comunes."
@@ -345,12 +345,12 @@ export const CHATGPT_MODULE_3_STEPS_FR = [
     "Ordonnancement Fondamental",
     "Pourquoi l'ordre des mots est-il crucial dans la création d'un prompt d'image ?",
     [
-      "Car l'IA occulte le début et ne lit que la fin du texte",
-      "Parce que les termes situés au tout début définissent avec plus de force et d'autorité les éléments principaux du tableau",
       "Car le style visuel s'établit mieux avec les verbes d'action",
-      "L'ordre des phrases est un mythe"
+      "L'ordre des phrases est un mythe",
+      "Car l'IA occulte le début et ne lit que la fin du texte",
+      "Parce que les termes situés au tout début définissent avec plus de force et d'autorité les éléments principaux du tableau"
     ],
-    1,
+    3,
     "Les pondérations s'activent intensément lors de la saisie primitive des mots au début du prompt : tout est conditionné par la première ligne de texte."
   ),
   textStep(
@@ -382,11 +382,11 @@ export const CHATGPT_MODULE_3_STEPS_FR = [
     "Quel type d'éclairage évoquerait une vibration de mélancolie forte avec des souvenirs de chaleureuse nostalgie parmi vos rendus ?",
     [
       "Lumières néons rouges aveuglantes",
-      "Éclairage rigoureux et hivernal",
       "Golden hour (l'heure dorée du crépuscule)",
-      "Lumière crue projetée depuis un flash de téléphone"
+      "Lumière crue projetée depuis un flash de téléphone",
+      "Éclairage rigoureux et hivernal"
     ],
-    2,
+    1,
     "La Golden Hour, majesté ardente et orangée de la journée tombante, invoque invariablement le calme chaleureux et réconfortant du passé lointain."
   ),
   fillStep(
@@ -413,10 +413,10 @@ export const CHATGPT_MODULE_3_STEPS_FR = [
     "Fonction du Prompt Négatif",
     "Quel est l'intérêt fondamental de rédiger avec précaution une injonction d'exclusion dite 'Prompt Négatif' au cœur de son tableau logistique d'invite ?",
     [
-      "Exiger un degré insensé de perfection lumineuse sur un arrière-plan vide transparent et cristallin",
       "Écraser formellement les couleurs du spectre RGB indésirables des images synthétisées des studios de Hollywood",
+      "Obtenir une création photographique deux fois plus vite sur le serveur informatique central",
       "Nettoyer purement le calcul graphique du programme, en annihilant de fait les défauts notoires grossiers ou les marques en filigrane récurrentes des données synthétiques",
-      "Obtenir une création photographique deux fois plus vite sur le serveur informatique central"
+      "Exiger un degré insensé de perfection lumineuse sur un arrière-plan vide transparent et cristallin"
     ],
     2,
     "C'est la gomme de protection du système : il évince avec aplomb toute la déformation inesthétique et malheureuse commune issue du réseau de neurones en temps normal."
