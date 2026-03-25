@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import {
   Table,
   TableBody,
@@ -9,52 +7,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { AlertTriangle, CheckCircle, Clock, RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { AdminDataTable } from "./AdminDataTable";
 import { cn } from "@/lib/utils";
 import { formatAdminDateTime } from "@/lib/adminTimeZone";
+import {
+  formatAdminAnalyticsError,
+  useAdminAnalyticsDashboard,
+} from "@/hooks/useAdminAnalyticsDashboard";
 
 export const BillingLogsTable = () => {
-  const { data: billingLogs, isLoading, refetch } = useQuery({
-    queryKey: ["admin-billing-logs"],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("billing_event_logs")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(30);
-
-      return data || [];
-    },
-    refetchInterval: 300000,
-  });
-
-  // Health check: eventos pendentes
-  const { data: healthStats } = useQuery({
-    queryKey: ["admin-billing-health"],
-    queryFn: async () => {
-      const { data: pending } = await supabase
-        .from("billing_event_logs")
-        .select("id, status, created_at")
-        .eq("processed", false)
-        .in("status", ["pending", "USER_NOT_FOUND"]);
-
-      const now = new Date();
-      const oldPending = (pending || []).filter(p => {
-        const created = new Date(p.created_at);
-        const hoursAgo = (now.getTime() - created.getTime()) / (1000 * 60 * 60);
-        return hoursAgo > 24;
-      });
-
-      return {
-        totalPending: pending?.length || 0,
-        oldPending: oldPending.length,
-        userNotFound: (pending || []).filter(p => p.status === "USER_NOT_FOUND").length
-      };
-    },
-    refetchInterval: 300000,
-  });
+  const { data, isLoading, error, refetch } = useAdminAnalyticsDashboard();
+  const billingLogs = data?.tables.billingLogs || [];
 
   const getEventBadge = (eventType: string) => {
     const type = eventType.toUpperCase();
@@ -93,7 +56,7 @@ export const BillingLogsTable = () => {
       return <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-100 border-0 text-xs">Processado</Badge>;
     }
     if (status === "USER_NOT_FOUND") {
-      return <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-0 text-xs">⏳ Aguardando</Badge>;
+      return <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-0 text-xs">Aguardando</Badge>;
     }
     if (status === "pending") {
       return <Badge className="bg-slate-100 text-slate-600 hover:bg-slate-100 border-0 text-xs">Pendente</Badge>;
@@ -107,7 +70,7 @@ export const BillingLogsTable = () => {
     return <Badge variant="outline" className="text-xs bg-white">{status}</Badge>;
   };
 
-  const getSourceBadge = (payload: any) => {
+  const getSourceBadge = (payload: Record<string, unknown> | null) => {
     const source = payload?._webhook_source;
     if (source === "hotmart") {
       return <Badge variant="outline" className="text-xs border-orange-200 text-orange-600 bg-orange-50">Hotmart</Badge>;
@@ -118,69 +81,28 @@ export const BillingLogsTable = () => {
     return null;
   };
 
-  const getProductInfo = (payload: any) => {
-    const info = payload?._extraction_info;
-    if (info?.product_id) {
-      const type = info.product_id === "7031196" || info.product_id?.includes("freelancer") ? "Freelancer" : "Base";
+  const getProductInfo = (payload: Record<string, unknown> | null) => {
+    const extractionInfo = payload?._extraction_info as Record<string, unknown> | undefined;
+    const productId = extractionInfo?.product_id;
+
+    if (typeof productId === "string" && productId.length > 0) {
+      const type = productId === "7031196" || productId.includes("freelancer") ? "Freelancer" : "Base";
       return <span className="text-xs text-muted-foreground">{type}</span>;
     }
+
     return null;
   };
 
   return (
     <div className="space-y-4">
-      {/* Health Check Summary */}
-      <div className="grid grid-cols-3 gap-3">
-        <div className={cn(
-          "rounded-xl border p-4 flex items-center gap-3 transition-colors",
-          healthStats?.oldPending && healthStats.oldPending > 0
-            ? "border-red-200 bg-red-50"
-            : "border-border/50 bg-card"
-        )}>
-          {healthStats?.oldPending && healthStats.oldPending > 0 ? (
-            <div className="p-2 rounded-lg bg-red-100">
-              <AlertTriangle className="h-4 w-4 text-red-600" />
-            </div>
-          ) : (
-            <div className="p-2 rounded-lg bg-emerald-100">
-              <CheckCircle className="h-4 w-4 text-emerald-600" />
-            </div>
-          )}
-          <div>
-            <p className="text-xs text-muted-foreground">Pendentes &gt;24h</p>
-            <p className="text-lg font-bold">{healthStats?.oldPending || 0}</p>
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-border/50 bg-card p-4 flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-amber-100">
-            <Clock className="h-4 w-4 text-amber-600" />
-          </div>
-          <div>
-            <p className="text-xs text-muted-foreground">Aguardando Signup</p>
-            <p className="text-lg font-bold">{healthStats?.userNotFound || 0}</p>
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-border/50 bg-card p-4 flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-blue-100">
-            <RefreshCw className="h-4 w-4 text-blue-600" />
-          </div>
-          <div>
-            <p className="text-xs text-muted-foreground">Total Pendente</p>
-            <p className="text-lg font-bold">{healthStats?.totalPending || 0}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Billing Logs Table */}
       <AdminDataTable
         title="Eventos de Billing"
         emoji="📋"
-        description="Últimos 30 eventos • Atualiza a cada 30s"
+        description="Últimos 30 eventos • Atualiza a cada 5 minutos"
         isLoading={isLoading}
-        onRefresh={refetch}
-        isEmpty={!billingLogs || billingLogs.length === 0}
+        errorMessage={error ? formatAdminAnalyticsError(error) : undefined}
+        onRefresh={() => void refetch()}
+        isEmpty={billingLogs.length === 0}
         emptyMessage="Nenhum evento de billing registrado"
       >
         <div className="overflow-x-auto -mx-5">
@@ -196,12 +118,12 @@ export const BillingLogsTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {billingLogs?.map((log) => (
+              {billingLogs.map((log) => (
                 <TableRow
                   key={log.id}
                   className={cn(
                     "border-b border-border/30 hover:bg-muted/30",
-                    !log.processed && log.status === "USER_NOT_FOUND" && "bg-amber-50/50"
+                    !log.processed && log.status === "USER_NOT_FOUND" && "bg-amber-50/50",
                   )}
                 >
                   <TableCell className="text-sm whitespace-nowrap py-3 pl-5">

@@ -17,6 +17,7 @@ interface AdminDataTableProps {
   tooltip?: string;
   children: ReactNode;
   isLoading?: boolean;
+  errorMessage?: string;
   onRefresh?: () => void;
   className?: string;
   emptyMessage?: string;
@@ -30,18 +31,21 @@ export const AdminDataTable = ({
   tooltip,
   children,
   isLoading,
+  errorMessage,
   onRefresh,
   className,
-  emptyMessage = "Nenhum dado disponível",
+  emptyMessage = "Nenhum dado disponivel",
   isEmpty,
 }: AdminDataTableProps) => {
   if (isLoading) {
     return (
-      <div className={cn(
-        "rounded-2xl border border-border/50 bg-card shadow-sm overflow-hidden",
-        className
-      )}>
-        <div className="p-5 border-b border-border/30">
+      <div
+        className={cn(
+          "overflow-hidden rounded-2xl border border-border/50 bg-card shadow-sm",
+          className,
+        )}
+      >
+        <div className="border-b border-border/30 p-5">
           <Skeleton className="h-5 w-48" />
         </div>
         <div className="p-5">
@@ -52,27 +56,24 @@ export const AdminDataTable = ({
   }
 
   return (
-    <div className={cn(
-      "rounded-2xl border border-border/50 bg-card shadow-sm overflow-hidden",
-      "hover:shadow-md hover:border-border/80 transition-all duration-300",
-      className
-    )}>
-      {/* Header */}
-      <div className="flex items-center justify-between p-5 border-b border-border/30 bg-gradient-to-r from-muted/30 to-transparent">
+    <div
+      className={cn(
+        "overflow-hidden rounded-2xl border border-border/50 bg-card shadow-sm",
+        "transition-all duration-300 hover:border-border/80 hover:shadow-md",
+        className,
+      )}
+    >
+      <div className="flex items-center justify-between border-b border-border/30 bg-gradient-to-r from-muted/30 to-transparent p-5">
         <div className="flex items-center gap-2">
-          {emoji && (
-            <span className="text-lg">{emoji}</span>
-          )}
+          {emoji && <span className="text-lg">{emoji}</span>}
           <div>
             <div className="flex items-center gap-1.5">
-              <h4 className="text-sm font-semibold text-foreground">
-                {title}
-              </h4>
+              <h4 className="text-sm font-semibold text-foreground">{title}</h4>
               {tooltip && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Info className="h-3.5 w-3.5 text-muted-foreground/60 cursor-help" />
+                      <Info className="h-3.5 w-3.5 cursor-help text-muted-foreground/60" />
                     </TooltipTrigger>
                     <TooltipContent className="max-w-sm">
                       <p className="text-xs">{tooltip}</p>
@@ -81,14 +82,10 @@ export const AdminDataTable = ({
                 </TooltipProvider>
               )}
             </div>
-            {description && (
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {description}
-              </p>
-            )}
+            {description && <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>}
           </div>
         </div>
-        
+
         {onRefresh && (
           <Button
             variant="ghost"
@@ -100,13 +97,17 @@ export const AdminDataTable = ({
           </Button>
         )}
       </div>
-      
-      {/* Content */}
+
       <div className="p-5">
-        {isEmpty ? (
+        {errorMessage ? (
           <div className="py-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
-              <span className="text-2xl opacity-50">📊</span>
+            <p className="text-sm font-medium text-foreground">Falha ao carregar os dados</p>
+            <p className="mt-2 text-xs text-muted-foreground">{errorMessage}</p>
+          </div>
+        ) : isEmpty ? (
+          <div className="py-12 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/50">
+              <Info className="h-8 w-8 opacity-50" />
             </div>
             <p className="text-sm text-muted-foreground">{emptyMessage}</p>
           </div>

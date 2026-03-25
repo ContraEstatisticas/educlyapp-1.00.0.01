@@ -1,65 +1,67 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Shield, RefreshCw, ArrowLeft } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AdminGuard } from "@/components/AdminGuard";
-import { KPICards } from "@/components/admin/KPICards";
-import { UserGrowthChart } from "@/components/admin/UserGrowthChart";
-import { ProductDistributionChart } from "@/components/admin/ProductDistributionChart";
-import { BillingEventsChart } from "@/components/admin/BillingEventsChart";
-import { LTVRetentionChart } from "@/components/admin/LTVRetentionChart";
-import { EngagementChart } from "@/components/admin/EngagementChart";
-import { CancellationsTable } from "@/components/admin/CancellationsTable";
-import { TopStreaksTable } from "@/components/admin/TopStreaksTable";
-import { BillingLogsTable } from "@/components/admin/BillingLogsTable";
-import { PremiumUsersTable } from "@/components/admin/PremiumUsersTable";
-import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
-import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
-import { EmailLookup } from "@/components/admin/EmailLookup";
 import { BulkGrantAccess } from "@/components/admin/BulkGrantAccess";
-import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
+import { BillingEventsChart } from "@/components/admin/BillingEventsChart";
+import { BillingLogsTable } from "@/components/admin/BillingLogsTable";
+import { CancellationsTable } from "@/components/admin/CancellationsTable";
+import { EmailLookup } from "@/components/admin/EmailLookup";
+import { EngagementChart } from "@/components/admin/EngagementChart";
+import { KPICards } from "@/components/admin/KPICards";
+import { LTVRetentionChart } from "@/components/admin/LTVRetentionChart";
+import { ManualAccessGrant } from "@/components/admin/ManualAccessGrant";
 import { ManualAccountCreator } from "@/components/admin/ManualAccountCreator";
+import { ManualMetricsForm } from "@/components/admin/ManualMetricsForm";
+import { PremiumUsersTable } from "@/components/admin/PremiumUsersTable";
+import { ProductDistributionChart } from "@/components/admin/ProductDistributionChart";
+import { ResendAccessLink } from "@/components/admin/ResendAccessLink";
 import { RevokeAccess } from "@/components/admin/RevokeAccess";
+import { TopStreaksTable } from "@/components/admin/TopStreaksTable";
+import { UserGrowthChart } from "@/components/admin/UserGrowthChart";
+import {
+  formatAdminAnalyticsError,
+  useAdminMigrationReport,
+} from "@/hooks/useAdminAnalyticsDashboard";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import {
   formatAdminDateTime,
   getAdminDayStartIso,
 } from "@/lib/adminTimeZone";
+
+interface WelcomeBatchInfo {
+  error?: string;
+  sent?: number;
+  failed?: number;
+  remaining?: number;
+}
 
 const AdminAnalyticsContent = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [sendingBatch, setSendingBatch] = useState(false);
-  const [batchInfo, setBatchInfo] = useState<any>(null);
+  const [batchInfo, setBatchInfo] = useState<WelcomeBatchInfo | null>(null);
 
-  const refreshAll = () => {
-    queryClient.invalidateQueries({ queryKey: ["admin-kpis"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-user-growth"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-product-distribution"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-billing-events-chart"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-ltv-retention"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-engagement-chart"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-cancellations"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-top-streaks"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-billing-logs"] });
-    queryClient.invalidateQueries({ queryKey: ["admin-premium-users"] });
+  const refreshAll = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: ["admin-analytics-dashboard"] });
+    queryClient.invalidateQueries({ queryKey: ["admin-migration-report"] });
     queryClient.invalidateQueries({ queryKey: ["admin-manual-metrics"] });
-  };
+  }, [queryClient]);
 
   useEffect(() => {
     refreshAll();
-  }, []);
+  }, [refreshAll]);
 
   return (
     <div className="min-h-screen bg-background safe-area-inset">
-      {/* Header */}
-      <div className="sticky top-safe z-10 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-sm">
+      <div className="sticky top-safe z-10 border-b border-border/50 bg-background/80 shadow-sm backdrop-blur-xl">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -72,27 +74,24 @@ const AdminAnalyticsContent = () => {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-md">
+                <div className="rounded-xl bg-gradient-to-br from-primary to-primary/80 p-2.5 shadow-md">
                   <Shield className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-foreground">
-                    Painel Administrativo
-                  </h1>
-                  <p className="text-xs text-muted-foreground">
-                    Métricas e análises em tempo real
-                  </p>
+                  <h1 className="text-lg font-bold text-foreground">Painel Administrativo</h1>
+                  <p className="text-xs text-muted-foreground">Metricas e analises em tempo real</p>
                 </div>
               </div>
             </div>
+
             <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={refreshAll}
                 className="rounded-xl border-border/50 hover:bg-muted"
               >
-                <RefreshCw className="h-4 w-4 mr-2" />
+                <RefreshCw className="mr-2 h-4 w-4" />
                 Atualizar
               </Button>
               <Button
@@ -102,26 +101,47 @@ const AdminAnalyticsContent = () => {
                 onClick={async () => {
                   setSendingBatch(true);
                   setBatchInfo(null);
+
                   try {
                     const { data: sessionData } = await supabase.auth.getSession();
                     const token = sessionData?.session?.access_token;
+
                     if (!token) {
-                      toast({ title: "Sessão expirada", description: "Faça login novamente", variant: "destructive" });
+                      toast({
+                        title: "Sessao expirada",
+                        description: "Faca login novamente",
+                        variant: "destructive",
+                      });
                       return;
                     }
-                    const resp = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-pending-welcome-batch`, {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                    });
-                    const result = await resp.json();
+
+                    const response = await fetch(
+                      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-pending-welcome-batch`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          Authorization: `Bearer ${token}`,
+                        },
+                      },
+                    );
+
+                    const result: WelcomeBatchInfo = await response.json();
                     setBatchInfo(result);
+
                     toast({
                       title: result.error ? "Erro no envio" : "Lote enviado",
-                      description: result.error || `${result.sent || 0} enviados, ${result.remaining || 0} restantes`,
+                      description:
+                        result.error ||
+                        `${result.sent || 0} enviados, ${result.remaining || 0} restantes`,
                       variant: result.error ? "destructive" : "default",
                     });
                   } catch {
-                    toast({ title: "Erro", description: "Falha ao chamar a função", variant: "destructive" });
+                    toast({
+                      title: "Erro",
+                      description: "Falha ao chamar a funcao",
+                      variant: "destructive",
+                    });
                   } finally {
                     setSendingBatch(false);
                   }
@@ -134,27 +154,25 @@ const AdminAnalyticsContent = () => {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 py-8 space-y-8">
-        {/* Email Lookup + Resend Access */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="container mx-auto space-y-8 px-4 py-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <EmailLookup />
           <ResendAccessLink />
           <ManualAccountCreator />
         </div>
 
-        {/* KPI Cards */}
         <KPICards />
+
         {batchInfo && !batchInfo.error && (
-          <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-sm">
+          <div className="rounded-lg border border-green-500/20 bg-green-500/10 p-3 text-sm">
             <p className="text-green-400">
-              ✓ {batchInfo.sent || 0} enviados | {batchInfo.failed || 0} falhas | {batchInfo.remaining || 0} restantes
+              OK: {batchInfo.sent || 0} enviados | {batchInfo.failed || 0} falhas |{" "}
+              {batchInfo.remaining || 0} restantes
             </p>
           </div>
         )}
 
-        {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <UserGrowthChart />
           <ProductDistributionChart />
           <BillingEventsChart />
@@ -162,58 +180,58 @@ const AdminAnalyticsContent = () => {
           <EngagementChart />
         </div>
 
-        {/* Tables with Tabs */}
         <Tabs defaultValue="billing" className="w-full">
-          <TabsList className="grid w-full grid-cols-8 h-12 p-1 bg-muted/50 rounded-xl">
-            <TabsTrigger 
-              value="billing" 
+          <TabsList className="grid h-12 w-full grid-cols-8 rounded-xl bg-muted/50 p-1">
+            <TabsTrigger
+              value="billing"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              📋 Billing Logs
+              Billing Logs
             </TabsTrigger>
-            <TabsTrigger 
-              value="cancellations" 
+            <TabsTrigger
+              value="cancellations"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              ⚠️ Cancelamentos
+              Cancelamentos
             </TabsTrigger>
-            <TabsTrigger 
-              value="streaks" 
+            <TabsTrigger
+              value="streaks"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              🏆 Top Streaks
+              Top Streaks
             </TabsTrigger>
-            <TabsTrigger 
-              value="premium" 
+            <TabsTrigger
+              value="premium"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              👑 Premium
+              Premium
             </TabsTrigger>
-            <TabsTrigger 
-              value="grant-access" 
+            <TabsTrigger
+              value="grant-access"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              🔓 Liberar Acesso
+              Liberar Acesso
             </TabsTrigger>
-            <TabsTrigger 
-              value="bulk-grant" 
+            <TabsTrigger
+              value="bulk-grant"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              📦 Bulk Import
+              Bulk Import
             </TabsTrigger>
-            <TabsTrigger 
-              value="revoke" 
+            <TabsTrigger
+              value="revoke"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              🚫 Revogar
+              Revogar
             </TabsTrigger>
-            <TabsTrigger 
-              value="migration" 
+            <TabsTrigger
+              value="migration"
               className="rounded-lg text-xs font-medium data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
-              🧭 Filtro de dados
+              Filtro de dados
             </TabsTrigger>
           </TabsList>
+
           <div className="mt-4">
             <TabsContent value="billing" className="m-0">
               <BillingLogsTable />
@@ -242,10 +260,126 @@ const AdminAnalyticsContent = () => {
           </div>
         </Tabs>
 
-        {/* Manual Metrics */}
         <ManualMetricsForm />
       </div>
     </div>
+  );
+};
+
+const MigrationReport = () => {
+  const defaultStart = useMemo(() => "2026-01-16T00:00:00.000Z", []);
+  const [startISO, setStartISO] = useState(defaultStart);
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
+
+  useEffect(() => {
+    setStartISO(getAdminDayStartIso(selectedDate));
+  }, [selectedDate]);
+
+  const { data, isLoading, error } = useAdminMigrationReport(startISO);
+  const registeredList = data?.recentRegistered || [];
+  const notRegisteredList = data?.recentNoSignup || [];
+
+  return (
+    <Card className="p-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h3 className="text-lg font-bold">Filtro de dados</h3>
+          <p className="text-sm text-muted-foreground">Periodo: desde a data inicial ate hoje</p>
+        </div>
+        <div className="rounded-xl border border-border bg-card p-3">
+          <label className="mb-2 block text-xs text-muted-foreground">Data inicial</label>
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={(value) => value && setSelectedDate(value)}
+            className="rounded-md"
+          />
+        </div>
+      </div>
+
+      {error ? (
+        <div className="mt-6 rounded-xl border border-destructive/20 bg-destructive/5 p-4">
+          <p className="text-sm font-medium text-foreground">Falha ao carregar o relatorio</p>
+          <p className="mt-2 text-xs text-muted-foreground">{formatAdminAnalyticsError(error)}</p>
+        </div>
+      ) : isLoading ? (
+        <div className="mt-6 text-sm text-muted-foreground">Carregando relatorio...</div>
+      ) : (
+        <>
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4">
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="text-sm text-muted-foreground">Contas criadas</div>
+              <div className="mt-1 text-3xl font-bold">{data?.accountsCreated ?? "--"}</div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="text-sm text-muted-foreground">Usuarios com acesso</div>
+              <div className="mt-1 text-3xl font-bold">{data?.purchasesTotal ?? "--"}</div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="text-sm text-muted-foreground">Compras com cadastro</div>
+              <div className="mt-1 text-3xl font-bold">{data?.purchasesWithSignup ?? "--"}</div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="text-sm text-muted-foreground">Compras sem cadastro</div>
+              <div className="mt-1 text-3xl font-bold">{data?.eventsWithoutSignup ?? "--"}</div>
+            </div>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="mb-2 font-semibold">Ultimos com cadastro</div>
+              <div className="space-y-2">
+                {registeredList.map((row, index) => (
+                  <div
+                    key={`${row.email}-${index}`}
+                    className="flex items-center justify-between gap-4 text-sm"
+                  >
+                    <span className="truncate">{row.email}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {formatAdminDateTime(row.created_at, "pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                ))}
+                {registeredList.length === 0 && (
+                  <div className="text-sm text-muted-foreground">Sem registros</div>
+                )}
+              </div>
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="mb-2 font-semibold">Ultimos sem cadastro</div>
+              <div className="space-y-2">
+                {notRegisteredList.map((row, index) => (
+                  <div
+                    key={`${row.email}-${index}`}
+                    className="flex items-center justify-between gap-4 text-sm"
+                  >
+                    <span className="truncate">{row.email}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {formatAdminDateTime(row.created_at, "pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                ))}
+                {notRegisteredList.length === 0 && (
+                  <div className="text-sm text-muted-foreground">Sem registros</div>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </Card>
   );
 };
 
@@ -258,196 +392,3 @@ const AdminAnalytics = () => {
 };
 
 export default AdminAnalytics;
-
-const MigrationReport = () => {
-  const defaultStart = useMemo(() => {
-    return '2026-01-16T00:00:00.000Z';
-  }, []);
-  const [startISO, setStartISO] = useState(defaultStart);
-  const actions = useMemo(() => ([
-    'SETTLED','STARTING_TRIAL','SUBSCRIPTION_SETTLED','SUBSCRIPTION_TRIAL_STARTED','GRANTED',
-    'CONVERTION','RENEWING','RESUMING','RECOVERING','RECOVERING_AUTORENEW',
-    'PURCHASE_COMPLETE','PURCHASE_APPROVED','PURCHASE_PROTEST','PURCHASE_DELAYED'
-  ]), []);
-  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
-  useEffect(() => {
-    setStartISO(getAdminDayStartIso(selectedDate));
-  }, [selectedDate]);
-
-  const { data: usersCount } = useQuery({
-    queryKey: ['migration-users-premium', startISO],
-    queryFn: async () => {
-      const { count } = await supabase
-        .from('billing_event_logs')
-        .select('id', { count: 'exact', head: true })
-        .gte('created_at', startISO)
-        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled']);
-      return count || 0;
-    },
-    refetchOnWindowFocus: false,
-  });
-  const { data: accountsCreated } = useQuery({
-    queryKey: ['migration-accounts-created', startISO],
-    queryFn: async () => {
-      const { count } = await supabase
-        .from('profiles')
-        .select('id', { count: 'exact', head: true })
-        .gte('created_at', startISO);
-      return count || 0;
-    },
-    refetchOnWindowFocus: false,
-  });
-
-  const { data: purchasesTotal } = useQuery({
-    queryKey: ['migration-purchases-granted', startISO],
-    queryFn: async () => {
-      const { count } = await supabase
-        .from('billing_event_logs')
-        .select('id', { count: 'exact', head: true })
-        .gte('created_at', startISO)
-        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled']);
-      return count || 0;
-    },
-    refetchOnWindowFocus: false,
-  });
-
-  const { data: eventsWithoutSignup } = useQuery({
-    queryKey: ['migration-events-no-signup', startISO],
-    queryFn: async () => {
-      const { count } = await supabase
-        .from('billing_event_logs')
-        .select('id', { count: 'exact', head: true })
-        .gte('created_at', startISO)
-        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
-        .eq('status', 'USER_NOT_FOUND');
-      return count || 0;
-    },
-    refetchOnWindowFocus: false,
-  });
-
-  const { data: recentRegistered } = useQuery({
-    queryKey: ['migration-emails-registered', startISO],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from('billing_event_logs')
-        .select('email,user_id,created_at,status')
-        .gte('created_at', startISO)
-        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
-        .not('user_id', 'is', null)
-        .order('created_at', { ascending: false })
-        .limit(50);
-      return data || [];
-    },
-    refetchOnWindowFocus: false,
-  });
-
-  const { data: recentNoSignup } = useQuery({
-    queryKey: ['migration-emails-no-signup', startISO],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from('billing_event_logs')
-        .select('email,user_id,created_at,status')
-        .gte('created_at', startISO)
-        .in('event_type', ['PURCHASE_COMPLETE', 'SETTLED', 'settled'])
-        .eq('status', 'USER_NOT_FOUND')
-        .order('created_at', { ascending: false })
-        .limit(50);
-      return data || [];
-    },
-    refetchOnWindowFocus: false,
-  });
-
-  const registeredList = useMemo(() => {
-    return (recentRegistered || []);
-  }, [recentRegistered]);
-
-  const notRegisteredList = useMemo(() => {
-    return (recentNoSignup || []);
-  }, [recentNoSignup]);
-
-  return (
-    <Card className="p-6">
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-bold">Filtro de dados</h3>
-          <p className="text-sm text-muted-foreground">Período: desde a data inicial até hoje</p>
-        </div>
-        <div className="rounded-xl border border-border p-3 bg-card">
-          <label className="text-xs text-muted-foreground block mb-2">Data inicial</label>
-          <Calendar
-            mode="single"
-            selected={selectedDate}
-            onSelect={(d) => d && setSelectedDate(d)}
-            className="rounded-md"
-          />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="text-sm text-muted-foreground">Contas criadas</div>
-          <div className="text-3xl font-bold mt-1">{accountsCreated ?? '—'}</div>
-        </div>
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="text-sm text-muted-foreground">Usuários com acesso</div>
-          <div className="text-3xl font-bold mt-1">{purchasesTotal ?? '—'}</div>
-        </div>
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="text-sm text-muted-foreground">Compras com cadastro</div>
-          <div className="text-3xl font-bold mt-1">{usersCount ?? '—'}</div>
-        </div>
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="text-sm text-muted-foreground">Compras sem cadastro</div>
-          <div className="text-3xl font-bold mt-1">{eventsWithoutSignup ?? '—'}</div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="font-semibold mb-2">Últimos com cadastro</div>
-          <div className="space-y-2">
-            {(registeredList || []).map((r: any, idx: number) => (
-              <div key={idx} className="text-sm flex items-center justify-between">
-                <span className="truncate">{r.email}</span>
-                <span className="text-xs text-muted-foreground">
-                  {formatAdminDateTime(r.created_at, "pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </div>
-            ))}
-            {registeredList && registeredList.length === 0 && (
-              <div className="text-sm text-muted-foreground">Sem registros</div>
-            )}
-          </div>
-        </div>
-        <div className="bg-card border border-border rounded-xl p-4">
-          <div className="font-semibold mb-2">Últimos sem cadastro</div>
-          <div className="space-y-2">
-            {(notRegisteredList || []).map((r: any, idx: number) => (
-              <div key={idx} className="text-sm flex items-center justify-between">
-                <span className="truncate">{r.email}</span>
-                <span className="text-xs text-muted-foreground">
-                  {formatAdminDateTime(r.created_at, "pt-BR", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </div>
-            ))}
-            {notRegisteredList && notRegisteredList.length === 0 && (
-              <div className="text-sm text-muted-foreground">Sem registros</div>
-            )}
-          </div>
-        </div>
-      </div>
-    </Card>
-  );
-}

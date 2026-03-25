@@ -15,6 +15,7 @@ interface AdminChartCardProps {
   tooltip?: string;
   children: ReactNode;
   isLoading?: boolean;
+  errorMessage?: string;
   className?: string;
   action?: ReactNode;
 }
@@ -25,6 +26,7 @@ export const AdminChartCard = ({
   tooltip,
   children,
   isLoading,
+  errorMessage,
   className,
   action,
 }: AdminChartCardProps) => {
@@ -71,7 +73,16 @@ export const AdminChartCard = ({
       </div>
       
       <div className="relative">
-        {children}
+        {errorMessage ? (
+          <div className="h-[280px] flex items-center justify-center">
+            <div className="text-center max-w-sm">
+              <p className="text-sm font-medium text-foreground">Falha ao carregar o painel</p>
+              <p className="text-xs text-muted-foreground mt-2">{errorMessage}</p>
+            </div>
+          </div>
+        ) : (
+          children
+        )}
       </div>
     </div>
   );

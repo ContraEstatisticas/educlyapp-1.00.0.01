@@ -7,7 +7,7 @@ interface AdminKPICardProps {
   title: string;
   value: string | number;
   icon: ReactNode;
-  description?: string;
+  description?: ReactNode;
   trend?: "up" | "down" | "neutral";
   color?: "default" | "success" | "warning" | "danger" | "info" | "purple";
   tooltip?: string;
@@ -110,7 +110,7 @@ export const AdminKPICard = ({
             {typeof value === "number" ? value.toLocaleString("pt-BR") : value}
           </p>
 
-          {description && <p className="text-xs text-muted-foreground/80 line-clamp-1">{description}</p>}
+          {description && <div className="text-xs text-muted-foreground/80 space-y-1">{description}</div>}
         </div>
 
         <div

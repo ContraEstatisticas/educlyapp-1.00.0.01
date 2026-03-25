@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import {
   LineChart,
   Line,
@@ -11,83 +9,39 @@ import {
 } from "recharts";
 import { AdminChartCard } from "./AdminChartCard";
 import {
-  formatAdminDate,
-  getAdminDateKey,
-  getAdminDateKeysForLastDays,
-  getAdminDaysAgoStartIso,
-} from "@/lib/adminTimeZone";
+  formatAdminAnalyticsError,
+  useAdminAnalyticsDashboard,
+} from "@/hooks/useAdminAnalyticsDashboard";
 
 export const UserGrowthChart = () => {
-  const { data: chartData, isLoading } = useQuery({
-    queryKey: ["admin-user-growth"],
-    queryFn: async () => {
-      const thirtyDaysAgo = getAdminDaysAgoStartIso(29);
-      
-      const { data: profiles } = await supabase
-        .from("profiles")
-        .select("created_at")
-        .gte("created_at", thirtyDaysAgo)
-        .order("created_at", { ascending: true });
-
-      // Group by date
-      const groupedByDate: Record<string, number> = {};
-      
-      // Initialize all 30 days with 0
-      for (const date of getAdminDateKeysForLastDays(30)) {
-        groupedByDate[date] = 0;
-      }
-
-      // Count users per day
-      profiles?.forEach((profile) => {
-        if (profile.created_at) {
-          const date = getAdminDateKey(profile.created_at);
-          if (groupedByDate[date] !== undefined) {
-            groupedByDate[date]++;
-          }
-        }
-      });
-
-      // Convert to array and calculate cumulative
-      let cumulative = 0;
-      const result = Object.entries(groupedByDate).map(([date, count]) => {
-        cumulative += count;
-        return {
-          date,
-          novos: count,
-          total: cumulative,
-          label: formatAdminDate(date, "pt-BR", { day: "2-digit", month: "2-digit" }),
-        };
-      });
-
-      return result;
-    },
-    refetchInterval: 300000, // Refresh every 5 minutes
-  });
+  const { data, isLoading, error } = useAdminAnalyticsDashboard();
+  const chartData = data?.charts.userGrowth || [];
 
   return (
     <AdminChartCard
       title="Crescimento de Usuários (30 dias)"
       emoji="📈"
       isLoading={isLoading}
+      errorMessage={error ? formatAdminAnalyticsError(error) : undefined}
     >
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={chartData}>
           <defs>
             <linearGradient id="colorNovos" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
-              <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+              <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3} />
+              <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" className="stroke-muted/50" vertical={false} />
           <XAxis
             dataKey="label"
-            tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
+            tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
             tickLine={false}
             axisLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
-            tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
+            tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
             tickLine={false}
             axisLine={false}
             width={35}
@@ -105,6 +59,7 @@ export const UserGrowthChart = () => {
                   </div>
                 );
               }
+
               return null;
             }}
           />
@@ -114,11 +69,11 @@ export const UserGrowthChart = () => {
             stroke="hsl(var(--primary))"
             strokeWidth={2.5}
             dot={false}
-            activeDot={{ 
-              r: 6, 
+            activeDot={{
+              r: 6,
               fill: "hsl(var(--primary))",
               stroke: "hsl(var(--background))",
-              strokeWidth: 2
+              strokeWidth: 2,
             }}
           />
         </LineChart>

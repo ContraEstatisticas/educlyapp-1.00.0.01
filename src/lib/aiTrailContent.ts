@@ -160,6 +160,7 @@ import {
   DEEPSEEK_MODULE_6_STEPS_FR,
   DEEPSEEK_MODULE_6_STEPS_PT,
 } from "@/lib/deepseekModule6LessonSteps";
+import { CLAUDE_MODULE_1_STEPS_PT } from "@/lib/claudeModule1LessonSteps";
 
 
 
@@ -4199,6 +4200,79 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
         ]
       }
 
+    }
+  },
+  claude: {
+    status: "coming_soon",
+    locales: {
+      pt: {
+        statusBadge: "Em breve",
+        heroEyebrow: "Claude",
+        heroTitle: "Claude como seu assistente inteligente.",
+        heroDescription:
+          "Uma trilha para usar o Claude com mais contexto, mais qualidade de escrita e mais profundidade em analise e tomada de decisao.",
+        overviewTitle: "O que voce vai dominar",
+        overviewItems: [
+          "Como estruturar pedidos com contexto, objetivo e nivel de conhecimento para respostas mais fortes.",
+          "Como usar o Claude para analise, escrita, revisao e raciocinio em situacoes complexas.",
+          "Como transformar o Claude em parceiro de pensamento no trabalho e nos estudos do dia a dia."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Pratica guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "Claude como Seu Assistente Inteligente",
+            summary: "Fundamentos do Claude, contexto, refinamento, analise, escrita e honestidade.",
+            outcome: "Base solida para conversar melhor com o Claude no dia a dia.",
+            intro:
+              "Nesta licao, voce vai entender o que torna o Claude diferente, como ele responde melhor a contexto bem dado e como usar sua forca em analise, escrita e tomada de decisao.",
+            keyPoints: [
+              "O Claude foi criado com foco em utilidade, honestidade e seguranca.",
+              "Quanto mais contexto, objetivo e nivel de conhecimento voce informa, melhor tende a ser a resposta.",
+              "Ele se destaca em analise, escrita, revisao e raciocinio estruturado.",
+              "Quando ha incerteza, o comportamento esperado e sinalizar limites e recomendar verificacao."
+            ],
+            lessonSteps: CLAUDE_MODULE_1_STEPS_PT,
+            promptExample:
+              "Voce e um especialista em financas pessoais com experiencia em investimentos para iniciantes. Preciso de ajuda para montar minha primeira carteira de investimentos. Meu nivel de conhecimento no assunto e basico e o objetivo final e ter uma reserva de emergencia solida em 12 meses.",
+            practice: {
+              title: "Prompt com contexto",
+              instruction: "Monte um pedido claro para ativar o melhor do Claude.",
+              terms: [
+                "especialista em financas pessoais",
+                "investimentos para iniciantes",
+                "montar minha primeira carteira de investimentos",
+                "basico",
+                "ter uma reserva de emergencia solida em 12 meses"
+              ],
+              solution:
+                "Definir papel, especialidade, tarefa, nivel atual e objetivo final deixa a resposta muito mais contextualizada e util."
+            },
+            quiz: {
+              question: "O que melhor descreve o diferencial do Claude?",
+              options: [
+                "Ele foi desenvolvido com foco em raciocinio aprofundado, honestidade e respostas contextualizadas.",
+                "Ele memoriza automaticamente todas as conversas passadas.",
+                "Ele acessa a internet em tempo real sem nenhuma configuracao.",
+                "Ele nunca comete erros em nenhuma situacao."
+              ],
+              correctIndex: 0,
+              explanation:
+                "O Claude se diferencia por profundidade de raciocinio, honestidade sobre limites e uso mais forte de contexto."
+            },
+            takeaway:
+              "O melhor uso do Claude nasce de conversas bem construidas, com contexto claro, refinamento iterativo e expectativa realista sobre seus limites."
+          }
+        ]
+      }
     }
   }
 };
