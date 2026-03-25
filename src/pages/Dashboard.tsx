@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { clearAuthStorage } from "@/lib/authStorage";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MobileNav } from "@/components/MobileNav";
 import { WeeklyStreakBar } from "@/components/WeeklyStreakBar";
@@ -76,6 +77,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    clearAuthStorage();
     toast({ title: t("common.logout") });
     navigate("/auth");
   };

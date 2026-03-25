@@ -31,6 +31,7 @@ import { SoundControl } from "@/components/SoundControl";
 import { MobileNav } from "@/components/MobileNav";
 import { LevelRewardsCard } from "@/components/dashboard/LevelRewardsCard";
 import { useUserLevel } from "@/hooks/useUserLevel";
+import { clearAuthStorage } from "@/lib/authStorage";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Trophy, Star
@@ -472,6 +473,7 @@ const Profile = () => {
           size="icon"
           onClick={async () => {
             await supabase.auth.signOut();
+            clearAuthStorage();
             navigate("/auth");
           }}
           className="text-muted-foreground hover:text-destructive"

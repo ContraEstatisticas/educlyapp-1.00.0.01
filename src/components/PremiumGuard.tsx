@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
+import { clearAuthStorage, shouldClearSessionOnLogout } from "@/lib/authStorage";
 
 interface PremiumGuardProps {
   children: ReactNode;
@@ -9,19 +10,7 @@ interface PremiumGuardProps {
 
 // Helper to clear invalid session tokens
 const clearInvalidSession = () => {
-  if (typeof localStorage === "undefined" || typeof sessionStorage === "undefined") {
-    return;
-  }
-
-  const keysToRemove: string[] = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key && (key.startsWith('sb-') || key.includes('supabase'))) {
-      keysToRemove.push(key);
-    }
-  }
-  keysToRemove.forEach(key => localStorage.removeItem(key));
-  sessionStorage.clear();
+  clearAuthStorage();
 };
 
 export const PremiumGuard = ({ children }: PremiumGuardProps) => {
@@ -76,22 +65,11 @@ export const PremiumGuard = ({ children }: PremiumGuardProps) => {
 
         if (!isPremium) {
           // Check if user did NOT select "keep me logged in"
-          const shouldClearSession =
-            typeof localStorage !== "undefined" &&
-            localStorage.getItem("clearSessionOnLogout") === "true";
+          const shouldClearSession = shouldClearSessionOnLogout();
           
           if (shouldClearSession) {
             // Clear session completely before redirecting to auth
-            const keysToRemove: string[] = [];
-            for (let i = 0; i < localStorage.length; i++) {
-              const key = localStorage.key(i);
-              if (key && (key.startsWith('sb-') || key.includes('supabase'))) {
-                keysToRemove.push(key);
-              }
-            }
-            keysToRemove.forEach(key => localStorage.removeItem(key));
-            sessionStorage.clear();
-            localStorage.removeItem("clearSessionOnLogout");
+            clearAuthStorage();
             
             // Sign out and redirect to auth for fresh login
             await supabase.auth.signOut();

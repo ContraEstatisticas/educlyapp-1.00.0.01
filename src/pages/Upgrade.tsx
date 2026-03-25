@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import { clearAuthStorage } from "@/lib/authStorage";
 import {
   Lock,
   Sparkles,
@@ -45,17 +46,8 @@ const Upgrade = () => {
   ];
 
   const handleLogout = async () => {
-    const keysToRemove: string[] = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && (key.startsWith('sb-') || key.includes('supabase'))) {
-        keysToRemove.push(key);
-      }
-    }
-    keysToRemove.forEach(key => localStorage.removeItem(key));
-    sessionStorage.clear();
-
     await supabase.auth.signOut();
+    clearAuthStorage();
     navigate('/auth', { replace: true });
   };
 

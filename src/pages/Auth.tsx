@@ -13,6 +13,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import {
+  getRememberMeDefaultValue,
+  setAuthStorageMode,
+  setClearSessionOnLogoutPreference,
+} from "@/lib/authStorage";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -31,7 +36,7 @@ const Auth = () => {
   const [isProcessingMagicLink, setIsProcessingMagicLink] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(getRememberMeDefaultValue);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   const [showExpiredLink, setShowExpiredLink] = useState(false);
@@ -273,16 +278,12 @@ const Auth = () => {
 
     try {
       const normalizedEmail = email.trim().toLowerCase().replace(/\.+$/, "");
+      setAuthStorageMode(rememberMe);
+
       const { error } = await supabase.auth.signInWithPassword({
         email: normalizedEmail,
         password,
       });
-
-      if (!rememberMe) {
-        localStorage.setItem("clearSessionOnLogout", "true");
-      } else {
-        localStorage.removeItem("clearSessionOnLogout");
-      }
 
       if (error) {
         const message = String(error.message || "").toLowerCase();
@@ -291,6 +292,8 @@ const Auth = () => {
         setIsLoginErrorDialogOpen(true);
         return;
       }
+
+      setClearSessionOnLogoutPreference(!rememberMe);
 
       try {
         const {

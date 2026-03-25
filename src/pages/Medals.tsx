@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAllMedals } from "@/hooks/useAllMedals";
+import { clearAuthStorage } from "@/lib/authStorage";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -125,6 +126,7 @@ const Medals = () => {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    clearAuthStorage();
     toast({ title: t("common.logout") });
     navigate("/auth");
   };

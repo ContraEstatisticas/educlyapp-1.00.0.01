@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { clearAuthStorage } from "@/lib/authStorage";
 
 export const useLogout = () => {
   const navigate = useNavigate();
@@ -13,23 +14,10 @@ export const useLogout = () => {
       // Sign out from Supabase
       await supabase.auth.signOut();
 
-      // Clear all auth-related localStorage items
+      // Clear remaining auth-related browser storage
       localStorage.removeItem("quizCompleted");
       localStorage.removeItem("quizAnswers");
-      localStorage.removeItem("clearSessionOnLogout");
-      
-      // ALWAYS clear Supabase session tokens to prevent invalid JWT issues
-      const keysToRemove: string[] = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && (key.startsWith('sb-') || key.includes('supabase'))) {
-          keysToRemove.push(key);
-        }
-      }
-      keysToRemove.forEach(key => localStorage.removeItem(key));
-      
-      // Clear session storage too
-      sessionStorage.clear();
+      clearAuthStorage();
 
       toast({
         title: t('common.logout', 'Logout realizado'),
