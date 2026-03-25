@@ -1,51 +1,27 @@
 
 
-## Diagnostico: Magic Link reseta cache e desloga o usuario
+## Plano: Gerar DOCX do Relatório de Incidente
 
-### Causa raiz
+### Resumo
 
-O script de **force reset** no `index.html` (linhas 88-178) executa **ANTES** do React montar. Ele verifica se `localStorage.__educly_force_reset_v === '2'`. 
+Gerar um documento DOCX profissional explicando o incidente de progresso apagado, deixando claro que o problema afetou apenas usuários que executaram o script `reset_progress.sql` via navegador (cache/force-reset), e não todos os usuários da plataforma.
 
-Quando um usuario **novo** (ou que nunca passou pelo reset) clica no magic link:
+### Conteúdo do documento
 
-1. Navegador abre `/magic-login?token=UUID`
-2. `index.html` carrega e o script de force reset roda **imediatamente**
-3. Como `__educly_force_reset_v` nao existe no localStorage desse usuario, o script:
-   - Limpa `localStorage.clear()` (destroi qualquer sessao Supabase existente)
-   - Limpa `sessionStorage.clear()`
-   - Redireciona para `/auth?cache_reset=1&frv=2`
-4. O componente `MagicLogin` **nunca chega a montar** -- o usuario cai no `/auth` deslogado
+1. **Capa** - Título "Relatório de Incidente - Progresso Apagado Indevidamente", data, projeto Educly
+2. **Resumo executivo** - Visão geral do incidente: script de reset sem filtro por usuário causou perda de progresso para quem o executou via navegador
+3. **Causa raiz** - O arquivo `reset_progress.sql` continha DELETEs em massa nas tabelas `user_day_progress`, `user_step_progress` e `user_lesson_attempts` sem cláusula `WHERE user_id = ...`, apagando dados de todos os participantes do desafio "Iniciante IA". O script era acionado via páginas de cache/reset no navegador (`/cache.html`, `/reset-cache.html`), afetando apenas quem acessou essas páginas - não foi um evento global
+4. **Impacto** - Dias completados, XP acumulado e tentativas de quiz foram removidos. Escopo limitado a usuários que acionaram o reset pelo navegador
+5. **Caso reportado** - Usuário `jrmf3314@gmail.com` perdeu dias 1-7 e dia 9, além do XP correspondente (~100 XP)
+6. **Ações corretivas** - Queries SQL de restauração executadas (INSERT dos dias + UPDATE do XP de 65 para 165)
+7. **Medidas preventivas** - Remoção do `reset_progress.sql` do repositório; correção no `index.html` para proteger rotas de autenticação
+8. **Recomendações** - Verificar outros usuários potencialmente afetados; nunca incluir scripts de reset destrutivos sem filtro de usuário
 
-O mesmo problema afeta usuarios que limparam o cache manualmente ou acessam de um novo dispositivo/navegador.
+### Implementação técnica
 
-### Solucao
-
-**Arquivo: `index.html`** -- Adicionar bypass no script de force reset para rotas criticas de autenticacao.
-
-Antes da verificacao do `FORCE_RESET_V`, adicionar:
-
-```javascript
-// Skip force reset on authentication routes (magic-login, auth with hash tokens)
-var authRoutes = ['/magic-login', '/auth'];
-var isAuthRoute = authRoutes.some(function(r) {
-  return path === r.replace(/^\//, '') || path.indexOf(r.replace(/^\//, '') + '/') === 0;
-});
-var hasAuthHash = location.hash && location.hash.indexOf('access_token') !== -1;
-
-if (isAuthRoute || hasAuthHash) {
-  // Still mark the version so it doesn't trigger on next navigation
-  try { localStorage.setItem(KEY, FORCE_RESET_V); } catch(e) {}
-  return;
-}
-```
-
-Isso faz com que:
-- `/magic-login?token=...` nunca seja interrompido pelo reset
-- `/auth#access_token=...` (magic links diretos do Supabase) tambem nao seja interrompido
-- A versao do reset e marcada como "feita" para evitar que rode em navegacoes futuras
-
-### Impacto
-- Zero alteracao no fluxo de login normal
-- Zero alteracao no fluxo de reset de cache intencional (`/cache`, `/reset-cache`)
-- Resolve 100% dos casos de "primeiro clique no magic link redireciona para auth"
+- Criar script Node.js usando `docx` (docx-js) para gerar o DOCX com estilo profissional Educly
+- Cores e fontes consistentes com documentos anteriores do projeto (Calibri/Georgia, azul accent #1F4E79)
+- Salvar em `/mnt/documents/relatorio-incidente-progresso-apagado.docx`
+- Validar o documento gerado
+- Converter para imagem para QA visual
 
