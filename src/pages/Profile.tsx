@@ -181,6 +181,41 @@ const Profile = () => {
     }
   };
 
+  const handleOpenInstallLink = async (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    if (isInstallable) {
+      event.preventDefault();
+      const installed = await promptInstall();
+
+      if (installed) {
+        setIsPwaOpen(false);
+      }
+      return;
+    }
+
+    if (isIOS) {
+      event.preventDefault();
+      toast({
+        title: t('pwa.installTitle', 'Instalar Educly'),
+        description: t(
+          'pwa.iosManualInstallHint',
+          'No iPhone/iPad, abra no Safari e use Compartilhar > Adicionar à Tela de Início.'
+        ),
+      });
+      return;
+    }
+
+    event.preventDefault();
+    toast({
+      title: t('pwa.installTitle', 'Instalar Educly'),
+      description: t(
+        'pwa.manualInstallHint',
+        'Use a opção "Instalar app" no menu do navegador para concluir a instalação.'
+      ),
+    });
+  };
+
   const profileForm = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema)
   });
@@ -745,6 +780,7 @@ const Profile = () => {
                               href={installLink}
                               target="_blank"
                               rel="noreferrer"
+                              onClick={handleOpenInstallLink}
                               className="mt-2 block break-all text-xs text-primary underline underline-offset-2"
                             >
                               {installLink}
@@ -764,6 +800,7 @@ const Profile = () => {
                                 href={installLink}
                                 target="_blank"
                                 rel="noreferrer"
+                                onClick={handleOpenInstallLink}
                                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                               >
                                 <ExternalLink className="w-3.5 h-3.5" />
