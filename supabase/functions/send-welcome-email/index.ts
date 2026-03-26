@@ -336,7 +336,7 @@ const sendEmailViaResend = async (
 };
 
 const resolveUserId = async (params: {
-  supabaseAdmin: ReturnType<typeof createClient>;
+  supabaseAdmin: any;
   explicitUserId?: string | null;
   accessToken?: string | null;
 }) => {
@@ -361,7 +361,7 @@ const resolveUserId = async (params: {
     return null;
   }
 
-  return data?.user_id ?? null;
+  return (data as any)?.user_id ?? null;
 };
 
 serve(async (req) => {
@@ -415,11 +415,15 @@ serve(async (req) => {
       accessToken: accessToken || null,
     });
 
-    const emailType = mode === "legacy"
+    // Allow override_email_type from metadata (used by welcome reminders)
+    const overrideEmailType = typeof customMetadata.override_email_type === "string"
+      ? customMetadata.override_email_type
+      : null;
+    const emailType = overrideEmailType || (mode === "legacy"
       ? "welcome"
       : mode === "magic_link_reminder"
         ? "welcome_reminder"
-        : "magic_link";
+        : "magic_link");
     const dedupType = mode === "magic_link_existing" ? null : emailType;
 
     if (dedupType) {
