@@ -336,7 +336,7 @@ const sendEmailViaResend = async (
 };
 
 const resolveUserId = async (params: {
-  supabaseAdmin: ReturnType<typeof createClient>;
+  supabaseAdmin: any;
   explicitUserId?: string | null;
   accessToken?: string | null;
 }) => {
@@ -361,7 +361,7 @@ const resolveUserId = async (params: {
     return null;
   }
 
-  return data?.user_id ?? null;
+  return (data as any)?.user_id ?? null;
 };
 
 serve(async (req) => {

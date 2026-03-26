@@ -73,9 +73,10 @@ serve(async (req) => {
     } else {
       return new Response(JSON.stringify({ error: "Invalid type" }), { status: 400 });
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Scheduler error:", error);
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    const msg = error instanceof Error ? error.message : String(error);
+    return new Response(JSON.stringify({ error: msg }), { status: 500 });
   }
 });
 
@@ -106,7 +107,7 @@ async function handleDailyReminder(supabase: any) {
         Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
       },
       body: JSON.stringify({
-        user_ids: [user.user_id],
+        user_ids: [(user as any).user_id],
         title: getTranslation(lang, "dailyReminderTitle"),
         body: getTranslation(lang, "dailyReminder"),
         tag: "daily-reminder",

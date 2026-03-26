@@ -9,17 +9,10 @@ const corsHeaders = {
 const BATCH_LIMIT = 50;
 const LOOKBACK_DAYS = 14;
 const DELAY_BETWEEN_SENDS_MS = 500;
-const REMINDER_DELAY_HOURS = 6;
-const RESEND_BASE_URL = "https://api.resend.com";
-const SUPPORTED_LANGUAGES = ["pt", "en", "es", "fr", "de", "it", "ru"];
+const REMINDER_6H = 6;
+const REMINDER_48H = 48;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const isObjectRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
-
-const normalizeMetadata = (value: unknown): Record<string, unknown> =>
-  isObjectRecord(value) ? { ...value } : {};
 
 const normalizeEmail = (value: unknown) =>
   typeof value === "string" ? value.trim().toLowerCase().replace(/\.+$/, "") : "";
@@ -27,47 +20,14 @@ const normalizeEmail = (value: unknown) =>
 const normalizeLanguage = (value: unknown, fallback = "en") => {
   if (typeof value !== "string") return fallback;
   const normalized = value.trim().toLowerCase().split("-")[0];
-  return SUPPORTED_LANGUAGES.includes(normalized) ? normalized : fallback;
+  return ["pt", "en", "es", "fr", "de", "it", "ru"].includes(normalized) ? normalized : fallback;
 };
 
-const mergeReminderMetadata = (
-  metadataValue: unknown,
-  patch: Record<string, unknown>,
-): Record<string, unknown> => {
-  const metadata = normalizeMetadata(metadataValue);
-  const currentReminder = isObjectRecord(metadata.welcome_reminder)
-    ? { ...metadata.welcome_reminder }
-    : {};
+const isObjectRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
 
-  return {
-    ...metadata,
-    welcome_reminder: {
-      ...currentReminder,
-      ...patch,
-    },
-  };
-};
-
-const isOpenedResendEvent = (event: string | null | undefined) =>
-  event === "opened" || event === "clicked";
-
-const isDeliveryIssueEvent = (event: string | null | undefined) =>
-  event === "bounced" || event === "complained";
-
-const resendGet = async (apiKey: string, path: string) => {
-  const response = await fetch(`${RESEND_BASE_URL}${path}`, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Resend ${path} ${response.status}: ${errorText}`);
-  }
-
-  return response.json();
-};
+const normalizeMetadata = (value: unknown): Record<string, unknown> =>
+  isObjectRecord(value) ? { ...value } : {};
 
 const callInternalFunction = async <T>(params: {
   functionName: string;
@@ -104,33 +64,27 @@ serve(async (req) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const cronSecret = Deno.env.get("CRON_SECRET") || "";
-  const resendApiKey = Deno.env.get("RESEND_API_KEY");
   const supabase = createClient(supabaseUrl, serviceRoleKey);
 
   try {
-    if (!resendApiKey) {
-      throw new Error("RESEND_API_KEY not configured");
-    }
-
     const rawBody = await req.text();
     let body: Record<string, unknown> = {};
-
     try {
       body = rawBody ? JSON.parse(rawBody) : {};
     } catch {
       body = {};
     }
 
+    // Auth check
     const authHeader = req.headers.get("authorization") || "";
     const bearerToken = authHeader.toLowerCase().startsWith("bearer ")
       ? authHeader.slice(7).trim()
       : "";
     const bodySecret = typeof body.secret === "string" ? body.secret : "";
 
-    const isAuthorized = (
+    const isAuthorized =
       (cronSecret.length > 0 && (bearerToken === cronSecret || bodySecret === cronSecret)) ||
-      bearerToken === serviceRoleKey
-    );
+      bearerToken === serviceRoleKey;
 
     if (!isAuthorized) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
@@ -141,177 +95,139 @@ serve(async (req) => {
 
     const now = new Date();
     const nowIso = now.toISOString();
-    const dueBeforeIso = new Date(now.getTime() - REMINDER_DELAY_HOURS * 60 * 60 * 1000).toISOString();
-    const lookbackStartIso = new Date(now.getTime() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
+    const sixHoursAgo = new Date(now.getTime() - REMINDER_6H * 60 * 60 * 1000).toISOString();
+    const fortyEightHoursAgo = new Date(now.getTime() - REMINDER_48H * 60 * 60 * 1000).toISOString();
+    const lookbackStart = new Date(now.getTime() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
-    const { data: rawCandidates, error: candidateError } = await supabase
+    // 1. Get welcome/magic_link emails sent in the lookback window
+    const { data: welcomeEmails, error: welcomeError } = await supabase
       .from("email_logs")
-      .select("id, recipient_email, email_type, status, sent_at, opened_at, created_at, user_id, metadata")
+      .select("id, recipient_email, email_type, status, sent_at, user_id, metadata")
       .in("email_type", ["welcome", "magic_link"])
       .not("sent_at", "is", null)
-      .is("opened_at", null)
-      .gte("created_at", lookbackStartIso)
-      .lte("sent_at", dueBeforeIso)
+      .gte("created_at", lookbackStart)
       .order("sent_at", { ascending: true })
       .limit(BATCH_LIMIT * 4);
 
-    if (candidateError) {
-      throw candidateError;
-    }
-
-    const candidates = (rawCandidates || []).filter((row) => {
-      const metadata = normalizeMetadata(row.metadata);
-      const reminderMetadata = isObjectRecord(metadata.welcome_reminder)
-        ? metadata.welcome_reminder
-        : null;
-
-      return (
-        metadata.source === "welcome_flow" &&
-        reminderMetadata?.eligible === true &&
-        typeof metadata.resend_email_id === "string" &&
-        !reminderMetadata?.sent_at
-      );
-    });
-
-    if (candidates.length === 0) {
-      return new Response(JSON.stringify({
-        success: true,
-        processed: 0,
-        sent: 0,
-        skipped_opened: 0,
-        skipped_already_reminded: 0,
-        errors: 0,
-      }), {
+    if (welcomeError) throw welcomeError;
+    if (!welcomeEmails || welcomeEmails.length === 0) {
+      return new Response(JSON.stringify({ success: true, processed: 0, sent_6h: 0, sent_48h: 0, skipped: 0, errors: 0 }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
+    // 2. Get all reminder emails already sent (for dedup)
     const candidateEmails = Array.from(
-      new Set(candidates.map((row) => normalizeEmail(row.recipient_email)).filter(Boolean)),
+      new Set(welcomeEmails.map((r: any) => normalizeEmail(r.recipient_email)).filter(Boolean)),
     );
 
-    const { data: reminderLogs, error: reminderLogsError } = candidateEmails.length > 0
+    const { data: existingReminders } = candidateEmails.length > 0
       ? await supabase
         .from("email_logs")
-        .select("id, recipient_email, status, sent_at, metadata")
-        .eq("email_type", "welcome_reminder")
+        .select("recipient_email, email_type")
+        .in("email_type", ["welcome_reminder_6h", "welcome_reminder_48h", "welcome_reminder"])
         .in("recipient_email", candidateEmails)
-        .gte("created_at", lookbackStartIso)
-      : { data: [], error: null };
+        .gte("created_at", lookbackStart)
+      : { data: [] };
 
-    if (reminderLogsError) {
-      throw reminderLogsError;
+    const reminded6h = new Set<string>();
+    const reminded48h = new Set<string>();
+    for (const r of (existingReminders || [])) {
+      const email = normalizeEmail(r.recipient_email);
+      if (r.email_type === "welcome_reminder_6h" || r.email_type === "welcome_reminder") {
+        reminded6h.add(email);
+      }
+      if (r.email_type === "welcome_reminder_48h") {
+        reminded48h.add(email);
+      }
     }
 
-    const alreadyRemindedEmails = new Set(
-      (reminderLogs || [])
-        .filter((row) => Boolean(row.sent_at) || row.status === "sent" || row.status === "opened")
-        .map((row) => normalizeEmail(row.recipient_email))
-        .filter(Boolean),
+    // 3. Get user_ids that have sessions (meaning they accessed the platform)
+    const userIds = Array.from(
+      new Set(welcomeEmails.map((r: any) => r.user_id).filter(Boolean)),
     );
 
-    const processedEmails = new Set<string>();
+    const usersWithSessions = new Set<string>();
+    const usersWithRecentSessions = new Set<string>();
+
+    if (userIds.length > 0) {
+      // Check who has ANY session (for 6h check)
+      const { data: sessions } = await supabase
+        .from("user_sessions")
+        .select("user_id")
+        .in("user_id", userIds);
+
+      for (const s of (sessions || [])) {
+        usersWithSessions.add(s.user_id);
+      }
+
+      // Check who has a session in last 2 days (for 48h check)
+      const twoDaysAgo = new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000).toISOString();
+      const { data: recentSessions } = await supabase
+        .from("user_sessions")
+        .select("user_id")
+        .in("user_id", userIds)
+        .gte("started_at", twoDaysAgo);
+
+      for (const s of (recentSessions || [])) {
+        usersWithRecentSessions.add(s.user_id);
+      }
+    }
+
+    // 4. Process candidates
     const results: Array<Record<string, unknown>> = [];
-
-    let sentCount = 0;
-    let openedCount = 0;
-    let alreadyRemindedCount = 0;
+    let sent6h = 0;
+    let sent48h = 0;
+    let skippedCount = 0;
     let errorCount = 0;
+    const processedEmails = new Set<string>();
 
-    for (const row of candidates.slice(0, BATCH_LIMIT)) {
+    for (const row of welcomeEmails) {
+      if (results.length >= BATCH_LIMIT) break;
+
       const email = normalizeEmail(row.recipient_email);
+      if (!email || processedEmails.has(email)) continue;
+      processedEmails.add(email);
+
       const metadata = normalizeMetadata(row.metadata);
-      const reminderMetadata = isObjectRecord(metadata.welcome_reminder)
-        ? metadata.welcome_reminder
-        : {};
+      const userId = row.user_id;
+      const sentAt = row.sent_at ? new Date(row.sent_at) : null;
+      if (!sentAt) continue;
 
-      if (!email) {
-        continue;
+      const userName = typeof metadata.user_name === "string" && metadata.user_name.trim().length > 0
+        ? metadata.user_name.trim()
+        : email.split("@")[0];
+      const language = normalizeLanguage(metadata.language, "en");
+
+      // Determine which reminder to send
+      let reminderType: "6h" | "48h" | null = null;
+
+      const hoursSinceSent = (now.getTime() - sentAt.getTime()) / (1000 * 60 * 60);
+
+      if (hoursSinceSent >= REMINDER_48H && !reminded48h.has(email)) {
+        // 48h reminder: user has no session in last 2 days
+        if (userId && !usersWithRecentSessions.has(userId)) {
+          reminderType = "48h";
+        } else if (!userId) {
+          // No user_id means they never created an account
+          reminderType = "48h";
+        }
+      } else if (hoursSinceSent >= REMINDER_6H && !reminded6h.has(email)) {
+        // 6h reminder: user has no session at all
+        if (userId && !usersWithSessions.has(userId)) {
+          reminderType = "6h";
+        } else if (!userId) {
+          reminderType = "6h";
+        }
       }
 
-      if (processedEmails.has(email) || alreadyRemindedEmails.has(email)) {
-        alreadyRemindedCount += 1;
-        const nextMetadata = mergeReminderMetadata(metadata, {
-          status: "skipped_already_reminded",
-          checked_at: nowIso,
-        });
-
-        await supabase
-          .from("email_logs")
-          .update({ metadata: nextMetadata })
-          .eq("id", row.id);
-
-        results.push({ email, status: "skipped_already_reminded" });
-        continue;
-      }
-
-      const resendEmailId = typeof metadata.resend_email_id === "string"
-        ? metadata.resend_email_id
-        : null;
-
-      if (!resendEmailId) {
-        errorCount += 1;
-        const nextMetadata = mergeReminderMetadata(metadata, {
-          status: "missing_resend_email_id",
-          checked_at: nowIso,
-        });
-
-        await supabase
-          .from("email_logs")
-          .update({ metadata: nextMetadata })
-          .eq("id", row.id);
-
-        results.push({ email, status: "missing_resend_email_id" });
+      if (!reminderType) {
+        skippedCount++;
         continue;
       }
 
       try {
-        const resendDetail = await resendGet(resendApiKey, `/emails/${resendEmailId}`);
-        const lastEvent = typeof resendDetail?.last_event === "string"
-          ? resendDetail.last_event.toLowerCase()
-          : null;
-
-        if (isOpenedResendEvent(lastEvent)) {
-          openedCount += 1;
-
-          await supabase
-            .from("email_logs")
-            .update({
-              opened_at: row.opened_at || nowIso,
-              status: "opened",
-              metadata: mergeReminderMetadata(metadata, {
-                status: "not_needed_opened",
-                checked_at: nowIso,
-                last_resend_event: lastEvent,
-              }),
-            })
-            .eq("id", row.id);
-
-          results.push({ email, status: "opened_on_resend" });
-          continue;
-        }
-
-        if (isDeliveryIssueEvent(lastEvent)) {
-          await supabase
-            .from("email_logs")
-            .update({
-              metadata: mergeReminderMetadata(metadata, {
-                status: "skipped_delivery_issue",
-                checked_at: nowIso,
-                last_resend_event: lastEvent,
-              }),
-            })
-            .eq("id", row.id);
-
-          results.push({ email, status: "skipped_delivery_issue", last_event: lastEvent });
-          continue;
-        }
-
-        const userName = typeof metadata.user_name === "string" && metadata.user_name.trim().length > 0
-          ? metadata.user_name.trim()
-          : email.split("@")[0];
-        const language = normalizeLanguage(metadata.language, "en");
-
+        // Create account if needed and get access token
         const accountData = await callInternalFunction<{
           user_id: string;
           access_token: string | null;
@@ -331,6 +247,8 @@ serve(async (req) => {
           throw new Error("auto-create-account returned no access token");
         }
 
+        const emailType = reminderType === "6h" ? "welcome_reminder_6h" : "welcome_reminder_48h";
+
         await callInternalFunction({
           functionName: "send-welcome-email",
           supabaseUrl,
@@ -345,65 +263,33 @@ serve(async (req) => {
             user_id: accountData.user_id,
             parent_email_log_id: row.id,
             metadata: {
-              original_resend_email_id: resendEmailId,
-              original_last_resend_event: lastEvent,
+              reminder_type: reminderType,
+              original_email_type: row.email_type,
+              hours_since_original: Math.round(hoursSinceSent),
+              override_email_type: emailType,
             },
           },
         });
 
-        processedEmails.add(email);
-        sentCount += 1;
+        if (reminderType === "6h") sent6h++;
+        else sent48h++;
 
-        await supabase
-          .from("email_logs")
-          .update({
-            metadata: mergeReminderMetadata(metadata, {
-              status: "sent",
-              sent_at: nowIso,
-              checked_at: nowIso,
-              last_resend_event: lastEvent,
-            }),
-          })
-          .eq("id", row.id);
-
-        results.push({
-          email,
-          status: "reminder_sent",
-          original_email_type: row.email_type,
-          last_event: lastEvent,
-        });
-
+        results.push({ email, status: `reminder_${reminderType}_sent` });
         await sleep(DELAY_BETWEEN_SENDS_MS);
-      } catch (error) {
+      } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
-        errorCount += 1;
-
-        await supabase
-          .from("email_logs")
-          .update({
-            metadata: mergeReminderMetadata(metadata, {
-              status: reminderMetadata?.sent_at ? "sent" : "retry_pending",
-              checked_at: nowIso,
-              last_error: errorMessage,
-              last_error_at: nowIso,
-            }),
-          })
-          .eq("id", row.id);
-
-        results.push({
-          email,
-          status: "error",
-          error: errorMessage,
-        });
+        errorCount++;
+        console.error(`[welcome-reminder] Error for ${email}:`, errorMessage);
+        results.push({ email, status: "error", error: errorMessage });
       }
     }
 
     return new Response(JSON.stringify({
       success: true,
       processed: results.length,
-      sent: sentCount,
-      skipped_opened: openedCount,
-      skipped_already_reminded: alreadyRemindedCount,
+      sent_6h: sent6h,
+      sent_48h: sent48h,
+      skipped: skippedCount,
       errors: errorCount,
       results,
     }), {
