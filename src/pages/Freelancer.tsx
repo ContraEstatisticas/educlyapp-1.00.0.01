@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -448,9 +449,19 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] w-[95vw] max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl border-border bg-card p-0">
-        <div className="flex max-h-[90vh] flex-col">
-          <div className="border-b border-border bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-background px-4 py-4 sm:px-6 sm:py-6">
+      <DialogContent className="top-[calc(env(safe-area-inset-top,0px)+0.5rem)] w-[calc(100vw-1rem)] translate-y-0 overflow-hidden rounded-2xl border-border bg-card p-0 sm:top-[50%] sm:w-[95vw] sm:max-w-5xl sm:translate-y-[-50%] sm:rounded-3xl [&>button:last-child]:hidden">
+        <div className="flex max-h-[calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-1rem)] flex-col sm:max-h-[90dvh]">
+          <div className="relative border-b border-border bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-background px-4 pb-4 pt-[calc(env(safe-area-inset-top,0px)+1rem)] sm:px-6 sm:py-6">
+            <DialogClose asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-3 top-[calc(env(safe-area-inset-top,0px)+0.75rem)] h-11 w-11 rounded-full border border-border bg-background/90 shadow-sm hover:bg-background sm:right-4 sm:top-4"
+              >
+                <X className="h-5 w-5" />
+                <span className="sr-only">Close</span>
+              </Button>
+            </DialogClose>
             <DialogHeader className="space-y-2 text-left">
               <div className="inline-flex w-fit items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-orange-700 dark:bg-orange-900/30 dark:text-orange-200">
                 {tutorial.badge}
@@ -532,7 +543,7 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
                           <img
                             src={getTutorialImagePath(language, slide.imageNumber)}
                             alt={`${slide.title} - Freelancer tutorial`}
-                            className="max-h-[280px] sm:max-h-[520px] w-full rounded-xl sm:rounded-2xl object-contain"
+                            className="max-h-[240px] sm:max-h-[520px] w-full rounded-xl sm:rounded-2xl object-contain"
                             loading="lazy"
                           />
                         </div>
@@ -556,7 +567,7 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
             </Carousel>
           </div>
 
-          <div className="border-t border-border px-4 py-3 sm:px-6 sm:py-4">
+          <div className="border-t border-border px-4 pb-[calc(env(safe-area-inset-bottom,0px)+0.75rem)] pt-3 sm:px-6 sm:py-4">
             <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 {tutorial.slides.map((slide, index) => (

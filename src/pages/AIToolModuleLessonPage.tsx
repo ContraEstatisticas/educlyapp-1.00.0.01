@@ -556,10 +556,10 @@ const AIToolModuleLessonPage = () => {
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col">
-      <div className="px-4 py-3 flex items-center gap-3 bg-background border-b border-border">
+      <div className="px-4 pb-3 pt-[calc(env(safe-area-inset-top,0px)+0.75rem)] flex items-center gap-3 bg-background border-b border-border">
         <button
           onClick={() => navigate(`/trilhas-ia/${trail.slug}`)}
-          className="p-2 hover:bg-muted rounded-xl transition-all duration-200 group"
+          className="-ml-2 p-2.5 hover:bg-muted rounded-xl transition-all duration-200 group"
           type="button"
           aria-label={lessonUi.backToTrail}
         >
@@ -863,7 +863,7 @@ const AIToolModuleLessonPage = () => {
 
       </div>
 
-      <div className="p-4 bg-card border-t border-border z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
+      <div className="px-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] bg-card border-t border-border z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.08)]">
         <div className="max-w-2xl mx-auto">
           <Button
             onClick={needsVerification ? handleVerify : handleNext}
