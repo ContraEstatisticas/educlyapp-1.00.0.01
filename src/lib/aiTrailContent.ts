@@ -238,6 +238,18 @@ import {
   LOVABLE_MODULE_6_STEPS_FR,
   LOVABLE_MODULE_6_STEPS_PT,
 } from "@/lib/lovableModule6LessonSteps";
+import {
+  GROK_MODULE_1_STEPS_EN,
+  GROK_MODULE_1_STEPS_ES,
+  GROK_MODULE_1_STEPS_FR,
+  GROK_MODULE_1_STEPS_PT,
+} from "@/lib/grokModule1LessonSteps";
+import {
+  GROK_MODULE_2_STEPS_EN,
+  GROK_MODULE_2_STEPS_ES,
+  GROK_MODULE_2_STEPS_FR,
+  GROK_MODULE_2_STEPS_PT,
+} from "@/lib/grokModule2LessonSteps";
 
 
 
@@ -6672,6 +6684,451 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "Bien choisir son plan, gerer les credits et publier avec rigueur clot le parcours Lovable avec une logique de produit reel et non de simple prototype."
+          }
+        ]
+      }
+    }
+  },
+  grok: {
+    status: "coming_soon",
+    locales: {
+      pt: {
+        statusBadge: "Trilha em preparacao",
+        heroEyebrow: "Grok",
+        heroTitle: "Grok para pesquisa, automacao e criacao.",
+        heroDescription:
+          "Uma trilha para usar o Grok como motor de pesquisa inteligente, leitura de contexto, criacao de conteudo e estruturacao de processos.",
+        overviewTitle: "O que voce vai dominar",
+        overviewItems: [
+          "Como escrever prompts claros para pesquisa, conteudo e analise com o Grok.",
+          "Como usar o Grok para sintetizar informacoes e gerar ideias de negocio.",
+          "Como refinar respostas e estruturar processos repetitivos com mais clareza."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Pratica guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "Trabalhando com o Grok para Pesquisa, Automacao e Criacao de Conteudo",
+            summary: "Prompting, pesquisa inteligente, criacao de conteudo, analise de informacoes e automacao de tarefas.",
+            outcome: "Base pratica para usar o Grok em pesquisa, criacao e estruturacao de processos com mais contexto.",
+            intro:
+              "Nesta licao, voce entende como o Grok pode acelerar pesquisa, organizacao de informacoes, criacao de conteudo e desenho de processos quando recebe prompts claros e bem direcionados.",
+            keyPoints: [
+              "O Grok ajuda a sintetizar multiplas fontes e organizar respostas de forma mais rapida do que uma pesquisa manual dispersa.",
+              "Prompts com problema, contexto, formato e pedido de passos produzem respostas muito melhores.",
+              "Ele pode apoiar tanto em conteudo quanto em analise de dados, ideias de negocio e automacao de rotinas.",
+              "O verdadeiro ganho aparece quando voce refina respostas em ciclos em vez de aceitar a primeira versao."
+            ],
+            lessonSteps: GROK_MODULE_1_STEPS_PT,
+            promptExample:
+              "Pesquise sobre inteligencia artificial e gere um resumo com os pontos principais, incluindo aplicacoes praticas, tendencias atuais e possiveis oportunidades para empresas ou criadores de conteudo.",
+            practice: {
+              title: "Prompt de pesquisa com Grok",
+              instruction: "Monte um prompt de pesquisa util para o Grok.",
+              terms: [
+                "inteligencia artificial",
+                "aplicacoes praticas",
+                "tendencias atuais",
+                "oportunidades"
+              ],
+              solution:
+                "Um bom prompt de pesquisa com Grok combina tema, recorte pratico e o tipo de insight que voce quer receber."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao usar IA como o Grok?",
+              options: [
+                "Fazer perguntas muito especificas.",
+                "Pedir respostas estruturadas.",
+                "Fazer perguntas vagas sem contexto suficiente.",
+                "Revisar as respostas geradas."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sem contexto suficiente, a IA responde de forma generica. O contexto e o que aponta o que importa na resposta."
+            },
+            takeaway:
+              "Usar bem o Grok nao significa apenas perguntar qualquer coisa. Significa dar contexto, pedir estrutura, revisar o resultado e transformar a resposta em algo aplicavel."
+          },
+          {
+            number: 2,
+            title: "Criando Videos e Fotos com o Grok",
+            summary: "Fotos, estilos visuais, thumbnails, videos curtos, sequencias de cena, refinamento e referencias.",
+            outcome: "Base pratica para gerar conteudo visual com prompts mais claros e resultados mais profissionais.",
+            intro:
+              "Nesta licao, voce aprende a usar o Grok para criar imagens e videos com mais controle, entendendo como descrever estilo, composicao, movimento e refinamento visual.",
+            keyPoints: [
+              "Prompts visuais claros melhoram muito a qualidade de fotos e videos gerados com IA.",
+              "Estilo, iluminacao, ambiente e composicao ajudam o Grok a produzir imagens mais alinhadas ao objetivo.",
+              "Thumbnails, roteiros por cena e referencias visuais tornam a criacao de conteudo digital mais estrategica.",
+              "Refinar detalhes como realismo, luz e cor e mais eficiente do que recomecar do zero a cada tentativa."
+            ],
+            lessonSteps: GROK_MODULE_2_STEPS_PT,
+            promptExample:
+              "Crie uma imagem de um escritorio futurista em estilo realista, com iluminacao cinematografica e fundo minimalista.",
+            practice: {
+              title: "Prompt visual com Grok",
+              instruction: "Monte um prompt visual simples para gerar uma imagem com estilo claro.",
+              terms: [
+                "escritorio futurista",
+                "realista",
+                "cinematografica",
+                "minimalista"
+              ],
+              solution:
+                "Um bom prompt visual combina cena, estilo, iluminacao e ambiente para orientar melhor a geracao."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao gerar imagens com IA?",
+              options: [
+                "Pedir imagens muito especificas.",
+                "Gerar varias variacoes.",
+                "Usar prompts vagos sem detalhes visuais suficientes.",
+                "Ajustar os resultados."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quando o prompt nao descreve bem a cena, o estilo e a composicao, o resultado tende a ficar generico."
+            },
+            takeaway:
+              "Quanto melhor voce descreve o que quer ver, mais o Grok consegue transformar sua ideia em imagem ou video com intencao visual."
+          }
+        ]
+      },
+      en: {
+        statusBadge: "Trail in progress",
+        heroEyebrow: "Grok",
+        heroTitle: "Grok for research, automation, and creation.",
+        heroDescription:
+          "A trail for using Grok as an engine for smart research, context reading, content creation, and process structuring.",
+        overviewTitle: "What you will master",
+        overviewItems: [
+          "How to write clear prompts for research, content, and analysis with Grok.",
+          "How to use Grok to synthesize information and generate business ideas.",
+          "How to refine answers and structure repetitive processes with more clarity."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final reading",
+        modules: [
+          {
+            number: 1,
+            title: "Working with Grok for Research, Automation, and Content Creation",
+            summary: "Prompting, smart research, content creation, information analysis, and task automation.",
+            outcome: "A practical base for using Grok in research, creation, and process structuring with stronger context.",
+            intro:
+              "In this lesson, you learn how Grok can accelerate research, information synthesis, content creation, and process design when it receives clear and well-directed prompts.",
+            keyPoints: [
+              "Grok can synthesize multiple sources and structure answers faster than scattered manual research.",
+              "Prompts that define the problem, context, format, and requested steps create much better outputs.",
+              "It can support content creation, data analysis, business ideas, and workflow automation.",
+              "The real gain comes from refining answers in cycles instead of accepting the first version."
+            ],
+            lessonSteps: GROK_MODULE_1_STEPS_EN,
+            promptExample:
+              "Research artificial intelligence and generate a summary with the main points, including practical applications, current trends, and possible opportunities for companies or content creators.",
+            practice: {
+              title: "Research prompt with Grok",
+              instruction: "Build a useful research prompt for Grok.",
+              terms: [
+                "artificial intelligence",
+                "practical applications",
+                "current trends",
+                "opportunities"
+              ],
+              solution:
+                "A strong Grok research prompt combines a topic, a practical angle, and the kind of insight you want back."
+            },
+            quiz: {
+              question: "What is the most common mistake when using AI like Grok?",
+              options: [
+                "Asking very specific questions.",
+                "Requesting structured answers.",
+                "Asking vague questions without enough context.",
+                "Reviewing the generated answers."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Without enough context, the AI answers in a generic way. Context is what points it toward what matters."
+            },
+            takeaway:
+              "Using Grok well is not about asking anything at random. It is about giving context, requesting structure, reviewing the answer, and turning it into something useful."
+          },
+          {
+            number: 2,
+            title: "Creating Videos and Photos with Grok",
+            summary: "Photos, visual styles, thumbnails, short videos, scene sequences, refinement, and references.",
+            outcome: "A practical base for generating visual content with clearer prompts and more professional-looking results.",
+            intro:
+              "In this lesson, you learn how to use Grok to create images and videos with more control by describing style, composition, movement, and refinement more clearly.",
+            keyPoints: [
+              "Clear visual prompts strongly improve the quality of AI-generated photos and videos.",
+              "Style, lighting, environment, and composition help Grok produce visuals that match the goal better.",
+              "Thumbnails, scene-by-scene outlines, and visual references make digital content creation more strategic.",
+              "Refining realism, lighting, and color is more efficient than restarting from scratch every time."
+            ],
+            lessonSteps: GROK_MODULE_2_STEPS_EN,
+            promptExample:
+              "Create an image of a futuristic office in a realistic style, with cinematic lighting and a minimalist background.",
+            practice: {
+              title: "Visual prompt with Grok",
+              instruction: "Build a simple visual prompt for an image with a clear style.",
+              terms: [
+                "futuristic office",
+                "realistic",
+                "cinematic",
+                "minimalist"
+              ],
+              solution:
+                "A strong visual prompt combines scene, style, lighting, and environment so the generation has a clear direction."
+            },
+            quiz: {
+              question: "What is the most common mistake when generating images with AI?",
+              options: [
+                "Requesting very specific images.",
+                "Generating several variations.",
+                "Using vague prompts without enough visual detail.",
+                "Adjusting the results."
+              ],
+              correctIndex: 2,
+              explanation:
+                "If the prompt does not describe scene, style, and composition well, the result tends to feel generic."
+            },
+            takeaway:
+              "The better you describe what you want to see, the more Grok can turn your idea into an image or video with real visual intention."
+          }
+        ]
+      },
+      es: {
+        statusBadge: "Ruta en preparacion",
+        heroEyebrow: "Grok",
+        heroTitle: "Grok para investigacion, automatizacion y creacion.",
+        heroDescription:
+          "Una ruta para usar Grok como motor de investigacion inteligente, lectura de contexto, creacion de contenido y estructuracion de procesos.",
+        overviewTitle: "Lo que vas a dominar",
+        overviewItems: [
+          "Como escribir prompts claros para investigacion, contenido y analisis con Grok.",
+          "Como usar Grok para sintetizar informacion y generar ideas de negocio.",
+          "Como refinar respuestas y estructurar procesos repetitivos con mas claridad."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Practica guiada",
+        termsLabel: "Terminos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "Trabajando con Grok para Investigacion, Automatizacion y Creacion de Contenido",
+            summary: "Prompting, investigacion inteligente, creacion de contenido, analisis de informacion y automatizacion de tareas.",
+            outcome: "Base practica para usar Grok en investigacion, creacion y estructuracion de procesos con mas contexto.",
+            intro:
+              "En esta leccion entiendes como Grok puede acelerar la investigacion, la sintesis de informacion, la creacion de contenido y el diseno de procesos cuando recibe prompts claros y bien dirigidos.",
+            keyPoints: [
+              "Grok puede sintetizar multiples fuentes y estructurar respuestas mas rapido que una investigacion manual dispersa.",
+              "Los prompts que definen problema, contexto, formato y pasos pedidos generan resultados mucho mejores.",
+              "Puede apoyar en contenido, analisis de datos, ideas de negocio y automatizacion de flujos.",
+              "La mayor ganancia aparece cuando refinas las respuestas en ciclos en lugar de aceptar la primera version."
+            ],
+            lessonSteps: GROK_MODULE_1_STEPS_ES,
+            promptExample:
+              "Investiga sobre inteligencia artificial y genera un resumen con los puntos principales, incluyendo aplicaciones practicas, tendencias actuales y posibles oportunidades para empresas o creadores de contenido.",
+            practice: {
+              title: "Prompt de investigacion con Grok",
+              instruction: "Construye un prompt de investigacion util para Grok.",
+              terms: [
+                "inteligencia artificial",
+                "aplicaciones practicas",
+                "tendencias actuales",
+                "oportunidades"
+              ],
+              solution:
+                "Un buen prompt de investigacion con Grok combina tema, enfoque practico y el tipo de insight que quieres recibir."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al usar IA como Grok?",
+              options: [
+                "Hacer preguntas demasiado especificas.",
+                "Pedir respuestas estructuradas.",
+                "Hacer preguntas vagas sin suficiente contexto.",
+                "Revisar las respuestas generadas."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sin suficiente contexto, la IA responde de forma generica. El contexto es lo que marca que es lo importante."
+            },
+            takeaway:
+              "Usar bien Grok no significa preguntar cualquier cosa. Significa dar contexto, pedir estructura, revisar el resultado y convertirlo en algo aplicable."
+          },
+          {
+            number: 2,
+            title: "Creando Videos y Fotos con Grok",
+            summary: "Fotos, estilos visuales, thumbnails, videos cortos, secuencias de escena, refinamiento y referencias.",
+            outcome: "Base practica para generar contenido visual con prompts mas claros y resultados mas profesionales.",
+            intro:
+              "En esta leccion aprendes a usar Grok para crear imagenes y videos con mas control, describiendo mejor estilo, composicion, movimiento y refinamiento visual.",
+            keyPoints: [
+              "Los prompts visuales claros mejoran mucho la calidad de fotos y videos generados con IA.",
+              "Estilo, iluminacion, ambiente y composicion ayudan a Grok a producir imagenes mas alineadas al objetivo.",
+              "Thumbnails, guiones por escenas y referencias visuales vuelven mas estrategica la creacion de contenido digital.",
+              "Refinar detalles como realismo, luz y color es mas eficiente que empezar de cero en cada intento."
+            ],
+            lessonSteps: GROK_MODULE_2_STEPS_ES,
+            promptExample:
+              "Crea una imagen de una oficina futurista en estilo realista, con iluminacion cinematografica y fondo minimalista.",
+            practice: {
+              title: "Prompt visual con Grok",
+              instruction: "Construye un prompt visual simple para generar una imagen con estilo claro.",
+              terms: [
+                "oficina futurista",
+                "realista",
+                "cinematografica",
+                "minimalista"
+              ],
+              solution:
+                "Un buen prompt visual combina escena, estilo, iluminacion y ambiente para orientar mejor la generacion."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al generar imagenes con IA?",
+              options: [
+                "Pedir imagenes demasiado especificas.",
+                "Generar varias variaciones.",
+                "Usar prompts vagos sin suficientes detalles visuales.",
+                "Ajustar los resultados."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Si el prompt no describe bien la escena, el estilo y la composicion, el resultado suele quedar generico."
+            },
+            takeaway:
+              "Cuanto mejor describes lo que quieres ver, mas puede Grok convertir tu idea en imagen o video con verdadera intencion visual."
+          }
+        ]
+      },
+      fr: {
+        statusBadge: "Parcours en preparation",
+        heroEyebrow: "Grok",
+        heroTitle: "Grok pour la recherche, l'automatisation et la creation.",
+        heroDescription:
+          "Un parcours pour utiliser Grok comme moteur de recherche intelligente, de lecture de contexte, de creation de contenu et de structuration de processus.",
+        overviewTitle: "Ce que vous allez maitriser",
+        overviewItems: [
+          "Comment ecrire des prompts clairs pour la recherche, le contenu et l'analyse avec Grok.",
+          "Comment utiliser Grok pour synthetiser des informations et generer des idees de business.",
+          "Comment affiner les reponses et structurer des processus repetitifs avec plus de clarte."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points cles",
+        promptLabel: "Prompt de reference",
+        practiceLabel: "Pratique guidee",
+        termsLabel: "Termes",
+        solutionLabel: "Reponse attendue",
+        quizLabel: "Checkpoint",
+        correctLabel: "Bonne reponse",
+        takeawayLabel: "Lecture finale",
+        modules: [
+          {
+            number: 1,
+            title: "Travailler avec Grok pour la Recherche, l'Automatisation et la Creation de Contenu",
+            summary: "Prompting, recherche intelligente, creation de contenu, analyse d'informations et automatisation de taches.",
+            outcome: "Base pratique pour utiliser Grok en recherche, creation et structuration de processus avec plus de contexte.",
+            intro:
+              "Dans cette lecon, vous comprenez comment Grok peut accelerer la recherche, la synthese d'informations, la creation de contenu et la conception de processus lorsqu'il recoit des prompts clairs et bien orientes.",
+            keyPoints: [
+              "Grok peut synthetiser plusieurs sources et structurer des reponses plus vite qu'une recherche manuelle dispersee.",
+              "Les prompts qui definissent probleme, contexte, format et etapes demandees donnent de bien meilleurs resultats.",
+              "Il peut aider pour le contenu, l'analyse de donnees, les idees de business et l'automatisation de flux.",
+              "Le vrai gain apparait quand vous affinez les reponses en cycles au lieu d'accepter la premiere version."
+            ],
+            lessonSteps: GROK_MODULE_1_STEPS_FR,
+            promptExample:
+              "Fais une recherche sur l'intelligence artificielle et genere un resume avec les points principaux, y compris les applications pratiques, les tendances actuelles et les opportunites possibles pour les entreprises ou les createurs de contenu.",
+            practice: {
+              title: "Prompt de recherche avec Grok",
+              instruction: "Construisez un prompt de recherche utile pour Grok.",
+              terms: [
+                "intelligence artificielle",
+                "applications pratiques",
+                "tendances actuelles",
+                "opportunites"
+              ],
+              solution:
+                "Un bon prompt de recherche avec Grok combine un theme, un angle pratique et le type d'insight que vous voulez obtenir."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on utilise une IA comme Grok ?",
+              options: [
+                "Poser des questions tres specifiques.",
+                "Demander des reponses structurees.",
+                "Poser des questions vagues sans assez de contexte.",
+                "Revoir les reponses generees."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sans assez de contexte, l'IA repond de facon generique. Le contexte est ce qui montre ce qui compte reellement."
+            },
+            takeaway:
+              "Bien utiliser Grok ne consiste pas a poser n'importe quelle question. Il faut donner du contexte, demander une structure, revoir la reponse et la transformer en quelque chose d'utile."
+          },
+          {
+            number: 2,
+            title: "Creer des Videos et des Photos avec Grok",
+            summary: "Photos, styles visuels, thumbnails, videos courtes, sequences de scenes, affinage et references.",
+            outcome: "Base pratique pour generer du contenu visuel avec des prompts plus clairs et des resultats plus professionnels.",
+            intro:
+              "Dans cette lecon, vous apprenez a utiliser Grok pour creer des images et des videos avec plus de controle, en decrivant mieux le style, la composition, le mouvement et l'affinage visuel.",
+            keyPoints: [
+              "Des prompts visuels clairs ameliorent fortement la qualite des photos et videos generees par IA.",
+              "Le style, la lumiere, l'environnement et la composition aident Grok a produire des visuels plus aligns sur l'objectif.",
+              "Les thumbnails, les plans par scene et les references visuelles rendent la creation de contenu digital plus strategique.",
+              "Affiner le realisme, la lumiere et les couleurs est plus efficace que recommencer a zero a chaque essai."
+            ],
+            lessonSteps: GROK_MODULE_2_STEPS_FR,
+            promptExample:
+              "Cree une image d'un bureau futuriste dans un style realiste, avec un eclairage cinematographique et un fond minimaliste.",
+            practice: {
+              title: "Prompt visuel avec Grok",
+              instruction: "Construisez un prompt visuel simple pour generer une image avec un style clair.",
+              terms: [
+                "bureau futuriste",
+                "realiste",
+                "cinematographique",
+                "minimaliste"
+              ],
+              solution:
+                "Un bon prompt visuel combine scene, style, lumiere et ambiance pour guider beaucoup mieux la generation."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on genere des images avec l'IA ?",
+              options: [
+                "Demander des images tres specifiques.",
+                "Generer plusieurs variations.",
+                "Utiliser des prompts vagues sans assez de details visuels.",
+                "Ajuster les resultats."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Si le prompt ne decrit pas bien la scene, le style et la composition, le resultat reste souvent trop generique."
+            },
+            takeaway:
+              "Plus vous decrivez clairement ce que vous voulez voir, plus Grok peut transformer votre idee en image ou video avec une vraie intention visuelle."
           }
         ]
       }

@@ -305,7 +305,8 @@ const AIToolModuleLessonPage = () => {
     toolSlug === "chatgpt" ||
     toolSlug === "deepseek" ||
     toolSlug === "claude" ||
-    toolSlug === "lovable";
+    toolSlug === "lovable" ||
+    toolSlug === "grok";
 
   const setSelectedOption = (value: number | null) => {
     setStepAnswers((prev) => ({
