@@ -11,6 +11,7 @@ import { SoundSettingsProvider } from "@/contexts/SoundSettingsContext";
 import { PremiumGuard } from "@/components/PremiumGuard";
 import { UpdateNotification } from "@/components/UpdateNotification";
 import { PushNotificationPrompt } from "@/components/PushNotificationPrompt";
+import { RemoteFeatureGate } from "@/components/RemoteFeatureGate";
 import { ThemeProvider } from "@/components/theme-provider";
 import { supabase } from "@/integrations/supabase/client";
 import { useSessionTracking } from "@/hooks/useSessionTracking";
@@ -228,10 +229,37 @@ const App = () => {
                   <Route path="/trilhas-ia/:toolSlug" element={<PremiumGuard><AIToolTrailPage /></PremiumGuard>} />
                   <Route path="/trilhas-ia/:toolSlug/modulo/:moduleNumber" element={<PremiumGuard><AIToolModuleLessonPage /></PremiumGuard>} />
                   <Route path="/aula/:dayId" element={<PremiumGuard><DayLesson /></PremiumGuard>} />
-                  <Route path="/chat" element={<PremiumGuard><Chat /></PremiumGuard>} />
+                  <Route
+                    path="/chat"
+                    element={
+                      <PremiumGuard>
+                        <RemoteFeatureGate>
+                          <Chat />
+                        </RemoteFeatureGate>
+                      </PremiumGuard>
+                    }
+                  />
                   <Route path="/certificado/:id" element={<PremiumGuard><Certificate /></PremiumGuard>} />
-                  <Route path="/assistentes" element={<PremiumGuard><Assistentes /></PremiumGuard>} />
-                  <Route path="/assistentes/:aiType" element={<PremiumGuard><AssistantChat /></PremiumGuard>} />
+                  <Route
+                    path="/assistentes"
+                    element={
+                      <PremiumGuard>
+                        <RemoteFeatureGate>
+                          <Assistentes />
+                        </RemoteFeatureGate>
+                      </PremiumGuard>
+                    }
+                  />
+                  <Route
+                    path="/assistentes/:aiType"
+                    element={
+                      <PremiumGuard>
+                        <RemoteFeatureGate>
+                          <AssistantChat />
+                        </RemoteFeatureGate>
+                      </PremiumGuard>
+                    }
+                  />
                   <Route path="/freelancer" element={<PremiumGuard><Freelancer /></PremiumGuard>} />
                   <Route path="/freelancer/:moduleId" element={<PremiumGuard><FreelancerLesson /></PremiumGuard>} />
                   <Route path="/medalhas" element={<PremiumGuard><Medals /></PremiumGuard>} />

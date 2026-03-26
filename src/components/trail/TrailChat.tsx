@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { X, Send, Loader2, Bot, User, Trophy, ArrowRight } from "lucide-react";
+import { X, Send, Loader2, Bot, User, Trophy, ArrowRight, Globe, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useRemoteFeatureAccess } from "@/hooks/useRemoteFeatureAccess";
 
 interface TrailChatProps {
   /** Whether the modal is visible */
@@ -258,10 +260,11 @@ const useChatLogic = (toolContext: string, language: string, moduleSummary?: str
 export const TrailChat = ({ isOpen, onClose, toolContext, accentColor = "#8b5cf6", language = "pt", moduleSummary }: TrailChatProps) => {
   const chat = useChatLogic(toolContext, language, moduleSummary);
   const ui = getUi(language);
+  const { isRestricted, notice, restriction } = useRemoteFeatureAccess();
 
   useEffect(() => {
-    if (isOpen) setTimeout(() => chat.textareaRef.current?.focus(), 300);
-  }, [isOpen]);
+    if (isOpen && !isRestricted) setTimeout(() => chat.textareaRef.current?.focus(), 300);
+  }, [isOpen, isRestricted]);
 
   // Auto-close after 3 user messages (wait for AI to finish responding)
   useEffect(() => {
@@ -272,6 +275,51 @@ export const TrailChat = ({ isOpen, onClose, toolContext, accentColor = "#8b5cf6
   }, [chat.userMsgCount, chat.isLoading, onClose]);
 
   if (!isOpen) return null;
+
+  if (isRestricted && notice) {
+    const Icon = restriction === "offline" ? WifiOff : Globe;
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+
+        <div className="relative w-full max-w-md overflow-hidden rounded-xl border border-border bg-background shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+          <div className="border-b border-border px-6 py-5" style={{ background: `linear-gradient(135deg, ${accentColor}15, ${accentColor}08)` }}>
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-3">
+                <Badge className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary hover:bg-primary/10">
+                  {notice.badge}
+                </Badge>
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl"
+                  style={{ backgroundColor: `${accentColor}20`, color: accentColor }}
+                >
+                  <Icon className="h-6 w-6" />
+                </div>
+              </div>
+
+              <button
+                onClick={onClose}
+                className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label={notice.closeLabel}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="px-6 py-6">
+            <h2 className="text-2xl font-bold leading-tight text-foreground">{notice.title}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{notice.description}</p>
+
+            <Button className="mt-6 h-11 w-full rounded-2xl" onClick={onClose}>
+              {notice.closeLabel}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">

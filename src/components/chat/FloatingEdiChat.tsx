@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -7,6 +7,7 @@ import { ChatInput } from "@/components/chat/ChatInput";
 import { toast } from "sonner";
 import mascoteEducly from "@/assets/edi-mascote.png";
 import { supabase } from "@/integrations/supabase/client";
+import { useRemoteFeatureAccess } from "@/hooks/useRemoteFeatureAccess";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,6 +22,7 @@ interface FloatingEdiChatProps {
 
 export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) => {
   const { t, i18n } = useTranslation();
+  const { isRestricted, notice } = useRemoteFeatureAccess();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,12 +55,36 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
     defaultValue: t("common.close", { defaultValue: "Close" }),
   });
 
+  const showRestrictedNotice = useCallback(() => {
+    if (!notice) return;
+
+    toast.error(notice.title, {
+      description: notice.description,
+    });
+  }, [notice]);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const handleOpenChat = () => setIsOpen(true);
+    const handleOpenChat = () => {
+      if (isRestricted) {
+        showRestrictedNotice();
+        return;
+      }
+
+      setIsOpen(true);
+    };
+
     const handleCloseChat = () => setIsOpen(false);
-    const handleToggleChat = () => setIsOpen((prev) => !prev);
+
+    const handleToggleChat = () => {
+      if (isRestricted) {
+        showRestrictedNotice();
+        return;
+      }
+
+      setIsOpen((prev) => !prev);
+    };
 
     window.addEventListener("open-edi-chat", handleOpenChat);
     window.addEventListener("close-edi-chat", handleCloseChat);
@@ -69,7 +95,14 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
       window.removeEventListener("close-edi-chat", handleCloseChat);
       window.removeEventListener("toggle-edi-chat", handleToggleChat);
     };
-  }, []);
+  }, [isRestricted, showRestrictedNotice]);
+
+  useEffect(() => {
+    if (isRestricted && isOpen) {
+      setIsOpen(false);
+      showRestrictedNotice();
+    }
+  }, [isOpen, isRestricted, showRestrictedNotice]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -101,6 +134,11 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
   }, [chatGreeting, hasGreeted, i18n.language, messages]);
 
   const handleSend = async (message: string) => {
+    if (isRestricted) {
+      showRestrictedNotice();
+      return;
+    }
+
     const userMessage: Message = { role: "user", content: message };
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
@@ -224,7 +262,14 @@ export const FloatingEdiChat = ({ showLauncher = true }: FloatingEdiChatProps) =
       {/* Floating Button - FIXED / STATIC VERSION */}
       {showLauncher && (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          if (isRestricted) {
+            showRestrictedNotice();
+            return;
+          }
+
+          setIsOpen(true);
+        }}
         // Keep launcher static: avoid inherited transforms/animations.
         style={{ transform: "none", transition: "none", animation: "none" }}
         className={cn(
