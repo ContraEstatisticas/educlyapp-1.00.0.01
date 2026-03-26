@@ -37,7 +37,10 @@ const UI = {
     subtitle: "Pratique o que você aprendeu com a IA",
     placeholder: "Escreva seu prompt aqui...",
     skip: "Pular",
+    close: "Fechar",
     newChat: "Nova conversa",
+    practiceComplete: "Prática concluída",
+    practiceCompleteHint: "A resposta vai continuar visível. Leia com calma e feche quando quiser.",
   },
   en: {
     greeting: `Now it's your turn! ✍️\n\nWrite a **prompt** in your own words to practice what you just learned. It can be a question, instruction, or command you'd use with an AI.\n\nI'll evaluate and help you improve!`,
@@ -45,7 +48,10 @@ const UI = {
     subtitle: "Practice what you learned with AI",
     placeholder: "Write your prompt here...",
     skip: "Skip",
+    close: "Close",
     newChat: "New chat",
+    practiceComplete: "Practice complete",
+    practiceCompleteHint: "This response will stay here. Read it calmly and close the chat when you're ready.",
   },
   es: {
     greeting: `¡Ahora es tu turno! ✍️\n\nEscribe un **prompt** con tus propias palabras para practicar lo que acabas de aprender. Puede ser una pregunta, instrucción o comando que usarías con una IA.\n\n¡Voy a evaluar y ayudarte a mejorar!`,
@@ -53,7 +59,10 @@ const UI = {
     subtitle: "Practica lo que aprendiste con IA",
     placeholder: "Escribe tu prompt aquí...",
     skip: "Saltar",
+    close: "Cerrar",
     newChat: "Nuevo chat",
+    practiceComplete: "Práctica completada",
+    practiceCompleteHint: "La respuesta seguirá visible. Léela con calma y cierra el chat cuando quieras.",
   },
   fr: {
     greeting: `À ton tour ! ✍️\n\nÉcris un **prompt** avec tes propres mots pour pratiquer ce que tu viens d'apprendre. Ça peut être une question, une instruction ou une commande que tu utiliserais avec une IA.\n\nJe vais évaluer et t'aider à t'améliorer !`,
@@ -61,7 +70,10 @@ const UI = {
     subtitle: "Pratique ce que tu as appris avec l'IA",
     placeholder: "Écris ton prompt ici...",
     skip: "Passer",
+    close: "Fermer",
     newChat: "Nouveau chat",
+    practiceComplete: "Pratique terminée",
+    practiceCompleteHint: "La réponse reste affichée. Lis-la tranquillement et ferme le chat quand tu veux.",
   },
 } as const;
 
@@ -261,18 +273,12 @@ export const TrailChat = ({ isOpen, onClose, toolContext, accentColor = "#8b5cf6
   const chat = useChatLogic(toolContext, language, moduleSummary);
   const ui = getUi(language);
   const { isRestricted, notice, restriction } = useRemoteFeatureAccess();
+  const hasCompletedPractice = chat.userMsgCount >= 3;
+  const showNewChatAction = chat.userMsgCount > 0 && !chat.isLoading;
 
   useEffect(() => {
     if (isOpen && !isRestricted) setTimeout(() => chat.textareaRef.current?.focus(), 300);
   }, [isOpen, isRestricted]);
-
-  // Auto-close after 3 user messages (wait for AI to finish responding)
-  useEffect(() => {
-    if (chat.userMsgCount >= 3 && !chat.isLoading) {
-      const timer = setTimeout(onClose, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [chat.userMsgCount, chat.isLoading, onClose]);
 
   if (!isOpen) return null;
 
@@ -366,6 +372,13 @@ export const TrailChat = ({ isOpen, onClose, toolContext, accentColor = "#8b5cf6
 
         {/* Input area */}
         <div className="shrink-0 border-t border-border bg-muted/30 px-5 py-4">
+          {hasCompletedPractice ? (
+            <div className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+              <p className="font-semibold">{ui.practiceComplete}</p>
+              <p className="mt-1 text-emerald-800/90">{ui.practiceCompleteHint}</p>
+            </div>
+          ) : null}
+
           <div className="flex items-end gap-2">
             <textarea
               ref={chat.textareaRef}
@@ -399,10 +412,25 @@ export const TrailChat = ({ isOpen, onClose, toolContext, accentColor = "#8b5cf6
             </Button>
           </div>
 
-          {/* Skip action */}
-          <div className="flex items-center justify-end mt-3">
-            <button onClick={onClose} className="text-xs font-medium hover:text-foreground transition-colors flex items-center gap-1" style={{ color: accentColor }}>
-              {ui.skip}
+          <div className="mt-3 flex items-center justify-between gap-3">
+            <div>
+              {showNewChatAction ? (
+                <button
+                  onClick={chat.clearChat}
+                  className="text-xs font-medium transition-colors hover:text-foreground"
+                  style={{ color: accentColor }}
+                >
+                  {ui.newChat}
+                </button>
+              ) : null}
+            </div>
+
+            <button
+              onClick={onClose}
+              className="text-xs font-medium hover:text-foreground transition-colors flex items-center gap-1"
+              style={{ color: accentColor }}
+            >
+              {hasCompletedPractice ? ui.close : ui.skip}
               <ArrowRight className="w-3 h-3" />
             </button>
           </div>
