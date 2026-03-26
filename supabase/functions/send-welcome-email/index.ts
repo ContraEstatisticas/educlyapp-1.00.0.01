@@ -467,6 +467,7 @@ serve(async (req) => {
       ...customMetadata,
       mode,
       language: normalizedLang,
+      language_source: languageSource,
       user_name: userName,
     };
 
