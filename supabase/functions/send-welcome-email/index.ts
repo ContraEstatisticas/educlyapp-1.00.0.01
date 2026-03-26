@@ -11,6 +11,7 @@ const corsHeaders = {
 };
 
 const REMINDER_DELAY_HOURS = 6;
+const REMINDER_EMAIL_TYPES = ["welcome_reminder", "welcome_reminder_6h", "welcome_reminder_48h"] as const;
 
 type EmailMode =
   | "legacy"
@@ -445,8 +446,47 @@ serve(async (req) => {
         ? "welcome_reminder"
         : "magic_link");
     const dedupType = mode === "magic_link_existing" ? null : emailType;
+    const isReminderMode = mode === "magic_link_reminder";
 
-    if (dedupType) {
+    if (isReminderMode) {
+      const { data: existingReminderByEmail, error: existingReminderByEmailError } = await supabaseAdmin
+        .from("email_logs")
+        .select("id")
+        .eq("recipient_email", email)
+        .in("email_type", [...REMINDER_EMAIL_TYPES])
+        .neq("status", "error")
+        .limit(1);
+
+      if (existingReminderByEmailError) {
+        throw existingReminderByEmailError;
+      }
+
+      if ((existingReminderByEmail?.length ?? 0) > 0) {
+        return new Response(JSON.stringify({ success: true, skipped: true, reason: "already_reminded_email" }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      if (userId) {
+        const { data: existingReminderByUser, error: existingReminderByUserError } = await supabaseAdmin
+          .from("email_logs")
+          .select("id")
+          .eq("user_id", userId)
+          .in("email_type", [...REMINDER_EMAIL_TYPES])
+          .neq("status", "error")
+          .limit(1);
+
+        if (existingReminderByUserError) {
+          throw existingReminderByUserError;
+        }
+
+        if ((existingReminderByUser?.length ?? 0) > 0) {
+          return new Response(JSON.stringify({ success: true, skipped: true, reason: "already_reminded_user" }), {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+      }
+    } else if (dedupType) {
       const { data: existingLog } = await supabaseAdmin
         .from("email_logs")
         .select("id")
@@ -533,6 +573,53 @@ serve(async (req) => {
     }
 
     createdLogId = logEntry?.id ?? null;
+
+    if (isReminderMode && createdLogId) {
+      let canonicalReminderQuery = supabaseAdmin
+        .from("email_logs")
+        .select("id")
+        .in("email_type", [...REMINDER_EMAIL_TYPES])
+        .neq("status", "error")
+        .order("created_at", { ascending: true })
+        .order("id", { ascending: true })
+        .limit(1);
+
+      canonicalReminderQuery = userId
+        ? canonicalReminderQuery.eq("user_id", userId)
+        : canonicalReminderQuery.eq("recipient_email", email);
+
+      const { data: canonicalReminderLogs, error: canonicalReminderLogError } = await canonicalReminderQuery;
+
+      if (canonicalReminderLogError || !canonicalReminderLogs?.[0]) {
+        await supabaseAdmin
+          .from("email_logs")
+          .update({
+            status: "error",
+            error_message: "Could not confirm canonical reminder log before send",
+          })
+          .eq("id", createdLogId);
+
+        return new Response(JSON.stringify({ error: "Could not verify reminder duplicate protection" }), {
+          status: 503,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const canonicalReminderLogId = canonicalReminderLogs[0].id;
+      if (canonicalReminderLogId !== createdLogId) {
+        await supabaseAdmin
+          .from("email_logs")
+          .update({
+            status: "skipped_duplicate",
+            error_message: "Duplicate reminder prevented by race-condition guard",
+          })
+          .eq("id", createdLogId);
+
+        return new Response(JSON.stringify({ success: true, skipped: true, reason: "duplicate_request" }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const trackingPixel = createdLogId

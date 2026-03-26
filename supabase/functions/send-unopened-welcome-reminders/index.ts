@@ -10,7 +10,7 @@ const BATCH_LIMIT = 50;
 const LOOKBACK_DAYS = 14;
 const DELAY_BETWEEN_SENDS_MS = 500;
 const REMINDER_6H = 6;
-const REMINDER_48H = 48;
+const REMINDER_EMAIL_TYPES = ["welcome_reminder_6h", "welcome_reminder_48h", "welcome_reminder"] as const;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -76,7 +76,6 @@ serve(async (req) => {
     }
 
     // Auth check
-    const anonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
     const authHeader = req.headers.get("authorization") || "";
     const bearerToken = authHeader.toLowerCase().startsWith("bearer ")
       ? authHeader.slice(7).trim()
@@ -85,8 +84,7 @@ serve(async (req) => {
 
     const isAuthorized =
       (cronSecret.length > 0 && (bearerToken === cronSecret || bodySecret === cronSecret)) ||
-      bearerToken === serviceRoleKey ||
-      bearerToken === anonKey;
+      bearerToken === serviceRoleKey;
 
     if (!isAuthorized) {
       console.error("[send-unopened-welcome-reminders] Unauthorized: bearer token does not match any accepted key");
@@ -97,9 +95,6 @@ serve(async (req) => {
     }
 
     const now = new Date();
-    const nowIso = now.toISOString();
-    const sixHoursAgo = new Date(now.getTime() - REMINDER_6H * 60 * 60 * 1000).toISOString();
-    const fortyEightHoursAgo = new Date(now.getTime() - REMINDER_48H * 60 * 60 * 1000).toISOString();
     const lookbackStart = new Date(now.getTime() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
     // 1. Get welcome/magic_link emails sent in the lookback window
@@ -114,34 +109,51 @@ serve(async (req) => {
 
     if (welcomeError) throw welcomeError;
     if (!welcomeEmails || welcomeEmails.length === 0) {
-      return new Response(JSON.stringify({ success: true, processed: 0, sent_6h: 0, sent_48h: 0, skipped: 0, errors: 0 }), {
+      return new Response(JSON.stringify({ success: true, processed: 0, sent: 0, sent_6h: 0, sent_48h: 0, skipped: 0, errors: 0 }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    // 2. Get all reminder emails already sent (for dedup)
+    // 2. Get all reminder emails already sent (one-time dedupe for the whole user/email)
     const candidateEmails = Array.from(
       new Set(welcomeEmails.map((r: any) => normalizeEmail(r.recipient_email)).filter(Boolean)),
     );
+    const candidateUserIds = Array.from(
+      new Set(welcomeEmails.map((r: any) => r.user_id).filter(Boolean)),
+    );
 
-    const { data: existingReminders } = candidateEmails.length > 0
-      ? await supabase
-        .from("email_logs")
-        .select("recipient_email, email_type")
-        .in("email_type", ["welcome_reminder_6h", "welcome_reminder_48h", "welcome_reminder"])
-        .in("recipient_email", candidateEmails)
-        .gte("created_at", lookbackStart)
-      : { data: [] };
+    const [
+      { data: existingRemindersByEmail, error: existingRemindersByEmailError },
+      { data: existingRemindersByUser, error: existingRemindersByUserError },
+    ] = await Promise.all([
+      candidateEmails.length > 0
+        ? supabase
+          .from("email_logs")
+          .select("recipient_email, user_id, email_type")
+          .in("email_type", [...REMINDER_EMAIL_TYPES])
+          .in("recipient_email", candidateEmails)
+        : Promise.resolve({ data: [], error: null }),
+      candidateUserIds.length > 0
+        ? supabase
+          .from("email_logs")
+          .select("recipient_email, user_id, email_type")
+          .in("email_type", [...REMINDER_EMAIL_TYPES])
+          .in("user_id", candidateUserIds)
+        : Promise.resolve({ data: [], error: null }),
+    ]);
 
-    const reminded6h = new Set<string>();
-    const reminded48h = new Set<string>();
-    for (const r of (existingReminders || [])) {
-      const email = normalizeEmail(r.recipient_email);
-      if (r.email_type === "welcome_reminder_6h" || r.email_type === "welcome_reminder") {
-        reminded6h.add(email);
+    if (existingRemindersByEmailError) throw existingRemindersByEmailError;
+    if (existingRemindersByUserError) throw existingRemindersByUserError;
+
+    const remindedEmails = new Set<string>();
+    const remindedUserIds = new Set<string>();
+    for (const reminder of [...(existingRemindersByEmail || []), ...(existingRemindersByUser || [])]) {
+      const email = normalizeEmail(reminder.recipient_email);
+      if (email) {
+        remindedEmails.add(email);
       }
-      if (r.email_type === "welcome_reminder_48h") {
-        reminded48h.add(email);
+      if (typeof reminder.user_id === "string" && reminder.user_id.length > 0) {
+        remindedUserIds.add(reminder.user_id);
       }
     }
 
@@ -151,7 +163,6 @@ serve(async (req) => {
     );
 
     const usersWithSessions = new Set<string>();
-    const usersWithRecentSessions = new Set<string>();
     const userLanguageMap = new Map<string, string>();
 
     if (userIds.length > 0) {
@@ -176,24 +187,11 @@ serve(async (req) => {
       for (const s of (sessions || [])) {
         usersWithSessions.add(s.user_id);
       }
-
-      // Check who has a session in last 2 days (for 48h check)
-      const twoDaysAgo = new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000).toISOString();
-      const { data: recentSessions } = await supabase
-        .from("user_sessions")
-        .select("user_id")
-        .in("user_id", userIds)
-        .gte("started_at", twoDaysAgo);
-
-      for (const s of (recentSessions || [])) {
-        usersWithRecentSessions.add(s.user_id);
-      }
     }
 
     // 4. Process candidates
     const results: Array<Record<string, unknown>> = [];
-    let sent6h = 0;
-    let sent48h = 0;
+    let sentReminders = 0;
     let skippedCount = 0;
     let errorCount = 0;
     const processedEmails = new Set<string>();
@@ -209,6 +207,10 @@ serve(async (req) => {
       const userId = row.user_id;
       const sentAt = row.sent_at ? new Date(row.sent_at) : null;
       if (!sentAt) continue;
+      if (remindedEmails.has(email) || (typeof userId === "string" && remindedUserIds.has(userId))) {
+        skippedCount++;
+        continue;
+      }
 
       const userName = typeof metadata.user_name === "string" && metadata.user_name.trim().length > 0
         ? metadata.user_name.trim()
@@ -217,29 +219,14 @@ serve(async (req) => {
         ? normalizeLanguage(userLanguageMap.get(userId), "en")
         : normalizeLanguage(metadata.language, "en");
 
-      // Determine which reminder to send
-      let reminderType: "6h" | "48h" | null = null;
-
       const hoursSinceSent = (now.getTime() - sentAt.getTime()) / (1000 * 60 * 60);
+      const shouldSendReminder = hoursSinceSent >= REMINDER_6H &&
+        (
+          (typeof userId === "string" && userId.length > 0 && !usersWithSessions.has(userId)) ||
+          !userId
+        );
 
-      if (hoursSinceSent >= REMINDER_48H && !reminded48h.has(email)) {
-        // 48h reminder: user has no session in last 2 days
-        if (userId && !usersWithRecentSessions.has(userId)) {
-          reminderType = "48h";
-        } else if (!userId) {
-          // No user_id means they never created an account
-          reminderType = "48h";
-        }
-      } else if (hoursSinceSent >= REMINDER_6H && !reminded6h.has(email)) {
-        // 6h reminder: user has no session at all
-        if (userId && !usersWithSessions.has(userId)) {
-          reminderType = "6h";
-        } else if (!userId) {
-          reminderType = "6h";
-        }
-      }
-
-      if (!reminderType) {
+      if (!shouldSendReminder) {
         skippedCount++;
         continue;
       }
@@ -265,8 +252,6 @@ serve(async (req) => {
           throw new Error("auto-create-account returned no access token");
         }
 
-        const emailType = reminderType === "6h" ? "welcome_reminder_6h" : "welcome_reminder_48h";
-
         // Determine language source for telemetry
         const languageSource = userId && userLanguageMap.has(userId)
           ? "profile"
@@ -288,19 +273,20 @@ serve(async (req) => {
             user_id: accountData.user_id,
             parent_email_log_id: row.id,
             metadata: {
-              reminder_type: reminderType,
+              reminder_type: "6h_once",
               original_email_type: row.email_type,
               hours_since_original: Math.round(hoursSinceSent),
-              override_email_type: emailType,
               language_source: languageSource,
             },
           },
         });
 
-        if (reminderType === "6h") sent6h++;
-        else sent48h++;
-
-        results.push({ email, status: `reminder_${reminderType}_sent` });
+        sentReminders++;
+        remindedEmails.add(email);
+        if (typeof accountData.user_id === "string" && accountData.user_id.length > 0) {
+          remindedUserIds.add(accountData.user_id);
+        }
+        results.push({ email, status: "reminder_sent" });
         await sleep(DELAY_BETWEEN_SENDS_MS);
       } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
@@ -313,8 +299,9 @@ serve(async (req) => {
     return new Response(JSON.stringify({
       success: true,
       processed: results.length,
-      sent_6h: sent6h,
-      sent_48h: sent48h,
+      sent: sentReminders,
+      sent_6h: sentReminders,
+      sent_48h: 0,
       skipped: skippedCount,
       errors: errorCount,
       results,
