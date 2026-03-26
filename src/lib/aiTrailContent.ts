@@ -202,6 +202,42 @@ import {
   CLAUDE_MODULE_7_STEPS_FR,
   CLAUDE_MODULE_7_STEPS_PT,
 } from "@/lib/claudeModule7LessonSteps";
+import {
+  LOVABLE_MODULE_1_STEPS_EN,
+  LOVABLE_MODULE_1_STEPS_ES,
+  LOVABLE_MODULE_1_STEPS_FR,
+  LOVABLE_MODULE_1_STEPS_PT,
+} from "@/lib/lovableModule1LessonSteps";
+import {
+  LOVABLE_MODULE_2_STEPS_EN,
+  LOVABLE_MODULE_2_STEPS_ES,
+  LOVABLE_MODULE_2_STEPS_FR,
+  LOVABLE_MODULE_2_STEPS_PT,
+} from "@/lib/lovableModule2LessonSteps";
+import {
+  LOVABLE_MODULE_3_STEPS_EN,
+  LOVABLE_MODULE_3_STEPS_ES,
+  LOVABLE_MODULE_3_STEPS_FR,
+  LOVABLE_MODULE_3_STEPS_PT,
+} from "@/lib/lovableModule3LessonSteps";
+import {
+  LOVABLE_MODULE_4_STEPS_EN,
+  LOVABLE_MODULE_4_STEPS_ES,
+  LOVABLE_MODULE_4_STEPS_FR,
+  LOVABLE_MODULE_4_STEPS_PT,
+} from "@/lib/lovableModule4LessonSteps";
+import {
+  LOVABLE_MODULE_5_STEPS_EN,
+  LOVABLE_MODULE_5_STEPS_ES,
+  LOVABLE_MODULE_5_STEPS_FR,
+  LOVABLE_MODULE_5_STEPS_PT,
+} from "@/lib/lovableModule5LessonSteps";
+import {
+  LOVABLE_MODULE_6_STEPS_EN,
+  LOVABLE_MODULE_6_STEPS_ES,
+  LOVABLE_MODULE_6_STEPS_FR,
+  LOVABLE_MODULE_6_STEPS_PT,
+} from "@/lib/lovableModule6LessonSteps";
 
 
 
@@ -5471,6 +5507,1171 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "La meilleure facon d'utiliser Claude avec d'autres outils est de le placer au centre du flux tout en profitant du meilleur de chaque plateforme."
+          }
+        ]
+      }
+    }
+  },
+  lovable: {
+    status: "live",
+    locales: {
+      pt: {
+        statusBadge: "Trilha ativa",
+        heroEyebrow: "Lovable",
+        heroTitle: "Lovable criando apps com IA.",
+        heroDescription:
+          "Uma trilha para transformar ideias em aplicativos funcionais usando linguagem natural, refinamento iterativo e publicacao rapida.",
+        overviewTitle: "O que voce vai dominar",
+        overviewItems: [
+          "Como descrever um app com clareza para o Lovable gerar interface, logica e dados.",
+          "Como refinar a aplicacao aos poucos, adicionar banco, login e integracoes externas.",
+          "Como publicar, validar ideias e usar boas praticas para reduzir retrabalho."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Pratica guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "Lovable Criando Aplicativos com Inteligencia Artificial",
+            summary: "O que e o Lovable, fluxo de criacao, tipos de app, refinamento e publicacao.",
+            outcome: "Base para transformar ideias em aplicativos funcionais usando prompts claros.",
+            intro:
+              "Nesta licao, voce vai entender o que torna o Lovable especial, como descrever seu primeiro aplicativo e como evoluir essa base ate uma versao publicavel.",
+            keyPoints: [
+              "Lovable transforma linguagem natural em apps web com interface, logica e banco de dados.",
+              "Prompts claros sobre objetivo, funcoes e visual melhoram muito a primeira geracao.",
+              "O melhor caminho e construir uma base funcional e refinar em etapas pequenas.",
+              "Publicacao rapida e MVPs reduzem a distancia entre ideia, validacao e produto."
+            ],
+            lessonSteps: LOVABLE_MODULE_1_STEPS_PT,
+            promptExample:
+              "Crie um aplicativo de lista de tarefas onde o usuario pode adicionar tarefas, editar tarefas e deletar tarefas. O visual deve ser limpo e moderno com cores azul e branco.",
+            practice: {
+              title: "Primeiro app no Lovable",
+              instruction: "Monte um prompt inicial para um app simples no Lovable.",
+              terms: [
+                "lista de tarefas",
+                "adicionar tarefas",
+                "editar tarefas",
+                "deletar tarefas",
+                "limpo e moderno",
+                "azul e branco"
+              ],
+              solution:
+                "Um bom prompt inicial combina objetivo, acoes principais e direcao visual para o Lovable entregar uma base funcional."
+            },
+            quiz: {
+              question: "O que torna o Lovable revolucionario para quem nao sabe programar?",
+              options: [
+                "Ele transforma linguagem natural em aplicativos web funcionais com interface, logica e banco de dados.",
+                "Ele cria apenas prototipos visuais sem funcionalidade real.",
+                "Ele so funciona para quem ja programa.",
+                "Os apps so funcionam dentro da plataforma."
+              ],
+              correctIndex: 0,
+              explanation:
+                "O diferencial do Lovable e permitir que pessoas sem conhecimento tecnico criem aplicativos funcionais a partir de descricoes em texto."
+            },
+            takeaway:
+              "O melhor uso do Lovable nasce de prompts claros, refinamento progressivo e foco em aprender rapido com uma base funcional."
+          },
+          {
+            number: 2,
+            title: "Criando seu Primeiro Projeto do Zero com Lovable",
+            summary: "Projeto AgendaPro, prompt inicial, avaliacao, dashboard, agenda, clientes, banco, login e publicacao.",
+            outcome: "Visao completa de como sair do zero e construir um app real por camadas no Lovable.",
+            intro:
+              "Nesta licao, voce acompanha a criacao do AgendaPro, um sistema de agendamento para profissionais autonomos, entendendo cada decisao, prompt e etapa do processo.",
+            keyPoints: [
+              "Usar um projeto concreto ajuda a memorizar processo, e nao apenas conceitos soltos.",
+              "O primeiro prompt deve definir telas, navegacao e estilo para dar estrutura ao app.",
+              "O refinamento ideal preserva o que ja funciona e corrige partes especificas sem retrabalho.",
+              "Banco, login, testes completos e revisao mobile transformam uma base inicial em produto utilizavel."
+            ],
+            lessonSteps: LOVABLE_MODULE_2_STEPS_PT,
+            promptExample:
+              "Crie um aplicativo chamado AgendaPro para profissionais autonomos. O app deve ter 4 telas principais: Dashboard, Agenda, Clientes e Configuracoes. A Dashboard deve mostrar um resumo do dia. A Agenda deve permitir criar e visualizar horarios. A tela de Clientes deve listar clientes e abrir detalhes. A tela de Configuracoes deve permitir ajustar dados do profissional. O visual deve ser clean e profissional, com azul escuro, branco, detalhes em dourado, fontes modernas e navegacao intuitiva.",
+            practice: {
+              title: "Projeto AgendaPro",
+              instruction: "Monte o prompt inicial do AgendaPro definindo telas, objetivo e estilo visual.",
+              terms: [
+                "Dashboard",
+                "Agenda",
+                "Clientes",
+                "Configuracoes",
+                "clean e profissional",
+                "azul escuro, branco e dourado"
+              ],
+              solution:
+                "O melhor ponto de partida combina estrutura de telas, publico e direcao visual para o Lovable criar uma base coerente."
+            },
+            quiz: {
+              question: "Por que descrever as 4 telas no primeiro prompt e uma boa estrategia?",
+              options: [
+                "Porque o Lovable so aceita prompts com multiplas telas.",
+                "Porque isso elimina qualquer necessidade de refinamento.",
+                "Porque o Lovable organiza melhor menus, navegacao e relacoes entre telas quando conhece o mapa do produto desde o inicio.",
+                "Porque criar todas as telas de uma vez sempre gera mais erros."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quando a ferramenta entende a estrutura completa do produto, ela consegue montar uma navegacao mais consistente desde a primeira versao."
+            },
+            takeaway:
+              "Projetos bem construidos no Lovable nascem de clareza inicial, refinamento por camadas, testes completos e publicacao so depois de validar a experiencia real."
+          },
+          {
+            number: 3,
+            title: "Edicao via Chat no Lovable",
+            summary: "Pedidos de edicao, ajustes visuais, funcionalidades, bugs, microcopy, estrutura e historico de versoes.",
+            outcome: "Capacidade de evoluir e corrigir apps no Lovable com pedidos claros, seguros e iterativos.",
+            intro:
+              "Nesta licao, voce aprende a usar o chat do Lovable como centro de edicao continua, refinando visual, comportamento, estrutura e textos sem tocar em codigo.",
+            keyPoints: [
+              "Pedidos de edicao funcionam melhor quando dizem onde esta o problema, o que esta errado e o que deve acontecer.",
+              "Ajustes visuais e funcionais podem ser agrupados com clareza para acelerar iteracoes.",
+              "Descricoes boas de bugs explicam acao, resultado atual, resultado esperado e tela afetada.",
+              "Historico de versoes e testes entre edicoes reduzem risco e deixam a evolucao do app mais segura."
+            ],
+            lessonSteps: LOVABLE_MODULE_3_STEPS_PT,
+            promptExample:
+              "Faca os seguintes ajustes visuais: mude a cor de fundo do header para azul escuro, aumente o espacamento entre os cards da Dashboard de 8px para 16px, mude a fonte dos titulos para Inter, deixe os cards com sombra mais suave e adicione uma borda vertical verde no lado esquerdo de cada card de agendamento confirmado.",
+            practice: {
+              title: "Pedido de edicao claro",
+              instruction: "Monte um pedido de edicao visual bem especifico para a Dashboard.",
+              terms: [
+                "cor",
+                "azul escuro",
+                "espacamento",
+                "16px",
+                "Inter",
+                "borda vertical verde"
+              ],
+              solution:
+                "Um bom pedido de edicao combina local da mudanca, detalhes do ajuste e resultado visual esperado em uma unica instrucao objetiva."
+            },
+            quiz: {
+              question: "O que torna uma descricao de bug eficaz para o Lovable?",
+              options: [
+                "Usar termos tecnicos para parecer mais preciso.",
+                "Apenas dizer que algo nao esta funcionando.",
+                "Descrever o que voce fez, o que aconteceu, o que deveria ter acontecido e em qual tela.",
+                "Reiniciar o projeto e evitar mais detalhes."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Essa estrutura da ao Lovable o contexto necessario para localizar a causa raiz do problema com mais rapidez."
+            },
+            takeaway:
+              "Quem domina a edicao via chat consegue iterar com rapidez, corrigir com seguranca e evoluir o app sem perder controle do processo."
+          },
+          {
+            number: 4,
+            title: "Trabalhando com Importacoes de Design no Lovable",
+            summary: "Figma, referencias visuais, componentes, screenshots anotados e sistemas de design.",
+            outcome: "Capacidade de transformar materiais visuais em interfaces funcionais e consistentes no Lovable.",
+            intro:
+              "Nesta licao, voce aprende a importar designs existentes para acelerar a criacao do app, usando Figma, imagens de referencia, componentes isolados e guias visuais completos.",
+            keyPoints: [
+              "A integracao com Figma ajuda a transformar layouts estaticos em interfaces funcionais com muito menos ambiguidade.",
+              "Arquivos organizados, com frames, componentes e estilos claros, melhoram bastante a qualidade da importacao.",
+              "Referencias em imagem, componentes isolados e screenshots anotados permitem ajustes mais cirurgicos.",
+              "Importacoes grandes devem ser testadas por partes para evitar retrabalho e facilitar correcao de problemas."
+            ],
+            lessonSteps: LOVABLE_MODULE_4_STEPS_PT,
+            promptExample:
+              "Para importar do Figma no Lovable: abra seu arquivo no Figma, selecione o frame ou componente que quer importar, copie o link de compartilhamento do elemento, cole o link no chat do Lovable com a instrucao de importar e aguarde o Lovable converter o design em codigo HTML e CSS funcional.",
+            practice: {
+              title: "Importacao guiada",
+              instruction: "Monte um pedido para usar uma imagem de referencia como base visual do AgendaPro.",
+              terms: [
+                "arraste e solte ou anexe",
+                "crie",
+                "AgendaPro",
+                "manter",
+                "adaptar"
+              ],
+              solution:
+                "Uma boa importacao por imagem combina a referencia visual com instrucoes claras sobre o que preservar e o que ajustar ao contexto real do app."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao trabalhar com importacoes de design no Lovable?",
+              options: [
+                "Importar designs muito simples que o Lovable poderia criar sozinho.",
+                "Usar referencias visuais de aplicativos concorrentes.",
+                "Importar um design complexo completo sem testar tela por tela.",
+                "Misturar importacoes do Figma com referencias em imagem no mesmo projeto."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quando a importacao e muito grande, qualquer erro fica mais dificil de isolar e corrigir sem afetar partes que ja estavam corretas."
+            },
+            takeaway:
+              "Importar com organizacao e adaptar com intencao faz o Lovable unir velocidade de desenvolvimento com consistencia visual."
+          },
+          {
+            number: 5,
+            title: "Escrevendo Conteudo para Sites e Apps no Lovable",
+            summary: "Titulos, subtitulos, CTAs, beneficios, microcopy, onboarding, estados vazios e e-mails.",
+            outcome: "Capacidade de escrever textos que convertem, orientam e constroem confianca em produtos feitos no Lovable.",
+            intro:
+              "Nesta licao, voce aprende a escrever o conteudo certo para cada parte do seu app ou site, transformando palavras em clareza, acao e confianca.",
+            keyPoints: [
+              "Titulos e subtitulos devem comunicar valor rapido, sem jargoes nem promessas vagas.",
+              "CTAs, beneficios e microcopy funcionam melhor quando explicam impacto e reduzem friccao.",
+              "Cadastro, onboarding e estados vazios sao pontos criticos para orientar o usuario e aumentar ativacao.",
+              "Tom de voz consistente e e-mails automaticos bem escritos reforcam personalidade e confianca no produto."
+            ],
+            lessonSteps: LOVABLE_MODULE_5_STEPS_PT,
+            promptExample:
+              "Escreva o titulo, subtitulo, CTA principal e 4 beneficios da homepage do AgendaPro. O tom deve ser claro, profissional e acessivel para profissionais autonomos.",
+            practice: {
+              title: "Titulo e CTA",
+              instruction: "Monte um titulo principal e um CTA forte para a home do AgendaPro.",
+              terms: [
+                "Agendamentos online",
+                "profissionais autonomos",
+                "planilha ou WhatsApp",
+                "Criar minha conta gratis"
+              ],
+              solution:
+                "Um bom combo de titulo e CTA deixa claro o valor do produto e mostra exatamente qual e o proximo passo sem gerar hesitacao."
+            },
+            quiz: {
+              question: "O que torna um CTA significativamente mais eficaz do que outro?",
+              options: [
+                "Usar cores mais vibrantes no botao para atrair o olhar.",
+                "Deixar o botao maior do que todos os outros elementos da pagina.",
+                "Especificar o que acontece apos o clique e remover o risco percebido.",
+                "CTAs com mais de 5 palavras sempre convertem melhor."
+              ],
+              correctIndex: 2,
+              explanation:
+                "CTAs melhores convertem porque reduzem a incerteza e mostram com clareza qual ganho o usuario tera ao clicar."
+            },
+            takeaway:
+              "Quando o conteudo e bem escrito, o Lovable deixa de entregar apenas uma interface bonita e passa a entregar uma experiencia que realmente converte."
+          },
+          {
+            number: 6,
+            title: "Planos, Precos e Como Lancar seu App no Lovable",
+            summary: "Creditos, planos, top-ups, dominio personalizado, publicacao e escolha de plano.",
+            outcome: "Capacidade de publicar com seguranca e escolher o plano certo para cada fase do projeto.",
+            intro:
+              "Nesta licao, voce aprende como funcionam os creditos do Lovable, o que cada plano oferece e quais cuidados tomar antes de colocar seu app no ar.",
+            keyPoints: [
+              "O sistema de creditos varia conforme a complexidade do pedido, e uma boa estrategia de uso evita desperdicio.",
+              "Cada plano faz sentido em um momento diferente, do aprendizado individual ate a operacao corporativa.",
+              "Top-ups ajudam em picos pontuais, mas uso recorrente costuma indicar necessidade de upgrade.",
+              "Publicar bem exige revisar responsividade, fluxos de dados, dominio e experiencia real do usuario."
+            ],
+            lessonSteps: LOVABLE_MODULE_6_STEPS_PT,
+            promptExample:
+              "Consomem mais creditos: criar uma nova tela do zero, adicionar funcionalidades complexas com banco de dados e autenticacao. Consomem menos creditos: ajustes visuais simples, mudancas de texto e correcoes pontuais de layout.",
+            practice: {
+              title: "Plano certo",
+              instruction: "Monte uma recomendacao simples de plano para um freelancer que esta lancando o primeiro app.",
+              terms: [
+                "freelancer",
+                "Pro",
+                "dominio",
+                "privados",
+                "faca upgrade"
+              ],
+              solution:
+                "A melhor recomendacao combina fase do projeto, necessidade de privacidade, publicacao profissional e margem real de uso de creditos."
+            },
+            quiz: {
+              question: "Por que testar o aplicativo em diferentes tamanhos de tela antes de publicar e essencial?",
+              options: [
+                "Porque o Lovable exige uma aprovacao formal de responsividade antes da publicacao.",
+                "Para cumprir regulamentacoes gerais de acessibilidade digital.",
+                "Porque os usuarios vao acessar o app em celulares, tablets e computadores, e uma experiencia quebrada em qualquer um deles custa usuarios.",
+                "Responsividade so importa para apps com publico majoritariamente mobile."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Uma publicacao so esta pronta quando a experiencia funciona bem no dispositivo real de quem vai usar o produto."
+            },
+            takeaway:
+              "Escolher o plano certo, administrar bem os creditos e publicar com criterio fecha a trilha da Lovable com foco em produto real, nao so em prototipo."
+          }
+        ]
+      },
+      en: {
+        statusBadge: "Trail live",
+        heroEyebrow: "Lovable",
+        heroTitle: "Lovable building apps with AI.",
+        heroDescription:
+          "A trail for turning ideas into functional apps with natural language, iterative refinement, and fast publishing.",
+        overviewTitle: "What you will master",
+        overviewItems: [
+          "How to describe an app clearly so Lovable can generate interface, logic, and data.",
+          "How to refine the app step by step, add database, login, and external integrations.",
+          "How to publish, validate ideas, and use best practices to reduce rework."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final reading",
+        modules: [
+          {
+            number: 1,
+            title: "Lovable Creating Apps with Artificial Intelligence",
+            summary: "What Lovable is, creation flow, app types, refinement, and publishing.",
+            outcome: "A solid base for turning ideas into functional apps with clear prompts.",
+            intro:
+              "In this lesson, you will understand what makes Lovable special, how to describe your first app, and how to evolve that first version into something ready to publish.",
+            keyPoints: [
+              "Lovable turns natural language into web apps with interface, logic, and database.",
+              "Clear prompts about goal, features, and look greatly improve the first generation.",
+              "The best path is to build a functional base and refine it in small steps.",
+              "Fast publishing and MVP thinking reduce the distance between idea, validation, and product."
+            ],
+            lessonSteps: LOVABLE_MODULE_1_STEPS_EN,
+            promptExample:
+              "Create a to-do list app where the user can add tasks, edit tasks, and delete tasks. The visual should be clean and modern with blue and white colors.",
+            practice: {
+              title: "First app in Lovable",
+              instruction: "Build an opening prompt for a simple app in Lovable.",
+              terms: [
+                "to-do list",
+                "add tasks",
+                "edit tasks",
+                "delete tasks",
+                "clean and modern",
+                "blue and white"
+              ],
+              solution:
+                "A good opening prompt combines purpose, main actions, and visual direction so Lovable can deliver a useful working base."
+            },
+            quiz: {
+              question: "What makes Lovable revolutionary for people who do not know how to code?",
+              options: [
+                "It turns natural language into functional web apps with interface, logic, and database.",
+                "It only creates visual prototypes without real functionality.",
+                "It only works for programmers.",
+                "Apps only function inside the platform."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Lovable stands out because it lets non-technical people create working apps directly from text descriptions."
+            },
+            takeaway:
+              "The best use of Lovable starts with clear prompts, progressive refinement, and a focus on learning quickly from a functional first version."
+          },
+          {
+            number: 2,
+            title: "Creating Your First Project from Scratch with Lovable",
+            summary: "AgendaPro project, initial prompt, evaluation, dashboard, schedule, clients, database, login, and publishing.",
+            outcome: "A complete view of how to go from zero to a real app built in layers with Lovable.",
+            intro:
+              "In this lesson, you follow the creation of AgendaPro, a scheduling system for self-employed professionals, and understand each decision, prompt, and step in the process.",
+            keyPoints: [
+              "Using a concrete project helps you remember the process rather than isolated concepts.",
+              "The first prompt should define screens, navigation, and style to give the app strong structure.",
+              "Good refinement preserves what already works and fixes only the parts that need adjustment.",
+              "Database, login, full testing, and mobile review turn an initial build into a usable product."
+            ],
+            lessonSteps: LOVABLE_MODULE_2_STEPS_EN,
+            promptExample:
+              "Create an app called AgendaPro for self-employed professionals. The app should have 4 main screens: Dashboard, Schedule, Clients, and Settings. The Dashboard should show a summary of the day. The Schedule screen should allow creating and viewing appointments. The Clients screen should list clients and open details. The Settings screen should let the professional adjust profile data. The visual style should be clean and professional, with dark blue, white, gold accents, modern fonts, and intuitive navigation.",
+            practice: {
+              title: "AgendaPro project",
+              instruction: "Build the opening prompt for AgendaPro by defining screens, purpose, and visual direction.",
+              terms: [
+                "Dashboard",
+                "Schedule",
+                "Clients",
+                "Settings",
+                "clean and professional",
+                "dark blue, white, and gold"
+              ],
+              solution:
+                "The best starting point combines screen structure, target user, and visual direction so Lovable can generate a coherent first version."
+            },
+            quiz: {
+              question: "Why is it a good strategy to describe the 4 screens in the first prompt?",
+              options: [
+                "Because Lovable only accepts prompts with multiple screens.",
+                "Because it removes any future need for refinement.",
+                "Because Lovable can organize menus, navigation, and screen relationships better when it knows the product map from the start.",
+                "Because creating all screens at once always causes more errors."
+              ],
+              correctIndex: 2,
+              explanation:
+                "When the tool understands the full structure of the product, it can build a more consistent first version."
+            },
+            takeaway:
+              "Strong Lovable projects start with clarity, evolve through layered refinement, and are only published after real testing across the core flow."
+          },
+          {
+            number: 3,
+            title: "Editing via Chat in Lovable",
+            summary: "Editing requests, visual adjustments, functionality updates, bugs, microcopy, structure, and version history.",
+            outcome: "Ability to evolve and fix Lovable apps with clear, safe, and iterative requests.",
+            intro:
+              "In this lesson, you learn to use Lovable chat as the center of continuous editing, refining visuals, behavior, structure, and text without touching code.",
+            keyPoints: [
+              "Editing requests work best when they say where the problem is, what is wrong, and what should happen instead.",
+              "Visual and functional adjustments can be grouped clearly to speed up iterations.",
+              "Strong bug reports explain the action, current result, expected result, and affected screen.",
+              "Version history and testing between edits reduce risk and make app evolution much safer."
+            ],
+            lessonSteps: LOVABLE_MODULE_3_STEPS_EN,
+            promptExample:
+              "Make the following visual adjustments: change the header background color to dark blue, increase the spacing between the Dashboard cards from 8px to 16px, change the title font to Inter, make the cards have a softer shadow, and add a green vertical border on the left side of each confirmed appointment card.",
+            practice: {
+              title: "Clear editing request",
+              instruction: "Build a highly specific visual editing request for the Dashboard.",
+              terms: [
+                "color",
+                "dark blue",
+                "spacing",
+                "16px",
+                "Inter",
+                "green vertical border"
+              ],
+              solution:
+                "A good editing request combines the location of the change, the exact adjustment, and the expected visual outcome in one clear instruction."
+            },
+            quiz: {
+              question: "What makes a bug description effective for Lovable?",
+              options: [
+                "Using technical terms to sound more precise.",
+                "Only saying that something is not working.",
+                "Describing what you did, what happened, what should have happened, and on which screen.",
+                "Restarting the project and avoiding details."
+              ],
+              correctIndex: 2,
+              explanation:
+                "That structure gives Lovable the context it needs to find the root cause faster."
+            },
+            takeaway:
+              "When you master chat editing, you can iterate quickly, fix issues safely, and evolve the app without losing control of the process."
+          },
+          {
+            number: 4,
+            title: "Working with Design Imports in Lovable",
+            summary: "Figma, visual references, isolated components, annotated screenshots, and design systems.",
+            outcome: "Ability to turn visual materials into functional and consistent interfaces inside Lovable.",
+            intro:
+              "In this lesson, you learn how to import existing designs to speed up app creation using Figma, image references, isolated components, and complete visual guides.",
+            keyPoints: [
+              "Figma integration helps turn static layouts into functional interfaces with far less ambiguity.",
+              "Organized files with clear frames, components, and styles greatly improve import quality.",
+              "Image references, isolated components, and annotated screenshots allow more surgical adjustments.",
+              "Large imports should be tested in smaller parts to reduce rework and make issues easier to fix."
+            ],
+            lessonSteps: LOVABLE_MODULE_4_STEPS_EN,
+            promptExample:
+              "To import from Figma into Lovable: open your file in Figma, select the frame or component you want to import, copy the share link of that element, paste the link into Lovable chat with an import instruction, and wait for Lovable to convert the design into functional HTML and CSS code.",
+            practice: {
+              title: "Guided import",
+              instruction: "Build a request to use an image reference as the visual base for AgendaPro.",
+              terms: [
+                "drag and drop or attach",
+                "create",
+                "AgendaPro",
+                "keep",
+                "adapt"
+              ],
+              solution:
+                "A strong image-based import combines the visual reference with clear guidance on what should stay and what should be adapted to the app."
+            },
+            quiz: {
+              question: "What is the most common mistake when working with design imports in Lovable?",
+              options: [
+                "Importing very simple designs that Lovable could build on its own.",
+                "Using visual references from competitor apps.",
+                "Importing one large complex design without testing screen by screen.",
+                "Mixing Figma imports with image references in the same project."
+              ],
+              correctIndex: 2,
+              explanation:
+                "When the import is too large, any mistake becomes harder to isolate and fix without affecting parts that were already correct."
+            },
+            takeaway:
+              "Importing with organization and adapting with intention lets Lovable combine development speed with strong visual consistency."
+          },
+          {
+            number: 5,
+            title: "Writing Content for Sites and Apps in Lovable",
+            summary: "Headlines, subtitles, CTAs, benefits, microcopy, onboarding, empty states, and emails.",
+            outcome: "Ability to write copy that converts, guides, and builds trust in products built with Lovable.",
+            intro:
+              "In this lesson, you learn how to write the right content for each part of your app or site, turning words into clarity, action, and trust.",
+            keyPoints: [
+              "Headlines and subtitles should communicate value quickly without jargon or vague promises.",
+              "CTAs, benefits, and microcopy work better when they explain impact and reduce friction.",
+              "Signup, onboarding, and empty states are critical points for guiding the user and increasing activation.",
+              "Consistent tone of voice and well-written automatic emails strengthen product personality and trust."
+            ],
+            lessonSteps: LOVABLE_MODULE_5_STEPS_EN,
+            promptExample:
+              "Write the headline, subtitle, main CTA, and 4 benefits for the AgendaPro homepage. The tone should be clear, professional, and approachable for self-employed professionals.",
+            practice: {
+              title: "Headline and CTA",
+              instruction: "Build a strong headline and CTA for the AgendaPro homepage.",
+              terms: [
+                "Online scheduling",
+                "self-employed professionals",
+                "spreadsheet or WhatsApp",
+                "Create my free account"
+              ],
+              solution:
+                "A strong headline and CTA combination makes the product value obvious and shows the next step without creating hesitation."
+            },
+            quiz: {
+              question: "What makes one CTA significantly more effective than another?",
+              options: [
+                "Using brighter colors on the button to attract attention.",
+                "Making the button larger than every other page element.",
+                "Specifying what happens after the click and removing perceived risk.",
+                "CTAs with more than 5 words always convert better."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Better CTAs convert because they reduce uncertainty and clearly show what the user gains by clicking."
+            },
+            takeaway:
+              "When the copy is well written, Lovable stops delivering only a pretty interface and starts delivering an experience that truly converts."
+          },
+          {
+            number: 6,
+            title: "Plans, Pricing, and How to Launch Your App in Lovable",
+            summary: "Credits, plans, top-ups, custom domain, publishing, and plan selection.",
+            outcome: "Ability to publish with confidence and choose the right plan for each stage of the project.",
+            intro:
+              "In this lesson, you learn how Lovable credits work, what each plan offers, and which checks matter before putting your app live.",
+            keyPoints: [
+              "The credit system changes according to request complexity, and good usage strategy avoids waste.",
+              "Each plan fits a different moment, from individual learning to corporate operation.",
+              "Top-ups help with short-term peaks, but repeated need usually signals an upgrade is more appropriate.",
+              "Publishing well means reviewing responsiveness, data flows, domain setup, and real user experience."
+            ],
+            lessonSteps: LOVABLE_MODULE_6_STEPS_EN,
+            promptExample:
+              "Requests that consume more credits: creating a brand-new screen, adding complex features with database and authentication. Requests that consume fewer credits: simple visual tweaks, text changes, and small layout fixes.",
+            practice: {
+              title: "Right plan",
+              instruction: "Build a simple plan recommendation for a freelancer launching a first app.",
+              terms: [
+                "freelancer",
+                "Pro",
+                "domain",
+                "private",
+                "upgrade"
+              ],
+              solution:
+                "The best recommendation combines project stage, privacy needs, professional publishing, and real monthly credit usage."
+            },
+            quiz: {
+              question: "Why is it essential to test the app on different screen sizes before publishing?",
+              options: [
+                "Because Lovable requires a formal responsiveness approval before publishing.",
+                "To comply with general digital accessibility regulations.",
+                "Because users will access the app on phones, tablets, and computers, and a broken experience on any of them costs users.",
+                "Responsiveness only matters for apps with mostly mobile traffic."
+              ],
+              correctIndex: 2,
+              explanation:
+                "A launch is only ready when the experience works well on the real devices people will use."
+            },
+            takeaway:
+              "Choosing the right plan, managing credits well, and publishing carefully closes the Lovable trail with a real product mindset, not just a prototype mindset."
+          }
+        ]
+      },
+      es: {
+        statusBadge: "Ruta activa",
+        heroEyebrow: "Lovable",
+        heroTitle: "Lovable creando apps con IA.",
+        heroDescription:
+          "Una ruta para convertir ideas en aplicaciones funcionales con lenguaje natural, refinamiento iterativo y publicacion rapida.",
+        overviewTitle: "Lo que vas a dominar",
+        overviewItems: [
+          "Como describir una app con claridad para que Lovable genere interfaz, logica y datos.",
+          "Como refinar la aplicacion paso a paso, agregar base de datos, login e integraciones externas.",
+          "Como publicar, validar ideas y usar buenas practicas para reducir retrabajo."
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Practica guiada",
+        termsLabel: "Terminos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "Lovable Creando Aplicaciones con Inteligencia Artificial",
+            summary: "Que es Lovable, flujo de creacion, tipos de app, refinamiento y publicacion.",
+            outcome: "Base para transformar ideas en aplicaciones funcionales usando prompts claros.",
+            intro:
+              "En esta leccion entenderas que hace especial a Lovable, como describir tu primera aplicacion y como evolucionar esa base hasta una version publicable.",
+            keyPoints: [
+              "Lovable transforma lenguaje natural en apps web con interfaz, logica y base de datos.",
+              "Los prompts claros sobre objetivo, funciones y visual mejoran mucho la primera generacion.",
+              "El mejor camino es construir una base funcional y refinarla en etapas pequenas.",
+              "La publicacion rapida y el enfoque MVP reducen la distancia entre idea, validacion y producto."
+            ],
+            lessonSteps: LOVABLE_MODULE_1_STEPS_ES,
+            promptExample:
+              "Crea una aplicacion de lista de tareas donde el usuario puede agregar tareas, editar tareas y borrar tareas. El visual debe ser limpio y moderno con colores azul y blanco.",
+            practice: {
+              title: "Primera app en Lovable",
+              instruction: "Construye un prompt inicial para una app sencilla en Lovable.",
+              terms: [
+                "lista de tareas",
+                "agregar tareas",
+                "editar tareas",
+                "borrar tareas",
+                "limpio y moderno",
+                "azul y blanco"
+              ],
+              solution:
+                "Un buen prompt inicial combina objetivo, acciones principales y direccion visual para que Lovable entregue una base funcional."
+            },
+            quiz: {
+              question: "Que hace revolucionario a Lovable para quien no sabe programar?",
+              options: [
+                "Transforma lenguaje natural en aplicaciones web funcionales con interfaz, logica y base de datos.",
+                "Crea solo prototipos visuales sin funcionalidad real.",
+                "Funciona solo para programadores.",
+                "Las apps solo funcionan dentro de la plataforma."
+              ],
+              correctIndex: 0,
+              explanation:
+                "El diferencial de Lovable es permitir que personas sin conocimiento tecnico creen aplicaciones funcionales directamente desde descripciones en texto."
+            },
+            takeaway:
+              "La mejor forma de usar Lovable nace de prompts claros, refinamiento progresivo y foco en aprender rapido a partir de una base funcional."
+          },
+          {
+            number: 2,
+            title: "Creando tu Primer Proyecto desde Cero con Lovable",
+            summary: "Proyecto AgendaPro, prompt inicial, evaluacion, dashboard, agenda, clientes, base de datos, login y publicacion.",
+            outcome: "Una vision completa de como pasar de cero a una app real construida por capas con Lovable.",
+            intro:
+              "En esta leccion acompanas la creacion de AgendaPro, un sistema de turnos para profesionales independientes, entendiendo cada decision, prompt y etapa del proceso.",
+            keyPoints: [
+              "Usar un proyecto concreto ayuda a memorizar el proceso y no solo conceptos sueltos.",
+              "El primer prompt debe definir pantallas, navegacion y estilo para dar estructura a la app.",
+              "El buen refinamiento conserva lo que ya funciona y corrige solo las partes necesarias.",
+              "Base de datos, login, pruebas completas y revision mobile convierten una base inicial en un producto util."
+            ],
+            lessonSteps: LOVABLE_MODULE_2_STEPS_ES,
+            promptExample:
+              "Crea una aplicacion llamada AgendaPro para profesionales independientes. La app debe tener 4 pantallas principales: Dashboard, Agenda, Clientes y Configuraciones. El Dashboard debe mostrar un resumen del dia. La pantalla de Agenda debe permitir crear y ver turnos. La pantalla de Clientes debe listar clientes y abrir detalles. La pantalla de Configuraciones debe permitir ajustar los datos del profesional. El estilo visual debe ser limpio y profesional, con azul oscuro, blanco, detalles dorados, fuentes modernas y navegacion intuitiva.",
+            practice: {
+              title: "Proyecto AgendaPro",
+              instruction: "Construye el prompt inicial de AgendaPro definiendo pantallas, objetivo y direccion visual.",
+              terms: [
+                "Dashboard",
+                "Agenda",
+                "Clientes",
+                "Configuraciones",
+                "limpio y profesional",
+                "azul oscuro, blanco y dorado"
+              ],
+              solution:
+                "El mejor punto de partida combina estructura de pantallas, publico y direccion visual para que Lovable genere una primera version coherente."
+            },
+            quiz: {
+              question: "Por que es una buena estrategia describir las 4 pantallas en el primer prompt?",
+              options: [
+                "Porque Lovable solo acepta prompts con multiples pantallas.",
+                "Porque elimina cualquier necesidad futura de refinamiento.",
+                "Porque Lovable organiza mejor menus, navegacion y relaciones entre pantallas cuando conoce el mapa del producto desde el inicio.",
+                "Porque crear todas las pantallas de una vez siempre genera mas errores."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Cuando la herramienta entiende la estructura completa del producto, puede construir una primera version mas consistente."
+            },
+            takeaway:
+              "Los buenos proyectos en Lovable nacen de claridad inicial, refinamiento por capas y publicacion solo despues de probar el flujo real."
+          },
+          {
+            number: 3,
+            title: "Edicion por Chat en Lovable",
+            summary: "Pedidos de edicion, ajustes visuales, funcionalidades, bugs, microcopy, estructura e historial de versiones.",
+            outcome: "Capacidad de evolucionar y corregir apps en Lovable con pedidos claros, seguros e iterativos.",
+            intro:
+              "En esta leccion aprendes a usar el chat de Lovable como centro de edicion continua, refinando visual, comportamiento, estructura y textos sin tocar codigo.",
+            keyPoints: [
+              "Los pedidos de edicion funcionan mejor cuando indican donde esta el problema, que esta mal y que debe ocurrir.",
+              "Los ajustes visuales y funcionales pueden agruparse con claridad para acelerar iteraciones.",
+              "Las buenas descripciones de bugs explican la accion, el resultado actual, el resultado esperado y la pantalla afectada.",
+              "El historial de versiones y las pruebas entre ediciones reducen el riesgo y hacen mas segura la evolucion de la app."
+            ],
+            lessonSteps: LOVABLE_MODULE_3_STEPS_ES,
+            promptExample:
+              "Haz los siguientes ajustes visuales: cambia el color de fondo del header a azul oscuro, aumenta el espaciado entre las cards del Dashboard de 8px a 16px, cambia la fuente de los titulos a Inter, deja las cards con una sombra mas suave y agrega un borde vertical verde en el lado izquierdo de cada card de cita confirmada.",
+            practice: {
+              title: "Pedido de edicion claro",
+              instruction: "Construye un pedido de edicion visual muy especifico para el Dashboard.",
+              terms: [
+                "color",
+                "azul oscuro",
+                "espaciado",
+                "16px",
+                "Inter",
+                "borde vertical verde"
+              ],
+              solution:
+                "Un buen pedido de edicion combina la ubicacion del cambio, el ajuste exacto y el resultado visual esperado en una sola instruccion clara."
+            },
+            quiz: {
+              question: "Que hace eficaz una descripcion de bug para Lovable?",
+              options: [
+                "Usar terminos tecnicos para sonar mas preciso.",
+                "Solo decir que algo no funciona.",
+                "Describir que hiciste, que paso, que deberia haber pasado y en que pantalla.",
+                "Reiniciar el proyecto y evitar mas detalles."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Esa estructura le da a Lovable el contexto necesario para encontrar la causa raiz con mas rapidez."
+            },
+            takeaway:
+              "Cuando dominas la edicion por chat, puedes iterar rapido, corregir con seguridad y hacer evolucionar la app sin perder control del proceso."
+          },
+          {
+            number: 4,
+            title: "Trabajando con Importaciones de Diseno en Lovable",
+            summary: "Figma, referencias visuales, componentes aislados, capturas anotadas y sistemas de diseno.",
+            outcome: "Capacidad de transformar materiales visuales en interfaces funcionales y consistentes dentro de Lovable.",
+            intro:
+              "En esta leccion aprendes a importar disenos existentes para acelerar la creacion de la app usando Figma, imagenes de referencia, componentes aislados y guias visuales completas.",
+            keyPoints: [
+              "La integracion con Figma ayuda a transformar layouts estaticos en interfaces funcionales con mucha menos ambiguedad.",
+              "Archivos organizados, con frames, componentes y estilos claros, mejoran mucho la calidad de la importacion.",
+              "Referencias en imagen, componentes aislados y capturas anotadas permiten ajustes mas quirurgicos.",
+              "Las importaciones grandes deben probarse por partes para reducir retrabajo y facilitar la correccion."
+            ],
+            lessonSteps: LOVABLE_MODULE_4_STEPS_ES,
+            promptExample:
+              "Para importar desde Figma en Lovable: abre tu archivo en Figma, selecciona el frame o componente que quieres importar, copia el link de comparticion del elemento, pega el enlace en el chat de Lovable con la instruccion de importar y espera a que Lovable convierta el diseno en codigo HTML y CSS funcional.",
+            practice: {
+              title: "Importacion guiada",
+              instruction: "Construye un pedido para usar una imagen de referencia como base visual de AgendaPro.",
+              terms: [
+                "arrastra y suelta o adjunta",
+                "crea",
+                "AgendaPro",
+                "mantener",
+                "adaptar"
+              ],
+              solution:
+                "Una buena importacion por imagen combina la referencia visual con instrucciones claras sobre que conservar y que adaptar al contexto real de la app."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al trabajar con importaciones de diseno en Lovable?",
+              options: [
+                "Importar disenos muy simples que Lovable podria crear por si solo.",
+                "Usar referencias visuales de apps competidoras.",
+                "Importar un diseno complejo completo sin probar pantalla por pantalla.",
+                "Mezclar importaciones de Figma con referencias en imagen dentro del mismo proyecto."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Cuando la importacion es muy grande, cualquier error se vuelve mas dificil de aislar y corregir sin afectar partes que ya estaban bien."
+            },
+            takeaway:
+              "Importar con organizacion y adaptar con intencion permite que Lovable una velocidad de desarrollo con consistencia visual."
+          },
+          {
+            number: 5,
+            title: "Escribiendo Contenido para Sitios y Apps en Lovable",
+            summary: "Titulos, subtitulos, CTAs, beneficios, microcopy, onboarding, estados vacios y e-mails.",
+            outcome: "Capacidad de escribir textos que convierten, orientan y construyen confianza en productos hechos con Lovable.",
+            intro:
+              "En esta leccion aprendes a escribir el contenido correcto para cada parte de tu app o sitio, convirtiendo palabras en claridad, accion y confianza.",
+            keyPoints: [
+              "Titulos y subtitulos deben comunicar valor rapido sin jerga ni promesas vagas.",
+              "CTAs, beneficios y microcopy funcionan mejor cuando explican impacto y reducen friccion.",
+              "Registro, onboarding y estados vacios son puntos criticos para guiar al usuario y aumentar activacion.",
+              "Un tono de voz consistente y e-mails automaticos bien escritos refuerzan la personalidad y la confianza en el producto."
+            ],
+            lessonSteps: LOVABLE_MODULE_5_STEPS_ES,
+            promptExample:
+              "Escribe el titulo, subtitulo, CTA principal y 4 beneficios de la home de AgendaPro. El tono debe ser claro, profesional y accesible para profesionales independientes.",
+            practice: {
+              title: "Titulo y CTA",
+              instruction: "Construye un titulo principal y un CTA fuerte para la home de AgendaPro.",
+              terms: [
+                "Agendamientos online",
+                "profesionales independientes",
+                "planilla o WhatsApp",
+                "Crear mi cuenta gratis"
+              ],
+              solution:
+                "Una buena combinacion de titulo y CTA deja claro el valor del producto y muestra el siguiente paso sin generar duda."
+            },
+            quiz: {
+              question: "Que hace que un CTA sea significativamente mas eficaz que otro?",
+              options: [
+                "Usar colores mas llamativos en el boton para atraer la vista.",
+                "Hacer el boton mas grande que todos los otros elementos.",
+                "Especificar que ocurre despues del clic y reducir el riesgo percibido.",
+                "Los CTAs con mas de 5 palabras siempre convierten mejor."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Los mejores CTAs convierten porque reducen la incertidumbre y muestran con claridad que gana el usuario al hacer clic."
+            },
+            takeaway:
+              "Cuando el contenido esta bien escrito, Lovable deja de entregar solo una interfaz bonita y pasa a entregar una experiencia que realmente convierte."
+          },
+          {
+            number: 6,
+            title: "Planes, Precios y Como Lanzar tu App en Lovable",
+            summary: "Creditos, planes, top-ups, dominio personalizado, publicacion y eleccion de plan.",
+            outcome: "Capacidad de publicar con seguridad y elegir el plan adecuado para cada etapa del proyecto.",
+            intro:
+              "En esta leccion aprendes como funcionan los creditos de Lovable, que ofrece cada plan y que revisar antes de poner tu app en linea.",
+            keyPoints: [
+              "El sistema de creditos cambia segun la complejidad del pedido, y una buena estrategia evita desperdicio.",
+              "Cada plan encaja con un momento distinto, desde el aprendizaje individual hasta la operacion corporativa.",
+              "Los top-ups ayudan en picos puntuales, pero una necesidad recurrente suele indicar que conviene hacer upgrade.",
+              "Publicar bien implica revisar responsividad, flujos de datos, dominio y experiencia real del usuario."
+            ],
+            lessonSteps: LOVABLE_MODULE_6_STEPS_ES,
+            promptExample:
+              "Consumen mas creditos: crear una pantalla nueva desde cero, agregar funcionalidades complejas con base de datos y autenticacion. Consumen menos creditos: ajustes visuales simples, cambios de texto y correcciones pequenas de layout.",
+            practice: {
+              title: "Plan correcto",
+              instruction: "Construye una recomendacion simple de plan para un freelancer que lanza su primera app.",
+              terms: [
+                "freelancer",
+                "Pro",
+                "dominio",
+                "privados",
+                "haz upgrade"
+              ],
+              solution:
+                "La mejor recomendacion combina etapa del proyecto, necesidad de privacidad, publicacion profesional y uso real de creditos por mes."
+            },
+            quiz: {
+              question: "Por que es esencial probar la aplicacion en distintos tamanos de pantalla antes de publicar?",
+              options: [
+                "Porque Lovable exige una aprobacion formal de responsividad antes de publicar.",
+                "Para cumplir regulaciones generales de accesibilidad digital.",
+                "Porque los usuarios entraran desde moviles, tablets y computadoras, y una mala experiencia en cualquiera de ellos cuesta usuarios.",
+                "La responsividad solo importa en apps con publico mayoritariamente mobile."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Una publicacion solo esta lista cuando la experiencia funciona bien en los dispositivos reales del usuario."
+            },
+            takeaway:
+              "Elegir bien el plan, administrar los creditos y publicar con criterio cierra la ruta de Lovable con mentalidad de producto real y no solo de prototipo."
+          }
+        ]
+      },
+      fr: {
+        statusBadge: "Parcours actif",
+        heroEyebrow: "Lovable",
+        heroTitle: "Lovable creant des apps avec l'IA.",
+        heroDescription:
+          "Un parcours pour transformer des idees en applications fonctionnelles avec langage naturel, raffinement iteratif et publication rapide.",
+        overviewTitle: "Ce que vous allez maitriser",
+        overviewItems: [
+          "Comment decrire une app clairement pour que Lovable genere interface, logique et donnees.",
+          "Comment affiner l'application par etapes, ajouter base de donnees, login et integrations externes.",
+          "Comment publier, valider des idees et utiliser de bonnes pratiques pour reduire le retravail."
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points cles",
+        promptLabel: "Prompt de reference",
+        practiceLabel: "Pratique guidee",
+        termsLabel: "Termes",
+        solutionLabel: "Reponse attendue",
+        quizLabel: "Checkpoint",
+        correctLabel: "Bonne reponse",
+        takeawayLabel: "Lecture finale",
+        modules: [
+          {
+            number: 1,
+            title: "Lovable Creer des Applications avec l'Intelligence Artificielle",
+            summary: "Ce qu'est Lovable, flux de creation, types d'apps, raffinement et publication.",
+            outcome: "Base solide pour transformer des idees en applications fonctionnelles avec des prompts clairs.",
+            intro:
+              "Dans cette lecon, vous allez comprendre ce qui rend Lovable special, comment decrire votre premiere application et comment faire evoluer cette base jusqu'a une version publiable.",
+            keyPoints: [
+              "Lovable transforme le langage naturel en apps web avec interface, logique et base de donnees.",
+              "Des prompts clairs sur l'objectif, les fonctions et le visuel ameliorent fortement la premiere generation.",
+              "Le meilleur chemin consiste a construire une base fonctionnelle et a la raffiner par petites etapes.",
+              "La publication rapide et la logique MVP reduisent la distance entre idee, validation et produit."
+            ],
+            lessonSteps: LOVABLE_MODULE_1_STEPS_FR,
+            promptExample:
+              "Cree une application de liste de taches ou l'utilisateur peut ajouter des taches, modifier des taches et supprimer des taches. Le visuel doit etre propre et moderne avec des couleurs bleu et blanc.",
+            practice: {
+              title: "Premiere app dans Lovable",
+              instruction: "Construisez un prompt initial pour une application simple dans Lovable.",
+              terms: [
+                "liste de taches",
+                "ajouter des taches",
+                "modifier des taches",
+                "supprimer des taches",
+                "propre et moderne",
+                "bleu et blanc"
+              ],
+              solution:
+                "Un bon prompt initial combine objectif, actions principales et direction visuelle afin que Lovable livre une base fonctionnelle utile."
+            },
+            quiz: {
+              question: "Qu'est-ce qui rend Lovable revolutionnaire pour quelqu'un qui ne sait pas programmer ?",
+              options: [
+                "Il transforme le langage naturel en applications web fonctionnelles avec interface, logique et base de donnees.",
+                "Il ne cree que des prototypes visuels sans vraie fonctionnalite.",
+                "Il fonctionne uniquement pour des programmeurs.",
+                "Les apps ne fonctionnent qu'a l'interieur de la plateforme."
+              ],
+              correctIndex: 0,
+              explanation:
+                "Le grand differenciateur de Lovable est de permettre a des personnes non techniques de creer des applications fonctionnelles a partir de simples descriptions."
+            },
+            takeaway:
+              "La meilleure facon d'utiliser Lovable commence avec des prompts clairs, un raffinement progressif et une recherche d'apprentissage rapide a partir d'une base fonctionnelle."
+          },
+          {
+            number: 2,
+            title: "Creer Votre Premier Projet depuis Zero avec Lovable",
+            summary: "Projet AgendaPro, prompt initial, evaluation, dashboard, agenda, clients, base de donnees, login et publication.",
+            outcome: "Une vue complete pour passer de zero a une vraie application construite par etapes avec Lovable.",
+            intro:
+              "Dans cette lecon, vous suivez la creation d'AgendaPro, un systeme de prise de rendez-vous pour travailleurs independants, en comprenant chaque decision, prompt et etape du processus.",
+            keyPoints: [
+              "Utiliser un projet concret aide a memoriser le processus plutot que des concepts isoles.",
+              "Le premier prompt doit definir ecrans, navigation et style pour donner une structure solide a l'application.",
+              "Un bon raffinement preserve ce qui fonctionne deja et corrige seulement les parties a ajuster.",
+              "Base de donnees, login, tests complets et verification mobile transforment une premiere base en produit utilisable."
+            ],
+            lessonSteps: LOVABLE_MODULE_2_STEPS_FR,
+            promptExample:
+              "Creez une application appelee AgendaPro pour des professionnels independants. L'application doit avoir 4 ecrans principaux : Dashboard, Agenda, Clients et Parametres. Le Dashboard doit afficher un resume de la journee. L'ecran Agenda doit permettre de creer et de voir les rendez-vous. L'ecran Clients doit lister les clients et ouvrir leurs details. L'ecran Parametres doit permettre d'ajuster les donnees du professionnel. Le style visuel doit etre propre et professionnel, avec bleu fonce, blanc, details dores, polices modernes et navigation intuitive.",
+            practice: {
+              title: "Projet AgendaPro",
+              instruction: "Construisez le prompt initial d'AgendaPro en definissant ecrans, objectif et direction visuelle.",
+              terms: [
+                "Dashboard",
+                "Agenda",
+                "Clients",
+                "Parametres",
+                "propre et professionnel",
+                "bleu fonce, blanc et dore"
+              ],
+              solution:
+                "Le meilleur point de depart combine structure des ecrans, public cible et direction visuelle afin que Lovable genere une premiere version coherente."
+            },
+            quiz: {
+              question: "Pourquoi est-ce une bonne strategie de decrire les 4 ecrans dans le premier prompt ?",
+              options: [
+                "Parce que Lovable n'accepte que des prompts avec plusieurs ecrans.",
+                "Parce que cela supprime tout besoin futur de raffinement.",
+                "Parce que Lovable organise mieux menus, navigation et relations entre ecrans lorsqu'il connait la carte du produit des le debut.",
+                "Parce que creer tous les ecrans d'un coup provoque toujours plus d'erreurs."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quand l'outil comprend la structure complete du produit, il peut generer une premiere version bien plus coherente."
+            },
+            takeaway:
+              "Les bons projets Lovable commencent par une vision claire, evoluent par couches et ne sont publies qu'apres un vrai test du flux principal."
+          },
+          {
+            number: 3,
+            title: "Edition par Chat dans Lovable",
+            summary: "Demandes d'edition, ajustements visuels, fonctionnalites, bugs, microcopy, structure et historique des versions.",
+            outcome: "Capacite a faire evoluer et corriger des apps Lovable avec des demandes claires, sures et iteratives.",
+            intro:
+              "Dans cette lecon, vous apprenez a utiliser le chat de Lovable comme centre d'edition continue, en affinant le visuel, le comportement, la structure et les textes sans toucher au code.",
+            keyPoints: [
+              "Les demandes d'edition fonctionnent mieux quand elles indiquent ou se trouve le probleme, ce qui ne va pas et ce qui doit se passer.",
+              "Les ajustements visuels et fonctionnels peuvent etre regroupes clairement pour accelerer les iterations.",
+              "Les bonnes descriptions de bugs expliquent l'action, le resultat actuel, le resultat attendu et l'ecran concerne.",
+              "L'historique des versions et les tests entre editions reduisent le risque et rendent l'evolution de l'app plus sure."
+            ],
+            lessonSteps: LOVABLE_MODULE_3_STEPS_FR,
+            promptExample:
+              "Faites les ajustements visuels suivants : changez la couleur de fond du header en bleu fonce, augmentez l'espacement entre les cartes du Dashboard de 8px a 16px, changez la police des titres en Inter, rendez les cards avec une ombre plus douce et ajoutez une bordure verticale verte sur le cote gauche de chaque carte de rendez-vous confirme.",
+            practice: {
+              title: "Demande d'edition claire",
+              instruction: "Construisez une demande d'edition visuelle tres precise pour le Dashboard.",
+              terms: [
+                "couleur",
+                "bleu fonce",
+                "espacement",
+                "16px",
+                "Inter",
+                "bordure verticale verte"
+              ],
+              solution:
+                "Une bonne demande d'edition combine l'emplacement du changement, l'ajustement exact et le resultat visuel attendu dans une seule instruction claire."
+            },
+            quiz: {
+              question: "Qu'est-ce qui rend une description de bug efficace pour Lovable ?",
+              options: [
+                "Utiliser des termes techniques pour sembler plus precis.",
+                "Dire seulement que quelque chose ne fonctionne pas.",
+                "Decrire ce que vous avez fait, ce qui s'est passe, ce qui aurait du se passer et sur quel ecran.",
+                "Redemarrer le projet et eviter plus de details."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Cette structure donne a Lovable le contexte necessaire pour trouver la cause racine plus rapidement."
+            },
+            takeaway:
+              "Quand vous maitrisez l'edition par chat, vous pouvez iterer vite, corriger avec surete et faire evoluer l'application sans perdre le controle du processus."
+          },
+          {
+            number: 4,
+            title: "Travailler avec les Importations de Design dans Lovable",
+            summary: "Figma, references visuelles, composants isoles, captures annotees et systemes de design.",
+            outcome: "Capacite a transformer des materiaux visuels en interfaces fonctionnelles et coherentes dans Lovable.",
+            intro:
+              "Dans cette lecon, vous apprenez a importer des designs existants pour accelerer la creation de l'application en utilisant Figma, des images de reference, des composants isoles et des guides visuels complets.",
+            keyPoints: [
+              "L'integration Figma aide a transformer des layouts statiques en interfaces fonctionnelles avec beaucoup moins d'ambiguite.",
+              "Des fichiers organises, avec frames, composants et styles clairs, ameliorent fortement la qualite de l'importation.",
+              "Les references image, composants isoles et captures annotees permettent des ajustements plus chirurgicaux.",
+              "Les grandes importations doivent etre testees par parties pour reduire le retravail et faciliter les corrections."
+            ],
+            lessonSteps: LOVABLE_MODULE_4_STEPS_FR,
+            promptExample:
+              "Pour importer depuis Figma dans Lovable : ouvrez votre fichier dans Figma, selectionnez le frame ou le composant que vous voulez importer, copiez le lien de partage de cet element, collez le lien dans le chat de Lovable avec l'instruction d'importation et attendez que Lovable convertisse le design en code HTML et CSS fonctionnel.",
+            practice: {
+              title: "Importation guidee",
+              instruction: "Construisez une demande pour utiliser une image de reference comme base visuelle d'AgendaPro.",
+              terms: [
+                "glissez-deposez ou joignez",
+                "cree",
+                "AgendaPro",
+                "conserver",
+                "adapter"
+              ],
+              solution:
+                "Une bonne importation basee sur une image combine la reference visuelle avec des consignes claires sur ce qu'il faut conserver et ce qu'il faut adapter au contexte reel de l'application."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante lorsqu'on travaille avec des importations de design dans Lovable ?",
+              options: [
+                "Importer des designs tres simples que Lovable pourrait creer seul.",
+                "Utiliser des references visuelles d'applications concurrentes.",
+                "Importer un design complexe complet sans tester ecran par ecran.",
+                "Melanger les importations Figma et les references image dans le meme projet."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Quand l'importation est trop vaste, toute erreur devient plus difficile a isoler et a corriger sans affecter les parties deja correctes."
+            },
+            takeaway:
+              "Importer avec organisation et adapter avec intention permet a Lovable d'unir vitesse de developpement et coherence visuelle."
+          },
+          {
+            number: 5,
+            title: "Ecrire du Contenu pour Sites et Apps dans Lovable",
+            summary: "Titres, sous-titres, CTA, benefices, microcopy, onboarding, etats vides et emails.",
+            outcome: "Capacite a rediger des textes qui convertissent, orientent et construisent la confiance dans des produits realises avec Lovable.",
+            intro:
+              "Dans cette lecon, vous apprenez a rediger le bon contenu pour chaque partie de votre application ou site, en transformant les mots en clarte, action et confiance.",
+            keyPoints: [
+              "Les titres et sous-titres doivent communiquer rapidement la valeur sans jargon ni promesses floues.",
+              "CTA, benefices et microcopy fonctionnent mieux lorsqu'ils expliquent l'impact et reduisent la friction.",
+              "Inscription, onboarding et etats vides sont des points critiques pour guider l'utilisateur et augmenter l'activation.",
+              "Un ton de voix coherent et des emails automatiques bien rediges renforcent la personnalite du produit et la confiance."
+            ],
+            lessonSteps: LOVABLE_MODULE_5_STEPS_FR,
+            promptExample:
+              "Ecrivez le titre, le sous-titre, le CTA principal et 4 benefices pour la page d'accueil d'AgendaPro. Le ton doit etre clair, professionnel et accessible pour des professionnels independants.",
+            practice: {
+              title: "Titre et CTA",
+              instruction: "Construisez un titre principal et un CTA fort pour la page d'accueil d'AgendaPro.",
+              terms: [
+                "Prise de rendez-vous en ligne",
+                "professionnels independants",
+                "tableur ou WhatsApp",
+                "Creer mon compte gratuit"
+              ],
+              solution:
+                "Une bonne combinaison titre plus CTA rend la valeur du produit evidente et montre la prochaine etape sans creer d'hesitation."
+            },
+            quiz: {
+              question: "Qu'est-ce qui rend un CTA significativement plus efficace qu'un autre ?",
+              options: [
+                "Utiliser des couleurs plus vives sur le bouton pour attirer le regard.",
+                "Rendre le bouton plus grand que tous les autres elements de la page.",
+                "Preciser ce qui se passe apres le clic et reduire le risque percu.",
+                "Les CTA de plus de 5 mots convertissent toujours mieux."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Les meilleurs CTA convertissent parce qu'ils reduisent l'incertitude et montrent clairement ce que l'utilisateur gagne en cliquant."
+            },
+            takeaway:
+              "Quand le contenu est bien redige, Lovable ne livre pas seulement une belle interface, mais une experience qui convertit vraiment."
+          },
+          {
+            number: 6,
+            title: "Plans, Tarifs et Comment Lancer Votre App dans Lovable",
+            summary: "Credits, plans, top-ups, domaine personnalise, publication et choix du plan.",
+            outcome: "Capacite a publier avec assurance et a choisir le bon plan pour chaque etape du projet.",
+            intro:
+              "Dans cette lecon, vous apprenez comment fonctionnent les credits de Lovable, ce que propose chaque plan et quels points verifier avant de mettre votre app en ligne.",
+            keyPoints: [
+              "Le systeme de credits varie selon la complexite des demandes, et une bonne strategie d'usage evite le gaspillage.",
+              "Chaque plan correspond a un moment different, de l'apprentissage individuel a l'operation corporate.",
+              "Les top-ups aident lors de pics ponctuels, mais un besoin recurrent signale souvent qu'un upgrade est plus adapte.",
+              "Bien publier suppose de verifier responsivite, flux de donnees, domaine et experience utilisateur reelle."
+            ],
+            lessonSteps: LOVABLE_MODULE_6_STEPS_FR,
+            promptExample:
+              "Consomment plus de credits : creer un nouvel ecran depuis zero, ajouter des fonctionnalites complexes avec base de donnees et authentification. Consomment moins de credits : ajustements visuels simples, changements de texte et corrections ponctuelles de layout.",
+            practice: {
+              title: "Bon plan",
+              instruction: "Construisez une recommandation simple de plan pour un freelance qui lance sa premiere application.",
+              terms: [
+                "freelance",
+                "Pro",
+                "domaine",
+                "prives",
+                "faites upgrade"
+              ],
+              solution:
+                "La meilleure recommandation combine etape du projet, besoin de confidentialite, publication professionnelle et usage reel des credits."
+            },
+            quiz: {
+              question: "Pourquoi est-il essentiel de tester l'application sur differentes tailles d'ecran avant de publier ?",
+              options: [
+                "Parce que Lovable exige une validation formelle de la responsivite avant publication.",
+                "Pour respecter des regles generales d'accessibilite numerique.",
+                "Parce que les utilisateurs viendront depuis mobiles, tablettes et ordinateurs, et qu'une mauvaise experience sur l'un d'eux fait perdre des utilisateurs.",
+                "La responsivite ne compte que pour les applications principalement mobiles."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Une publication n'est vraiment prete que lorsque l'experience fonctionne bien sur les appareils reels des utilisateurs."
+            },
+            takeaway:
+              "Bien choisir son plan, gerer les credits et publier avec rigueur clot le parcours Lovable avec une logique de produit reel et non de simple prototype."
           }
         ]
       }

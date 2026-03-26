@@ -752,7 +752,7 @@ const Profile = () => {
 
                   <div className="py-4 space-y-6">
                     {isInstalled ? (
-                      <div className="p-12 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 flex flex-col items-center gap-4 text-center">
+                      <div className="p-6 sm:p-12 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 flex flex-col items-center gap-4 text-center">
                         <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center">
                           <Award className="w-8 h-8 text-emerald-500" />
                         </div>
@@ -922,7 +922,7 @@ const Profile = () => {
 
             <TabsContent value="account" className="space-y-6">
               {/* Card principal com bg-card */}
-              <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
+              <Card className="p-6 sm:p-8 rounded-3xl bg-card border text-card-foreground">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-3 text-foreground">
                   <Settings className="w-5 h-5 text-primary" />
                   {t('profile.accountDetails')}
@@ -979,7 +979,7 @@ const Profile = () => {
                 </form>
               </Card>
 
-              <Card className="p-6 rounded-3xl bg-card border text-card-foreground">
+              <Card className="p-6 sm:p-8 rounded-3xl bg-card border text-card-foreground">
                 <div className="flex items-center justify-between gap-4">
                   <div className="space-y-1">
                     <h4 className="text-base font-bold text-foreground">
@@ -996,7 +996,7 @@ const Profile = () => {
 
             <TabsContent value="achievements" className="space-y-6">
               {/* Card conquistas com bg-card */}
-              <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
+              <Card className="p-6 sm:p-8 rounded-3xl bg-card border text-card-foreground">
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h3 className="text-xl font-bold flex items-center gap-3 text-foreground mb-2">
@@ -1076,7 +1076,7 @@ const Profile = () => {
 
             <TabsContent value="notifications" className="space-y-6">
               {/* Card notificações com bg-card */}
-              <Card className="p-8 rounded-3xl bg-card border text-card-foreground">
+              <Card className="p-6 sm:p-8 rounded-3xl bg-card border text-card-foreground">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-3 text-foreground">
                   <Bell className="w-5 h-5 text-blue-500" />
                   {t('profile.notificationSettings')}

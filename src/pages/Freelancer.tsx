@@ -448,67 +448,67 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] max-w-5xl overflow-hidden rounded-3xl border-border bg-card p-0">
+      <DialogContent className="max-h-[90vh] w-[95vw] max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl border-border bg-card p-0">
         <div className="flex max-h-[90vh] flex-col">
-          <div className="border-b border-border bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-background px-6 py-6">
+          <div className="border-b border-border bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-background px-4 py-4 sm:px-6 sm:py-6">
             <DialogHeader className="space-y-2 text-left">
               <div className="inline-flex w-fit items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-orange-700 dark:bg-orange-900/30 dark:text-orange-200">
                 {tutorial.badge}
               </div>
-              <DialogTitle className="text-2xl font-bold leading-tight text-foreground">
+              <DialogTitle className="text-lg sm:text-2xl font-bold leading-tight text-foreground">
                 {tutorial.title}
               </DialogTitle>
-              <DialogDescription className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              <DialogDescription className="max-w-3xl text-xs sm:text-sm leading-relaxed text-muted-foreground">
                 {tutorial.description}
               </DialogDescription>
             </DialogHeader>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-6 py-6">
+          <div className="flex-1 overflow-y-auto px-3 py-4 sm:px-6 sm:py-6">
             <Carousel setApi={setCarouselApi} opts={{ align: "start", loop: false }} className="w-full">
               <CarouselContent>
                 {tutorial.slides.map((slide, index) => (
                   <CarouselItem key={slide.id}>
-                    <div className="flex flex-col gap-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between gap-3">
+                    <div className="flex flex-col gap-4 sm:gap-6">
+                      <div className="space-y-3 sm:space-y-4">
+                        <div className="flex items-center justify-between gap-2 sm:gap-3">
                           <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-orange-600 dark:text-orange-300">
+                            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-orange-600 dark:text-orange-300">
                               {slide.eyebrow}
                             </p>
-                            <h3 className="mt-2 text-2xl font-bold text-foreground">{slide.title}</h3>
+                            <h3 className="mt-1 sm:mt-2 text-lg sm:text-2xl font-bold text-foreground">{slide.title}</h3>
                           </div>
-                          <div className="rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-semibold text-muted-foreground">
+                          <div className="rounded-full border border-border bg-muted/60 px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold text-muted-foreground whitespace-nowrap">
                             {index + 1} / {tutorial.slides.length}
                           </div>
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {slide.paragraphs.map((paragraph) => (
-                            <p key={paragraph} className="text-sm leading-7 text-muted-foreground">
+                            <p key={paragraph} className="text-xs sm:text-sm leading-6 sm:leading-7 text-muted-foreground">
                               {paragraph}
                             </p>
                           ))}
                         </div>
 
                         {slide.calloutTitle && slide.calloutText ? (
-                          <div className="rounded-2xl border border-orange-200/70 bg-orange-50/80 p-4 dark:border-orange-900/60 dark:bg-orange-950/20">
-                            <p className="text-sm font-semibold text-foreground">{slide.calloutTitle}</p>
-                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{slide.calloutText}</p>
+                          <div className="rounded-xl sm:rounded-2xl border border-orange-200/70 bg-orange-50/80 p-3 sm:p-4 dark:border-orange-900/60 dark:bg-orange-950/20">
+                            <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.calloutTitle}</p>
+                            <p className="mt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground">{slide.calloutText}</p>
                           </div>
                         ) : null}
 
                         {slide.checklistTitle ? (
-                          <div className="rounded-2xl border border-border bg-muted/40 p-4">
-                            <p className="text-sm font-semibold text-foreground">{slide.checklistTitle}</p>
+                          <div className="rounded-xl sm:rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
+                            <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.checklistTitle}</p>
                             {slide.checklistIntro ? (
-                              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{slide.checklistIntro}</p>
+                              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">{slide.checklistIntro}</p>
                             ) : null}
                             {slide.checklistItems?.length ? (
                               <ul className="mt-3 space-y-2">
                                 {slide.checklistItems.map((item) => (
-                                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange-500" />
+                                  <li key={item} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+                                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-orange-500" />
                                     <span>{item}</span>
                                   </li>
                                 ))}
@@ -518,9 +518,9 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
                         ) : null}
 
                         {slide.completionTitle && slide.completionBadge ? (
-                          <div className="rounded-2xl border border-emerald-200/70 bg-emerald-50/80 p-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
-                            <p className="text-sm font-semibold text-foreground">{slide.completionTitle}</p>
-                            <p className="mt-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                          <div className="rounded-xl sm:rounded-2xl border border-emerald-200/70 bg-emerald-50/80 p-3 sm:p-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
+                            <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.completionTitle}</p>
+                            <p className="mt-2 text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300">
                               {slide.completionBadge} {"\u2713"}
                             </p>
                           </div>
@@ -528,11 +528,11 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
                       </div>
 
                       <div>
-                        <div className="flex min-h-[260px] items-center justify-center overflow-hidden rounded-3xl border border-border bg-muted/40 p-3 shadow-sm">
+                        <div className="flex min-h-[160px] sm:min-h-[260px] items-center justify-center overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-muted/40 p-2 sm:p-3 shadow-sm">
                           <img
                             src={getTutorialImagePath(language, slide.imageNumber)}
                             alt={`${slide.title} - Freelancer tutorial`}
-                            className="max-h-[520px] w-full rounded-2xl object-contain"
+                            className="max-h-[280px] sm:max-h-[520px] w-full rounded-xl sm:rounded-2xl object-contain"
                             loading="lazy"
                           />
                         </div>
@@ -542,22 +542,23 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
                 ))}
               </CarouselContent>
 
+              {/* Navigation arrows - hidden on mobile, swipe is used instead */}
               <CarouselPrevious
                 variant="secondary"
                 size="icon"
-                className="left-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border border-border bg-background/90 shadow-lg backdrop-blur hover:bg-background"
+                className="hidden sm:flex left-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border border-border bg-background/90 shadow-lg backdrop-blur hover:bg-background"
               />
               <CarouselNext
                 variant="secondary"
                 size="icon"
-                className="right-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border border-border bg-background/90 shadow-lg backdrop-blur hover:bg-background"
+                className="hidden sm:flex right-3 top-1/2 z-20 h-11 w-11 -translate-y-1/2 rounded-full border border-border bg-background/90 shadow-lg backdrop-blur hover:bg-background"
               />
             </Carousel>
           </div>
 
-          <div className="border-t border-border px-6 py-4">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="flex flex-wrap items-center gap-2">
+          <div className="border-t border-border px-4 py-3 sm:px-6 sm:py-4">
+            <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 {tutorial.slides.map((slide, index) => (
                   <button
                     key={slide.id}

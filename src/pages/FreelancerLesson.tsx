@@ -41,11 +41,11 @@ const FinalCard = ({ moduleNumber, isSavingProgress, onComplete }: FinalCardProp
   const { t, i18n } = useTranslation();
   
   return (
-    <div className="animate-in zoom-in duration-700 bg-[#0f172a] rounded-[40px] p-12 text-white text-center shadow-2xl shadow-slate-200">
+    <div className="animate-in zoom-in duration-700 bg-[#0f172a] rounded-3xl sm:rounded-[40px] p-6 sm:p-12 text-white text-center shadow-2xl shadow-slate-200">
       <div className="w-20 h-20 bg-[#f97316] rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-orange-500/30">
         <CheckCircle2 className="w-10 h-10 text-white" />
       </div>
-      <h3 className="text-[34px] font-[900] mb-4 tracking-tight leading-tight">
+      <h3 className="text-2xl sm:text-[34px] font-[900] mb-4 tracking-tight leading-tight">
         {tUi(t, i18n.language, "freelancer.lesson.moduleComplete")}
       </h3>
       <p className="text-slate-400 mb-8">
@@ -368,7 +368,7 @@ const FreelancerLesson = () => {
       <div
         ref={contentRef}
         className={cn(
-          "max-w-2xl mx-auto px-6 space-y-16 pb-40 transition-padding duration-300",
+          "max-w-2xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16 pb-40 transition-padding duration-300",
           isHeaderVisible ? "pt-24" : "pt-6",
         )}
       >
@@ -393,7 +393,7 @@ const FreelancerLesson = () => {
                     </span>
 
                     {step.title && (
-                      <h2 className="text-[32px] font-[900] text-[#0f172a] leading-[1.15] tracking-tight">
+                      <h2 className="text-2xl sm:text-[32px] font-[900] text-[#0f172a] leading-[1.15] tracking-tight">
                         {step.title}
                       </h2>
                     )}
@@ -401,7 +401,7 @@ const FreelancerLesson = () => {
 
                   <div className="space-y-6">
                     {step.content?.split("\n").map((paragraph, pIndex) => (
-                      <p key={pIndex} className="text-[18px] text-[#475569]/80 leading-relaxed font-normal">
+                      <p key={pIndex} className="text-base sm:text-[18px] text-[#475569]/80 leading-relaxed font-normal">
                         {renderFormattedText(paragraph)}
                       </p>
                     ))}

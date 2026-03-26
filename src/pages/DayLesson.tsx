@@ -11,6 +11,8 @@ import { useTranslatedLessonContent } from "@/hooks/useTranslatedLessonContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
+import { MilestoneUpsellModal, MILESTONE_DAYS } from "@/components/lesson/MilestoneUpsellModal";
+import { useProductAccess } from "@/hooks/useProductAccess";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -120,6 +122,7 @@ const DayLesson = () => {
   const { dayId } = useParams();
   const navigate = useNavigate();
   const { playCorrect, playIncorrect, playContinue } = useQuizSounds();
+  const { ai_hub: hasAiHub } = useProductAccess();
 
   // Estados da Lição
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -128,6 +131,8 @@ const DayLesson = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showPracticeModal, setShowPracticeModal] = useState(false);
   const [isCompletingDay, setIsCompletingDay] = useState(false);
+  const [pendingMilestoneDay, setPendingMilestoneDay] = useState<number | null>(null);
+  const [showMilestoneUpsell, setShowMilestoneUpsell] = useState(false);
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
@@ -392,6 +397,16 @@ const DayLesson = () => {
             }
           }
         }
+
+          // Mark milestone for showing AFTER TrailChat closes (only for non-AI-Hub users)
+          if (
+            dayInfo &&
+            (MILESTONE_DAYS as readonly number[]).includes(dayInfo.dayNumber) &&
+            !hasAiHub
+          ) {
+            setPendingMilestoneDay(dayInfo.dayNumber);
+          }
+
         setShowPracticeModal(true);
       } catch (error) {
         setIsCompletingDay(false);
@@ -952,9 +967,30 @@ const DayLesson = () => {
         />
       )}
 
+      {/* Milestone Upsell CTA - Shows AFTER TrailChat closes on days 5, 10, 15, 20, 25, 28 */}
+      {showMilestoneUpsell && pendingMilestoneDay && (
+        <MilestoneUpsellModal
+          dayNumber={pendingMilestoneDay}
+          isOpen={showMilestoneUpsell}
+          onClose={() => {
+            setShowMilestoneUpsell(false);
+            setPendingMilestoneDay(null);
+            navigate("/dashboard");
+          }}
+        />
+      )}
+
       <TrailChat
         isOpen={showPracticeModal}
-        onClose={() => { setShowPracticeModal(false); navigate("/dashboard"); }}
+        onClose={() => {
+          setShowPracticeModal(false);
+          // If there's a pending milestone, show the upsell modal instead of navigating
+          if (pendingMilestoneDay) {
+            setShowMilestoneUpsell(true);
+          } else {
+            navigate("/dashboard");
+          }
+        }}
         toolContext="Desafio 28 Dias"
         accentColor="#6366f1"
         language={i18n.language}
