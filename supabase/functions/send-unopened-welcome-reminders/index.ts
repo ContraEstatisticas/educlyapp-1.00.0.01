@@ -76,6 +76,7 @@ serve(async (req) => {
     }
 
     // Auth check
+    const anonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
     const authHeader = req.headers.get("authorization") || "";
     const bearerToken = authHeader.toLowerCase().startsWith("bearer ")
       ? authHeader.slice(7).trim()
@@ -84,9 +85,11 @@ serve(async (req) => {
 
     const isAuthorized =
       (cronSecret.length > 0 && (bearerToken === cronSecret || bodySecret === cronSecret)) ||
-      bearerToken === serviceRoleKey;
+      bearerToken === serviceRoleKey ||
+      bearerToken === anonKey;
 
     if (!isAuthorized) {
+      console.error("[send-unopened-welcome-reminders] Unauthorized: bearer token does not match any accepted key");
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
