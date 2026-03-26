@@ -267,6 +267,13 @@ serve(async (req) => {
 
         const emailType = reminderType === "6h" ? "welcome_reminder_6h" : "welcome_reminder_48h";
 
+        // Determine language source for telemetry
+        const languageSource = userId && userLanguageMap.has(userId)
+          ? "profile"
+          : (typeof metadata.language === "string" && metadata.language.trim().length > 0)
+            ? "welcome_metadata"
+            : "fallback_en";
+
         await callInternalFunction({
           functionName: "send-welcome-email",
           supabaseUrl,
@@ -285,6 +292,7 @@ serve(async (req) => {
               original_email_type: row.email_type,
               hours_since_original: Math.round(hoursSinceSent),
               override_email_type: emailType,
+              language_source: languageSource,
             },
           },
         });

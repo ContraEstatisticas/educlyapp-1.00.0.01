@@ -408,12 +408,32 @@ serve(async (req) => {
       );
     }
 
-    const normalizedLang = language.toLowerCase().split("-")[0] || "en";
     const userId = await resolveUserId({
       supabaseAdmin,
       explicitUserId,
       accessToken: accessToken || null,
     });
+
+    // For reminder emails, always resolve language from the user's profile
+    let normalizedLang = language.toLowerCase().split("-")[0] || "en";
+    let languageSource = "body_param";
+
+    if (mode === "magic_link_reminder" && userId) {
+      const { data: profileData } = await supabaseAdmin
+        .from("profiles")
+        .select("preferred_language")
+        .eq("id", userId)
+        .maybeSingle();
+
+      const profileLang = profileData?.preferred_language;
+      if (typeof profileLang === "string" && profileLang.trim().length > 0) {
+        const resolved = profileLang.trim().toLowerCase().split("-")[0];
+        if (["pt", "en", "es", "fr", "de", "it", "ru"].includes(resolved)) {
+          normalizedLang = resolved;
+          languageSource = "profile";
+        }
+      }
+    }
 
     // Allow override_email_type from metadata (used by welcome reminders)
     const overrideEmailType = typeof customMetadata.override_email_type === "string"
@@ -447,6 +467,7 @@ serve(async (req) => {
       ...customMetadata,
       mode,
       language: normalizedLang,
+      language_source: languageSource,
       user_name: userName,
     };
 
