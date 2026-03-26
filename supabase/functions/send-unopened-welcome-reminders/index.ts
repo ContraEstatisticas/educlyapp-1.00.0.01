@@ -152,8 +152,21 @@ serve(async (req) => {
 
     const usersWithSessions = new Set<string>();
     const usersWithRecentSessions = new Set<string>();
+    const userLanguageMap = new Map<string, string>();
 
     if (userIds.length > 0) {
+      // Fetch preferred_language from profiles
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("id, preferred_language")
+        .in("id", userIds);
+
+      for (const p of (profiles || [])) {
+        if (p.preferred_language) {
+          userLanguageMap.set(p.id, p.preferred_language);
+        }
+      }
+
       // Check who has ANY session (for 6h check)
       const { data: sessions } = await supabase
         .from("user_sessions")
@@ -200,7 +213,9 @@ serve(async (req) => {
       const userName = typeof metadata.user_name === "string" && metadata.user_name.trim().length > 0
         ? metadata.user_name.trim()
         : email.split("@")[0];
-      const language = normalizeLanguage(metadata.language, "en");
+      const language = userId && userLanguageMap.has(userId)
+        ? normalizeLanguage(userLanguageMap.get(userId), "en")
+        : normalizeLanguage(metadata.language, "en");
 
       // Determine which reminder to send
       let reminderType: "6h" | "48h" | null = null;
