@@ -375,6 +375,9 @@ const DayLesson = () => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                   },
+                  body: JSON.stringify({
+                    language: i18n.resolvedLanguage || i18n.language,
+                  }),
                 });
               }
             } catch (upsellError) {
