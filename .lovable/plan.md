@@ -1,60 +1,62 @@
 
+Diagnóstico confirmado (com dados reais do banco):
 
-## Diagnóstico: Por que os emails de reminder NÃO foram enviados
+1) O problema NÃO é mais o cron  
+- Job `welcome-reminder-hourly` está ativo e rodando de hora em hora (`cron.job` id 8).
 
-### Evidências encontradas
+2) A causa raiz atual é de resolução de idioma, não de envio  
+- Nos reminders recentes, `email_logs.metadata.language` está `en` mesmo para usuários com `profiles.preferred_language = es/fr`.
+- Exemplo real: reminders com `preferred_language: es/fr` foram enviados com `reminder_lang: en`.
 
-1. **O cron job EXISTE e ESTÁ RODANDO** - Job ID 8, `welcome-reminder-hourly`, schedule `0 * * * *`, status `active`. Rodou às 13:00 e 14:00 UTC hoje com `status: succeeded`.
+3) Por que isso acontece no código atual  
+- Em `send-unopened-welcome-reminders`, o idioma é definido antes do envio assim:
+  - tenta `profiles.preferred_language` usando `welcomeEmails.user_id`
+  - se não achar, cai para `metadata.language`
+  - se não existir, cai para `en`
+- Só que muitos registros históricos de `email_logs` (welcome/magic_link) vieram sem `user_id` e sem `metadata.language`.
+- Resultado: fallback em massa para inglês.
 
-2. **A função NUNCA foi executada** - Zero logs para `send-unopened-welcome-reminders`. Nenhum boot, nenhum erro, nada.
+Evidência forte:
+- Últimos 14 dias de `welcome/magic_link`:  
+  - `total: 2396`  
+  - `missing_user_id: 2109`  
+  - `missing_language_meta: 2230`  
+- Ou seja, o fluxo atual depende de campos que historicamente estão ausentes.
 
-3. **Causa raiz: o cron usa a ANON KEY, mas a função só aceita SERVICE_ROLE_KEY**
+Plano de correção imediata:
 
-O cron job envia:
-```
-Authorization: Bearer eyJ...anon_key...
-```
+1) Blindar o idioma no ponto final de envio (`send-welcome-email`)  
+Arquivo: `supabase/functions/send-welcome-email/index.ts`
 
-Mas a função verifica:
-```typescript
-const isAuthorized =
-  (cronSecret.length > 0 && (bearerToken === cronSecret || bodySecret === cronSecret)) ||
-  bearerToken === serviceRoleKey;  // ← só aceita service_role_key!
-```
+Implementar regra para `mode === "magic_link_reminder"`:
+- Resolver `userId` (já existe no código via `resolveUserId`).
+- Buscar `profiles.preferred_language` desse `userId`.
+- Se existir, sobrescrever o idioma final do email com esse valor (normalizado).
+- Só usar `body.language` como fallback quando `preferred_language` não existir.
 
-Como `CRON_SECRET` não está configurado (`cronSecret.length > 0` é false), e o bearer token é a anon key (não a service_role_key), a função retorna **401 Unauthorized** silenciosamente — sem nenhum `console.log` antes do return.
+Por que aqui:
+- É o último ponto antes de montar subject/template.
+- Garante idioma correto mesmo quando o evento de origem (`email_logs` antigo) vier incompleto.
+- Cobre tanto o cron automático quanto execuções manuais que chamam `send-welcome-email`.
 
-O `status: succeeded` no cron significa apenas que o `net.http_post` foi enviado com sucesso, **não** que a função respondeu 200.
+2) Ajustar `send-unopened-welcome-reminders` para rastreabilidade (opcional, mas recomendado)  
+Arquivo: `supabase/functions/send-unopened-welcome-reminders/index.ts`
 
-### Solução
+- Incluir no `metadata` enviado ao `send-welcome-email` um campo de diagnóstico:
+  - `language_source`: `profile` | `welcome_metadata` | `fallback_en`
+- Isso facilita auditoria sem depender de logs verbosos.
 
-#### 1. Corrigir autenticação da Edge Function
+3) Validação pós-correção (imediata, após próxima execução)
+- Verificar reminders novos em `email_logs`:
+  - `metadata.language` deve bater com `split_part(profiles.preferred_language, '-', 1)`.
+- Conferir especificamente usuários com `preferred_language in ('es','fr','pt','de','it','ru')` para garantir que deixaram de sair como `en`.
 
-Adicionar a anon key como método válido de autenticação na função `send-unopened-welcome-reminders`. A Supabase internamente garante que chamadas via `net.http_post` são seguras (originam do banco). Vamos aceitar tanto a anon key quanto a service_role_key:
+4) (Recomendação curta de robustez operacional)
+- O cron HTTP usa timeout padrão curto (5s) e este fluxo pode passar disso em lotes.
+- Ajustar timeout do `net.http_post` do job hourly para evitar timeouts falsos no monitoramento.
 
-```typescript
-const anonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
+Escopo de arquivos:
+- `supabase/functions/send-welcome-email/index.ts` (correção principal)
+- `supabase/functions/send-unopened-welcome-reminders/index.ts` (telemetria de origem de idioma, recomendado)
 
-const isAuthorized =
-  (cronSecret.length > 0 && (bearerToken === cronSecret || bodySecret === cronSecret)) ||
-  bearerToken === serviceRoleKey ||
-  bearerToken === anonKey;  // ← ADICIONAR
-```
-
-Também adicionar um `console.log` antes do return 401 para facilitar debug futuro.
-
-#### 2. Corrigir build error em `resend-dashboard/index.ts`
-
-O TypeScript reclama que `apiKey` pode ser `undefined` na linha 101 apesar do guard na linha 73. Adicionar assertion `!` ou cast.
-
-#### 3. Re-deploy da função
-
-Deploy automático após as correções.
-
-### Arquivos alterados
-
-| Arquivo | Ação |
-|---------|------|
-| `supabase/functions/send-unopened-welcome-reminders/index.ts` | Aceitar anon key na auth + log de 401 |
-| `supabase/functions/resend-dashboard/index.ts` | Fix TS: cast `apiKey` como `string` após guard |
-
+Sem migração de banco necessária.
