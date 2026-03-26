@@ -56,6 +56,8 @@ export const ManualMetricsForm = () => {
       if (error) throw error;
       return data as ManualMetric[];
     },
+    staleTime: 300000,
+    refetchOnMount: false,
   });
 
   // Save mutation

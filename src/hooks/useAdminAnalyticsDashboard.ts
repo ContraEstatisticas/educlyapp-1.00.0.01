@@ -287,6 +287,8 @@ export const useAdminAnalyticsDashboard = (errorRangeDays = 7) =>
 
       return normalizeDashboardData(data);
     },
+    staleTime: 300000,
+    refetchOnMount: false,
     refetchInterval: 300000,
   });
 
@@ -311,5 +313,7 @@ export const useAdminMigrationReport = (startISO: string) =>
 
       return normalizeMigrationReportData(data);
     },
+    staleTime: 300000,
+    refetchOnMount: false,
     refetchOnWindowFocus: false,
   });

@@ -8,7 +8,6 @@ const corsHeaders = {
 
 const ADMIN_TIME_ZONE = "America/Sao_Paulo";
 const ADMIN_UTC_OFFSET = "-03:00";
-const AUTH_USERS_PAGE_SIZE = 1000;
 const BULK_FETCH_PAGE_SIZE = 1000;
 const COMPLETED_PROGRESS_PAGE_SIZE = 1000;
 const DEFAULT_ERROR_RANGE_DAYS = 7;
@@ -137,36 +136,17 @@ const isBillingPaymentEvent = (eventType: string) => {
 const isManualBillingImport = (payload: Record<string, unknown> | null | undefined) =>
   getBillingWebhookSource(payload) === "manual_csv_import";
 
-const fetchAllAuthEmails = async (
-  // deno-lint-ignore no-explicit-any
-  supabaseAdmin: any,
-) => {
-  const authEmails = new Set<string>();
-
-  for (let page = 1; page <= 100; page += 1) {
-    const { data, error } = await supabaseAdmin.auth.admin.listUsers({
-      page,
-      perPage: AUTH_USERS_PAGE_SIZE,
-    });
-
-    if (error) throw error;
-
-    const users = data?.users || [];
-
-    users.forEach((user: { email?: string | null }) => {
-      const normalizedEmail = normalizeBillingEmail(user.email);
-      if (normalizedEmail) {
-        authEmails.add(normalizedEmail);
-      }
-    });
-
-    if (users.length < AUTH_USERS_PAGE_SIZE) {
-      break;
-    }
-  }
-
-  return authEmails;
-};
+const BILLING_ANALYTICS_EVENT_FILTER = [
+  "event_type.ilike.%settled%",
+  "event_type.ilike.%approved%",
+  "event_type.ilike.%complete%",
+  "event_type.ilike.%renewing%",
+  "event_type.ilike.%recovering%",
+  "event_type.ilike.%trial%",
+  "event_type.ilike.%chargeback%",
+  "event_type.ilike.%refund%",
+  "event_type.eq.GRANTED",
+].join(",");
 
 const isHotmartBillingEvent = (event: { event_type: string; payload: Record<string, unknown> | null }) => {
   const payload = event.payload;
@@ -375,7 +355,6 @@ const buildDashboardSnapshot = async (
     streakData,
     billingEventsLastSevenDays,
     activeProducts,
-    billingHealth,
     billingPaymentsForLtv,
   ] = await Promise.all([
     fetchAllRows<{ id: string; created_at: string | null }>((from, to) =>
@@ -421,24 +400,15 @@ const buildDashboardSnapshot = async (
         .order("user_id", { ascending: true })
         .range(from, to)
     ),
-    fetchAllRows<{ id: string; email: string | null; event_type: string; status: string; created_at: string | null }>((from, to) =>
-      supabaseAdmin
-        .from("billing_event_logs")
-        .select("id, email, event_type, status, created_at")
-        .eq("processed", false)
-        .in("status", ["pending", "USER_NOT_FOUND"])
-        .order("created_at", { ascending: false })
-        .range(from, to)
-    ),
     fetchAllRows<{
       email: string | null;
       event_type: string;
       payload: Record<string, unknown> | null;
-      created_at: string | null;
     }>((from, to) =>
       supabaseAdmin
         .from("billing_event_logs")
-        .select("email, event_type, payload, created_at")
+        .select("email, event_type, payload")
+        .or(BILLING_ANALYTICS_EVENT_FILTER)
         .order("created_at", { ascending: true })
         .range(from, to)
     ),
@@ -841,31 +811,13 @@ const buildDashboardSnapshot = async (
     full_name: profileNamesById.get(streak.user_id) || "Usuario",
   }));
 
-  let waitingSignup = 0;
-  if (billingHealth.length > 0) {
-    const authEmails = await fetchAllAuthEmails(supabaseAdmin);
-    const pendingEmailsWithoutAccount = new Set(
-      billingHealth
-        .map((row: { email: string | null }) => normalizeBillingEmail(row.email))
-        .filter((email): email is string => Boolean(email) && !authEmails.has(email)),
-    );
-
-    waitingSignup = pendingEmailsWithoutAccount.size;
-  }
-
-  const now = new Date();
-  const oldPending = billingHealth.filter((row: { created_at: string | null }) => {
-    if (!row.created_at) return false;
-    const createdAt = new Date(row.created_at);
-    const hoursAgo = (now.getTime() - createdAt.getTime()) / (1000 * 60 * 60);
-    return hoursAgo > 24;
-  }).length;
-
+  // billingHealth is currently not rendered in the admin UI, so we avoid the
+  // extra full-table/Auth scans here and keep a stable empty payload shape.
   const billingHealthSummary = {
-    totalPending: billingHealth.length,
-    oldPending,
-    waitingSignup,
-    userNotFound: billingHealth.filter((row: { status: string }) => row.status === "USER_NOT_FOUND").length,
+    totalPending: 0,
+    oldPending: 0,
+    waitingSignup: 0,
+    userNotFound: 0,
   };
 
   return {

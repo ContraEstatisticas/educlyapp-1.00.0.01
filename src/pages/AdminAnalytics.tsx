@@ -55,10 +55,6 @@ const AdminAnalyticsContent = () => {
     queryClient.invalidateQueries({ queryKey: ["admin-manual-metrics"] });
   }, [queryClient]);
 
-  useEffect(() => {
-    refreshAll();
-  }, [refreshAll]);
-
   return (
     <div className="min-h-screen bg-background safe-area-inset">
       <div className="sticky top-safe z-10 border-b border-border/50 bg-background/80 shadow-sm backdrop-blur-xl">
