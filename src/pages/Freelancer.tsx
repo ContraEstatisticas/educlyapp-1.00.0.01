@@ -475,52 +475,61 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
             </DialogHeader>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-3 py-4 sm:px-6 sm:py-6">
-            <Carousel setApi={setCarouselApi} opts={{ align: "start", loop: false }} className="w-full">
-              <CarouselContent>
+          <div className="flex-1 overflow-x-hidden overflow-y-auto px-3 py-4 sm:px-6 sm:py-6">
+            <Carousel setApi={setCarouselApi} opts={{ align: "start", loop: false }} className="w-full min-w-0">
+              <CarouselContent className="min-w-0">
                 {tutorial.slides.map((slide, index) => (
                   <CarouselItem key={slide.id}>
-                    <div className="flex flex-col gap-4 sm:gap-6">
-                      <div className="space-y-3 sm:space-y-4">
-                        <div className="flex items-center justify-between gap-2 sm:gap-3">
-                          <div>
+                    <div className="flex min-w-0 flex-col gap-4 sm:gap-6">
+                      <div className="min-w-0 space-y-3 sm:space-y-4">
+                        <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="min-w-0 max-w-full">
                             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-orange-600 dark:text-orange-300">
                               {slide.eyebrow}
                             </p>
-                            <h3 className="mt-1 sm:mt-2 text-lg sm:text-2xl font-bold text-foreground">{slide.title}</h3>
+                            <h3 className="mt-1 sm:mt-2 break-words text-lg font-bold leading-tight text-foreground sm:text-2xl">
+                              {slide.title}
+                            </h3>
                           </div>
                           <div className="rounded-full border border-border bg-muted/60 px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-semibold text-muted-foreground whitespace-nowrap">
                             {index + 1} / {tutorial.slides.length}
                           </div>
                         </div>
 
-                        <div className="space-y-2 sm:space-y-3">
+                        <div className="min-w-0 space-y-2 sm:space-y-3">
                           {slide.paragraphs.map((paragraph) => (
-                            <p key={paragraph} className="text-xs sm:text-sm leading-6 sm:leading-7 text-muted-foreground">
+                            <p
+                              key={paragraph}
+                              className="max-w-full break-words whitespace-normal text-xs leading-6 text-muted-foreground sm:text-sm sm:leading-7"
+                            >
                               {paragraph}
                             </p>
                           ))}
                         </div>
 
                         {slide.calloutTitle && slide.calloutText ? (
-                          <div className="rounded-xl sm:rounded-2xl border border-orange-200/70 bg-orange-50/80 p-3 sm:p-4 dark:border-orange-900/60 dark:bg-orange-950/20">
+                          <div className="min-w-0 rounded-xl border border-orange-200/70 bg-orange-50/80 p-3 sm:rounded-2xl sm:p-4 dark:border-orange-900/60 dark:bg-orange-950/20">
                             <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.calloutTitle}</p>
-                            <p className="mt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground">{slide.calloutText}</p>
+                            <p className="mt-1 max-w-full break-words whitespace-normal text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                              {slide.calloutText}
+                            </p>
                           </div>
                         ) : null}
 
                         {slide.checklistTitle ? (
-                          <div className="rounded-xl sm:rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
+                          <div className="min-w-0 rounded-xl border border-border bg-muted/40 p-3 sm:rounded-2xl sm:p-4">
                             <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.checklistTitle}</p>
                             {slide.checklistIntro ? (
-                              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">{slide.checklistIntro}</p>
+                              <p className="mt-2 max-w-full break-words whitespace-normal text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                                {slide.checklistIntro}
+                              </p>
                             ) : null}
                             {slide.checklistItems?.length ? (
                               <ul className="mt-3 space-y-2">
                                 {slide.checklistItems.map((item) => (
-                                  <li key={item} className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+                                  <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground sm:text-sm">
                                     <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-orange-500" />
-                                    <span>{item}</span>
+                                    <span className="break-words">{item}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -529,8 +538,8 @@ const FreelancerAccountTutorialButton = ({ language }: { language: string }) => 
                         ) : null}
 
                         {slide.completionTitle && slide.completionBadge ? (
-                          <div className="rounded-xl sm:rounded-2xl border border-emerald-200/70 bg-emerald-50/80 p-3 sm:p-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
-                            <p className="text-xs sm:text-sm font-semibold text-foreground">{slide.completionTitle}</p>
+                          <div className="min-w-0 rounded-xl border border-emerald-200/70 bg-emerald-50/80 p-3 sm:rounded-2xl sm:p-4 dark:border-emerald-900/60 dark:bg-emerald-950/20">
+                            <p className="max-w-full break-words text-xs font-semibold text-foreground sm:text-sm">{slide.completionTitle}</p>
                             <p className="mt-2 text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300">
                               {slide.completionBadge} {"\u2713"}
                             </p>
