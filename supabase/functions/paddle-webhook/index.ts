@@ -137,10 +137,11 @@ function maskSecret(value: string, visibleChars = 6): string {
 
 // ---------- ✅ NOVO: helpers do enqueue de e-mail (não quebra fluxo) ----------
 
-function localeToLanguage(locale: unknown): "pt" | "en" | "es" {
-  const l = String(locale ?? "").toLowerCase();
-  if (l.startsWith("pt")) return "pt";
-  if (l.startsWith("en")) return "en";
+function localeToLanguage(locale: unknown): string {
+  const l = String(locale ?? "").toLowerCase().split("_")[0].split("-")[0];
+  if (["pt", "en", "es", "fr", "de", "it", "ru"].includes(l)) {
+    return l;
+  }
   return "es";
 }
 

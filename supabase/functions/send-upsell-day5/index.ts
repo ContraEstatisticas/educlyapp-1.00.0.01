@@ -69,6 +69,10 @@ function tr(language: string, key: TranslationKey): string {
   return TRANSLATIONS[normalized][key];
 }
 
+function normalizeEmail(email?: string | null): string {
+  return String(email ?? "").trim().toLowerCase();
+}
+
 function getCheckoutUrl(product: "ai_hub" | "freelancer"): string {
   if (product === "ai_hub") {
     return "https://pay.hotmart.com/P104360708Q?off=nnp1mth1&bid=1773855842344&sck=app&utm_source=emailRS";
@@ -192,19 +196,34 @@ serve(async (req) => {
       .eq("id", userId)
       .maybeSingle();
 
-    const email = userEmail;
+    const email = normalizeEmail(userEmail);
+    if (!email) {
+      return new Response(JSON.stringify({ error: "User email not found" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const language = normalizeLanguage(
       requestedLanguage || profile?.preferred_language || metadataLanguage || DEFAULT_LANGUAGE,
     );
 
-    const { data: existingLog } = await service
+    const { data: existingLogs, error: existingLogsError } = await service
       .from("email_logs")
       .select("id")
-      .eq("recipient_email", email.toLowerCase())
+      .eq("recipient_email", email)
       .eq("email_type", "upsell_day5")
-      .maybeSingle();
+      .limit(1);
 
-    if (existingLog) {
+    if (existingLogsError) {
+      console.error("[send-upsell-day5] Failed to check existing email log:", existingLogsError);
+      return new Response(JSON.stringify({ error: "Could not verify existing sends safely" }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if ((existingLogs?.length ?? 0) > 0) {
       return new Response(JSON.stringify({ success: true, skipped: true, reason: "already_sent" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -230,10 +249,10 @@ serve(async (req) => {
     }
 
     const subject = tr(language, "subject");
-    const { data: logEntry } = await service
+    const { data: logEntry, error: logInsertError } = await service
       .from("email_logs")
       .insert({
-        recipient_email: email.toLowerCase(),
+        recipient_email: email,
         user_id: userId,
         email_type: "upsell_day5",
         subject,
@@ -243,6 +262,56 @@ serve(async (req) => {
       .select("id")
       .single();
 
+    if (logInsertError || !logEntry) {
+      console.error("[send-upsell-day5] Failed to create email log:", logInsertError);
+      return new Response(JSON.stringify({ error: "Could not create send guard log" }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // After reserving a log row, only the oldest upsell log is allowed to send.
+    // This prevents duplicate emails when multiple requests race at the same time.
+    const { data: canonicalLogs, error: canonicalLogError } = await service
+      .from("email_logs")
+      .select("id")
+      .eq("recipient_email", email)
+      .eq("email_type", "upsell_day5")
+      .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
+      .limit(1);
+
+    if (canonicalLogError || !canonicalLogs?.[0]) {
+      console.error("[send-upsell-day5] Failed to resolve canonical email log:", canonicalLogError);
+      await service
+        .from("email_logs")
+        .update({
+          status: "error",
+          error_message: "Could not confirm canonical day 5 upsell log before send",
+        })
+        .eq("id", logEntry.id);
+
+      return new Response(JSON.stringify({ error: "Could not verify duplicate protection" }), {
+        status: 503,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const canonicalLogId = canonicalLogs[0].id;
+    if (canonicalLogId !== logEntry.id) {
+      await service
+        .from("email_logs")
+        .update({
+          status: "skipped_duplicate",
+          error_message: "Duplicate day 5 upsell prevented by race-condition guard",
+        })
+        .eq("id", logEntry.id);
+
+      return new Response(JSON.stringify({ success: true, skipped: true, reason: "duplicate_request" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const pixelBaseUrl = Deno.env.get("SUPABASE_URL")!;
     const pixel = logEntry
       ? `<img src="${pixelBaseUrl}/functions/v1/track-email-open?id=${logEntry.id}" width="1" height="1" style="display:none" alt=""/>`
@@ -250,7 +319,20 @@ serve(async (req) => {
     const htmlBase = emailHtml(profile?.full_name || email.split("@")[0], language, target);
     const html = htmlBase.includes("</body>") ? htmlBase.replace("</body>", `${pixel}</body>`) : htmlBase + pixel;
 
-    await sendEmailViaResend(email, subject, html);
+    try {
+      await sendEmailViaResend(email, subject, html);
+    } catch (sendError) {
+      const sendMessage = sendError instanceof Error ? sendError.message : "Unknown send error";
+      await service
+        .from("email_logs")
+        .update({
+          status: "error",
+          error_message: sendMessage,
+        })
+        .eq("id", logEntry.id);
+
+      throw sendError;
+    }
 
     if (logEntry) {
       await service

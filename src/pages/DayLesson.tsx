@@ -127,6 +127,7 @@ const DayLesson = () => {
   const [dayInfo, setDayInfo] = useState<{ dayNumber: number; title: string; challengeId: string } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showPracticeModal, setShowPracticeModal] = useState(false);
+  const [isCompletingDay, setIsCompletingDay] = useState(false);
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
@@ -312,6 +313,10 @@ const DayLesson = () => {
 
   // --- LÓGICA DE NAVEGAÇÃO ---
   const handleNext = async (fromComponentComplete?: boolean) => {
+    if (isCompletingDay) {
+      return;
+    }
+
     const step = lessonSteps[currentStepIndex];
 
     // BLOQUEIO: Não permite avançar se errou em quiz ou prática - deve tentar de novo
@@ -342,6 +347,8 @@ const DayLesson = () => {
     }
 
     if (currentStepIndex >= lessonSteps.length - 1) {
+      setIsCompletingDay(true);
+
       try {
         const {
           data: { user },
@@ -387,6 +394,7 @@ const DayLesson = () => {
         }
         setShowPracticeModal(true);
       } catch (error) {
+        setIsCompletingDay(false);
         console.error("Error saving progress:", error);
         navigate("/dashboard");
       }
@@ -893,6 +901,7 @@ const DayLesson = () => {
             <Button
               onClick={needsVerification ? handleVerify : () => handleNext()}
               disabled={
+                isCompletingDay ||
                 // Quiz: must select an option before verifying
                 (currentStep.type === "quiz" && !isAnswerChecked && selectedOption === null) ||
                 // Practical: must have words arranged before verifying  
@@ -907,7 +916,9 @@ const DayLesson = () => {
                   : "bg-primary hover:bg-primary/90 text-primary-foreground disabled:bg-muted-foreground/30 disabled:text-muted-foreground disabled:border disabled:border-border",
               )}
             >
-              {isAnswerChecked
+              {isCompletingDay
+                ? t("lesson.loading", "Carregando...")
+                : isAnswerChecked
                 ? isCorrect
                   ? currentStepIndex === lessonSteps.length - 1
                     ? `🎓 ${t("lesson.continue")}`
