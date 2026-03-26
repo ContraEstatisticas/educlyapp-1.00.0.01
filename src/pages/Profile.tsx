@@ -7,7 +7,8 @@ import {
   CreditCard, ChevronRight, Medal as MedalIcon,
   Star, Image as ImageIcon, Mail, User, Key,
   Bell, Eye, EyeOff, TrendingUp, CalendarDays,
-  Award, FileText, Share2, Lock, Download, Smartphone, Share, Plus, MoreVertical
+  Award, FileText, Share2, Lock, Download, Smartphone, Share, Plus, MoreVertical,
+  Copy, ExternalLink, Link as LinkIcon
 } from "lucide-react";
 import { usePWAInstall } from "@/hooks/usePWAInstall";
 import { useTranslation } from "react-i18next";
@@ -78,6 +79,7 @@ const Profile = () => {
   const { t } = useTranslation();
   const { currentLevel, currentXPInLevel, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
   const { isInstallable, isInstalled, isIOS, isAndroid, promptInstall } = usePWAInstall();
+  const installLink = typeof window !== "undefined" ? `${window.location.origin}/` : "/";
 
   const [loading, setLoading] = useState(true);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -162,6 +164,22 @@ const Profile = () => {
     },
     enabled: !!userId,
   });
+
+  const handleCopyInstallLink = async () => {
+    try {
+      await navigator.clipboard.writeText(installLink);
+      toast({
+        title: t('pwa.linkCopiedTitle', 'Link copiado'),
+        description: t('pwa.linkCopiedDesc', 'O link de instalação foi copiado para a área de transferência.'),
+      });
+    } catch {
+      toast({
+        variant: "destructive",
+        title: t('common.error', 'Erro'),
+        description: t('pwa.linkCopiedError', 'Não foi possível copiar o link de instalação.'),
+      });
+    }
+  };
 
   const profileForm = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema)
@@ -717,6 +735,42 @@ const Profile = () => {
                             <Smartphone className="w-4 h-4" />
                             {t('pwa.installInstructions', 'Instruções')}
                           </h4>
+
+                          <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+                            <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                              <LinkIcon className="w-4 h-4 text-primary" />
+                              {t('pwa.installLinkLabel', 'Link de instalação')}
+                            </div>
+                            <a
+                              href={installLink}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="mt-2 block break-all text-xs text-primary underline underline-offset-2"
+                            >
+                              {installLink}
+                            </a>
+                            <div className="mt-3 flex flex-wrap items-center gap-2">
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={handleCopyInstallLink}
+                                className="h-9 rounded-xl px-3 text-xs"
+                              >
+                                <Copy className="w-3.5 h-3.5 mr-1.5" />
+                                {t('pwa.copyLink', 'Copiar link')}
+                              </Button>
+                              <a
+                                href={installLink}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5" />
+                                {t('pwa.openLink', 'Abrir link')}
+                              </a>
+                            </div>
+                          </div>
 
                           {isIOS ? (
                             <div className="space-y-3">
