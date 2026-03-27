@@ -198,6 +198,7 @@ const App = () => {
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}
                   <Route path="/" element={<Index />} />
+                  <Route path="/paddle" element={<PaddleLanding />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/update-password" element={<UpdatePassword />} />
                   <Route path="/obrigado" element={<ThankYou />} />
