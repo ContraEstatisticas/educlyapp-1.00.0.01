@@ -44,6 +44,7 @@ interface AiTrailUiCopy {
   viewCertificate: string;
   certificateError: string;
   certificateIncomplete: string;
+  xpRewardReason: string;
 }
 
 interface TrailMetaCopy {
@@ -93,6 +94,7 @@ const EN_UI: AiTrailUiCopy = {
   viewCertificate: "View certificate",
   certificateError: "Error generating certificate",
   certificateIncomplete: "Complete all modules first.",
+  xpRewardReason: "Specialized trail completed",
 };
 
 const PT_UI: AiTrailUiCopy = {
@@ -137,6 +139,7 @@ const PT_UI: AiTrailUiCopy = {
   viewCertificate: "Ver certificado",
   certificateError: "Erro ao gerar certificado",
   certificateIncomplete: "Conclua todos os modulos primeiro.",
+  xpRewardReason: "Trilha especializada concluida",
 };
 
 const ES_UI: AiTrailUiCopy = {
@@ -181,6 +184,7 @@ const ES_UI: AiTrailUiCopy = {
   viewCertificate: "Ver certificado",
   certificateError: "Error al generar el certificado",
   certificateIncomplete: "Completa primero todos los modulos.",
+  xpRewardReason: "Ruta especializada completada",
 };
 
 const FR_UI: AiTrailUiCopy = {
@@ -225,6 +229,7 @@ const FR_UI: AiTrailUiCopy = {
   viewCertificate: "Voir le certificat",
   certificateError: "Erreur lors de la generation du certificat",
   certificateIncomplete: "Terminez d'abord tous les modules.",
+  xpRewardReason: "Parcours specialise termine",
 };
 
 const UI_COPY_BY_LANG: Record<AiTrailLang, AiTrailUiCopy> = {

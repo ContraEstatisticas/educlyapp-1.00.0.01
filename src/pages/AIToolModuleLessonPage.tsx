@@ -10,7 +10,10 @@ import { GradualTextDisplay, GradualTextDisplayRef } from "@/components/lesson/G
 import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
 import { aiMasteryTrailsBySlug } from "@/lib/aiMasteryTrails";
 import { AiTrailLessonStep, getAiTrailContent, isAiTrailLive } from "@/lib/aiTrailContent";
+import { getAiTrailUiCopy } from "@/lib/aiTrailI18n";
+import { claimAiTrailCompletionXp } from "@/lib/aiTrailRewards";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
+import { useUserLevel, XP_REWARDS } from "@/hooks/useUserLevel";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
 
@@ -135,9 +138,11 @@ const AIToolModuleLessonPage = () => {
   const { toolSlug, moduleNumber } = useParams();
   const { t, i18n } = useTranslation();
   const { playContinue, playCorrect, playIncorrect } = useQuizSounds();
+  const { addXPAsync } = useUserLevel();
 
   const language = i18n.resolvedLanguage || i18n.language;
   const lessonUi = getLessonUi(language);
+  const aiTrailUi = getAiTrailUiCopy(language);
   const trail = useMemo(() => (toolSlug ? aiMasteryTrailsBySlug[toolSlug] : null), [toolSlug]);
   const trailContent = useMemo(() => (toolSlug ? getAiTrailContent(toolSlug, language) : null), [language, toolSlug]);
   const isLive = trail ? isAiTrailLive(trail.slug) : false;
@@ -496,7 +501,21 @@ const AIToolModuleLessonPage = () => {
   const finishLesson = async () => {
     if (!toolSlug || !moduleContent) return;
 
-    await completeModule(moduleContent.number);
+    const completedModules = await completeModule(moduleContent.number);
+
+    try {
+      await claimAiTrailCompletionXp({
+        slug: toolSlug,
+        totalModules,
+        completedModules,
+        xpAmount: XP_REWARDS.AI_TRAIL_COMPLETE,
+        reason: `${aiTrailUi.xpRewardReason}: ${trail?.name || toolSlug}`,
+        awardXP: addXPAsync,
+      });
+    } catch (error) {
+      console.error("Failed to award AI trail completion XP:", error);
+    }
+
     setShowPracticeModal(true);
   };
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Award, BookOpen, CheckCircle2, Lock, Loader2, Play, Sparkles, Trophy } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -6,10 +6,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useUserLevel, XP_REWARDS } from "@/hooks/useUserLevel";
 import { aiMasteryTrailsBySlug } from "@/lib/aiMasteryTrails";
 import { useTranslation } from "react-i18next";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { getAiTrailContent, isAiTrailLive } from "@/lib/aiTrailContent";
+import { claimAiTrailCompletionXp, isAiTrailXpEligible } from "@/lib/aiTrailRewards";
 import { DaysProgressBar } from "@/components/lesson/DaysProgressBar";
 import { cn } from "@/lib/utils";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
@@ -153,6 +155,7 @@ const AIToolTrailPage = () => {
   const { toolSlug } = useParams();
   const { toast } = useToast();
   const { i18n } = useTranslation();
+  const { addXPAsync } = useUserLevel();
 
   const language = i18n.resolvedLanguage || i18n.language;
   const pageUi = getPageUi(language);
@@ -170,8 +173,32 @@ const AIToolTrailPage = () => {
   } = useAiTrailProgress(trail?.slug, totalModules);
 
   const [isGeneratingCert, setIsGeneratingCert] = useState(false);
+  const trailXpCheckedRef = useRef(false);
 
   const allDone = completedModules.length >= totalModules && totalModules > 0;
+
+  useEffect(() => {
+    trailXpCheckedRef.current = false;
+  }, [toolSlug]);
+
+  useEffect(() => {
+    if (!toolSlug || !trail || !allDone || trailXpCheckedRef.current || !isAiTrailXpEligible(toolSlug)) {
+      return;
+    }
+
+    trailXpCheckedRef.current = true;
+
+    void claimAiTrailCompletionXp({
+      slug: toolSlug,
+      totalModules,
+      completedModules,
+      xpAmount: XP_REWARDS.AI_TRAIL_COMPLETE,
+      reason: `${aiTrailUi.xpRewardReason}: ${trail.name}`,
+      awardXP: addXPAsync,
+    }).catch((error) => {
+      console.error("Failed to award AI trail completion XP:", error);
+    });
+  }, [addXPAsync, aiTrailUi.xpRewardReason, allDone, completedModules, toolSlug, totalModules, trail]);
 
   const {
     data: existingCertificate,

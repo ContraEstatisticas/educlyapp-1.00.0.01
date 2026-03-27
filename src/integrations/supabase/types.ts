@@ -149,6 +149,39 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_trail_completion_rewards: {
+        Row: {
+          awarded_at: string
+          created_at: string
+          id: string
+          tool_slug: string
+          total_modules: number
+          updated_at: string
+          user_id: string
+          xp_awarded: number
+        }
+        Insert: {
+          awarded_at?: string
+          created_at?: string
+          id?: string
+          tool_slug: string
+          total_modules: number
+          updated_at?: string
+          user_id: string
+          xp_awarded: number
+        }
+        Update: {
+          awarded_at?: string
+          created_at?: string
+          id?: string
+          tool_slug?: string
+          total_modules?: number
+          updated_at?: string
+          user_id?: string
+          xp_awarded?: number
+        }
+        Relationships: []
+      }
       billing_access_audit_log: {
         Row: {
           accessed_at: string
