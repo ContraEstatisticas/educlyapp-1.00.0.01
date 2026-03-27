@@ -20,7 +20,6 @@ import { Badge } from "@/components/ui/badge";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
-import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 
 import mountainBackground from "../../assets/mountainBackground.png";
@@ -147,7 +146,7 @@ const Dashboard = () => {
     }
   });
 
-  const { data: nameConfirmationData } = useQuery({
+  const { data: nameConfirmationData, isFetched: isNameConfirmationReady } = useQuery({
     queryKey: ["dashboard-name-confirmation"],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -271,23 +270,6 @@ const Dashboard = () => {
 
   return (
     <main className="dashboard-texture min-h-screen bg-background text-foreground pl-safe pr-safe pb-mobile-nav md:pb-20">
-      {nameConfirmationData?.needsConfirmation ? (
-        <NameConfirmationDialog
-          open={nameConfirmationData.needsConfirmation}
-          savedName={nameConfirmationData.savedName}
-          userId={nameConfirmationData.userId}
-          onCompleted={(nextName) => {
-            queryClient.setQueryData(["dashboard-welcome-user"], nextName);
-            queryClient.setQueryData(["dashboard-name-confirmation"], {
-              ...nameConfirmationData,
-              savedName: nextName,
-              needsConfirmation: false,
-            });
-            queryClient.invalidateQueries({ queryKey: ["user-profile"] });
-          }}
-        />
-      ) : null}
-
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -523,7 +505,30 @@ const Dashboard = () => {
         }
       `}</style>
 
-      <DashboardAvatarOnboarding />
+      <DashboardAvatarOnboarding
+        isNameConfirmationReady={isNameConfirmationReady}
+        nameConfirmation={
+          nameConfirmationData
+            ? {
+                savedName: nameConfirmationData.savedName,
+                userId: nameConfirmationData.userId,
+                onCompleted: (nextName) => {
+                  queryClient.setQueryData(["dashboard-welcome-user"], nextName);
+                  queryClient.setQueryData(["dashboard-name-confirmation"], (current: typeof nameConfirmationData) =>
+                    current
+                      ? {
+                          ...current,
+                          savedName: nextName,
+                          needsConfirmation: false,
+                        }
+                      : current,
+                  );
+                  queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+                },
+              }
+            : null
+        }
+      />
       <div
         className={`sticky top-0 !z-[130] w-full border-b transition-all duration-300 pt-safe ${
           isNavbarScrolled

@@ -622,12 +622,13 @@ export const WeeklyStreakBar = ({ className }: WeeklyStreakBarProps) => {
         }
       `}</style>
 
-      <div
-        className={cn(
-          "weekly-celebration-shell mx-auto max-w-[560px]",
-          weekCelebrationPhase === "border" && "weekly-celebration-shell-loading",
-        )}
-      >
+        <div
+          id="weekly-streak-highlight"
+          className={cn(
+            "weekly-celebration-shell mx-auto max-w-[560px]",
+            weekCelebrationPhase === "border" && "weekly-celebration-shell-loading",
+          )}
+        >
         <span className="weekly-loading-ring" />
 
         <div className={cn("weekly-congrats-slot", weekCelebrationPhase === "message" && "weekly-congrats-slot-visible")}>

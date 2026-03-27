@@ -8,18 +8,47 @@ import {
   type MutableRefObject,
 } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Bounds, Html, useAnimations, useGLTF } from "@react-three/drei";
-import { driver, type DriveStep, type Driver } from "driver.js";
+import { Bounds, ContactShadows, Html, useAnimations, useGLTF } from "@react-three/drei";
+import { driver, type DriveStep, type Driver, type PopoverDOM } from "driver.js";
 import { Play, Volume2, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
+import Typed from "typed.js";
 import { Button } from "@/components/ui/button";
 import * as THREE from "three";
 
-const dashboardAvatarModelUrl = new URL("../../../assets/3dAvatar/robotWoman_v1.glb", import.meta.url).href;
-const dashboardAvatarIntroAudioUrl = new URL(
-  "../../../assets/onboardingAudios/audiosES/frase1Espanhol.mp3",
-  import.meta.url,
-).href;
+const spanishOnboardingAudioUrls = import.meta.glob("../../../assets/onboardingAudios/audiosES/*.mp3", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+const findOnboardingAudioUrl = (fileName: string) =>
+  Object.entries(spanishOnboardingAudioUrls).find(([path]) => path.endsWith(`/${fileName}`))?.[1] ?? null;
+
+const dashboardAvatarModelUrl = new URL("../../../assets/3dAvatar/modeloFinal_lipsync.glb", import.meta.url).href;
+const dashboardAvatarIntroAudioUrl = findOnboardingAudioUrl("frase1Espanhol.mp3") ?? "";
+const dashboardTourStepAudioUrl = findOnboardingAudioUrl("frase2Espanhol.mp3");
+const dashboardAvatarNarrationText =
+  "Bienvenido a Educly. Aquí aprenderás IA con una jornada práctica y guiada. Antes de empezar, confirma tu nombre. Se utilizará en tu perfil, tu progreso y los certificados que se generen en la plataforma.";
+const dashboardTourStepTitle = "Resumen del panel de control";
+const dashboardTourStepDescription =
+  "Aquí tienes un resumen clave de tu experiencia: saludo, progreso reciente y acceso rápido a lo que más importa.";
+const dashboardWeeklyStreakStepTitle = "Tu constancia semanal";
+const dashboardWeeklyStreakStepDescription =
+  "Este registro muestra tu secuencia de estudio. Te ayuda a convertir la frecuencia en hábito.";
+const dashboardWeeklyStreakStepAudioUrl = findOnboardingAudioUrl("frase3Espanhol.mp3");
+const dashboardActiveChallengeStepTitle = "Desaf\u00edo activo";
+const dashboardActiveChallengeStepDescription =
+  "Tu desaf\u00edo principal est\u00e1 aqu\u00ed, con seguimiento del progreso, bot\u00f3n para continuar y acceso r\u00e1pido al contenido.";
+const dashboardActiveChallengeStepAudioUrl = findOnboardingAudioUrl("frase4Espanhol.mp3");
+const dashboardQuickActionsStepTitle = "Acciones r\u00e1pidas";
+const dashboardQuickActionsStepDescription =
+  "Estos atajos agilizan tu trabajo diario: misiones, medallas y rutas especializadas est\u00e1n a solo un clic de distancia.";
+const dashboardQuickActionsStepAudioUrl = findOnboardingAudioUrl("frase5Espanhol.mp3");
+const dashboardFeaturedProductsStepTitle = "Productos destacados";
+const dashboardFeaturedProductsStepDescription =
+  "Esta secci\u00f3n contiene tarjetas premium con acceso r\u00e1pido a las experiencias de aplicaciones m\u00e1s relevantes.";
+const dashboardFeaturedProductsStepAudioUrl = findOnboardingAudioUrl("frase6Espanhol.mp3");
 
 const avatarVisemeNames = [
   "viseme_sil",
@@ -133,8 +162,56 @@ const resolveStepElement = (element: DriveStep["element"]) => {
   return element;
 };
 
+const clampViewportPosition = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+const pinPopoverBelowElement = (
+  popover: PopoverDOM,
+  element: Element | undefined,
+  {
+    offset = 36,
+    align = "center",
+    viewportPadding = 16,
+  }: {
+    offset?: number;
+    align?: "start" | "center" | "end";
+    viewportPadding?: number;
+  } = {},
+) => {
+  if (!element) return;
+
+  window.requestAnimationFrame(() => {
+    const wrapperRect = popover.wrapper.getBoundingClientRect();
+    const elementRect = element.getBoundingClientRect();
+
+    const requestedLeft =
+      align === "start"
+        ? elementRect.left
+        : align === "end"
+          ? elementRect.right - wrapperRect.width
+          : elementRect.left + elementRect.width / 2 - wrapperRect.width / 2;
+    const maxLeft = Math.max(viewportPadding, window.innerWidth - wrapperRect.width - viewportPadding);
+    const safeLeft = clampViewportPosition(requestedLeft, viewportPadding, maxLeft);
+    const safeTop = Math.max(viewportPadding, elementRect.bottom + offset);
+
+    popover.wrapper.style.left = `${safeLeft}px`;
+    popover.wrapper.style.top = `${safeTop}px`;
+    popover.wrapper.style.right = "auto";
+    popover.wrapper.style.bottom = "auto";
+    popover.wrapper.style.transform = "translateY(0)";
+  });
+};
+
 type DashboardAvatarModelProps = {
   speechAnalysisRef: MutableRefObject<SpeechAnalysisFrame>;
+};
+
+type DashboardAvatarOnboardingProps = {
+  nameConfirmation?: {
+    savedName: string;
+    userId: string;
+    onCompleted: (nextName: string) => void;
+  } | null;
+  isNameConfirmationReady?: boolean;
 };
 
 const DashboardAvatarModel = ({ speechAnalysisRef }: DashboardAvatarModelProps) => {
@@ -183,7 +260,7 @@ const DashboardAvatarModel = ({ speechAnalysisRef }: DashboardAvatarModelProps) 
     const speech = speechAnalysisRef.current;
     const visemeTargets = buildVisemeTargets(speech, state.clock.elapsedTime);
 
-    groupRef.current.rotation.y = Math.PI;
+    groupRef.current.rotation.y = 0;
     groupRef.current.position.y = 0;
 
     morphMeshesRef.current.forEach((mesh) => {
@@ -217,7 +294,7 @@ const DashboardAvatarModel = ({ speechAnalysisRef }: DashboardAvatarModelProps) 
   });
 
   return (
-    <group ref={groupRef} rotation={[0, Math.PI, 0]}>
+    <group ref={groupRef} rotation={[0, 0, 0]}>
       <primitive object={avatarScene} />
     </group>
   );
@@ -231,11 +308,17 @@ const DashboardAvatarFallback = () => (
   </Html>
 );
 
-export const DashboardAvatarOnboarding = () => {
+export const DashboardAvatarOnboarding = ({
+  nameConfirmation = null,
+  isNameConfirmationReady = true,
+}: DashboardAvatarOnboardingProps) => {
   const { t, i18n } = useTranslation();
   const [isIntroVisible, setIsIntroVisible] = useState(true);
   const [audioUiState, setAudioUiState] = useState<"loading" | "ready" | "playing" | "blocked">("loading");
   const [hasNarrationEnded, setHasNarrationEnded] = useState(false);
+  const [isNameConfirmationOpen, setIsNameConfirmationOpen] = useState(false);
+  const [hasCompletedNameConfirmation, setHasCompletedNameConfirmation] = useState(false);
+  const [hasSkippedNameConfirmation, setHasSkippedNameConfirmation] = useState(false);
   const driverRef = useRef<Driver | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -245,6 +328,97 @@ export const DashboardAvatarOnboarding = () => {
   const timeDomainDataRef = useRef<Uint8Array | null>(null);
   const audioFrameRef = useRef<number | null>(null);
   const speechAnalysisRef = useRef<SpeechAnalysisFrame>(createIdleSpeechAnalysis());
+  const typedTargetRef = useRef<HTMLSpanElement | null>(null);
+  const typedInstanceRef = useRef<Typed | null>(null);
+  const driverPopoverTitleTypedRef = useRef<Typed | null>(null);
+  const driverPopoverDescriptionTypedRef = useRef<Typed | null>(null);
+  const driverStepAudioRef = useRef<HTMLAudioElement | null>(null);
+  const driverStepAudioDurationRef = useRef<Record<string, number>>({});
+  const driverStepAudioCacheRef = useRef<Record<string, HTMLAudioElement>>({});
+  const audioDurationSecondsRef = useRef(0);
+  const needsNameConfirmation = Boolean(nameConfirmation);
+  const isNameConfirmationResolved = !needsNameConfirmation || hasCompletedNameConfirmation || hasSkippedNameConfirmation;
+  const shouldShowIntroActions = hasNarrationEnded && isNameConfirmationReady && isNameConfirmationResolved;
+
+  const stopDriverPopoverNarration = useCallback(() => {
+    if (driverPopoverTitleTypedRef.current) {
+      driverPopoverTitleTypedRef.current.destroy();
+      driverPopoverTitleTypedRef.current = null;
+    }
+
+    if (driverPopoverDescriptionTypedRef.current) {
+      driverPopoverDescriptionTypedRef.current.destroy();
+      driverPopoverDescriptionTypedRef.current = null;
+    }
+
+    if (driverStepAudioRef.current) {
+      driverStepAudioRef.current.pause();
+      driverStepAudioRef.current.currentTime = 0;
+    }
+  }, []);
+
+  const startDriverPopoverNarration = useCallback(
+    (popover: PopoverDOM, title: string, description: string, audioUrl?: string | null) => {
+      stopDriverPopoverNarration();
+
+      const titleTarget = document.createElement("span");
+      const descriptionTarget = document.createElement("span");
+      titleTarget.className = "driver-typed-title";
+      descriptionTarget.className = "driver-typed-description";
+      popover.title.replaceChildren(titleTarget);
+      popover.description.replaceChildren(descriptionTarget);
+
+      const totalDurationMs =
+        audioUrl && driverStepAudioDurationRef.current[audioUrl] > 0
+          ? driverStepAudioDurationRef.current[audioUrl] * 1000
+          : 6200;
+      const titleDurationMs = Math.max(900, totalDurationMs * 0.26);
+      const descriptionDurationMs = Math.max(1800, totalDurationMs - titleDurationMs - 220);
+      const titleTypeSpeed = Math.max(18, Math.min(44, Math.round(titleDurationMs / title.length)));
+      const descriptionTypeSpeed = Math.max(
+        12,
+        Math.min(34, Math.round(descriptionDurationMs / description.length)),
+      );
+
+      driverPopoverTitleTypedRef.current = new Typed(titleTarget, {
+        strings: [title],
+        typeSpeed: titleTypeSpeed,
+        startDelay: 120,
+        backSpeed: 0,
+        backDelay: 0,
+        loop: false,
+        smartBackspace: false,
+        showCursor: false,
+        contentType: "null",
+        onComplete: () => {
+          driverPopoverDescriptionTypedRef.current = new Typed(descriptionTarget, {
+            strings: [description],
+            typeSpeed: descriptionTypeSpeed,
+            startDelay: 120,
+            backSpeed: 0,
+            backDelay: 0,
+            loop: false,
+            smartBackspace: false,
+            showCursor: false,
+            contentType: "null",
+          });
+        },
+      });
+
+      if (audioUrl) {
+        const audioElement = driverStepAudioCacheRef.current[audioUrl];
+
+        if (audioElement) {
+          audioElement.currentTime = 0;
+          driverStepAudioRef.current = audioElement;
+          void audioElement.play().catch(() => {
+            // Text animation still runs even if audio is not available yet.
+          });
+        }
+      }
+    },
+    [stopDriverPopoverNarration],
+  );
 
   const buildSteps = useCallback((): DriveStep[] => {
     if (typeof window === "undefined") return [];
@@ -255,62 +429,85 @@ export const DashboardAvatarOnboarding = () => {
     const steps: DriveStep[] = [
       {
         element: "#dashboard-welcome-banner",
+        onDeselected: () => {
+          stopDriverPopoverNarration();
+        },
         popover: {
-          title: t("dashboard.avatarOnboarding.steps.hero.title", {
-            defaultValue: "Visao geral da dashboard",
-          }),
-          description: t("dashboard.avatarOnboarding.steps.hero.description", {
-            defaultValue:
-              "Aqui fica o resumo principal da sua jornada: saudacao, progresso recente e acesso rapido ao que importa primeiro.",
-          }),
+          title: dashboardTourStepTitle,
+          description: dashboardTourStepDescription,
           side: "bottom",
           align: "start",
           popoverClass: commonPopoverClass,
+          onPopoverRender: (popover) => {
+            startDriverPopoverNarration(popover, dashboardTourStepTitle, dashboardTourStepDescription, dashboardTourStepAudioUrl);
+          },
         },
       },
       {
-        element: "#weekly-streak",
+        element: "#weekly-streak-highlight",
+        onDeselected: () => {
+          stopDriverPopoverNarration();
+        },
         popover: {
-          title: t("dashboard.avatarOnboarding.steps.streak.title", {
-            defaultValue: "Sua consistencia semanal",
-          }),
-          description: t("dashboard.avatarOnboarding.steps.streak.description", {
-            defaultValue:
-              "Essa faixa mostra sua sequencia de estudo. Ela ajuda a transformar frequencia em habito.",
-          }),
-          side: isDesktop ? "bottom" : "top",
+          title: dashboardWeeklyStreakStepTitle,
+          description: dashboardWeeklyStreakStepDescription,
+          side: "bottom",
           align: "center",
           popoverClass: commonPopoverClass,
+          onPopoverRender: (popover, opts) => {
+            startDriverPopoverNarration(
+              popover,
+              dashboardWeeklyStreakStepTitle,
+              dashboardWeeklyStreakStepDescription,
+              dashboardWeeklyStreakStepAudioUrl,
+            );
+            pinPopoverBelowElement(popover, opts.state.activeElement, {
+              align: "center",
+              offset: 44,
+            });
+          },
         },
       },
       {
         element: "#active-challenge",
+        onDeselected: () => {
+          stopDriverPopoverNarration();
+        },
         popover: {
-          title: t("dashboard.avatarOnboarding.steps.challenge.title", {
-            defaultValue: "Desafio ativo",
-          }),
-          description: t("dashboard.avatarOnboarding.steps.challenge.description", {
-            defaultValue:
-              "Seu desafio principal fica aqui, com progresso, botao de continuar e acesso rapido ao conteudo.",
-          }),
+          title: dashboardActiveChallengeStepTitle,
+          description: dashboardActiveChallengeStepDescription,
           side: "top",
           align: "center",
           popoverClass: commonPopoverClass,
+          onPopoverRender: (popover) => {
+            startDriverPopoverNarration(
+              popover,
+              dashboardActiveChallengeStepTitle,
+              dashboardActiveChallengeStepDescription,
+              dashboardActiveChallengeStepAudioUrl,
+            );
+          },
         },
       },
       {
         element: "#dashboard-quick-cards",
+        onDeselected: () => {
+          stopDriverPopoverNarration();
+        },
         popover: {
-          title: t("dashboard.avatarOnboarding.steps.quickActions.title", {
-            defaultValue: "Acoes rapidas",
-          }),
-          description: t("dashboard.avatarOnboarding.steps.quickActions.description", {
-            defaultValue:
-              "Esses atalhos aceleram o dia a dia: missoes, medalhas e trilhas especializadas ficam a um clique.",
-          }),
+          title: dashboardQuickActionsStepTitle,
+          description: dashboardQuickActionsStepDescription,
           side: "top",
           align: "center",
           popoverClass: commonPopoverClass,
+          onPopoverRender: (popover) => {
+            startDriverPopoverNarration(
+              popover,
+              dashboardQuickActionsStepTitle,
+              dashboardQuickActionsStepDescription,
+              dashboardQuickActionsStepAudioUrl,
+            );
+          },
         },
       },
     ];
@@ -318,23 +515,29 @@ export const DashboardAvatarOnboarding = () => {
     if (isDesktop) {
       steps.push({
         element: "#dashboard-featured-products",
+        onDeselected: () => {
+          stopDriverPopoverNarration();
+        },
         popover: {
-          title: t("dashboard.avatarOnboarding.steps.products.title", {
-            defaultValue: "Produtos em destaque",
-          }),
-          description: t("dashboard.avatarOnboarding.steps.products.description", {
-            defaultValue:
-              "Nesta area ficam os cards premium com acesso rapido as experiencias mais relevantes do app.",
-          }),
+          title: dashboardFeaturedProductsStepTitle,
+          description: dashboardFeaturedProductsStepDescription,
           side: "top",
           align: "center",
           popoverClass: commonPopoverClass,
+          onPopoverRender: (popover) => {
+            startDriverPopoverNarration(
+              popover,
+              dashboardFeaturedProductsStepTitle,
+              dashboardFeaturedProductsStepDescription,
+              dashboardFeaturedProductsStepAudioUrl,
+            );
+          },
         },
       });
     }
 
     return steps.filter((step) => resolveStepElement(step.element));
-  }, [t]);
+  }, [startDriverPopoverNarration, stopDriverPopoverNarration, t]);
 
   const startTour = useCallback(
     (initialStep = 0) => {
@@ -364,13 +567,14 @@ export const DashboardAvatarOnboarding = () => {
         popoverClass: "dashboard-driver-popover",
         steps,
         onDestroyed: () => {
+          stopDriverPopoverNarration();
           driverRef.current = null;
         },
       });
 
       driverRef.current.drive(initialStep);
     },
-    [buildSteps, t],
+    [buildSteps, stopDriverPopoverNarration, t],
   );
 
   const stopAudioMonitoring = useCallback(() => {
@@ -381,6 +585,62 @@ export const DashboardAvatarOnboarding = () => {
 
     speechAnalysisRef.current = createIdleSpeechAnalysis();
   }, []);
+
+  const resetNarrationTyping = useCallback((nextText = "") => {
+    if (typedInstanceRef.current) {
+      typedInstanceRef.current.destroy();
+      typedInstanceRef.current = null;
+    }
+
+    if (typedTargetRef.current) {
+      typedTargetRef.current.textContent = nextText;
+    }
+  }, []);
+
+  const startNarrationTyping = useCallback(
+    (narrationText: string, durationSeconds?: number) => {
+      const typedTarget = typedTargetRef.current;
+
+      if (!typedTarget) return;
+
+      resetNarrationTyping();
+
+      if (!narrationText.trim()) {
+        setHasNarrationEnded(true);
+        return;
+      }
+
+      const safeDurationSeconds =
+        typeof durationSeconds === "number" && Number.isFinite(durationSeconds) && durationSeconds > 0
+          ? durationSeconds
+          : audioDurationSecondsRef.current;
+      const approximateIntroLeadMs = 260;
+      const typingWindowMs =
+        safeDurationSeconds > 0
+          ? Math.max(2600, safeDurationSeconds * 1000 - approximateIntroLeadMs)
+          : 7600;
+      const calculatedTypeSpeed = Math.max(
+        14,
+        Math.min(42, Math.round(typingWindowMs / narrationText.length)),
+      );
+
+      typedInstanceRef.current = new Typed(typedTarget, {
+        strings: [narrationText],
+        typeSpeed: calculatedTypeSpeed,
+        startDelay: approximateIntroLeadMs,
+        backSpeed: 0,
+        backDelay: 0,
+        loop: false,
+        smartBackspace: false,
+        showCursor: false,
+        contentType: "null",
+        onComplete: () => {
+          setHasNarrationEnded(true);
+        },
+      });
+    },
+    [resetNarrationTyping],
+  );
 
   const startAudioMonitoring = useCallback(() => {
     const analyser = audioAnalyserRef.current;
@@ -489,11 +749,12 @@ export const DashboardAvatarOnboarding = () => {
       }
 
       stopAudioMonitoring();
+      resetNarrationTyping(resetPlayback ? "" : dashboardAvatarNarrationText);
     },
-    [stopAudioMonitoring],
+    [resetNarrationTyping, stopAudioMonitoring],
   );
 
-  const playIntroAudio = useCallback(async () => {
+  const playIntroAudio = useCallback(async (restartTyping = true) => {
     const audioElement = audioElementRef.current;
 
     if (!audioElement) return;
@@ -512,12 +773,15 @@ export const DashboardAvatarOnboarding = () => {
 
       audioElement.currentTime = 0;
       setHasNarrationEnded(false);
+      if (restartTyping) {
+        startNarrationTyping(dashboardAvatarNarrationText, audioElement.duration);
+      }
       await audioElement.play();
     } catch (error) {
       setAudioUiState("blocked");
       stopAudioMonitoring();
     }
-  }, [ensureAudioGraph, stopAudioMonitoring]);
+  }, [ensureAudioGraph, startNarrationTyping, stopAudioMonitoring]);
 
   useEffect(() => {
     if (!isIntroVisible) return;
@@ -540,6 +804,66 @@ export const DashboardAvatarOnboarding = () => {
   useEffect(() => {
     return () => {
       driverRef.current?.destroy();
+      resetNarrationTyping();
+      stopDriverPopoverNarration();
+    };
+  }, [resetNarrationTyping, stopDriverPopoverNarration]);
+
+  useEffect(() => {
+    if (!nameConfirmation) {
+      setHasCompletedNameConfirmation(false);
+      setHasSkippedNameConfirmation(false);
+      setIsNameConfirmationOpen(false);
+    }
+  }, [nameConfirmation]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const narratedAudioUrls = [
+      dashboardTourStepAudioUrl,
+      dashboardWeeklyStreakStepAudioUrl,
+      dashboardActiveChallengeStepAudioUrl,
+      dashboardQuickActionsStepAudioUrl,
+      dashboardFeaturedProductsStepAudioUrl,
+    ].filter((audioUrl): audioUrl is string => Boolean(audioUrl));
+
+    if (narratedAudioUrls.length === 0) return;
+
+    const listeners = narratedAudioUrls.map((audioUrl) => {
+      const audioElement = new Audio(audioUrl);
+      audioElement.preload = "auto";
+      driverStepAudioCacheRef.current[audioUrl] = audioElement;
+
+      const handleCanPlay = () => {
+        driverStepAudioDurationRef.current[audioUrl] = Number.isFinite(audioElement.duration) ? audioElement.duration : 0;
+      };
+
+      const handleError = () => {
+        driverStepAudioDurationRef.current[audioUrl] = 0;
+      };
+
+      audioElement.addEventListener("canplaythrough", handleCanPlay);
+      audioElement.addEventListener("error", handleError);
+
+      return {
+        audioUrl,
+        audioElement,
+        handleCanPlay,
+        handleError,
+      };
+    });
+
+    return () => {
+      listeners.forEach(({ audioUrl, audioElement, handleCanPlay, handleError }) => {
+        audioElement.removeEventListener("canplaythrough", handleCanPlay);
+        audioElement.removeEventListener("error", handleError);
+        audioElement.pause();
+        audioElement.src = "";
+        delete driverStepAudioCacheRef.current[audioUrl];
+        delete driverStepAudioDurationRef.current[audioUrl];
+      });
+      driverStepAudioRef.current = null;
     };
   }, []);
 
@@ -551,6 +875,7 @@ export const DashboardAvatarOnboarding = () => {
     audioElementRef.current = audioElement;
 
     const handleCanPlay = () => {
+      audioDurationSecondsRef.current = Number.isFinite(audioElement.duration) ? audioElement.duration : 0;
       setAudioUiState((currentState) => (currentState === "playing" ? currentState : "ready"));
     };
 
@@ -569,6 +894,7 @@ export const DashboardAvatarOnboarding = () => {
       setAudioUiState("ready");
       setHasNarrationEnded(true);
       stopAudioMonitoring();
+      resetNarrationTyping(dashboardAvatarNarrationText);
     };
 
     const handleError = () => {
@@ -596,6 +922,7 @@ export const DashboardAvatarOnboarding = () => {
       frequencyDataRef.current = null;
       timeDomainDataRef.current = null;
       stopAudioMonitoring();
+      resetNarrationTyping();
 
       const currentAudioContext = audioContextRef.current;
       audioContextRef.current = null;
@@ -604,19 +931,43 @@ export const DashboardAvatarOnboarding = () => {
         void currentAudioContext.close();
       }
     };
-  }, [stopAudioMonitoring]);
+  }, [resetNarrationTyping, stopAudioMonitoring]);
 
   useEffect(() => {
     if (!isIntroVisible) return;
 
     const autoplayTimeout = window.setTimeout(() => {
-      void playIntroAudio();
+      setHasNarrationEnded(false);
+      startNarrationTyping(dashboardAvatarNarrationText, audioDurationSecondsRef.current);
+      void playIntroAudio(false);
     }, 380);
 
     return () => {
       window.clearTimeout(autoplayTimeout);
     };
-  }, [isIntroVisible, playIntroAudio]);
+  }, [isIntroVisible, playIntroAudio, startNarrationTyping]);
+
+  useEffect(() => {
+    if (
+      !isIntroVisible ||
+      !hasNarrationEnded ||
+      !isNameConfirmationReady ||
+      !needsNameConfirmation ||
+      isNameConfirmationResolved ||
+      isNameConfirmationOpen
+    ) {
+      return;
+    }
+
+    setIsNameConfirmationOpen(true);
+  }, [
+    hasNarrationEnded,
+    isIntroVisible,
+    isNameConfirmationOpen,
+    isNameConfirmationReady,
+    isNameConfirmationResolved,
+    needsNameConfirmation,
+  ]);
 
   useEffect(() => {
     if (!driverRef.current?.isActive()) return;
@@ -627,6 +978,11 @@ export const DashboardAvatarOnboarding = () => {
   }, [i18n.resolvedLanguage, i18n.language, startTour]);
 
   const handleStartTour = () => {
+    if (!isNameConfirmationResolved) {
+      setIsNameConfirmationOpen(true);
+      return;
+    }
+
     stopIntroAudio(true);
     setIsIntroVisible(false);
     window.setTimeout(() => {
@@ -635,6 +991,11 @@ export const DashboardAvatarOnboarding = () => {
   };
 
   const handleDismissIntro = () => {
+    if (!isNameConfirmationResolved) {
+      setIsNameConfirmationOpen(true);
+      return;
+    }
+
     stopIntroAudio(true);
     setIsIntroVisible(false);
   };
@@ -651,68 +1012,90 @@ export const DashboardAvatarOnboarding = () => {
                 <div className="absolute inset-x-14 top-8 h-24 rounded-full bg-orange-400/16 blur-3xl" />
                 <div className="absolute inset-x-20 bottom-8 h-16 rounded-full bg-slate-950/12 blur-3xl dark:bg-slate-950/26" />
                 <Canvas
+                  shadows
                   dpr={[1, 2]}
-                  camera={{ position: [0, 0.4, 2.9], fov: 23 }}
+                  camera={{ position: [0.06, 0.48, 2.72], fov: 28 }}
                   gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+                  onCreated={({ gl }) => {
+                    gl.toneMapping = THREE.ACESFilmicToneMapping;
+                    gl.toneMappingExposure = 1.08;
+                  }}
                 >
-                  <ambientLight intensity={1.9} />
-                  <directionalLight position={[4, 5, 5]} intensity={2.35} />
-                  <directionalLight position={[-4, 2, 4]} intensity={1.25} />
-                  <spotLight position={[0, 6, 4]} intensity={1.35} angle={0.45} penumbra={0.85} />
+                  <hemisphereLight args={["#ffffff", "#0f172a", 0.7]} />
+                  <ambientLight intensity={0.38} />
+                  <directionalLight
+                    castShadow
+                    position={[3.6, 4.8, 4.2]}
+                    intensity={2.2}
+                    color="#fff3e8"
+                    shadow-mapSize-width={2048}
+                    shadow-mapSize-height={2048}
+                    shadow-bias={-0.00008}
+                    shadow-normalBias={0.02}
+                  />
+                  <directionalLight position={[-3.8, 2.7, 3.2]} intensity={0.8} color="#c8e6ff" />
+                  <spotLight
+                    castShadow
+                    position={[-1.8, 3.9, 5.4]}
+                    intensity={1.3}
+                    angle={0.42}
+                    penumbra={0.95}
+                    color="#ffd1a8"
+                    shadow-mapSize-width={1024}
+                    shadow-mapSize-height={1024}
+                    shadow-bias={-0.0001}
+                  />
+                  <pointLight position={[0.35, 1.2, -2.4]} intensity={0.62} color="#7dd3fc" />
                   <Suspense fallback={<DashboardAvatarFallback />}>
-                    <Bounds fit clip observe margin={1.32}>
+                    <Bounds fit clip observe margin={1.22}>
                       <DashboardAvatarModel speechAnalysisRef={speechAnalysisRef} />
                     </Bounds>
+                    <ContactShadows
+                      position={[0, -1.28, 0]}
+                      opacity={0.42}
+                      scale={3.2}
+                      blur={2.8}
+                      far={2.9}
+                      resolution={1024}
+                      color="#0f172a"
+                    />
                   </Suspense>
                 </Canvas>
               </div>
             </div>
 
-            <div className="relative mt-2 w-full max-w-2xl text-center">
-              <h2 className="text-2xl font-black leading-tight text-foreground sm:text-3xl md:text-4xl">
-                {t("dashboard.avatarOnboarding.modalTitle", {
-                  defaultValue: "Posso comecar seu tutorial da dashboard?",
-                })}
-              </h2>
-
-              <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-foreground/80 sm:text-base md:text-lg">
-                {t("dashboard.avatarOnboarding.modalDescription", {
-                  defaultValue:
-                    "Eu sou a EDI. Vou te guiar pelos pontos principais desta tela enquanto a dashboard fica suavemente desfocada ao fundo.",
-                })}
+            <div className="relative mt-2 w-full max-w-3xl text-center">
+              <p className="mx-auto min-h-[164px] max-w-2xl text-base font-medium leading-relaxed text-foreground sm:min-h-[146px] sm:text-lg md:min-h-[136px] md:text-[1.45rem]">
+                <span ref={typedTargetRef} aria-live="polite" />
               </p>
 
-              <p className="mx-auto mt-3 max-w-xl text-base font-medium leading-relaxed text-foreground sm:text-lg">
-                {t("dashboard.avatarOnboarding.modalQuestion", {
-                  defaultValue: "Quer que eu comece o tutorial agora?",
-                })}
-              </p>
-
-              <div className="mt-4 flex justify-center">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="rounded-full px-4 text-sm font-medium text-foreground/80 hover:text-foreground"
-                  onClick={() => {
-                    void playIntroAudio();
-                  }}
-                >
-                  <Volume2 className="mr-2 h-4 w-4" />
-                  {audioUiState === "playing"
-                    ? t("dashboard.avatarOnboarding.audioPlaying", {
-                        defaultValue: "Reproduzindo apresentacao",
-                      })
-                    : hasNarrationEnded
-                      ? t("dashboard.avatarOnboarding.audioReplay", {
-                          defaultValue: "Ouvir novamente",
+              {shouldShowIntroActions ? (
+                <div className="mt-4 flex justify-center">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="rounded-full px-4 text-sm font-medium text-foreground/80 hover:text-foreground"
+                    onClick={() => {
+                      void playIntroAudio();
+                    }}
+                  >
+                    <Volume2 className="mr-2 h-4 w-4" />
+                    {audioUiState === "playing"
+                      ? t("dashboard.avatarOnboarding.audioPlaying", {
+                          defaultValue: "Reproduzindo apresentacao",
                         })
-                      : t("dashboard.avatarOnboarding.audioCta", {
-                          defaultValue: "Ouvir apresentacao",
-                        })}
-                </Button>
-              </div>
+                      : hasNarrationEnded
+                        ? t("dashboard.avatarOnboarding.audioReplay", {
+                            defaultValue: "Ouvir novamente",
+                          })
+                        : t("dashboard.avatarOnboarding.audioCta", {
+                            defaultValue: "Ouvir apresentacao",
+                          })}
+                  </Button>
+                </div>
+              ) : null}
 
-              {audioUiState === "blocked" ? (
+              {audioUiState === "blocked" && shouldShowIntroActions ? (
                 <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-foreground/60 sm:text-sm">
                   {t("dashboard.avatarOnboarding.audioHint", {
                     defaultValue:
@@ -721,35 +1104,56 @@ export const DashboardAvatarOnboarding = () => {
                 </p>
               ) : null}
 
-              <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
-                <Button
-                  type="button"
-                  size="lg"
-                  className="rounded-full px-7 text-base font-semibold"
-                  onClick={handleStartTour}
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  {t("dashboard.avatarOnboarding.startNow", {
-                    defaultValue: "Comecar tutorial",
-                  })}
-                </Button>
+              {shouldShowIntroActions ? (
+                <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
+                  <Button
+                    type="button"
+                    size="lg"
+                    className="rounded-full px-7 text-base font-semibold"
+                    onClick={handleStartTour}
+                  >
+                    <Play className="mr-2 h-5 w-5" />
+                    {t("dashboard.avatarOnboarding.startNow", {
+                      defaultValue: "Comecar tutorial",
+                    })}
+                  </Button>
 
-                <Button
-                  type="button"
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full border-border/80 bg-background/50 px-7 text-base font-semibold backdrop-blur-sm"
-                  onClick={handleDismissIntro}
-                >
-                  <X className="mr-2 h-5 w-5" />
-                  {t("dashboard.avatarOnboarding.notNow", {
-                    defaultValue: "Agora nao",
-                  })}
-                </Button>
-              </div>
+                  <Button
+                    type="button"
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full border-border/80 bg-background/50 px-7 text-base font-semibold backdrop-blur-sm"
+                    onClick={handleDismissIntro}
+                  >
+                    <X className="mr-2 h-5 w-5" />
+                    {t("dashboard.avatarOnboarding.notNow", {
+                      defaultValue: "Agora nao",
+                    })}
+                  </Button>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
+      ) : null}
+
+      {nameConfirmation ? (
+        <NameConfirmationDialog
+          open={isNameConfirmationOpen}
+          savedName={nameConfirmation.savedName}
+          userId={nameConfirmation.userId}
+          languageOverride="es"
+          skipButtonLabel="Omitir por ahora"
+          onCompleted={(nextName) => {
+            setHasCompletedNameConfirmation(true);
+            setIsNameConfirmationOpen(false);
+            nameConfirmation.onCompleted(nextName);
+          }}
+          onSkipped={() => {
+            setHasSkippedNameConfirmation(true);
+            setIsNameConfirmationOpen(false);
+          }}
+        />
       ) : null}
     </>
   );
