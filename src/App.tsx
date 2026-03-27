@@ -120,6 +120,7 @@ import ResetCache from "./pages/ResetCache";
 import SignupFromEmail from "./pages/SignupFromEmail";
 import Billing from "./pages/Billing";
 import MagicLogin from "./pages/MagicLogin";
+import PaddleLanding from "./pages/PaddleLanding";
 import AIToolTrailsHub from "./pages/AIToolTrailsHub";
 import AIToolTrailPage from "./pages/AIToolTrailPage";
 import AIToolModuleLessonPage from "./pages/AIToolModuleLessonPage";
