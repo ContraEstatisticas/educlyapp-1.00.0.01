@@ -250,6 +250,30 @@ import {
   GROK_MODULE_2_STEPS_FR,
   GROK_MODULE_2_STEPS_PT,
 } from "@/lib/grokModule2LessonSteps";
+import {
+  GROK_MODULE_3_STEPS_EN,
+  GROK_MODULE_3_STEPS_ES,
+  GROK_MODULE_3_STEPS_FR,
+  GROK_MODULE_3_STEPS_PT,
+} from "@/lib/grokModule3LessonSteps";
+import {
+  GROK_MODULE_4_STEPS_EN,
+  GROK_MODULE_4_STEPS_ES,
+  GROK_MODULE_4_STEPS_FR,
+  GROK_MODULE_4_STEPS_PT,
+} from "@/lib/grokModule4LessonSteps";
+import {
+  GROK_MODULE_5_STEPS_EN,
+  GROK_MODULE_5_STEPS_ES,
+  GROK_MODULE_5_STEPS_FR,
+  GROK_MODULE_5_STEPS_PT,
+} from "@/lib/grokModule5LessonSteps";
+import {
+  GROK_MODULE_6_STEPS_EN,
+  GROK_MODULE_6_STEPS_ES,
+  GROK_MODULE_6_STEPS_FR,
+  GROK_MODULE_6_STEPS_PT,
+} from "@/lib/grokModule6LessonSteps";
 
 
 
@@ -6690,10 +6714,10 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
     }
   },
   grok: {
-    status: "coming_soon",
+    status: "live",
     locales: {
       pt: {
-        statusBadge: "Trilha em preparacao",
+        statusBadge: "Trilha ativa",
         heroEyebrow: "Grok",
         heroTitle: "Grok para pesquisa, automacao e criacao.",
         heroDescription:
@@ -6799,11 +6823,181 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "Quanto melhor voce descreve o que quer ver, mais o Grok consegue transformar sua ideia em imagem ou video com intencao visual."
+          },
+          {
+            number: 3,
+            title: "Usando o Grok para Marketing",
+            summary: "Copies, campanhas, posts, roteiros, analise de publico, funis e ideias virais.",
+            outcome: "Base pratica para usar o Grok como apoio em criacao, estrategia e iteracao de marketing digital.",
+            intro:
+              "Nesta licao, voce aprende como o Grok pode acelerar campanhas, criar anuncios, estruturar conteudo e analisar publico com muito mais velocidade.",
+            keyPoints: [
+              "O Grok ajuda a gerar copies, ideias de campanha e conteudos de marketing em poucos minutos.",
+              "Ele tambem pode mapear dores, desejos e problemas do publico para melhorar a comunicacao.",
+              "Funis, roteiros de video e conteudos virais ficam mais claros quando voce pede estrutura explicita.",
+              "O maior ganho aparece quando voce testa, mede e refina, em vez de usar a IA uma unica vez."
+            ],
+            lessonSteps: GROK_MODULE_3_STEPS_PT,
+            promptExample:
+              "Crie uma copy de anuncio para um curso de inteligencia artificial destacando o principal beneficio, incluindo um gancho forte no inicio e um call to action claro no final.",
+            practice: {
+              title: "Copy com Grok",
+              instruction: "Monte um prompt para criar uma copy de anuncio objetiva para um curso de IA.",
+              terms: [
+                "curso de inteligencia artificial",
+                "beneficio",
+                "call to action"
+              ],
+              solution:
+                "Um bom prompt de copy deixa clara a oferta, o beneficio central e a acao final esperada."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao usar IA para marketing?",
+              options: [
+                "Criar muitas variacoes de anuncios.",
+                "Testar diferentes campanhas.",
+                "Usar IA apenas uma vez sem testar ou otimizar os resultados.",
+                "Pedir sugestoes de estrategia."
+              ],
+              correctIndex: 2,
+              explanation:
+                "A IA rende muito mais quando entra em ciclos de geracao, teste, medicao e refinamento."
+            },
+            takeaway:
+              "No marketing, o Grok funciona melhor como acelerador de testes e criacao. O diferencial esta em iterar rapido com base no que performa."
+          },
+          {
+            number: 4,
+            title: "Usando o Grok para Automacao",
+            summary: "Tarefas repetitivas, fluxos, atendimento, conteudo, analise de dados, integracoes e refinamento.",
+            outcome: "Base pratica para estruturar automacoes simples com o Grok e reduzir retrabalho operacional.",
+            intro:
+              "Nesta licao, voce aprende como o Grok pode ajudar a identificar tarefas automatizaveis, criar fluxos claros e melhorar processos repetitivos do dia a dia.",
+            keyPoints: [
+              "Automacao comeca identificando tarefas repetitivas com potencial real de ganho de tempo.",
+              "Fluxos claros transformam operacoes manuais em sistemas mais previsiveis e escalaveis.",
+              "Atendimento, conteudo, analise de dados e integracoes entre ferramentas sao usos comuns e valiosos.",
+              "O maior erro e tentar automatizar processos complexos sem estruturacao e testes antes."
+            ],
+            lessonSteps: GROK_MODULE_4_STEPS_PT,
+            promptExample:
+              "Crie um fluxo de automacao para responder leads com as seguintes etapas: coleta de dados, processamento das informacoes e envio do resultado.",
+            practice: {
+              title: "Fluxo com Grok",
+              instruction: "Monte um prompt simples para criar um fluxo de automacao.",
+              terms: [
+                "responder leads",
+                "dados",
+                "resultado"
+              ],
+              solution:
+                "Um bom prompt de automacao define o processo, a entrada de dados e a saida esperada."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao criar automacoes?",
+              options: [
+                "Automatizar tarefas simples.",
+                "Testar processos antes de usar.",
+                "Tentar automatizar processos complexos sem estrutura-los primeiro.",
+                "Criar fluxos claros."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sem estrutura, a automacao tende a amplificar falhas em vez de gerar eficiencia."
+            },
+            takeaway:
+              "O Grok ajuda muito na automacao quando voce primeiro organiza o processo, depois testa em pequena escala e so entao expande."
+          },
+          {
+            number: 5,
+            title: "Usando o Chat de Voz do Grok",
+            summary: "Conversa por voz, estilo espontaneo, brainstorming, aprendizado guiado e refinamento em dialogo.",
+            outcome: "Base pratica para usar o chat de voz do Grok com mais clareza, velocidade e naturalidade.",
+            intro:
+              "Nesta licao, voce aprende como o chat de voz do Grok pode acelerar conversas, ideias e explicacoes com um estilo mais natural, direto e dinamico.",
+            keyPoints: [
+              "O chat de voz do Grok se destaca por parecer mais espontaneo e proximo de um dialogo humano.",
+              "Falar com clareza e contexto continua sendo essencial para receber respostas melhores.",
+              "A voz funciona muito bem para brainstorming, aprendizagem e exploracao rapida de ideias.",
+              "Refinar a resposta em vez de recomecar do zero torna a conversa mais eficiente."
+            ],
+            lessonSteps: GROK_MODULE_5_STEPS_PT,
+            promptExample:
+              "Explique inteligencia artificial de forma simples, como se estivesse ensinando para um iniciante.",
+            practice: {
+              title: "Voz com Grok",
+              instruction: "Monte um pedido curto para aprender algo por voz com mais clareza.",
+              terms: [
+                "inteligencia artificial",
+                "iniciante",
+                "simples",
+                "pratico"
+              ],
+              solution:
+                "Um bom prompt por voz deixa claro o tema, o nivel da explicacao e o tipo de ajuste que voce quer na resposta."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao usar chat de voz com IA?",
+              options: [
+                "Fazer perguntas complexas.",
+                "Pedir exemplos praticos.",
+                "Falar de forma confusa ou sem contexto suficiente.",
+                "Conversar naturalmente."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Mesmo em voz, a clareza da pergunta e o contexto enviado continuam determinando a qualidade da resposta."
+            },
+            takeaway:
+              "No chat de voz, o Grok funciona melhor quando voce conversa com naturalidade, mas sem abrir mao de clareza, contexto e refinamento."
+          },
+          {
+            number: 6,
+            title: "Usando o Grok como Fonte de Criatividade",
+            summary: "Brainstorming, perspectivas, combinacoes de conceitos, narrativas e refinamento criativo.",
+            outcome: "Base pratica para usar o Grok como parceiro criativo e transformar ideias em projetos mais fortes.",
+            intro:
+              "Nesta licao, voce aprende como o Grok pode ampliar sua criatividade ao gerar ideias, explorar novos angulos e ajudar a estruturar conceitos em algo mais concreto.",
+            keyPoints: [
+              "O Grok ajuda a ampliar repertorio criativo ao sugerir varias ideias e perspectivas rapidamente.",
+              "Explorar o mesmo tema por diferentes pontos de vista revela oportunidades e ajustes importantes.",
+              "Combinar conceitos e criar narrativas sao formas poderosas de sair do lugar-comum.",
+              "O maior erro e aceitar a primeira ideia sem iterar, variar e refinar."
+            ],
+            lessonSteps: GROK_MODULE_6_STEPS_PT,
+            promptExample:
+              "Crie um conceito de projeto que combine inteligencia artificial com educacao para criar algo inovador.",
+            practice: {
+              title: "Criatividade com Grok",
+              instruction: "Monte um prompt curto para gerar uma ideia criativa e depois transforma-la em projeto.",
+              terms: [
+                "10",
+                "um projeto digital",
+                "projeto",
+                "funcionalidades"
+              ],
+              solution:
+                "Um bom prompt criativo abre espaco para exploracao e depois pede estrutura para transformar a melhor ideia em algo aplicavel."
+            },
+            quiz: {
+              question: "Qual e o erro mais comum ao usar IA para criatividade?",
+              options: [
+                "Gerar muitas ideias.",
+                "Testar diferentes abordagens.",
+                "Aceitar a primeira ideia sem explorar outras possibilidades.",
+                "Pedir variacoes."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Criatividade com IA melhora muito quando voce trata a primeira resposta como rascunho e nao como versao final."
+            },
+            takeaway:
+              "O Grok vira um parceiro criativo muito mais forte quando voce usa volume, contraste de perspectivas e refinamento para lapidar as ideias."
           }
         ]
       },
       en: {
-        statusBadge: "Trail in progress",
+        statusBadge: "Trail live",
         heroEyebrow: "Grok",
         heroTitle: "Grok for research, automation, and creation.",
         heroDescription:
@@ -6909,11 +7103,181 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "The better you describe what you want to see, the more Grok can turn your idea into an image or video with real visual intention."
+          },
+          {
+            number: 3,
+            title: "Using Grok for Marketing",
+            summary: "Ad copy, campaigns, posts, scripts, audience analysis, funnels, and viral ideas.",
+            outcome: "A practical base for using Grok to support creation, strategy, and iteration in digital marketing.",
+            intro:
+              "In this lesson, you learn how Grok can accelerate campaigns, create ads, structure content, and analyze audiences much faster.",
+            keyPoints: [
+              "Grok helps generate copy, campaign ideas, and marketing content in minutes.",
+              "It can also map audience pain points, desires, and problems to improve messaging.",
+              "Funnels, video scripts, and viral-content ideas become clearer when you request explicit structure.",
+              "The biggest advantage appears when you test, measure, and refine instead of using AI only once."
+            ],
+            lessonSteps: GROK_MODULE_3_STEPS_EN,
+            promptExample:
+              "Create ad copy for an artificial intelligence course highlighting the main benefit, including a strong hook at the beginning and a clear call to action at the end.",
+            practice: {
+              title: "Copy with Grok",
+              instruction: "Build a prompt to create direct ad copy for an AI course.",
+              terms: [
+                "artificial intelligence course",
+                "benefit",
+                "call to action"
+              ],
+              solution:
+                "A strong copy prompt clearly defines the offer, the central benefit, and the final action you want the reader to take."
+            },
+            quiz: {
+              question: "What is the most common mistake when using AI for marketing?",
+              options: [
+                "Creating many ad variations.",
+                "Testing different campaigns.",
+                "Using AI only once without testing or optimizing the results.",
+                "Asking for strategy suggestions."
+              ],
+              correctIndex: 2,
+              explanation:
+                "AI becomes much more valuable when it is part of a loop of generation, testing, measurement, and refinement."
+            },
+            takeaway:
+              "In marketing, Grok works best as a fast testing and creation engine. The real edge comes from rapid iteration based on performance."
+          },
+          {
+            number: 4,
+            title: "Using Grok for Automation",
+            summary: "Repetitive tasks, flows, support, content, data analysis, integrations, and refinement.",
+            outcome: "A practical base for structuring simple automations with Grok and reducing operational rework.",
+            intro:
+              "In this lesson, you learn how Grok can help identify automatable tasks, create clear flows, and improve repetitive daily processes.",
+            keyPoints: [
+              "Automation starts by identifying repetitive tasks with real time-saving potential.",
+              "Clear flows turn manual operations into more predictable and scalable systems.",
+              "Support, content, data analysis, and tool integrations are common and valuable use cases.",
+              "The biggest mistake is trying to automate complex processes before structuring and testing them."
+            ],
+            lessonSteps: GROK_MODULE_4_STEPS_EN,
+            promptExample:
+              "Create an automation flow for replying to leads with these steps: collecting data, processing the information, and sending the result.",
+            practice: {
+              title: "Flow with Grok",
+              instruction: "Build a simple prompt for an automation flow.",
+              terms: [
+                "replying to leads",
+                "data",
+                "result"
+              ],
+              solution:
+                "A strong automation prompt defines the process, the data input, and the expected output."
+            },
+            quiz: {
+              question: "What is the most common mistake when creating automations?",
+              options: [
+                "Automating simple tasks.",
+                "Testing processes before using them.",
+                "Trying to automate complex processes before structuring them first.",
+                "Creating clear flows."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Without structure, automation tends to amplify flaws instead of creating efficiency."
+            },
+            takeaway:
+              "Grok helps most with automation when you first organize the process, then test on a small scale, and only then expand."
+          },
+          {
+            number: 5,
+            title: "Using Grok Voice Chat",
+            summary: "Voice conversation, spontaneous style, brainstorming, guided learning, and dialog-based refinement.",
+            outcome: "A practical base for using Grok voice chat with more clarity, speed, and natural flow.",
+            intro:
+              "In this lesson, you learn how Grok voice chat can accelerate conversations, ideas, and explanations with a more natural, direct, and dynamic style.",
+            keyPoints: [
+              "Grok voice chat stands out because it feels more spontaneous and closer to a human dialogue.",
+              "Speaking with clarity and context is still essential for getting better responses.",
+              "Voice works especially well for brainstorming, learning, and fast idea exploration.",
+              "Refining an answer instead of restarting from scratch makes the conversation more efficient."
+            ],
+            lessonSteps: GROK_MODULE_5_STEPS_EN,
+            promptExample:
+              "Explain artificial intelligence in a simple way, as if you were teaching a beginner.",
+            practice: {
+              title: "Voice with Grok",
+              instruction: "Build a short request to learn something by voice with more clarity.",
+              terms: [
+                "artificial intelligence",
+                "beginner",
+                "simple",
+                "practical"
+              ],
+              solution:
+                "A strong voice prompt makes the topic, the explanation level, and the kind of refinement you want clearly visible."
+            },
+            quiz: {
+              question: "What is the most common mistake when using AI voice chat?",
+              options: [
+                "Asking complex questions.",
+                "Requesting practical examples.",
+                "Speaking in a confusing way or without enough context.",
+                "Speaking naturally."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Even in voice, the clarity of the question and the provided context strongly shape the quality of the answer."
+            },
+            takeaway:
+              "In voice chat, Grok works best when you speak naturally without giving up clarity, context, and iterative refinement."
+          },
+          {
+            number: 6,
+            title: "Using Grok as a Source of Creativity",
+            summary: "Brainstorming, perspectives, concept combinations, narratives, and creative refinement.",
+            outcome: "A practical base for using Grok as a creative partner and turning ideas into stronger projects.",
+            intro:
+              "In this lesson, you learn how Grok can expand your creativity by generating ideas, exploring new angles, and helping shape concepts into something more concrete.",
+            keyPoints: [
+              "Grok helps expand creative range by suggesting multiple ideas and perspectives quickly.",
+              "Exploring the same theme from different viewpoints reveals opportunities and important adjustments.",
+              "Combining concepts and creating narratives are powerful ways to move beyond generic ideas.",
+              "The biggest mistake is accepting the first idea without iterating, varying, and refining."
+            ],
+            lessonSteps: GROK_MODULE_6_STEPS_EN,
+            promptExample:
+              "Create a project concept that combines artificial intelligence with education to create something innovative.",
+            practice: {
+              title: "Creativity with Grok",
+              instruction: "Build a short prompt to generate a creative idea and then turn it into a project.",
+              terms: [
+                "10",
+                "a digital project",
+                "project",
+                "features"
+              ],
+              solution:
+                "A strong creative prompt opens room for exploration and then asks for structure to turn the best idea into something usable."
+            },
+            quiz: {
+              question: "What is the most common mistake when using AI for creativity?",
+              options: [
+                "Generating many ideas.",
+                "Testing different approaches.",
+                "Accepting the first idea without exploring other possibilities.",
+                "Requesting variations."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Creativity with AI improves a lot when you treat the first response as a draft rather than the final version."
+            },
+            takeaway:
+              "Grok becomes a much stronger creative partner when you use volume, perspective contrast, and refinement to shape better ideas."
           }
         ]
       },
       es: {
-        statusBadge: "Ruta en preparacion",
+        statusBadge: "Ruta activa",
         heroEyebrow: "Grok",
         heroTitle: "Grok para investigacion, automatizacion y creacion.",
         heroDescription:
@@ -7019,11 +7383,181 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "Cuanto mejor describes lo que quieres ver, mas puede Grok convertir tu idea en imagen o video con verdadera intencion visual."
+          },
+          {
+            number: 3,
+            title: "Usando Grok para Marketing",
+            summary: "Copies, campanas, posts, guiones, analisis de publico, embudos e ideas virales.",
+            outcome: "Base practica para usar Grok como apoyo en creacion, estrategia e iteracion de marketing digital.",
+            intro:
+              "En esta leccion aprendes como Grok puede acelerar campanas, crear anuncios, estructurar contenido y analizar publico con mucha mas rapidez.",
+            keyPoints: [
+              "Grok ayuda a generar copies, ideas de campana y contenidos de marketing en pocos minutos.",
+              "Tambien puede mapear dolores, deseos y problemas del publico para mejorar el mensaje.",
+              "Embudos, guiones de video e ideas de contenido viral quedan mas claros cuando pides estructura explicita.",
+              "La mayor ventaja aparece cuando pruebas, mides y refinas, en lugar de usar la IA solo una vez."
+            ],
+            lessonSteps: GROK_MODULE_3_STEPS_ES,
+            promptExample:
+              "Crea una copy de anuncio para un curso de inteligencia artificial destacando el principal beneficio, incluyendo un gancho fuerte al inicio y un call to action claro al final.",
+            practice: {
+              title: "Copy con Grok",
+              instruction: "Construye un prompt para crear una copy de anuncio directa para un curso de IA.",
+              terms: [
+                "curso de inteligencia artificial",
+                "beneficio",
+                "call to action"
+              ],
+              solution:
+                "Un buen prompt de copy deja clara la oferta, el beneficio central y la accion final esperada."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al usar IA para marketing?",
+              options: [
+                "Crear muchas variaciones de anuncios.",
+                "Probar campanas diferentes.",
+                "Usar IA solo una vez sin probar ni optimizar los resultados.",
+                "Pedir sugerencias de estrategia."
+              ],
+              correctIndex: 2,
+              explanation:
+                "La IA rinde mucho mas cuando entra en un ciclo de generacion, prueba, medicion y refinamiento."
+            },
+            takeaway:
+              "En marketing, Grok funciona mejor como acelerador de pruebas y creacion. La ventaja real esta en iterar rapido segun el rendimiento."
+          },
+          {
+            number: 4,
+            title: "Usando Grok para Automatizacion",
+            summary: "Tareas repetitivas, flujos, atencion, contenido, analisis de datos, integraciones y refinamiento.",
+            outcome: "Base practica para estructurar automatizaciones simples con Grok y reducir retrabajo operativo.",
+            intro:
+              "En esta leccion aprendes como Grok puede ayudar a identificar tareas automatizables, crear flujos claros y mejorar procesos repetitivos del dia a dia.",
+            keyPoints: [
+              "La automatizacion empieza identificando tareas repetitivas con potencial real de ahorro de tiempo.",
+              "Los flujos claros convierten operaciones manuales en sistemas mas previsibles y escalables.",
+              "Atencion, contenido, analisis de datos e integraciones entre herramientas son usos comunes y valiosos.",
+              "El mayor error es intentar automatizar procesos complejos antes de estructurarlos y probarlos."
+            ],
+            lessonSteps: GROK_MODULE_4_STEPS_ES,
+            promptExample:
+              "Crea un flujo de automatizacion para responder leads con estas etapas: recoleccion de datos, procesamiento de la informacion y envio del resultado.",
+            practice: {
+              title: "Flujo con Grok",
+              instruction: "Construye un prompt simple para un flujo de automatizacion.",
+              terms: [
+                "responder leads",
+                "datos",
+                "resultado"
+              ],
+              solution:
+                "Un buen prompt de automatizacion define el proceso, la entrada de datos y la salida esperada."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al crear automatizaciones?",
+              options: [
+                "Automatizar tareas simples.",
+                "Probar procesos antes de usarlos.",
+                "Intentar automatizar procesos complejos sin estructurarlos primero.",
+                "Crear flujos claros."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sin estructura, la automatizacion tiende a amplificar fallos en lugar de generar eficiencia."
+            },
+            takeaway:
+              "Grok ayuda mucho en automatizacion cuando primero organizas el proceso, luego pruebas en pequeno y solo despues lo amplias."
+          },
+          {
+            number: 5,
+            title: "Usando el Chat de Voz de Grok",
+            summary: "Conversacion por voz, estilo espontaneo, brainstorming, aprendizaje guiado y refinamiento en dialogo.",
+            outcome: "Base practica para usar el chat de voz de Grok con mas claridad, velocidad y naturalidad.",
+            intro:
+              "En esta leccion aprendes como el chat de voz de Grok puede acelerar conversaciones, ideas y explicaciones con un estilo mas natural, directo y dinamico.",
+            keyPoints: [
+              "El chat de voz de Grok destaca porque se siente mas espontaneo y cercano a un dialogo humano.",
+              "Hablar con claridad y contexto sigue siendo esencial para obtener mejores respuestas.",
+              "La voz funciona muy bien para brainstorming, aprendizaje y exploracion rapida de ideas.",
+              "Refinar la respuesta en lugar de empezar de cero vuelve la conversacion mas eficiente."
+            ],
+            lessonSteps: GROK_MODULE_5_STEPS_ES,
+            promptExample:
+              "Explica inteligencia artificial de forma simple, como si estuvieras ensenando a un principiante.",
+            practice: {
+              title: "Voz con Grok",
+              instruction: "Construye una solicitud corta para aprender algo por voz con mas claridad.",
+              terms: [
+                "inteligencia artificial",
+                "principiante",
+                "simple",
+                "practico"
+              ],
+              solution:
+                "Un buen prompt por voz deja claro el tema, el nivel de explicacion y el tipo de ajuste que quieres en la respuesta."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al usar chat de voz con IA?",
+              options: [
+                "Hacer preguntas complejas.",
+                "Pedir ejemplos practicos.",
+                "Hablar de forma confusa o sin suficiente contexto.",
+                "Hablar naturalmente."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Incluso en voz, la claridad de la pregunta y el contexto entregado siguen determinando la calidad de la respuesta."
+            },
+            takeaway:
+              "En chat de voz, Grok funciona mejor cuando hablas con naturalidad sin perder claridad, contexto y refinamiento iterativo."
+          },
+          {
+            number: 6,
+            title: "Usando Grok como Fuente de Creatividad",
+            summary: "Brainstorming, perspectivas, combinaciones de conceptos, narrativas y refinamiento creativo.",
+            outcome: "Base practica para usar Grok como companero creativo y convertir ideas en proyectos mas solidos.",
+            intro:
+              "En esta leccion aprendes como Grok puede ampliar tu creatividad al generar ideas, explorar nuevos angulos y ayudarte a convertir conceptos en algo mas concreto.",
+            keyPoints: [
+              "Grok ayuda a ampliar el repertorio creativo al sugerir multiples ideas y perspectivas rapidamente.",
+              "Explorar un mismo tema desde diferentes puntos de vista revela oportunidades y ajustes importantes.",
+              "Combinar conceptos y crear narrativas son formas poderosas de salir de lo generico.",
+              "El mayor error es aceptar la primera idea sin iterar, variar ni refinar."
+            ],
+            lessonSteps: GROK_MODULE_6_STEPS_ES,
+            promptExample:
+              "Crea un concepto de proyecto que combine inteligencia artificial con educacion para crear algo innovador.",
+            practice: {
+              title: "Creatividad con Grok",
+              instruction: "Construye un prompt corto para generar una idea creativa y luego convertirla en proyecto.",
+              terms: [
+                "10",
+                "un proyecto digital",
+                "proyecto",
+                "funcionalidades"
+              ],
+              solution:
+                "Un buen prompt creativo abre espacio para explorar y luego pide estructura para convertir la mejor idea en algo aplicable."
+            },
+            quiz: {
+              question: "Cual es el error mas comun al usar IA para creatividad?",
+              options: [
+                "Generar muchas ideas.",
+                "Probar diferentes enfoques.",
+                "Aceptar la primera idea sin explorar otras posibilidades.",
+                "Pedir variaciones."
+              ],
+              correctIndex: 2,
+              explanation:
+                "La creatividad con IA mejora mucho cuando tratas la primera respuesta como un borrador y no como una version final."
+            },
+            takeaway:
+              "Grok se vuelve un companero creativo mucho mas fuerte cuando usas volumen, contraste de perspectivas y refinamiento para pulir ideas."
           }
         ]
       },
       fr: {
-        statusBadge: "Parcours en preparation",
+        statusBadge: "Parcours actif",
         heroEyebrow: "Grok",
         heroTitle: "Grok pour la recherche, l'automatisation et la creation.",
         heroDescription:
@@ -7129,6 +7663,176 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "Plus vous decrivez clairement ce que vous voulez voir, plus Grok peut transformer votre idee en image ou video avec une vraie intention visuelle."
+          },
+          {
+            number: 3,
+            title: "Utiliser Grok pour le Marketing",
+            summary: "Copies, campagnes, posts, scripts, analyse du public, funnels et idees virales.",
+            outcome: "Base pratique pour utiliser Grok comme appui a la creation, a la strategie et a l'iteration en marketing digital.",
+            intro:
+              "Dans cette lecon, vous apprenez comment Grok peut accelerer les campagnes, creer des annonces, structurer du contenu et analyser le public beaucoup plus vite.",
+            keyPoints: [
+              "Grok aide a generer des copies, des idees de campagne et des contenus marketing en quelques minutes.",
+              "Il peut aussi cartographier douleurs, desirs et problemes du public pour ameliorer le message.",
+              "Funnels, scripts video et idees de contenu viral deviennent plus clairs quand vous demandez une structure explicite.",
+              "Le plus grand gain apparait quand vous testez, mesurez et affinez, au lieu d'utiliser l'IA une seule fois."
+            ],
+            lessonSteps: GROK_MODULE_3_STEPS_FR,
+            promptExample:
+              "Cree une copy d'annonce pour un cours d'intelligence artificielle en mettant en avant le principal benefice, avec un hook fort au debut et un call to action clair a la fin.",
+            practice: {
+              title: "Copy avec Grok",
+              instruction: "Construisez un prompt pour creer une copy d'annonce directe pour un cours d'IA.",
+              terms: [
+                "cours d'intelligence artificielle",
+                "benefice",
+                "call to action"
+              ],
+              solution:
+                "Un bon prompt de copy rend explicites l'offre, le benefice central et l'action finale attendue."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on utilise l'IA pour le marketing ?",
+              options: [
+                "Creer beaucoup de variations d'annonces.",
+                "Tester plusieurs campagnes.",
+                "Utiliser l'IA une seule fois sans tester ni optimiser les resultats.",
+                "Demander des suggestions de strategie."
+              ],
+              correctIndex: 2,
+              explanation:
+                "L'IA devient bien plus utile lorsqu'elle fait partie d'une boucle de generation, de test, de mesure et d'affinage."
+            },
+            takeaway:
+              "En marketing, Grok fonctionne mieux comme moteur rapide de creation et de tests. Le vrai avantage vient de l'iteration rapide basee sur la performance."
+          },
+          {
+            number: 4,
+            title: "Utiliser Grok pour l'Automatisation",
+            summary: "Taches repetitives, flux, support, contenu, analyse de donnees, integrations et affinage.",
+            outcome: "Base pratique pour structurer des automatisations simples avec Grok et reduire le retravail operationnel.",
+            intro:
+              "Dans cette lecon, vous apprenez comment Grok peut aider a identifier les taches automatisables, creer des flux clairs et ameliorer les processus repetitifs du quotidien.",
+            keyPoints: [
+              "L'automatisation commence par l'identification de taches repetitives avec un vrai potentiel de gain de temps.",
+              "Des flux clairs transforment des operations manuelles en systemes plus previsibles et plus scalables.",
+              "Support, contenu, analyse de donnees et integrations entre outils sont des cas d'usage frequents et utiles.",
+              "La plus grande erreur est de vouloir automatiser des processus complexes avant de les structurer et de les tester."
+            ],
+            lessonSteps: GROK_MODULE_4_STEPS_FR,
+            promptExample:
+              "Cree un flux d'automatisation pour repondre aux leads avec les etapes suivantes : collecte des donnees, traitement des informations et envoi du resultat.",
+            practice: {
+              title: "Flux avec Grok",
+              instruction: "Construisez un prompt simple pour un flux d'automatisation.",
+              terms: [
+                "repondre aux leads",
+                "donnees",
+                "resultat"
+              ],
+              solution:
+                "Un bon prompt d'automatisation definit le processus, l'entree de donnees et la sortie attendue."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on cree des automatisations ?",
+              options: [
+                "Automatiser des taches simples.",
+                "Tester les processus avant de les utiliser.",
+                "Essayer d'automatiser des processus complexes sans les structurer d'abord.",
+                "Creer des flux clairs."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sans structure, l'automatisation tend a amplifier les defauts au lieu de creer de l'efficacite."
+            },
+            takeaway:
+              "Grok aide le plus en automatisation lorsque vous organisez d'abord le processus, le testez a petite echelle, puis l'etendez."
+          },
+          {
+            number: 5,
+            title: "Utiliser le Chat Vocal de Grok",
+            summary: "Conversation vocale, style spontane, brainstorming, apprentissage guide et affinage en dialogue.",
+            outcome: "Base pratique pour utiliser le chat vocal de Grok avec plus de clarte, de vitesse et de naturel.",
+            intro:
+              "Dans cette lecon, vous apprenez comment le chat vocal de Grok peut accelerer les conversations, les idees et les explications avec un style plus naturel, direct et dynamique.",
+            keyPoints: [
+              "Le chat vocal de Grok se distingue parce qu'il semble plus spontane et plus proche d'un vrai dialogue humain.",
+              "Parler avec clarte et contexte reste essentiel pour obtenir de meilleures reponses.",
+              "La voix fonctionne tres bien pour le brainstorming, l'apprentissage et l'exploration rapide d'idees.",
+              "Affiner la reponse au lieu de recommencer a zero rend la conversation plus efficace."
+            ],
+            lessonSteps: GROK_MODULE_5_STEPS_FR,
+            promptExample:
+              "Explique l'intelligence artificielle de facon simple, comme si tu l'enseignais a un debutant.",
+            practice: {
+              title: "Voix avec Grok",
+              instruction: "Construisez une demande courte pour apprendre quelque chose par la voix avec plus de clarte.",
+              terms: [
+                "intelligence artificielle",
+                "debutant",
+                "simple",
+                "pratique"
+              ],
+              solution:
+                "Un bon prompt vocal rend explicites le sujet, le niveau d'explication et le type d'ajustement attendu dans la reponse."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on utilise le chat vocal avec une IA ?",
+              options: [
+                "Poser des questions complexes.",
+                "Demander des exemples pratiques.",
+                "Parler de facon confuse ou sans assez de contexte.",
+                "Parler naturellement."
+              ],
+              correctIndex: 2,
+              explanation:
+                "Meme en vocal, la clarte de la question et le contexte donne restent decisifs pour la qualite de la reponse."
+            },
+            takeaway:
+              "En chat vocal, Grok fonctionne mieux quand vous parlez naturellement sans abandonner clarte, contexte et affinage progressif."
+          },
+          {
+            number: 6,
+            title: "Utiliser Grok comme Source de Creativite",
+            summary: "Brainstorming, perspectives, combinaisons de concepts, narrations et affinage creatif.",
+            outcome: "Base pratique pour utiliser Grok comme partenaire creatif et transformer des idees en projets plus solides.",
+            intro:
+              "Dans cette lecon, vous apprenez comment Grok peut elargir votre creativite en generant des idees, en explorant de nouveaux angles et en aidant a structurer les concepts de facon plus concrete.",
+            keyPoints: [
+              "Grok aide a elargir le repertoire creatif en suggerant rapidement plusieurs idees et perspectives.",
+              "Explorer un meme theme selon differents points de vue revele des opportunites et des ajustements importants.",
+              "Combiner des concepts et creer des narrations sont des moyens puissants de sortir du convenu.",
+              "La plus grande erreur est d'accepter la premiere idee sans iterer, varier et affiner."
+            ],
+            lessonSteps: GROK_MODULE_6_STEPS_FR,
+            promptExample:
+              "Cree un concept de projet qui combine l'intelligence artificielle avec l'education pour creer quelque chose d'innovant.",
+            practice: {
+              title: "Creativite avec Grok",
+              instruction: "Construisez un prompt court pour generer une idee creative puis la transformer en projet.",
+              terms: [
+                "10",
+                "un projet digital",
+                "projet",
+                "fonctionnalites"
+              ],
+              solution:
+                "Un bon prompt creatif ouvre l'exploration puis demande une structure pour transformer la meilleure idee en quelque chose d'utilisable."
+            },
+            quiz: {
+              question: "Quelle est l'erreur la plus courante quand on utilise l'IA pour la creativite ?",
+              options: [
+                "Generer beaucoup d'idees.",
+                "Tester differentes approches.",
+                "Accepter la premiere idee sans explorer d'autres possibilites.",
+                "Demander des variations."
+              ],
+              correctIndex: 2,
+              explanation:
+                "La creativite avec l'IA s'ameliore beaucoup quand on traite la premiere reponse comme un brouillon plutot que comme une version finale."
+            },
+            takeaway:
+              "Grok devient un partenaire creatif bien plus fort quand vous utilisez volume, contraste de perspectives et affinage pour polir les idees."
           }
         ]
       }
