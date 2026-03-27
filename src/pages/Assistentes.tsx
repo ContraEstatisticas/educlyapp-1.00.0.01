@@ -1,29 +1,32 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { usePremiumAccess } from "@/hooks/usePremiumAccess";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, RotateCcw, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ChatMessage } from "@/components/chat/ChatMessage";
-import { ChatInput } from "@/components/chat/ChatInput";
-import { ChatPremiumGate } from "@/components/chat/ChatPremiumGate";
-import { AssistantsTutorial } from "@/components/onboarding";
-import { ProductGuard } from "@/components/ProductGuard";
-import { MobileNav } from "@/components/MobileNav";
+import { ArrowLeft, Menu, MessageSquareText, RotateCcw, Sparkles } from "lucide-react";
+
 import { AIModelSelector, AI_MODELS } from "@/components/assistentes/AIModelSelector";
 import { AISidebar } from "@/components/assistentes/AISidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { PromptLibrary } from "@/components/assistentes/PromptLibrary";
+import { getPromptLibraryUiCopy } from "@/components/assistentes/promptLibraryData";
+import { ChatInput } from "@/components/chat/ChatInput";
+import { ChatMessage } from "@/components/chat/ChatMessage";
+import { ChatPremiumGate } from "@/components/chat/ChatPremiumGate";
+import { MobileNav } from "@/components/MobileNav";
+import { AssistantsTutorial } from "@/components/onboarding";
+import { ProductGuard } from "@/components/ProductGuard";
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { usePremiumAccess } from "@/hooks/usePremiumAccess";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
-import { tUi } from "@/lib/supplementalUiTranslations";
 import {
   AI_HUB_BASE_DAILY_IMAGE_LIMIT,
   AI_HUB_BASE_DAILY_MESSAGE_LIMIT,
   getAiHubDailyLimits,
   hasWhitelistedAiHubAccess,
 } from "@/lib/aiHubConfig";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
 
@@ -32,6 +35,8 @@ interface Message {
   role: "user" | "assistant";
   content: string;
 }
+
+type AssistantsSection = "chat" | "library";
 
 const MAX_CONTEXT_MESSAGES = 24;
 const MAX_PERSISTED_HISTORY_MESSAGES = 100;
@@ -108,20 +113,23 @@ const getStoredAssistantsMode = (): "chat" | "creative" => {
 };
 
 const getStoredAssistantsModel = (): string => {
-  if (typeof window === "undefined") return "chatgpt";
+  if (typeof window === "undefined") return "edi";
 
   const storedModel = window.localStorage.getItem(ASSISTANTS_MODEL_STORAGE_KEY);
-  return AI_MODELS.some((model) => model.id === storedModel) ? String(storedModel) : "chatgpt";
+  return AI_MODELS.some((model) => model.id === storedModel && model.id !== "nanobanana")
+    ? String(storedModel)
+    : "edi";
 };
 
 const AssistentesContent = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
-  const { isPremium, isLoading: premiumLoading, checkoutUrl } = usePremiumAccess();
+  const { isPremium, isLoading: premiumLoading } = usePremiumAccess();
   const isMobile = useIsMobile();
 
   const [mode, setMode] = useState<"chat" | "creative">(() => getStoredAssistantsMode());
+  const [activeSection, setActiveSection] = useState<AssistantsSection>("chat");
   const [activeModel, setActiveModel] = useState(() => getStoredAssistantsModel());
   const [messages, setMessages] = useState<Message[]>([]);
   const [messagesAssistantType, setMessagesAssistantType] = useState<string | null>(null);
@@ -133,25 +141,35 @@ const AssistentesContent = () => {
   const [messageLimit, setMessageLimit] = useState(AI_HUB_BASE_DAILY_MESSAGE_LIMIT);
   const [imageLimit, setImageLimit] = useState(AI_HUB_BASE_DAILY_IMAGE_LIMIT);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [inputDraft, setInputDraft] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const currentAiType = mode === "creative" ? "nanobanana" : activeModel;
+  const isLibraryView = activeSection === "library";
+  const promptLibraryUiCopy = getPromptLibraryUiCopy(i18n.resolvedLanguage || i18n.language);
 
-  // Get logo for current AI
   const getCurrentLogo = () => {
     if (mode === "creative") return nanobananaLogo;
-    const model = AI_MODELS.find((m) => m.id === activeModel);
+    const model = AI_MODELS.find((item) => item.id === activeModel);
     return model?.logoSrc || AI_MODELS[0].logoSrc;
   };
 
-  // Auth check + usage fetch
   useEffect(() => {
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { navigate("/auth"); return; }
+      if (!user) {
+        navigate("/auth");
+        return;
+      }
+
       setCurrentUserId(user.id);
       const today = new Date().toISOString().split("T")[0];
-      const [{ data: usageData, error: usageError }, { data: products, error: productsError }, { data: levelData, error: levelError }] = await Promise.all([
+
+      const [
+        { data: usageData, error: usageError },
+        { data: products, error: productsError },
+        { data: levelData, error: levelError },
+      ] = await Promise.all([
         supabase
           .from("ai_hub_usage")
           .select("messages_today, images_today")
@@ -190,10 +208,10 @@ const AssistentesContent = () => {
       setMessageLimit(limits.messageLimit);
       setImageLimit(limits.imageLimit);
     };
-    init();
+
+    void init();
   }, [navigate]);
 
-  // Load persisted history for the active assistant
   useEffect(() => {
     if (!isPremium) return;
 
@@ -207,6 +225,7 @@ const AssistentesContent = () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user || cancelled) return;
+
         setCurrentUserId(user.id);
 
         const cachedMessages = readCachedAssistantMessages(user.id, currentAiType);
@@ -271,17 +290,26 @@ const AssistentesContent = () => {
     };
   }, [currentAiType, isPremium, t, toast]);
 
-  // Scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleModelChange = (modelId: string) => {
+    if (modelId === "nanobanana") {
+      setMode("creative");
+      return;
+    }
+
+    setMode("chat");
     setActiveModel(modelId);
   };
 
-  const handleModeChange = (newMode: "chat" | "creative") => {
-    setMode(newMode);
+  const handleSectionChange = (section: AssistantsSection) => {
+    if (section === "chat") {
+      setMode("chat");
+      setActiveModel("edi");
+    }
+    setActiveSection(section);
     setSidebarOpen(false);
   };
 
@@ -300,7 +328,9 @@ const AssistentesContent = () => {
     if (messagesAssistantType !== currentAiType) return;
 
     const storageKey = getAssistantsHistoryStorageKey(currentUserId, currentAiType);
-    const messagesToCache = messages.filter((message) => message.id !== GREETING_MESSAGE_ID).slice(-100);
+    const messagesToCache = messages
+      .filter((message) => message.id !== GREETING_MESSAGE_ID)
+      .slice(-100);
 
     try {
       if (messagesToCache.length === 0) {
@@ -316,7 +346,13 @@ const AssistentesContent = () => {
 
   const sendMessage = async (input: string) => {
     if (!input.trim() || isLoading || isHistoryLoading) return;
-    const userMessage: Message = { id: `user-${Date.now()}`, role: "user", content: input.trim() };
+
+    const userMessage: Message = {
+      id: `user-${Date.now()}`,
+      role: "user",
+      content: input.trim(),
+    };
+
     setMessagesAssistantType(currentAiType);
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
@@ -329,10 +365,10 @@ const AssistentesContent = () => {
       }
 
       const apiMessages = messages
-        .filter((m) => m.id !== GREETING_MESSAGE_ID)
+        .filter((message) => message.id !== GREETING_MESSAGE_ID)
         .concat(userMessage)
-        .map((m) => ({ role: m.role, content: stripImagePayload(m.content) }))
-        .filter((m) => m.content.length > 0)
+        .map((message) => ({ role: message.role, content: stripImagePayload(message.content) }))
+        .filter((message) => message.content.length > 0)
         .slice(-MAX_CONTEXT_MESSAGES);
 
       const response = await fetch(
@@ -349,37 +385,37 @@ const AssistentesContent = () => {
             language: i18n.language,
             chatContext: AI_HUB_CHAT_CONTEXT,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
         let errorMsg = t("chat.error.sendError");
+
         try {
           const err = await response.json();
           if (err?.error) errorMsg = err.error;
         } catch {
           errorMsg = t("chat.error.sendError");
         }
+
         if (response.status === 429) errorMsg = t("assistants.rateLimit.message");
         toast({ title: errorMsg, variant: "destructive" });
         setIsLoading(false);
         return;
       }
 
-      // Image response (nanobanana)
       const contentType = response.headers.get("content-type");
       if (contentType?.includes("application/json")) {
         const data = await response.json();
         if (data.type === "creative") {
           const content = data.imageUrl ? `${data.text}\n\n[IMAGE:${data.imageUrl}]` : data.text;
           setMessages((prev) => [...prev, { id: `assistant-${Date.now()}`, role: "assistant", content }]);
-          setImagesUsed((p) => p + 1);
+          setImagesUsed((prev) => prev + 1);
           setIsLoading(false);
           return;
         }
       }
 
-      // Stream text
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let assistantContent = "";
@@ -388,42 +424,48 @@ const AssistentesContent = () => {
 
       if (reader) {
         let buffer = "";
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
+
           buffer += decoder.decode(value, { stream: true });
           let newlineIndex: number;
+
           while ((newlineIndex = buffer.indexOf("\n")) !== -1) {
             let line = buffer.slice(0, newlineIndex);
             buffer = buffer.slice(newlineIndex + 1);
+
             if (line.endsWith("\r")) line = line.slice(0, -1);
             if (line.startsWith(":") || line.trim() === "") continue;
             if (!line.startsWith("data: ")) continue;
+
             const jsonStr = line.slice(6).trim();
             if (jsonStr === "[DONE]") break;
+
             try {
               const parsed = JSON.parse(jsonStr);
               const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+
               if (content) {
                 assistantContent += content;
                 setMessages((prev) => {
-                  const newMessages = [...prev];
-                  const last = newMessages[newMessages.length - 1];
-                  if (last?.role === "assistant") last.content = assistantContent;
-                  return newMessages;
+                  const nextMessages = [...prev];
+                  const lastMessage = nextMessages[nextMessages.length - 1];
+                  if (lastMessage?.role === "assistant") lastMessage.content = assistantContent;
+                  return nextMessages;
                 });
               }
             } catch {
-              buffer = line + "\n" + buffer;
+              buffer = `${line}\n${buffer}`;
               break;
             }
           }
         }
       }
 
-      setUsageToday((p) => p + 1);
+      setUsageToday((prev) => prev + 1);
 
-      // Save to DB
       const { data: { user } } = await supabase.auth.getUser();
       if (user && assistantContent) {
         const baseTimestamp = Date.now();
@@ -445,6 +487,7 @@ const AssistentesContent = () => {
             created_at: new Date(baseTimestamp + 1).toISOString(),
           },
         ]);
+
         if (persistError) {
           console.error("Error saving assistant history:", persistError);
         }
@@ -480,10 +523,7 @@ const AssistentesContent = () => {
         : deleteQuery.or(`ai_tool_context.eq.${AI_HUB_CHAT_CONTEXT},ai_tool_context.is.null`);
 
       const { error } = await deleteQuery;
-
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (typeof window !== "undefined") {
         window.localStorage.removeItem(getAssistantsHistoryStorageKey(user.id, currentAiType));
@@ -496,6 +536,31 @@ const AssistentesContent = () => {
       toast({ title: t("chat.error.sendError"), variant: "destructive" });
     } finally {
       setIsHistoryLoading(false);
+    }
+  };
+
+  const handleUsePrompt = (prompt: string, title: string) => {
+    setMode("chat");
+    setActiveSection("chat");
+    setActiveModel("chatgpt");
+    setInputDraft(prompt);
+    toast({
+      title: `${promptLibraryUiCopy.promptLabel} "${title}" ${promptLibraryUiCopy.toastReadySuffix}`,
+    });
+  };
+
+  const handleCopyPrompt = async (prompt: string, title: string) => {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      toast({
+        title: `${promptLibraryUiCopy.promptLabel} "${title}" ${promptLibraryUiCopy.toastCopiedSuffix}`,
+      });
+    } catch (error) {
+      console.error("Error copying prompt:", error);
+      toast({
+        title: promptLibraryUiCopy.toastCopyError,
+        variant: "destructive",
+      });
     }
   };
 
@@ -523,8 +588,8 @@ const AssistentesContent = () => {
 
   const sidebarContent = (
     <AISidebar
-      mode={mode}
-      onModeChange={handleModeChange}
+      activeSection={activeSection}
+      onSectionChange={handleSectionChange}
       usageToday={usageToday}
       imagesUsed={imagesUsed}
       messageLimit={messageLimit}
@@ -534,24 +599,16 @@ const AssistentesContent = () => {
 
   const visibleMessages = messagesAssistantType === currentAiType ? messages : [];
 
-  const currentName = mode === "creative"
-    ? t("assistants.nanobanana.name")
-    : t(AI_MODELS.find((m) => m.id === activeModel)?.nameKey || "assistants.chatgpt.name");
-
   return (
     <div className="h-[100dvh] bg-background flex overflow-hidden pb-mobile-nav md:pb-0">
       <AssistantsTutorial />
 
-      {/* Desktop sidebar */}
       {!isMobile && sidebarContent}
 
-      {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Header */}
         <div className="sticky top-safe z-10 px-3 py-2.5 border-b border-border bg-card/80 backdrop-blur-sm">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              {/* Mobile hamburger */}
               {isMobile && (
                 <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
                   <SheetTrigger asChild>
@@ -565,46 +622,65 @@ const AssistentesContent = () => {
                 </Sheet>
               )}
 
-              {/* Model selector or creative label */}
-              {mode === "chat" ? (
-                <AIModelSelector activeModel={activeModel} onSelect={handleModelChange} />
-              ) : (
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl overflow-hidden p-1 bg-amber-500/10">
-                    <img src={nanobananaLogo} alt="NanoBanana" className="w-full h-full object-contain rounded-lg" />
+              {isLibraryView ? (
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-amber-500 text-white shadow-sm">
+                    <Sparkles className="w-4 h-4" />
                   </div>
-                  <span className="font-semibold text-sm text-foreground">{t("assistants.nanobanana.name")}</span>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">
+                      {promptLibraryUiCopy.librarySectionTitle}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {promptLibraryUiCopy.librarySectionDescription}
+                    </p>
+                  </div>
                 </div>
+              ) : (
+                <AIModelSelector
+                  activeModel={mode === "creative" ? "nanobanana" : activeModel}
+                  onSelect={handleModelChange}
+                />
               )}
             </div>
 
-            <div className="flex items-center gap-1">
-              {/* Usage pill */}
-              <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full hidden sm:block">
-                {mode === "creative"
-                  ? `🎨 ${Math.round((imagesUsed / Math.max(imageLimit, 1)) * 100)}%`
-                  : `💬 ${Math.round((usageToday / Math.max(messageLimit, 1)) * 100)}%`}
+            {isLibraryView ? (
+              <div className="hidden md:flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1.5 text-xs text-orange-700">
+                <MessageSquareText className="w-3.5 h-3.5" />
+                {promptLibraryUiCopy.librarySectionBanner}
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-8 gap-2 rounded-full px-3 text-xs sm:text-sm"
-                onClick={() => void clearChat()}
-                disabled={isHistoryLoading || isLoading}
-                aria-label={tUi(t, i18n.language, "chat.newConversationHint")}
-                title={tUi(t, i18n.language, "chat.newConversationHint")}
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>{tUi(t, i18n.language, "chat.newConversation")}</span>
-              </Button>
-            </div>
+            ) : (
+              <div className="flex items-center gap-1">
+                <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full hidden sm:block">
+                  {mode === "creative"
+                    ? `${t("assistants.sidebar.imagesShort")} ${Math.round((imagesUsed / Math.max(imageLimit, 1)) * 100)}%`
+                    : `${t("assistants.sidebar.messagesShort")} ${Math.round((usageToday / Math.max(messageLimit, 1)) * 100)}%`}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-8 gap-2 rounded-full px-3 text-xs sm:text-sm"
+                  onClick={() => void clearChat()}
+                  disabled={isHistoryLoading || isLoading}
+                  aria-label={tUi(t, i18n.language, "chat.newConversationHint")}
+                  title={tUi(t, i18n.language, "chat.newConversationHint")}
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>{tUi(t, i18n.language, "chat.newConversation")}</span>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Messages */}
         <div className="flex-1 overflow-y-auto px-3 py-4">
-          <div className="max-w-3xl mx-auto space-y-4">
-            {isHistoryLoading && visibleMessages.length === 0 ? (
+          <div className={isLibraryView ? "max-w-5xl mx-auto" : "max-w-3xl mx-auto space-y-4"}>
+            {isLibraryView ? (
+              <PromptLibrary
+                onUsePrompt={handleUsePrompt}
+                onCopyPrompt={handleCopyPrompt}
+              />
+            ) : isHistoryLoading && visibleMessages.length === 0 ? (
               <div className="flex items-center justify-center py-12">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
               </div>
@@ -618,7 +694,8 @@ const AssistentesContent = () => {
                 />
               ))
             )}
-            {isLoading && visibleMessages[visibleMessages.length - 1]?.role !== "assistant" && !isHistoryLoading && (
+
+            {!isLibraryView && isLoading && visibleMessages[visibleMessages.length - 1]?.role !== "assistant" && !isHistoryLoading && (
               <div className="flex gap-3">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden bg-muted p-1">
                   <img src={getCurrentLogo()} alt="" className="w-full h-full object-contain" />
@@ -632,24 +709,28 @@ const AssistentesContent = () => {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
+
+            {!isLibraryView && <div ref={messagesEndRef} />}
           </div>
         </div>
 
-        {/* Input */}
-        <div className="sticky bottom-0 border-t border-border bg-background px-3 py-3 pb-safe">
-          <div className="max-w-3xl mx-auto">
-            <ChatInput
-              onSend={sendMessage}
-              isLoading={isLoading || isHistoryLoading}
-              placeholder={
-                mode === "creative"
-                  ? t("assistants.nanobanana.greeting").slice(0, 50) + "..."
-                  : t("assistants.inputPlaceholder")
-              }
-            />
+        {!isLibraryView && (
+          <div className="sticky bottom-0 border-t border-border bg-background px-3 py-3 pb-safe">
+            <div className="max-w-3xl mx-auto">
+              <ChatInput
+                onSend={sendMessage}
+                isLoading={isLoading || isHistoryLoading}
+                value={inputDraft}
+                onValueChange={setInputDraft}
+                placeholder={
+                  mode === "creative"
+                    ? `${t("assistants.nanobanana.greeting").slice(0, 50)}...`
+                    : t("assistants.inputPlaceholder")
+                }
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {!isMobile && <div className="pb-0" />}

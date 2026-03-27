@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,11 +8,31 @@ interface ChatInputProps {
   onSend: (message: string) => void;
   isLoading?: boolean;
   placeholder?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
-export const ChatInput = ({ onSend, isLoading, placeholder }: ChatInputProps) => {
+export const ChatInput = ({ onSend, isLoading, placeholder, value, onValueChange }: ChatInputProps) => {
   const { t } = useTranslation();
-  const [input, setInput] = useState('');
+  const [internalInput, setInternalInput] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isControlled = value !== undefined;
+  const input = isControlled ? value : internalInput;
+
+  const setInput = (nextValue: string) => {
+    if (!isControlled) {
+      setInternalInput(nextValue);
+    }
+    onValueChange?.(nextValue);
+  };
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    textarea.style.height = 'auto';
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
+  }, [input]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +53,7 @@ export const ChatInput = ({ onSend, isLoading, placeholder }: ChatInputProps) =>
     <form onSubmit={handleSubmit} className="flex gap-2 items-end">
       <div className="flex-1 relative">
         <textarea
+          ref={textareaRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -49,11 +70,6 @@ export const ChatInput = ({ onSend, isLoading, placeholder }: ChatInputProps) =>
           style={{
             height: 'auto',
             minHeight: '48px'
-          }}
-          onInput={(e) => {
-            const target = e.target as HTMLTextAreaElement;
-            target.style.height = 'auto';
-            target.style.height = Math.min(target.scrollHeight, 120) + 'px';
           }}
         />
       </div>

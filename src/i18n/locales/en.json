@@ -2719,6 +2719,13 @@
     "access": "Access Assistants",
     "online": "Online",
     "inputPlaceholder": "Type your message...",
+    "sidebar": {
+      "specialistLabel": "Specialist",
+      "resourcesLabel": "Resources",
+      "imagesLabel": "Images",
+      "messagesShort": "Msgs",
+      "imagesShort": "Imgs"
+    },
     "rateLimit": {
       "counter": "Messages today",
       "message": "You've reached your daily message limit. Try again tomorrow!"
@@ -2749,12 +2756,13 @@
     },
     "edi": {
       "name": "EDI",
-      "description": "Your personal Educly assistant for questions and guidance",
-      "greeting": "Hi! 👋 I'm EDI, your assistant here at Educly! I'm super happy to help you! What would you like to know?"
+      "description": "General AI specialist for choosing tools, building prompts, and guiding your workflow",
+      "greeting": "Hi! 👋 I'm EDI, your general AI specialist here at Educly. I can help you choose the best AI for each goal, improve prompts, compare tools, and guide your next step. What are you trying to do today?"
     },
     "nanobanana": {
       "name": "NanoBanana",
       "description": "Amazing image generation with artificial intelligence",
+      "pillLabel": "Images",
       "greeting": "Hello! 🎨 I'm NanoBanana! I can create amazing images for you! Describe what you want to see and I'll generate it right away. What would you like to create?"
     },
     "specialist": {

@@ -2448,13 +2448,55 @@
   "assistants": {
     "title": "Assistants IA",
     "subtitle": "Choisissez votre assistant spécialisé",
-    "dashboardDesc": "4 IA spécialisées pour différentes tâches: enseignement, prompts, planification et création d'images.",
+    "dashboardDesc": "6 IA spécialisées pour différentes tâches : enseignement, prompts, planification et création d'images.",
     "access": "Accéder aux Assistants",
     "online": "En ligne",
     "inputPlaceholder": "Tapez votre message...",
+    "sidebar": {
+      "specialistLabel": "Spécialiste",
+      "resourcesLabel": "Ressources",
+      "imagesLabel": "Images",
+      "messagesShort": "Msgs",
+      "imagesShort": "Imgs"
+    },
+    "rateLimit": {
+      "counter": "Messages aujourd'hui",
+      "message": "Vous avez atteint votre limite quotidienne de messages. Réessayez demain."
+    },
     "info": {
       "title": "Comment Fonctionnent les Assistants",
       "description": "Chaque assistant a été formé pour une spécialité différente. Choisissez celui qui convient le mieux à votre besoin et discutez naturellement."
+    },
+    "chatgpt": {
+      "name": "ChatGPT",
+      "description": "Conversation naturelle, écriture créative et résolution de problèmes",
+      "greeting": "Bonjour ! 👋 Je suis ChatGPT. Je peux vous aider en rédaction, analyse, programmation et bien plus encore. Que souhaitez-vous faire aujourd'hui ?"
+    },
+    "gemini": {
+      "name": "Gemini",
+      "description": "Recherche avancée, analyse de données et intégration Google",
+      "greeting": "Bonjour ! 👋 Je suis Gemini. Je peux vous aider en recherche, analyse d'informations et bien plus encore. Comment puis-je vous aider ?"
+    },
+    "claude": {
+      "name": "Claude",
+      "description": "Analyse approfondie, raisonnement complexe et textes longs",
+      "greeting": "Bonjour ! 👋 Je suis Claude. Je suis spécialisé dans l'analyse détaillée et le raisonnement rigoureux. De quoi avez-vous besoin ?"
+    },
+    "grok": {
+      "name": "Grok",
+      "description": "Des perspectives uniques avec humour et créativité",
+      "greeting": "Salut ! 👋 Je suis Grok. J'apporte une perspective différente et créative à n'importe quel sujet. De quoi allons-nous parler ?"
+    },
+    "edi": {
+      "name": "EDI",
+      "description": "Spécialiste IA généraliste pour choisir les bons outils, créer de meilleurs prompts et guider votre workflow",
+      "greeting": "Bonjour ! 👋 Je suis EDI, votre spécialiste IA généraliste ici sur Educly. Je peux vous aider à choisir la meilleure IA selon votre objectif, améliorer vos prompts, comparer des outils et guider votre prochaine étape. Que voulez-vous faire aujourd'hui ?"
+    },
+    "nanobanana": {
+      "name": "NanoBanana",
+      "description": "Génération d'images incroyables avec intelligence artificielle",
+      "pillLabel": "Images",
+      "greeting": "Bonjour ! 🎨 Je suis NanoBanana ! Je peux créer des images incroyables pour vous. Décrivez ce que vous voulez voir et je le générerai immédiatement. Que souhaitez-vous créer ?"
     },
     "specialist": {
       "name": "IA Spécialiste",

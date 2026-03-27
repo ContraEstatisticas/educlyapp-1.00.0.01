@@ -2848,6 +2848,13 @@
     "access": "Acessar Assistentes",
     "online": "Online",
     "inputPlaceholder": "Digite sua mensagem...",
+    "sidebar": {
+      "specialistLabel": "Especialista",
+      "resourcesLabel": "Recursos",
+      "imagesLabel": "Imagens",
+      "messagesShort": "Msgs",
+      "imagesShort": "Imgs"
+    },
     "rateLimit": {
       "counter": "Mensagens hoje",
       "message": "Você atingiu o limite diário de mensagens. Tente novamente amanhã!"
@@ -2878,12 +2885,13 @@
     },
     "edi": {
       "name": "EDI",
-      "description": "Seu assistente pessoal da Educly para dúvidas e orientação",
-      "greeting": "Oi! 👋 Eu sou o EDI, seu assistente aqui na Educly! Tô muito feliz em te ajudar! Me conta, o que você quer saber?"
+      "description": "Especialista geral para escolher a melhor IA, criar prompts e orientar seu fluxo",
+      "greeting": "Oi! 👋 Eu sou o EDI, seu especialista geral em IA aqui na Educly. Posso te dizer qual IA usar em cada objetivo, montar prompts melhores, comparar ferramentas e te orientar no proximo passo. O que voce quer fazer hoje?"
     },
     "nanobanana": {
       "name": "NanoBanana",
       "description": "Geração de imagens incríveis com inteligência artificial",
+      "pillLabel": "Imagens",
       "greeting": "Olá! 🎨 Sou o NanoBanana! Posso criar imagens incríveis para você! Descreva o que você quer ver e eu vou gerar na hora. O que você gostaria de criar?"
     },
     "specialist": {
