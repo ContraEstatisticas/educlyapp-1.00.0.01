@@ -120,6 +120,7 @@ import ResetCache from "./pages/ResetCache";
 import SignupFromEmail from "./pages/SignupFromEmail";
 import Billing from "./pages/Billing";
 import MagicLogin from "./pages/MagicLogin";
+import PaddleLanding from "./pages/PaddleLanding";
 import AIToolTrailsHub from "./pages/AIToolTrailsHub";
 import AIToolTrailPage from "./pages/AIToolTrailPage";
 import AIToolModuleLessonPage from "./pages/AIToolModuleLessonPage";
@@ -197,6 +198,7 @@ const App = () => {
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}
                   <Route path="/" element={<Index />} />
+                  <Route path="/paddle" element={<PaddleLanding />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/update-password" element={<UpdatePassword />} />
                   <Route path="/obrigado" element={<ThankYou />} />
