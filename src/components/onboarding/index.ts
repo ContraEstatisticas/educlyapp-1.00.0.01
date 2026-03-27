@@ -6,3 +6,4 @@ export { ProductOnboarding } from "./ProductOnboarding";
 export { ChallengeTutorial } from "./ChallengeTutorial";
 export { FreelancerTutorial } from "./FreelancerTutorial";
 export { AssistantsTutorial } from "./AssistantsTutorial";
+export { DashboardAvatarOnboarding } from "./DashboardAvatarOnboarding";

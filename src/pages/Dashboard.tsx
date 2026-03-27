@@ -7,7 +7,7 @@ import { clearAuthStorage } from "@/lib/authStorage";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MobileNav } from "@/components/MobileNav";
 import { WeeklyStreakBar } from "@/components/WeeklyStreakBar";
-import { ProductOnboarding } from "@/components/onboarding";
+import { DashboardAvatarOnboarding } from "@/components/onboarding";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useTranslation } from "react-i18next";
 import { TrailContentModal } from "@/components/dashboard/TrailContentModal";
@@ -523,7 +523,7 @@ const Dashboard = () => {
         }
       `}</style>
 
-      <ProductOnboarding />
+      <DashboardAvatarOnboarding />
       <div
         className={`sticky top-0 !z-[130] w-full border-b transition-all duration-300 pt-safe ${
           isNavbarScrolled
@@ -539,7 +539,10 @@ const Dashboard = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4 !z-auto">
 
         {/* Welcome Banner */}
-        <div className="dashboard-hero-merged relative z-10 mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6">
+        <div
+          id="dashboard-welcome-banner"
+          className="dashboard-hero-merged relative z-10 mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6"
+        >
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="w-full md:max-w-[680px]">
               <h1 className="mb-2 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
@@ -762,7 +765,7 @@ const Dashboard = () => {
           </section>
 
           {/* GRID DE CARDS DESTAQUE */}
-          <div>
+          <div id="dashboard-featured-products">
             <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
               {featuredCards.map((card, index) => {
                 const hasCardAccess = productAccess.hasAccess(card.productType);
