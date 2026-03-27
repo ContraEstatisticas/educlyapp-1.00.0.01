@@ -119,36 +119,6 @@ export type Database = {
         }
         Relationships: []
       }
-      ai_trail_module_progress: {
-        Row: {
-          completed_at: string
-          created_at: string
-          id: string
-          module_number: number
-          tool_slug: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          completed_at?: string
-          created_at?: string
-          id?: string
-          module_number: number
-          tool_slug: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          completed_at?: string
-          created_at?: string
-          id?: string
-          module_number?: number
-          tool_slug?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       ai_trail_completion_rewards: {
         Row: {
           awarded_at: string
@@ -179,6 +149,36 @@ export type Database = {
           updated_at?: string
           user_id?: string
           xp_awarded?: number
+        }
+        Relationships: []
+      }
+      ai_trail_module_progress: {
+        Row: {
+          completed_at: string
+          created_at: string
+          id: string
+          module_number: number
+          tool_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          module_number: number
+          tool_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          module_number?: number
+          tool_slug?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
