@@ -335,8 +335,8 @@ export const GEMINI_MODULE_7_STEPS_ES = [
     "¡Crea tu copy!",
     "Utiliza los conocidos parámetros PAS, AIDA o PPPP en la redacción persuasiva.",
     "\"Usando el framework [___], escribe un copy de [___] para [___]. Público: [___]. Dolor central: [___]. Presenta la solución como [___]. Finaliza con un [___] claro y urgente. Tono: [___].\"",
-    ["PAS — Problema, Agitación, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
-    ["PAS — Problema, Agitation, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
+    ["PAS — Problema, Agitación, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endeudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
+    ["PAS — Problema, Agitación, Solución", "ventas", "un curso online de organización financiera", "personas entre 25 y 40 años endeudadas y sin control del dinero", "falta de método y disciplina financiera", "el primer paso concreto hacia la libertad financiera", "CTA", "directo y empático"],
     "Trazar límites metodológicos lo fuerza a entregar textos anclados en psicología pura de ventas, no palabrería vacía."
   ),
   textStep(
@@ -383,8 +383,8 @@ export const GEMINI_MODULE_7_STEPS_ES = [
     "¡Guioniza tu rodaje!",
     "Marca a fuego la cadencia oral e impone la secuencia estricta visual que la narrativa requerirá simultáneamente al lector a cámara.",
     "\"Crea un guion de [___] para [___] sobre [___]. En los primeros [___] segundos: un [___] que origine suma e inmediata curiosidad veloz. Desarrollo partido en [___] bloques, adjudicando valiosa [___] de imagen para cada uno. Cierre con la veloz [___] al fin de este clip publicitario. Tono de orador: [___].\"",
-    ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 días usando publicidad orgánica viva de mercado actual en auge", "3", "gancho rápido e intenso", "3", "sugerencia descriptiva", "CTA", "muy rítmico asertivo seguro directo franco y audaz total sin timidez alguna o rodeos innecesarios sobrantes para ir potente al punto del clip video este"],
-    ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 dias usando publicidad orgánica viva de mercado actual en auge", "3", "gancho", "3", "sugerencia", "CTA", "franco y directo"],
+    ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 días usando publicidad orgánica", "3", "gancho", "3", "sugerencia visual", "CTA", "franco y directo"],
+    ["Reels de 45 segundos", "Instagram", "cómo doblar ventas en 30 días usando publicidad orgánica", "3", "gancho", "3", "sugerencia visual", "CTA", "franco y directo"],
     "Dirigir la pantalla secundaria desde el papel asevera la dinámica y el pulso vibrante, espantando el formato mortal de busto parlante sin cortes que la atención digital destruye."
   ),
   textStep(
@@ -395,8 +395,8 @@ export const GEMINI_MODULE_7_STEPS_ES = [
     "¡Visualiza tu agenda planificada!",
     "Planea tu artillería futura previniendo apagones en tu constelación social sin quemarte por ideas en una hoja en blanco.",
     "\"Crea un calendario editorial sólido para [___] abarcando el estricto mes venidero de [___] completo dedicado de pleno a [___]. Incluye firmemente: el monto fijo de [___] apariciones por semana en los feeds globales; destacando nítido el tipo puntual de [___] que adopte ahí ese contenido; apuntalado al precioso claro de [___] de salida al aire vivo. Acopla siempre sabias [___] del mes donde te subas a surfear tópicos al alza listos y servidos globales a fin allí presentes que sirvan comercialmente.\"",
-    ["múltiples redes como Instagram y LinkedIn enteras", "octubre rojo e intenso venidero ya", "academia digital de artes", "4", "tema y formato", "mejor horario", "fechas especiales fijas"],
-    ["Instagram y LinkedIn", "octubre", "academia", "4", "tema y formato", "horario", "fechas especiales"],
+    ["Instagram y LinkedIn", "octubre", "academia digital de artes", "4", "tema y formato", "mejor horario", "fechas especiales"],
+    ["Instagram y LinkedIn", "octubre", "academia digital de artes", "4", "tema y formato", "mejor horario", "fechas especiales"],
     "Predecir feriados o coyunturas mundiales permite cabalgar en tendencias a bajo coste al ser ya temas presentes y de charla por default."
   ),
   textStep(
@@ -407,8 +407,8 @@ export const GEMINI_MODULE_7_STEPS_ES = [
     "¡Blinda y gerencia a tus masivos seguidores activos fervientes ya!",
     "Acuna respuestas blindadas modulares muy rápidas contra polémicas duras o halagos diarios sin trabas en ti mismo para ser líder claro e inmediato frente el otro al uso tuyo ahora y ya.",
     "\"Crea un banco robusto firme certero para ti y claro listado completo estructurado bien de cerca de al menos [___] templates rápidos o guías modulares precisas bases seguras de pronta respuesta base fiel a utilizar en posibles comentarios duros e íntegros como en privados densos DMs recibidos del canal de [___]. Integra al paquete de base estricto estas directrices para ti mismo: devoluciones buenas para cuando haya un caluroso gran [___] hecho al perfil buen hombre, para una básica y típica [___] ingenua respecto a costes; otra para atajada rápida ante inminente terrible y amenazada de fea [___] del trato de delivery nuestro y el gentil rápido y seguro [___] general por info vaga diversa a dar la marca veloz al caso a caso al chat o correo allí. La vibra general del tono base puro para ti: será invariablemente ultra [___] y sin perder el foco en rematar encausándolo con fuerza o maestría impecable guiada muy sabiamente y directamente sin freno ni pausa y claro total [___] en el largo paso allí del funnel que queramos dictar nosotros mismos y serás maestro de esto a las masas ya total y sin fisuras desde hoy bien rápido allí y firme seguro como un roble viejo en la plaza pura.\"",
-    ["6", "el muy vivo movido o el duro Instagram oficial principal puro de nuestra amada marca esta o negocio de perfil propio general grande con gente a reventar de activa ruidosa", "elogio y afecto noble honesto", "duda u consulta", "queja seria y airada fea pero sana y resoluble", "pedido genérico suelto y breve o muy vago incierto ahí puro y vacío", "empático y ultra profesional total noble firme", "redirigiéndolo dócilmente pero muy tenaz directo y fuerte y encausándolo certero total firme hacia justo al preciso próximo claro gran firme escalón firme exactito del embudo paso allá seguro nuestro a vender u convencer ya bien al caso muy de seguro"],
-    ["6", "Instagram de marca", "elogio", "duda", "reclama", "solicitud", "empática", "al siguiente paso"],
+    ["6", "Instagram de marca", "elogio", "duda", "queja", "solicitud", "empático y profesional", "al siguiente paso"],
+    ["6", "Instagram de marca", "elogio", "duda", "queja", "solicitud", "empático y profesional", "al siguiente paso"],
     "Las plantillas robustas evitan tropezar en peleas innecesarias o parecer fríos autómatas. Otorgan resoluciones veloces con aura empática institucional certera intachable muy pura de empresa madura con aplomo enorme genial al rubro."
   ),
   textStep(
@@ -419,7 +419,7 @@ export const GEMINI_MODULE_7_STEPS_ES = [
     "¡Analiza el ROI e Insights vitales duros tuyos!",
     "Deposita métricas ciegas planas pidiéndole rumbos precisos y de cirugía mayor firme y seria audaz clara sin igual brillante ya para adelante a por más fuerte.",
     "\"Amado asistente: toma este crudo set de puras cifras de performance general crudas reales duras inútiles e incomprensibles de mes pasado publicitario cerrado ya. : [pegar la tabla tuya aquí adentro]. Condensa e incinera paja allí, exuda oro al explicar y dime ya: donde fue claro donde en general nos [___] brillantemente bien y genial; qué plano nos [___] y anduvo con un asqueroso fétido patético lodo feo amargado por un y muy por muy por bien mal y del muy por bajo de todo vilmente obvio el triste promedio general del resto visto u de ese nuestro esperado ansiado; decime que tipo general duro inamovible de núcleo básico fuerte vital propio a pura de este genial modelo inmerso de la propia [___] general básica actual muy al fin debo por fuerza aferrar firme sostener duro blindada pura y cual en muy suma o y de qué purga o adenda yo debo o preciso por el deber inmenso y fatal [___] feroz urgente firme fuerte firme o extirpar sin mas ya para mejorar mis ratios del mes del próximo tiro de mes allí enfrente nuestro y así en verdad puro poder mejorar mis ingresos netos muy rápidos y muy seguros ahí general.\"",
-    ["funcionó", "quedó o ubicó e instaló patético y de muy mal pésimo o pobre", "pilar de la estructura base táctica real total que poseemos al tiro acá o esa enorme colosal gran fina estrategia", "pulir afinar cortar alistar y alinear u así re adaptar duramente y arreglar con bisturí filoso o modificar y corregir ya en todo fuerte y con dureza o repensar un poco y ajustar"],
+    ["funcionó", "quedó", "estrategia", "ajustar"],
     ["funcionó", "quedó", "estrategia", "ajustar"],
     "La frialdad absoluta cibernética previene sesgos emocionales del creador dolido que suele ocultarse y culpar al resto ante fracasos del gráfico al ignorar los verdaderos datos lógicos inobjetables de ajuste por venir pronto puro allí inminentes de ver o actuar al toque al leer estos números puros finos decodificados tan a tiro brillante en minutos reales plenos y sanos."
   ),

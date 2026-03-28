@@ -72,7 +72,11 @@ export const FillBlanks = ({
     setActiveBlank(firstEmpty !== -1 ? firstEmpty : null);
   };
 
-  const applyAnswerToBlank = (blankIndex: number, answer: string): (string | null)[] | null => {
+  const applyAnswerToBlank = (
+    blankIndex: number,
+    answer: string,
+    allowDirectInsert = false,
+  ): (string | null)[] | null => {
     const normalizeValue = (value: string) => value.trim();
     const currentOptionId = filledOptionIds[blankIndex];
     const matchingOption =
@@ -85,31 +89,36 @@ export const FillBlanks = ({
         (option) => normalizeValue(option.value) === normalizeValue(answer)
       );
 
-    if (!matchingOption) return null;
-
     const nextFilledAnswers = [...filledAnswers];
     const nextFilledOptionIds = [...filledOptionIds];
 
-    // If the correct option is currently placed in another blank, free that blank first.
-    const occupiedIndex = nextFilledOptionIds.findIndex(
-      (optionId, index) => optionId === matchingOption.id && index !== blankIndex
-    );
+    if (!matchingOption && !allowDirectInsert) return null;
 
-    if (occupiedIndex !== -1) {
-      nextFilledAnswers[occupiedIndex] = null;
-      nextFilledOptionIds[occupiedIndex] = null;
-    }
+    if (matchingOption) {
+      // If the correct option is currently placed in another blank, free that blank first.
+      const occupiedIndex = nextFilledOptionIds.findIndex(
+        (optionId, index) => optionId === matchingOption.id && index !== blankIndex
+      );
 
-    if (currentOptionId && currentOptionId !== matchingOption.id) {
-      const previousSlot = nextFilledOptionIds.findIndex((optionId) => optionId === currentOptionId);
-      if (previousSlot !== -1) {
-        nextFilledAnswers[previousSlot] = null;
-        nextFilledOptionIds[previousSlot] = null;
+      if (occupiedIndex !== -1) {
+        nextFilledAnswers[occupiedIndex] = null;
+        nextFilledOptionIds[occupiedIndex] = null;
       }
+
+      if (currentOptionId && currentOptionId !== matchingOption.id) {
+        const previousSlot = nextFilledOptionIds.findIndex((optionId) => optionId === currentOptionId);
+        if (previousSlot !== -1) {
+          nextFilledAnswers[previousSlot] = null;
+          nextFilledOptionIds[previousSlot] = null;
+        }
+      }
+
+      nextFilledOptionIds[blankIndex] = matchingOption.id;
+    } else {
+      nextFilledOptionIds[blankIndex] = null;
     }
 
     nextFilledAnswers[blankIndex] = answer;
-    nextFilledOptionIds[blankIndex] = matchingOption.id;
 
     const nextUsedOptions = new Set(
       nextFilledOptionIds.filter((optionId): optionId is string => optionId !== null)
@@ -203,7 +212,7 @@ export const FillBlanks = ({
     const answer = actualAnswers[stepIndex];
     if (!answer) return false;
 
-    const nextFilledAnswers = applyAnswerToBlank(stepIndex, answer);
+    const nextFilledAnswers = applyAnswerToBlank(stepIndex, answer, true);
     if (!nextFilledAnswers) return false;
 
     const allCorrect = areAllAnswersCorrect(nextFilledAnswers);
