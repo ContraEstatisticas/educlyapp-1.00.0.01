@@ -397,3 +397,42 @@
   --wave-halo: rgba(59, 130, 246, 0.26);
   --wave-edge: rgba(148, 163, 184, 0.14);
 }
+
+/* ============================================================
+   Level-Up Popup — Progressive Animations
+   ============================================================ */
+
+/* Shimmer that sweeps across the level number text (tier 3-4) */
+@keyframes levelUpShimmer {
+  0% {
+    background-position: 200% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Rotating gradient border for tier-rising and above */
+@keyframes levelUpBorderSpin {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.level-up-border.tier-rising {
+  animation: levelUpBorderSpin 6s linear infinite;
+}
+
+.level-up-border.tier-advanced {
+  animation: levelUpBorderSpin 4s linear infinite;
+}
+
+.level-up-border.tier-master {
+  animation: levelUpBorderSpin 3s linear infinite;
+}
