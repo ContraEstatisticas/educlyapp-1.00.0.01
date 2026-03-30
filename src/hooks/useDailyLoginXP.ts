@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 import { useUserLevel, XP_REWARDS } from "./useUserLevel";
 
 export const useDailyLoginXP = () => {
   const { addXP, levelData } = useUserLevel();
+  const { t } = useTranslation();
   const hasCheckedRef = useRef(false);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export const useDailyLoginXP = () => {
         localStorage.setItem(lastLoginKey, today);
         
         // Dar XP de login diário
-        addXP(XP_REWARDS.DAILY_LOGIN, "Login diário! 🌟");
+        addXP(XP_REWARDS.DAILY_LOGIN, t("xp.dailyLogin", "Login diário! 🌟"));
       }
     };
 

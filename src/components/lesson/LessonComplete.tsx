@@ -48,8 +48,8 @@ export const LessonComplete = ({
       setXpAwarded(true);
       const xpAmount = isLastDay ? XP_REWARDS.DAY_COMPLETE + XP_REWARDS.MODULE_COMPLETE : XP_REWARDS.DAY_COMPLETE;
       const reason = isLastDay 
-        ? `Desafio completo! 🏆 Dia ${dayNumber}/${totalDays}` 
-        : `Lição completada! 📚 Dia ${dayNumber}/${totalDays}`;
+        ? t("xp.challengeComplete", { day: dayNumber, total: totalDays, defaultValue: `Desafio completo! 🏆 Dia {{day}}/{{total}}` }).replace('{{day}}', String(dayNumber)).replace('{{total}}', String(totalDays))
+        : t("xp.lessonComplete", { day: dayNumber, total: totalDays, defaultValue: `Lição completada! 📚 Dia {{day}}/{{total}}` }).replace('{{day}}', String(dayNumber)).replace('{{total}}', String(totalDays));
       addXP(xpAmount, reason);
     }
   }, [xpAwarded, isLastDay, dayNumber, totalDays, addXP]);

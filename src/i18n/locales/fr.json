@@ -3366,5 +3366,11 @@
     "gemini_master": "Complétez tous les jours de Gemini",
     "early_bird": "Complétez une leçon avant 8h du matin",
     "night_owl": "Complétez une leçon après 22h"
+  },
+  "xp": {
+    "dailyLogin": "Connexion quotidienne ! 🌟",
+    "quizCorrect": "Quiz correct !",
+    "challengeComplete": "Défi complet ! 🏆 Jour {{day}}/{{total}}",
+    "lessonComplete": "Leçon terminée ! 📚 Jour {{day}}/{{total}}"
   }
 }

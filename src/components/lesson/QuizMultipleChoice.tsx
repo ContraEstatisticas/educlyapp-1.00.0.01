@@ -55,7 +55,7 @@ export const QuizMultipleChoice = ({
       // Award XP for correct answer (only once)
       if (!xpAwarded) {
         setXpAwarded(true);
-        addXP(XP_REWARDS.QUIZ_CORRECT, "Quiz correto!");
+        addXP(XP_REWARDS.QUIZ_CORRECT, t("xp.quizCorrect", "Quiz correto!"));
       }
     } else {
       playIncorrect();
