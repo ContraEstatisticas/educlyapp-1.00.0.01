@@ -1767,6 +1767,10 @@
     "specialty_trails": {
       "title": "Parcours de spécialité",
       "quickSubtitle": "Explorez les parcours par spécialité"
+    },
+    "card_status": {
+      "active": "Actif",
+      "locked": "Bloqué"
     }
   },
   "progress": {

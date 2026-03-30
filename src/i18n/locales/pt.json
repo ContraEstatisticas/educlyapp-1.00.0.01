@@ -2142,6 +2142,10 @@
     "specialty_trails": {
       "title": "Trilhas de especialidades",
       "quickSubtitle": "Explore trilhas por especialidade"
+    },
+    "card_status": {
+      "active": "Ativo",
+      "locked": "Bloqueado"
     }
   },
   "missions": {

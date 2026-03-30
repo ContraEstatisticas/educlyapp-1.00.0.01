@@ -97,12 +97,13 @@ serve(async (req) => {
     const now = new Date();
     const lookbackStart = new Date(now.getTime() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
 
-    // 1. Get welcome/magic_link emails sent in the lookback window
+    // 1. Get welcome/magic_link emails sent in the lookback window that were NOT opened
     const { data: welcomeEmails, error: welcomeError } = await supabase
       .from("email_logs")
-      .select("id, recipient_email, email_type, status, sent_at, user_id, metadata")
+      .select("id, recipient_email, email_type, status, sent_at, user_id, metadata, opened_at")
       .in("email_type", ["welcome", "magic_link"])
       .not("sent_at", "is", null)
+      .is("opened_at", null)
       .gte("created_at", lookbackStart)
       .order("sent_at", { ascending: true })
       .limit(BATCH_LIMIT * 4);

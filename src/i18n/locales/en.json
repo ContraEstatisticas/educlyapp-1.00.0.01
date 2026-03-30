@@ -2549,6 +2549,10 @@
     "specialty_trails": {
       "title": "Specialty Trails",
       "quickSubtitle": "Explore trails by specialty"
+    },
+    "card_status": {
+      "active": "Active",
+      "locked": "Locked"
     }
   },
   "onboardingQuiz": {

@@ -2679,6 +2679,10 @@
     "specialty_trails": {
       "title": "Rutas de especialidades",
       "quickSubtitle": "Explora rutas por especialidad"
+    },
+    "card_status": {
+      "active": "Activo",
+      "locked": "Bloqueado"
     }
   },
   "progress": {
