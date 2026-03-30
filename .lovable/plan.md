@@ -1,55 +1,27 @@
 
 
-## Situação atual
+## Diagnóstico do erro de build
 
-O script do Paddle **já está inserido** no `index.html` (linhas 83-88):
+O erro que impede a publicação está em `supabase/functions/assistentes-chat/index.ts`, linha 1056:
 
-```html
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-<script type="text/javascript">
-  Paddle.Initialize({ 
-    token: 'live_7d525879d9abfb6c4a7b0055777'
-  });
-</script>
+```
+TS2345: Argument of type 'SupabaseClient<any, "public", ...>' is not assignable to 
+parameter of type 'SupabaseClient<unknown, { PostgrestVersion: string; }, never, ...>'
 ```
 
-E o `PaddleLanding.tsx` também tem um fallback dinâmico que injeta o mesmo script.
+### Causa
 
-## Por que o Paddle não reconhece
+Na linha 128, a função `getAiHubLimitInfo` define o tipo do parâmetro `supabase` como `ReturnType<typeof createClient>`. Porém, quando `createClient` é chamado com argumentos reais (linha 986), o TypeScript infere um tipo genérico diferente do `ReturnType<typeof createClient>` (que representa a chamada sem argumentos). Isso causa incompatibilidade de tipos.
 
-O `index.html` tem um script de **limpeza de cache automática** (linhas 99-200). Quando qualquer visitante novo (incluindo o crawler do Paddle) acessa `/paddle`:
+### Solução
 
-1. O crawler não tem a flag `__educly_force_reset_v` no localStorage
-2. A rota `/paddle` **não está** na lista de exceções (linha 124: `['magic-login', 'auth']`)
-3. O script redireciona o crawler para `/auth?cache_reset=1` **antes** do Paddle.js carregar
-4. Resultado: "Popup form did not render"
+Alterar a tipagem do parâmetro na linha 128 de `ReturnType<typeof createClient>` para `any`:
 
-## Plano
+| Arquivo | Linha | Alteração |
+|---------|-------|-----------|
+| `supabase/functions/assistentes-chat/index.ts` | 128 | `supabase: ReturnType<typeof createClient>` → `supabase: any` |
 
-**1 alteração, 1 arquivo, 1 palavra adicionada.**
+Essa abordagem já é usada em outras partes do projeto (conforme a memória técnica: usar cast para `any` para evitar falhas de compilação com tipos do Supabase).
 
-No `index.html`, linha 124, adicionar `'paddle'` na lista de rotas que NÃO são redirecionadas:
-
-```js
-// ANTES
-var authRoutes = ['magic-login', 'auth'];
-
-// DEPOIS
-var authRoutes = ['magic-login', 'auth', 'paddle'];
-```
-
-Isso faz o script de cache ignorar quem está em `/paddle`, permitindo que o Paddle.js carregue normalmente.
-
-**Nenhum outro arquivo é tocado. Nenhuma outra mudança.**
-
-## Verificação pós-alteração
-
-Após a alteração, verificar que:
-- `index.html` linha 124 tem `'paddle'` na lista
-- Nenhuma outra linha do `index.html` foi modificada
-- `PaddleLanding.tsx` continua idêntico
-- `LandingHero.tsx` continua idêntico
-- `App.tsx` continua idêntico
-- `PricingSection.tsx` continua idêntico
-- Nenhum outro arquivo do projeto foi alterado
+Nenhum outro arquivo precisa ser alterado. Nenhuma lógica muda — apenas a anotação de tipo.
 
