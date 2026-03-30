@@ -8,10 +8,19 @@ import {
   getLevelTitle,
   getRewardTitleList,
   type LevelRewardKey,
+  type LevelRewardRow,
 } from "@/lib/levelRewards";
 import { getNewsletterRequiresFreelancerDescription } from "@/lib/levelRewardMarketing";
-import { dispatchLevelUpEvent } from "@/lib/levelUpEvents";
+import {
+  dispatchLevelRewardsGrantedEvent,
+  dispatchLevelUpEvent,
+} from "@/lib/levelUpEvents";
 import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
+import {
+  getNewlySyncedRewards,
+  mergeGrantedRewardsIntoCache,
+  refreshLevelRewardsQuery,
+} from "@/lib/levelRewardQueries";
 
 const XP_PER_LEVEL = [
   0,
@@ -130,6 +139,9 @@ export const useUserLevel = () => {
     async (userId: string, currentLevel: number) => {
       if (currentLevel < 3) return [] as GrantedReward[];
 
+      const cachedRewardsBeforeSync =
+        queryClient.getQueryData<LevelRewardRow[]>(["user-level-rewards"]) || [];
+
       const { data, error } = await supabase.rpc("apply_level_rewards", {
         p_current_level: currentLevel,
         p_user_id: userId,
@@ -137,16 +149,47 @@ export const useUserLevel = () => {
 
       if (error) {
         console.error("Error applying level rewards:", error);
-        return [] as GrantedReward[];
       }
 
       const grantedRewards = (data || []) as GrantedReward[];
+      let hasAiHubDayPassReward = grantedRewards.some(
+        (reward) => reward.reward_key === "ai_hub_day_pass",
+      );
 
       if (grantedRewards.length > 0) {
-        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
+        dispatchLevelRewardsGrantedEvent({
+          rewards: mergedRewards,
+          source: "local",
+        });
       }
 
-      if (grantedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+      try {
+        const refreshedRewards = await refreshLevelRewardsQuery(queryClient);
+
+        if (grantedRewards.length === 0) {
+          const newlyDetectedRewards = getNewlySyncedRewards(
+            cachedRewardsBeforeSync,
+            refreshedRewards,
+            currentLevel,
+          );
+
+          if (newlyDetectedRewards.length > 0) {
+            hasAiHubDayPassReward =
+              hasAiHubDayPassReward ||
+              newlyDetectedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass");
+
+            dispatchLevelRewardsGrantedEvent({
+              rewards: newlyDetectedRewards,
+              source: "local",
+            });
+          }
+        }
+      } catch (refreshError) {
+        console.error("Error refreshing level rewards after sync:", refreshError);
+      }
+
+      if (hasAiHubDayPassReward) {
         dispatchProductAccessRefresh();
       }
 

@@ -32,12 +32,23 @@ import {
   type LevelRewardPopupContent,
 } from "@/lib/levelRewardPopup";
 import {
+  LEVEL_REWARDS_GRANTED_EVENT,
   LEVEL_UP_EVENT,
   LEVEL_UP_POPUP_CLOSE_EVENT,
   LEVEL_UP_POPUP_OPEN_EVENT,
+  type LevelRewardsGrantedEventDetail,
 } from "@/lib/levelUpEvents";
 import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
-import type { LevelRewardRow } from "@/lib/levelRewards";
+import {
+  getUnlockedRewardForMilestone,
+  REWARD_MILESTONES,
+  type LevelRewardRow,
+} from "@/lib/levelRewards";
+import {
+  getNewlySyncedRewards,
+  mergeGrantedRewardsIntoCache,
+  refreshLevelRewardsQuery,
+} from "@/lib/levelRewardQueries";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
 
@@ -89,9 +100,11 @@ export const LevelRewardMilestonePopup = () => {
   const { freelancer, ai_hub, isLoading: isAccessLoading } = useProductAccess();
   const { data: rewards = [], isLoading: isRewardsLoading } = useLevelRewards();
   const [dismissedRewardFingerprints, setDismissedRewardFingerprints] = useState<string[]>([]);
+  const [queuedRewards, setQueuedRewards] = useState<LevelRewardRow[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [syncedRewardKey, setSyncedRewardKey] = useState<string | null>(null);
+  const [lastSyncedRewardSignature, setLastSyncedRewardSignature] = useState<string | null>(null);
   const [isLevelUpPopupActive, setIsLevelUpPopupActive] = useState(false);
+  const [pendingPostLevelUpSync, setPendingPostLevelUpSync] = useState(false);
 
   const language = i18n.resolvedLanguage || i18n.language;
   const hasDiscountOffer = hasFreelancerDiscountOffer();
@@ -102,40 +115,119 @@ export const LevelRewardMilestonePopup = () => {
 
     const handleLevelUpRequested = () => {
       setIsLevelUpPopupActive(true);
+      setPendingPostLevelUpSync(true);
     };
 
     const handleLevelUpPopupClosed = () => {
       setIsLevelUpPopupActive(false);
     };
 
+    const handleRewardsGranted = (event: Event) => {
+      const detail = (event as CustomEvent<LevelRewardsGrantedEventDetail>).detail;
+
+      if (!detail?.rewards?.length) return;
+
+      setQueuedRewards((currentQueue) => {
+        const nextQueue = [...currentQueue];
+
+        for (const reward of detail.rewards) {
+          if (!SUPPORTED_POPUP_REWARDS.includes(reward.reward_key)) continue;
+
+          const existingRewardIndex = nextQueue.findIndex(
+            (queuedReward) =>
+              queuedReward.source_level === reward.source_level &&
+              queuedReward.reward_key === reward.reward_key,
+          );
+
+          if (existingRewardIndex >= 0) {
+            nextQueue[existingRewardIndex] = reward;
+            continue;
+          }
+
+          nextQueue.push(reward);
+        }
+
+        return sortRewards(nextQueue);
+      });
+    };
+
     window.addEventListener(LEVEL_UP_EVENT, handleLevelUpRequested);
     window.addEventListener(LEVEL_UP_POPUP_OPEN_EVENT, handleLevelUpRequested);
     window.addEventListener(LEVEL_UP_POPUP_CLOSE_EVENT, handleLevelUpPopupClosed);
+    window.addEventListener(LEVEL_REWARDS_GRANTED_EVENT, handleRewardsGranted as EventListener);
 
     return () => {
       window.removeEventListener(LEVEL_UP_EVENT, handleLevelUpRequested);
       window.removeEventListener(LEVEL_UP_POPUP_OPEN_EVENT, handleLevelUpRequested);
       window.removeEventListener(LEVEL_UP_POPUP_CLOSE_EVENT, handleLevelUpPopupClosed);
+      window.removeEventListener(LEVEL_REWARDS_GRANTED_EVENT, handleRewardsGranted as EventListener);
     };
   }, []);
+
+  const rewardStateSignature = useMemo(
+    () =>
+      REWARD_MILESTONES.map((milestone) => {
+        const reward = getUnlockedRewardForMilestone(rewards, milestone.level);
+        const status =
+          reward?.metadata && typeof reward.metadata.status === "string"
+            ? reward.metadata.status
+            : "none";
+
+        return `${milestone.level}:${reward?.reward_key || "missing"}:${status}`;
+      }).join("|"),
+    [rewards],
+  );
+
+  const shouldSyncRewards = useMemo(() => {
+    if (currentLevel < 3) return false;
+
+    const missingReachedReward = REWARD_MILESTONES.some(
+      (milestone) =>
+        currentLevel >= milestone.level && !getUnlockedRewardForMilestone(rewards, milestone.level),
+    );
+
+    const pendingNewsletterReward = rewards.find(
+      (reward) =>
+        reward.reward_key === "newsletter_access" &&
+        reward.metadata &&
+        typeof reward.metadata.status === "string" &&
+        reward.metadata.status === "requires_freelancer",
+    );
+
+    const pendingAiHubBonusReward = rewards.find(
+      (reward) =>
+        reward.reward_key === "ai_hub_bonus_limits" &&
+        reward.metadata &&
+        typeof reward.metadata.status === "string" &&
+        reward.metadata.status === "requires_ai_hub",
+    );
+
+    return (
+      missingReachedReward ||
+      Boolean(freelancer && pendingNewsletterReward) ||
+      Boolean(ai_hub && pendingAiHubBonusReward)
+    );
+  }, [ai_hub, currentLevel, freelancer, rewards]);
 
   useEffect(() => {
     if (
       isLevelLoading ||
       isAccessLoading ||
       !levelData?.user_id ||
-      currentLevel < 3
+      !shouldSyncRewards
     ) {
       return;
     }
 
-    const syncKey = `${levelData.user_id}:${currentLevel}:${freelancer}:${ai_hub}`;
+    const syncKey = `${levelData.user_id}:${currentLevel}:${freelancer}:${ai_hub}:${rewardStateSignature}`;
 
-    if (syncedRewardKey === syncKey) return;
+    if (lastSyncedRewardSignature === syncKey) return;
 
     let cancelled = false;
 
     const syncRewards = async () => {
+      const cachedRewardsBeforeSync = queryClient.getQueryData<LevelRewardRow[]>(["user-level-rewards"]) || [];
+
       const { data, error } = await supabase.rpc("apply_level_rewards", {
         p_current_level: currentLevel,
         p_user_id: levelData.user_id,
@@ -143,16 +235,62 @@ export const LevelRewardMilestonePopup = () => {
 
       if (error) {
         console.error("Error syncing level rewards:", error);
-        return;
       }
 
       if (cancelled) return;
 
-      setSyncedRewardKey(syncKey);
+      const grantedRewards = Array.isArray(data) ? data : [];
 
-      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      if (grantedRewards.length > 0) {
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
 
-      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+        setQueuedRewards((currentQueue) =>
+          sortRewards([
+            ...currentQueue.filter(
+              (queuedReward) =>
+                !mergedRewards.some(
+                  (newReward) =>
+                    newReward.source_level === queuedReward.source_level &&
+                    newReward.reward_key === queuedReward.reward_key,
+                ),
+            ),
+            ...mergedRewards,
+          ]),
+        );
+      }
+
+      try {
+        const refreshedRewards = await refreshLevelRewardsQuery(queryClient);
+        setLastSyncedRewardSignature(syncKey);
+
+        if (grantedRewards.length === 0) {
+          const newlyDetectedRewards = getNewlySyncedRewards(
+            cachedRewardsBeforeSync,
+            refreshedRewards,
+            currentLevel,
+          );
+
+          if (newlyDetectedRewards.length > 0) {
+            setQueuedRewards((currentQueue) =>
+              sortRewards([
+                ...currentQueue.filter(
+                  (queuedReward) =>
+                    !newlyDetectedRewards.some(
+                      (newReward) =>
+                        newReward.source_level === queuedReward.source_level &&
+                        newReward.reward_key === queuedReward.reward_key,
+                    ),
+                ),
+                ...newlyDetectedRewards,
+              ]),
+            );
+          }
+        }
+      } catch (refreshError) {
+        console.error("Error refreshing level rewards for popup:", refreshError);
+      }
+
+      if (grantedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
         dispatchProductAccessRefresh();
       }
     };
@@ -168,12 +306,31 @@ export const LevelRewardMilestonePopup = () => {
     freelancer,
     isAccessLoading,
     isLevelLoading,
+    lastSyncedRewardSignature,
     levelData?.user_id,
     queryClient,
-    syncedRewardKey,
+    rewardStateSignature,
+    shouldSyncRewards,
   ]);
 
+  useEffect(() => {
+    if (isLevelUpPopupActive || !pendingPostLevelUpSync) return;
+
+    setPendingPostLevelUpSync(false);
+    setLastSyncedRewardSignature(null);
+    queryClient.invalidateQueries({ queryKey: ["user-level"] });
+    void refreshLevelRewardsQuery(queryClient);
+  }, [isLevelUpPopupActive, pendingPostLevelUpSync, queryClient]);
+
   const activeReward = useMemo(() => {
+    const queuedReward = sortRewards(queuedRewards).find(
+      (reward) =>
+        !hasSeenPopupLocally(reward) &&
+        !dismissedRewardFingerprints.includes(getRewardSeenFingerprint(reward)),
+    );
+
+    if (queuedReward) return queuedReward;
+
     const sortedRewards = sortRewards(rewards).filter((reward) =>
       SUPPORTED_POPUP_REWARDS.includes(reward.reward_key),
     );
@@ -193,7 +350,7 @@ export const LevelRewardMilestonePopup = () => {
         );
       }) || null
     );
-  }, [dismissedRewardFingerprints, rewards]);
+  }, [dismissedRewardFingerprints, queuedRewards, rewards]);
 
   const popupContent = useMemo<LevelRewardPopupContent | null>(() => {
     if (!activeReward) return null;
@@ -204,6 +361,9 @@ export const LevelRewardMilestonePopup = () => {
     const rewardFingerprint = getRewardSeenFingerprint(reward);
 
     markPopupSeenLocally(reward);
+    setQueuedRewards((currentQueue) =>
+      currentQueue.filter((queuedReward) => queuedReward.id !== reward.id),
+    );
     setDismissedRewardFingerprints((previous) =>
       previous.includes(rewardFingerprint) ? previous : [...previous, rewardFingerprint],
     );
@@ -213,7 +373,7 @@ export const LevelRewardMilestonePopup = () => {
       await supabase.rpc("mark_level_reward_popup_seen" as never, {
         p_reward_key: reward.reward_key,
       } as unknown as never);
-      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      await refreshLevelRewardsQuery(queryClient);
     } catch (error) {
       console.error("Error marking level reward popup as seen:", error);
     } finally {
@@ -245,7 +405,9 @@ export const LevelRewardMilestonePopup = () => {
     }
   };
 
-  if (isRewardsLoading || isLevelUpPopupActive || !activeReward || !popupContent) return null;
+  if ((isRewardsLoading && queuedRewards.length === 0) || isLevelUpPopupActive || !activeReward || !popupContent) {
+    return null;
+  }
 
   const Icon = iconByKey[popupContent.icon];
   const showDiscountNote =

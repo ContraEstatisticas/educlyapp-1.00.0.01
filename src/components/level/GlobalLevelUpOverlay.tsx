@@ -5,13 +5,20 @@ import { LevelUpNotification } from "@/components/LevelUpNotification";
 import { useSoundSettings } from "@/contexts/SoundSettingsContext";
 import { supabase } from "@/integrations/supabase/client";
 import medalSound from "@/assets/sounds/medal-earned.mp3";
+import type { LevelRewardRow } from "@/lib/levelRewards";
 import {
+  dispatchLevelRewardsGrantedEvent,
   LEVEL_UP_EVENT,
   dispatchLevelUpPopupCloseEvent,
   dispatchLevelUpPopupOpenEvent,
   type LevelUpEventDetail,
 } from "@/lib/levelUpEvents";
 import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
+import {
+  getNewlySyncedRewards,
+  mergeGrantedRewardsIntoCache,
+  refreshLevelRewardsQuery,
+} from "@/lib/levelRewardQueries";
 
 export const GlobalLevelUpOverlay = () => {
   const queryClient = useQueryClient();
@@ -29,6 +36,9 @@ export const GlobalLevelUpOverlay = () => {
 
   const syncLevelRewards = useCallback(
     async (userId: string, currentLevel: number) => {
+      const cachedRewardsBeforeSync =
+        queryClient.getQueryData<LevelRewardRow[]>(["user-level-rewards"]) || [];
+
       const { data, error } = await supabase.rpc("apply_level_rewards", {
         p_current_level: currentLevel,
         p_user_id: userId,
@@ -36,12 +46,47 @@ export const GlobalLevelUpOverlay = () => {
 
       if (error) {
         console.error("Error syncing level rewards after level update:", error);
-        return;
       }
 
-      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      const grantedRewards = Array.isArray(data) ? data : [];
+      let hasAiHubDayPassReward = grantedRewards.some(
+        (reward) => reward.reward_key === "ai_hub_day_pass",
+      );
 
-      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+      if (grantedRewards.length > 0) {
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
+        dispatchLevelRewardsGrantedEvent({
+          rewards: mergedRewards,
+          source: "realtime",
+        });
+      }
+
+      try {
+        const refreshedRewards = await refreshLevelRewardsQuery(queryClient);
+
+        if (grantedRewards.length === 0) {
+          const newlyDetectedRewards = getNewlySyncedRewards(
+            cachedRewardsBeforeSync,
+            refreshedRewards,
+            currentLevel,
+          );
+
+          if (newlyDetectedRewards.length > 0) {
+            hasAiHubDayPassReward =
+              hasAiHubDayPassReward ||
+              newlyDetectedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass");
+
+            dispatchLevelRewardsGrantedEvent({
+              rewards: newlyDetectedRewards,
+              source: "realtime",
+            });
+          }
+        }
+      } catch (refreshError) {
+        console.error("Error refreshing level rewards after realtime sync:", refreshError);
+      }
+
+      if (hasAiHubDayPassReward) {
         dispatchProductAccessRefresh();
       }
     },

@@ -18,12 +18,19 @@ import {
   getUnlockedRewardForMilestone,
   REWARD_MILESTONES,
   type LevelRewardKey,
+  type LevelRewardRow,
 } from "@/lib/levelRewards";
 import {
   getNewsletterRequiresFreelancerCta,
   getNewsletterRequiresFreelancerDescription,
 } from "@/lib/levelRewardMarketing";
+import { dispatchLevelRewardsGrantedEvent } from "@/lib/levelUpEvents";
 import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
+import {
+  getNewlySyncedRewards,
+  mergeGrantedRewardsIntoCache,
+  refreshLevelRewardsQuery,
+} from "@/lib/levelRewardQueries";
 import { useTranslation } from "react-i18next";
 
 interface LevelRewardsCardProps {
@@ -109,6 +116,9 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
     let cancelled = false;
 
     const syncRewards = async () => {
+      const cachedRewardsBeforeSync =
+        queryClient.getQueryData<LevelRewardRow[]>(["user-level-rewards"]) || [];
+
       const { data, error } = await supabase.rpc("apply_level_rewards", {
         p_current_level: currentLevel,
         p_user_id: levelData.user_id,
@@ -116,15 +126,50 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
 
       if (error) {
         console.error("Error syncing level rewards from profile card:", error);
-        return;
       }
 
       if (cancelled) return;
 
-      setLastSyncedRewardSignature(syncSignature);
-      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      const grantedRewards = Array.isArray(data) ? data : [];
+      let hasAiHubDayPassReward = grantedRewards.some(
+        (reward) => reward.reward_key === "ai_hub_day_pass",
+      );
 
-      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+      if (grantedRewards.length > 0) {
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
+        dispatchLevelRewardsGrantedEvent({
+          rewards: mergedRewards,
+          source: "sync",
+        });
+      }
+
+      try {
+        const refreshedRewards = await refreshLevelRewardsQuery(queryClient);
+        setLastSyncedRewardSignature(syncSignature);
+
+        if (grantedRewards.length === 0) {
+          const newlyDetectedRewards = getNewlySyncedRewards(
+            cachedRewardsBeforeSync,
+            refreshedRewards,
+            currentLevel,
+          );
+
+          if (newlyDetectedRewards.length > 0) {
+            hasAiHubDayPassReward =
+              hasAiHubDayPassReward ||
+              newlyDetectedRewards.some((reward) => reward.reward_key === "ai_hub_day_pass");
+
+            dispatchLevelRewardsGrantedEvent({
+              rewards: newlyDetectedRewards,
+              source: "sync",
+            });
+          }
+        }
+      } catch (refreshError) {
+        console.error("Error refreshing level rewards from profile card:", refreshError);
+      }
+
+      if (hasAiHubDayPassReward) {
         dispatchProductAccessRefresh();
       }
     };
