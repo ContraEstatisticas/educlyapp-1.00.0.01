@@ -26,6 +26,7 @@ import {
   getAiHubDailyLimits,
   hasWhitelistedAiHubAccess,
 } from "@/lib/aiHubConfig";
+import { getLevelProgressFromTotalXP } from "@/hooks/useUserLevel";
 import { tUi } from "@/lib/supplementalUiTranslations";
 
 import nanobananaLogo from "@/assets/ai-logos/nanobanana.png";
@@ -179,7 +180,7 @@ const AssistentesContent = () => {
         supabase.rpc("get_user_products"),
         supabase
           .from("user_levels")
-          .select("current_level")
+          .select("total_xp_earned")
           .eq("user_id", user.id)
           .maybeSingle(),
       ]);
@@ -202,7 +203,7 @@ const AssistentesContent = () => {
       const hasAiHubAccess =
         hasWhitelistedAiHubAccess(user.email) ||
         (products || []).some((product) => product.product_type === "ai_hub");
-      const currentLevel = levelData?.current_level || 1;
+      const currentLevel = getLevelProgressFromTotalXP(levelData?.total_xp_earned || 0).currentLevel;
       const limits = getAiHubDailyLimits({ currentLevel, hasAiHubAccess });
 
       setMessageLimit(limits.messageLimit);

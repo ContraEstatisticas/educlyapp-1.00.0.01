@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
-import { getXPForLevel, getXPForNextLevel } from "@/hooks/useUserLevel";
+import { getLevelProgressFromTotalXP } from "@/hooks/useUserLevel";
 
 interface DashboardHeaderProps {
   onLogout: () => void;
@@ -59,12 +59,7 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
         data: { user },
       } = await supabase.auth.getUser();
       if (!user) {
-        return {
-          currentLevel: 1,
-          currentXPInLevel: 0,
-          xpNeededForNext: getXPForNextLevel(1) - getXPForLevel(1),
-          progressPercent: 0,
-        };
+        return getLevelProgressFromTotalXP(0);
       }
 
       const { data } = await supabase
@@ -73,21 +68,12 @@ export const DashboardHeader = ({ onLogout, onOpenEdiChat }: DashboardHeaderProp
         .eq("user_id", user.id)
         .maybeSingle();
 
-      const currentLevel = data?.current_level || 1;
       const totalXP = data?.total_xp_earned || 0;
-      const xpForCurrentLevel = getXPForLevel(currentLevel);
-      const xpForNextLevel = getXPForNextLevel(currentLevel);
-      const xpNeededForNext = Math.max(1, xpForNextLevel - xpForCurrentLevel);
-      const rawCurrentXPInLevel = totalXP - xpForCurrentLevel;
-      const currentXPInLevel = Math.max(0, Math.min(rawCurrentXPInLevel, xpNeededForNext));
-      const progressPercent =
-        currentLevel >= 20 ? 100 : Math.max(0, Math.min((currentXPInLevel / xpNeededForNext) * 100, 100));
+      const levelProgress = getLevelProgressFromTotalXP(totalXP);
 
       return {
-        currentLevel,
-        currentXPInLevel,
-        xpNeededForNext,
-        progressPercent,
+        ...levelProgress,
+        xpNeededForNext: Math.max(1, levelProgress.xpNeededForNext),
       };
     },
   });

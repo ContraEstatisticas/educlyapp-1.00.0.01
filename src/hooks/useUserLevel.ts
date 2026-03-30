@@ -22,27 +22,29 @@ import {
   refreshLevelRewardsQuery,
 } from "@/lib/levelRewardQueries";
 
+// Softer level curve: roughly 28% less XP than before, with the late game
+// still growing steadily so leveling feels rewarding without becoming trivial.
 const XP_PER_LEVEL = [
   0,
-  250,
-  700,
-  1500,
-  2800,
-  4500,
-  6800,
-  9800,
-  13500,
-  18000,
-  23500,
-  30000,
-  38000,
-  47500,
-  59000,
-  73000,
-  90000,
-  110000,
-  135000,
-  165000,
+  180,
+  500,
+  1100,
+  2000,
+  3200,
+  4900,
+  7000,
+  9700,
+  13000,
+  16900,
+  21600,
+  27300,
+  34200,
+  42500,
+  52600,
+  64800,
+  79200,
+  97200,
+  118800,
 ];
 
 export const XP_REWARDS = {
@@ -125,6 +127,27 @@ export const getXPForLevel = (level: number) => {
 export const getXPForNextLevel = (level: number) => {
   if (level >= 20) return XP_PER_LEVEL[19];
   return XP_PER_LEVEL[level] || XP_PER_LEVEL[XP_PER_LEVEL.length - 1];
+};
+
+export const getLevelProgressFromTotalXP = (totalXP: number) => {
+  const currentLevel = calculateLevelFromXP(totalXP);
+  const xpForCurrentLevel = getXPForLevel(currentLevel);
+  const xpForNextLevel = getXPForNextLevel(currentLevel);
+  const xpNeededForNext = currentLevel >= 20 ? 0 : Math.max(1, xpForNextLevel - xpForCurrentLevel);
+  const rawCurrentXPInLevel = totalXP - xpForCurrentLevel;
+  const currentXPInLevel =
+    currentLevel >= 20 ? 0 : Math.max(0, Math.min(rawCurrentXPInLevel, xpNeededForNext));
+  const progressPercent =
+    currentLevel >= 20 ? 100 : Math.min((currentXPInLevel / xpNeededForNext) * 100, 100);
+
+  return {
+    currentLevel,
+    currentXPInLevel,
+    progressPercent,
+    xpForCurrentLevel,
+    xpForNextLevel,
+    xpNeededForNext,
+  };
 };
 
 export const useUserLevel = () => {
@@ -226,6 +249,32 @@ export const useUserLevel = () => {
         return newData;
       }
 
+      const totalXP = data.total_xp_earned || 0;
+      const syncedProgress = getLevelProgressFromTotalXP(totalXP);
+      const storedLevel = data.current_level || 1;
+      const storedCurrentXP = data.current_xp || 0;
+
+      if (
+        storedLevel !== syncedProgress.currentLevel ||
+        storedCurrentXP !== syncedProgress.currentXPInLevel
+      ) {
+        const { data: syncedData, error: syncError } = await supabase
+          .from("user_levels")
+          .update({
+            current_level: syncedProgress.currentLevel,
+            current_xp: syncedProgress.currentXPInLevel,
+          })
+          .eq("user_id", user.id)
+          .select()
+          .single();
+
+        if (syncError) {
+          console.error("Error syncing user level to updated XP curve:", syncError);
+        } else {
+          return syncedData;
+        }
+      }
+
       return data;
     },
   });
@@ -261,11 +310,9 @@ export const useUserLevel = () => {
 
       if (!baseData) throw new Error("User level not found");
 
-      const previousLevel = baseData.current_level || 1;
       const newTotalXP = (baseData.total_xp_earned || 0) + amount;
-      const newLevel = calculateLevelFromXP(newTotalXP);
-      const xpForCurrentLevel = getXPForLevel(newLevel);
-      const currentXPInLevel = newTotalXP - xpForCurrentLevel;
+      const previousLevel = getLevelProgressFromTotalXP(baseData.total_xp_earned || 0).currentLevel;
+      const { currentLevel: newLevel, currentXPInLevel } = getLevelProgressFromTotalXP(newTotalXP);
 
       const { data, error } = await supabase
         .from("user_levels")
@@ -329,14 +376,9 @@ export const useUserLevel = () => {
     },
   });
 
-  const currentLevel = levelData?.current_level || 1;
   const totalXP = levelData?.total_xp_earned || 0;
-  const xpForCurrentLevel = getXPForLevel(currentLevel);
-  const xpForNextLevel = getXPForNextLevel(currentLevel);
-  const xpNeededForNext = xpForNextLevel - xpForCurrentLevel;
-  const currentXPInLevel = totalXP - xpForCurrentLevel;
-  const progressPercent =
-    currentLevel >= 20 ? 100 : Math.min((currentXPInLevel / xpNeededForNext) * 100, 100);
+  const { currentLevel, currentXPInLevel, progressPercent, xpNeededForNext } =
+    getLevelProgressFromTotalXP(totalXP);
 
   return {
     addXP: (amount: number, reason: string) => addXPMutation.mutate({ amount, reason }),

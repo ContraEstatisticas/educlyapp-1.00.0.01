@@ -64,7 +64,7 @@ type OpenRouterModelConfig = {
 };
 
 type AiHubLevelRow = {
-  current_level: number | null;
+  total_xp_earned: number | null;
 };
 
 type AiHubProductRow = {
@@ -73,6 +73,43 @@ type AiHubProductRow = {
 };
 
 const GEMINI_BACKED_AI_TYPES = new Set(["gemini", "nanobanana", "edi"]);
+
+const XP_PER_LEVEL = [
+  0,
+  180,
+  500,
+  1100,
+  2000,
+  3200,
+  4900,
+  7000,
+  9700,
+  13000,
+  16900,
+  21600,
+  27300,
+  34200,
+  42500,
+  52600,
+  64800,
+  79200,
+  97200,
+  118800,
+];
+
+const calculateLevelFromXP = (totalXP: number) => {
+  let level = 1;
+
+  for (let index = 1; index < XP_PER_LEVEL.length; index += 1) {
+    if (totalXP >= XP_PER_LEVEL[index]) {
+      level = index + 1;
+    } else {
+      break;
+    }
+  }
+
+  return Math.min(level, 20);
+};
 
 const OPENROUTER_MODELS: Record<string, OpenRouterModelConfig> = {
   chatgpt: {
@@ -88,7 +125,7 @@ const OPENROUTER_MODELS: Record<string, OpenRouterModelConfig> = {
 };
 
 const getAiHubLimitInfo = async (
-  supabase: { from: (typeof createClient extends (...args: any[]) => infer T ? T : never)["from"] },
+  supabase: ReturnType<typeof createClient>,
   userId: string,
   userEmail?: string | null,
 ) => {
@@ -96,7 +133,7 @@ const getAiHubLimitInfo = async (
     await Promise.all([
       supabase
         .from("user_levels")
-        .select("current_level")
+        .select("total_xp_earned")
         .eq("user_id", userId)
         .maybeSingle(),
       supabase
@@ -128,7 +165,7 @@ const getAiHubLimitInfo = async (
     return new Date(product.expires_at).getTime() > Date.now();
   });
   const hasAiHubAccess = hasAiHubFromWhitelist || hasAiHubFromProducts;
-  const currentLevel = levelData?.current_level || 1;
+  const currentLevel = calculateLevelFromXP(levelData?.total_xp_earned || 0);
   const hasLevelBonus = hasAiHubAccess && currentLevel >= LEVEL_BONUS_MIN_LEVEL;
 
   return {
