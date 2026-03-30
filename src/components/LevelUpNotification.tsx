@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Sparkles } from "lucide-react";
+import { Star, Sparkles, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { getLevelRewardsCopy, getLevelTitle } from "@/lib/levelRewards";
 
@@ -11,7 +11,7 @@ interface LevelUpNotificationProps {
 }
 
 export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotificationProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const copy = getLevelRewardsCopy(i18n.resolvedLanguage || i18n.language);
 
   useEffect(() => {
@@ -31,7 +31,16 @@ export const LevelUpNotification = ({ level, isVisible, onClose }: LevelUpNotifi
           className="fixed left-1/2 -translate-x-1/2 z-[9999] pointer-events-none"
           style={{ top: "calc(env(safe-area-inset-top, 0px) + 5rem)" }}
         >
-          <div className="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-1 rounded-2xl shadow-2xl">
+          <div className="relative bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 p-1 rounded-2xl shadow-2xl">
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute right-2 top-2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-background/90 text-foreground shadow-sm transition hover:bg-background pointer-events-auto"
+              aria-label={t("common.close", "Close")}
+            >
+              <X className="h-4 w-4" />
+            </button>
+
             <div className="bg-background rounded-xl px-8 py-6 text-center relative overflow-hidden">
               {/* Sparkles animation */}
               <motion.div

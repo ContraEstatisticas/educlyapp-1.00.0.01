@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { PWARedirect } from "@/components/PWARedirect";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
+import { GlobalLevelUpOverlay } from "@/components/level/GlobalLevelUpOverlay";
 import { LevelRewardMilestonePopup } from "@/components/level/LevelRewardMilestonePopup";
 import { SoundSettingsProvider } from "@/contexts/SoundSettingsContext";
 import { PremiumGuard } from "@/components/PremiumGuard";
@@ -194,6 +195,7 @@ const App = () => {
                 <PWARedirect />
 {/* <PWAInstallPrompt /> */}
                 <PushNotificationPrompt />
+                <GlobalLevelUpOverlay />
                 <LevelRewardMilestonePopup />
                 <Routes>
                   {/* --- ROTAS PÚBLICAS --- */}

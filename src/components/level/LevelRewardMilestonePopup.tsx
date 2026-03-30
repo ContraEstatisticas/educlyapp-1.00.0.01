@@ -31,6 +31,11 @@ import {
   getLevelRewardPopupContent,
   type LevelRewardPopupContent,
 } from "@/lib/levelRewardPopup";
+import {
+  LEVEL_UP_EVENT,
+  LEVEL_UP_POPUP_CLOSE_EVENT,
+  LEVEL_UP_POPUP_OPEN_EVENT,
+} from "@/lib/levelUpEvents";
 import type { LevelRewardRow } from "@/lib/levelRewards";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
@@ -81,10 +86,33 @@ export const LevelRewardMilestonePopup = () => {
   const [dismissedRewardIds, setDismissedRewardIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [syncedRewardKey, setSyncedRewardKey] = useState<string | null>(null);
+  const [isLevelUpPopupActive, setIsLevelUpPopupActive] = useState(false);
 
   const language = i18n.resolvedLanguage || i18n.language;
   const hasDiscountOffer = hasFreelancerDiscountOffer();
   const discountOfferCopy = getFreelancerDiscountOfferCopy(language);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleLevelUpRequested = () => {
+      setIsLevelUpPopupActive(true);
+    };
+
+    const handleLevelUpPopupClosed = () => {
+      setIsLevelUpPopupActive(false);
+    };
+
+    window.addEventListener(LEVEL_UP_EVENT, handleLevelUpRequested);
+    window.addEventListener(LEVEL_UP_POPUP_OPEN_EVENT, handleLevelUpRequested);
+    window.addEventListener(LEVEL_UP_POPUP_CLOSE_EVENT, handleLevelUpPopupClosed);
+
+    return () => {
+      window.removeEventListener(LEVEL_UP_EVENT, handleLevelUpRequested);
+      window.removeEventListener(LEVEL_UP_POPUP_OPEN_EVENT, handleLevelUpRequested);
+      window.removeEventListener(LEVEL_UP_POPUP_CLOSE_EVENT, handleLevelUpPopupClosed);
+    };
+  }, []);
 
   useEffect(() => {
     if (
@@ -208,7 +236,7 @@ export const LevelRewardMilestonePopup = () => {
     }
   };
 
-  if (isRewardsLoading || !activeReward || !popupContent) return null;
+  if (isRewardsLoading || isLevelUpPopupActive || !activeReward || !popupContent) return null;
 
   const Icon = iconByKey[popupContent.icon];
   const showDiscountNote =

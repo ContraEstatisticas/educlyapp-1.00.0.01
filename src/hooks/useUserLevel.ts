@@ -6,12 +6,11 @@ import { useTranslation } from "react-i18next";
 import {
   getLevelRewardsCopy,
   getLevelTitle,
-  getLevelUpToastDescription,
-  getLevelUpToastTitle,
   getRewardTitleList,
   type LevelRewardKey,
 } from "@/lib/levelRewards";
 import { getNewsletterRequiresFreelancerDescription } from "@/lib/levelRewardMarketing";
+import { dispatchLevelUpEvent } from "@/lib/levelUpEvents";
 
 const XP_PER_LEVEL = [
   0,
@@ -263,34 +262,11 @@ export const useUserLevel = () => {
       });
 
       if (result.newLevel > result.previousLevel) {
-        const unlockedTitles = getRewardTitleList(
-          result.grantedRewards.map((reward) => reward.reward_key),
-          language,
-        );
-
-        setTimeout(() => {
-          toast({
-            title: getLevelUpToastTitle(result.newLevel, language),
-            description:
-              unlockedTitles.length > 0
-                ? getGrantedRewardsToastDescription(
-                    result.grantedRewards,
-                    unlockedTitles,
-                    language,
-                    rewardCopy.rewardUnlockedPrefix,
-                  )
-                : getLevelUpToastDescription(result.newLevel, language),
-            duration: 6000,
-          });
-
-          try {
-            const audio = new Audio("/assets/sounds/medal-earned.mp3");
-            audio.volume = 0.5;
-            void audio.play();
-          } catch {
-            // ignore audio failures
-          }
-        }, 500);
+        dispatchLevelUpEvent({
+          level: result.newLevel,
+          previousLevel: result.previousLevel,
+          source: "local",
+        });
       } else if (result.grantedRewards.length > 0) {
         const unlockedTitles = getRewardTitleList(
           result.grantedRewards.map((reward) => reward.reward_key),

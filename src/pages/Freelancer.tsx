@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,17 +21,22 @@ import {
 } from "@/components/ui/carousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { ProductGuard } from "@/components/ProductGuard";
 import { ArrowLeft, CheckCircle2, ExternalLink, Trophy, Loader2, MoreVertical, X } from "lucide-react";
 import { FreelancerTutorial } from "@/components/onboarding";
 import { useFreelancerContent } from "@/hooks/useFreelancerContent";
+import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import { FreelancerCandyCrushPath } from "@/components/FreelancerCandyCrushPath";
 import { MedalHolder } from "@/components/freelancer/MedalHolder";
 import { FreelancerStepsBar } from "@/components/lesson/FreelancerStepsBar";
 import type { StepProgress } from "@/components/lesson/FreelancerStepsBar";
 import { MobileNav } from "@/components/MobileNav";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import {
+  generateOrFetchFreelancerCertificateId,
+  getExistingFreelancerCertificateId,
+} from "@/lib/freelancerCertificate";
 
 const FREELANCER_URL = "https://www.freelancer.com/";
 
@@ -615,6 +621,9 @@ const SidebarContent = ({
   completedCount,
   totalModules,
   progressPercentage,
+  certificateId,
+  isGeneratingCertificate,
+  onCertificateClick,
   t,
   language
 }: {
@@ -622,6 +631,9 @@ const SidebarContent = ({
   completedCount: number;
   totalModules: number;
   progressPercentage: number;
+  certificateId: string | null;
+  isGeneratingCertificate: boolean;
+  onCertificateClick: () => void;
   t: any;
   language: string;
 }) => (
@@ -658,6 +670,25 @@ const SidebarContent = ({
           percent: progressPercentage,
         })}
       </p>
+
+      {allCompleted ? (
+        <Button
+          onClick={onCertificateClick}
+          disabled={isGeneratingCertificate}
+          className="mt-6 w-full gap-2 rounded-2xl bg-orange-500 font-bold text-white hover:bg-orange-600"
+        >
+          {isGeneratingCertificate ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <ExternalLink className="h-4 w-4" />
+          )}
+          {isGeneratingCertificate
+            ? tUi(t, language, "challenge.generatingCertificate")
+            : certificateId
+              ? t("certificate.viewCertificate", "View Certificate")
+              : tUi(t, language, "challenge.generateCertificate")}
+        </Button>
+      ) : null}
     </div>
 
     {/* Container de Medalhas com suporte a Dark Mode */}
@@ -672,10 +703,36 @@ const FreelancerContent = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getAllModules, isLoading } = useFreelancerContent();
+  const { checkAndAwardMedals, isLoading: medalsLoading, earnedCount } = useFreelancerMedals();
   const [moduleProgress, setModuleProgress] = useState<Record<number, { stepIndex: number; completed: boolean }>>({});
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [certificateId, setCertificateId] = useState<string | null>(null);
+  const [isGeneratingCertificate, setIsGeneratingCertificate] = useState(false);
+  const medalCheckKeyRef = useRef<string | null>(null);
 
   const modules = getAllModules();
+
+  const { data: streakData, isLoading: streakLoading } = useQuery({
+    queryKey: ["user-streak"],
+    queryFn: async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        return { current_streak: 0, longest_streak: 0 };
+      }
+
+      const { data, error } = await supabase
+        .from("user_streaks")
+        .select("current_streak, longest_streak")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data || { current_streak: 0, longest_streak: 0 };
+    },
+  });
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -758,8 +815,93 @@ const FreelancerContent = () => {
   );
 
   const totalModules = modules.length;
-  const allCompleted = completedCount === totalModules;
+  const allCompleted = totalModules > 0 && completedCount === totalModules;
   const progressPercentage = Math.round((completedCount / totalModules) * 100) || 0;
+  const currentStreak = streakData?.current_streak || 0;
+
+  useEffect(() => {
+    if (totalModules === 0 || medalsLoading || streakLoading) return;
+
+    const checkKey = `${completedCount}:${currentStreak}:${earnedCount}`;
+    if (medalCheckKeyRef.current === checkKey) return;
+    medalCheckKeyRef.current = checkKey;
+
+    void checkAndAwardMedals({
+      completedModules: completedCount,
+      currentStreak,
+    }).catch((error) => {
+      console.error("Error checking freelancer medals:", error);
+    });
+  }, [
+    checkAndAwardMedals,
+    completedCount,
+    currentStreak,
+    earnedCount,
+    medalsLoading,
+    streakLoading,
+    totalModules,
+  ]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadExistingCertificate = async () => {
+      if (!allCompleted) {
+        if (isMounted) setCertificateId(null);
+        return;
+      }
+
+      try {
+        const existingId = await getExistingFreelancerCertificateId();
+        if (isMounted) {
+          setCertificateId(existingId);
+        }
+      } catch (error) {
+        console.error("Error loading freelancer certificate:", error);
+      }
+    };
+
+    void loadExistingCertificate();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [allCompleted]);
+
+  const handleCertificateClick = async () => {
+    if (!allCompleted) return;
+
+    if (certificateId) {
+      navigate(`/certificado/${certificateId}`);
+      return;
+    }
+
+    setIsGeneratingCertificate(true);
+
+    try {
+      const generatedId = await generateOrFetchFreelancerCertificateId();
+
+      if (generatedId) {
+        setCertificateId(generatedId);
+        navigate(`/certificado/${generatedId}`);
+      } else {
+        toast({
+          title: tUi(t, i18n.language, "challenge.certificateError"),
+          description: tUi(t, i18n.language, "challenge.completeToCertificate"),
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error generating freelancer certificate:", error);
+      toast({
+        title: tUi(t, i18n.language, "challenge.certificateError"),
+        description: error instanceof Error ? error.message : t("common.error", "Error"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingCertificate(false);
+    }
+  };
 
   const stepsForBar: StepProgress[] = useMemo(
     () =>
@@ -817,6 +959,9 @@ const FreelancerContent = () => {
                 completedCount={completedCount}
                 totalModules={totalModules}
                 progressPercentage={progressPercentage}
+                certificateId={certificateId}
+                isGeneratingCertificate={isGeneratingCertificate}
+                onCertificateClick={handleCertificateClick}
                 t={t}
                 language={i18n.language}
               />
@@ -878,6 +1023,9 @@ const FreelancerContent = () => {
                 completedCount={completedCount}
                 totalModules={totalModules}
                 progressPercentage={progressPercentage}
+                certificateId={certificateId}
+                isGeneratingCertificate={isGeneratingCertificate}
+                onCertificateClick={handleCertificateClick}
                 t={t}
                 language={i18n.language}
               />

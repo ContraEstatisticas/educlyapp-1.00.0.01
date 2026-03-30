@@ -2149,6 +2149,7 @@
       "organization": "Educly - Digital Education",
       "formationDescription": "Training in {{tool}} with a total workload of {{hours}} hours, {{description}}",
       "toolDescription": {
+        "freelancer": "demonstrating mastery in professional positioning, client acquisition, proposal writing, pricing, and freelance service delivery supported by artificial intelligence.",
         "chatgpt": "demonstrating mastery in advanced prompt creation, task automation, and practical application of conversational AI in real projects.",
         "claude": "demonstrating mastery in document analysis, advanced logical reasoning, and practical application of AI for productivity and research.",
         "gemini": "demonstrating mastery in multimodal integration, data analysis, and practical application of Google's AI in workflows.",

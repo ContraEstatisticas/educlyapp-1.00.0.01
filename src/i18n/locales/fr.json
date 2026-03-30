@@ -1233,6 +1233,7 @@
       "organization": "Educly - Éducation numérique",
       "formationDescription": "Formation en {{tool}} avec une charge horaire totale de {{hours}} heures, {{description}}",
       "toolDescription": {
+        "freelancer": "démontrant sa maîtrise du positionnement professionnel, de l'acquisition de clients, de la rédaction de propositions, de la tarification et de l'exécution de services freelance avec l'appui de l'intelligence artificielle.",
         "chatgpt": "démontrant la maîtrise de la création de prompts avancés, de l'automatisation des tâches et de l'application pratique de l'IA conversationnelle dans des projets réels.",
         "claude": "démontrant la maîtrise de l'analyse de documents, du raisonnement logique avancé et de l'application pratique de l'IA pour la productivité et la recherche.",
         "gemini": "démontrant la maîtrise de l'intégration multimodale, de l'analyse de données et de l'application pratique de l'IA de Google dans les flux de travail.",

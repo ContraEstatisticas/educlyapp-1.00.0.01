@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useMedalNotification } from "./useMedalNotification";
@@ -25,6 +26,13 @@ interface UserMedal {
   user_id: string;
   medal_id: string;
   earned_at: string;
+}
+
+interface MedalProgressCheck {
+  completedModules?: number;
+  currentStreak?: number;
+  completedWithinHours?: number | null;
+  perfectQuizCount?: number;
 }
 
 export const useFreelancerMedals = () => {
@@ -77,12 +85,14 @@ export const useFreelancerMedals = () => {
       if (!user) throw new Error("User not authenticated");
 
       // Check if already earned
-      const { data: existing } = await supabase
+      const { data: existing, error: existingError } = await supabase
         .from("user_freelancer_medals")
         .select("id")
         .eq("user_id", user.id)
         .eq("medal_id", medalId)
-        .single();
+        .maybeSingle();
+
+      if (existingError) throw existingError;
 
       if (existing) return null; // Already earned
 
@@ -107,10 +117,38 @@ export const useFreelancerMedals = () => {
   });
 
   // Check and award medals based on current progress
-  const checkAndAwardMedals = async (
-    completedModules: number,
-    currentStreak: number
-  ) => {
+  const awardMedalBySlug = useCallback(
+    async (slug: string) => {
+      let medal = allMedals?.find((item) => item.slug === slug);
+
+      if (!medal) {
+        const { data, error } = await supabase
+          .from("freelancer_medals")
+          .select("*")
+          .eq("slug", slug)
+          .maybeSingle();
+
+        if (error) throw error;
+        if (!data) return null;
+
+        medal = {
+          ...data,
+          tier: data.tier as "bronze" | "silver" | "gold" | "platinum",
+          unlock_condition: data.unlock_condition as unknown as UnlockCondition,
+        };
+      }
+
+      return awardMedal.mutateAsync(medal.id);
+    },
+    [allMedals, awardMedal],
+  );
+
+  const checkAndAwardMedals = useCallback(async ({
+    completedModules = 0,
+    currentStreak = 0,
+    completedWithinHours = null,
+    perfectQuizCount = 0,
+  }: MedalProgressCheck) => {
     if (!allMedals) return;
 
     for (const medal of allMedals) {
@@ -126,6 +164,14 @@ export const useFreelancerMedals = () => {
         case "streak":
           shouldAward = currentStreak >= (medal.unlock_condition.count || 0);
           break;
+        case "fast_module":
+          shouldAward =
+            completedWithinHours !== null &&
+            completedWithinHours <= (medal.unlock_condition.hours || 0);
+          break;
+        case "perfect_quiz":
+          shouldAward = perfectQuizCount >= (medal.unlock_condition.count || 0);
+          break;
         // Other conditions can be checked elsewhere
       }
 
@@ -133,7 +179,7 @@ export const useFreelancerMedals = () => {
         await awardMedal.mutateAsync(medal.id);
       }
     }
-  };
+  }, [allMedals, awardMedal, userMedals]);
 
   // Get medal with earned status
   const getMedalsWithStatus = () => {
@@ -154,6 +200,7 @@ export const useFreelancerMedals = () => {
     userMedals,
     isLoading: medalsLoading || userMedalsLoading,
     awardMedal: awardMedal.mutate,
+    awardMedalBySlug,
     checkAndAwardMedals,
     getMedalsWithStatus,
     earnedCount: userMedals?.length || 0,

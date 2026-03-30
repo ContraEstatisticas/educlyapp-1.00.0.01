@@ -6,9 +6,14 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
 import { useFreelancerContent } from "@/hooks/useFreelancerContent";
+import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { useToast } from "@/hooks/use-toast";
 import { tUi } from "@/lib/supplementalUiTranslations";
+import {
+  FREELANCER_CERTIFICATE_TOTAL_MODULES,
+  generateOrFetchFreelancerCertificateId,
+} from "@/lib/freelancerCertificate";
 import { EdiGuidedHelp, EdiGuidedHelpStep } from "@/components/lesson/EdiGuidedHelp";
 import { TrailChat } from "@/components/trail/TrailChat";
 
@@ -80,6 +85,7 @@ const FreelancerLesson = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getModuleContent, getModuleInfo, isLoading: contentLoading } = useFreelancerContent();
+  const { awardMedalBySlug } = useFreelancerMedals();
   const { playCorrect, playIncorrect } = useQuizSounds();
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -104,6 +110,7 @@ const FreelancerLesson = () => {
   const moduleNumber = parseInt(moduleId || "1");
   const steps = getModuleContent(moduleNumber);
   const moduleInfo = getModuleInfo(moduleNumber);
+  const moduleStartStorageKey = `educly:freelancer:module-start:${moduleNumber}`;
 
   // Função para salvar progresso do módulo no banco
   const saveModuleProgress = useCallback(async (completed: boolean) => {
@@ -167,6 +174,15 @@ const FreelancerLesson = () => {
     };
     checkAuth();
   }, [navigate]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const existingStart = window.localStorage.getItem(moduleStartStorageKey);
+    if (!existingStart) {
+      window.localStorage.setItem(moduleStartStorageKey, new Date().toISOString());
+    }
+  }, [moduleStartStorageKey]);
 
   // Efeito para controlar visibilidade do header baseado no scroll
   useEffect(() => {
@@ -528,7 +544,68 @@ const FreelancerLesson = () => {
             moduleNumber={moduleNumber}
             isSavingProgress={isSavingProgress}
             onComplete={async () => {
+              const hasQuizSteps = steps.some((step) => step.type === "quiz");
+              const completedWithoutQuizErrors =
+                hasQuizSteps &&
+                Object.values(wrongAttemptsRef.current).every((attempts) => attempts === 0);
+              const moduleStartTimestamp =
+                typeof window !== "undefined"
+                  ? window.localStorage.getItem(moduleStartStorageKey)
+                  : null;
+              const completedWithinHours = moduleStartTimestamp
+                ? (Date.now() - new Date(moduleStartTimestamp).getTime()) / (1000 * 60 * 60)
+                : null;
+
               await saveModuleProgress(true);
+
+              const medalAwards: Array<Promise<unknown>> = [];
+
+              if (completedWithoutQuizErrors) {
+                medalAwards.push(awardMedalBySlug("perfect_quiz"));
+              }
+
+              if (completedWithinHours !== null && completedWithinHours <= 24) {
+                medalAwards.push(awardMedalBySlug("fast_learner"));
+              }
+
+              if (medalAwards.length > 0) {
+                const medalResults = await Promise.allSettled(medalAwards);
+
+                medalResults.forEach((result) => {
+                  if (result.status === "rejected") {
+                    console.error("Error awarding freelancer medal:", result.reason);
+                  }
+                });
+              }
+
+              if (typeof window !== "undefined") {
+                window.localStorage.removeItem(moduleStartStorageKey);
+              }
+
+              if (moduleNumber === FREELANCER_CERTIFICATE_TOTAL_MODULES) {
+                try {
+                  const certificateId = await generateOrFetchFreelancerCertificateId();
+
+                  if (certificateId) {
+                    navigate(`/certificado/${certificateId}`);
+                    return;
+                  }
+
+                  toast({
+                    title: tUi(t, i18n.language, "challenge.certificateError"),
+                    description: tUi(t, i18n.language, "challenge.completeToCertificate"),
+                    variant: "destructive",
+                  });
+                } catch (error) {
+                  console.error("Error generating freelancer certificate:", error);
+                  toast({
+                    title: tUi(t, i18n.language, "challenge.certificateError"),
+                    description: error instanceof Error ? error.message : t("common.error", "Error"),
+                    variant: "destructive",
+                  });
+                }
+              }
+
               setShowPracticeModal(true);
             }}
           />

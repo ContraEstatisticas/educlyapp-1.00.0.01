@@ -44,6 +44,7 @@ function drawRoundedPill(ctx: CanvasRenderingContext2D, x: number, y: number, w:
 
 // Mapeamento de carga horária por ferramenta (dados técnicos, não traduzíveis)
 const toolHours: Record<string, number> = {
+  freelancer: 28,
   chatgpt: 32,
   claude: 24,
   gemini: 24,
@@ -62,6 +63,7 @@ const toolHours: Record<string, number> = {
 };
 
 const toolSpecialization: Record<string, string> = {
+  freelancer: 'Freelancer Pro',
   chatgpt: 'ChatGPT',
   claude: 'Claude',
   gemini: 'Gemini',

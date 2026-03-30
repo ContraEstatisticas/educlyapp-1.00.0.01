@@ -1560,6 +1560,7 @@
       "organization": "Educly - Educação digital",
       "formationDescription": "Formação em {{tool}} com carga horária total de {{hours}} horas, {{description}}",
       "toolDescription": {
+        "freelancer": "demonstrando domínio em posicionamento profissional, captação de clientes, criação de propostas, precificação e execução de serviços freelance com apoio de inteligência artificial.",
         "chatgpt": "demonstrando domínio em criação de prompts avançados, automação de tarefas e aplicação prática de inteligência artificial conversacional em projetos reais.",
         "claude": "demonstrando domínio em análise de documentos, raciocínio lógico avançado e aplicação prática de IA para produtividade e pesquisa.",
         "gemini": "demonstrando domínio em integração multimodal, análise de dados e aplicação prática da IA do Google em fluxos de trabalho.",

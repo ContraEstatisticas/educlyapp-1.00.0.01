@@ -6,7 +6,7 @@ import {
   AI_HUB_LEVEL_BONUS_EXTRA_MESSAGES,
 } from "@/lib/aiHubConfig";
 
-type PopupLocale = "pt" | "en" | "es";
+type PopupLocale = "pt" | "en" | "es" | "fr";
 type PopupIcon = "mail" | "briefcase" | "brain" | "file-text" | "sparkles";
 
 export type LevelRewardPopupAction =
@@ -347,12 +347,106 @@ const COPY_BY_LOCALE: Record<PopupLocale, LocaleCopy> = {
       },
     },
   },
+  fr: {
+    levelBadgeTemplate: "Niveau {{level}} debloque",
+    notNow: "Pas maintenant",
+    rewards: {
+      newsletter_access: {
+        active: {
+          action: "dismiss",
+          benefits: [
+            "Offres freelance filtrees chaque semaine",
+            "Opportunites a distance et signaux pratiques du marche",
+            "Plus de clarte pour transformer une competence en revenu",
+          ],
+          description:
+            "Comme le module Freelancer est deja actif sur votre compte, vous allez maintenant recevoir ce journal hebdomadaire par email.",
+          icon: "mail",
+          primaryLabel: "Parfait",
+          title: "Vous avez debloque le journal hebdomadaire des missions freelance",
+        },
+        requires_freelancer: {
+          action: "freelancer_offer",
+          benefits: [
+            "Une selection hebdomadaire de missions freelance et d'opportunites a distance",
+            "Un guide de marche pour ceux qui veulent monetiser leurs competences en IA",
+            "Cet avantage s'active des que Freelancer est debloque",
+          ],
+          description:
+            "Cet avantage est deja a vous. Il ne reste plus qu'a debloquer le module Freelancer pour commencer a recevoir ces mises a jour par email.",
+          icon: "briefcase",
+          primaryLabel: "Debloquer Freelancer",
+          secondaryLabel: "Pas maintenant",
+          title: "Vous avez debloque le journal hebdomadaire des missions freelance",
+        },
+      },
+      ai_hub_day_pass: {
+        active: {
+          action: "open_ai_hub",
+          benefits: [
+            "24 heures d'acces au AI Hub",
+            "Utilisez ChatGPT, Gemini, Claude, Grok, NanoBanana et EDI",
+            "Testez les assistants et voyez lequel accelere le plus votre flux",
+          ],
+          description:
+            "Votre pass d'une journee est deja actif et peut etre utilise tout de suite dans le AI Hub.",
+          icon: "brain",
+          primaryLabel: "Ouvrir AI Hub",
+          title: "Vous avez gagne 1 jour de AI Hub",
+        },
+      },
+      prompt_guide_pdf: {
+        active: {
+          action: "download_pdf",
+          benefits: [
+            "Des prompts recommandes pour chaque IA de la plateforme",
+            "Des structures pretes a l'emploi pour creer plus vite",
+            "Moins d'essais-erreurs pour obtenir de meilleurs resultats",
+          ],
+          description:
+            "Comme AI Hub etait deja actif sur votre compte au niveau 5, nous avons debloque un PDF special rempli de prompts prets a utiliser.",
+          icon: "file-text",
+          primaryLabel: "Telecharger le PDF",
+          title: "Vous avez debloque le PDF de prompts par IA",
+        },
+      },
+      ai_hub_bonus_limits: {
+        active: ({ extraImages, extraMessages, totalImages, totalMessages }) => ({
+          action: "open_ai_hub",
+          benefits: [
+            `+${extraMessages} messages supplementaires par jour`,
+            `+${extraImages} images supplementaires par jour`,
+            `Votre limite quotidienne passe maintenant a ${totalMessages} messages et ${totalImages} images par jour`,
+          ],
+          description:
+            "Comme AI Hub est deja actif pour vous, le boost du niveau 7 est maintenant en vigueur et vous donne beaucoup plus de marge chaque jour.",
+          icon: "sparkles",
+          primaryLabel: "Ouvrir AI Hub",
+          title: "Vous avez debloque un boost quotidien du AI Hub",
+        }),
+        requires_ai_hub: ({ extraImages, extraMessages, totalImages, totalMessages }) => ({
+          action: "unlock_ai_hub",
+          benefits: [
+            `+${extraMessages} messages supplementaires par jour`,
+            `+${extraImages} images supplementaires par jour`,
+            `Une fois AI Hub active, votre limite quotidienne passera a ${totalMessages} messages et ${totalImages} images`,
+          ],
+          description:
+            "L'avantage du niveau 7 est deja reserve pour votre compte. Il s'activera des que AI Hub sera debloque pour vous.",
+          icon: "sparkles",
+          primaryLabel: "Debloquer AI Hub",
+          secondaryLabel: "Pas maintenant",
+          title: "Vous avez debloque le boost quotidien du AI Hub",
+        }),
+      },
+    },
+  },
 };
 
 const normalizeLocale = (language?: string): PopupLocale => {
   const baseLanguage = language?.split("-")[0];
 
-  if (baseLanguage === "pt" || baseLanguage === "en" || baseLanguage === "es") {
+  if (baseLanguage === "pt" || baseLanguage === "en" || baseLanguage === "es" || baseLanguage === "fr") {
     return baseLanguage;
   }
 
