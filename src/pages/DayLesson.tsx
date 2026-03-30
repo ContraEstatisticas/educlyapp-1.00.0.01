@@ -14,6 +14,8 @@ import { TrailChat } from "@/components/trail/TrailChat";
 import { MilestoneUpsellModal, MILESTONE_DAYS } from "@/components/lesson/MilestoneUpsellModal";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
+import { ensureBigActionAvailability } from "@/lib/bigAction";
+import { getBigActionUiCopy } from "@/lib/bigActionI18n";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -125,6 +127,7 @@ const DayLesson = () => {
   const { playCorrect, playIncorrect, playContinue } = useQuizSounds();
   const { ai_hub: hasAiHub } = useProductAccess();
   const { syncEarnableMedals } = useFreelancerMedals();
+  const bigActionUi = getBigActionUiCopy(i18n.resolvedLanguage || i18n.language);
 
   // Estados da Lição
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -403,6 +406,19 @@ const DayLesson = () => {
             await syncEarnableMedals();
           } catch (medalError) {
             console.error("Error syncing medals after day completion:", medalError);
+          }
+
+          try {
+            const bigActionState = await ensureBigActionAvailability(user.id);
+
+            if (bigActionState?.unlockedNow) {
+              toast({
+                title: bigActionUi.toasts.challengeDayUnlockedTitle,
+                description: bigActionUi.toasts.challengeDayUnlockedDescription,
+              });
+            }
+          } catch (bigActionError) {
+            console.error("Error syncing Big Action after day completion:", bigActionError);
           }
         }
 

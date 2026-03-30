@@ -125,6 +125,7 @@ import PaddleLanding from "./pages/PaddleLanding";
 import AIToolTrailsHub from "./pages/AIToolTrailsHub";
 import AIToolTrailPage from "./pages/AIToolTrailPage";
 import AIToolModuleLessonPage from "./pages/AIToolModuleLessonPage";
+import BigActionPage from "./pages/BigActionPage";
 
 // Inicialização do Query Client para cache de requisições
 const queryClient = new QueryClient({
@@ -232,6 +233,7 @@ const App = () => {
                   <Route path="/trilhas-ia" element={<PremiumGuard><AIToolTrailsHub /></PremiumGuard>} />
                   <Route path="/trilhas-ia/:toolSlug" element={<PremiumGuard><AIToolTrailPage /></PremiumGuard>} />
                   <Route path="/trilhas-ia/:toolSlug/modulo/:moduleNumber" element={<PremiumGuard><AIToolModuleLessonPage /></PremiumGuard>} />
+                  <Route path="/big-acao" element={<PremiumGuard><BigActionPage /></PremiumGuard>} />
                   <Route path="/aula/:dayId" element={<PremiumGuard><DayLesson /></PremiumGuard>} />
                   <Route
                     path="/chat"

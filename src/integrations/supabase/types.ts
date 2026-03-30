@@ -152,6 +152,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_trail_completions: {
+        Row: {
+          completed_at: string
+          created_at: string
+          id: string
+          tool_slug: string
+          total_modules: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          tool_slug: string
+          total_modules: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          created_at?: string
+          id?: string
+          tool_slug?: string
+          total_modules?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       ai_trail_module_progress: {
         Row: {
           completed_at: string
@@ -1012,6 +1042,9 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          big_action_challenge_day_baseline: number
+          big_action_specialized_module_baseline: number
+          big_action_trail_baseline: number
           cover_url: string | null
           created_at: string | null
           full_name: string | null
@@ -1021,11 +1054,15 @@ export type Database = {
           onboarding_quiz_completed: boolean | null
           personalized_trail_quiz_completed: boolean | null
           preferred_language: string | null
+          professional_area: string | null
           updated_at: string | null
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          big_action_challenge_day_baseline?: number
+          big_action_specialized_module_baseline?: number
+          big_action_trail_baseline?: number
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -1035,11 +1072,15 @@ export type Database = {
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
           preferred_language?: string | null
+          professional_area?: string | null
           updated_at?: string | null
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          big_action_challenge_day_baseline?: number
+          big_action_specialized_module_baseline?: number
+          big_action_trail_baseline?: number
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -1049,6 +1090,7 @@ export type Database = {
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
           preferred_language?: string | null
+          professional_area?: string | null
           updated_at?: string | null
         }
         Relationships: []
@@ -1083,6 +1125,69 @@ export type Database = {
           subscription_json?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      user_big_actions: {
+        Row: {
+          completed_at: string | null
+          completed_trail_count_snapshot: number
+          created_at: string
+          error_message: string | null
+          generated_at: string | null
+          generation_language: string | null
+          id: string
+          metadata: Json
+          progress_source: string
+          professional_area: string | null
+          ready_prompt: string | null
+          status: string
+          steps: Json
+          title: string | null
+          unlock_at_trail_count: number
+          updated_at: string
+          user_id: string
+          what_to_create: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          completed_trail_count_snapshot?: number
+          created_at?: string
+          error_message?: string | null
+          generated_at?: string | null
+          generation_language?: string | null
+          id?: string
+          metadata?: Json
+          progress_source?: string
+          professional_area?: string | null
+          ready_prompt?: string | null
+          status?: string
+          steps?: Json
+          title?: string | null
+          unlock_at_trail_count: number
+          updated_at?: string
+          user_id: string
+          what_to_create?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          completed_trail_count_snapshot?: number
+          created_at?: string
+          error_message?: string | null
+          generated_at?: string | null
+          generation_language?: string | null
+          id?: string
+          metadata?: Json
+          progress_source?: string
+          professional_area?: string | null
+          ready_prompt?: string | null
+          status?: string
+          steps?: Json
+          title?: string | null
+          unlock_at_trail_count?: number
+          updated_at?: string
+          user_id?: string
+          what_to_create?: string | null
         }
         Relationships: []
       }
@@ -1901,6 +2006,29 @@ export type Database = {
       check_user_exists_by_email: {
         Args: { p_email: string }
         Returns: boolean
+      }
+      complete_user_big_action: {
+        Args: { p_action_id: string }
+        Returns: {
+          completed_at: string | null
+          completed_trail_count_snapshot: number
+          created_at: string
+          error_message: string | null
+          generated_at: string | null
+          generation_language: string | null
+          id: string
+          metadata: Json
+          progress_source: string
+          professional_area: string | null
+          ready_prompt: string | null
+          status: string
+          steps: Json
+          title: string | null
+          unlock_at_trail_count: number
+          updated_at: string
+          user_id: string
+          what_to_create: string | null
+        }
       }
       finish_user_session: {
         Args: { p_ended_at?: string; p_session_id: string }

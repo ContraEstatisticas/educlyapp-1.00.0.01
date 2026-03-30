@@ -15,10 +15,10 @@ import {
 } from "@/components/ui/dialog";
 
 const SUPPORTED_LANGUAGES = [
-  { code: "pt", name: "Português", flag: "🇧🇷" },
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "es", name: "Español", flag: "🇪🇸" },
-  { code: "fr", name: "Français", flag: "🇫🇷" },
+  { code: "pt", name: "Português", flagUrl: "https://flagcdn.com/w80/br.png", shortCode: "BR" },
+  { code: "en", name: "English", flagUrl: "https://flagcdn.com/w80/us.png", shortCode: "US" },
+  { code: "es", name: "Español", flagUrl: "https://flagcdn.com/w80/es.png", shortCode: "ES" },
+  { code: "fr", name: "Français", flagUrl: "https://flagcdn.com/w80/fr.png", shortCode: "FR" },
 ];
 
 interface LanguageSelectionDialogProps {
@@ -70,8 +70,8 @@ export const LanguageSelectionDialog = ({
       if (error) throw error;
 
       toast({
-        title: "Idioma atualizado",
-        description: "Seu idioma de preferência foi salvo com sucesso.",
+        title: "Language updated",
+        description: "Your preferred language has been saved successfully.",
       });
 
       // Dar um tempo para o usuário ver a animação
@@ -81,8 +81,8 @@ export const LanguageSelectionDialog = ({
     } catch (error) {
       console.error("[LanguageSelectionDialog] Falha ao salvar idioma:", error);
       toast({
-        title: "Erro ao salvar",
-        description: "Ocorreu um erro ao salvar o idioma. Tente novamente.",
+        title: "Error saving",
+        description: "An error occurred while saving the language. Please try again.",
         variant: "destructive",
       });
       setIsSaving(false);
@@ -105,10 +105,10 @@ export const LanguageSelectionDialog = ({
 
           <DialogHeader className="space-y-3 text-left">
             <DialogTitle className="text-2xl font-bold text-foreground">
-              Qual seu idioma?
+              What's your language?
             </DialogTitle>
             <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
-              Selecione o idioma da sua preferência para continuar usando a plataforma Educly da melhor forma possível.
+              Select your preferred language to continue using the Educly platform in the best way possible.
             </DialogDescription>
           </DialogHeader>
 
@@ -128,12 +128,14 @@ export const LanguageSelectionDialog = ({
                   }
                 `}
               >
-                <div className={`
-                  text-4xl transition-transform duration-300
-                  ${selectedLanguage === lang.code ? "scale-110" : "group-hover:scale-110"}
-                `}>
-                  {lang.flag}
-                </div>
+                <img 
+                  src={lang.flagUrl} 
+                  alt={lang.name}
+                  className={`
+                    w-12 h-8 object-cover rounded shadow-sm transition-transform duration-300
+                    ${selectedLanguage === lang.code ? "scale-110" : "group-hover:scale-110"}
+                  `}
+                />
                 <div className="text-sm font-semibold text-foreground">
                   {lang.name}
                 </div>
@@ -150,7 +152,7 @@ export const LanguageSelectionDialog = ({
               disabled={isSaving || !selectedLanguage}
               className="w-full font-bold shadow-md shadow-primary/20 transition-all hover:shadow-primary/40 text-background bg-primary hover:bg-primary/90 h-12 text-base rounded-xl"
             >
-              {isSaving ? "Salvando..." : "Confirmar Idioma"}
+              {isSaving ? "Saving..." : "Confirm Language"}
               {!isSaving && <ArrowRight className="w-5 h-5 ml-2" />}
             </Button>
           </div>

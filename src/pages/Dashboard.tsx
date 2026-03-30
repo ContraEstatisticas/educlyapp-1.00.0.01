@@ -22,8 +22,10 @@ import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
+import { BigActionBanner } from "@/components/dashboard/BigActionBanner";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 import { getStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
+import { useBigAction } from "@/hooks/useBigAction";
 
 import mountainBackground from "../../assets/mountainBackground.png";
 import mountainPerson from "../../assets/mountainPerson.png";
@@ -77,6 +79,7 @@ const Dashboard = () => {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
   const greeting = t(getGreetingKeyByHour(new Date()));
+  const { data: bigActionState } = useBigAction();
 
   useDailyLoginXP();
 
@@ -665,6 +668,11 @@ const Dashboard = () => {
         </div>
 
         <div className="relative z-20 space-y-10 mt-14 md:mt-20 lg:mt-[10px] mb-[3px]">
+          <BigActionBanner
+            bigAction={bigActionState}
+            onOpen={() => navigate("/big-acao")}
+          />
+
           {/* CARD PRINCIPAL */}
           <div id="active-challenge" className="relative z-20 overflow-visible rounded-3xl border border-border bg-card/95 p-4 shadow-sm md:p-6">
             <div className="grid gap-7 lg:grid-cols-[300px_1fr_190px] lg:items-center lg:gap-10">

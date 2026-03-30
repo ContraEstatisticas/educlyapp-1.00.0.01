@@ -125,7 +125,7 @@ const OPENROUTER_MODELS: Record<string, OpenRouterModelConfig> = {
 };
 
 const getAiHubLimitInfo = async (
-  supabase: any,
+  supabase: ReturnType<typeof createClient>,
   userId: string,
   userEmail?: string | null,
 ) => {

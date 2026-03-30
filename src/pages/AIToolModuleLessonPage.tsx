@@ -12,10 +12,13 @@ import { aiMasteryTrailsBySlug } from "@/lib/aiMasteryTrails";
 import { AiTrailLessonStep, getAiTrailContent, isAiTrailLive } from "@/lib/aiTrailContent";
 import { getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { claimAiTrailCompletionXp } from "@/lib/aiTrailRewards";
+import { ensureBigActionAvailability } from "@/lib/bigAction";
+import { getBigActionUiCopy } from "@/lib/bigActionI18n";
 import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
 import { useUserLevel, XP_REWARDS } from "@/hooks/useUserLevel";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
+import { useToast } from "@/hooks/use-toast";
 
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((module) => ({ default: module.FillBlanks })));
 
@@ -139,10 +142,12 @@ const AIToolModuleLessonPage = () => {
   const { t, i18n } = useTranslation();
   const { playContinue, playCorrect, playIncorrect } = useQuizSounds();
   const { addXPAsync } = useUserLevel();
+  const { toast } = useToast();
 
   const language = i18n.resolvedLanguage || i18n.language;
   const lessonUi = getLessonUi(language);
   const aiTrailUi = getAiTrailUiCopy(language);
+  const bigActionUi = getBigActionUiCopy(language);
   const trail = useMemo(() => (toolSlug ? aiMasteryTrailsBySlug[toolSlug] : null), [toolSlug]);
   const trailContent = useMemo(() => (toolSlug ? getAiTrailContent(toolSlug, language) : null), [language, toolSlug]);
   const isLive = trail ? isAiTrailLive(trail.slug) : false;
@@ -514,6 +519,19 @@ const AIToolModuleLessonPage = () => {
       });
     } catch (error) {
       console.error("Failed to award AI trail completion XP:", error);
+    }
+
+    try {
+      const bigActionState = await ensureBigActionAvailability();
+
+      if (bigActionState?.unlockedNow) {
+        toast({
+          title: bigActionUi.toasts.specializedModuleUnlockedTitle,
+          description: bigActionUi.toasts.specializedModuleUnlockedDescription,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to sync Big Action after AI module completion:", error);
     }
 
     setShowPracticeModal(true);
