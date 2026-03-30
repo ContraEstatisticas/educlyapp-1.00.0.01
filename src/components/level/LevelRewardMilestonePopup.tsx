@@ -36,6 +36,7 @@ import {
   LEVEL_UP_POPUP_CLOSE_EVENT,
   LEVEL_UP_POPUP_OPEN_EVENT,
 } from "@/lib/levelUpEvents";
+import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
 import type { LevelRewardRow } from "@/lib/levelRewards";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
@@ -55,16 +56,20 @@ const iconByKey = {
   "sparkles": Sparkles,
 } as const;
 
-const getLocalSeenKey = (rewardId: string) => `educly-level-reward-popup-seen:${rewardId}`;
+const getRewardSeenFingerprint = (reward: Pick<LevelRewardRow, "id" | "updated_at">) =>
+  `${reward.id}:${reward.updated_at}`;
 
-const hasSeenPopupLocally = (rewardId: string) => {
+const getLocalSeenKey = (reward: Pick<LevelRewardRow, "id" | "updated_at">) =>
+  `educly-level-reward-popup-seen:${getRewardSeenFingerprint(reward)}`;
+
+const hasSeenPopupLocally = (reward: Pick<LevelRewardRow, "id" | "updated_at">) => {
   if (typeof window === "undefined") return false;
-  return window.localStorage.getItem(getLocalSeenKey(rewardId)) === "1";
+  return window.localStorage.getItem(getLocalSeenKey(reward)) === "1";
 };
 
-const markPopupSeenLocally = (rewardId: string) => {
+const markPopupSeenLocally = (reward: Pick<LevelRewardRow, "id" | "updated_at">) => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(getLocalSeenKey(rewardId), "1");
+  window.localStorage.setItem(getLocalSeenKey(reward), "1");
 };
 
 const sortRewards = (rewards: LevelRewardRow[]) =>
@@ -83,7 +88,7 @@ export const LevelRewardMilestonePopup = () => {
   const { currentLevel, isLoading: isLevelLoading, levelData } = useUserLevel();
   const { freelancer, ai_hub, isLoading: isAccessLoading } = useProductAccess();
   const { data: rewards = [], isLoading: isRewardsLoading } = useLevelRewards();
-  const [dismissedRewardIds, setDismissedRewardIds] = useState<string[]>([]);
+  const [dismissedRewardFingerprints, setDismissedRewardFingerprints] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [syncedRewardKey, setSyncedRewardKey] = useState<string | null>(null);
   const [isLevelUpPopupActive, setIsLevelUpPopupActive] = useState(false);
@@ -145,8 +150,10 @@ export const LevelRewardMilestonePopup = () => {
 
       setSyncedRewardKey(syncKey);
 
-      if (Array.isArray(data) && data.length > 0) {
-        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+
+      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+        dispatchProductAccessRefresh();
       }
     };
 
@@ -181,12 +188,12 @@ export const LevelRewardMilestonePopup = () => {
 
         return (
           !popupSeenAt &&
-          !hasSeenPopupLocally(reward.id) &&
-          !dismissedRewardIds.includes(reward.id)
+          !hasSeenPopupLocally(reward) &&
+          !dismissedRewardFingerprints.includes(getRewardSeenFingerprint(reward))
         );
       }) || null
     );
-  }, [dismissedRewardIds, rewards]);
+  }, [dismissedRewardFingerprints, rewards]);
 
   const popupContent = useMemo<LevelRewardPopupContent | null>(() => {
     if (!activeReward) return null;
@@ -194,9 +201,11 @@ export const LevelRewardMilestonePopup = () => {
   }, [activeReward, language]);
 
   const markSeen = async (reward: LevelRewardRow) => {
-    markPopupSeenLocally(reward.id);
-    setDismissedRewardIds((previous) =>
-      previous.includes(reward.id) ? previous : [...previous, reward.id],
+    const rewardFingerprint = getRewardSeenFingerprint(reward);
+
+    markPopupSeenLocally(reward);
+    setDismissedRewardFingerprints((previous) =>
+      previous.includes(rewardFingerprint) ? previous : [...previous, rewardFingerprint],
     );
     setIsSubmitting(true);
 

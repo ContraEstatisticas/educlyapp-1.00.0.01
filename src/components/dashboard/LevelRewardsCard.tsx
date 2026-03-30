@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { ArrowRight, Brain, FileText, Gift, Lock, Mail, Sparkles } from "lucide-react";
@@ -23,6 +23,7 @@ import {
   getNewsletterRequiresFreelancerCta,
   getNewsletterRequiresFreelancerDescription,
 } from "@/lib/levelRewardMarketing";
+import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
 import { useTranslation } from "react-i18next";
 
 interface LevelRewardsCardProps {
@@ -40,9 +41,10 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { i18n } = useTranslation();
-  const { currentLevel, currentXPInLevel, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
+  const { currentLevel, currentXPInLevel, isLoading: isLevelLoading, levelData, progressPercent, totalXP, xpNeededForNext } = useUserLevel();
   const { data: rewards = [], isLoading } = useLevelRewards();
   const { freelancer, ai_hub } = useProductAccess();
+  const [lastSyncedRewardSignature, setLastSyncedRewardSignature] = useState<string | null>(null);
 
   const copy = getLevelRewardsCopy(i18n.resolvedLanguage || i18n.language);
   const language = i18n.resolvedLanguage || i18n.language;
@@ -52,7 +54,28 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
     [currentLevel],
   );
 
-  useEffect(() => {
+  const rewardStateSignature = useMemo(
+    () =>
+      REWARD_MILESTONES.map((milestone) => {
+        const reward = getUnlockedRewardForMilestone(rewards, milestone.level);
+        const status =
+          reward?.metadata && typeof reward.metadata.status === "string"
+            ? reward.metadata.status
+            : "none";
+
+        return `${milestone.level}:${reward?.reward_key || "missing"}:${status}`;
+      }).join("|"),
+    [rewards],
+  );
+
+  const shouldSyncRewards = useMemo(() => {
+    if (currentLevel < 3) return false;
+
+    const missingReachedReward = REWARD_MILESTONES.some(
+      (milestone) =>
+        currentLevel >= milestone.level && !getUnlockedRewardForMilestone(rewards, milestone.level),
+    );
+
     const pendingNewsletterReward = rewards.find(
       (reward) =>
         reward.reward_key === "newsletter_access" &&
@@ -61,38 +84,67 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
         reward.metadata.status === "requires_freelancer",
     );
 
-    if (!freelancer || !pendingNewsletterReward) return;
+    const pendingAiHubBonusReward = rewards.find(
+      (reward) =>
+        reward.reward_key === "ai_hub_bonus_limits" &&
+        reward.metadata &&
+        typeof reward.metadata.status === "string" &&
+        reward.metadata.status === "requires_ai_hub",
+    );
+
+    return (
+      missingReachedReward ||
+      Boolean(freelancer && pendingNewsletterReward) ||
+      Boolean(ai_hub && pendingAiHubBonusReward)
+    );
+  }, [ai_hub, currentLevel, freelancer, rewards]);
+
+  useEffect(() => {
+    if (isLevelLoading || !levelData?.user_id || !shouldSyncRewards) return;
+
+    const syncSignature = `${levelData.user_id}:${currentLevel}:${freelancer}:${ai_hub}:${rewardStateSignature}`;
+
+    if (lastSyncedRewardSignature === syncSignature) return;
 
     let cancelled = false;
 
-    const syncNewsletterReward = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) return;
-
+    const syncRewards = async () => {
       const { data, error } = await supabase.rpc("apply_level_rewards", {
-        p_current_level: 3,
-        p_user_id: user.id,
+        p_current_level: currentLevel,
+        p_user_id: levelData.user_id,
       });
 
       if (error) {
-        console.error("Error syncing newsletter reward:", error);
+        console.error("Error syncing level rewards from profile card:", error);
         return;
       }
 
-      if (!cancelled && Array.isArray(data) && data.length > 0) {
-        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      if (cancelled) return;
+
+      setLastSyncedRewardSignature(syncSignature);
+      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+
+      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+        dispatchProductAccessRefresh();
       }
     };
 
-    void syncNewsletterReward();
+    void syncRewards();
 
     return () => {
       cancelled = true;
     };
-  }, [freelancer, queryClient, rewards]);
+  }, [
+    ai_hub,
+    currentLevel,
+    freelancer,
+    isLevelLoading,
+    lastSyncedRewardSignature,
+    levelData?.user_id,
+    queryClient,
+    rewardStateSignature,
+    shouldSyncRewards,
+  ]);
 
   return (
     <Card className={cn("p-6 rounded-3xl bg-card border text-card-foreground", className)}>

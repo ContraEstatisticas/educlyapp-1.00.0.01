@@ -11,6 +11,7 @@ import {
   dispatchLevelUpPopupOpenEvent,
   type LevelUpEventDetail,
 } from "@/lib/levelUpEvents";
+import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
 
 export const GlobalLevelUpOverlay = () => {
   const queryClient = useQueryClient();
@@ -38,8 +39,10 @@ export const GlobalLevelUpOverlay = () => {
         return;
       }
 
-      if (Array.isArray(data) && data.length > 0) {
-        queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+      queryClient.invalidateQueries({ queryKey: ["user-level-rewards"] });
+
+      if (Array.isArray(data) && data.some((reward) => reward.reward_key === "ai_hub_day_pass")) {
+        dispatchProductAccessRefresh();
       }
     },
     [queryClient],

@@ -11,6 +11,7 @@ import {
 } from "@/lib/levelRewards";
 import { getNewsletterRequiresFreelancerDescription } from "@/lib/levelRewardMarketing";
 import { dispatchLevelUpEvent } from "@/lib/levelUpEvents";
+import { dispatchProductAccessRefresh } from "@/lib/productAccessEvents";
 
 const XP_PER_LEVEL = [
   0,
@@ -92,11 +93,6 @@ const getGrantedRewardsToastDescription = (
   }
 
   return `${rewardUnlockedPrefix}: ${unlockedTitles.join(", ")}.`;
-};
-
-const dispatchProductAccessRefresh = () => {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent("educly:product-access-refresh"));
 };
 
 export const calculateLevelFromXP = (totalXP: number) => {

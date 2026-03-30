@@ -14,7 +14,7 @@ export const useLevelRewards = () => {
 
       const { data, error } = await supabase
         .from("user_level_rewards")
-        .select("id, reward_key, source_level, granted_at, metadata")
+        .select("id, reward_key, source_level, granted_at, updated_at, metadata")
         .eq("user_id", user.id)
         .order("source_level", { ascending: true })
         .order("granted_at", { ascending: true });

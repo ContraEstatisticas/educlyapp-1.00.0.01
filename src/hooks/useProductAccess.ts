@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { hasWhitelistedAiHubAccess } from '@/lib/aiHubConfig';
+import { PRODUCT_ACCESS_REFRESH_EVENT } from '@/lib/productAccessEvents';
 
 export type ProductType = 'base' | 'freelancer' | 'ai_hub';
 
@@ -67,10 +68,10 @@ export const useProductAccess = () => {
       void checkAccess();
     };
 
-    window.addEventListener('educly:product-access-refresh', handleRefresh);
+    window.addEventListener(PRODUCT_ACCESS_REFRESH_EVENT, handleRefresh);
 
     return () => {
-      window.removeEventListener('educly:product-access-refresh', handleRefresh);
+      window.removeEventListener(PRODUCT_ACCESS_REFRESH_EVENT, handleRefresh);
     };
   }, [checkAccess]);
 

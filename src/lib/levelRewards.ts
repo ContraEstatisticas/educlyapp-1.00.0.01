@@ -11,6 +11,7 @@ export interface LevelRewardRow {
   reward_key: LevelRewardKey;
   source_level: number;
   granted_at: string;
+  updated_at: string;
   metadata: Record<string, unknown> | null;
 }
 
