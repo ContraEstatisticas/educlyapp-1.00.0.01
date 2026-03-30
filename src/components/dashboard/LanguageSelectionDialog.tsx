@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import { clearStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
 import {
   Dialog,
   DialogContent,
@@ -48,11 +49,12 @@ export const LanguageSelectionDialog = ({
     if (!selectedLanguage) return;
     
     setIsSaving(true);
-    const lang = selectedLanguage;
+    const lang = normalizeAppLanguage(selectedLanguage);
 
     try {
       // 1. Atualizar idioma no i18n
-      i18n.changeLanguage(lang);
+      await i18n.changeLanguage(lang);
+      clearStoredLanguageOverride();
       localStorage.setItem("i18nextLng", lang);
 
       // 2. Salvar no Supabase

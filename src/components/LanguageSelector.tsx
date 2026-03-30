@@ -1,24 +1,24 @@
-import { useTranslation } from 'react-i18next';
-import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
+import { Globe } from "lucide-react";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
-import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { normalizeAppLanguage, setStoredLanguageOverride } from "@/lib/languagePreference";
 
 const languages = [
-  { code: 'pt', name: 'Português', flag: '🇧🇷' },
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-];
+  { code: "pt", name: "Português", shortName: "PT", flag: "🇧🇷" },
+  { code: "en", name: "English", shortName: "EN", flag: "🇺🇸" },
+  { code: "es", name: "Español", shortName: "ES", flag: "🇪🇸" },
+  { code: "fr", name: "Français", shortName: "FR", flag: "🇫🇷" },
+  { code: "it", name: "Italiano", shortName: "IT", flag: "🇮🇹" },
+  { code: "de", name: "Deutsch", shortName: "DE", flag: "🇩🇪" },
+  { code: "ru", name: "Русский", shortName: "RU", flag: "🇷🇺" },
+] as const;
 
 interface LanguageSelectorProps {
   className?: string;
@@ -27,45 +27,45 @@ interface LanguageSelectorProps {
 export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
 
+  const currentLanguageCode = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+  const currentLanguage =
+    languages.find((language) => language.code === currentLanguageCode) || languages[0];
+
   const handleLanguageChange = async (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
-    localStorage.setItem('i18nextLng', languageCode);
-    
-    // Attempt saving to DB if user is logged in
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      await supabase
-        .from('profiles')
-        .update({ preferred_language: languageCode })
-        .eq('id', user.id);
-    }
+    const normalizedLanguage = normalizeAppLanguage(languageCode);
+
+    setStoredLanguageOverride(normalizedLanguage);
+    await i18n.changeLanguage(normalizedLanguage);
   };
 
-  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
-
   return (
-    <Select value={i18n.language} onValueChange={handleLanguageChange}>
-      <SelectTrigger className={cn("w-[60px] sm:w-[140px] bg-background/50 backdrop-blur-sm hover:bg-background/70 transition-all border-border", className)}>
+    <Select value={currentLanguage.code} onValueChange={handleLanguageChange}>
+      <SelectTrigger
+        className={cn(
+          "w-[60px] bg-background/50 backdrop-blur-sm transition-all hover:bg-background/70 sm:w-[140px] border-border",
+          className,
+        )}
+      >
         <div className="flex items-center gap-1 sm:gap-2">
-          <Globe className="h-4 w-4 text-primary hidden sm:block" />
-          <SelectValue>
-            <span className="flex items-center gap-1 sm:gap-1.5">
-              <span>{currentLanguage.flag}</span>
-              <span className="text-sm font-medium hidden sm:inline">{currentLanguage.name}</span>
-            </span>
-          </SelectValue>
+          <Globe className="hidden h-4 w-4 text-primary sm:block" />
+          <span className="flex items-center gap-1 sm:gap-1.5">
+            <span className="text-sm leading-none">{currentLanguage.flag}</span>
+            <span className="text-sm font-medium sm:hidden">{currentLanguage.shortName}</span>
+            <span className="hidden text-sm font-medium sm:inline">{currentLanguage.name}</span>
+          </span>
         </div>
       </SelectTrigger>
-      <SelectContent 
-        className="bg-background/95 backdrop-blur-lg border-border max-h-[300px] max-w-[90vw]"
+
+      <SelectContent
+        className="max-h-[300px] max-w-[90vw] border-border bg-background/95 backdrop-blur-lg"
         position="popper"
         side="bottom"
         align="end"
         sideOffset={4}
       >
         {languages.map((language) => (
-          <SelectItem 
-            key={language.code} 
+          <SelectItem
+            key={language.code}
             value={language.code}
             className="cursor-pointer hover:bg-primary/10 focus:bg-primary/10"
           >

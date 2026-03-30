@@ -23,6 +23,7 @@ import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
+import { getStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
 
 import mountainBackground from "../../assets/mountainBackground.png";
 import mountainPerson from "../../assets/mountainPerson.png";
@@ -192,12 +193,29 @@ const Dashboard = () => {
     },
   });
 
-  // Sync loaded DB preferred language with local i18n if there is a mismatch (e.g., cleared cache)
+  // The dropdown can override the UI language locally without changing the
+  // persisted preferred language in the profile.
   useEffect(() => {
+    const localLanguageOverride = getStoredLanguageOverride();
+
+    if (localLanguageOverride) {
+      const normalizedCurrentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+
+      if (normalizedCurrentLanguage !== localLanguageOverride) {
+        void i18n.changeLanguage(localLanguageOverride);
+        localStorage.setItem("i18nextLng", localLanguageOverride);
+      }
+
+      return;
+    }
+
     if (languageConfirmationData?.preferredLanguage && !languageConfirmationData?.needsConfirmation) {
-      if (i18n.language !== languageConfirmationData.preferredLanguage) {
-        i18n.changeLanguage(languageConfirmationData.preferredLanguage);
-        localStorage.setItem("i18nextLng", languageConfirmationData.preferredLanguage);
+      const preferredLanguage = normalizeAppLanguage(languageConfirmationData.preferredLanguage);
+      const normalizedCurrentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+
+      if (normalizedCurrentLanguage !== preferredLanguage) {
+        void i18n.changeLanguage(preferredLanguage);
+        localStorage.setItem("i18nextLng", preferredLanguage);
       }
     }
   }, [languageConfirmationData?.preferredLanguage, languageConfirmationData?.needsConfirmation, i18n]);
