@@ -9,8 +9,33 @@ const corsHeaders = {
 const BATCH_LIMIT = 50;
 const LOOKBACK_DAYS = 14;
 const DELAY_BETWEEN_SENDS_MS = 500;
-const REMINDER_6H = 6;
-const REMINDER_EMAIL_TYPES = ["welcome_reminder_6h", "welcome_reminder_48h", "welcome_reminder"] as const;
+const MIN_HOURS_SINCE_SENT = 6;
+const MAX_RESEND_PAGES = 50;
+const PAGE_DELAY_MS = 250;
+const RETRY_DELAY_MS = 1200;
+const RETRY_ATTEMPTS = 4;
+
+// Regras para detectar emails de boas-vindas pelo subject
+const WELCOME_SUBJECT_RULES = [
+  { language: "pt", fragments: ["acesso liberado", "acesso foi liberado"] },
+  { language: "en", fragments: ["access granted", "access has been unlocked"] },
+  { language: "es", fragments: ["acceso liberado", "acceso fue liberado"] },
+  { language: "fr", fragments: ["acces accorde", "acces a ete libere"] },
+  { language: "de", fragments: ["zugang freigeschaltet"] },
+  { language: "it", fragments: ["accesso sbloccato"] },
+  { language: "ru", fragments: ["dostup otkryt"] },
+];
+
+// Regras para detectar emails de lembrete pelo subject
+const REMINDER_SUBJECT_RULES = [
+  { language: "pt", fragments: ["acesso ainda esta te esperando"] },
+  { language: "en", fragments: ["access is still waiting"] },
+  { language: "es", fragments: ["acceso aun te esta esperando"] },
+  { language: "fr", fragments: ["acces vous attend encore"] },
+  { language: "de", fragments: ["zugang wartet noch auf sie"] },
+  { language: "it", fragments: ["accesso ti sta ancora aspettando"] },
+  { language: "ru", fragments: ["dostup vse eshche zhdet vas"] },
+];
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -23,11 +48,138 @@ const normalizeLanguage = (value: unknown, fallback = "en") => {
   return ["pt", "en", "es", "fr", "de", "it", "ru"].includes(normalized) ? normalized : fallback;
 };
 
-const isObjectRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
+const normalizeForMatch = (value: string) =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
-const normalizeMetadata = (value: unknown): Record<string, unknown> =>
-  isObjectRecord(value) ? { ...value } : {};
+const detectLanguageBySubject = (subject: string, rules: typeof WELCOME_SUBJECT_RULES) => {
+  const normalizedSubject = normalizeForMatch(subject);
+  for (const rule of rules) {
+    for (const fragment of rule.fragments) {
+      if (normalizedSubject.includes(fragment)) {
+        return rule.language;
+      }
+    }
+  }
+  return null;
+};
+
+const isOpenedResendEvent = (event: unknown) => {
+  if (typeof event !== "string") return false;
+  const normalized = event.toLowerCase();
+  return normalized === "opened" || normalized === "clicked";
+};
+
+const resendGetWithRetry = async (apiKey: string, urlPath: string) => {
+  for (let attempt = 1; attempt <= RETRY_ATTEMPTS; attempt++) {
+    const response = await fetch(`https://api.resend.com${urlPath}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${apiKey}` },
+    });
+
+    if (response.ok) {
+      return response.json();
+    }
+
+    if (response.status === 429 && attempt < RETRY_ATTEMPTS) {
+      console.log(`[send-unopened-welcome-reminders] Rate limited, waiting ${RETRY_DELAY_MS}ms...`);
+      await sleep(RETRY_DELAY_MS);
+      continue;
+    }
+
+    throw new Error(`Resend API error: ${response.status}`);
+  }
+};
+
+interface WelcomeEmail {
+  id: string;
+  email: string;
+  subject: string;
+  created_at: string;
+  last_event: string | null;
+  language: string;
+  hoursSinceSent: number;
+}
+
+const listResendEmails = async (apiKey: string, days: number) => {
+  const cutoffMs = Date.now() - days * 24 * 60 * 60 * 1000;
+  const welcomeEmails: WelcomeEmail[] = [];
+  const remindedRecipients = new Set<string>();
+  const activeRecipients = new Set<string>();
+  let cursor = "";
+  let pages = 0;
+  let totalEmailsScanned = 0;
+
+  for (let page = 0; page < MAX_RESEND_PAGES; page++) {
+    if (page > 0) await sleep(PAGE_DELAY_MS);
+
+    const urlPath = cursor ? `/emails?limit=100&after=${cursor}` : "/emails?limit=100";
+    const payload = await resendGetWithRetry(apiKey, urlPath);
+    const batch = Array.isArray(payload?.data) ? payload.data : [];
+    pages++;
+
+    if (batch.length === 0) break;
+
+    let reachedCutoff = false;
+    for (const item of batch) {
+      totalEmailsScanned++;
+      const createdAtMs = new Date(item.created_at || "").getTime();
+      if (Number.isFinite(createdAtMs) && createdAtMs < cutoffMs) {
+        reachedCutoff = true;
+        break;
+      }
+
+      const subject = item.subject || "";
+      const recipient = normalizeEmail(item.to?.[0]);
+
+      // Track users who clicked/opened ANY email (already active)
+      if (recipient && isOpenedResendEvent(item.last_event)) {
+        activeRecipients.add(recipient);
+      }
+
+      // Check if it's a reminder email (to exclude those who already received one)
+      const reminderLanguage = detectLanguageBySubject(subject, REMINDER_SUBJECT_RULES);
+      if (reminderLanguage) {
+        if (recipient) remindedRecipients.add(recipient);
+        continue;
+      }
+
+      // Check if it's a welcome email
+      const welcomeLanguage = detectLanguageBySubject(subject, WELCOME_SUBJECT_RULES);
+      if (!welcomeLanguage) continue;
+
+      // Check if the welcome email was opened
+      if (isOpenedResendEvent(item.last_event)) continue;
+
+      // Check if minimum time has passed (6 hours)
+      const hoursSinceSent = (Date.now() - createdAtMs) / (1000 * 60 * 60);
+      if (hoursSinceSent < MIN_HOURS_SINCE_SENT) continue;
+
+      welcomeEmails.push({
+        id: item.id,
+        email: recipient,
+        subject,
+        created_at: item.created_at,
+        last_event: item.last_event,
+        language: welcomeLanguage,
+        hoursSinceSent: Math.round(hoursSinceSent),
+      });
+    }
+
+    if (reachedCutoff || !payload?.has_more) break;
+    cursor = batch[batch.length - 1]?.id || "";
+    if (!cursor) break;
+  }
+
+  console.log(`[send-unopened-welcome-reminders] Resend pages: ${pages}, Emails scanned: ${totalEmailsScanned}`);
+
+  return { welcomeEmails, remindedRecipients, activeRecipients };
+};
 
 const callInternalFunction = async <T>(params: {
   functionName: string;
@@ -64,6 +216,7 @@ serve(async (req) => {
   const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
   const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const cronSecret = Deno.env.get("CRON_SECRET") || "";
+  const resendApiKey = Deno.env.get("RESEND_API_KEY") || "";
   const supabase = createClient(supabaseUrl, serviceRoleKey);
 
   try {
@@ -94,144 +247,101 @@ serve(async (req) => {
       });
     }
 
-    const now = new Date();
-    const lookbackStart = new Date(now.getTime() - LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
-
-    // 1. Get welcome/magic_link emails sent in the lookback window that were NOT opened
-    const { data: welcomeEmails, error: welcomeError } = await supabase
-      .from("email_logs")
-      .select("id, recipient_email, email_type, status, sent_at, user_id, metadata, opened_at")
-      .in("email_type", ["welcome", "magic_link"])
-      .not("sent_at", "is", null)
-      .is("opened_at", null)
-      .gte("created_at", lookbackStart)
-      .order("sent_at", { ascending: true })
-      .limit(BATCH_LIMIT * 4);
-
-    if (welcomeError) throw welcomeError;
-    if (!welcomeEmails || welcomeEmails.length === 0) {
-      return new Response(JSON.stringify({ success: true, processed: 0, sent: 0, sent_6h: 0, sent_48h: 0, skipped: 0, errors: 0 }), {
+    if (!resendApiKey) {
+      console.error("[send-unopened-welcome-reminders] Missing RESEND_API_KEY");
+      return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
+        status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    // 2. Get all reminder emails already sent (one-time dedupe for the whole user/email)
-    const candidateEmails = Array.from(
-      new Set(welcomeEmails.map((r: any) => normalizeEmail(r.recipient_email)).filter(Boolean)),
+    // 1. Fetch emails from Resend API (last N days)
+    const { welcomeEmails, remindedRecipients, activeRecipients } = await listResendEmails(resendApiKey, LOOKBACK_DAYS);
+
+    console.log(`[send-unopened-welcome-reminders] Welcome emails NOT opened: ${welcomeEmails.length}`);
+    console.log(`[send-unopened-welcome-reminders] Already received reminder: ${remindedRecipients.size}`);
+    console.log(`[send-unopened-welcome-reminders] Already active (clicked any email): ${activeRecipients.size}`);
+
+    if (welcomeEmails.length === 0) {
+      return new Response(JSON.stringify({ success: true, processed: 0, sent: 0, skipped: 0, errors: 0 }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // 2. Filter out those who already received reminder OR are already active
+    const candidatesAfterFilter = welcomeEmails.filter(e => 
+      !remindedRecipients.has(e.email) && !activeRecipients.has(e.email)
     );
-    const candidateUserIds = Array.from(
-      new Set(welcomeEmails.map((r: any) => r.user_id).filter(Boolean)),
-    );
 
-    const [
-      { data: existingRemindersByEmail, error: existingRemindersByEmailError },
-      { data: existingRemindersByUser, error: existingRemindersByUserError },
-    ] = await Promise.all([
-      candidateEmails.length > 0
-        ? supabase
-          .from("email_logs")
-          .select("recipient_email, user_id, email_type")
-          .in("email_type", [...REMINDER_EMAIL_TYPES])
-          .in("recipient_email", candidateEmails)
-        : Promise.resolve({ data: [], error: null }),
-      candidateUserIds.length > 0
-        ? supabase
-          .from("email_logs")
-          .select("recipient_email, user_id, email_type")
-          .in("email_type", [...REMINDER_EMAIL_TYPES])
-          .in("user_id", candidateUserIds)
-        : Promise.resolve({ data: [], error: null }),
-    ]);
+    console.log(`[send-unopened-welcome-reminders] After filtering reminders and active: ${candidatesAfterFilter.length}`);
 
-    if (existingRemindersByEmailError) throw existingRemindersByEmailError;
-    if (existingRemindersByUserError) throw existingRemindersByUserError;
+    if (candidatesAfterFilter.length === 0) {
+      return new Response(JSON.stringify({ success: true, processed: 0, sent: 0, skipped: welcomeEmails.length, errors: 0 }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
-    const remindedEmails = new Set<string>();
-    const remindedUserIds = new Set<string>();
-    for (const reminder of [...(existingRemindersByEmail || []), ...(existingRemindersByUser || [])]) {
-      const email = normalizeEmail(reminder.recipient_email);
-      if (email) {
-        remindedEmails.add(email);
-      }
-      if (typeof reminder.user_id === "string" && reminder.user_id.length > 0) {
-        remindedUserIds.add(reminder.user_id);
+    // 3. Get preferred language from profiles
+    const candidateEmails = [...new Set(candidatesAfterFilter.map(e => e.email))];
+    
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id, email, preferred_language, full_name")
+      .in("email", candidateEmails);
+
+    const profileByEmail = new Map<string, { preferred_language?: string; full_name?: string }>();
+    for (const p of (profiles || [])) {
+      if (p.email) {
+        profileByEmail.set(normalizeEmail(p.email), p);
       }
     }
 
-    // 3. Get user_ids that have sessions (meaning they accessed the platform)
-    const userIds = Array.from(
-      new Set(welcomeEmails.map((r: any) => r.user_id).filter(Boolean)),
-    );
+    // 4. Build eligible list
+    const eligible: Array<{
+      email: string;
+      language: string;
+      userName: string;
+      hoursSinceSent: number;
+    }> = [];
+    const processedEmails = new Set<string>();
 
-    const usersWithSessions = new Set<string>();
-    const userLanguageMap = new Map<string, string>();
+    for (const item of candidatesAfterFilter) {
+      if (processedEmails.has(item.email)) continue;
+      processedEmails.add(item.email);
 
-    if (userIds.length > 0) {
-      // Fetch preferred_language from profiles
-      const { data: profiles } = await supabase
-        .from("profiles")
-        .select("id, preferred_language")
-        .in("id", userIds);
+      const profile = profileByEmail.get(item.email);
 
-      for (const p of (profiles || [])) {
-        if (p.preferred_language) {
-          userLanguageMap.set(p.id, p.preferred_language);
-        }
+      // Determine language: profile preference > original email language
+      let language = item.language || "en";
+      if (profile?.preferred_language) {
+        language = normalizeLanguage(profile.preferred_language);
       }
 
-      // Check who has ANY session (for 6h check)
-      const { data: sessions } = await supabase
-        .from("user_sessions")
-        .select("user_id")
-        .in("user_id", userIds);
-
-      for (const s of (sessions || [])) {
-        usersWithSessions.add(s.user_id);
+      // Determine name
+      let userName = item.email.split("@")[0];
+      if (profile?.full_name) {
+        userName = profile.full_name;
       }
+
+      eligible.push({
+        email: item.email,
+        language,
+        userName,
+        hoursSinceSent: item.hoursSinceSent,
+      });
+
+      if (eligible.length >= BATCH_LIMIT) break;
     }
 
-    // 4. Process candidates
+    console.log(`[send-unopened-welcome-reminders] Eligible to receive reminder: ${eligible.length}`);
+
+    // 5. Send reminder emails
     const results: Array<Record<string, unknown>> = [];
     let sentReminders = 0;
     let skippedCount = 0;
     let errorCount = 0;
-    const processedEmails = new Set<string>();
 
-    for (const row of welcomeEmails) {
-      if (results.length >= BATCH_LIMIT) break;
-
-      const email = normalizeEmail(row.recipient_email);
-      if (!email || processedEmails.has(email)) continue;
-      processedEmails.add(email);
-
-      const metadata = normalizeMetadata(row.metadata);
-      const userId = row.user_id;
-      const sentAt = row.sent_at ? new Date(row.sent_at) : null;
-      if (!sentAt) continue;
-      if (remindedEmails.has(email) || (typeof userId === "string" && remindedUserIds.has(userId))) {
-        skippedCount++;
-        continue;
-      }
-
-      const userName = typeof metadata.user_name === "string" && metadata.user_name.trim().length > 0
-        ? metadata.user_name.trim()
-        : email.split("@")[0];
-      const language = userId && userLanguageMap.has(userId)
-        ? normalizeLanguage(userLanguageMap.get(userId), "en")
-        : normalizeLanguage(metadata.language, "en");
-
-      const hoursSinceSent = (now.getTime() - sentAt.getTime()) / (1000 * 60 * 60);
-      const shouldSendReminder = hoursSinceSent >= REMINDER_6H &&
-        (
-          (typeof userId === "string" && userId.length > 0 && !usersWithSessions.has(userId)) ||
-          !userId
-        );
-
-      if (!shouldSendReminder) {
-        skippedCount++;
-        continue;
-      }
-
+    for (const candidate of eligible) {
       try {
         // Create account if needed and get access token
         const accountData = await callInternalFunction<{
@@ -243,9 +353,9 @@ serve(async (req) => {
           supabaseUrl,
           serviceRoleKey,
           body: {
-            email,
-            buyer_name: userName,
-            language,
+            email: candidate.email,
+            buyer_name: candidate.userName,
+            language: candidate.language,
           },
         });
 
@@ -253,47 +363,40 @@ serve(async (req) => {
           throw new Error("auto-create-account returned no access token");
         }
 
-        // Determine language source for telemetry
-        const languageSource = userId && userLanguageMap.has(userId)
-          ? "profile"
-          : (typeof metadata.language === "string" && metadata.language.trim().length > 0)
-            ? "welcome_metadata"
-            : "fallback_en";
-
-        await callInternalFunction({
+        const response = await callInternalFunction<{ skipped?: boolean }>({
           functionName: "send-welcome-email",
           supabaseUrl,
           serviceRoleKey,
           body: {
-            email,
-            userName,
-            language,
+            email: candidate.email,
+            userName: candidate.userName,
+            language: candidate.language,
             mode: "magic_link_reminder",
             access_token: accountData.access_token,
             generated_password: accountData.generated_password,
             user_id: accountData.user_id,
-            parent_email_log_id: row.id,
             metadata: {
               reminder_type: "6h_once",
-              original_email_type: row.email_type,
-              hours_since_original: Math.round(hoursSinceSent),
-              language_source: languageSource,
+              hours_since_original: candidate.hoursSinceSent,
+              source: "cron_resend_api",
             },
           },
         });
 
-        sentReminders++;
-        remindedEmails.add(email);
-        if (typeof accountData.user_id === "string" && accountData.user_id.length > 0) {
-          remindedUserIds.add(accountData.user_id);
+        if (response?.skipped) {
+          skippedCount++;
+          results.push({ email: candidate.email, status: "skipped" });
+        } else {
+          sentReminders++;
+          results.push({ email: candidate.email, status: "reminder_sent", language: candidate.language });
         }
-        results.push({ email, status: "reminder_sent" });
+
         await sleep(DELAY_BETWEEN_SENDS_MS);
       } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
         errorCount++;
-        console.error(`[welcome-reminder] Error for ${email}:`, errorMessage);
-        results.push({ email, status: "error", error: errorMessage });
+        console.error(`[send-unopened-welcome-reminders] Error for ${candidate.email}:`, errorMessage);
+        results.push({ email: candidate.email, status: "error", error: errorMessage });
       }
     }
 
@@ -301,8 +404,6 @@ serve(async (req) => {
       success: true,
       processed: results.length,
       sent: sentReminders,
-      sent_6h: sentReminders,
-      sent_48h: 0,
       skipped: skippedCount,
       errors: errorCount,
       results,
