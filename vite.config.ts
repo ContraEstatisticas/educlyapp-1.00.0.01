@@ -95,7 +95,7 @@ export default defineConfig(({ mode }) => ({
         clientsClaim: true,
         // Import custom push notification handler
         importScripts: ['/sw-push.js'],
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6 MiB
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024, // 8 MiB
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         globIgnores: [
           '**/reset-cache.html',
