@@ -1859,6 +1859,14 @@ export type Database = {
           source_level: number
         }[]
       }
+      apply_level_rewards_internal: {
+        Args: { p_current_level: number; p_user_id: string }
+        Returns: {
+          metadata: Json
+          reward_key: string
+          source_level: number
+        }[]
+      }
       audit_premium_access: {
         Args: never
         Returns: {

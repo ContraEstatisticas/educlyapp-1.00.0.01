@@ -54,7 +54,7 @@ export const GlobalLevelUpOverlay = () => {
       );
 
       if (grantedRewards.length > 0) {
-        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards as any);
         dispatchLevelRewardsGrantedEvent({
           rewards: mergedRewards,
           source: "realtime",

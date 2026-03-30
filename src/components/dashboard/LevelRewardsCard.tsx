@@ -136,7 +136,7 @@ export const LevelRewardsCard = ({ className }: LevelRewardsCardProps) => {
       );
 
       if (grantedRewards.length > 0) {
-        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards);
+        const mergedRewards = mergeGrantedRewardsIntoCache(queryClient, grantedRewards as any);
         dispatchLevelRewardsGrantedEvent({
           rewards: mergedRewards,
           source: "sync",
