@@ -13,38 +13,38 @@ interface NewsletterPopupCopy {
 
 const COPY_BY_LOCALE: Record<PopupLocale, NewsletterPopupCopy> = {
   pt: {
-    badge: "Nivel 3 desbloqueado",
-    activeTitle: "Voce liberou o jornal semanal de vagas freelance",
+    badge: "🎉 Super Bonus — Nivel 3",
+    activeTitle: "Super Bonus: Jornal semanal de vagas freelance ativado!",
     activeDescription:
-      "Esse beneficio e uma curadoria semanal enviada por email com vagas freelance, oportunidades remotas e sinais praticos de mercado. Como o modulo Freelancer ja esta ativo na sua conta, voce vai comecar a receber essas atualizacoes no seu email.",
-    activeButton: "Perfeito",
-    lockedTitle: "Voce desbloqueou o jornal semanal de vagas freelance",
+      "Voce atingiu o Super Bonus do nivel 3! A partir de agora, voce recebe no email uma curadoria semanal exclusiva com vagas freelance selecionadas, oportunidades remotas e atalhos para transformar o que voce esta aprendendo em renda real. Como o modulo Freelancer ja esta ativo, tudo ja esta funcionando.",
+    activeButton: "Demais!",
+    lockedTitle: "Super Bonus desbloqueado: Jornal semanal de vagas freelance!",
     lockedDescription:
-      "Esse beneficio e uma curadoria semanal enviada por email com vagas freelance, oportunidades remotas e sinais de mercado para quem quer transformar habilidade em renda. Agora falta desbloquear o modulo Freelancer para receber essas atualizacoes no seu email.",
+      "Voce atingiu o Super Bonus do nivel 3! Com o modulo Freelancer ativo, voce comeca a receber semanalmente no email vagas filtradas, oportunidades remotas e orientacoes para transformar inteligencia artificial em renda. E como ter um radar de oportunidades trabalhando pra voce toda semana.",
     lockedPrimaryButton: "Desbloquear Freelancer",
     lockedSecondaryButton: "Agora nao",
   },
   en: {
-    badge: "Level 3 unlocked",
-    activeTitle: "You unlocked the weekly freelance jobs journal",
+    badge: "🎉 Super Bonus — Level 3",
+    activeTitle: "Super Bonus: Weekly freelance jobs journal activated!",
     activeDescription:
-      "This perk is a weekly curated email with freelance roles, remote opportunities, and practical market signals. Because the Freelancer module is already active on your account, you will now start receiving these updates by email.",
-    activeButton: "Awesome",
-    lockedTitle: "You unlocked the weekly freelance jobs journal",
+      "You hit the Level 3 Super Bonus! From now on, you will receive an exclusive weekly email with curated freelance jobs, remote opportunities, and shortcuts to turn what you are learning into real income. Since the Freelancer module is already active, everything is already running.",
+    activeButton: "Amazing!",
+    lockedTitle: "Super Bonus unlocked: Weekly freelance jobs journal!",
     lockedDescription:
-      "This perk is a weekly curated email with freelance roles, remote opportunities, and market signals for people who want to turn skill into income. Now you need to unlock the Freelancer module to receive these updates in your email.",
+      "You hit the Level 3 Super Bonus! With the Freelancer module active, you will receive curated freelance jobs, remote opportunities, and guidance to turn AI into income — delivered weekly to your inbox. It is like having an opportunity radar working for you every single week.",
     lockedPrimaryButton: "Unlock Freelancer",
     lockedSecondaryButton: "Not now",
   },
   es: {
-    badge: "Nivel 3 desbloqueado",
-    activeTitle: "Has desbloqueado el boletin semanal de vacantes freelance",
+    badge: "🎉 Super Bonus — Nivel 3",
+    activeTitle: "Super Bonus: Boletin semanal de vacantes freelance activado!",
     activeDescription:
-      "Este beneficio es una curadoria semanal enviada por email con vacantes freelance, oportunidades remotas y señales practicas de mercado. Como el modulo Freelancer ya esta activo en tu cuenta, ahora empezaras a recibir estas actualizaciones por email.",
-    activeButton: "Perfecto",
-    lockedTitle: "Has desbloqueado el boletin semanal de vacantes freelance",
+      "Alcanzaste el Super Bonus del nivel 3! A partir de ahora recibiras en tu email una curadoria semanal exclusiva con vacantes freelance seleccionadas, oportunidades remotas y atajos para convertir lo que estas aprendiendo en ingresos reales. Como el modulo Freelancer ya esta activo, todo ya esta funcionando.",
+    activeButton: "Genial!",
+    lockedTitle: "Super Bonus desbloqueado: Boletin semanal de vacantes freelance!",
     lockedDescription:
-      "Este beneficio es una curadoria semanal enviada por email con vacantes freelance, oportunidades remotas y señales de mercado para quien quiere convertir habilidad en ingresos. Ahora necesitas desbloquear el modulo Freelancer para recibir estas actualizaciones en tu email.",
+      "Alcanzaste el Super Bonus del nivel 3! Con el modulo Freelancer activo, empezaras a recibir semanalmente vacantes filtradas, oportunidades remotas y orientacion para convertir la IA en ingresos. Es como tener un radar de oportunidades trabajando para ti cada semana.",
     lockedPrimaryButton: "Desbloquear Freelancer",
     lockedSecondaryButton: "Ahora no",
   },

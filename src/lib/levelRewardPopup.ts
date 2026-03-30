@@ -73,29 +73,29 @@ const COPY_BY_LOCALE: Record<PopupLocale, LocaleCopy> = {
         active: {
           action: "dismiss",
           benefits: [
-            "Vagas freelance filtradas toda semana",
-            "Oportunidades remotas e sinais praticos de mercado",
-            "Mais clareza para transformar habilidade em renda",
+            "Vagas de freelancer filtradas e enviadas toda semana no seu email",
+            "Oportunidades reais de trabalho remoto com IA",
+            "Sinais praticos de mercado para voce comecar a gerar renda extra",
           ],
           description:
-            "Como o modulo Freelancer ja esta ativo na sua conta, voce passa a receber esse jornal semanal no seu email.",
+            "Voce atingiu o Super Bonus do nivel 3! Como o modulo Freelancer ja esta ativo na sua conta, a partir de agora voce recebe no email uma curadoria semanal exclusiva com vagas freelance selecionadas, oportunidades remotas e atalhos para transformar o que voce esta aprendendo aqui em renda real.",
           icon: "mail",
-          primaryLabel: "Perfeito",
-          title: "Voce liberou o jornal semanal de vagas freelance",
+          primaryLabel: "Demais!",
+          title: "Super Bonus: Jornal semanal de vagas freelance ativado!",
         },
         requires_freelancer: {
           action: "freelancer_offer",
           benefits: [
-            "Curadoria semanal com vagas e oportunidades remotas",
-            "Direcionamento de mercado para quem quer monetizar IA",
-            "Esse beneficio ativa quando o modulo Freelancer estiver liberado",
+            "Curadoria semanal com vagas reais de freelancer no seu email",
+            "Direcionamento de mercado para monetizar suas skills de IA",
+            "Ativa automaticamente quando o modulo Freelancer for desbloqueado",
           ],
           description:
-            "O beneficio ja e seu. Agora falta desbloquear o modulo Freelancer para comecar a receber essas atualizacoes no email.",
+            "Voce atingiu o Super Bonus do nivel 3! Com o modulo Freelancer ativo, voce comeca a receber semanalmente no email vagas filtradas, oportunidades remotas e orientacoes para transformar inteligencia artificial em renda. E como se voce tivesse um radar de oportunidades trabalhando pra voce toda semana.",
           icon: "briefcase",
           primaryLabel: "Desbloquear Freelancer",
           secondaryLabel: "Agora nao",
-          title: "Voce desbloqueou o jornal semanal de vagas freelance",
+          title: "Super Bonus desbloqueado: Jornal semanal de vagas freelance!",
         },
       },
       ai_hub_day_pass: {
@@ -167,29 +167,29 @@ const COPY_BY_LOCALE: Record<PopupLocale, LocaleCopy> = {
         active: {
           action: "dismiss",
           benefits: [
-            "Fresh freelance roles every week",
-            "Remote opportunities and practical market signals",
-            "More clarity to turn skill into income",
+            "Hand-picked freelance jobs delivered to your inbox every week",
+            "Real remote work opportunities powered by AI skills",
+            "Practical market insights to start earning extra income",
           ],
           description:
-            "Because the Freelancer module is already active on your account, you will now receive this weekly journal by email.",
+            "You hit the Level 3 Super Bonus! Since the Freelancer module is already active on your account, you now start receiving an exclusive weekly email with curated freelance jobs, remote opportunities, and shortcuts to turn what you are learning here into real income.",
           icon: "mail",
-          primaryLabel: "Awesome",
-          title: "You unlocked the weekly freelance jobs journal",
+          primaryLabel: "Amazing!",
+          title: "Super Bonus: Weekly freelance jobs journal activated!",
         },
         requires_freelancer: {
           action: "freelancer_offer",
           benefits: [
-            "A weekly curation of freelance roles and remote opportunities",
-            "Market guidance for people monetizing AI skills",
-            "This perk activates as soon as Freelancer is unlocked",
+            "Weekly curated email with real freelance job opportunities",
+            "Market direction to monetize your AI skills",
+            "Activates automatically once the Freelancer module is unlocked",
           ],
           description:
-            "The perk is already yours. Now you need to unlock the Freelancer module to start receiving these updates by email.",
+            "You hit the Level 3 Super Bonus! With the Freelancer module active, you will receive curated freelance jobs, remote opportunities, and guidance to turn AI into income — delivered weekly to your inbox. It is like having an opportunity radar working for you every single week.",
           icon: "briefcase",
           primaryLabel: "Unlock Freelancer",
           secondaryLabel: "Not now",
-          title: "You unlocked the weekly freelance jobs journal",
+          title: "Super Bonus unlocked: Weekly freelance jobs journal!",
         },
       },
       ai_hub_day_pass: {
@@ -261,29 +261,29 @@ const COPY_BY_LOCALE: Record<PopupLocale, LocaleCopy> = {
         active: {
           action: "dismiss",
           benefits: [
-            "Vacantes freelance filtradas cada semana",
-            "Oportunidades remotas y senales practicas de mercado",
-            "Mas claridad para convertir habilidad en ingresos",
+            "Vacantes freelance seleccionadas y enviadas a tu email cada semana",
+            "Oportunidades reales de trabajo remoto con IA",
+            "Senales practicas del mercado para generar ingresos extra",
           ],
           description:
-            "Como el modulo Freelancer ya esta activo en tu cuenta, ahora empezaras a recibir este boletin semanal por email.",
+            "Alcanzaste el Super Bonus del nivel 3! Como el modulo Freelancer ya esta activo en tu cuenta, a partir de ahora recibiras en tu email una curadoria semanal exclusiva con vacantes freelance seleccionadas, oportunidades remotas y atajos para convertir lo que estas aprendiendo aqui en ingresos reales.",
           icon: "mail",
-          primaryLabel: "Perfecto",
-          title: "Has desbloqueado el boletin semanal de vacantes freelance",
+          primaryLabel: "Genial!",
+          title: "Super Bonus: Boletin semanal de vacantes freelance activado!",
         },
         requires_freelancer: {
           action: "freelancer_offer",
           benefits: [
-            "Curadoria semanal con vacantes y oportunidades remotas",
-            "Direccion de mercado para quien quiere monetizar habilidades con IA",
-            "Este beneficio se activa cuando desbloquees Freelancer",
+            "Curadoria semanal con vacantes reales de freelance en tu email",
+            "Direccion de mercado para monetizar tus habilidades con IA",
+            "Se activa automaticamente al desbloquear el modulo Freelancer",
           ],
           description:
-            "El beneficio ya es tuyo. Ahora necesitas desbloquear el modulo Freelancer para empezar a recibir estas actualizaciones por email.",
+            "Alcanzaste el Super Bonus del nivel 3! Con el modulo Freelancer activo, empezaras a recibir semanalmente vacantes filtradas, oportunidades remotas y orientacion para convertir la inteligencia artificial en ingresos. Es como tener un radar de oportunidades trabajando para ti cada semana.",
           icon: "briefcase",
           primaryLabel: "Desbloquear Freelancer",
           secondaryLabel: "Ahora no",
-          title: "Has desbloqueado el boletin semanal de vacantes freelance",
+          title: "Super Bonus desbloqueado: Boletin semanal de vacantes freelance!",
         },
       },
       ai_hub_day_pass: {
@@ -355,29 +355,29 @@ const COPY_BY_LOCALE: Record<PopupLocale, LocaleCopy> = {
         active: {
           action: "dismiss",
           benefits: [
-            "Offres freelance filtrees chaque semaine",
-            "Opportunites a distance et signaux pratiques du marche",
-            "Plus de clarte pour transformer une competence en revenu",
+            "Offres freelance selectionnees et envoyees a votre email chaque semaine",
+            "Opportunites reelles de travail a distance avec l'IA",
+            "Signaux pratiques du marche pour generer des revenus supplementaires",
           ],
           description:
-            "Comme le module Freelancer est deja actif sur votre compte, vous allez maintenant recevoir ce journal hebdomadaire par email.",
+            "Vous avez atteint le Super Bonus du niveau 3! Puisque le module Freelancer est deja actif sur votre compte, vous recevez desormais par email une selection hebdomadaire exclusive de missions freelance, d'opportunites a distance et de raccourcis pour transformer vos apprentissages en revenus reels.",
           icon: "mail",
-          primaryLabel: "Parfait",
-          title: "Vous avez debloque le journal hebdomadaire des missions freelance",
+          primaryLabel: "Genial!",
+          title: "Super Bonus: Journal hebdomadaire des missions freelance active!",
         },
         requires_freelancer: {
           action: "freelancer_offer",
           benefits: [
-            "Une selection hebdomadaire de missions freelance et d'opportunites a distance",
-            "Un guide de marche pour ceux qui veulent monetiser leurs competences en IA",
-            "Cet avantage s'active des que Freelancer est debloque",
+            "Selection hebdomadaire de vraies missions freelance dans votre email",
+            "Orientation marche pour monetiser vos competences en IA",
+            "S'active automatiquement quand le module Freelancer est debloque",
           ],
           description:
-            "Cet avantage est deja a vous. Il ne reste plus qu'a debloquer le module Freelancer pour commencer a recevoir ces mises a jour par email.",
+            "Vous avez atteint le Super Bonus du niveau 3! Avec le module Freelancer actif, vous recevrez chaque semaine des missions filtrees, des opportunites a distance et une orientation pour transformer l'IA en revenus. C'est comme avoir un radar d'opportunites qui travaille pour vous chaque semaine.",
           icon: "briefcase",
           primaryLabel: "Debloquer Freelancer",
           secondaryLabel: "Pas maintenant",
-          title: "Vous avez debloque le journal hebdomadaire des missions freelance",
+          title: "Super Bonus debloque: Journal hebdomadaire des missions freelance!",
         },
       },
       ai_hub_day_pass: {
