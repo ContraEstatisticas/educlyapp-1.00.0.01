@@ -1750,7 +1750,8 @@
     "missions": {
       "title": "Missions Quotidiennes",
       "subtitle": "Complétez des missions quotidiennes pour gagner de l'XP et des récompenses exclusives.",
-      "cta": "Voir les Missions"
+      "cta": "Voir les Missions",
+      "quickSubtitle": "Tâches d'aujourd'hui en un clic"
     },
     "trail": {
       "title": "Parcours Personnalisé",
@@ -1760,7 +1761,12 @@
     "medals": {
       "title": "Médailles",
       "subtitle": "Gagnez des médailles pour vos accomplissements et affichez vos progrès.",
-      "cta": "Voir les Succès"
+      "cta": "Voir les Succès",
+      "quickSubtitle": "Votre progression et vos réalisations"
+    },
+    "specialty_trails": {
+      "title": "Parcours de spécialité",
+      "quickSubtitle": "Explorez les parcours par spécialité"
     }
   },
   "progress": {
@@ -3015,7 +3021,15 @@
     "updatedDesc": "Vos informations ont été enregistrées avec succès.",
     "updateError": "Impossible de mettre à jour le profil.",
     "settingsSaved": "Paramètres enregistrés !",
-    "notificationsUpdated": "Vos préférences de notification ont été mises à jour."
+    "notificationsUpdated": "Vos préférences de notification ont été mises à jour.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmNewPassword": "Confirmer le nouveau mot de passe",
+    "savePassword": "Enregistrer le mot de passe",
+    "passwordTooShort": "Le mot de passe doit comporter au moins 6 caractères.",
+    "passwordMismatch": "Les mots de passe ne correspondent pas.",
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter.",
+    "passwordChanged": "Mot de passe modifié !",
+    "passwordChangedDesc": "Votre mot de passe a été modifié avec succès. Un nouveau lien d'accès a été envoyé à votre adresse e-mail."
   },
   "company": {
     "title": "Informations sur l'Entreprise",
@@ -3302,5 +3316,55 @@
     "newContent": "Nouveautés sur Educly ! Découvrez les nouveaux modules disponibles.",
     "levelUp": "Incroyable ! Vous avez atteint le niveau {{level}} ! Continuez à évoluer !",
     "welcomeBack": "Cela fait longtemps ! Revenez et continuez où vous en étiez."
+  },
+  "medals": {
+    "title": "Mes Médailles",
+    "earnedCount": "{{earned}} sur {{total}} obtenues",
+    "freelancerSection": "Parcours Freelancer",
+    "freelancerDesc": "Médailles obtenues dans le parcours freelancer",
+    "trailSection": "Défi 28 Jours",
+    "trailDesc": "Médailles obtenues dans le défi de 28 jours",
+    "earnedOn": "Obtenue le",
+    "locked": "Verrouillée"
+  },
+  "medal_names": {
+    "first_step": "Premier Pas",
+    "explorer": "Explorateur",
+    "dedicated": "Dédié",
+    "master": "Maître Freelancer",
+    "streak_3": "En Rythme",
+    "streak_7": "Constant",
+    "streak_14": "Inarrêtable",
+    "fast_learner": "Apprenti Rapide",
+    "perfect_quiz": "Quiz Parfait",
+    "trail_week1": "Première Semaine",
+    "trail_week2": "Deux Semaines",
+    "trail_week3": "Trois Semaines",
+    "trail_complete": "Maître du Parcours",
+    "chatgpt_master": "Maître de ChatGPT",
+    "claude_master": "Maître de Claude",
+    "gemini_master": "Maître de Gemini",
+    "early_bird": "Lève-tôt",
+    "night_owl": "Oiseau de Nuit"
+  },
+  "medal_defs": {
+    "first_step": "Complétez votre premier module",
+    "explorer": "Complétez 3 modules",
+    "dedicated": "Complétez 5 modules",
+    "master": "Complétez les 8 modules",
+    "streak_3": "Maintenez une série de 3 jours",
+    "streak_7": "Maintenez une série de 7 jours",
+    "streak_14": "Maintenez une série de 14 jours",
+    "fast_learner": "Complétez un module en un seul jour",
+    "perfect_quiz": "Répondez correctement à toutes les questions d'un module du premier coup",
+    "trail_week1": "Complétez la première semaine du défi de 28 jours",
+    "trail_week2": "Complétez deux semaines du défi de 28 jours",
+    "trail_week3": "Complétez trois semaines du défi de 28 jours",
+    "trail_complete": "Complétez tout le défi de 28 jours",
+    "chatgpt_master": "Complétez tous les jours de ChatGPT",
+    "claude_master": "Complétez tous les jours de Claude",
+    "gemini_master": "Complétez tous les jours de Gemini",
+    "early_bird": "Complétez une leçon avant 8h du matin",
+    "night_owl": "Complétez une leçon après 22h"
   }
 }

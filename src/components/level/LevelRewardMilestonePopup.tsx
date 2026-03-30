@@ -412,33 +412,28 @@ export const LevelRewardMilestonePopup = () => {
   }, [isLevelUpPopupActive, pendingPostLevelUpSync, queryClient]);
 
   const activeReward = useMemo(() => {
-    const queuedReward = sortRewards(queuedRewards).find(
-      (reward) =>
-        !hasSeenPopupLocally(reward) &&
-        !dismissedRewardFingerprints.includes(getRewardSeenFingerprint(reward)),
-    );
+    const isUnseen = (reward: LevelRewardRow) => {
+      const popupSeenAt =
+        reward.metadata &&
+        typeof (reward.metadata as Record<string, unknown>).popup_seen_at === "string"
+          ? (reward.metadata as Record<string, unknown>).popup_seen_at
+          : null;
 
+      return (
+        !popupSeenAt &&
+        !hasSeenPopupLocally(reward) &&
+        !dismissedRewardFingerprints.includes(getRewardSeenFingerprint(reward))
+      );
+    };
+
+    const queuedReward = sortRewards(queuedRewards).find(isUnseen);
     if (queuedReward) return queuedReward;
 
     const sortedRewards = sortRewards(rewards).filter((reward) =>
       SUPPORTED_POPUP_REWARDS.includes(reward.reward_key),
     );
 
-    return (
-      sortedRewards.find((reward) => {
-        const popupSeenAt =
-          reward.metadata &&
-          typeof reward.metadata.popup_seen_at === "string"
-            ? reward.metadata.popup_seen_at
-            : null;
-
-        return (
-          !popupSeenAt &&
-          !hasSeenPopupLocally(reward) &&
-          !dismissedRewardFingerprints.includes(getRewardSeenFingerprint(reward))
-        );
-      }) || null
-    );
+    return sortedRewards.find(isUnseen) || null;
   }, [dismissedRewardFingerprints, queuedRewards, rewards]);
 
   const popupContent = useMemo<LevelRewardPopupContent | null>(() => {

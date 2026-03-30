@@ -2125,7 +2125,8 @@
     "missions": {
       "title": "Missões Diárias",
       "subtitle": "Complete tarefas simples para ganhar XP e subir de nível.",
-      "cta": "Ver Missões"
+      "cta": "Ver Missões",
+      "quickSubtitle": "Tarefas de hoje em um clique"
     },
     "trail": {
       "title": "Trilha Personalizada",
@@ -2135,7 +2136,12 @@
     "medals": {
       "title": "Suas Conquistas",
       "subtitle": "Visualize as medalhas e certificados que você já desbloqueou.",
-      "cta": "Ver Medalhas"
+      "cta": "Ver Medalhas",
+      "quickSubtitle": "Seu progresso e conquistas"
+    },
+    "specialty_trails": {
+      "title": "Trilhas de especialidades",
+      "quickSubtitle": "Explore trilhas por especialidade"
     }
   },
   "missions": {
@@ -2144,9 +2150,16 @@
     "cta": "Ver Missões"
   },
   "medals": {
-    "title": "Medalhas",
+    "title": "Minhas Medalhas",
     "subtitle": "Ganhe medalhas por suas conquistas e exiba seu progresso.",
-    "cta": "Ver Conquistas"
+    "cta": "Ver Conquistas",
+    "earnedCount": "{{earned}} de {{total}} conquistadas",
+    "freelancerSection": "Trilha Freelancer",
+    "freelancerDesc": "Medalhas conquistadas na trilha freelancer",
+    "trailSection": "Desafio 28 Dias",
+    "trailDesc": "Medalhas conquistadas no desafio de 28 dias",
+    "earnedOn": "Conquistada em",
+    "locked": "Bloqueada"
   },
   "progress": {
     "title": "Seu progresso na Educly",
@@ -3514,7 +3527,15 @@
     "updatedDesc": "Suas informações foram salvas com sucesso.",
     "updateError": "Não foi possível atualizar o perfil.",
     "settingsSaved": "Configurações salvas!",
-    "notificationsUpdated": "Suas preferências de notificação foram atualizadas."
+    "notificationsUpdated": "Suas preferências de notificação foram atualizadas.",
+    "newPassword": "Nova senha",
+    "confirmNewPassword": "Confirmar nova senha",
+    "savePassword": "Salvar senha",
+    "passwordTooShort": "A senha deve ter pelo menos 6 caracteres.",
+    "passwordMismatch": "As senhas não coincidem.",
+    "sessionExpired": "Sua sessão expirou. Faça login novamente.",
+    "passwordChanged": "Senha alterada!",
+    "passwordChangedDesc": "Sua senha foi alterada com sucesso. Um novo link de acesso foi enviado ao seu e-mail."
   },
   "company": {
     "title": "Informações da Empresa",
@@ -3804,5 +3825,45 @@
     "newContent": "Novidades no Educly! Confira os novos módulos disponíveis.",
     "levelUp": "Incrível! Você alcançou o nível {{level}}! Continue evoluindo!",
     "welcomeBack": "Faz tempo que não te vemos! Volte e continue de onde parou."
+  },
+  "medal_names": {
+    "first_step": "Primeiro Passo",
+    "explorer": "Explorador",
+    "dedicated": "Dedicado",
+    "master": "Mestre Freelancer",
+    "streak_3": "Em Ritmo",
+    "streak_7": "Constante",
+    "streak_14": "Imparável",
+    "fast_learner": "Aprendiz Rápido",
+    "perfect_quiz": "Quiz Perfeito",
+    "trail_week1": "Primeira Semana",
+    "trail_week2": "Duas Semanas",
+    "trail_week3": "Três Semanas",
+    "trail_complete": "Mestre da Trilha",
+    "chatgpt_master": "Mestre do ChatGPT",
+    "claude_master": "Mestre do Claude",
+    "gemini_master": "Mestre do Gemini",
+    "early_bird": "Madrugador",
+    "night_owl": "Coruja Noturna"
+  },
+  "medal_defs": {
+    "first_step": "Complete seu primeiro módulo",
+    "explorer": "Complete 3 módulos",
+    "dedicated": "Complete 5 módulos",
+    "master": "Complete todos os 8 módulos",
+    "streak_3": "Mantenha uma sequência de 3 dias",
+    "streak_7": "Mantenha uma sequência de 7 dias",
+    "streak_14": "Mantenha uma sequência de 14 dias",
+    "fast_learner": "Complete um módulo em um único dia",
+    "perfect_quiz": "Acerte todas as questões de um módulo na primeira tentativa",
+    "trail_week1": "Complete a primeira semana da trilha de 28 dias",
+    "trail_week2": "Complete duas semanas da trilha de 28 dias",
+    "trail_week3": "Complete três semanas da trilha de 28 dias",
+    "trail_complete": "Complete toda a trilha de 28 dias",
+    "chatgpt_master": "Complete todos os dias de ChatGPT",
+    "claude_master": "Complete todos os dias de Claude",
+    "gemini_master": "Complete todos os dias de Gemini",
+    "early_bird": "Complete uma aula antes das 8h da manhã",
+    "night_owl": "Complete uma aula depois das 22h"
   }
 }

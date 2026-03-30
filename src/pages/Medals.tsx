@@ -214,7 +214,7 @@ const Medals = () => {
                     "text-xs text-center font-medium max-w-[80px] truncate",
                     medal.isEarned ? "text-foreground" : "text-muted-foreground"
                   )}>
-                    {medal.name}
+                    {t(`medal_names.${medal.slug || medal.id}`, medal.name)}
                   </span>
                 </div>
               </TooltipTrigger>
@@ -228,17 +228,17 @@ const Medals = () => {
                 )}
               >
                 <div className="text-center">
-                  <p className="font-semibold text-foreground">{medal.name}</p>
-                  <p className="text-sm text-muted-foreground">{medal.description}</p>
+                  <p className="font-semibold text-foreground">{t(`medal_names.${medal.slug || medal.id}`, medal.name)}</p>
+                  <p className="text-sm text-muted-foreground">{t(`medal_defs.${medal.slug || medal.id}`, medal.description)}</p>
                   {medal.isEarned && medal.earnedAt && (
                     <p className="text-xs text-green-600 mt-1">
-                      ✓ Conquistada em{" "}
+                      {t("medals.earnedOn", "Conquistada em")} 
                       {new Date(medal.earnedAt).toLocaleDateString()}
                     </p>
                   )}
                   {!medal.isEarned && (
                     <p className="text-xs text-muted-foreground mt-1 italic">
-                      Bloqueada
+                      {t("medals.locked", "Bloqueada")}
                     </p>
                   )}
                 </div>

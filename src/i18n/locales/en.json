@@ -2532,7 +2532,8 @@
     "missions": {
       "title": "Daily Missions",
       "subtitle": "Complete daily missions to earn XP and exclusive rewards.",
-      "cta": "View Missions"
+      "cta": "View Missions",
+      "quickSubtitle": "Today's tasks in one click"
     },
     "trail": {
       "title": "Custom Track",
@@ -2542,7 +2543,12 @@
     "medals": {
       "title": "Medals",
       "subtitle": "Earn medals for your achievements and show off your progress.",
-      "cta": "View Achievements"
+      "cta": "View Achievements",
+      "quickSubtitle": "Your progress and achievements"
+    },
+    "specialty_trails": {
+      "title": "Specialty Trails",
+      "quickSubtitle": "Explore trails by specialty"
     }
   },
   "onboardingQuiz": {
@@ -4363,7 +4369,15 @@
     "updatedDesc": "Your information has been saved successfully.",
     "updateError": "Could not update profile.",
     "settingsSaved": "Settings saved!",
-    "notificationsUpdated": "Your notification preferences have been updated."
+    "notificationsUpdated": "Your notification preferences have been updated.",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "savePassword": "Save password",
+    "passwordTooShort": "Password must be at least 6 characters.",
+    "passwordMismatch": "Passwords do not match.",
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "passwordChanged": "Password changed!",
+    "passwordChangedDesc": "Your password was successfully changed. A new access link has been sent to your email."
   },
   "company": {
     "title": "Company Information",
@@ -4624,5 +4638,55 @@
     "newContent": "What's new on Educly! Check out the new modules available.",
     "levelUp": "Amazing! You reached level {{level}}! Keep evolving!",
     "welcomeBack": "It's been a while! Come back and continue where you left off."
+  },
+  "medals": {
+    "title": "Medals",
+    "earnedCount": "{{earned}} out of {{total}} earned",
+    "freelancerSection": "Freelancer Trail",
+    "freelancerDesc": "Medals earned in the freelancer trail",
+    "trailSection": "28-Day Challenge",
+    "trailDesc": "Medals earned in the 28-day challenge",
+    "earnedOn": "Earned on",
+    "locked": "Locked"
+  },
+  "medal_names": {
+    "first_step": "First Step",
+    "explorer": "Explorer",
+    "dedicated": "Dedicated",
+    "master": "Master Freelancer",
+    "streak_3": "In Rhythm",
+    "streak_7": "Constant",
+    "streak_14": "Unstoppable",
+    "fast_learner": "Fast Learner",
+    "perfect_quiz": "Perfect Quiz",
+    "trail_week1": "First Week",
+    "trail_week2": "Two Weeks",
+    "trail_week3": "Three Weeks",
+    "trail_complete": "Trail Master",
+    "chatgpt_master": "ChatGPT Master",
+    "claude_master": "Claude Master",
+    "gemini_master": "Gemini Master",
+    "early_bird": "Early Bird",
+    "night_owl": "Night Owl"
+  },
+  "medal_defs": {
+    "first_step": "Complete your first module",
+    "explorer": "Complete 3 modules",
+    "dedicated": "Complete 5 modules",
+    "master": "Complete all 8 modules",
+    "streak_3": "Maintain a 3-day streak",
+    "streak_7": "Maintain a 7-day streak",
+    "streak_14": "Maintain a 14-day streak",
+    "fast_learner": "Complete a module in a single day",
+    "perfect_quiz": "Answer all questions in a module correctly on the first try",
+    "trail_week1": "Complete the first week of the 28-day challenge",
+    "trail_week2": "Complete two weeks of the 28-day challenge",
+    "trail_week3": "Complete three weeks of the 28-day challenge",
+    "trail_complete": "Complete the entire 28-day challenge",
+    "chatgpt_master": "Complete all ChatGPT days",
+    "claude_master": "Complete all Claude days",
+    "gemini_master": "Complete all Gemini days",
+    "early_bird": "Complete a lesson before 8 AM",
+    "night_owl": "Complete a lesson after 10 PM"
   }
 }

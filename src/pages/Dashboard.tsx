@@ -21,6 +21,7 @@ import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
+import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 
 import mountainBackground from "../../assets/mountainBackground.png";
@@ -171,6 +172,36 @@ const Dashboard = () => {
     },
   });
 
+  const { data: languageConfirmationData } = useQuery({
+    queryKey: ["dashboard-language-confirmation"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("language_confirmation_completed, preferred_language")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      return {
+        userId: user.id,
+        preferredLanguage: profile?.preferred_language || null,
+        needsConfirmation: profile ? !profile.language_confirmation_completed : false,
+      };
+    },
+  });
+
+  // Sync loaded DB preferred language with local i18n if there is a mismatch (e.g., cleared cache)
+  useEffect(() => {
+    if (languageConfirmationData?.preferredLanguage && !languageConfirmationData?.needsConfirmation) {
+      if (i18n.language !== languageConfirmationData.preferredLanguage) {
+        i18n.changeLanguage(languageConfirmationData.preferredLanguage);
+        localStorage.setItem("i18nextLng", languageConfirmationData.preferredLanguage);
+      }
+    }
+  }, [languageConfirmationData?.preferredLanguage, languageConfirmationData?.needsConfirmation, i18n]);
+
   const { data: streakData } = useQuery({
     queryKey: ["dashboard-user-streak-card"],
     queryFn: async () => {
@@ -281,6 +312,21 @@ const Dashboard = () => {
             queryClient.setQueryData(["dashboard-name-confirmation"], {
               ...nameConfirmationData,
               savedName: nextName,
+              needsConfirmation: false,
+            });
+            queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+          }}
+        />
+      ) : null}
+
+      {languageConfirmationData?.needsConfirmation && !nameConfirmationData?.needsConfirmation ? (
+        <LanguageSelectionDialog
+          open={languageConfirmationData.needsConfirmation}
+          userId={languageConfirmationData.userId}
+          defaultLanguage={languageConfirmationData.preferredLanguage}
+          onCompleted={(lang) => {
+            queryClient.setQueryData(["dashboard-language-confirmation"], {
+              ...languageConfirmationData,
               needsConfirmation: false,
             });
             queryClient.invalidateQueries({ queryKey: ["user-profile"] });

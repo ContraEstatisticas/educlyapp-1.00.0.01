@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { supabase } from "@/integrations/supabase/client";
 import {
   Select,
   SelectContent,
@@ -26,9 +27,18 @@ interface LanguageSelectorProps {
 export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (languageCode: string) => {
+  const handleLanguageChange = async (languageCode: string) => {
     i18n.changeLanguage(languageCode);
     localStorage.setItem('i18nextLng', languageCode);
+    
+    // Attempt saving to DB if user is logged in
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase
+        .from('profiles')
+        .update({ preferred_language: languageCode })
+        .eq('id', user.id);
+    }
   };
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];

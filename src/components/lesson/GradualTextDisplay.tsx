@@ -99,15 +99,23 @@ export const GradualTextDisplay = forwardRef<GradualTextDisplayRef, GradualTextD
           key={i} 
           className="text-foreground/80 text-base md:text-lg leading-relaxed mb-4 last:mb-0"
         >
-          {line.split(/(\*\*.*?\*\*)/g).map((part, j) =>
-            part.startsWith("**") ? (
-              <strong key={j} className="font-semibold text-primary">
-                {part.slice(2, -2)}
-              </strong>
-            ) : (
-              part
-            )
-          )}
+          {line.split(/(\*\*.*?\*\*|<bold>.*?<\/bold>)/g).map((part, j) => {
+            if (part.startsWith("**")) {
+              return (
+                <strong key={j} className="font-semibold text-primary">
+                  {part.slice(2, -2)}
+                </strong>
+              );
+            }
+            if (part.startsWith("<bold>")) {
+              return (
+                <strong key={j} className="font-semibold text-primary">
+                  {part.slice(6, -7)}
+                </strong>
+              );
+            }
+            return part;
+          })}
         </p>
       ));
     };

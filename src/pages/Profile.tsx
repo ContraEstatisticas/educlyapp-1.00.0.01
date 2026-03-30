@@ -68,6 +68,7 @@ interface ProfileData {
 interface Medal {
   id: string;
   name: string;
+  slug?: string;
   icon_name?: string;
   color?: string;
   isEarned?: boolean;
@@ -152,7 +153,7 @@ const Profile = () => {
 
       const { data: medalDetails } = await supabase
         .from("freelancer_medals")
-        .select("id, name, icon_name, color")
+        .select("id, slug, name, icon_name, color")
         .in("id", userMedals.map(m => m.medal_id));
 
       if (!medalDetails) return [];
@@ -1037,13 +1038,13 @@ const Profile = () => {
                                 )}
                               </div>
                               <span className="text-xs mt-2 text-muted-foreground text-center font-medium truncate w-full">
-                                {medal.isEarned ? medal.name.split(' ')[0] : '???'}
+                                {medal.isEarned ? t(`medal_names.${medal.slug || medal.id}`, medal.name): "???"}
                               </span>
                             </div>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="font-bold text-sm bg-foreground text-background border-none shadow-lg">
                             <div className="space-y-1">
-                              <p>{medal.name}</p>
+                              <p>{t(`medal_names.${medal.slug || medal.id}`, medal.name)}</p>
                               {medal.isEarned && (
                                 <p className="text-xs text-muted font-normal">
                                   {t('profile.earned')}
