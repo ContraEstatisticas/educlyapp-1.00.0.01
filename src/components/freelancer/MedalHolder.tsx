@@ -17,6 +17,13 @@ import {
   CheckCircle,
   Medal,
   Lock,
+  Calendar,
+  Trophy,
+  MessageSquare,
+  Bot,
+  Sparkles,
+  Sunrise,
+  Moon,
 } from "lucide-react";
 import {
   Tooltip,
@@ -35,6 +42,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Rocket,
   Timer,
   CheckCircle,
+  Calendar,
+  Trophy,
+  MessageSquare,
+  Bot,
+  Sparkles,
+  Sunrise,
+  Moon,
 };
 
 const colorMap: Record<string, { bg: string; border: string; icon: string; glow: string }> = {

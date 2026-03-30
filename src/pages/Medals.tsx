@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAllMedals } from "@/hooks/useAllMedals";
+import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import { clearAuthStorage } from "@/lib/authStorage";
 import { cn } from "@/lib/utils";
 import {
@@ -124,7 +125,9 @@ const Medals = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { getMedalsByCategory, isLoading, earnedCount, totalCount } = useAllMedals();
+  const { syncEarnableMedals } = useFreelancerMedals();
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
+  const [hasSyncedMedals, setHasSyncedMedals] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -140,6 +143,26 @@ const Medals = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (hasSyncedMedals) return;
+
+    let isMounted = true;
+
+    void syncEarnableMedals()
+      .catch((error) => {
+        console.error("Error syncing medals on medals page:", error);
+      })
+      .finally(() => {
+        if (isMounted) {
+          setHasSyncedMedals(true);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [hasSyncedMedals, syncEarnableMedals]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

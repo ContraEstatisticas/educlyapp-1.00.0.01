@@ -702,6 +702,547 @@
     ]
   },
   "module8": {
+    "title": "Building Your Reputation",
+    "description": "Turn reviews into ranking, trust, and more contracts",
+    "icon": "BadgeCheck",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Building Your Reputation",
+        "content": "In freelancing, your reputation works like your resume. Before opening your portfolio, clients look at ratings, reviews, and delivery history. Strong reviews increase visibility and make future clients trust you faster."
+      },
+      {
+        "type": "text",
+        "title": "How to Ask for Feedback",
+        "content": "The biggest mistake is waiting for the client to review you on their own. Ask right after the final delivery while the client still feels good about the finished work. Keep the message short, human, and low pressure."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "The best time to ask a client for a review is right after the ___, while they still have a positive feeling about the completed work.",
+          "answers": [
+            "final delivery"
+          ],
+          "options": [
+            "final delivery",
+            "first proposal",
+            "kickoff meeting",
+            "negotiation"
+          ],
+          "explanation": "Answer: final delivery."
+        }
+      },
+      {
+        "type": "text",
+        "title": "What Improves Your Ranking",
+        "content": "Platforms do not look only at ratings. They also track review frequency, response time, completion rate, and consistency over time. At the beginning, smaller projects help build momentum. If you receive a negative review, answer with calm and professionalism."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "What do platforms consider besides the rating when ranking a freelancer?",
+        "options": [
+          {
+            "text": "The number of proposals sent per week",
+            "isCorrect": false
+          },
+          {
+            "text": "Review frequency, response time, and project completion rate",
+            "isCorrect": true
+          },
+          {
+            "text": "Portfolio quality and the number of connections on the platform",
+            "isCorrect": false
+          },
+          {
+            "text": "The amount charged per project compared with the category average",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each situation to the right action",
+          "description": "Connect each scenario to the strongest professional response.",
+          "pairs": [
+            {
+              "left": "The client disappeared without leaving a review",
+              "right": "Send a polite message asking for feedback right after delivery"
+            },
+            {
+              "left": "You received a negative review",
+              "right": "Respond professionally without attacking"
+            },
+            {
+              "left": "You are starting from zero on the platform",
+              "right": "Accept smaller projects to build your track record"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 8 Summary",
+        "content": "Reputation is built review by review. Ask for feedback at the right time, respond fast, finish what you promised, and handle criticism with maturity. That is what helps an account climb the ranking."
+      }
+    ]
+  },
+  "module9": {
+    "title": "How to Raise Your Prices",
+    "description": "Adjust your rates with confidence",
+    "icon": "TrendingUp",
+    "steps": [
+      {
+        "type": "text",
+        "title": "How to Raise Your Prices",
+        "content": "There comes a point when your old price no longer matches the value you deliver. If your calendar is full, clients accept your proposals easily, and you already have strong reviews, the market is signaling that it is time to adjust."
+      },
+      {
+        "type": "text",
+        "title": "Communicating the Increase",
+        "content": "Warn clients in advance and avoid apologizing too much. Before stating the new rate, remind them of the results, deadlines met, and consistent quality. That is value anchoring in practice."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "When communicating a price increase, the ideal approach is to warn the client in ___ and stay direct without over-explaining.",
+          "answers": [
+            "advance"
+          ],
+          "options": [
+            "advance",
+            "discount",
+            "urgency",
+            "haste"
+          ],
+          "explanation": "Answer: advance."
+        }
+      },
+      {
+        "type": "text",
+        "title": "If the Client Refuses",
+        "content": "Do not back down immediately. If needed, offer a smaller scope for the old price, not the same work for less money. That protects your value and keeps your position strong."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "What is value anchoring in practice?",
+        "options": [
+          {
+            "text": "Offering progressive discounts as the client hires you more often",
+            "isCorrect": false
+          },
+          {
+            "text": "Reinforcing results and positive experiences before presenting the new price",
+            "isCorrect": true
+          },
+          {
+            "text": "Comparing your price with other freelancers so you look cheaper",
+            "isCorrect": false
+          },
+          {
+            "text": "Creating packages with different names to justify higher prices",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: c."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each situation to the right action",
+          "description": "Connect each pricing scenario to the strongest decision.",
+          "pairs": [
+            {
+              "left": "The client refuses the new price",
+              "right": "Offer a smaller scope for the old price, not the same work for less"
+            },
+            {
+              "left": "It has been six months without an adjustment and your calendar is full",
+              "right": "It is a clear sign that it is time to raise your rates"
+            },
+            {
+              "left": "You want to tell a recurring client about the increase",
+              "right": "Warn them in advance and stay direct and professional"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 9 Summary",
+        "content": "Raise prices when your history supports it. Communicate early, anchor in delivered value, and protect your position when there is resistance."
+      }
+    ]
+  },
+  "module10": {
+    "title": "How to Handle Abusive Revisions",
+    "description": "Protect scope, evidence, and delivery",
+    "icon": "Shield",
+    "steps": [
+      {
+        "type": "text",
+        "title": "How to Handle Abusive Revisions",
+        "content": "Revisions are part of the service. Endless revisions are not. Define how many rounds are included from the start and treat additional changes as extra work."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "When a client asks for changes beyond what was agreed, this behavior is called ___.",
+          "answers": [
+            "scope creep"
+          ],
+          "options": [
+            "scope creep",
+            "premium briefing",
+            "spontaneous upgrade",
+            "late alignment"
+          ],
+          "explanation": "Answer: scope creep."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Disputes and Protection",
+        "content": "If a dispute happens, platforms look at evidence. Keep communication inside the platform, document agreements, never send the final file before payment is confirmed, and split larger projects into stages with partial payments."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "Why is it important to keep all client communication inside the platform?",
+        "options": [
+          {
+            "text": "To make automatic translation of messages easier",
+            "isCorrect": false
+          },
+          {
+            "text": "To keep documented evidence in case of a dispute",
+            "isCorrect": true
+          },
+          {
+            "text": "So the client cannot hire other freelancers",
+            "isCorrect": false
+          },
+          {
+            "text": "Because the platform charges lower fees on projects with internal communication",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each situation to the right action",
+          "description": "Pair each problem with the action that protects your work best.",
+          "pairs": [
+            {
+              "left": "The client asks for a fifth round of revisions",
+              "right": "Explain that additional revisions have an extra cost"
+            },
+            {
+              "left": "A dispute was opened on the platform",
+              "right": "Present documentation, messages, and delivered files"
+            },
+            {
+              "left": "A large project with a new client",
+              "right": "Split it into stages with partial payments"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 10 Summary",
+        "content": "Professional freelancers define limits, document everything, and protect the delivery before conflict appears. Clear scope and recorded communication prevent unnecessary losses."
+      }
+    ]
+  },
+  "module11": {
+    "title": "Leaving the Platforms",
+    "description": "Reduce platform dependence with intelligence",
+    "icon": "ExternalLink",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Leaving the Platforms",
+        "content": "Platforms are useful at the beginning, but relying on them forever has a cost in fees, rules, and algorithm risk. The right moment to start migrating is when recurring clients already trust your work."
+      },
+      {
+        "type": "text",
+        "title": "Moving Clients to Direct Work",
+        "content": "Do not suggest the change abruptly. First build the relationship. Then show the move as a benefit for both sides: fewer fees, more flexibility, and a smoother long-term partnership."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "When proposing to work outside the platform, the strongest argument is to present it as a ___ benefit, better for the client and better for you.",
+          "answers": [
+            "mutual"
+          ],
+          "options": [
+            "mutual",
+            "urgent",
+            "temporary",
+            "one-sided"
+          ],
+          "explanation": "Answer: mutual."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Building Your Own Funnel",
+        "content": "Outside the platform, you need social proof and a direct contact channel. A simple portfolio, LinkedIn profile, client testimonials, and a clear way to reach you are enough to start."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "What is the smartest strategy to reduce dependence on platforms?",
+        "options": [
+          {
+            "text": "Stop using the platform immediately as soon as you have recurring clients",
+            "isCorrect": false
+          },
+          {
+            "text": "Use the platform only to attract new clients while keeping recurring work direct",
+            "isCorrect": true
+          },
+          {
+            "text": "Create profiles on every possible platform at the same time",
+            "isCorrect": false
+          },
+          {
+            "text": "Wait for the platform to lower its fees before making any move",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each stage to the right timing",
+          "description": "Connect each career stage to the best next move.",
+          "pairs": [
+            {
+              "left": "You are still building reputation",
+              "right": "Focus on the platform, it is not time to migrate yet"
+            },
+            {
+              "left": "You have satisfied recurring clients",
+              "right": "It is time to propose a direct contract"
+            },
+            {
+              "left": "Direct clients already cover your fixed expenses",
+              "right": "The platform becomes optional"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 11 Summary",
+        "content": "Leaving platforms does not mean disappearing from them. It means reducing dependence step by step until direct work becomes strong enough to sustain the business."
+      }
+    ]
+  },
+  "module12": {
+    "title": "Freelancer Financial Management",
+    "description": "Create stability even with variable income",
+    "icon": "Wallet",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Freelancer Financial Management",
+        "content": "Freelancers deal with strong months and weak months. The first step is to stop treating every payment as instant profit. Always divide income between fixed expenses, emergency reserve, and reinvestment."
+      },
+      {
+        "type": "text",
+        "title": "Emergency Reserve",
+        "content": "For freelancers, an emergency reserve is survival, not luxury. The target is three to six months of expenses. The practical rule is simple: save the surplus before spending it."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "For a freelancer, the recommended reserve is between three and ___ months of expenses.",
+          "answers": [
+            "six"
+          ],
+          "options": [
+            "six",
+            "twelve",
+            "two",
+            "nine"
+          ],
+          "explanation": "Answer: six."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Taxes and Paying Yourself",
+        "content": "Set aside 10% to 15% of every payment for taxes. Also create a fixed salary for yourself so that your personal finances become more predictable even when income varies."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "Why does creating a fixed salary for yourself help freelancers?",
+        "options": [
+          {
+            "text": "Because it forces the freelancer to work more to hit the target every month",
+            "isCorrect": false
+          },
+          {
+            "text": "Because it creates financial predictability even with variable income",
+            "isCorrect": true
+          },
+          {
+            "text": "Because it reduces the taxes paid on monthly earnings",
+            "isCorrect": false
+          },
+          {
+            "text": "Because it makes bank financing approval easier",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: c."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each habit to its benefit",
+          "description": "Link each money routine to the result it creates.",
+          "pairs": [
+            {
+              "left": "Set aside 10% to 15% of every payment",
+              "right": "Avoids unpleasant surprises when it is time to pay taxes"
+            },
+            {
+              "left": "Define a fixed monthly salary for yourself",
+              "right": "Creates financial predictability even with variable income"
+            },
+            {
+              "left": "Save the surplus before spending",
+              "right": "Builds the emergency reserve consistently"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 12 Summary",
+        "content": "Financially healthy freelancers separate revenue, build reserve, anticipate taxes, and pay themselves with discipline. Income can vary, but management does not need to vary with it."
+      }
+    ]
+  },
+  "module13": {
+    "title": "Scale: From Freelancer to Business",
+    "description": "Use AI, positioning, and structure to grow",
+    "icon": "Rocket",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Scale: From Freelancer to Business",
+        "content": "Solo freelancers have a natural ceiling: limited hours and limited delivery capacity. At some point, growth requires more than simply working harder."
+      },
+      {
+        "type": "text",
+        "title": "AI and Subcontracting",
+        "content": "AI can speed up research, drafting, review, and organization. When demand goes beyond your capacity, subcontracting trusted partners becomes the next natural step."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Complete the sentence",
+          "sentence": "When demand exceeds an individual freelancer's capacity, the next natural growth step is ___.",
+          "answers": [
+            "subcontracting"
+          ],
+          "options": [
+            "subcontracting",
+            "improvisation",
+            "a strategic pause",
+            "lowering prices"
+          ],
+          "explanation": "Answer: subcontracting."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Packages and Positioning",
+        "content": "Service packages simplify the client's decision and improve predictability. Specialist positioning increases perceived value: generalists compete on price, specialists compete on transformation."
+      },
+      {
+        "type": "quiz",
+        "title": "Multiple choice",
+        "question": "What is the main advantage of creating service packages instead of charging for individual projects?",
+        "options": [
+          {
+            "text": "Packages let you charge less and attract more clients at the same time",
+            "isCorrect": false
+          },
+          {
+            "text": "Packages simplify the client decision and create financial predictability",
+            "isCorrect": true
+          },
+          {
+            "text": "Packages remove the need to keep your portfolio updated",
+            "isCorrect": false
+          },
+          {
+            "text": "Packages are accepted only by large companies, not smaller clients",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Correct answer: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Match each strategy to the result it creates",
+          "description": "Connect each action to the type of scale it produces.",
+          "pairs": [
+            {
+              "left": "Use AI to automate parts of the process",
+              "right": "Increases delivery capacity without increasing working hours"
+            },
+            {
+              "left": "Position yourself as a specialist in a niche",
+              "right": "Lets you charge more without needing to over-justify"
+            },
+            {
+              "left": "Create service packages",
+              "right": "Simplifies sales and increases revenue predictability"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Module 13 Summary",
+        "content": "Scale begins when you stop selling only hours and start building systems: tools, partners, packages, and positioning. That is what turns strong freelance work into a stronger business."
+      }
+    ]
+  },
+  "module14": {
     "title": "Your Plan for the Next 30 Days",
     "description": "Put everything you've learned into practice and build your freelance career",
     "icon": "Rocket",
@@ -709,7 +1250,7 @@
       {
         "type": "text",
         "title": "🎓 Your Plan for the Next 30 Days",
-        "content": "You've completed the previous seven modules. You now have clarity on what freelancing is, where to find clients, how to build a profile, what services to offer, how to write proposals, how to set prices, and how to deliver with excellence.\nBut knowledge without action doesn't produce results. This final module is about what you do starting today."
+        "content": "You have completed the previous thirteen modules. You now understand how to enter the freelance market, find clients, build a strong profile, write proposals, set prices, deliver professionally, strengthen your reputation, raise your rates, protect scope, reduce platform dependence, organize your finances, and think about scale. This final module is about what you do starting today."
       },
       {
         "type": "text",
@@ -806,7 +1347,7 @@
       {
         "type": "text",
         "title": "📋 Final Summary: What You've Built",
-        "content": "Over eight modules, you went from not knowing what freelancing is to having a concrete action plan. You know where to find clients, how to build a profile that sells, what services to offer, how to write proposals that win projects, how to set prices with purpose, how to deliver with excellence, and how to ask for reviews at the right time.\nAll that's left is to act.\nThe difference between someone who earns money as a freelancer and someone who \"will try someday\" isn't talent, experience, or luck. It's decision. The first project doesn't wait for the perfect moment. The perfect moment is when you decide to start.\nYou have the knowledge, the tools, and the plan. The next step is yours."
+        "content": "Across fourteen modules, you moved from not knowing what freelancing is to having a concrete action plan. You now know how to find clients, build a profile that sells, write winning proposals, price better, ask for reviews, handle revisions, organize your finances, and structure growth. All that remains is to act."
       }
     ]
   }

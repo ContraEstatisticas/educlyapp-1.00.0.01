@@ -702,6 +702,547 @@
     ]
   },
   "module8": {
+    "title": "Construyendo Tu Reputacion",
+    "description": "Convierte evaluaciones en ranking y confianza",
+    "icon": "BadgeCheck",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Construyendo Tu Reputacion",
+        "content": "En el mundo freelancer, tu reputacion funciona como curriculo. Antes de abrir tu portafolio, el cliente mira tu nota, tus reviews y tu historial. Una cuenta con buenas evaluaciones aparece mas y convierte mejor."
+      },
+      {
+        "type": "text",
+        "title": "Como Pedir Feedback",
+        "content": "No esperes que el cliente evale solo. Pide feedback justo despues de la entrega final, cuando la experiencia todavia esta fresca y positiva. El mensaje debe ser simple, humano y sin presion."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "El mejor momento para pedir una evaluacion al cliente es justo despues de la ___, mientras todavia conserva una sensacion positiva del trabajo terminado.",
+          "answers": [
+            "entrega final"
+          ],
+          "options": [
+            "entrega final",
+            "primera propuesta",
+            "reunion inicial",
+            "negociacion"
+          ],
+          "explanation": "Respuesta: entrega final."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Que Mejora Tu Ranking",
+        "content": "Las plataformas no miran solo la nota. Tambien cuentan la frecuencia de reviews, el tiempo de respuesta, la tasa de finalizacion y la consistencia del historial. Al inicio conviene aceptar proyectos pequenos. Si llega una critica negativa, responde con profesionalismo."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Que consideran las plataformas ademas de la nota al rankear a un freelancer?",
+        "options": [
+          {
+            "text": "El numero de propuestas enviadas por semana",
+            "isCorrect": false
+          },
+          {
+            "text": "La frecuencia de evaluaciones, el tiempo de respuesta y la tasa de finalizacion",
+            "isCorrect": true
+          },
+          {
+            "text": "La calidad del portafolio y el numero de conexiones en la plataforma",
+            "isCorrect": false
+          },
+          {
+            "text": "El valor cobrado por proyecto frente al promedio de la categoria",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada situacion con la accion correcta",
+          "description": "Relaciona cada escenario con la mejor respuesta profesional.",
+          "pairs": [
+            {
+              "left": "El cliente desaparecio sin dejar evaluacion",
+              "right": "Envia un mensaje amable pidiendo feedback justo despues de la entrega"
+            },
+            {
+              "left": "Recibiste una evaluacion negativa",
+              "right": "Responde con profesionalismo, sin atacar"
+            },
+            {
+              "left": "Estas empezando desde cero en la plataforma",
+              "right": "Acepta proyectos pequenos para construir historial"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 8",
+        "content": "La reputacion se construye review por review. Pide feedback en el momento correcto, responde rapido y maneja las criticas con madurez. Eso hace que tu cuenta gane ranking y confianza."
+      }
+    ]
+  },
+  "module9": {
+    "title": "Como Aumentar Tus Precios",
+    "description": "Ajusta tus tarifas con seguridad",
+    "icon": "TrendingUp",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Como Aumentar Tus Precios",
+        "content": "Si tu agenda esta llena, tus clientes aceptan sin discutir y tu historial ya es fuerte, el mercado esta indicando que llego el momento de reajustar."
+      },
+      {
+        "type": "text",
+        "title": "Comunicar el Reajuste",
+        "content": "Avisa con anticipacion y sin justificar demasiado. Antes del nuevo precio, recuerda resultados, plazos cumplidos y calidad. Eso ancla el valor."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "Al comunicar un aumento de precio, lo ideal es avisar con ___ y ser directo, sin exagerar las justificaciones.",
+          "answers": [
+            "anticipacion"
+          ],
+          "options": [
+            "anticipacion",
+            "descuento",
+            "urgencia",
+            "prisa"
+          ],
+          "explanation": "Respuesta: anticipacion."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Si el Cliente Rechaza",
+        "content": "No retrocedas de inmediato. Si quieres mantenerlo, ofrece un alcance menor por el precio anterior, no el mismo trabajo por menos dinero."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Que es el anclaje de valor en la practica?",
+        "options": [
+          {
+            "text": "Ofrecer descuentos progresivos cuando el cliente te contrata mas veces",
+            "isCorrect": false
+          },
+          {
+            "text": "Reforzar resultados y experiencias positivas antes de presentar el nuevo precio",
+            "isCorrect": true
+          },
+          {
+            "text": "Comparar tu precio con el de otros freelancers para parecer mas barato",
+            "isCorrect": false
+          },
+          {
+            "text": "Crear paquetes con nombres distintos para justificar cobros mayores",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: c."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada situacion con la accion correcta",
+          "description": "Vincula cada escenario de precio con la decision mas fuerte.",
+          "pairs": [
+            {
+              "left": "El cliente rechaza el nuevo precio",
+              "right": "Ofrece un alcance menor por el precio anterior, no el mismo trabajo por menos"
+            },
+            {
+              "left": "Hace seis meses que no reajustas y tu agenda esta llena",
+              "right": "Es una senal clara de que llego la hora de reajustar"
+            },
+            {
+              "left": "Quieres comunicar el aumento a un cliente recurrente",
+              "right": "Avisa con anticipacion y se directo y profesional"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 9",
+        "content": "Reajusta cuando tu historial lo respalde. Comunica temprano, apoya el nuevo valor en resultados y protege tu posicion si aparece resistencia."
+      }
+    ]
+  },
+  "module10": {
+    "title": "Como Lidiar con Revisiones Abusivas",
+    "description": "Protege alcance, evidencia y entrega",
+    "icon": "Shield",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Como Lidiar con Revisiones Abusivas",
+        "content": "Las revisiones forman parte del servicio. Las revisiones infinitas no. Define desde el inicio cuantas rondas estan incluidas y cobra las adicionales."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "Cuando un cliente pide cambios mas alla de lo contratado, ese comportamiento se llama ___.",
+          "answers": [
+            "scope creep"
+          ],
+          "options": [
+            "scope creep",
+            "briefing premium",
+            "upgrade espontaneo",
+            "alineacion tardia"
+          ],
+          "explanation": "Respuesta: scope creep."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Disputas y Proteccion",
+        "content": "Si aparece una disputa, la plataforma mira pruebas. Manten toda la comunicacion dentro del sistema, documenta acuerdos y divide proyectos grandes en etapas con pagos parciales."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Por que es importante mantener toda la comunicacion con el cliente dentro de la plataforma?",
+        "options": [
+          {
+            "text": "Para facilitar la traduccion automatica",
+            "isCorrect": false
+          },
+          {
+            "text": "Para tener evidencias documentadas en caso de disputa",
+            "isCorrect": true
+          },
+          {
+            "text": "Para que el cliente no pueda contratar a otros freelancers",
+            "isCorrect": false
+          },
+          {
+            "text": "Porque la plataforma cobra menos comision",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada situacion con la accion correcta",
+          "description": "Asocia el problema con la respuesta que mejor protege tu trabajo.",
+          "pairs": [
+            {
+              "left": "El cliente pide una quinta ronda de revision",
+              "right": "Informa que las revisiones adicionales tienen costo extra"
+            },
+            {
+              "left": "Se abrio una disputa en la plataforma",
+              "right": "Presenta documentacion, mensajes y archivos entregados"
+            },
+            {
+              "left": "Proyecto grande con cliente nuevo",
+              "right": "Dividelo en etapas con pagos parciales"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 10",
+        "content": "El freelancer profesional define limites, documenta todo y protege la entrega antes del conflicto."
+      }
+    ]
+  },
+  "module11": {
+    "title": "Saliendo de las Plataformas",
+    "description": "Reduce dependencia sin perder captacion",
+    "icon": "ExternalLink",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Saliendo de las Plataformas",
+        "content": "Las plataformas sirven para empezar, pero depender de ellas para siempre tiene costo. El momento de migrar llega cuando ya tienes clientes recurrentes que confian en tu trabajo."
+      },
+      {
+        "type": "text",
+        "title": "Migrar Clientes al Directo",
+        "content": "No propongas el cambio de forma brusca. Primero fortalece la relacion. Luego presenta la migracion como un beneficio para ambos."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "Al proponer trabajar fuera de la plataforma, el argumento mas fuerte es presentarlo como un beneficio ___, mejor para el cliente y mejor para ti.",
+          "answers": [
+            "mutuo"
+          ],
+          "options": [
+            "mutuo",
+            "urgente",
+            "temporal",
+            "unilateral"
+          ],
+          "explanation": "Respuesta: mutuo."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Tu Embudo Propio",
+        "content": "Portafolio simple, LinkedIn, testimonios y un canal directo ya son suficiente base para empezar a depender menos de la plataforma."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Cual es la estrategia mas inteligente para reducir la dependencia de las plataformas?",
+        "options": [
+          {
+            "text": "Dejar de usar la plataforma inmediatamente cuando tengas clientes fijos",
+            "isCorrect": false
+          },
+          {
+            "text": "Usar la plataforma solo para captar nuevos clientes mientras mantienes a los recurrentes por fuera",
+            "isCorrect": true
+          },
+          {
+            "text": "Crear perfiles en todas las plataformas posibles al mismo tiempo",
+            "isCorrect": false
+          },
+          {
+            "text": "Esperar a que la plataforma baje sus comisiones antes de decidir",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada etapa con el momento correcto",
+          "description": "Relaciona cada fase con el siguiente mejor movimiento.",
+          "pairs": [
+            {
+              "left": "Todavia estas construyendo reputacion",
+              "right": "Enfocate en la plataforma, aun no es momento de migrar"
+            },
+            {
+              "left": "Tienes clientes recurrentes satisfechos",
+              "right": "Es hora de proponer la migracion a contrato directo"
+            },
+            {
+              "left": "Los clientes directos ya cubren tus gastos fijos",
+              "right": "La plataforma se vuelve opcional"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 11",
+        "content": "Salir de las plataformas no es desaparecer de ellas. Es reducir dependencia paso a paso hasta que el canal directo sostenga el negocio."
+      }
+    ]
+  },
+  "module12": {
+    "title": "Gestion Financiera del Freelancer",
+    "description": "Crea estabilidad incluso con ingresos variables",
+    "icon": "Wallet",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Gestion Financiera del Freelancer",
+        "content": "Los freelancers viven meses fuertes y meses flojos. El primer paso es dejar de tratar cada pago como ganancia inmediata. Divide lo que entra entre gastos fijos, reserva de emergencia e inversion."
+      },
+      {
+        "type": "text",
+        "title": "Reserva de Emergencia",
+        "content": "Para un freelancer, la reserva es supervivencia. El objetivo es guardar entre tres y seis meses de gastos. La regla practica es simple: guardar el excedente antes de gastarlo."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "Para un freelancer, la reserva recomendada es de entre tres y ___ meses de gastos.",
+          "answers": [
+            "seis"
+          ],
+          "options": [
+            "seis",
+            "doce",
+            "dos",
+            "nueve"
+          ],
+          "explanation": "Respuesta: seis."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Impuestos y Sueldo Propio",
+        "content": "Separar 10% a 15% para impuestos evita sorpresas. Tambien ayuda crear un sueldo fijo personal para ganar previsibilidad."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Por que ayuda a los freelancers crear un salario fijo para si mismos?",
+        "options": [
+          {
+            "text": "Porque obliga al freelancer a trabajar mas",
+            "isCorrect": false
+          },
+          {
+            "text": "Porque genera previsibilidad financiera incluso con ingresos variables",
+            "isCorrect": true
+          },
+          {
+            "text": "Porque reduce los impuestos mensuales",
+            "isCorrect": false
+          },
+          {
+            "text": "Porque facilita la aprobacion bancaria",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: c."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada habito con el beneficio que genera",
+          "description": "Relaciona cada rutina financiera con el resultado que produce.",
+          "pairs": [
+            {
+              "left": "Separar 10% a 15% de cada pago",
+              "right": "Evita sorpresas desagradables al pagar impuestos"
+            },
+            {
+              "left": "Definir un salario mensual fijo para ti mismo",
+              "right": "Genera previsibilidad financiera incluso con ingresos variables"
+            },
+            {
+              "left": "Guardar el excedente antes de gastar",
+              "right": "Construye la reserva de emergencia con constancia"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 12",
+        "content": "El freelancer sano separa ingresos, construye reserva, anticipa impuestos y se paga con disciplina."
+      }
+    ]
+  },
+  "module13": {
+    "title": "Escala: De Freelancer a Negocio",
+    "description": "Usa IA, posicionamiento y estructura para crecer",
+    "icon": "Rocket",
+    "steps": [
+      {
+        "type": "text",
+        "title": "Escala: De Freelancer a Negocio",
+        "content": "El freelancer solo tiene un limite natural de horas y capacidad. En algun momento crecer requiere algo mas que trabajar mas duro."
+      },
+      {
+        "type": "text",
+        "title": "IA y Subcontratacion",
+        "content": "La IA acelera investigacion, borradores, revision y organizacion. Cuando la demanda supera tu capacidad, subcontratar se vuelve el siguiente paso natural."
+      },
+      {
+        "type": "component",
+        "componentName": "FillBlanks",
+        "props": {
+          "title": "Completa la frase",
+          "sentence": "Cuando la demanda supera la capacidad individual del freelancer, el siguiente paso natural de crecimiento es la ___.",
+          "answers": [
+            "subcontratacion"
+          ],
+          "options": [
+            "subcontratacion",
+            "improvisacion",
+            "pausa estrategica",
+            "reduccion de precios"
+          ],
+          "explanation": "Respuesta: subcontratacion."
+        }
+      },
+      {
+        "type": "text",
+        "title": "Paquetes y Posicionamiento",
+        "content": "Los paquetes simplifican la decision del cliente y mejoran la previsibilidad. El especialista compite por valor; el generalista compite por precio."
+      },
+      {
+        "type": "quiz",
+        "title": "Opcion multiple",
+        "question": "Cual es la principal ventaja de crear paquetes de servicio en vez de cobrar por proyecto individual?",
+        "options": [
+          {
+            "text": "Los paquetes permiten cobrar menos y atraer mas clientes al mismo tiempo",
+            "isCorrect": false
+          },
+          {
+            "text": "Los paquetes simplifican la decision del cliente y crean previsibilidad financiera",
+            "isCorrect": true
+          },
+          {
+            "text": "Los paquetes eliminan la necesidad de mantener actualizado el portafolio",
+            "isCorrect": false
+          },
+          {
+            "text": "Los paquetes solo son aceptados por grandes empresas",
+            "isCorrect": false
+          }
+        ],
+        "explanation": "Respuesta correcta: b."
+      },
+      {
+        "type": "component",
+        "componentName": "MatchWords",
+        "props": {
+          "title": "Une cada estrategia con el resultado que genera",
+          "description": "Conecta cada accion con el tipo de escala que produce.",
+          "pairs": [
+            {
+              "left": "Usar IA para automatizar partes del proceso",
+              "right": "Aumenta la capacidad de entrega sin aumentar las horas trabajadas"
+            },
+            {
+              "left": "Posicionarte como especialista en un nicho",
+              "right": "Permite cobrar mas sin justificarte demasiado"
+            },
+            {
+              "left": "Crear paquetes de servicio",
+              "right": "Simplifica la venta y aumenta la previsibilidad de ingresos"
+            }
+          ]
+        }
+      },
+      {
+        "type": "text",
+        "title": "Resumen del Modulo 13",
+        "content": "La escala comienza cuando dejas de vender solo horas y empiezas a construir sistemas: herramientas, aliados, paquetes y posicionamiento."
+      }
+    ]
+  },
+  "module14": {
     "title": "Tu Plan Para los Próximos 30 Días",
     "description": "Pon en práctica todo lo que aprendiste y construye tu carrera freelancer",
     "icon": "Rocket",
@@ -709,7 +1250,7 @@
       {
         "type": "text",
         "title": "🎓 Tu Plan Para los Próximos 30 Días",
-        "content": "Completaste los siete módulos anteriores. Ahora tienes claridad sobre qué es el freelancing, dónde encontrar clientes, cómo construir un perfil, qué servicios ofrecer, cómo escribir propuestas, cómo definir precios y cómo entregar con excelencia.\nPero el conocimiento sin acción no genera resultados. Este módulo final es sobre lo que haces a partir de hoy."
+        "content": "Completaste los trece modulos anteriores. Ahora ya entiendes como entrar al mercado freelancer, encontrar clientes, construir un perfil fuerte, escribir propuestas, definir precios, entregar con excelencia, fortalecer tu reputacion, reajustar tus valores, proteger el alcance, reducir la dependencia de las plataformas, organizar tus finanzas y pensar en escala. Este modulo final trata de lo que haces a partir de hoy."
       },
       {
         "type": "text",
@@ -806,7 +1347,7 @@
       {
         "type": "text",
         "title": "📋 Resumen Final: Lo Que Construiste",
-        "content": "En ocho módulos pasaste de no saber qué es ser freelancer a tener un plan concreto de acción. Sabes dónde buscar clientes, cómo construir un perfil que vende, qué servicios ofrecer, cómo escribir propuestas que ganan proyectos, cómo definir precios con criterio, cómo entregar con excelencia y cómo pedir evaluaciones en el momento correcto.\nLo único que falta es actuar.\nLa diferencia entre quien gana dinero como freelancer y quien \"algún día intentará\" no es talento, experiencia ni suerte. Es decisión. El primer proyecto no espera el momento perfecto. El momento perfecto es cuando decides comenzar.\nTienes el conocimiento, las herramientas y el plan. El siguiente paso es tuyo."
+        "content": "A lo largo de catorce modulos pasaste de no saber que es ser freelancer a tener un plan de accion concreto. Ahora sabes como buscar clientes, construir un perfil que vende, escribir propuestas que ganan proyectos, cobrar mejor, pedir evaluaciones, manejar revisiones, organizar tus finanzas y estructurar crecimiento. Solo falta actuar."
       }
     ]
   }

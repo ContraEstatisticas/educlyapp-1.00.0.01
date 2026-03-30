@@ -85,7 +85,7 @@ const FreelancerLesson = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getModuleContent, getModuleInfo, isLoading: contentLoading } = useFreelancerContent();
-  const { awardMedalBySlug } = useFreelancerMedals();
+  const { awardMedalBySlug, syncEarnableMedals } = useFreelancerMedals();
   const { playCorrect, playIncorrect } = useQuizSounds();
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -576,6 +576,12 @@ const FreelancerLesson = () => {
                     console.error("Error awarding freelancer medal:", result.reason);
                   }
                 });
+              }
+
+              try {
+                await syncEarnableMedals();
+              } catch (error) {
+                console.error("Error syncing freelancer medals after module completion:", error);
               }
 
               if (typeof window !== "undefined") {

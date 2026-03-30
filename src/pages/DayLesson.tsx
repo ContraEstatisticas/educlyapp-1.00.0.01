@@ -13,6 +13,7 @@ import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
 import { MilestoneUpsellModal, MILESTONE_DAYS } from "@/components/lesson/MilestoneUpsellModal";
 import { useProductAccess } from "@/hooks/useProductAccess";
+import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -123,6 +124,7 @@ const DayLesson = () => {
   const navigate = useNavigate();
   const { playCorrect, playIncorrect, playContinue } = useQuizSounds();
   const { ai_hub: hasAiHub } = useProductAccess();
+  const { syncEarnableMedals } = useFreelancerMedals();
 
   // Estados da Lição
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -395,6 +397,12 @@ const DayLesson = () => {
             } catch (upsellError) {
               console.error("Error sending day 5 upsell:", upsellError);
             }
+          }
+
+          try {
+            await syncEarnableMedals();
+          } catch (medalError) {
+            console.error("Error syncing medals after day completion:", medalError);
           }
         }
 

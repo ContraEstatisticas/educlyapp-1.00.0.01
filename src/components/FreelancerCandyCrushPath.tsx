@@ -51,6 +51,7 @@ export const FreelancerCandyCrushPath = ({
   )?.moduleNumber || 1;
 
   const svgHeight = modules.length * ROW_HEIGHT + START_Y_OFFSET + 100;
+  const completedPathCount = Math.min(completedModules.length + 1, modules.length);
 
   // Confetti on new completion
   const prevCompletedCount = useRef(completedModules.length);
@@ -84,11 +85,13 @@ export const FreelancerCandyCrushPath = ({
   }, [currentModuleNumber]);
 
   // Build path data helper
-  const buildPathData = (count: number) =>
-    modules
-      .slice(0, count)
+  const buildPathData = (count: number) => {
+    const cappedCount = Math.min(count, modules.length);
+
+    return modules
+      .slice(0, cappedCount)
       .map((_, i) => {
-        if (i >= count - 1) return "";
+        if (i >= cappedCount - 1) return "";
         const startY = START_Y_OFFSET + i * ROW_HEIGHT + 40;
         const endY = START_Y_OFFSET + (i + 1) * ROW_HEIGHT + 40;
         const isEven = i % 2 === 0;
@@ -97,6 +100,7 @@ export const FreelancerCandyCrushPath = ({
         return `M ${startX} ${startY} C ${startX} ${startY + 80}, ${endX} ${endY - 80}, ${endX} ${endY}`;
       })
       .join(" ");
+  };
 
   return (
     <div className="py-8 relative flex justify-center w-full overflow-hidden">
@@ -118,7 +122,7 @@ export const FreelancerCandyCrushPath = ({
           {/* Completed path â€” solid green */}
           {completedModules.length > 0 && (
             <path
-              d={buildPathData(completedModules.length + 1)}
+              d={buildPathData(completedPathCount)}
               fill="none"
               stroke="#22c55e"
               strokeWidth="6"
@@ -130,7 +134,7 @@ export const FreelancerCandyCrushPath = ({
           {/* LED flow on completed path */}
           {completedModules.length > 0 && (
             <path
-              d={buildPathData(completedModules.length + 1)}
+              d={buildPathData(completedPathCount)}
               fill="none"
               stroke="#4ade80"
               strokeWidth="5"

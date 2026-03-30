@@ -12,6 +12,7 @@ import { DaysProgressBar } from "@/components/lesson/DaysProgressBar";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useTranslatedChallengeContent } from "@/hooks/useTranslatedChallengeContent";
+import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import confetti from "canvas-confetti";
 import { ChallengeTutorial } from "@/components/onboarding";
 import { tUi } from "@/lib/supplementalUiTranslations";
@@ -72,6 +73,7 @@ const Challenge = () => {
   const queryClient = useQueryClient();
   const { t, i18n } = useTranslation();
   const { getChallengeName, getChallengeDescription, getDayTitle } = useTranslatedChallengeContent();
+  const { syncEarnableMedals } = useFreelancerMedals();
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
 
   const [selectedAITool, setSelectedAITool] = useState<string | null>(null);
@@ -177,6 +179,7 @@ const Challenge = () => {
   const OFFSET_X = 80;
 
   const prevCompletedCount = useRef(completedCount);
+  const medalSyncKeyRef = useRef<string | null>(null);
   const [recentlyCompleted, setRecentlyCompleted] = useState<string | null>(null);
 
   useEffect(() => {
@@ -204,6 +207,18 @@ const Challenge = () => {
       }, 500);
     }
   }, [loadingDays, calculatedCurrentDay]);
+
+  useEffect(() => {
+    if (!challengeDays) return;
+
+    const syncKey = `${completedCount}:${challengeDays.length}`;
+    if (medalSyncKeyRef.current === syncKey) return;
+    medalSyncKeyRef.current = syncKey;
+
+    void syncEarnableMedals().catch((error) => {
+      console.error("Error syncing challenge medals:", error);
+    });
+  }, [challengeDays, completedCount, syncEarnableMedals]);
 
   if (loadingChallenge || loadingDays) return <div className="p-8"><Skeleton className="h-64 w-full" /></div>;
   if (!challenge) return <div className="text-center p-8">{tUi(t, i18n.language, "challenge.notFound")}</div>;

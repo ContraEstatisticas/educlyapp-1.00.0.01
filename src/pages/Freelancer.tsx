@@ -703,7 +703,7 @@ const FreelancerContent = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { getAllModules, isLoading } = useFreelancerContent();
-  const { checkAndAwardMedals, isLoading: medalsLoading, earnedCount } = useFreelancerMedals();
+  const { syncEarnableMedals, isLoading: medalsLoading } = useFreelancerMedals();
   const [moduleProgress, setModuleProgress] = useState<Record<number, { stepIndex: number; completed: boolean }>>({});
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [certificateId, setCertificateId] = useState<string | null>(null);
@@ -822,22 +822,18 @@ const FreelancerContent = () => {
   useEffect(() => {
     if (totalModules === 0 || medalsLoading || streakLoading) return;
 
-    const checkKey = `${completedCount}:${currentStreak}:${earnedCount}`;
+    const checkKey = `${completedCount}:${currentStreak}`;
     if (medalCheckKeyRef.current === checkKey) return;
     medalCheckKeyRef.current = checkKey;
 
-    void checkAndAwardMedals({
-      completedModules: completedCount,
-      currentStreak,
-    }).catch((error) => {
+    void syncEarnableMedals().catch((error) => {
       console.error("Error checking freelancer medals:", error);
     });
   }, [
-    checkAndAwardMedals,
     completedCount,
     currentStreak,
-    earnedCount,
     medalsLoading,
+    syncEarnableMedals,
     streakLoading,
     totalModules,
   ]);
