@@ -121,7 +121,7 @@
       }
 
       // Skip force reset on authentication routes (magic-login, auth with hash tokens)
-      var authRoutes = ['magic-login', 'auth'];
+      var authRoutes = ['magic-login', 'auth', 'paddle'];
       var isAuthRoute = authRoutes.some(function(r) {
         return path === r || path.indexOf(r + '/') === 0;
       });
