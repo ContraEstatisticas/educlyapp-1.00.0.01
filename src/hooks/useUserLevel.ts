@@ -22,29 +22,29 @@ import {
   refreshLevelRewardsQuery,
 } from "@/lib/levelRewardQueries";
 
-// Softer level curve: roughly 28% less XP than before, with the late game
-// still growing steadily so leveling feels rewarding without becoming trivial.
+// Softer level curve: roughly 35% less XP than before, while the late game
+// still grows steadily so leveling feels rewarding without becoming trivial.
 const XP_PER_LEVEL = [
   0,
-  180,
-  500,
-  1100,
-  2000,
-  3200,
-  4900,
-  7000,
-  9700,
-  13000,
-  16900,
-  21600,
-  27300,
-  34200,
-  42500,
-  52600,
-  64800,
-  79200,
-  97200,
-  118800,
+  160,
+  450,
+  1000,
+  1800,
+  2900,
+  4400,
+  6300,
+  8750,
+  11700,
+  15200,
+  19450,
+  24600,
+  30800,
+  38250,
+  47350,
+  58300,
+  71300,
+  87500,
+  106900,
 ];
 
 export const XP_REWARDS = {
