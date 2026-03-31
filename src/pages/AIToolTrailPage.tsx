@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Award, BookOpen, CheckCircle2, Lock, Loader2, Play, Sparkles, Trophy } from "lucide-react";
+import { ArrowLeft, Award, CheckCircle2, ChevronRight, Lock, Loader2, Map, Play, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,17 @@ const PAGE_UI = {
     continueButton: "Abrir modulo",
     completedButton: "Revisar modulo",
     doneBadge: "Concluida",
+    currentPointTitle: "Retome do ponto atual",
+    currentPointDescription: "Recentralize o mapa no modulo onde voce parou e siga sem procurar manualmente.",
+    jumpToCurrentButton: "Voltar ao modulo atual",
+    summaryBeforeLesson: "Resumo antes da aula",
+    summaryOutcomeLabel: "Voce vai sair com",
+    miniMapTitle: "Mini-mapa da trilha",
+    miniMapDescription: "Todos os modulos visiveis para voce retomar sem perder contexto.",
+    currentBadge: "Agora",
+    readyBadge: "Disponivel",
+    upcomingBadge: "Bloqueado",
+    fixedStepLabel: "Proximo passo",
   },
   en: {
     summaryBadge: "Trail map",
@@ -47,6 +58,17 @@ const PAGE_UI = {
     continueButton: "Open module",
     completedButton: "Review module",
     doneBadge: "Completed",
+    currentPointTitle: "Return to your current point",
+    currentPointDescription: "Recenter the map on the module you paused and keep the guided path in view.",
+    jumpToCurrentButton: "Back to current module",
+    summaryBeforeLesson: "Summary before lesson",
+    summaryOutcomeLabel: "You will leave with",
+    miniMapTitle: "Trail mini-map",
+    miniMapDescription: "Every module visible so you can resume without losing context.",
+    currentBadge: "Now",
+    readyBadge: "Ready",
+    upcomingBadge: "Locked",
+    fixedStepLabel: "Next step",
   },
   es: {
     summaryBadge: "Mapa de la ruta",
@@ -62,6 +84,17 @@ const PAGE_UI = {
     continueButton: "Abrir modulo",
     completedButton: "Revisar modulo",
     doneBadge: "Completada",
+    currentPointTitle: "Retoma desde tu punto actual",
+    currentPointDescription: "Recentra el mapa en el modulo donde te quedaste y sigue sin buscar manualmente.",
+    jumpToCurrentButton: "Volver al modulo actual",
+    summaryBeforeLesson: "Resumen antes de la leccion",
+    summaryOutcomeLabel: "Vas a salir con",
+    miniMapTitle: "Mini mapa de la ruta",
+    miniMapDescription: "Todos los modulos visibles para que retomes sin perder el contexto.",
+    currentBadge: "Ahora",
+    readyBadge: "Disponible",
+    upcomingBadge: "Bloqueado",
+    fixedStepLabel: "Siguiente paso",
   },
   fr: {
     summaryBadge: "Carte du parcours",
@@ -77,6 +110,17 @@ const PAGE_UI = {
     continueButton: "Ouvrir le module",
     completedButton: "Revoir le module",
     doneBadge: "Termine",
+    currentPointTitle: "Reprends a ton point actuel",
+    currentPointDescription: "Recentre la carte sur le module ou tu t'es arrete et garde le parcours guide sous les yeux.",
+    jumpToCurrentButton: "Revenir au module actuel",
+    summaryBeforeLesson: "Resume avant la lecon",
+    summaryOutcomeLabel: "Tu repars avec",
+    miniMapTitle: "Mini-carte du parcours",
+    miniMapDescription: "Tous les modules visibles pour reprendre sans perdre le contexte.",
+    currentBadge: "Maintenant",
+    readyBadge: "Disponible",
+    upcomingBadge: "Verrouille",
+    fixedStepLabel: "Etape suivante",
   },
 } as const;
 
@@ -174,8 +218,16 @@ const AIToolTrailPage = () => {
 
   const [isGeneratingCert, setIsGeneratingCert] = useState(false);
   const trailXpCheckedRef = useRef(false);
+  const currentModuleRef = useRef<HTMLDivElement>(null);
 
   const allDone = completedModules.length >= totalModules && totalModules > 0;
+
+  const scrollToCurrentModule = () => {
+    currentModuleRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
 
   useEffect(() => {
     trailXpCheckedRef.current = false;
@@ -269,6 +321,16 @@ const AIToolTrailPage = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [toolSlug]);
 
+  useEffect(() => {
+    if (!trail || !isLive || !trailContent) return;
+
+    const timeout = window.setTimeout(() => {
+      scrollToCurrentModule();
+    }, 450);
+
+    return () => window.clearTimeout(timeout);
+  }, [allDone, currentModuleNumber, isLive, toolSlug, trail, trailContent]);
+
   const handleOpenModule = (moduleNumber: number) => {
     if (!toolSlug || !trailContent) return;
 
@@ -352,7 +414,7 @@ const AIToolTrailPage = () => {
           </div>
         </header>
 
-        <div className="relative max-w-4xl mx-auto px-4 py-6">
+        <div className="relative max-w-4xl mx-auto px-4 py-6 pb-[calc(12rem+env(safe-area-inset-bottom,0px))] md:pb-32">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="hidden lg:block">
               <div className="sticky top-20 space-y-6">
@@ -371,8 +433,16 @@ const AIToolTrailPage = () => {
                   <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                     {pageUi.routeLabel}
                   </p>
-                  <h2 className="mt-2 text-lg font-bold text-foreground">{pageUi.continueTitle}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{pageUi.jumpLabel}</p>
+                  <h2 className="mt-2 text-lg font-bold text-foreground">{pageUi.currentPointTitle}</h2>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{pageUi.currentPointDescription}</p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 w-full justify-between rounded-2xl border-border/70"
+                    onClick={scrollToCurrentModule}
+                  >
+                    {pageUi.jumpToCurrentButton}
+                    <RotateCcw className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </div>
@@ -394,8 +464,16 @@ const AIToolTrailPage = () => {
                   <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                     {pageUi.routeLabel}
                   </p>
-                  <h2 className="mt-2 text-lg font-bold text-foreground">{pageUi.continueTitle}</h2>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{pageUi.jumpLabel}</p>
+                  <h2 className="mt-2 text-lg font-bold text-foreground">{pageUi.currentPointTitle}</h2>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{pageUi.currentPointDescription}</p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 w-full justify-between rounded-2xl border-border/70"
+                    onClick={scrollToCurrentModule}
+                  >
+                    {pageUi.jumpToCurrentButton}
+                    <RotateCcw className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
 
@@ -458,6 +536,140 @@ const AIToolTrailPage = () => {
                 </div>
               ) : null}
 
+              <div className="mb-6 rounded-3xl border border-border bg-card p-5 shadow-sm">
+                <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                  <div className="max-w-2xl">
+                    <div
+                      className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]"
+                      style={{ backgroundColor: `${trail.accent}15`, color: trail.accent }}
+                    >
+                      <Target className="h-3.5 w-3.5" />
+                      {pageUi.summaryBeforeLesson}
+                    </div>
+                    <h3 className="mt-3 text-2xl font-bold text-foreground">
+                      {trailContent.moduleLabel} {focusModuleNumber}: {focusModule?.title || trailContent.modules[focusModuleNumber - 1]?.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                      {focusModule?.summary || focusModule?.intro || pageUi.continueDescription}
+                    </p>
+                    {focusModule?.outcome ? (
+                      <div className="mt-4 rounded-2xl bg-muted/60 p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                          {pageUi.summaryOutcomeLabel}
+                        </p>
+                        <p className="mt-2 text-sm font-medium text-foreground">{focusModule.outcome}</p>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <Button
+                    onClick={() => handleOpenModule(focusModuleNumber)}
+                    className="h-12 rounded-2xl px-6 text-sm font-semibold"
+                    style={{ backgroundColor: trail.accent, color: "#ffffff" }}
+                  >
+                    {allCompleted ? pageUi.completedButton : pageUi.continueButton}
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="mb-6 rounded-3xl border border-border bg-card p-5 shadow-sm">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="max-w-2xl">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                      <Map className="h-3.5 w-3.5" />
+                      {pageUi.miniMapTitle}
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">{pageUi.miniMapDescription}</p>
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    className="rounded-2xl border-border/70"
+                    onClick={scrollToCurrentModule}
+                  >
+                    {pageUi.jumpToCurrentButton}
+                    <RotateCcw className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {modulesWithStatus.map((module) => {
+                    const isCurrent = module.status === "current";
+                    const isCompleted = module.status === "completed";
+                    const isLocked = module.status === "locked";
+
+                    const statusLabel = isCompleted
+                      ? pageUi.doneBadge
+                      : isCurrent
+                        ? pageUi.currentBadge
+                        : isLocked
+                          ? pageUi.upcomingBadge
+                          : pageUi.readyBadge;
+
+                    return (
+                      <button
+                        key={`mini-map-${module.number}`}
+                        onClick={() => handleOpenModule(module.number)}
+                        disabled={isLocked}
+                        className={cn(
+                          "flex items-start justify-between gap-3 rounded-2xl border px-4 py-4 text-left transition-all",
+                          isCurrent
+                            ? "border-primary/40 bg-primary/5 shadow-sm"
+                            : isCompleted
+                              ? "border-green-500/30 bg-green-500/5"
+                              : isLocked
+                                ? "cursor-not-allowed border-border/60 bg-muted/30 opacity-70"
+                                : "border-border hover:border-primary/30 hover:bg-accent/40"
+                        )}
+                      >
+                        <div className="flex min-w-0 items-start gap-3">
+                          <div
+                            className={cn(
+                              "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border text-sm font-bold",
+                              isCurrent
+                                ? "border-primary/40 bg-primary text-primary-foreground"
+                                : isCompleted
+                                  ? "border-green-500/30 bg-green-500 text-white"
+                                  : isLocked
+                                    ? "border-border bg-card text-muted-foreground"
+                                    : "border-border bg-card text-foreground"
+                            )}
+                          >
+                            {module.number}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                              {trailContent.moduleLabel} {module.number}
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-foreground line-clamp-1">{module.title}</p>
+                            <p className="mt-1 text-xs leading-6 text-muted-foreground line-clamp-2">
+                              {module.summary || module.outcome || module.intro}
+                            </p>
+                          </div>
+                        </div>
+
+                        <Badge
+                          variant="outline"
+                          className={cn(
+                            "shrink-0 border-0",
+                            isCurrent
+                              ? "bg-primary/10 text-primary"
+                              : isCompleted
+                                ? "bg-green-500/10 text-green-600"
+                                : isLocked
+                                  ? "bg-muted text-muted-foreground"
+                                  : "bg-secondary text-secondary-foreground"
+                          )}
+                        >
+                          {statusLabel}
+                        </Badge>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="mb-4">
                 <DaysProgressBar
                   days={modulesWithStatus.map((module) => ({
@@ -517,10 +729,12 @@ const AIToolTrailPage = () => {
                     const isCurrent = module.status === "current";
                     const isCompleted = module.status === "completed";
                     const isLocked = module.status === "locked";
+                    const isFocus = module.number === focusModuleNumber;
 
                     return (
                       <div
                         key={module.number}
+                        ref={isFocus ? currentModuleRef : null}
                         className="absolute w-36 flex flex-col items-center z-10"
                         style={{
                           top: `${START_Y_OFFSET + index * ROW_HEIGHT}px`,
@@ -578,37 +792,33 @@ const AIToolTrailPage = () => {
                   })}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              <div className="mt-6 rounded-3xl border border-border bg-card p-5 shadow-sm">
-                <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-                  <div className="max-w-2xl">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                      {pageUi.continueTitle}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-bold text-foreground">
-                      {trailContent.moduleLabel} {focusModuleNumber}: {focusModule?.title || trailContent.modules[focusModuleNumber - 1]?.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                      {focusModule?.summary || focusModule?.intro || pageUi.continueDescription}
-                    </p>
-                    {focusModule?.outcome ? (
-                      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground">
-                        <BookOpen className="h-3.5 w-3.5" />
-                        {focusModule.outcome}
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <Button
-                    onClick={() => handleOpenModule(focusModuleNumber)}
-                    className="h-12 px-6 text-sm font-semibold"
-                    style={{ backgroundColor: trail.accent, color: "#ffffff" }}
-                  >
-                    {allCompleted ? pageUi.completedButton : pageUi.continueButton}
-                    <Play className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
+        <div className="pointer-events-none fixed inset-x-0 bottom-[calc(5.4rem+env(safe-area-inset-bottom,0px))] z-40 px-4 md:bottom-4">
+          <div className="pointer-events-auto mx-auto max-w-4xl rounded-3xl border border-border bg-background/95 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur-xl">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div className="min-w-0">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  {pageUi.fixedStepLabel}
+                </p>
+                <h3 className="mt-1 truncate text-base font-semibold text-foreground">
+                  {trailContent.moduleLabel} {focusModuleNumber}: {focusModule?.title || trailContent.modules[focusModuleNumber - 1]?.title}
+                </h3>
+                <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+                  {focusModule?.outcome || focusModule?.summary || pageUi.continueDescription}
+                </p>
               </div>
+
+              <Button
+                onClick={() => handleOpenModule(focusModuleNumber)}
+                className="h-11 rounded-2xl px-5 text-sm font-semibold"
+                style={{ backgroundColor: trail.accent, color: "#ffffff" }}
+              >
+                {allCompleted ? pageUi.completedButton : pageUi.continueButton}
+                <Play className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>

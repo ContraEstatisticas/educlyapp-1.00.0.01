@@ -458,16 +458,6 @@ const Dashboard = () => {
       ? t("common.continue")
       : t("challenge.start");
   const handleContinueChallenge = () => navigate(`/desafio/${activeChallenge.slug}`);
-  const handleResumeJourney = async () => {
-    if (todayOverview?.nextDay?.id && !isCompleted) {
-      const { refreshSession } = await import("@/hooks/useRefreshSession");
-      await refreshSession();
-      navigate(`/aula/${todayOverview.nextDay.id}`);
-      return;
-    }
-
-    handleContinueChallenge();
-  };
   const estimatedMinutes = estimateLessonMinutes(todayOverview?.nextLessonStepCount || 0);
   const todayKey = toLocalDateString(new Date());
   const dailyGoalCompleted = streakData?.last_activity_date === todayKey;
@@ -616,7 +606,7 @@ const Dashboard = () => {
 
   const runShortcutAction = (key: DashboardFavoriteKey) => {
     if (key === "challenge") {
-      void handleResumeJourney();
+      handleContinueChallenge();
       return;
     }
 
@@ -983,9 +973,7 @@ const Dashboard = () => {
           recentActivities={recentActivities}
           favoriteShortcuts={favoriteShortcuts}
           suggestedShortcuts={suggestedShortcuts}
-          onResumeJourney={() => {
-            void handleResumeJourney();
-          }}
+          onResumeJourney={handleContinueChallenge}
           onOpenTrailContent={() => setTrailModalOpen(true)}
           onOpenMissions={() => setMissionsOpen(true)}
           onRecentNavigate={(route) => {

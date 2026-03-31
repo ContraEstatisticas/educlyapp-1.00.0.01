@@ -1,11 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { ArrowLeft, Mic, Check, Star, Trophy, Sparkles, Layers3, ArrowRight } from "lucide-react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { ArrowLeft, Check, Star, Trophy, Sparkles, Layers3, ArrowRight, ChevronRight, Map, RotateCcw, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/hooks/use-toast";
 import { AIToolPopup } from "@/components/challenge/AIToolPopup";
 import { AIToolSelector, aiToolsConfig, aiToolsOrder } from "@/components/lesson/AIToolSelector";
 import { DaysProgressBar } from "@/components/lesson/DaysProgressBar";
@@ -66,15 +65,88 @@ const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t, languag
   );
 };
 
+const CHALLENGE_NAV_UI = {
+  pt: {
+    summaryBadge: "Resumo antes da aula",
+    currentPointTitle: "Retome do ponto atual",
+    currentPointDescription: "Leve o caminho visual de volta para o dia certo e siga sem procurar manualmente.",
+    jumpToCurrentButton: "Voltar ao dia atual",
+    miniMapTitle: "Mini-mapa da unidade",
+    miniMapDescription: "Veja os dias do bloco atual desta IA e o que ja foi concluido.",
+    nextStepLabel: "Proximo passo",
+    currentBadge: "Agora",
+    completedBadge: "Feito",
+    readyBadge: "Disponivel",
+    upcomingBadge: "Depois",
+    unitLabel: "Bloco atual",
+    toolLabel: "Ferramenta desta fase",
+    dayLabel: "Dia",
+  },
+  en: {
+    summaryBadge: "Summary before lesson",
+    currentPointTitle: "Return to your current point",
+    currentPointDescription: "Bring the visual path back to the right day and keep going without searching manually.",
+    jumpToCurrentButton: "Back to current day",
+    miniMapTitle: "Unit mini-map",
+    miniMapDescription: "See the days inside the current AI block and what has already been completed.",
+    nextStepLabel: "Next step",
+    currentBadge: "Now",
+    completedBadge: "Done",
+    readyBadge: "Ready",
+    upcomingBadge: "Later",
+    unitLabel: "Current block",
+    toolLabel: "Tool in this phase",
+    dayLabel: "Day",
+  },
+  es: {
+    summaryBadge: "Resumen antes de la leccion",
+    currentPointTitle: "Retoma desde tu punto actual",
+    currentPointDescription: "Lleva el camino visual de vuelta al dia correcto y sigue sin buscar manualmente.",
+    jumpToCurrentButton: "Volver al dia actual",
+    miniMapTitle: "Mini mapa de la unidad",
+    miniMapDescription: "Mira los dias del bloque actual de esta IA y lo que ya se completo.",
+    nextStepLabel: "Siguiente paso",
+    currentBadge: "Ahora",
+    completedBadge: "Hecho",
+    readyBadge: "Disponible",
+    upcomingBadge: "Despues",
+    unitLabel: "Bloque actual",
+    toolLabel: "Herramienta de esta fase",
+    dayLabel: "Dia",
+  },
+  fr: {
+    summaryBadge: "Resume avant la lecon",
+    currentPointTitle: "Reprends a ton point actuel",
+    currentPointDescription: "Ramene le parcours visuel au bon jour et continue sans chercher manuellement.",
+    jumpToCurrentButton: "Revenir au jour actuel",
+    miniMapTitle: "Mini-carte de l'unite",
+    miniMapDescription: "Vois les jours du bloc IA actuel et ce qui est deja termine.",
+    nextStepLabel: "Etape suivante",
+    currentBadge: "Maintenant",
+    completedBadge: "Termine",
+    readyBadge: "Disponible",
+    upcomingBadge: "Apres",
+    unitLabel: "Bloc actuel",
+    toolLabel: "Outil de cette phase",
+    dayLabel: "Jour",
+  },
+} as const;
+
+type SupportedChallengeLanguage = keyof typeof CHALLENGE_NAV_UI;
+
+const getChallengeNavUi = (language?: string) => {
+  const base = language?.split("-")[0]?.toLowerCase() as SupportedChallengeLanguage | undefined;
+  return CHALLENGE_NAV_UI[base || "en"] || CHALLENGE_NAV_UI.en;
+};
+
 const Challenge = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
   const { t, i18n } = useTranslation();
-  const { getChallengeName, getChallengeDescription, getDayTitle } = useTranslatedChallengeContent();
+  const { getChallengeName, getChallengeDescription, getDayTitle, getDayDescription } = useTranslatedChallengeContent();
   const { syncEarnableMedals } = useFreelancerMedals();
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
+  const challengeUi = getChallengeNavUi(i18n.resolvedLanguage || i18n.language);
 
   const [selectedAITool, setSelectedAITool] = useState<string | null>(null);
   const [popupToolSlug, setPopupToolSlug] = useState<string | null>(null);
@@ -223,7 +295,33 @@ const Challenge = () => {
   if (loadingChallenge || loadingDays) return <div className="p-8"><Skeleton className="h-64 w-full" /></div>;
   if (!challenge) return <div className="text-center p-8">{tUi(t, i18n.language, "challenge.notFound")}</div>;
 
+  const challengeDescription = getChallengeDescription(challenge.slug, challenge.description || "");
   const svgHeight = (challengeDays?.length || 0) * ROW_HEIGHT + START_Y_OFFSET + 100;
+  const allDaysCompleted = completedCount >= totalDays && totalDays > 0;
+  const focusDayNumber = totalDays > 0
+    ? allDaysCompleted
+      ? totalDays
+      : Math.min(calculatedCurrentDay, totalDays)
+    : calculatedCurrentDay;
+  const focusDay = challengeDays?.find((day) => day.day_number === focusDayNumber) || challengeDays?.[challengeDays.length - 1];
+  const focusToolSlug = focusDay?.ai_tools?.slug || "chatgpt";
+  const focusToolConfig = aiToolsConfig[focusToolSlug] || aiToolsConfig.chatgpt;
+  const focusToolDays = challengeDays?.filter((day) => day.ai_tools?.slug === focusToolSlug) || [];
+  const focusToolCompletedCount = focusToolDays.filter((day) => completedDayIds.includes(day.id)).length;
+  const focusDayTitle = focusDay
+    ? ((dayTranslations as any)?.[focusDay.id]?.title || getDayTitle(slug!, focusDay.day_number, focusToolSlug, focusDay.title))
+    : getChallengeName(challenge.slug, challenge.name);
+  const focusDayDescription = focusDay
+    ? ((dayTranslations as any)?.[focusDay.id]?.description
+      || getDayDescription(slug!, focusDay.day_number, focusToolSlug, focusDay.description || challengeDescription))
+    : challengeDescription;
+
+  const scrollToCurrentDay = () => {
+    currentDayRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background safe-area-inset relative">
@@ -246,7 +344,7 @@ const Challenge = () => {
         </div>
       </header>
 
-      <div className="relative max-w-4xl mx-auto px-4 py-6">
+      <div className="relative max-w-4xl mx-auto px-4 py-6 pb-[calc(12rem+env(safe-area-inset-bottom,0px))] md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="hidden lg:block">
             <div id="trophy-card" className="sticky top-20">
@@ -291,40 +389,159 @@ const Challenge = () => {
               />
             </div>
 
+            <div className="mb-6 rounded-3xl border border-border bg-card p-5 shadow-sm">
+              <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                    <Target className="h-3.5 w-3.5" />
+                    {challengeUi.summaryBadge}
+                  </div>
+                  <h3 className="mt-3 text-2xl font-bold text-foreground">
+                    {challengeUi.dayLabel} {focusDayNumber}: {focusDayTitle}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                    {focusDayDescription || challengeDescription}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground">
+                      {challengeUi.toolLabel}: {focusToolConfig.name}
+                    </div>
+                    <div className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground">
+                      {challengeUi.unitLabel}: {focusToolCompletedCount}/{focusToolDays.length}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex w-full flex-col gap-3 md:w-auto">
+                  <Button className="h-12 rounded-2xl px-6" onClick={() => focusDay && handleDayClick(focusDay.id)}>
+                    {challengeUi.dayLabel} {focusDayNumber}
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="h-12 rounded-2xl border-border/70 px-6"
+                    onClick={scrollToCurrentDay}
+                  >
+                    {challengeUi.jumpToCurrentButton}
+                    <RotateCcw className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-6 rounded-3xl border border-border bg-card p-5 shadow-sm">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary-foreground">
+                    <Map className="h-3.5 w-3.5" />
+                    {challengeUi.miniMapTitle}
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{challengeUi.miniMapDescription}</p>
+                </div>
+
+                <div className="rounded-2xl bg-muted/60 px-4 py-3 text-sm">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                    {challengeUi.unitLabel}
+                  </p>
+                  <p className="mt-1 font-semibold text-foreground">{focusToolConfig.name}</p>
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-3">
+                {focusToolDays.map((day) => {
+                  const isCompleted = completedDayIds.includes(day.id);
+                  const isCurrent = !allDaysCompleted && day.day_number === focusDayNumber;
+                  const isLocked = !allDaysCompleted && day.day_number > focusDayNumber;
+                  const translatedTitle = (dayTranslations as any)?.[day.id]?.title || getDayTitle(slug!, day.day_number, focusToolSlug, day.title);
+                  const translatedDescription = (dayTranslations as any)?.[day.id]?.description
+                    || getDayDescription(slug!, day.day_number, focusToolSlug, day.description || challengeDescription);
+
+                  const statusLabel = isCompleted
+                    ? challengeUi.completedBadge
+                    : isCurrent
+                      ? challengeUi.currentBadge
+                      : isLocked
+                        ? challengeUi.upcomingBadge
+                        : challengeUi.readyBadge;
+
+                  return (
+                    <button
+                      key={`focus-unit-${day.id}`}
+                      onClick={() => !isLocked && handleDayClick(day.id)}
+                      disabled={isLocked}
+                      className={cn(
+                        "flex items-start justify-between gap-3 rounded-2xl border px-4 py-4 text-left transition-all",
+                        isCurrent
+                          ? "border-primary/40 bg-primary/5 shadow-sm"
+                          : isCompleted
+                            ? "border-green-500/30 bg-green-500/5"
+                            : isLocked
+                              ? "cursor-not-allowed border-border/60 bg-muted/30 opacity-70"
+                              : "border-border hover:border-primary/30 hover:bg-accent/40"
+                      )}
+                    >
+                      <div className="flex min-w-0 items-start gap-3">
+                        <div
+                          className={cn(
+                            "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border text-sm font-bold",
+                            isCurrent
+                              ? "border-primary/40 bg-primary text-primary-foreground"
+                              : isCompleted
+                                ? "border-green-500/30 bg-green-500 text-white"
+                                : isLocked
+                                  ? "border-border bg-card text-muted-foreground"
+                                  : "border-border bg-card text-foreground"
+                          )}
+                        >
+                          {day.day_number}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                            {challengeUi.dayLabel} {day.day_number}
+                          </p>
+                          <p className="mt-1 text-sm font-semibold text-foreground line-clamp-1">{translatedTitle}</p>
+                          <p className="mt-1 text-xs leading-6 text-muted-foreground line-clamp-2">
+                            {translatedDescription}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div
+                        className={cn(
+                          "shrink-0 rounded-full px-3 py-1 text-xs font-semibold",
+                          isCurrent
+                            ? "bg-primary/10 text-primary"
+                            : isCompleted
+                              ? "bg-green-500/10 text-green-600"
+                              : isLocked
+                                ? "bg-muted text-muted-foreground"
+                                : "bg-secondary text-secondary-foreground"
+                        )}
+                      >
+                        {statusLabel}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Days Progress Bar */}
             <div id="days-progress-bar" className="mb-4">
               <DaysProgressBar
                 days={challengeDays?.map((d) => {
                   const isCompleted = completedDayIds.includes(d.id);
-                  const isCurrent = d.day_number === calculatedCurrentDay;
-                  let status: "completed" | "current" | "locked" | "unlocked" = isCompleted ? "completed" : isCurrent ? "current" : d.day_number < calculatedCurrentDay ? "completed" : "locked";
+                  const isCurrent = !allDaysCompleted && d.day_number === focusDayNumber;
+                  const isUnlocked = d.day_number < focusDayNumber || allDaysCompleted;
+                  const status: "completed" | "current" | "locked" | "unlocked" = isCompleted ? "completed" : isCurrent ? "current" : isUnlocked ? "unlocked" : "locked";
                   return { dayNumber: d.day_number, status };
                 }) || []}
-                currentDay={calculatedCurrentDay}
+                currentDay={focusDayNumber}
                 onDayClick={(dayNum) => {
                   const day = challengeDays?.find((d) => d.day_number === dayNum);
                   if (day) handleDayClick(day.id);
                 }}
               />
-            </div>
-
-            <div className="mb-6 overflow-hidden rounded-3xl border border-border bg-card p-5 shadow-sm">
-              <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-                  <div className="max-w-2xl">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
-                      <Layers3 className="h-3.5 w-3.5" />
-                      {aiTrailUi.challengeEyebrow}
-                    </div>
-                    <h3 className="mt-3 text-2xl font-bold text-foreground">
-                      {aiTrailUi.challengeTitle}
-                    </h3>
-                  </div>
-  
-                  <Button className="h-12 rounded-xl px-6" onClick={() => navigate("/trilhas-ia")}>
-                    {aiTrailUi.challengeButton}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-              </div>
             </div>
 
             {/* Zig-zag path */}
@@ -350,8 +567,8 @@ const Challenge = () => {
 
                   {completedDayIds.length > 0 && (
                     <path
-                      d={challengeDays?.slice(0, calculatedCurrentDay).map((_, i) => {
-                        if (i === (challengeDays?.slice(0, calculatedCurrentDay).length || 0) - 1) return "";
+                      d={challengeDays?.slice(0, focusDayNumber).map((_, i) => {
+                        if (i === (challengeDays?.slice(0, focusDayNumber).length || 0) - 1) return "";
                         const startY = START_Y_OFFSET + i * ROW_HEIGHT + 40;
                         const endY = START_Y_OFFSET + (i + 1) * ROW_HEIGHT + 40;
                         const isEven = i % 2 === 0;
@@ -369,8 +586,8 @@ const Challenge = () => {
 
                   {completedDayIds.length > 0 && (
                     <path
-                      d={challengeDays?.slice(0, calculatedCurrentDay).map((_, i) => {
-                        if (i === (challengeDays?.slice(0, calculatedCurrentDay).length || 0) - 1) return "";
+                      d={challengeDays?.slice(0, focusDayNumber).map((_, i) => {
+                        if (i === (challengeDays?.slice(0, focusDayNumber).length || 0) - 1) return "";
                         const startY = START_Y_OFFSET + i * ROW_HEIGHT + 40;
                         const endY = START_Y_OFFSET + (i + 1) * ROW_HEIGHT + 40;
                         const isEven = i % 2 === 0;
@@ -390,16 +607,16 @@ const Challenge = () => {
 
                 {challengeDays?.map((day, index) => {
                   const toolSlug = day.ai_tools?.slug || "chatgpt";
-                  const config = aiToolsConfig[toolSlug] || aiToolsConfig["chatgpt"];
                   const isCompleted = completedDayIds.includes(day.id);
-                  const isCurrent = day.day_number === calculatedCurrentDay;
-                  const isLocked = day.day_number > calculatedCurrentDay;
+                  const isCurrent = !allDaysCompleted && day.day_number === focusDayNumber;
+                  const isFocus = day.day_number === focusDayNumber;
+                  const isLocked = !allDaysCompleted && day.day_number > focusDayNumber;
                   const isLeft = index % 2 === 0;
 
                   return (
                     <div
                       key={day.id}
-                      ref={isCurrent ? currentDayRef : null}
+                      ref={isFocus ? currentDayRef : null}
                       className={cn("absolute w-28 flex flex-col items-center z-10", recentlyCompleted === day.id && "animate-completion-burst")}
                       style={{
                         top: `${START_Y_OFFSET + index * ROW_HEIGHT}px`,
@@ -436,7 +653,7 @@ const Challenge = () => {
 
                       <div className={cn(
                         "mt-3 w-32 text-center bg-card border border-border px-2 py-2 rounded-xl shadow-md transition-all",
-                        (isCurrent || isCompleted) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                        (isFocus || isCompleted) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                       )}>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{t("challenge.day")} {day.day_number}</p>
                         <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">{(dayTranslations as any)?.[day.id]?.title || getDayTitle(slug!, day.day_number, toolSlug, day.title)}</p>
@@ -444,6 +661,25 @@ const Challenge = () => {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+
+            <div className="mt-6 mb-6 overflow-hidden rounded-3xl border border-border bg-card p-5 shadow-sm">
+              <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                    <Layers3 className="h-3.5 w-3.5" />
+                    {aiTrailUi.challengeEyebrow}
+                  </div>
+                  <h3 className="mt-3 text-2xl font-bold text-foreground">
+                    {aiTrailUi.challengeTitle}
+                  </h3>
+                </div>
+
+                <Button className="h-12 rounded-xl px-6" onClick={() => navigate("/trilhas-ia")}>
+                  {aiTrailUi.challengeButton}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
             </div>
 
@@ -470,6 +706,29 @@ const Challenge = () => {
               isOpen={!!popupToolSlug}
               onClose={() => setPopupToolSlug(null)}
             />
+          </div>
+        </div>
+      </div>
+
+      <div className="pointer-events-none fixed inset-x-0 bottom-[calc(5.4rem+env(safe-area-inset-bottom,0px))] z-40 px-4 md:bottom-4">
+        <div className="pointer-events-auto mx-auto max-w-4xl rounded-3xl border border-border bg-background/95 p-3 shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur-xl">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                {challengeUi.nextStepLabel}
+              </p>
+              <h3 className="mt-1 truncate text-base font-semibold text-foreground">
+                {challengeUi.dayLabel} {focusDayNumber}: {focusDayTitle}
+              </h3>
+              <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+                {focusToolConfig.name} • {focusDayDescription || challengeDescription}
+              </p>
+            </div>
+
+            <Button className="h-11 rounded-2xl px-5 text-sm font-semibold" onClick={() => focusDay && handleDayClick(focusDay.id)}>
+              {challengeUi.dayLabel} {focusDayNumber}
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
