@@ -16,11 +16,69 @@ import { RemoteFeatureGate } from "@/components/RemoteFeatureGate";
 import { ThemeProvider } from "@/components/theme-provider";
 import { supabase } from "@/integrations/supabase/client";
 import { useSessionTracking } from "@/hooks/useSessionTracking";
+import {
+  getStoredLanguageOverride,
+  LANGUAGE_OVERRIDE_STORAGE_KEY,
+  normalizeAppLanguage,
+} from "@/lib/languagePreference";
 import i18n from "i18next";
 
 // Componente invisível que rastreia sessões de usuários autenticados
 const SessionTracker = () => {
   useSessionTracking();
+  return null;
+};
+
+const LanguagePreferenceSync = () => {
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    const syncDocumentLanguage = (language: string) => {
+      document.documentElement.lang = normalizeAppLanguage(language);
+    };
+
+    const syncStoredLanguage = async () => {
+      const storedOverride = getStoredLanguageOverride();
+      const storedDetectorLanguage = window.localStorage.getItem("i18nextLng");
+      const targetLanguage =
+        storedOverride || (storedDetectorLanguage ? normalizeAppLanguage(storedDetectorLanguage) : null);
+      const currentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+
+      syncDocumentLanguage(targetLanguage || currentLanguage);
+
+      if (targetLanguage && currentLanguage !== targetLanguage) {
+        await i18n.changeLanguage(targetLanguage);
+      }
+    };
+
+    const handleLanguageChanged = (language: string) => {
+      syncDocumentLanguage(language);
+    };
+
+    const handleStorage = (event: StorageEvent) => {
+      if (
+        event.key &&
+        event.key !== "i18nextLng" &&
+        event.key !== LANGUAGE_OVERRIDE_STORAGE_KEY
+      ) {
+        return;
+      }
+
+      void syncStoredLanguage();
+    };
+
+    void syncStoredLanguage();
+    i18n.on("languageChanged", handleLanguageChanged);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChanged);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
   return null;
 };
 
@@ -190,6 +248,7 @@ const App = () => {
               <Sonner />
           
               <BrowserRouter>
+                <LanguagePreferenceSync />
                 <SessionTracker />
                 <UpdateNotification autoReloadSeconds={15} />
                 <PWARedirect />

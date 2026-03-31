@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
 
@@ -28,18 +29,41 @@ export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
 
   const currentLanguageCode = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+  const [selectedLanguageCode, setSelectedLanguageCode] = useState(currentLanguageCode);
   const currentLanguage =
-    languages.find((language) => language.code === currentLanguageCode) || languages[0];
+    languages.find((language) => language.code === selectedLanguageCode) || languages[0];
+
+  useEffect(() => {
+    setSelectedLanguageCode(currentLanguageCode);
+  }, [currentLanguageCode]);
 
   const handleLanguageChange = async (languageCode: string) => {
     const normalizedLanguage = normalizeAppLanguage(languageCode);
+    const previousLanguage = selectedLanguageCode;
 
+    if (normalizedLanguage === previousLanguage) return;
+
+    setSelectedLanguageCode(normalizedLanguage);
     setStoredLanguageOverride(normalizedLanguage);
-    await i18n.changeLanguage(normalizedLanguage);
+
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = normalizedLanguage;
+    }
+
+    try {
+      await i18n.changeLanguage(normalizedLanguage);
+
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("[LanguageSelector] Failed to change language:", error);
+      setSelectedLanguageCode(previousLanguage);
+    }
   };
 
   return (
-    <Select value={currentLanguage.code} onValueChange={handleLanguageChange}>
+    <Select value={selectedLanguageCode} onValueChange={handleLanguageChange}>
       <SelectTrigger
         className={cn(
           "w-[60px] bg-background/50 backdrop-blur-sm transition-all hover:bg-background/70 sm:w-[140px] border-border",
