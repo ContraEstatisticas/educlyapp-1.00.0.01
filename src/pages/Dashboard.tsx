@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,17 +6,16 @@ import { useToast } from "@/hooks/use-toast";
 import { clearAuthStorage } from "@/lib/authStorage";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { MobileNav } from "@/components/MobileNav";
-import { WeeklyStreakBar } from "@/components/WeeklyStreakBar";
 import { ProductOnboarding } from "@/components/onboarding";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useTranslation } from "react-i18next";
 import { TrailContentModal } from "@/components/dashboard/TrailContentModal";
 import { DailyMissionsModal } from "@/components/dashboard/DailyMissionsModal";
+import { DashboardTodayHome } from "@/components/dashboard/DashboardTodayHome";
 import { FloatingEdiChat } from "@/components/chat/FloatingEdiChat";
-import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, ChevronRight, Brain, Code, Bookmark, RotateCcw, ArrowRight, Flame, Compass, X } from "lucide-react";
+import { Lock, LockOpen, Play, Target, Medal, Zap, Sparkles, Brain, Code, RotateCcw, ArrowRight, Compass, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDailyLoginXP } from "@/hooks/useDailyLoginXP";
-import { Badge } from "@/components/ui/badge";
 import { aiMasteryTrails } from "@/lib/aiMasteryTrails";
 import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
@@ -24,9 +23,6 @@ import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationD
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 import { getStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
-
-import mountainBackground from "../../assets/mountainBackground.png";
-import mountainPerson from "../../assets/mountainPerson.png";
 import corujaIA from "@/assets/IA.png";
 import corujaFreelancerImg from "@/assets/coruja-freelancer.png";
 import chatgptLogo from "@/assets/ai-logos/chatgpt.png";
@@ -45,6 +41,90 @@ const getTrailInitials = (name: string) =>
     .join("");
 
 const CHALLENGE_28_DAYS_ID = "dfb76f1b-d272-4e4d-96b2-0bc4d3392489";
+const DASHBOARD_TODAY_FAVORITES_KEY = "educly-dashboard-today-favorites:v1";
+
+type DashboardFavoriteKey =
+  | "challenge"
+  | "missions"
+  | "medals"
+  | "assistants"
+  | "freelancer"
+  | "trails"
+  | "edi";
+
+type TodayActivity =
+  | {
+      id: string;
+      type: "challenge";
+      completedAt: string;
+      dayNumber: number;
+    }
+  | {
+      id: string;
+      type: "trail";
+      completedAt: string;
+      toolSlug: string;
+      moduleNumber: number;
+    };
+
+interface TodayOverviewData {
+  completedDaysCount: number;
+  nextDay: {
+    id: string;
+    dayNumber: number;
+  } | null;
+  nextLessonStepCount: number;
+  recentActivities: TodayActivity[];
+}
+
+const toLocalDateString = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+const estimateLessonMinutes = (stepCount: number) => {
+  if (!stepCount) return 8;
+  return Math.min(18, Math.max(6, Math.round(stepCount * 1.5)));
+};
+
+const isDashboardFavoriteKey = (value: string): value is DashboardFavoriteKey =>
+  [
+    "challenge",
+    "missions",
+    "medals",
+    "assistants",
+    "freelancer",
+    "trails",
+    "edi",
+  ].includes(value);
+
+const loadDashboardFavorites = (): DashboardFavoriteKey[] => {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const raw = window.localStorage.getItem(DASHBOARD_TODAY_FAVORITES_KEY);
+    if (!raw) return [];
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter((value): value is DashboardFavoriteKey => typeof value === "string" && isDashboardFavoriteKey(value));
+  } catch {
+    return [];
+  }
+};
+
+const hasStoredDashboardFavorites = () => {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(DASHBOARD_TODAY_FAVORITES_KEY) !== null;
+};
+
+const saveDashboardFavorites = (favorites: DashboardFavoriteKey[]) => {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(DASHBOARD_TODAY_FAVORITES_KEY, JSON.stringify(favorites));
+};
 
 const getGreetingKeyByHour = (date: Date) => {
   const hour = date.getHours();
@@ -75,8 +155,12 @@ const Dashboard = () => {
   const [missionsOpen, setMissionsOpen] = useState(false);
   const [trailsPanelOpen, setTrailsPanelOpen] = useState(false);
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
+  const [favoriteKeys, setFavoriteKeys] = useState<DashboardFavoriteKey[]>(() => loadDashboardFavorites());
+  const [favoritesInitialized, setFavoritesInitialized] = useState(() => hasStoredDashboardFavorites());
   const aiTrailUi = getAiTrailUiCopy(i18n.resolvedLanguage || i18n.language);
   const greeting = t(getGreetingKeyByHour(new Date()));
+  const hasAiHubAccess = productAccess.hasAccess("ai_hub");
+  const hasFreelancerAccess = productAccess.hasAccess("freelancer");
 
   useDailyLoginXP();
 
@@ -120,16 +204,109 @@ const Dashboard = () => {
     });
   };
 
-  const { data: completedDaysCount = 0 } = useQuery({
-    queryKey: ["completed-days-count", CHALLENGE_28_DAYS_ID],
+  const { data: todayOverview } = useQuery<TodayOverviewData>({
+    queryKey: ["dashboard-today-overview", CHALLENGE_28_DAYS_ID],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return 0;
-      const { data: challengeDays } = await supabase.from("challenge_days").select("id").eq("challenge_id", CHALLENGE_28_DAYS_ID);
-      if (!challengeDays || challengeDays.length === 0) return 0;
-      const dayIds = challengeDays.map((d) => d.id);
-      const { count } = await supabase.from("user_day_progress").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("completed", true).in("challenge_day_id", dayIds);
-      return count || 0;
+      if (!user) {
+        return {
+          completedDaysCount: 0,
+          nextDay: null,
+          nextLessonStepCount: 0,
+          recentActivities: [],
+        };
+      }
+
+      const { data: challengeDays } = await supabase
+        .from("challenge_days")
+        .select("id, day_number")
+        .eq("challenge_id", CHALLENGE_28_DAYS_ID)
+        .order("day_number");
+
+      if (!challengeDays || challengeDays.length === 0) {
+        return {
+          completedDaysCount: 0,
+          nextDay: null,
+          nextLessonStepCount: 0,
+          recentActivities: [],
+        };
+      }
+
+      const dayIds = challengeDays.map((day) => day.id);
+
+      const [{ data: challengeProgress }, { data: trailProgress }] = await Promise.all([
+        supabase
+          .from("user_day_progress")
+          .select("challenge_day_id, completed_at")
+          .eq("user_id", user.id)
+          .in("challenge_day_id", dayIds)
+          .eq("completed", true)
+          .order("completed_at", { ascending: false }),
+        supabase
+          .from("ai_trail_module_progress")
+          .select("tool_slug, module_number, completed_at")
+          .eq("user_id", user.id)
+          .order("completed_at", { ascending: false })
+          .limit(4),
+      ]);
+
+      const completedProgress = challengeProgress || [];
+      const completedDayIds = new Set(completedProgress.map((item) => item.challenge_day_id));
+      const nextChallengeDay =
+        challengeDays.find((day) => !completedDayIds.has(day.id)) || challengeDays[challengeDays.length - 1] || null;
+
+      let nextLessonStepCount = 0;
+
+      if (nextChallengeDay?.id) {
+        const { count } = await supabase
+          .from("lesson_steps")
+          .select("id", { count: "exact", head: true })
+          .eq("challenge_day_id", nextChallengeDay.id);
+
+        nextLessonStepCount = count || 0;
+      }
+
+      const recentChallengeActivities: TodayActivity[] = completedProgress.slice(0, 4).flatMap((item) => {
+        const day = challengeDays.find((candidate) => candidate.id === item.challenge_day_id);
+        const completedAt = item.completed_at;
+
+        if (!day || !completedAt) return [];
+
+        return [{
+          id: `challenge-${item.challenge_day_id}`,
+          type: "challenge",
+          completedAt,
+          dayNumber: day.day_number,
+        }];
+      });
+
+      const recentTrailActivities: TodayActivity[] = (trailProgress || []).flatMap((item) => {
+        if (!item.completed_at) return [];
+
+        return [{
+          id: `trail-${item.tool_slug}-${item.module_number}`,
+          type: "trail",
+          completedAt: item.completed_at,
+          toolSlug: item.tool_slug,
+          moduleNumber: item.module_number,
+        }];
+      });
+
+      const recentActivities = [...recentChallengeActivities, ...recentTrailActivities]
+        .sort((left, right) => new Date(right.completedAt).getTime() - new Date(left.completedAt).getTime())
+        .slice(0, 4);
+
+      return {
+        completedDaysCount: completedProgress.length,
+        nextDay: nextChallengeDay
+          ? {
+              id: nextChallengeDay.id,
+              dayNumber: nextChallengeDay.day_number,
+            }
+          : null,
+        nextLessonStepCount,
+        recentActivities,
+      };
     }
   });
 
@@ -225,20 +402,21 @@ const Dashboard = () => {
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        return { current_streak: 0, longest_streak: 0 };
+        return { current_streak: 0, longest_streak: 0, last_activity_date: null as string | null };
       }
 
       const { data } = await supabase
         .from("user_streaks")
-        .select("current_streak, longest_streak")
+        .select("current_streak, longest_streak, last_activity_date")
         .eq("user_id", user.id)
         .maybeSingle();
 
-      return data || { current_streak: 0, longest_streak: 0 };
+      return data || { current_streak: 0, longest_streak: 0, last_activity_date: null as string | null };
     }
   });
 
   const activeChallenge = MOCK_ACTIVE_SESSION.challenges;
+  const completedDaysCount = todayOverview?.completedDaysCount || 0;
   const totalDays = 28;
   const hasProgress = completedDaysCount > 0;
   const isCompleted = completedDaysCount >= totalDays;
@@ -246,9 +424,6 @@ const Dashboard = () => {
   const currentStreak = streakData?.current_streak || 0;
   const [animatedStreak, setAnimatedStreak] = useState(0);
   const normalizedProgress = Math.min(100, Math.max(0, progressPercentage));
-  const progressRadius = 34;
-  const progressCircumference = 2 * Math.PI * progressRadius;
-  const progressOffset = progressCircumference - (normalizedProgress / 100) * progressCircumference;
 
   useEffect(() => {
     const target = Math.max(0, currentStreak);
@@ -283,6 +458,195 @@ const Dashboard = () => {
       ? t("common.continue")
       : t("challenge.start");
   const handleContinueChallenge = () => navigate(`/desafio/${activeChallenge.slug}`);
+  const handleResumeJourney = async () => {
+    if (todayOverview?.nextDay?.id && !isCompleted) {
+      const { refreshSession } = await import("@/hooks/useRefreshSession");
+      await refreshSession();
+      navigate(`/aula/${todayOverview.nextDay.id}`);
+      return;
+    }
+
+    handleContinueChallenge();
+  };
+  const estimatedMinutes = estimateLessonMinutes(todayOverview?.nextLessonStepCount || 0);
+  const todayKey = toLocalDateString(new Date());
+  const dailyGoalCompleted = streakData?.last_activity_date === todayKey;
+  const nextDayNumber = todayOverview?.nextDay?.dayNumber || Math.min(completedDaysCount + 1, totalDays);
+  const locale = i18n.resolvedLanguage || i18n.language;
+
+  const formatActivityTimestamp = (value: string) => new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "short",
+  }).format(new Date(value));
+
+  const recentActivities = useMemo(() => {
+    return (todayOverview?.recentActivities || []).map((activity) => {
+      if (activity.type === "challenge") {
+        return {
+          id: activity.id,
+          title: t("dashboard.today.recent.challengeTitle", { defaultValue: "Desafio 28 dias" }),
+          subtitle: t("dashboard.today.recent.challengeSubtitle", {
+            defaultValue: "Dia {{day}} concluído",
+            day: activity.dayNumber,
+          }),
+          meta: formatActivityTimestamp(activity.completedAt),
+          Icon: RotateCcw,
+          route: "challenge" as const,
+        };
+      }
+
+      const trailMeta = getAiTrailLocalizedMeta(activity.toolSlug, locale);
+
+      return {
+        id: activity.id,
+        title: trailMeta.title,
+        subtitle: t("dashboard.today.recent.trailSubtitle", {
+          defaultValue: "Módulo {{module}} concluído",
+          module: activity.moduleNumber,
+        }),
+        meta: formatActivityTimestamp(activity.completedAt),
+        Icon: Compass,
+        route: `/trilhas-ia/${activity.toolSlug}/modulo/${activity.moduleNumber}`,
+      };
+    });
+  }, [formatActivityTimestamp, locale, t, todayOverview?.recentActivities]);
+
+  const availableShortcuts = useMemo(() => {
+    return [
+      {
+        key: "challenge" as const,
+        title: t("dashboard.today.shortcuts.challenge", { defaultValue: "Continuar desafio" }),
+        subtitle: t("dashboard.today.shortcuts.challengeHint", {
+          defaultValue: isCompleted ? "Revisar seu caminho de 28 dias" : "Voltar direto para sua trilha principal",
+        }),
+        Icon: Play,
+      },
+      {
+        key: "missions" as const,
+        title: t("dashboard.missions.title"),
+        subtitle: t("dashboard.today.shortcuts.missionsHint", { defaultValue: "Abrir metas e tarefas de hoje" }),
+        Icon: Target,
+      },
+      {
+        key: "medals" as const,
+        title: t("dashboard.medals.title"),
+        subtitle: t("dashboard.today.shortcuts.medalsHint", { defaultValue: "Ver conquistas e marcos" }),
+        Icon: Medal,
+      },
+      {
+        key: "edi" as const,
+        title: "EDI Assist",
+        subtitle: t("dashboard.today.shortcuts.ediHint", { defaultValue: "Pedir ajuda sem sair da home" }),
+        Icon: Sparkles,
+      },
+      ...(hasAiHubAccess
+        ? [{
+            key: "assistants" as const,
+            title: t("dashboard.featured.assistants.title"),
+            subtitle: t("dashboard.today.shortcuts.assistantsHint", { defaultValue: "Abrir seus assistentes de IA" }),
+            Icon: Brain,
+          }, {
+            key: "trails" as const,
+            title: t("dashboard.specialty_trails.title", "Trilhas de especialidades"),
+            subtitle: t("dashboard.today.shortcuts.trailsHint", { defaultValue: "Explorar trilhas por ferramenta" }),
+            Icon: Compass,
+          }]
+        : []),
+      ...(hasFreelancerAccess
+        ? [{
+            key: "freelancer" as const,
+            title: t("dashboard.featured.freelancer.title"),
+            subtitle: t("dashboard.today.shortcuts.freelancerHint", { defaultValue: "Retomar sua formação freelancer" }),
+            Icon: Code,
+          }]
+        : []),
+    ];
+  }, [hasAiHubAccess, hasFreelancerAccess, isCompleted, t]);
+
+  const availableShortcutKeys = useMemo(
+    () => new Set(availableShortcuts.map((shortcut) => shortcut.key)),
+    [availableShortcuts],
+  );
+  const defaultFavoriteKeys = useMemo(
+    () =>
+      (["challenge", "missions", "medals", "edi", "assistants"] as DashboardFavoriteKey[]).filter((key) =>
+        availableShortcutKeys.has(key),
+      ),
+    [availableShortcutKeys],
+  );
+  const availableShortcutSignature = useMemo(
+    () => availableShortcuts.map((shortcut) => shortcut.key).join("|"),
+    [availableShortcuts],
+  );
+  const defaultFavoritesSignature = useMemo(
+    () => defaultFavoriteKeys.join("|"),
+    [defaultFavoriteKeys],
+  );
+
+  useEffect(() => {
+    if (!favoritesInitialized && defaultFavoriteKeys.length > 0) {
+      setFavoriteKeys(defaultFavoriteKeys);
+      setFavoritesInitialized(true);
+      return;
+    }
+
+    if (!favoritesInitialized) return;
+
+    setFavoriteKeys((current) => {
+      const filtered = current.filter((key) => availableShortcutKeys.has(key));
+      return filtered.length === current.length && filtered.every((value, index) => value === current[index])
+        ? current
+        : filtered;
+    });
+  }, [availableShortcutKeys, availableShortcutSignature, defaultFavoriteKeys, defaultFavoritesSignature, favoritesInitialized]);
+
+  useEffect(() => {
+    if (!favoritesInitialized) return;
+    saveDashboardFavorites(favoriteKeys);
+  }, [favoriteKeys, favoritesInitialized]);
+
+  const favoriteShortcuts = availableShortcuts.filter((shortcut) => favoriteKeys.includes(shortcut.key));
+  const suggestedShortcuts = availableShortcuts.filter((shortcut) => !favoriteKeys.includes(shortcut.key)).slice(0, 3);
+
+  const toggleFavorite = (key: DashboardFavoriteKey) => {
+    setFavoriteKeys((current) =>
+      current.includes(key) ? current.filter((item) => item !== key) : [...current, key],
+    );
+  };
+
+  const runShortcutAction = (key: DashboardFavoriteKey) => {
+    if (key === "challenge") {
+      void handleResumeJourney();
+      return;
+    }
+
+    if (key === "missions") {
+      setMissionsOpen(true);
+      return;
+    }
+
+    if (key === "medals") {
+      navigate("/medalhas");
+      return;
+    }
+
+    if (key === "assistants") {
+      navigate("/assistentes");
+      return;
+    }
+
+    if (key === "freelancer") {
+      navigate("/freelancer");
+      return;
+    }
+
+    if (key === "trails") {
+      navigate("/trilhas-ia");
+      return;
+    }
+
+    handleOpenEdiChat();
+  };
 
   // --- CORREÇÃO DE SEGURANÇA AQUI ---
   // Verifica se o retorno é realmente um array antes de tentar usar.
@@ -602,168 +966,48 @@ const Dashboard = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-8 pt-4 !z-auto">
 
-        {/* Welcome Banner */}
-        <div className="dashboard-hero-merged relative z-10 mt-2 mb-8 rounded-3xl border border-border bg-card/90 px-5 py-5 shadow-sm md:mt-4 md:px-7 md:py-6">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="w-full md:max-w-[680px]">
-              <h1 className="mb-2 text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                {greeting},{" "}
-                {isUserDisplayNameLoading ? (
-                  <span
-                    className="name-loading-skeleton h-[0.9em] w-[9.2rem] align-[-0.08em] md:w-[12rem]"
-                    aria-label={t("dashboard.loading_user_name")}
-                  />
-                ) : (
-                  userDisplayName || t("dashboard.student")
-                )}
-                .
-              </h1>
-              <p className="text-slate-600 dark:text-muted-foreground">
-                {t("dashboard.hero_subtitle_prefix")}{" "}
-                <span className="inline-block bg-gradient-to-r from-primary via-orange-500 to-primary bg-clip-text font-extrabold tracking-tight text-transparent drop-shadow-[0_2px_8px_rgba(249,115,22,0.28)]">
-                  Educly
-                </span>
-                {t("dashboard.hero_subtitle_suffix")}
-              </p>
+        <DashboardTodayHome
+          greeting={greeting}
+          isUserDisplayNameLoading={isUserDisplayNameLoading}
+          userDisplayName={userDisplayName || t("dashboard.student")}
+          animatedStreak={animatedStreak}
+          completedDaysCount={completedDaysCount}
+          totalDays={totalDays}
+          normalizedProgress={normalizedProgress}
+          estimatedMinutes={estimatedMinutes}
+          nextDayNumber={nextDayNumber}
+          dailyGoalCompleted={dailyGoalCompleted}
+          isCompleted={isCompleted}
+          bookmarkLabel={bookmarkLabel}
+          challengeTitle={t("challenges.iniciante-ia.name")}
+          recentActivities={recentActivities}
+          favoriteShortcuts={favoriteShortcuts}
+          suggestedShortcuts={suggestedShortcuts}
+          onResumeJourney={() => {
+            void handleResumeJourney();
+          }}
+          onOpenTrailContent={() => setTrailModalOpen(true)}
+          onOpenMissions={() => setMissionsOpen(true)}
+          onRecentNavigate={(route) => {
+            if (route === "challenge") {
+              handleContinueChallenge();
+              return;
+            }
 
-              <div className="mt-4 flex items-center gap-3" aria-hidden>
-                <div className="hero-decorative-orb">
-                  <span className="hero-decorative-icon">
-                    <Sparkles className="h-5 w-5" />
-                  </span>
-                </div>
-                <div className="h-px w-16 bg-gradient-to-r from-primary/45 to-transparent" />
-              </div>
-            </div>
+            navigate(route);
+          }}
+          onShortcutAction={runShortcutAction}
+          onToggleFavorite={toggleFavorite}
+        />
 
-            <div className="w-full min-w-[210px] rounded-[24px] border border-primary/25 bg-gradient-to-br from-primary/15 via-orange-500/10 to-primary/5 px-4 py-5 shadow-[0_18px_32px_-26px_rgba(249,115,22,0.55)] sm:w-[240px]">
-              <div className="flex flex-col items-center justify-center text-center">
-                <div className="relative mb-3">
-                  <span className="absolute inset-0 rounded-full bg-primary/30 blur-lg animate-pulse" />
-                  <span className="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 ring-4 ring-primary/10">
-                    <Flame className="h-8 w-8 text-primary fill-current animate-streak-glow" />
-                  </span>
-                </div>
-
-                <div className="flex items-end justify-center gap-2">
-                  <span className="text-6xl font-extrabold leading-none text-primary">{animatedStreak}</span>
-                  <span className="pb-2 text-lg font-semibold text-primary/85">
-                    {animatedStreak === 1 ? t("challenge.day") : t("challenge.days")}
-                  </span>
-                </div>
-
-                <p className="mt-1 text-sm font-medium text-primary/80">
-                  {t("dashboard.streak_in_sequence")}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id="weekly-streak" className="mt-6 border-t border-border/70 pt-4">
-            <WeeklyStreakBar />
-          </div>
-        </div>
-
-        <div className="relative z-20 space-y-10 mt-14 md:mt-20 lg:mt-[10px] mb-[3px]">
-          {/* CARD PRINCIPAL */}
-          <div id="active-challenge" className="relative z-20 overflow-visible rounded-3xl border border-border bg-card/95 p-4 shadow-sm md:p-6">
-            <div className="grid gap-7 lg:grid-cols-[300px_1fr_190px] lg:items-center lg:gap-10">
-              <button
-                type="button"
-                onClick={handleContinueChallenge}
-                className="group/challenge-image relative overflow-visible rounded-2xl text-left transition-transform duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
-                aria-label={t("dashboard.continue_button")}
-              >
-                <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-muted/20 transition-all duration-300 group-hover/challenge-image:border-primary/30 group-hover/challenge-image:shadow-[0_20px_34px_-20px_rgba(249,115,22,0.5)]">
-                  <img
-                    src={mountainBackground}
-                    className="h-44 w-full object-cover object-center transition-transform duration-500 ease-out group-hover/challenge-image:scale-[1.015] md:h-[200px] md:object-top lg:object-center"
-                    alt={t("challenges.iniciante-ia.name")}
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent" />
-                  <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(15,23,42,0.12),inset_0_-24px_34px_rgba(15,23,42,0.34)] dark:shadow-[inset_0_0_0_1px_rgba(148,163,184,0.14),inset_0_-28px_38px_rgba(2,6,23,0.58)]" />
-                </div>
-
-                <img
-                  src={mountainPerson}
-                  alt=""
-                  aria-hidden
-                  className="pointer-events-none absolute left-0 -top-12 z-20 h-[calc(100%+3rem)] w-full rounded-2xl object-cover object-top drop-shadow-[0_16px_24px_rgba(15,23,42,0.52)] transition-transform duration-500 ease-out will-change-transform group-hover/challenge-image:-translate-y-0.5 md:top-0 md:h-full md:object-top lg:-top-14 lg:h-[calc(100%+3.6rem)] lg:object-center"
-                />
-              </button>
-
-              <div className="space-y-4 lg:pr-2">
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
-                  {t("challenges.iniciante-ia.name")}
-                </h3>
-
-                <p className="max-w-2xl text-slate-600 dark:text-muted-foreground text-base leading-relaxed">
-                  {t("challenges.iniciante-ia.description")}
-                </p>
-
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                    {completedDaysCount}/{totalDays} {t("dashboard.days_label")}
-                  </span>
-                  <span className="text-sm font-medium text-slate-500 dark:text-muted-foreground/80">
-                    {t("dashboard.challenge_progress")}
-                  </span>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-primary/20 bg-gradient-to-b from-primary/10 to-primary/[0.03] p-4">
-                <div className="flex flex-col items-center text-center">
-                  <div className="relative h-24 w-24">
-                    <svg
-                      className="h-24 w-24 -rotate-90"
-                      viewBox="0 0 88 88"
-                      aria-label={t("dashboard.challenge_progress")}
-                    >
-                      <circle
-                        cx="44"
-                        cy="44"
-                        r={progressRadius}
-                        fill="none"
-                        stroke="hsl(var(--border))"
-                        strokeWidth="8"
-                      />
-                      <circle
-                        cx="44"
-                        cy="44"
-                        r={progressRadius}
-                        fill="none"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth="8"
-                        strokeLinecap="round"
-                        strokeDasharray={`${progressCircumference} ${progressCircumference}`}
-                        strokeDashoffset={progressOffset}
-                        className="transition-all duration-700 ease-out"
-                      />
-                    </svg>
-                    <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-primary">
-                      {normalizedProgress}%
-                    </span>
-                  </div>
-
-                  <Button
-                    className="mt-3 h-10 w-full rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-                    onClick={handleContinueChallenge}
-                  >
-                    {bookmarkLabel}
-                    <ChevronRight className="w-4 h-4 ml-2" />
-                  </Button>
-
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="mt-2 h-10 w-full rounded-xl border-border/80 bg-background/75 font-semibold text-foreground hover:bg-background"
-                    onClick={() => setTrailModalOpen(true)}
-                  >
-                    {t("dashboard.view_content")}
-                  </Button>
-                </div>
-              </div>
-            </div>
+        <div className="relative z-20 mt-8 space-y-10">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              {t("dashboard.today.exploreMore", { defaultValue: "Explorar mais" })}
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-foreground">
+              {t("dashboard.today.exploreMoreTitle", { defaultValue: "Outros atalhos e áreas do app" })}
+            </h2>
           </div>
 
           <section id="dashboard-quick-cards" className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
