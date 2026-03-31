@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Bell, X, BellRing } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ const MIN_DAYS_BETWEEN_PROMPTS = 7;
  */
 export const PushNotificationPrompt = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const { status, subscribe, loading, isSupported } = usePushNotifications();
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
@@ -44,7 +46,9 @@ export const PushNotificationPrompt = () => {
         const elapsed = Date.now() - new Date(lastDismissed).getTime();
         if (elapsed < MIN_DAYS_BETWEEN_PROMPTS * 24 * 60 * 60 * 1000) return;
       }
-    } catch {}
+    } catch {
+      return;
+    }
 
     const timer = setTimeout(() => setVisible(true), 10_000);
     return () => clearTimeout(timer);
@@ -55,15 +59,45 @@ export const PushNotificationPrompt = () => {
     setVisible(false);
     try {
       localStorage.setItem(DISMISS_KEY, new Date().toISOString());
-    } catch {}
+    } catch {
+      return;
+    }
   };
 
   const handleAccept = async () => {
-    await subscribe();
-    setVisible(false);
-    try {
-      localStorage.setItem(DISMISS_KEY, new Date().toISOString());
-    } catch {}
+    const nextStatus = await subscribe();
+
+    if (nextStatus === "subscribed") {
+      setVisible(false);
+      try {
+        localStorage.setItem(DISMISS_KEY, new Date().toISOString());
+      } catch {
+        return;
+      }
+      return;
+    }
+
+    if (nextStatus === "denied") {
+      setVisible(false);
+      toast({
+        title: t("pushNotifications.permissionDeniedTitle", "Notificações bloqueadas"),
+        description: t(
+          "pushNotifications.permissionDeniedDescription",
+          "Permita as notificações nas configurações do navegador para ativar esse recurso."
+        ),
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: t("pushNotifications.enableFailedTitle", "Não foi possível ativar agora"),
+      description: t(
+        "pushNotifications.enableFailedDescription",
+        "Tente novamente em alguns segundos. Se continuar assim, atualize a página e verifique a permissão de notificações do navegador."
+      ),
+      variant: "destructive",
+    });
   };
 
   if (!visible || dismissed || status === "subscribed" || status === "denied" || status === "unsupported") {

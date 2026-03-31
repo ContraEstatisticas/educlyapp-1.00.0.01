@@ -13,6 +13,9 @@ const VAPID_PUBLIC_KEY =
   import.meta.env.VITE_VAPID_PUBLIC_KEY ??
   "BEl62iUYgUivxkv68gTVTH6aLHrGlWlXTTGqnFkLsBJPCPKnGV_WgpBijdPGsKVnlOG8H2CZrJqg9TBXE4V2xI";
 
+const SERVICE_WORKER_TIMEOUT_MS = 8000;
+const PUSH_OPERATION_TIMEOUT_MS = 10000;
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -29,6 +32,31 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
   return outputArray;
 }
 
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  return new Promise<T>((resolve, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`[PushNotifications] Timed out while waiting for ${label}.`));
+    }, timeoutMs);
+
+    promise.then(
+      (value) => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        resolve(value);
+      },
+      (error) => {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        reject(error);
+      },
+    );
+  });
+}
+
 /** Check whether the browser supports push notifications. */
 export function isPushSupported(): boolean {
   return (
@@ -41,7 +69,36 @@ export function isPushSupported(): boolean {
 /** Returns the active service-worker registration, or null. */
 async function getSwRegistration(): Promise<ServiceWorkerRegistration | null> {
   if (!("serviceWorker" in navigator)) return null;
-  return navigator.serviceWorker.ready;
+
+  try {
+    const existingRegistration = await navigator.serviceWorker.getRegistration();
+    if (existingRegistration) {
+      return existingRegistration;
+    }
+  } catch (error) {
+    console.warn("[PushNotifications] Failed to read existing service worker registration:", error);
+  }
+
+  try {
+    return await withTimeout(
+      navigator.serviceWorker.ready,
+      SERVICE_WORKER_TIMEOUT_MS,
+      "service worker readiness",
+    );
+  } catch (error) {
+    console.warn("[PushNotifications] Service worker was not ready in time, trying manual registration:", error);
+  }
+
+  try {
+    return await withTimeout(
+      navigator.serviceWorker.register("/sw.js"),
+      SERVICE_WORKER_TIMEOUT_MS,
+      "service worker registration",
+    );
+  } catch (error) {
+    console.error("[PushNotifications] Failed to register service worker for push notifications:", error);
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -62,7 +119,14 @@ export async function subscribeToPush(): Promise<PushSubscription | null> {
   if (!isPushSupported()) return null;
 
   // 1. Request permission
-  const permission = await Notification.requestPermission();
+  const permission =
+    Notification.permission === "granted"
+      ? "granted"
+      : await withTimeout(
+          Notification.requestPermission(),
+          PUSH_OPERATION_TIMEOUT_MS,
+          "notification permission",
+        );
   if (permission !== "granted") return null;
 
   // 2. Get SW registration
@@ -71,10 +135,21 @@ export async function subscribeToPush(): Promise<PushSubscription | null> {
 
   // 3. Subscribe
   try {
-    const subscription = await registration.pushManager.subscribe({
+    const existingSubscription = await withTimeout(
+      registration.pushManager.getSubscription(),
+      PUSH_OPERATION_TIMEOUT_MS,
+      "existing push subscription",
+    );
+
+    if (existingSubscription) {
+      await saveSubscription(existingSubscription);
+      return existingSubscription;
+    }
+
+    const subscription = await withTimeout(registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY).buffer as ArrayBuffer,
-    });
+    }), PUSH_OPERATION_TIMEOUT_MS, "push subscription");
 
     // 4. Persist to Supabase
     await saveSubscription(subscription);
@@ -110,9 +185,19 @@ export async function unsubscribeFromPush(): Promise<boolean> {
  * Returns the current PushSubscription if one exists.
  */
 export async function getCurrentSubscription(): Promise<PushSubscription | null> {
-  const registration = await getSwRegistration();
-  if (!registration) return null;
-  return registration.pushManager.getSubscription();
+  try {
+    const registration = await getSwRegistration();
+    if (!registration) return null;
+
+    return await withTimeout(
+      registration.pushManager.getSubscription(),
+      PUSH_OPERATION_TIMEOUT_MS,
+      "current push subscription",
+    );
+  } catch (error) {
+    console.error("[PushNotifications] Failed to load current subscription:", error);
+    return null;
+  }
 }
 
 /**
@@ -137,7 +222,7 @@ async function saveSubscription(subscription: PushSubscription): Promise<void> {
   const subJson = subscription.toJSON();
 
   // Upsert by endpoint to avoid duplicates
-  const { error } = await supabase.from("push_subscriptions" as any).upsert(
+  const { error } = await supabase.from("push_subscriptions").upsert(
     {
       user_id: user.id,
       endpoint: subJson.endpoint,
@@ -157,7 +242,7 @@ async function removeSubscription(subscription: PushSubscription): Promise<void>
   const subJson = subscription.toJSON();
 
   const { error } = await supabase
-    .from("push_subscriptions" as any)
+    .from("push_subscriptions")
     .delete()
     .eq("endpoint", subJson.endpoint);
 

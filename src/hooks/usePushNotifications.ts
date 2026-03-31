@@ -19,35 +19,36 @@ export const usePushNotifications = () => {
   const [status, setStatus] = useState<PushStatus>("prompt");
   const [loading, setLoading] = useState(false);
 
+  const resolveStatus = useCallback(async (): Promise<PushStatus> => {
+    if (!isPushSupported()) {
+      return "unsupported";
+    }
+
+    const perm = getPermissionState();
+    if (perm === "denied") {
+      return "denied";
+    }
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return "prompt";
+    }
+
+    const sub = await getCurrentSubscription();
+    return sub ? "subscribed" : perm === "granted" ? "unsubscribed" : "prompt";
+  }, []);
+
   // Derive initial status on mount
   useEffect(() => {
     let cancelled = false;
 
     const init = async () => {
-      if (!isPushSupported()) {
-        setStatus("unsupported");
-        return;
-      }
-
-      const perm = getPermissionState();
-      if (perm === "denied") {
-        setStatus("denied");
-        return;
-      }
-
-      // Only check subscription when user is logged in
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) {
-        setStatus("prompt");
-        return;
-      }
-
-      const sub = await getCurrentSubscription();
+      const nextStatus = await resolveStatus();
       if (!cancelled) {
-        setStatus(sub ? "subscribed" : perm === "granted" ? "unsubscribed" : "prompt");
+        setStatus(nextStatus);
       }
     };
 
@@ -55,27 +56,31 @@ export const usePushNotifications = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [resolveStatus]);
 
   const subscribe = useCallback(async () => {
     setLoading(true);
     try {
-      const sub = await subscribeToPush();
-      setStatus(sub ? "subscribed" : getPermissionState() === "denied" ? "denied" : "prompt");
+      await subscribeToPush();
+      const nextStatus = await resolveStatus();
+      setStatus(nextStatus);
+      return nextStatus;
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [resolveStatus]);
 
   const unsubscribe = useCallback(async () => {
     setLoading(true);
     try {
       await unsubscribeFromPush();
-      setStatus("unsubscribed");
+      const nextStatus = await resolveStatus();
+      setStatus(nextStatus);
+      return nextStatus;
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [resolveStatus]);
 
   return {
     status,
