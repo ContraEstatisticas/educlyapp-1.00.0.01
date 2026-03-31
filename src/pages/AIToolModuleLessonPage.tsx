@@ -308,6 +308,7 @@ const AIToolModuleLessonPage = () => {
     toolSlug === "midjourney" ||
     toolSlug === "gemini" ||
     toolSlug === "chatgpt" ||
+    toolSlug === "gamma" ||
     toolSlug === "deepseek" ||
     toolSlug === "claude" ||
     toolSlug === "lovable" ||

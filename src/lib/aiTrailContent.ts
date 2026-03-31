@@ -274,6 +274,30 @@ import {
   GROK_MODULE_6_STEPS_FR,
   GROK_MODULE_6_STEPS_PT,
 } from "@/lib/grokModule6LessonSteps";
+import {
+  GAMMA_MODULE_1_STEPS_EN,
+  GAMMA_MODULE_1_STEPS_ES,
+  GAMMA_MODULE_1_STEPS_FR,
+  GAMMA_MODULE_1_STEPS_PT,
+} from "@/lib/gammaModule1LessonSteps";
+import {
+  GAMMA_MODULE_2_STEPS_EN,
+  GAMMA_MODULE_2_STEPS_ES,
+  GAMMA_MODULE_2_STEPS_FR,
+  GAMMA_MODULE_2_STEPS_PT,
+} from "@/lib/gammaModule2LessonSteps";
+import {
+  GAMMA_MODULE_3_STEPS_EN,
+  GAMMA_MODULE_3_STEPS_ES,
+  GAMMA_MODULE_3_STEPS_FR,
+  GAMMA_MODULE_3_STEPS_PT,
+} from "@/lib/gammaModule3LessonSteps";
+import {
+  GAMMA_MODULE_4_STEPS_EN,
+  GAMMA_MODULE_4_STEPS_ES,
+  GAMMA_MODULE_4_STEPS_FR,
+  GAMMA_MODULE_4_STEPS_PT,
+} from "@/lib/gammaModule4LessonSteps";
 
 
 
@@ -7833,6 +7857,715 @@ const AI_TRAIL_CONTENT: Record<string, AiTrailContentEntry> = {
             },
             takeaway:
               "Grok devient un partenaire creatif bien plus fort quand vous utilisez volume, contraste de perspectives et affinage pour polir les idees."
+          }
+        ]
+      }
+    }
+  },
+  gamma: {
+    status: "live",
+    locales: {
+      pt: {
+        statusBadge: "Trilha ativa",
+        heroEyebrow: "Gamma",
+        heroTitle: "Apresentacoes com IA, do prompt ao visual.",
+        heroDescription:
+          "Essa trilha organiza seus fundamentos de Gamma em 4 modulos praticos: conceito, criacao, edicao e recursos avancados.",
+        overviewTitle: "O que voce vai dominar",
+        overviewItems: [
+          "Criar apresentacoes profissionais em minutos com prompts claros.",
+          "Editar e personalizar cards com IA integrada.",
+          "Usar embeds, graficos e interatividade para apresentacoes memoraveis.",
+        ],
+        moduleLabel: "Modulo",
+        keyPointsLabel: "Pontos-chave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Pratica guiada",
+        termsLabel: "Termos",
+        solutionLabel: "Resposta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Resposta correta",
+        takeawayLabel: "Leitura final",
+        modules: [
+          {
+            number: 1,
+            title: "O que e o Gamma e por que ele Mudou a Forma de Criar Apresentacoes",
+            summary: "Conheca o Gamma, o sistema de cards e os casos de uso praticos.",
+            outcome: "Entendimento claro do que o Gamma faz e como ele se diferencia.",
+            intro:
+              "Voce aprende o que e o Gamma, como funciona o sistema de cards e para que serve na pratica.",
+            keyPoints: [
+              "Gamma usa IA para gerar estrutura, conteudo e design automaticamente.",
+              "Sistema de cards permite flexibilidade visual e interatividade.",
+              "Usado para pitch decks, relatorios, materiais de aula e landing pages.",
+              "Gamma estrutura e formata, mas o conteudo estrategico e seu.",
+            ],
+            lessonSteps: GAMMA_MODULE_1_STEPS_PT,
+            promptExample:
+              "Crie uma apresentacao sobre inteligencia artificial no mercado de trabalho para gestores, com tom analitico e slides sobre contexto, impactos e preparacao.",
+            practice: {
+              title: "Casos de uso",
+              instruction: "Complete a frase sobre os casos de uso do Gamma.",
+              terms: ["empreendedores", "professores", "consultores", "profissionais de marketing", "um designer"],
+              solution:
+                "O Gamma e usado por empreendedores para criar pitch decks rapidamente, por professores para produzir materiais de aula visuais, por consultores para gerar relatorios e propostas e por profissionais de marketing para criar landing pages e apresentacoes de campanha — tudo sem precisar de um designer.",
+            },
+            quiz: {
+              question: "O que diferencia o Gamma de ferramentas tradicionais como PowerPoint?",
+              options: [
+                "O Gamma usa IA para gerar estrutura, conteudo e design automaticamente a partir de um simples prompt",
+                "O Gamma so cria apresentacoes com templates fixos sem personalizacao",
+                "E necessario ter conhecimento de design para usar o Gamma",
+                "O Gamma funciona apenas para apresentacoes corporativas"
+              ],
+              correctIndex: 0,
+              explanation:
+                "O Gamma usa IA para gerar estrutura, conteudo e design automaticamente a partir de um simples prompt — eliminando a pagina em branco e reduzindo horas de trabalho para minutos.",
+            },
+            takeaway:
+              "O Gamma representa uma mudanca fundamental na forma como criamos apresentacoes. Descreva sua ideia. O Gamma faz o resto.",
+          },
+          {
+            number: 2,
+            title: "Criando sua Primeira Apresentacao do Zero com o Gamma",
+            summary: "Do prompt inicial ao resultado final, passo a passo.",
+            outcome: "Capacidade de criar apresentacoes completas com prompts claros.",
+            intro:
+              "Voce aprende a acessar o Gamma, escrever prompts poderosos, editar o outline e escolher o tema visual.",
+            keyPoints: [
+              "Ter claro o objetivo, publico e pontos principais antes de gerar.",
+              "Um bom prompt informa tema, objetivo, publico e tom desejado.",
+              "Editar o outline antes da geracao economiza tempo depois.",
+              "Temas visuais mudam a aparencia com um clique.",
+            ],
+            lessonSteps: GAMMA_MODULE_2_STEPS_PT,
+            promptExample:
+              "Crie uma apresentacao sobre inteligencia artificial no mercado de trabalho para gestores e lideres de equipe. O objetivo e mostrar oportunidades e riscos da IA. Use um tom analitico e acessivel e inclua slides sobre contexto atual, impactos praticos e como se preparar. Finalize com um slide de proximos passos.",
+            practice: {
+              title: "Prompt poderoso",
+              instruction: "Complete o prompt estrategico para o Gamma.",
+              terms: ["inteligencia artificial no mercado de trabalho", "gestores e lideres de equipe", "mostrar oportunidades e riscos da IA", "analitico e acessivel", "contexto atual", "impactos praticos", "como se preparar", "proximos passos"],
+              solution:
+                "Crie uma apresentacao sobre inteligencia artificial no mercado de trabalho para gestores e lideres de equipe. O objetivo e mostrar oportunidades e riscos da IA. Use um tom analitico e acessivel e inclua slides sobre contexto atual, impactos praticos e como se preparar. Finalize com um slide de proximos passos.",
+            },
+            quiz: {
+              question: "Por que editar o outline antes de gerar a apresentacao completa economiza tempo?",
+              options: [
+                "Porque o Gamma cobra creditos extras por ajustes apos a geracao",
+                "Para impressionar a audiencia com uma estrutura diferente do padrao",
+                "Porque ajustar a estrutura antes da geracao e muito mais rapido do que reorganizar slides depois",
+                "O outline nao pode ser editado apos a geracao inicial"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Porque ajustar a estrutura antes da geracao e muito mais rapido do que reorganizar slides depois — e garante que o conteudo gerado siga exatamente a logica que voce planejou.",
+            },
+            takeaway:
+              "Quanto mais claro e especifico for o seu prompt inicial, menos tempo voce vai gastar em ajustes depois. Prompts claros. Estrutura revisada. Visual aplicado. Apresentacao pronta.",
+          },
+          {
+            number: 3,
+            title: "Editando e Personalizando sua Apresentacao no Gamma",
+            summary: "Ajustando conteudo, reorganizando cards e refinando com IA.",
+            outcome: "Dominio da edicao com precisao e refinamento via IA.",
+            intro:
+              "Voce aprende a editar conteudo diretamente, usar a IA para refinar, reorganizar cards e gerenciar imagens.",
+            keyPoints: [
+              "Edicao direta nos cards com comando / para inserir elementos.",
+              "IA integrada permite expandir, resumir ou mudar tom de qualquer card.",
+              "Drag and drop visual e instantaneo para reorganizar.",
+              "Imagens podem ser geradas pela IA ou importadas.",
+            ],
+            lessonSteps: GAMMA_MODULE_3_STEPS_PT,
+            promptExample:
+              "Selecione um card, clique em Editar com IA e instrua: 'torne este slide mais direto e reduza para 3 topicos'.",
+            practice: {
+              title: "Edicao com precisao",
+              instruction: "Complete a sequencia de edicao no Gamma.",
+              terms: ["card", "reescreva", "/", "formatacao", "espacamento"],
+              solution:
+                "Para editar um card no Gamma: clique no card que deseja modificar, selecione o texto e reescreva diretamente, use o comando / para inserir novos elementos como listas ou imagens, e use as opcoes de formatacao do painel lateral para ajustar tamanho, alinhamento e espacamento do conteudo.",
+            },
+            quiz: {
+              question: "Qual comando de IA dentro do Gamma e mais util para melhorar uma apresentacao existente?",
+              options: [
+                "Pedir para a IA gerar uma apresentacao completamente nova do zero",
+                "Usar apenas os templates sem envolver a IA na edicao",
+                "Selecionar um card especifico, clicar em Editar com IA e dar uma instrucao precisa",
+                "A IA so pode ser usada na criacao inicial, nao na edicao"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Selecionar um card especifico, clicar em Editar com IA e dar uma instrucao precisa — como 'torne este slide mais direto e reduza para 3 topicos' — para refinar sem perder o contexto do restante da apresentacao.",
+            },
+            takeaway:
+              "Editar no Gamma e intuitivo e rapido — especialmente quando voce combina edicao direta com os refinamentos via IA. Edite com precisao. Refine com IA. Apresente com confianca.",
+          },
+          {
+            number: 4,
+            title: "Recursos Avancados do Gamma — IA, Embeds e Interatividade",
+            summary: "Videos, graficos, Gamma Agent e redesign com um clique.",
+            outcome: "Dominio dos recursos que transformam apresentacoes em experiencias interativas.",
+            intro:
+              "Voce aprende a incorporar midia externa, criar graficos, usar o Gamma Agent e redesenhar visualmente.",
+            keyPoints: [
+              "Embeds mantem o espectador dentro da apresentacao.",
+              "Graficos sao gerados automaticamente a partir dos dados.",
+              "Gamma Agent permite mudancas em linguagem natural.",
+              "Redesign com um clique testa estilos visuais rapidamente.",
+            ],
+            lessonSteps: GAMMA_MODULE_4_STEPS_PT,
+            promptExample:
+              "Use o comando / para inserir um grafico, insira seus dados e ajuste cores e legendas para manter consistencia visual.",
+            practice: {
+              title: "Visualize dados",
+              instruction: "Complete a sequencia para criar um grafico no Gamma.",
+              terms: ["/", "Grafico", "dados", "cores", "legendas", "local ideal"],
+              solution:
+                "Para criar um grafico no Gamma: use o comando / para inserir um novo elemento, escolha o tipo Grafico desejado, insira seus dados ou descreva as informacoes para a IA gerar automaticamente, ajuste cores e legendas para manter consistencia com o restante da apresentacao e posicione o grafico no local ideal do card.",
+            },
+            quiz: {
+              question: "Por que incorporar videos e graficos diretamente na apresentacao e mais eficiente do que linkar para fora?",
+              options: [
+                "Porque o espectador ve e interage com o conteudo sem sair da apresentacao",
+                "Porque links externos nunca funcionam em apresentacoes ao vivo",
+                "Embeds so funcionam em planos pagos do Gamma",
+                "Nao ha diferenca pratica entre um embed e um link externo"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Porque o espectador ve e interage com o conteudo sem sair da apresentacao — mantendo o fluxo da narrativa e eliminando o risco de perder a audiencia em uma aba diferente.",
+            },
+            takeaway:
+              "Os recursos avancados do Gamma transformam apresentacoes estaticas em experiencias interativas. Incorpore midia. Visualize dados. Redesenhe com intencao.",
+          }
+        ]
+      },
+      en: {
+        statusBadge: "Active trail",
+        heroEyebrow: "Gamma",
+        heroTitle: "AI presentations, from prompt to visual.",
+        heroDescription:
+          "This trail organizes your Gamma fundamentals into 4 practical modules: concept, creation, editing, and advanced features.",
+        overviewTitle: "What you'll master",
+        overviewItems: [
+          "Create professional presentations in minutes with clear prompts.",
+          "Edit and customize cards with integrated AI.",
+          "Use embeds, charts, and interactivity for memorable presentations.",
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Key points",
+        promptLabel: "Reference prompt",
+        practiceLabel: "Guided practice",
+        termsLabel: "Terms",
+        solutionLabel: "Expected answer",
+        quizLabel: "Checkpoint",
+        correctLabel: "Correct answer",
+        takeawayLabel: "Final reading",
+        modules: [
+          {
+            number: 1,
+            title: "What is Gamma and Why It Changed the Way We Create Presentations",
+            summary: "Learn about Gamma, the card system, and practical use cases.",
+            outcome: "Clear understanding of what Gamma does and how it differentiates.",
+            intro:
+              "You learn what Gamma is, how the card system works, and what it's used for in practice.",
+            keyPoints: [
+              "Gamma uses AI to automatically generate structure, content, and design.",
+              "Card system allows visual flexibility and interactivity.",
+              "Used for pitch decks, reports, teaching materials, and landing pages.",
+              "Gamma structures and formats, but strategic content is yours.",
+            ],
+            lessonSteps: GAMMA_MODULE_1_STEPS_EN,
+            promptExample:
+              "Create a presentation about artificial intelligence in the job market for managers, with an analytical tone and slides about context, impacts, and preparation.",
+            practice: {
+              title: "Use cases",
+              instruction: "Complete the sentence about Gamma's use cases.",
+              terms: ["entrepreneurs", "teachers", "consultants", "marketing professionals", "a designer"],
+              solution:
+                "Gamma is used by entrepreneurs to quickly create pitch decks, by teachers to produce visual teaching materials, by consultants to generate reports and proposals, and by marketing professionals to create landing pages and campaign presentations — all without needing a designer.",
+            },
+            quiz: {
+              question: "What differentiates Gamma from traditional tools like PowerPoint?",
+              options: [
+                "Gamma uses AI to automatically generate structure, content, and design from a simple prompt",
+                "Gamma only creates presentations with fixed templates without customization",
+                "Design knowledge is required to use Gamma",
+                "Gamma only works for corporate presentations"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Gamma uses AI to automatically generate structure, content, and design from a simple prompt — eliminating the blank page and reducing hours of work to minutes.",
+            },
+            takeaway:
+              "Gamma represents a fundamental change in how we create presentations. Describe your idea. Gamma does the rest.",
+          },
+          {
+            number: 2,
+            title: "Creating Your First Presentation from Scratch with Gamma",
+            summary: "From initial prompt to final result, step by step.",
+            outcome: "Ability to create complete presentations with clear prompts.",
+            intro:
+              "You learn to access Gamma, write powerful prompts, edit the outline, and choose the visual theme.",
+            keyPoints: [
+              "Have clear objective, audience, and main points before generating.",
+              "A good prompt informs theme, objective, audience, and desired tone.",
+              "Editing the outline before generation saves time later.",
+              "Visual themes change appearance with one click.",
+            ],
+            lessonSteps: GAMMA_MODULE_2_STEPS_EN,
+            promptExample:
+              "Create a presentation about artificial intelligence in the job market for managers and team leaders. The objective is to show opportunities and risks of AI. Use an analytical and accessible tone and include slides about current context, practical impacts, and how to prepare. Finish with a next steps slide.",
+            practice: {
+              title: "Powerful prompt",
+              instruction: "Complete the strategic prompt for Gamma.",
+              terms: ["artificial intelligence in the job market", "managers and team leaders", "show opportunities and risks of AI", "analytical and accessible", "current context", "practical impacts", "how to prepare", "next steps"],
+              solution:
+                "Create a presentation about artificial intelligence in the job market for managers and team leaders. The objective is to show opportunities and risks of AI. Use an analytical and accessible tone and include slides about current context, practical impacts, and how to prepare. Finish with a next steps slide.",
+            },
+            quiz: {
+              question: "Why does editing the outline before generating the complete presentation save time?",
+              options: [
+                "Because Gamma charges extra credits for adjustments after generation",
+                "To impress the audience with a different structure from the standard",
+                "Because adjusting the structure before generation is much faster than reorganizing slides later",
+                "The outline cannot be edited after initial generation"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Because adjusting the structure before generation is much faster than reorganizing slides later — and ensures the generated content follows exactly the logic you planned.",
+            },
+            takeaway:
+              "The clearer and more specific your initial prompt, the less time you'll spend on adjustments later. Clear prompts. Revised structure. Applied visual. Presentation ready.",
+          },
+          {
+            number: 3,
+            title: "Editing and Customizing Your Presentation in Gamma",
+            summary: "Adjusting content, reorganizing cards, and refining with AI.",
+            outcome: "Mastery of editing with precision and AI refinement.",
+            intro:
+              "You learn to edit content directly, use AI to refine, reorganize cards, and manage images.",
+            keyPoints: [
+              "Direct editing in cards with / command to insert elements.",
+              "Integrated AI allows expanding, summarizing, or changing tone of any card.",
+              "Visual and instant drag and drop for reorganizing.",
+              "Images can be AI-generated or imported.",
+            ],
+            lessonSteps: GAMMA_MODULE_3_STEPS_EN,
+            promptExample:
+              "Select a card, click Edit with AI, and instruct: 'make this slide more direct and reduce to 3 topics'.",
+            practice: {
+              title: "Edit with precision",
+              instruction: "Complete the editing sequence in Gamma.",
+              terms: ["card", "rewrite", "/", "formatting", "spacing"],
+              solution:
+                "To edit a card in Gamma: click on the card you want to modify, select the text and rewrite directly, use the / command to insert new elements like lists or images, and use the formatting options from the side panel to adjust size, alignment, and spacing of the content.",
+            },
+            quiz: {
+              question: "Which AI command within Gamma is most useful for improving an existing presentation?",
+              options: [
+                "Ask the AI to generate a completely new presentation from scratch",
+                "Use only templates without involving AI in editing",
+                "Select a specific card, click Edit with AI, and give a precise instruction",
+                "AI can only be used in initial creation, not in editing"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Select a specific card, click Edit with AI, and give a precise instruction — like 'make this slide more direct and reduce to 3 topics' — to refine without losing context of the rest of the presentation.",
+            },
+            takeaway:
+              "Editing in Gamma is intuitive and fast — especially when you combine direct editing with AI refinements. Edit with precision. Refine with AI. Present with confidence.",
+          },
+          {
+            number: 4,
+            title: "Advanced Gamma Features — AI, Embeds, and Interactivity",
+            summary: "Videos, charts, Gamma Agent, and one-click redesign.",
+            outcome: "Mastery of features that transform presentations into interactive experiences.",
+            intro:
+              "You learn to embed external media, create charts, use Gamma Agent, and visually redesign.",
+            keyPoints: [
+              "Embeds keep the viewer within the presentation.",
+              "Charts are automatically generated from data.",
+              "Gamma Agent allows changes in natural language.",
+              "One-click redesign tests visual styles quickly.",
+            ],
+            lessonSteps: GAMMA_MODULE_4_STEPS_EN,
+            promptExample:
+              "Use the / command to insert a chart, enter your data, and adjust colors and legends to maintain visual consistency.",
+            practice: {
+              title: "Visualize data",
+              instruction: "Complete the sequence to create a chart in Gamma.",
+              terms: ["/", "Chart", "data", "colors", "legends", "ideal location"],
+              solution:
+                "To create a chart in Gamma: use the / command to insert a new element, choose the desired Chart type, enter your data or describe the information for the AI to generate automatically, adjust colors and legends to maintain consistency with the rest of the presentation, and position the chart in the ideal location of the card.",
+            },
+            quiz: {
+              question: "Why is embedding videos and charts directly in the presentation more efficient than linking out?",
+              options: [
+                "Because the viewer sees and interacts with the content without leaving the presentation",
+                "Because external links never work in live presentations",
+                "Embeds only work in Gamma's paid plans",
+                "There is no practical difference between an embed and an external link"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Because the viewer sees and interacts with the content without leaving the presentation — maintaining narrative flow and eliminating the risk of losing the audience in a different tab.",
+            },
+            takeaway:
+              "Gamma's advanced features transform static presentations into interactive experiences. Embed media. Visualize data. Redesign with intention.",
+          }
+        ]
+      },
+      es: {
+        statusBadge: "Trilha activa",
+        heroEyebrow: "Gamma",
+        heroTitle: "Presentaciones con IA, del prompt al visual.",
+        heroDescription:
+          "Esta trilha organiza tus fundamentos de Gamma en 4 módulos prácticos: concepto, creación, edición y recursos avanzados.",
+        overviewTitle: "Lo que dominarás",
+        overviewItems: [
+          "Crear presentaciones profesionales en minutos con prompts claros.",
+          "Editar y personalizar tarjetas con IA integrada.",
+          "Usar embeds, gráficos e interactividad para presentaciones memorables.",
+        ],
+        moduleLabel: "Módulo",
+        keyPointsLabel: "Puntos clave",
+        promptLabel: "Prompt de referencia",
+        practiceLabel: "Práctica guiada",
+        termsLabel: "Términos",
+        solutionLabel: "Respuesta esperada",
+        quizLabel: "Checkpoint",
+        correctLabel: "Respuesta correcta",
+        takeawayLabel: "Lectura final",
+        modules: [
+          {
+            number: 1,
+            title: "Qué es Gamma y por qué Cambió la Forma de Crear Presentaciones",
+            summary: "Conoce Gamma, el sistema de tarjetas y los casos de uso prácticos.",
+            outcome: "Comprensión clara de lo que hace Gamma y cómo se diferencia.",
+            intro:
+              "Aprendes qué es Gamma, cómo funciona el sistema de tarjetas y para qué sirve en la práctica.",
+            keyPoints: [
+              "Gamma usa IA para generar estructura, contenido y diseño automáticamente.",
+              "Sistema de tarjetas permite flexibilidad visual e interactividad.",
+              "Usado para pitch decks, informes, materiales de clase y landing pages.",
+              "Gamma estructura y formatea, pero el contenido estratégico es tuyo.",
+            ],
+            lessonSteps: GAMMA_MODULE_1_STEPS_ES,
+            promptExample:
+              "Crea una presentación sobre inteligencia artificial en el mercado laboral para gerentes, con tono analítico y diapositivas sobre contexto, impactos y preparación.",
+            practice: {
+              title: "Casos de uso",
+              instruction: "Completa la frase sobre los casos de uso de Gamma.",
+              terms: ["emprendedores", "profesores", "consultores", "profesionales de marketing", "un diseñador"],
+              solution:
+                "Gamma es usado por emprendedores para crear pitch decks rápidamente, por profesores para producir materiales de clase visuales, por consultores para generar informes y propuestas y por profesionales de marketing para crear landing pages y presentaciones de campaña — todo sin necesitar un diseñador.",
+            },
+            quiz: {
+              question: "¿Qué diferencia a Gamma de herramientas tradicionales como PowerPoint?",
+              options: [
+                "Gamma usa IA para generar estructura, contenido y diseño automáticamente a partir de un simple prompt",
+                "Gamma solo crea presentaciones con plantillas fijas sin personalización",
+                "Es necesario tener conocimiento de diseño para usar Gamma",
+                "Gamma solo funciona para presentaciones corporativas"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Gamma usa IA para generar estructura, contenido y diseño automáticamente a partir de un simple prompt — eliminando la página en blanco y reduciendo horas de trabajo a minutos.",
+            },
+            takeaway:
+              "Gamma representa un cambio fundamental en la forma en que creamos presentaciones. Describe tu idea. Gamma hace el resto.",
+          },
+          {
+            number: 2,
+            title: "Creando tu Primera Presentación desde Cero con Gamma",
+            summary: "Del prompt inicial al resultado final, paso a paso.",
+            outcome: "Capacidad de crear presentaciones completas con prompts claros.",
+            intro:
+              "Aprendes a acceder a Gamma, escribir prompts poderosos, editar el outline y elegir el tema visual.",
+            keyPoints: [
+              "Tener claro el objetivo, público y puntos principales antes de generar.",
+              "Un buen prompt informa tema, objetivo, público y tono deseado.",
+              "Editar el outline antes de la generación ahorra tiempo después.",
+              "Temas visuales cambian la apariencia con un clic.",
+            ],
+            lessonSteps: GAMMA_MODULE_2_STEPS_ES,
+            promptExample:
+              "Crea una presentación sobre inteligencia artificial en el mercado laboral para gerentes y líderes de equipo. El objetivo es mostrar oportunidades y riesgos de la IA. Usa un tono analítico y accesible e incluye diapositivas sobre contexto actual, impactos prácticos y cómo prepararse. Finaliza con una diapositiva de próximos pasos.",
+            practice: {
+              title: "Prompt poderoso",
+              instruction: "Completa el prompt estratégico para Gamma.",
+              terms: ["inteligencia artificial en el mercado laboral", "gerentes y líderes de equipo", "mostrar oportunidades y riesgos de la IA", "analítico y accesible", "contexto actual", "impactos prácticos", "cómo prepararse", "próximos pasos"],
+              solution:
+                "Crea una presentación sobre inteligencia artificial en el mercado laboral para gerentes y líderes de equipo. El objetivo es mostrar oportunidades y riesgos de la IA. Usa un tono analítico y accesible e incluye diapositivas sobre contexto actual, impactos prácticos y cómo prepararse. Finaliza con una diapositiva de próximos pasos.",
+            },
+            quiz: {
+              question: "¿Por qué editar el outline antes de generar la presentación completa ahorra tiempo?",
+              options: [
+                "Porque Gamma cobra créditos extras por ajustes después de la generación",
+                "Para impresionar a la audiencia con una estructura diferente del estándar",
+                "Porque ajustar la estructura antes de la generación es mucho más rápido que reorganizar diapositivas después",
+                "El outline no puede ser editado después de la generación inicial"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Porque ajustar la estructura antes de la generación es mucho más rápido que reorganizar diapositivas después — y garantiza que el contenido generado siga exactamente la lógica que planeaste.",
+            },
+            takeaway:
+              "Cuanto más claro y específico sea tu prompt inicial, menos tiempo gastarás en ajustes después. Prompts claros. Estructura revisada. Visual aplicado. Presentación lista.",
+          },
+          {
+            number: 3,
+            title: "Editando y Personalizando tu Presentación en Gamma",
+            summary: "Ajustando contenido, reorganizando tarjetas y refinando con IA.",
+            outcome: "Dominio de la edición con precisión y refinamiento vía IA.",
+            intro:
+              "Aprendes a editar contenido directamente, usar la IA para refinar, reorganizar tarjetas y gestionar imágenes.",
+            keyPoints: [
+              "Edición directa en tarjetas con comando / para insertar elementos.",
+              "IA integrada permite expandir, resumir o cambiar tono de cualquier tarjeta.",
+              "Drag and drop visual e instantáneo para reorganizar.",
+              "Imágenes pueden ser generadas por IA o importadas.",
+            ],
+            lessonSteps: GAMMA_MODULE_3_STEPS_ES,
+            promptExample:
+              "Selecciona una tarjeta, haz clic en Editar con IA e instruye: 'haz esta diapositiva más directa y reduce a 3 tópicos'.",
+            practice: {
+              title: "Edita con precisión",
+              instruction: "Completa la secuencia de edición en Gamma.",
+              terms: ["tarjeta", "reescribe", "/", "formateo", "espaciado"],
+              solution:
+                "Para editar una tarjeta en Gamma: haz clic en la tarjeta que deseas modificar, selecciona el texto y reescribe directamente, usa el comando / para insertar nuevos elementos como listas o imágenes, y usa las opciones de formateo del panel lateral para ajustar tamaño, alineación y espaciado del contenido.",
+            },
+            quiz: {
+              question: "¿Qué comando de IA dentro de Gamma es más útil para mejorar una presentación existente?",
+              options: [
+                "Pedir a la IA que genere una presentación completamente nueva desde cero",
+                "Usar solo las plantillas sin involucrar la IA en la edición",
+                "Seleccionar una tarjeta específica, hacer clic en Editar con IA y dar una instrucción precisa",
+                "La IA solo puede ser usada en la creación inicial, no en la edición"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Seleccionar una tarjeta específica, hacer clic en Editar con IA y dar una instrucción precisa — como 'haz esta diapositiva más directa y reduce a 3 tópicos' — para refinar sin perder el contexto del resto de la presentación.",
+            },
+            takeaway:
+              "Editar en Gamma es intuitivo y rápido — especialmente cuando combinas edición directa con los refinamientos vía IA. Edita con precisión. Refina con IA. Presenta con confianza.",
+          },
+          {
+            number: 4,
+            title: "Recursos Avanzados de Gamma — IA, Embeds e Interactividad",
+            summary: "Videos, gráficos, Gamma Agent y rediseño con un clic.",
+            outcome: "Dominio de recursos que transforman presentaciones en experiencias interactivas.",
+            intro:
+              "Aprendes a incorporar medios externos, crear gráficos, usar Gamma Agent y rediseñar visualmente.",
+            keyPoints: [
+              "Embeds mantienen al espectador dentro de la presentación.",
+              "Gráficos se generan automáticamente a partir de los datos.",
+              "Gamma Agent permite cambios en lenguaje natural.",
+              "Rediseño con un clic prueba estilos visuales rápidamente.",
+            ],
+            lessonSteps: GAMMA_MODULE_4_STEPS_ES,
+            promptExample:
+              "Usa el comando / para insertar un gráfico, ingresa tus datos y ajusta colores y leyendas para mantener consistencia visual.",
+            practice: {
+              title: "Visualiza datos",
+              instruction: "Completa la secuencia para crear un gráfico en Gamma.",
+              terms: ["/", "Gráfico", "datos", "colores", "leyendas", "lugar ideal"],
+              solution:
+                "Para crear un gráfico en Gamma: usa el comando / para insertar un nuevo elemento, elige el tipo Gráfico deseado, ingresa tus datos o describe la información para que la IA genere automáticamente, ajusta colores y leyendas para mantener consistencia con el resto de la presentación y posiciona el gráfico en el lugar ideal de la tarjeta.",
+            },
+            quiz: {
+              question: "¿Por qué incorporar videos y gráficos directamente en la presentación es más eficiente que enlazar hacia afuera?",
+              options: [
+                "Porque el espectador ve e interactúa con el contenido sin salir de la presentación",
+                "Porque los enlaces externos nunca funcionan en presentaciones en vivo",
+                "Los embeds solo funcionan en planes pagos de Gamma",
+                "No hay diferencia práctica entre un embed y un enlace externo"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Porque el espectador ve e interactúa con el contenido sin salir de la presentación — manteniendo el flujo de la narrativa y eliminando el riesgo de perder a la audiencia en una pestaña diferente.",
+            },
+            takeaway:
+              "Las características avanzadas de Gamma transforman presentaciones estáticas en experiencias interactivas. Incorpora medios. Visualiza datos. Rediseña con intención.",
+          }
+        ]
+      },
+      fr: {
+        statusBadge: "Parcours actif",
+        heroEyebrow: "Gamma",
+        heroTitle: "Présentations avec IA, du prompt au visuel.",
+        heroDescription:
+          "Ce parcours organise vos fondamentaux Gamma en 4 modules pratiques : concept, création, édition et fonctionnalités avancées.",
+        overviewTitle: "Ce que vous maîtriserez",
+        overviewItems: [
+          "Créer des présentations professionnelles en minutes avec des prompts clairs.",
+          "Éditer et personnaliser des cartes avec IA intégrée.",
+          "Utiliser embeds, graphiques et interactivité pour des présentations mémorables.",
+        ],
+        moduleLabel: "Module",
+        keyPointsLabel: "Points clés",
+        promptLabel: "Prompt de référence",
+        practiceLabel: "Pratique guidée",
+        termsLabel: "Termes",
+        solutionLabel: "Réponse attendue",
+        quizLabel: "Checkpoint",
+        correctLabel: "Réponse correcte",
+        takeawayLabel: "Lecture finale",
+        modules: [
+          {
+            number: 1,
+            title: "Qu'est-ce que Gamma et pourquoi il a Changé la Façon de Créer des Présentations",
+            summary: "Découvrez Gamma, le système de cartes et les cas d'usage pratiques.",
+            outcome: "Compréhension claire de ce que fait Gamma et comment il se différencie.",
+            intro:
+              "Vous apprenez ce qu'est Gamma, comment fonctionne le système de cartes et à quoi il sert en pratique.",
+            keyPoints: [
+              "Gamma utilise l'IA pour générer automatiquement structure, contenu et design.",
+              "Système de cartes permet flexibilité visuelle et interactivité.",
+              "Utilisé pour pitch decks, rapports, matériels de cours et landing pages.",
+              "Gamma structure et formate, mais le contenu stratégique reste le vôtre.",
+            ],
+            lessonSteps: GAMMA_MODULE_1_STEPS_FR,
+            promptExample:
+              "Créez une présentation sur l'intelligence artificielle sur le marché du travail pour gestionnaires, avec un ton analytique et des diapositives sur contexte, impacts et préparation.",
+            practice: {
+              title: "Cas d'usage",
+              instruction: "Complétez la phrase sur les cas d'usage de Gamma.",
+              terms: ["entrepreneurs", "enseignants", "consultants", "professionnels du marketing", "un designer"],
+              solution:
+                "Gamma est utilisé par entrepreneurs pour créer rapidement des pitch decks, par enseignants pour produire des matériels de cours visuels, par consultants pour générer des rapports et propositions et par professionnels du marketing pour créer des landing pages et présentations de campagne — tout sans avoir besoin d'un designer.",
+            },
+            quiz: {
+              question: "Qu'est-ce qui différencie Gamma des outils traditionnels comme PowerPoint ?",
+              options: [
+                "Gamma utilise l'IA pour générer automatiquement structure, contenu et design à partir d'un simple prompt",
+                "Gamma ne crée que des présentations avec des modèles fixes sans personnalisation",
+                "Des connaissances en design sont nécessaires pour utiliser Gamma",
+                "Gamma ne fonctionne que pour les présentations d'entreprise"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Gamma utilise l'IA pour générer automatiquement structure, contenu et design à partir d'un simple prompt — éliminant la page blanche et réduisant des heures de travail à quelques minutes.",
+            },
+            takeaway:
+              "Gamma représente un changement fondamental dans la façon dont nous créons des présentations. Décrivez votre idée. Gamma fait le reste.",
+          },
+          {
+            number: 2,
+            title: "Créer votre Première Présentation de Zéro avec Gamma",
+            summary: "Du prompt initial au résultat final, étape par étape.",
+            outcome: "Capacité de créer des présentations complètes avec des prompts clairs.",
+            intro:
+              "Vous apprenez à accéder à Gamma, écrire des prompts puissants, éditer le plan et choisir le thème visuel.",
+            keyPoints: [
+              "Avoir clair l'objectif, le public et les points principaux avant de générer.",
+              "Un bon prompt informe thème, objectif, public et ton souhaité.",
+              "Éditer le plan avant la génération économise du temps après.",
+              "Thèmes visuels changent l'apparence en un clic.",
+            ],
+            lessonSteps: GAMMA_MODULE_2_STEPS_FR,
+            promptExample:
+              "Créez une présentation sur l'intelligence artificielle sur le marché du travail pour gestionnaires et chefs d'équipe. L'objectif est de montrer les opportunités et risques de l'IA. Utilisez un ton analytique et accessible et incluez des diapositives sur contexte actuel, impacts pratiques et comment se préparer. Terminez avec une diapositive de prochaines étapes.",
+            practice: {
+              title: "Prompt puissant",
+              instruction: "Complétez le prompt stratégique pour Gamma.",
+              terms: ["l'intelligence artificielle sur le marché du travail", "gestionnaires et chefs d'équipe", "montrer les opportunités et risques de l'IA", "analytique et accessible", "contexte actuel", "impacts pratiques", "comment se préparer", "prochaines étapes"],
+              solution:
+                "Créez une présentation sur l'intelligence artificielle sur le marché du travail pour gestionnaires et chefs d'équipe. L'objectif est de montrer les opportunités et risques de l'IA. Utilisez un ton analytique et accessible et incluez des diapositives sur contexte actuel, impacts pratiques et comment se préparer. Terminez avec une diapositive de prochaines étapes.",
+            },
+            quiz: {
+              question: "Pourquoi éditer le plan avant de générer la présentation complète économise du temps ?",
+              options: [
+                "Parce que Gamma facture des crédits supplémentaires pour les ajustements après la génération",
+                "Pour impressionner l'audience avec une structure différente du standard",
+                "Parce qu'ajuster la structure avant la génération est beaucoup plus rapide que réorganiser les diapositives après",
+                "Le plan ne peut pas être édité après la génération initiale"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Parce qu'ajuster la structure avant la génération est beaucoup plus rapide que réorganiser les diapositives après — et garantit que le contenu généré suive exactement la logique que vous avez planifiée.",
+            },
+            takeaway:
+              "Plus votre prompt initial est clair et spécifique, moins vous passerez de temps sur les ajustements après. Prompts clairs. Structure révisée. Visuel appliqué. Présentation prête.",
+          },
+          {
+            number: 3,
+            title: "Éditer et Personnaliser votre Présentation dans Gamma",
+            summary: "Ajuster le contenu, réorganiser les cartes et affiner avec l'IA.",
+            outcome: "Maîtrise de l'édition avec précision et affinement via IA.",
+            intro:
+              "Vous apprenez à éditer le contenu directement, utiliser l'IA pour affiner, réorganiser les cartes et gérer les images.",
+            keyPoints: [
+              "Édition directe dans les cartes avec commande / pour insérer des éléments.",
+              "IA intégrée permet d'élargir, résumer ou changer le ton de n'importe quelle carte.",
+              "Glisser-déposer visuel et instantané pour réorganiser.",
+              "Images peuvent être générées par l'IA ou importées.",
+            ],
+            lessonSteps: GAMMA_MODULE_3_STEPS_FR,
+            promptExample:
+              "Sélectionnez une carte, cliquez sur Éditer avec l'IA et instruisez : 'rendez cette diapositive plus directe et réduisez à 3 sujets'.",
+            practice: {
+              title: "Éditez avec précision",
+              instruction: "Complétez la séquence d'édition dans Gamma.",
+              terms: ["carte", "réécrivez", "/", "formatage", "espacement"],
+              solution:
+                "Pour éditer une carte dans Gamma : cliquez sur la carte que vous souhaitez modifier, sélectionnez le texte et réécrivez directement, utilisez la commande / pour insérer de nouveaux éléments comme des listes ou images, et utilisez les options de formatage du panneau latéral pour ajuster la taille, l'alignement et l'espacement du contenu.",
+            },
+            quiz: {
+              question: "Quelle commande IA dans Gamma est la plus utile pour améliorer une présentation existante ?",
+              options: [
+                "Demander à l'IA de générer une présentation complètement nouvelle de zéro",
+                "Utiliser uniquement les modèles sans impliquer l'IA dans l'édition",
+                "Sélectionner une carte spécifique, cliquer sur Éditer avec l'IA et donner une instruction précise",
+                "L'IA ne peut être utilisée que dans la création initiale, pas dans l'édition"
+              ],
+              correctIndex: 2,
+              explanation:
+                "Sélectionner une carte spécifique, cliquer sur Éditer avec l'IA et donner une instruction précise — comme 'rendez cette diapositive plus directe et réduisez à 3 sujets' — pour affiner sans perdre le contexte du reste de la présentation.",
+            },
+            takeaway:
+              "Éditer dans Gamma est intuitif et rapide — surtout lorsque vous combinez édition directe avec les affinements via l'IA. Éditez avec précision. Affinez avec l'IA. Présentez avec confiance.",
+          },
+          {
+            number: 4,
+            title: "Fonctionnalités Avancées de Gamma — IA, Embeds et Interactivité",
+            summary: "Vidéos, graphiques, Gamma Agent et redesign en un clic.",
+            outcome: "Maîtrise des fonctionnalités qui transforment les présentations en expériences interactives.",
+            intro:
+              "Vous apprenez à intégrer des médias externes, créer des graphiques, utiliser Gamma Agent et redesigner visuellement.",
+            keyPoints: [
+              "Embeds maintiennent le spectateur dans la présentation.",
+              "Graphiques sont générés automatiquement à partir des données.",
+              "Gamma Agent permet des changements en langage naturel.",
+              "Redesign en un clic teste les styles visuels rapidement.",
+            ],
+            lessonSteps: GAMMA_MODULE_4_STEPS_FR,
+            promptExample:
+              "Utilisez la commande / pour insérer un graphique, entrez vos données et ajustez couleurs et légendes pour maintenir la cohérence visuelle.",
+            practice: {
+              title: "Visualisez données",
+              instruction: "Complétez la séquence pour créer un graphique dans Gamma.",
+              terms: ["/", "Graphique", "données", "couleurs", "légendes", "emplacement idéal"],
+              solution:
+                "Pour créer un graphique dans Gamma : utilisez la commande / pour insérer un nouvel élément, choisissez le type Graphique souhaité, entrez vos données ou décrivez les informations pour que l'IA génère automatiquement, ajustez couleurs et légendes pour maintenir la cohérence avec le reste de la présentation et positionnez le graphique à l'emplacement idéal de la carte.",
+            },
+            quiz: {
+              question: "Pourquoi intégrer des vidéos et graphiques directement dans la présentation est-il plus efficace que de créer un lien vers l'extérieur ?",
+              options: [
+                "Parce que le spectateur voit et interagit avec le contenu sans quitter la présentation",
+                "Parce que les liens externes ne fonctionnent jamais dans les présentations en direct",
+                "Les embeds ne fonctionnent que dans les plans payants de Gamma",
+                "Il n'y a pas de différence pratique entre un embed et un lien externe"
+              ],
+              correctIndex: 0,
+              explanation:
+                "Parce que le spectateur voit et interagit avec le contenu sans quitter la présentation — maintenant le flux narratif et éliminant le risque de perdre l'audience dans un onglet différent.",
+            },
+            takeaway:
+              "Les fonctionnalités avancées de Gamma transforment les présentations statiques en expériences interactives. Intégrez des médias. Visualisez des données. Redesignez avec intention.",
           }
         ]
       }
