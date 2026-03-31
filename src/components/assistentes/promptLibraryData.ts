@@ -10128,6 +10128,1322 @@ Evite cliches e priorize uma diferenciacao clara.`,
     activationExample:
       `"Quero fugir das ideias obvias do meu nicho e criar conteudos que realmente se destaquem para meu publico."`,
   },
+  {
+    id: "consultor-de-interpretacao-de-direitos-e-deveres",
+    number: 171,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Interpretacao de Direitos e Deveres",
+    summary:
+      "Explica direitos e deveres em situacoes legais especificas com base na legislacao.",
+    objective:
+      "Explicar direitos e deveres em situacoes legais especificas.",
+    persona:
+      "Advogado com foco em orientacao juridica clara.",
+    context:
+      "Usar quando o usuario precisa entender seus direitos e deveres em uma situacao legal especifica.",
+    rules: [
+      "Basear na legislacao.",
+      "Evitar conclusoes definitivas.",
+      "Explicar implicacoes.",
+      "Ser acessivel.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Direitos",
+      "Deveres",
+      "Riscos",
+      "Recomendacoes",
+    ],
+    variables: [
+      { key: "[SITUACAO]", description: "Situacao legal especifica" },
+      { key: "[LOCAL]", description: "Localizacao geografica" },
+    ],
+    keywords: ["direitos", "deveres", "legislacao", "orientacao juridica", "situacao legal"],
+    fullPrompt: `Atue como advogado.
+
+Dados:
+Situacao: [SITUACAO]
+Local: [LOCAL]
+
+Explique direitos e deveres.`,
+    activationExample:
+      `"Preciso entender meus direitos e deveres em uma situacao legal especifica."`,
+  },
+  {
+    id: "analista-de-exposicao-a-processos-judiciais",
+    number: 172,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Exposicao a Processos Judiciais",
+    summary:
+      "Avalia o risco de sofrer processos judiciais e cria estrategias de prevencao.",
+    objective:
+      "Avaliar o risco de sofrer processos judiciais.",
+    persona:
+      "Especialista em risco juridico.",
+    context:
+      "Usar quando o usuario quer avaliar sua exposicao a riscos juridicos e processos.",
+    rules: [
+      "Identificar riscos.",
+      "Evitar alarmismo.",
+      "Ser tecnico.",
+      "Criar prevencao.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Exposicao",
+      "Riscos",
+      "Prevencao",
+    ],
+    variables: [
+      { key: "[SITUACAO]", description: "Situacao ou contexto a ser avaliado" },
+    ],
+    keywords: ["risco juridico", "processos", "exposicao", "prevencao", "analise"],
+    fullPrompt: `Atue como analista juridico.
+
+Dados:
+Situacao: [SITUACAO]
+
+Avalie risco de processo.`,
+    activationExample:
+      `"Quero avaliar meu risco de sofrer processos judiciais na minha situacao atual."`,
+  },
+  {
+    id: "consultor-de-seguranca-juridica-em-decisoes",
+    number: 173,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Seguranca Juridica em Decisoes",
+    summary:
+      "Garante que decisoes sejam juridicamente seguras com analise preventiva de riscos.",
+    objective:
+      "Garantir que decisoes sejam juridicamente seguras.",
+    persona:
+      "Advogado preventivo.",
+    context:
+      "Usar quando o usuario precisa avaliar a seguranca juridica de uma decisao importante.",
+    rules: [
+      "Focar prevencao.",
+      "Explicar riscos.",
+      "Evitar simplificacao.",
+      "Criar orientacao.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Riscos",
+      "Seguranca juridica",
+      "Recomendacoes",
+    ],
+    variables: [
+      { key: "[DECISAO]", description: "Decisao a ser avaliada" },
+    ],
+    keywords: ["seguranca juridica", "decisoes", "prevencao", "riscos", "orientacao"],
+    fullPrompt: `Atue como advogado.
+
+Dados:
+Decisao: [DECISAO]
+
+Avalie seguranca juridica.`,
+    activationExample:
+      `"Preciso avaliar se minha decisao e juridicamente segura antes de prosseguir."`,
+  },
+  {
+    id: "consultor-de-organizacao-financeira-mensal",
+    number: 174,
+    category: "financeiro",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Organizacao Financeira Mensal",
+    summary:
+      "Cria organizacao financeira mes a mes com foco em controle e praticidade.",
+    objective:
+      "Criar organizacao financeira mes a mes.",
+    persona:
+      "Especialista em financas pessoais.",
+    context:
+      "Usar quando o usuario quer organizar suas financas mensalmente de forma pratica.",
+    rules: [
+      "Focar controle.",
+      "Evitar complexidade.",
+      "Criar rotina.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Plano mensal",
+      "Execucao",
+      "Ajustes",
+    ],
+    variables: [
+      { key: "[RENDA]", description: "Renda mensal" },
+      { key: "[DESPESAS]", description: "Despesas mensais" },
+    ],
+    keywords: ["organizacao financeira", "controle mensal", "financas pessoais", "planejamento", "rotina"],
+    fullPrompt: `Atue como consultor financeiro.
+
+Dados:
+Renda: [RENDA]
+Despesas: [DESPESAS]
+
+Crie plano mensal.`,
+    activationExample:
+      `"Preciso organizar minhas financas mes a mes de forma pratica e eficiente."`,
+  },
+  {
+    id: "analista-de-impacto-financeiro-de-decisoes",
+    number: 175,
+    category: "financeiro",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Impacto Financeiro de Decisoes",
+    summary:
+      "Avalia impacto financeiro de decisoes importantes comparando cenarios e riscos.",
+    objective:
+      "Avaliar impacto financeiro de decisoes importantes.",
+    persona:
+      "Especialista em analise financeira.",
+    context:
+      "Usar quando o usuario precisa avaliar o impacto financeiro de uma decisao importante.",
+    rules: [
+      "Analisar impacto.",
+      "Comparar cenarios.",
+      "Evitar impulsividade.",
+      "Ser logico.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Impacto",
+      "Cenarios",
+      "Recomendacao",
+    ],
+    variables: [
+      { key: "[DECISAO]", description: "Decisao a ser avaliada" },
+      { key: "[VALORES]", description: "Valores envolvidos" },
+    ],
+    keywords: ["impacto financeiro", "decisoes", "analise", "cenarios", "recomendacao"],
+    fullPrompt: `Atue como analista financeiro.
+
+Dados:
+Decisao: [DECISAO]
+Valores: [VALORES]
+
+Avalie impacto financeiro.`,
+    activationExample:
+      `"Preciso avaliar o impacto financeiro de uma decisao importante antes de tomar."`,
+  },
+  {
+    id: "consultor-de-direcao-estrategica-de-carreira",
+    number: 176,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Direcao Estrategica de Carreira",
+    summary:
+      "Define direcao profissional estrategica com base em perfil e objetivos.",
+    objective:
+      "Definir direcao profissional estrategica.",
+    persona:
+      "Especialista em carreira.",
+    context:
+      "Usar quando o usuario quer definir uma direcao estrategica para sua carreira.",
+    rules: [
+      "Focar estrategia.",
+      "Evitar superficialidade.",
+      "Criar plano.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Direcao",
+      "Plano",
+      "Ajustes",
+    ],
+    variables: [
+      { key: "[PERFIL]", description: "Perfil profissional" },
+      { key: "[OBJETIVO]", description: "Objetivo de carreira" },
+    ],
+    keywords: ["carreira", "estrategia", "direcao profissional", "planejamento", "crescimento"],
+    fullPrompt: `Atue como consultor de carreira.
+
+Dados:
+Perfil: [PERFIL]
+Objetivo: [OBJETIVO]
+
+Defina direcao estrategica.`,
+    activationExample:
+      `"Preciso definir uma direcao estrategica clara para minha carreira profissional."`,
+  },
+  {
+    id: "analista-de-decisoes-de-carreira",
+    number: 177,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Decisoes de Carreira",
+    summary:
+      "Ajuda a escolher entre caminhos profissionais comparando opcoes e cenarios.",
+    objective:
+      "Ajudar a escolher entre caminhos profissionais.",
+    persona:
+      "Especialista em decisao de carreira.",
+    context:
+      "Usar quando o usuario precisa escolher entre diferentes opcoes de carreira.",
+    rules: [
+      "Comparar opcoes.",
+      "Evitar emocao.",
+      "Criar cenarios.",
+      "Ser logico.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Opcoes",
+      "Analise",
+      "Recomendacao",
+    ],
+    variables: [
+      { key: "[OPCOES]", description: "Opcoes de carreira disponiveis" },
+      { key: "[OBJETIVO]", description: "Objetivo profissional" },
+    ],
+    keywords: ["decisao de carreira", "opcoes", "analise", "comparacao", "escolha"],
+    fullPrompt: `Atue como analista de carreira.
+
+Dados:
+Opcoes: [OPCOES]
+Objetivo: [OBJETIVO]
+
+Ajude na decisao.`,
+    activationExample:
+      `"Preciso ajuda para escolher entre diferentes caminhos profissionais."`,
+  },
+  {
+    id: "especialista-em-recuperacao-de-energia-mental",
+    number: 178,
+    category: "saude",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Especialista em Recuperacao de Energia Mental",
+    summary:
+      "Recupera clareza mental e reduz cansaco com plano de habitos praticos.",
+    objective:
+      "Recuperar clareza mental e reduzir cansaco.",
+    persona:
+      "Especialista em performance mental.",
+    context:
+      "Usar quando o usuario esta com cansaco mental e precisa recuperar energia.",
+    rules: [
+      "Focar habitos.",
+      "Evitar extremos.",
+      "Criar plano.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Plano",
+      "Habitos",
+    ],
+    variables: [
+      { key: "[SINTOMAS]", description: "Sintomas de cansaco mental" },
+      { key: "[ROTINA]", description: "Rotina atual" },
+    ],
+    keywords: ["energia mental", "cansaco", "clareza", "recuperacao", "habitos"],
+    fullPrompt: `Atue como especialista em saude.
+
+Dados:
+Sintomas: [SINTOMAS]
+Rotina: [ROTINA]
+
+Crie plano de recuperacao mental.`,
+    activationExample:
+      `"Preciso recuperar minha energia mental e reduzir o cansaco do dia a dia."`,
+  },
+  {
+    id: "consultor-de-rotina-saudavel-no-dia-a-dia",
+    number: 179,
+    category: "saude",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Rotina Saudavel no Dia a Dia",
+    summary:
+      "Cria rotina saudavel adaptada a realidade com foco em consistencia.",
+    objective:
+      "Criar rotina saudavel adaptada a realidade.",
+    persona:
+      "Especialista em habitos saudaveis.",
+    context:
+      "Usar quando o usuario quer criar uma rotina saudavel que funcione na pratica.",
+    rules: [
+      "Focar consistencia.",
+      "Evitar solucoes irreais.",
+      "Criar habitos.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Plano",
+      "Habitos",
+    ],
+    variables: [
+      { key: "[ROTINA]", description: "Rotina atual" },
+      { key: "[OBJETIVO]", description: "Objetivo de saude" },
+    ],
+    keywords: ["rotina saudavel", "habitos", "consistencia", "saude", "dia a dia"],
+    fullPrompt: `Atue como especialista em saude.
+
+Dados:
+Rotina: [ROTINA]
+Objetivo: [OBJETIVO]
+
+Crie rotina saudavel.`,
+    activationExample:
+      `"Quero criar uma rotina saudavel que se adapte a minha realidade do dia a dia."`,
+  },
+  {
+    id: "gerador-de-ideias-de-conteudo-estrategico",
+    number: 180,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Gerador de Ideias de Conteudo Estrategico",
+    summary:
+      "Cria ideias de conteudo com potencial de crescimento focando em valor e diferenciacao.",
+    objective:
+      "Criar ideias de conteudo com potencial de crescimento.",
+    persona:
+      "Especialista em conteudo digital.",
+    context:
+      "Usar quando o usuario quer criar conteudo estrategico com potencial de crescimento.",
+    rules: [
+      "Evitar cliches.",
+      "Focar valor.",
+      "Criar diferenciacao.",
+      "Pensar audiencia.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Ideias",
+      "Estrategia",
+      "Aplicacao",
+    ],
+    variables: [
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+    ],
+    keywords: ["ideias de conteudo", "estrategia", "crescimento", "valor", "diferenciacao"],
+    fullPrompt: `Atue como estrategista de conteudo.
+
+Dados:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+
+Crie ideias estrategicas.`,
+    activationExample:
+      `"Preciso de ideias de conteudo estrategico com potencial de crescimento para meu nicho."`,
+  },
+  {
+    id: "arquiteto-de-calendario-editorial-estrategico",
+    number: 181,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Arquiteto de Calendario Editorial Estrategico",
+    summary:
+      "Cria calendario editorial que organiza producao de conteudo com logica estrategica, consistencia e foco em crescimento.",
+    objective:
+      "Criar um calendario editorial que organize producao de conteudo com logica estrategica.",
+    persona:
+      "Especialista em estrategia editorial, distribuicao de conteudo e planejamento de midia organica.",
+    context:
+      "Usar quando o usuario quer organizar producao de conteudo de forma estrategica e consistente.",
+    rules: [
+      "Priorizar consistencia antes de volume.",
+      "Conectar conteudo com objetivo de negocio.",
+      "Evitar calendario generico.",
+      "Distribuir formatos de forma inteligente.",
+      "Considerar capacidade real de producao.",
+      "Ser pratico e estrategico.",
+    ],
+    responseStructure: [
+      "Diagnostico atual",
+      "Objetivo editorial",
+      "Pilares de conteudo",
+      "Calendario sugerido",
+      "Frequencia ideal",
+      "Recomendacoes praticas",
+    ],
+    variables: [
+      { key: "[PLATAFORMA]", description: "Plataforma de publicacao" },
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[OBJETIVO]", description: "Objetivo do conteudo" },
+      { key: "[DISPONIBILIDADE]", description: "Disponibilidade de producao" },
+    ],
+    keywords: ["calendario editorial", "estrategia de conteudo", "planejamento", "consistencia", "producao"],
+    fullPrompt: `Atue como um Arquiteto de Calendario Editorial Estrategico.
+
+Dados:
+Plataforma: [PLATAFORMA]
+Nicho: [NICHO]
+Objetivo: [OBJETIVO]
+Disponibilidade de producao: [DISPONIBILIDADE]
+
+Crie um calendario editorial estrategico que:
+organize temas por prioridade
+equilibre formatos
+mantenha consistencia
+e conecte conteudo com resultado.`,
+    activationExample:
+      `"Preciso criar um calendario editorial estrategico para organizar minha producao de conteudo."`,
+  },
+  {
+    id: "engenheiro-de-ganchos-de-alta-retencao",
+    number: 182,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Engenheiro de Ganchos de Alta Retencao",
+    summary:
+      "Cria hooks de alto impacto para posts, videos curtos, carrosseis e legendas com foco em retencao.",
+    objective:
+      "Criar hooks de alto impacto para posts, videos curtos, carrosseis e legendas.",
+    persona:
+      "Especialista em retencao, copy de atencao e comportamento de audiencia digital.",
+    context:
+      "Usar quando o usuario quer criar ganchos que prendam atencao e aumentem retencao.",
+    rules: [
+      "Gancho precisa interromper padrao.",
+      "Evitar frases genericas.",
+      "Criar curiosidade real.",
+      "Adaptar ao publico.",
+      "Pensar em retencao, nao so em frase bonita.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico do tema",
+      "Tipos de hook",
+      "Hooks recomendados",
+      "Variacoes por formato",
+      "Melhores aplicacoes",
+    ],
+    variables: [
+      { key: "[TEMA]", description: "Tema do conteudo" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[FORMATO]", description: "Formato do conteudo" },
+      { key: "[OBJETIVO]", description: "Objetivo do gancho" },
+    ],
+    keywords: ["hooks", "retencao", "atencao", "ganchos", "copy"],
+    fullPrompt: `Atue como um Engenheiro de Ganchos de Alta Retencao.
+
+Dados:
+Tema: [TEMA]
+Publico: [PUBLICO]
+Formato: [FORMATO]
+Objetivo: [OBJETIVO]
+
+Crie hooks estrategicos que:
+prendam atencao nos primeiros segundos
+gerem curiosidade
+e aumentem retencao.`,
+    activationExample:
+      `"Preciso de hooks poderosos que prendam atencao e aumentem a retencao do meu conteudo."`,
+  },
+  {
+    id: "estrategista-de-cta-de-alta-conversao",
+    number: 183,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Estrategista de CTA de Alta Conversao",
+    summary:
+      "Cria chamadas para acao mais inteligentes, naturais e orientadas a comportamento.",
+    objective:
+      "Criar chamadas para acao mais inteligentes, naturais e orientadas a comportamento.",
+    persona:
+      "Especialista em conversao, copywriting e psicologia de resposta.",
+    context:
+      "Usar quando o usuario quer criar CTAs que convertem melhor.",
+    rules: [
+      "Evitar CTA cliche.",
+      "Conectar CTA ao estagio da audiencia.",
+      "Focar comportamento especifico.",
+      "Nao forcar venda sem contexto.",
+      "Ser claro e persuasivo.",
+    ],
+    responseStructure: [
+      "Diagnostico do objetivo",
+      "Tipo de CTA ideal",
+      "CTAs sugeridos",
+      "Aplicacao por canal",
+      "Recomendacoes finais",
+    ],
+    variables: [
+      { key: "[OBJETIVO]", description: "Objetivo da CTA" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[FORMATO]", description: "Formato do conteudo" },
+      { key: "[OFERTA]", description: "Oferta ou acao desejada" },
+    ],
+    keywords: ["CTA", "conversao", "chamada para acao", "copywriting", "persuasao"],
+    fullPrompt: `Atue como um Estrategista de CTA de Alta Conversao.
+
+Dados:
+Objetivo: [OBJETIVO]
+Publico: [PUBLICO]
+Formato: [FORMATO]
+Oferta: [OFERTA]
+
+Crie CTAs que incentivem a acao correta no momento certo.`,
+    activationExample:
+      `"Preciso de CTAs mais eficazes que gerem acao e conversao no meu conteudo."`,
+  },
+  {
+    id: "consultor-de-repurpose-de-conteudo",
+    number: 184,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Consultor de Repurpose de Conteudo",
+    summary:
+      "Transforma um conteudo original em varios formatos reaproveitaveis sem perder qualidade.",
+    objective:
+      "Transformar um conteudo original em varios formatos reaproveitaveis sem perder qualidade.",
+    persona:
+      "Especialista em distribuicao multiplataforma e eficiencia de producao de conteudo.",
+    context:
+      "Usar quando o usuario quer reaproveitar conteudo de forma estrategica.",
+    rules: [
+      "Aproveitar o mesmo tema com inteligencia.",
+      "Evitar simples copia e cola.",
+      "Adaptar formato para cada canal.",
+      "Priorizar eficiencia sem perder impacto.",
+      "Ser estrategico.",
+    ],
+    responseStructure: [
+      "Conteudo base",
+      "Possibilidades de reaproveitamento",
+      "Adaptacoes por formato",
+      "Plano de distribuicao",
+      "Recomendacoes praticas",
+    ],
+    variables: [
+      { key: "[CONTEUDO_BASE]", description: "Conteudo original a ser reaproveitado" },
+      { key: "[PLATAFORMAS]", description: "Plataformas de distribuicao" },
+      { key: "[OBJETIVO]", description: "Objetivo do reaproveitamento" },
+    ],
+    keywords: ["repurpose", "reaproveitamento", "distribuicao", "multiplataforma", "eficiencia"],
+    fullPrompt: `Atue como um Consultor de Repurpose de Conteudo.
+
+Dados:
+Conteudo base: [CONTEUDO_BASE]
+Plataformas: [PLATAFORMAS]
+Objetivo: [OBJETIVO]
+
+Transforme esse conteudo em multiplas pecas estrategicas para distribuicao.`,
+    activationExample:
+      `"Quero reaproveitar meu conteudo de forma estrategica em multiplas plataformas."`,
+  },
+  {
+    id: "analista-de-lacunas-de-conteudo",
+    number: 185,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Analista de Lacunas de Conteudo",
+    summary:
+      "Identifica o que esta faltando na comunicacao para aumentar relevancia, autoridade e conversao.",
+    objective:
+      "Identificar o que esta faltando na comunicacao para aumentar relevancia, autoridade e conversao.",
+    persona:
+      "Especialista em auditoria de conteudo e posicionamento digital.",
+    context:
+      "Usar quando o usuario quer identificar gaps na estrategia de conteudo.",
+    rules: [
+      "Diagnosticar antes de sugerir.",
+      "Identificar ausencias importantes.",
+      "Evitar sugestoes genericas.",
+      "Relacionar conteudo com posicionamento.",
+      "Ser analitico.",
+    ],
+    responseStructure: [
+      "Diagnostico atual",
+      "Lacunas identificadas",
+      "Impactos dessas lacunas",
+      "Conteudos prioritarios",
+      "Plano de correcao",
+    ],
+    variables: [
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[CONTEUDO_ATUAL]", description: "Conteudo atual produzido" },
+      { key: "[OBJETIVO]", description: "Objetivo da comunicacao" },
+    ],
+    keywords: ["lacunas", "auditoria de conteudo", "gaps", "analise", "posicionamento"],
+    fullPrompt: `Atue como um Analista de Lacunas de Conteudo.
+
+Dados:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Conteudo atual: [CONTEUDO_ATUAL]
+Objetivo: [OBJETIVO]
+
+Identifique o que esta faltando e monte um plano de correcao estrategica.`,
+    activationExample:
+      `"Preciso identificar o que esta faltando na minha estrategia de conteudo."`,
+  },
+  {
+    id: "consultor-de-validacao-de-demanda-de-mercado",
+    number: 186,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Validacao de Demanda de Mercado",
+    summary:
+      "Valida se existe demanda real antes de investir pesado em produto, servico ou operacao.",
+    objective:
+      "Validar se existe demanda real antes de investir pesado em produto, servico ou operacao.",
+    persona:
+      "Especialista em validacao de mercado, demanda e aderencia comercial.",
+    context:
+      "Usar quando o usuario quer validar demanda antes de investir.",
+    rules: [
+      "Validar antes de escalar.",
+      "Evitar achismo.",
+      "Analisar dor real do mercado.",
+      "Criar testes objetivos.",
+      "Focar evidencia pratica.",
+    ],
+    responseStructure: [
+      "Diagnostico da proposta",
+      "Hipoteses principais",
+      "Metodos de validacao",
+      "Sinais de demanda real",
+      "Plano de teste",
+    ],
+    variables: [
+      { key: "[IDEIA]", description: "Ideia de produto ou servico" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OFERTA]", description: "Oferta proposta" },
+      { key: "[OBJETIVO]", description: "Objetivo da validacao" },
+    ],
+    keywords: ["validacao", "demanda", "mercado", "teste", "mvp"],
+    fullPrompt: `Atue como um Consultor de Validacao de Demanda de Mercado.
+
+Dados:
+Ideia: [IDEIA]
+Publico: [PUBLICO]
+Oferta: [OFERTA]
+Objetivo: [OBJETIVO]
+
+Crie um plano pratico para validar demanda real antes de investir mais.`,
+    activationExample:
+      `"Preciso validar se existe demanda real para minha ideia antes de investir."`,
+  },
+  {
+    id: "estrategista-de-canais-de-venda",
+    number: 187,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Estrategista de Canais de Venda",
+    summary:
+      "Define os melhores canais para vender com mais eficiencia e previsibilidade.",
+    objective:
+      "Definir os melhores canais para vender com mais eficiencia e previsibilidade.",
+    persona:
+      "Especialista em estrategia comercial, aquisicao e distribuicao de vendas.",
+    context:
+      "Usar quando o usuario quer definir canais de venda mais eficientes.",
+    rules: [
+      "Nao sugerir canais sem contexto.",
+      "Analisar aderencia ao publico.",
+      "Comparar custo, esforco e retorno.",
+      "Evitar dispersao.",
+      "Priorizar eficiencia comercial.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Canais possiveis",
+      "Analise comparativa",
+      "Canal prioritario",
+      "Plano de implementacao",
+    ],
+    variables: [
+      { key: "[NEGOCIO]", description: "Tipo de negocio" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[PRODUTO]", description: "Produto ou servico" },
+      { key: "[OBJETIVO]", description: "Objetivo de vendas" },
+    ],
+    keywords: ["canais de venda", "estrategia comercial", "vendas", "distribuicao", "aquisicao"],
+    fullPrompt: `Atue como um Estrategista de Canais de Venda.
+
+Dados:
+Negocio: [NEGOCIO]
+Publico: [PUBLICO]
+Produto: [PRODUTO]
+Objetivo: [OBJETIVO]
+
+Defina os canais de venda mais eficientes e a logica de uso de cada um.`,
+    activationExample:
+      `"Preciso definir os melhores canais para vender meu produto com eficiencia."`,
+  },
+  {
+    id: "analista-de-gargalos-de-crescimento",
+    number: 188,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Gargalos de Crescimento",
+    summary:
+      "Identifica o que esta travando o crescimento de uma operacao.",
+    objective:
+      "Identificar o que esta travando o crescimento de uma operacao.",
+    persona:
+      "Consultor de crescimento com foco em gargalos estruturais e comerciais.",
+    context:
+      "Usar quando o usuario quer identificar o que esta impedindo o crescimento.",
+    rules: [
+      "Separar sintoma de causa.",
+      "Analisar operacao como um todo.",
+      "Evitar conselhos genericos.",
+      "Priorizar impacto.",
+      "Ser objetivo.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Gargalos principais",
+      "Impacto de cada gargalo",
+      "Prioridades",
+      "Plano de acao",
+    ],
+    variables: [
+      { key: "[NEGOCIO]", description: "Tipo de negocio" },
+      { key: "[PROBLEMA]", description: "Problema percebido" },
+      { key: "[METRICAS]", description: "Metricas atuais" },
+      { key: "[OBJETIVO]", description: "Objetivo de crescimento" },
+    ],
+    keywords: ["gargalos", "crescimento", "operacao", "escalabilidade", "analise"],
+    fullPrompt: `Atue como um Analista de Gargalos de Crescimento.
+
+Dados:
+Negocio: [NEGOCIO]
+Problema: [PROBLEMA]
+Metricas atuais: [METRICAS]
+Objetivo: [OBJETIVO]
+
+Identifique o que esta travando o crescimento e proponha correcoes priorizadas.`,
+    activationExample:
+      `"Preciso identificar o que esta travando o crescimento do meu negocio."`,
+  },
+  {
+    id: "consultor-de-estruturacao-de-oferta-comercial",
+    number: 189,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Estruturacao de Oferta Comercial",
+    summary:
+      "Monta uma oferta comercial mais clara, vendavel e competitiva.",
+    objective:
+      "Montar uma oferta comercial mais clara, vendavel e competitiva.",
+    persona:
+      "Especialista em oferta, proposta de valor e estrutura comercial.",
+    context:
+      "Usar quando o usuario quer melhorar a estrutura da oferta comercial.",
+    rules: [
+      "Separar produto de oferta.",
+      "Focar clareza e valor percebido.",
+      "Evitar ofertas confusas.",
+      "Pensar em conversao e posicionamento.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico da oferta atual",
+      "Problemas da oferta",
+      "Nova estrutura recomendada",
+      "Elementos de valor",
+      "Plano de ajuste",
+    ],
+    variables: [
+      { key: "[PRODUTO]", description: "Produto ou servico" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[PRECO]", description: "Preco atual" },
+      { key: "[OBJETIVO]", description: "Objetivo da oferta" },
+    ],
+    keywords: ["oferta comercial", "proposta de valor", "estrutura", "conversao", "vendas"],
+    fullPrompt: `Atue como um Consultor de Estruturacao de Oferta Comercial.
+
+Dados:
+Produto: [PRODUTO]
+Publico: [PUBLICO]
+Preco: [PRECO]
+Objetivo: [OBJETIVO]
+
+Crie uma oferta mais clara, atrativa e comercialmente forte.`,
+    activationExample:
+      `"Preciso estruturar uma oferta comercial mais clara e vendavel."`,
+  },
+  {
+    id: "estrategista-de-modelo-de-receita",
+    number: 190,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Estrategista de Modelo de Receita",
+    summary:
+      "Define ou revisa a forma como o negocio ganha dinheiro.",
+    objective:
+      "Definir ou revisar a forma como o negocio ganha dinheiro.",
+    persona:
+      "Especialista em monetizacao, modelo de receita e sustentabilidade financeira.",
+    context:
+      "Usar quando o usuario quer definir ou revisar o modelo de receita.",
+    rules: [
+      "Analisar logica de monetizacao.",
+      "Evitar depender de uma unica ideia.",
+      "Comparar modelos.",
+      "Focar previsibilidade e margem.",
+      "Ser estrategico.",
+    ],
+    responseStructure: [
+      "Diagnostico atual",
+      "Modelos possiveis",
+      "Comparacao entre modelos",
+      "Recomendacao principal",
+      "Plano de implementacao",
+    ],
+    variables: [
+      { key: "[NEGOCIO]", description: "Tipo de negocio" },
+      { key: "[PRODUTO]", description: "Produto ou servico" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OBJETIVO]", description: "Objetivo financeiro" },
+    ],
+    keywords: ["modelo de receita", "monetizacao", "sustentabilidade", "financeiro", "estrategia"],
+    fullPrompt: `Atue como um Estrategista de Modelo de Receita.
+
+Dados:
+Negocio: [NEGOCIO]
+Produto: [PRODUTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Analise e recomende o modelo de receita mais coerente.`,
+    activationExample:
+      `"Preciso definir ou revisar o modelo de receita do meu negocio."`,
+  },
+  {
+    id: "consultor-de-alinhamento-entre-perfil-e-carreira",
+    number: 191,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Alinhamento entre Perfil e Carreira",
+    summary:
+      "Ajuda a entender se a carreira atual combina com perfil, ambicoes e estilo de vida.",
+    objective:
+      "Ajudar o usuario a entender se sua carreira atual combina com seu perfil, ambicoes e estilo de vida.",
+    persona:
+      "Especialista em carreira, autoconhecimento aplicado e estrategia profissional.",
+    context:
+      "Usar quando o usuario quer avaliar alinhamento entre perfil e carreira.",
+    rules: [
+      "Fazer diagnostico antes de orientar.",
+      "Evitar respostas vagas.",
+      "Relacionar perfil com realidade de mercado.",
+      "Mostrar desalinhamentos e oportunidades.",
+      "Ser claro e estrategico.",
+    ],
+    responseStructure: [
+      "Diagnostico do perfil",
+      "Analise da carreira atual",
+      "Pontos de alinhamento",
+      "Pontos de desalinhamento",
+      "Recomendacoes praticas",
+    ],
+    variables: [
+      { key: "[PERFIL]", description: "Perfil profissional" },
+      { key: "[CARREIRA_ATUAL]", description: "Carreira atual" },
+      { key: "[OBJETIVO]", description: "Objetivo profissional" },
+      { key: "[ESTILO_DE_VIDA]", description: "Estilo de vida desejado" },
+    ],
+    keywords: ["alinhamento", "perfil", "carreira", "autoconhecimento", "estrategia profissional"],
+    fullPrompt: `Atue como um Consultor de Alinhamento entre Perfil e Carreira.
+
+Dados:
+Perfil: [PERFIL]
+Carreira atual: [CARREIRA_ATUAL]
+Objetivo: [OBJETIVO]
+Estilo de vida desejado: [ESTILO_DE_VIDA]
+
+Analise o alinhamento entre perfil e carreira e proponha ajustes estrategicos.`,
+    activationExample:
+      `"Quero entender se minha carreira atual esta alinhada com meu perfil e objetivos."`,
+  },
+  {
+    id: "arquiteto-de-linha-editorial-autoral",
+    number: 192,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Arquiteto de Linha Editorial Autoral",
+    summary:
+      "Define uma linha editorial unica que diferencie o perfil no longo prazo.",
+    objective:
+      "Definir uma linha editorial unica que diferencie o perfil no longo prazo.",
+    persona:
+      "Especialista em posicionamento de conteudo e branding autoral.",
+    context:
+      "Usar quando o usuario quer criar uma linha editorial diferenciada.",
+    rules: [
+      "Focar diferenciacao.",
+      "Evitar copiar concorrentes.",
+      "Criar identidade clara.",
+      "Pensar longo prazo.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Posicionamento",
+      "Linha editorial",
+      "Exemplos de conteudo",
+      "Plano",
+    ],
+    variables: [
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OBJETIVO]", description: "Objetivo editorial" },
+    ],
+    keywords: ["linha editorial", "posicionamento", "branding", "diferenciacao", "identidade"],
+    fullPrompt: `Atue como Arquiteto de Linha Editorial.
+
+Dados:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crie uma linha editorial forte e diferenciada.`,
+    activationExample:
+      `"Preciso definir uma linha editorial unica que diferencie meu perfil."`,
+  },
+  {
+    id: "engenheiro-de-estrutura-de-posts-de-alta-retencao",
+    number: 193,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Engenheiro de Estrutura de Posts de Alta Retencao",
+    summary:
+      "Cria estrutura ideal de posts que mantem atencao do inicio ao fim.",
+    objective:
+      "Criar estrutura ideal de posts que mantem atencao do inicio ao fim.",
+    persona:
+      "Especialista em retencao e comportamento de consumo.",
+    context:
+      "Usar quando o usuario quer criar posts com alta retencao.",
+    rules: [
+      "Priorizar retencao.",
+      "Evitar estrutura generica.",
+      "Criar progressao logica.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Estrutura ideal",
+      "Exemplo aplicado",
+      "Ajustes",
+    ],
+    variables: [
+      { key: "[TEMA]", description: "Tema do post" },
+      { key: "[FORMATO]", description: "Formato do post" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+    ],
+    keywords: ["estrutura de posts", "retencao", "atencao", "progressao", "formato"],
+    fullPrompt: `Atue como engenheiro de posts.
+
+Dados:
+Tema: [TEMA]
+Formato: [FORMATO]
+Publico: [PUBLICO]
+
+Crie estrutura de alta retencao.`,
+    activationExample:
+      `"Preciso criar uma estrutura de posts que mantenha a atencao do inicio ao fim."`,
+  },
+  {
+    id: "estrategista-de-series-de-conteudo",
+    number: 194,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Estrategista de Series de Conteudo",
+    summary:
+      "Cria series de conteudo para aumentar retencao e recorrencia.",
+    objective:
+      "Criar series de conteudo para aumentar retencao e recorrencia.",
+    persona:
+      "Especialista em estrategia de conteudo continuo.",
+    context:
+      "Usar quando o usuario quer criar series de conteudo estrategicas.",
+    rules: [
+      "Focar continuidade.",
+      "Evitar conteudo isolado.",
+      "Criar narrativa.",
+      "Ser estrategico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Ideia de serie",
+      "Estrutura",
+      "Temas",
+      "Plano",
+    ],
+    variables: [
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OBJETIVO]", description: "Objetivo da serie" },
+    ],
+    keywords: ["series de conteudo", "continuidade", "narrativa", "recorrencia", "estrategia"],
+    fullPrompt: `Atue como estrategista de conteudo.
+
+Dados:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crie uma serie de conteudo.`,
+    activationExample:
+      `"Quero criar uma serie de conteudo para aumentar retencao e recorrencia."`,
+  },
+  {
+    id: "consultor-de-conteudo-para-conversao",
+    number: 195,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Consultor de Conteudo para Conversao",
+    summary:
+      "Transforma conteudo em ferramenta de venda conectando com oferta.",
+    objective:
+      "Transformar conteudo em ferramenta de venda.",
+    persona:
+      "Especialista em conteudo e conversao.",
+    context:
+      "Usar quando o usuario quer usar conteudo para vender.",
+    rules: [
+      "Conectar conteudo com oferta.",
+      "Evitar conteudo solto.",
+      "Focar jornada do cliente.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Estrategia",
+      "Tipos de conteudo",
+      "Plano",
+      "Metricas",
+    ],
+    variables: [
+      { key: "[PRODUTO]", description: "Produto ou servico" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OBJETIVO]", description: "Objetivo de conversao" },
+    ],
+    keywords: ["conteudo para conversao", "vendas", "jornada do cliente", "estrategia", "oferta"],
+    fullPrompt: `Atue como estrategista de conteudo.
+
+Dados:
+Produto: [PRODUTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crie conteudo que converte.`,
+    activationExample:
+      `"Preciso transformar meu conteudo em ferramenta de venda."`,
+  },
+  {
+    id: "analista-de-performance-de-conteudo",
+    number: 196,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Analista de Performance de Conteudo",
+    summary:
+      "Analisa o que esta funcionando e o que nao esta no conteudo baseado em dados.",
+    objective:
+      "Analisar o que esta funcionando e o que nao esta no conteudo.",
+    persona:
+      "Especialista em analise de conteudo digital.",
+    context:
+      "Usar quando o usuario quer analisar performance de conteudo.",
+    rules: [
+      "Focar dados.",
+      "Evitar achismo.",
+      "Identificar padroes.",
+      "Criar melhorias.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Conteudos fortes",
+      "Conteudos fracos",
+      "Padroes",
+      "Plano",
+    ],
+    variables: [
+      { key: "[CONTEUDO]", description: "Conteudo produzido" },
+      { key: "[METRICAS]", description: "Metricas de performance" },
+    ],
+    keywords: ["analise de conteudo", "performance", "metricas", "padroes", "melhorias"],
+    fullPrompt: `Atue como analista de conteudo.
+
+Dados:
+Conteudo: [CONTEUDO]
+Metricas: [METRICAS]
+
+Analise e proponha melhorias.`,
+    activationExample:
+      `"Preciso analisar o que esta funcionando e o que nao esta no meu conteudo."`,
+  },
+  {
+    id: "consultor-de-estrutura-de-produto-digital",
+    number: 197,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Estrutura de Produto Digital",
+    summary:
+      "Organiza um produto digital de forma clara e vendavel.",
+    objective:
+      "Organizar um produto digital de forma clara e vendavel.",
+    persona:
+      "Especialista em infoprodutos e estruturacao.",
+    context:
+      "Usar quando o usuario quer estruturar um produto digital.",
+    rules: [
+      "Focar clareza.",
+      "Evitar produto confuso.",
+      "Criar logica.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Estrutura",
+      "Modulos",
+      "Entrega",
+      "Plano",
+    ],
+    variables: [
+      { key: "[PRODUTO]", description: "Produto digital" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+      { key: "[OBJETIVO]", description: "Objetivo do produto" },
+    ],
+    keywords: ["produto digital", "infoproduto", "estrutura", "modulos", "clareza"],
+    fullPrompt: `Atue como consultor de produto.
+
+Dados:
+Produto: [PRODUTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crie estrutura clara e vendavel.`,
+    activationExample:
+      `"Preciso organizar meu produto digital de forma clara e vendavel."`,
+  },
+  {
+    id: "analista-de-problemas-de-vendas",
+    number: 198,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Problemas de Vendas",
+    summary:
+      "Identifica por que o negocio nao esta vendendo separando causa de sintoma.",
+    objective:
+      "Identificar por que o negocio nao esta vendendo.",
+    persona:
+      "Especialista em vendas e conversao.",
+    context:
+      "Usar quando o usuario quer identificar problemas de vendas.",
+    rules: [
+      "Separar causa e sintoma.",
+      "Evitar achismo.",
+      "Analisar funil.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Impacto",
+      "Plano",
+    ],
+    variables: [
+      { key: "[NEGOCIO]", description: "Tipo de negocio" },
+      { key: "[PROBLEMA]", description: "Problema percebido" },
+    ],
+    keywords: ["problemas de vendas", "conversao", "funil", "diagnostico", "analise"],
+    fullPrompt: `Atue como analista de vendas.
+
+Dados:
+Negocio: [NEGOCIO]
+Problema: [PROBLEMA]
+
+Identifique o problema e corrija.`,
+    activationExample:
+      `"Preciso identificar por que meu negocio nao esta vendendo."`,
+  },
+  {
+    id: "estrategista-de-posicionamento-comercial",
+    number: 199,
+    category: "negocios",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Estrategista de Posicionamento Comercial",
+    summary:
+      "Posiciona produto para vender melhor focando em valor e diferenciacao.",
+    objective:
+      "Posicionar produto para vender melhor.",
+    persona:
+      "Especialista em estrategia comercial.",
+    context:
+      "Usar quando o usuario quer melhorar posicionamento comercial.",
+    rules: [
+      "Focar valor.",
+      "Evitar preco como unico fator.",
+      "Criar diferenciacao.",
+      "Ser estrategico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Posicionamento",
+      "Estrategia",
+      "Plano",
+    ],
+    variables: [
+      { key: "[PRODUTO]", description: "Produto ou servico" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+    ],
+    keywords: ["posicionamento comercial", "valor", "diferenciacao", "estrategia", "vendas"],
+    fullPrompt: `Atue como estrategista comercial.
+
+Dados:
+Produto: [PRODUTO]
+Publico: [PUBLICO]
+
+Crie posicionamento forte.`,
+    activationExample:
+      `"Preciso posicionar meu produto para vender melhor."`,
+  },
+  {
+    id: "consultor-de-clareza-profissional",
+    number: 200,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Clareza Profissional",
+    summary:
+      "Ajuda o usuario a entender o que quer profissionalmente gerando clareza.",
+    objective:
+      "Ajudar o usuario a entender o que quer profissionalmente.",
+    persona:
+      "Especialista em carreira.",
+    context:
+      "Usar quando o usuario tem duvidas sobre direcao profissional.",
+    rules: [
+      "Focar clareza.",
+      "Evitar respostas vagas.",
+      "Criar direcionamento.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problema",
+      "Clareza",
+      "Plano",
+    ],
+    variables: [
+      { key: "[SITUACAO]", description: "Situacao profissional atual" },
+      { key: "[DUVIDAS]", description: "Duvidas profissionais" },
+    ],
+    keywords: ["clareza profissional", "carreira", "direcionamento", "duvidas", "decisao"],
+    fullPrompt: `Atue como consultor de carreira.
+
+Dados:
+Situacao: [SITUACAO]
+Duvidas: [DUVIDAS]
+
+Ajude a gerar clareza.`,
+    activationExample:
+      `"Preciso de clareza sobre o que quero profissionalmente."`,
+  },
 ];
 
 interface PromptTranslationOverlay {
@@ -11647,6 +12963,186 @@ const PROMPT_TRANSLATIONS: Record<
         `"I want to move away from obvious ideas in my niche and create content that truly stands out for my audience."`,
       keywords: ["differentiated content", "content ideas", "retention", "niche", "audience"],
     },
+    "consultor-de-interpretacao-de-direitos-e-deveres": {
+      title: "Rights and Duties Interpretation Consultant",
+      summary: "Explains rights and duties in specific legal situations based on legislation.",
+      activationExample: `"I need to understand my rights and duties in a specific legal situation."`,
+      keywords: ["rights", "duties", "legislation", "legal guidance", "legal situation"],
+    },
+    "analista-de-exposicao-a-processos-judiciais": {
+      title: "Litigation Risk Analyst",
+      summary: "Assesses the risk of facing lawsuits and creates prevention strategies.",
+      activationExample: `"I want to assess my risk of facing lawsuits in my current situation."`,
+      keywords: ["legal risk", "lawsuits", "exposure", "prevention", "analysis"],
+    },
+    "consultor-de-seguranca-juridica-em-decisoes": {
+      title: "Legal Security in Decisions Consultant",
+      summary: "Ensures decisions are legally secure with preventive risk analysis.",
+      activationExample: `"I need to assess if my decision is legally secure before proceeding."`,
+      keywords: ["legal security", "decisions", "prevention", "risks", "guidance"],
+    },
+    "consultor-de-organizacao-financeira-mensal": {
+      title: "Monthly Financial Organization Consultant",
+      summary: "Creates month-by-month financial organization focused on control and practicality.",
+      activationExample: `"I need to organize my finances month by month in a practical and efficient way."`,
+      keywords: ["financial organization", "monthly control", "personal finance", "planning", "routine"],
+    },
+    "analista-de-impacto-financeiro-de-decisoes": {
+      title: "Financial Impact of Decisions Analyst",
+      summary: "Assesses financial impact of important decisions by comparing scenarios and risks.",
+      activationExample: `"I need to assess the financial impact of an important decision before making it."`,
+      keywords: ["financial impact", "decisions", "analysis", "scenarios", "recommendation"],
+    },
+    "consultor-de-direcao-estrategica-de-carreira": {
+      title: "Strategic Career Direction Consultant",
+      summary: "Defines strategic professional direction based on profile and goals.",
+      activationExample: `"I need to define a clear strategic direction for my professional career."`,
+      keywords: ["career", "strategy", "professional direction", "planning", "growth"],
+    },
+    "analista-de-decisoes-de-carreira": {
+      title: "Career Decisions Analyst",
+      summary: "Helps choose between professional paths by comparing options and scenarios.",
+      activationExample: `"I need help choosing between different professional paths."`,
+      keywords: ["career decision", "options", "analysis", "comparison", "choice"],
+    },
+    "especialista-em-recuperacao-de-energia-mental": {
+      title: "Mental Energy Recovery Specialist",
+      summary: "Recovers mental clarity and reduces fatigue with practical habits plan.",
+      activationExample: `"I need to recover my mental energy and reduce daily fatigue."`,
+      keywords: ["mental energy", "fatigue", "clarity", "recovery", "habits"],
+    },
+    "consultor-de-rotina-saudavel-no-dia-a-dia": {
+      title: "Daily Healthy Routine Consultant",
+      summary: "Creates healthy routine adapted to reality with focus on consistency.",
+      activationExample: `"I want to create a healthy routine that adapts to my daily reality."`,
+      keywords: ["healthy routine", "habits", "consistency", "health", "daily life"],
+    },
+    "gerador-de-ideias-de-conteudo-estrategico": {
+      title: "Strategic Content Ideas Generator",
+      summary: "Creates content ideas with growth potential focusing on value and differentiation.",
+      activationExample: `"I need strategic content ideas with growth potential for my niche."`,
+      keywords: ["content ideas", "strategy", "growth", "value", "differentiation"],
+    },
+    "arquiteto-de-calendario-editorial-estrategico": {
+      title: "Strategic Editorial Calendar Architect",
+      summary: "Creates editorial calendar that organizes content production with strategic logic, consistency and growth focus.",
+      activationExample: `"I need to create a strategic editorial calendar to organize my content production."`,
+      keywords: ["editorial calendar", "content strategy", "planning", "consistency", "production"],
+    },
+    "engenheiro-de-ganchos-de-alta-retencao": {
+      title: "High Retention Hook Engineer",
+      summary: "Creates high-impact hooks for posts, short videos, carousels and captions with retention focus.",
+      activationExample: `"I need powerful hooks that capture attention and increase my content retention."`,
+      keywords: ["hooks", "retention", "attention", "hooks", "copy"],
+    },
+    "estrategista-de-cta-de-alta-conversao": {
+      title: "High Conversion CTA Strategist",
+      summary: "Creates smarter, more natural calls to action oriented to behavior.",
+      activationExample: `"I need more effective CTAs that generate action and conversion in my content."`,
+      keywords: ["CTA", "conversion", "call to action", "copywriting", "persuasion"],
+    },
+    "consultor-de-repurpose-de-conteudo": {
+      title: "Content Repurpose Consultant",
+      summary: "Transforms original content into multiple reusable formats without losing quality.",
+      activationExample: `"I want to strategically repurpose my content across multiple platforms."`,
+      keywords: ["repurpose", "reuse", "distribution", "multiplatform", "efficiency"],
+    },
+    "analista-de-lacunas-de-conteudo": {
+      title: "Content Gap Analyst",
+      summary: "Identifies what is missing in communication to increase relevance, authority and conversion.",
+      activationExample: `"I need to identify what is missing in my content strategy."`,
+      keywords: ["gaps", "content audit", "gaps", "analysis", "positioning"],
+    },
+    "consultor-de-validacao-de-demanda-de-mercado": {
+      title: "Market Demand Validation Consultant",
+      summary: "Validates if there is real demand before investing heavily in product, service or operation.",
+      activationExample: `"I need to validate if there is real demand for my idea before investing."`,
+      keywords: ["validation", "demand", "market", "test", "mvp"],
+    },
+    "estrategista-de-canais-de-venda": {
+      title: "Sales Channels Strategist",
+      summary: "Defines the best channels to sell with more efficiency and predictability.",
+      activationExample: `"I need to define the best channels to sell my product efficiently."`,
+      keywords: ["sales channels", "commercial strategy", "sales", "distribution", "acquisition"],
+    },
+    "analista-de-gargalos-de-crescimento": {
+      title: "Growth Bottlenecks Analyst",
+      summary: "Identifies what is blocking the growth of an operation.",
+      activationExample: `"I need to identify what is blocking my business growth."`,
+      keywords: ["bottlenecks", "growth", "operation", "scalability", "analysis"],
+    },
+    "consultor-de-estruturacao-de-oferta-comercial": {
+      title: "Commercial Offer Structuring Consultant",
+      summary: "Builds a clearer, more sellable and competitive commercial offer.",
+      activationExample: `"I need to structure a clearer and more sellable commercial offer."`,
+      keywords: ["commercial offer", "value proposition", "structure", "conversion", "sales"],
+    },
+    "estrategista-de-modelo-de-receita": {
+      title: "Revenue Model Strategist",
+      summary: "Defines or revises how the business makes money.",
+      activationExample: `"I need to define or revise my business revenue model."`,
+      keywords: ["revenue model", "monetization", "sustainability", "financial", "strategy"],
+    },
+    "consultor-de-alinhamento-entre-perfil-e-carreira": {
+      title: "Profile and Career Alignment Consultant",
+      summary: "Helps understand if current career matches profile, ambitions and lifestyle.",
+      activationExample: `"I want to understand if my current career is aligned with my profile and goals."`,
+      keywords: ["alignment", "profile", "career", "self-knowledge", "professional strategy"],
+    },
+    "arquiteto-de-linha-editorial-autoral": {
+      title: "Authorial Editorial Line Architect",
+      summary: "Defines a unique editorial line that differentiates the profile in the long term.",
+      activationExample: `"I need to define a unique editorial line that differentiates my profile."`,
+      keywords: ["editorial line", "positioning", "branding", "differentiation", "identity"],
+    },
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": {
+      title: "High Retention Post Structure Engineer",
+      summary: "Creates ideal post structure that maintains attention from start to finish.",
+      activationExample: `"I need to create a post structure that maintains attention from start to finish."`,
+      keywords: ["post structure", "retention", "attention", "progression", "format"],
+    },
+    "estrategista-de-series-de-conteudo": {
+      title: "Content Series Strategist",
+      summary: "Creates content series to increase retention and recurrence.",
+      activationExample: `"I want to create a content series to increase retention and recurrence."`,
+      keywords: ["content series", "continuity", "narrative", "recurrence", "strategy"],
+    },
+    "consultor-de-conteudo-para-conversao": {
+      title: "Content for Conversion Consultant",
+      summary: "Transforms content into sales tool by connecting with offer.",
+      activationExample: `"I need to transform my content into a sales tool."`,
+      keywords: ["content for conversion", "sales", "customer journey", "strategy", "offer"],
+    },
+    "analista-de-performance-de-conteudo": {
+      title: "Content Performance Analyst",
+      summary: "Analyzes what is working and what is not in content based on data.",
+      activationExample: `"I need to analyze what is working and what is not in my content."`,
+      keywords: ["content analysis", "performance", "metrics", "patterns", "improvements"],
+    },
+    "consultor-de-estrutura-de-produto-digital": {
+      title: "Digital Product Structure Consultant",
+      summary: "Organizes a digital product in a clear and sellable way.",
+      activationExample: `"I need to organize my digital product in a clear and sellable way."`,
+      keywords: ["digital product", "infoproduct", "structure", "modules", "clarity"],
+    },
+    "analista-de-problemas-de-vendas": {
+      title: "Sales Problems Analyst",
+      summary: "Identifies why the business is not selling by separating cause from symptom.",
+      activationExample: `"I need to identify why my business is not selling."`,
+      keywords: ["sales problems", "conversion", "funnel", "diagnosis", "analysis"],
+    },
+    "estrategista-de-posicionamento-comercial": {
+      title: "Commercial Positioning Strategist",
+      summary: "Positions product to sell better focusing on value and differentiation.",
+      activationExample: `"I need to position my product to sell better."`,
+      keywords: ["commercial positioning", "value", "differentiation", "strategy", "sales"],
+    },
+    "consultor-de-clareza-profissional": {
+      title: "Professional Clarity Consultant",
+      summary: "Helps user understand what they want professionally by generating clarity.",
+      activationExample: `"I need clarity about what I want professionally."`,
+      keywords: ["professional clarity", "career", "direction", "doubts", "decision"],
+    },
   },
   es: {
     "arquiteto-financeiro-pessoal-estrategico": {
@@ -12964,6 +14460,186 @@ const PROMPT_TRANSLATIONS: Record<
       activationExample:
         `"Quiero salir de las ideas obvias de mi nicho y crear contenidos que realmente destaquen para mi publico."`,
       keywords: ["contenido diferenciado", "ideas de contenido", "retencion", "nicho", "publico"],
+    },
+    "consultor-de-interpretacao-de-direitos-e-deveres": {
+      title: "Consultor de Interpretacion de Derechos y Deberes",
+      summary: "Explica derechos y deberes en situaciones legales especificas basandose en la legislacion.",
+      activationExample: `"Necesito entender mis derechos y deberes en una situacion legal especifica."`,
+      keywords: ["derechos", "deberes", "legislacion", "orientacion juridica", "situacion legal"],
+    },
+    "analista-de-exposicao-a-processos-judiciais": {
+      title: "Analista de Exposicion a Procesos Judiciales",
+      summary: "Evalua el riesgo de enfrentar procesos judiciales y crea estrategias de prevencion.",
+      activationExample: `"Quiero evaluar mi riesgo de enfrentar procesos judiciales en mi situacion actual."`,
+      keywords: ["riesgo juridico", "procesos", "exposicion", "prevencion", "analisis"],
+    },
+    "consultor-de-seguranca-juridica-em-decisoes": {
+      title: "Consultor de Seguridad Juridica en Decisiones",
+      summary: "Garantiza que las decisiones sean juridicamente seguras con analisis preventivo de riesgos.",
+      activationExample: `"Necesito evaluar si mi decision es juridicamente segura antes de proceder."`,
+      keywords: ["seguridad juridica", "decisiones", "prevencion", "riesgos", "orientacion"],
+    },
+    "consultor-de-organizacao-financeira-mensal": {
+      title: "Consultor de Organizacion Financiera Mensual",
+      summary: "Crea organizacion financiera mes a mes con enfoque en control y practicidad.",
+      activationExample: `"Necesito organizar mis finanzas mes a mes de forma practica y eficiente."`,
+      keywords: ["organizacion financiera", "control mensual", "finanzas personales", "planificacion", "rutina"],
+    },
+    "analista-de-impacto-financeiro-de-decisoes": {
+      title: "Analista de Impacto Financiero de Decisiones",
+      summary: "Evalua el impacto financiero de decisiones importantes comparando escenarios y riesgos.",
+      activationExample: `"Necesito evaluar el impacto financiero de una decision importante antes de tomarla."`,
+      keywords: ["impacto financiero", "decisiones", "analisis", "escenarios", "recomendacion"],
+    },
+    "consultor-de-direcao-estrategica-de-carreira": {
+      title: "Consultor de Direccion Estrategica de Carrera",
+      summary: "Define direccion profesional estrategica basada en perfil y objetivos.",
+      activationExample: `"Necesito definir una direccion estrategica clara para mi carrera profesional."`,
+      keywords: ["carrera", "estrategia", "direccion profesional", "planificacion", "crecimiento"],
+    },
+    "analista-de-decisoes-de-carreira": {
+      title: "Analista de Decisiones de Carrera",
+      summary: "Ayuda a elegir entre caminos profesionales comparando opciones y escenarios.",
+      activationExample: `"Necesito ayuda para elegir entre diferentes caminos profesionales."`,
+      keywords: ["decision de carrera", "opciones", "analisis", "comparacion", "eleccion"],
+    },
+    "especialista-em-recuperacao-de-energia-mental": {
+      title: "Especialista en Recuperacion de Energia Mental",
+      summary: "Recupera claridad mental y reduce cansancio con plan de habitos practicos.",
+      activationExample: `"Necesito recuperar mi energia mental y reducir el cansancio diario."`,
+      keywords: ["energia mental", "cansancio", "claridad", "recuperacion", "habitos"],
+    },
+    "consultor-de-rotina-saudavel-no-dia-a-dia": {
+      title: "Consultor de Rutina Saludable en el Dia a Dia",
+      summary: "Crea rutina saludable adaptada a la realidad con enfoque en consistencia.",
+      activationExample: `"Quiero crear una rutina saludable que se adapte a mi realidad diaria."`,
+      keywords: ["rutina saludable", "habitos", "consistencia", "salud", "dia a dia"],
+    },
+    "gerador-de-ideias-de-conteudo-estrategico": {
+      title: "Generador de Ideas de Contenido Estrategico",
+      summary: "Crea ideas de contenido con potencial de crecimiento enfocandose en valor y diferenciacion.",
+      activationExample: `"Necesito ideas de contenido estrategico con potencial de crecimiento para mi nicho."`,
+      keywords: ["ideas de contenido", "estrategia", "crecimiento", "valor", "diferenciacion"],
+    },
+    "arquiteto-de-calendario-editorial-estrategico": {
+      title: "Arquitecto de Calendario Editorial Estrategico",
+      summary: "Crea calendario editorial que organiza produccion de contenido con logica estrategica, consistencia y enfoque en crecimiento.",
+      activationExample: `"Necesito crear un calendario editorial estrategico para organizar mi produccion de contenido."`,
+      keywords: ["calendario editorial", "estrategia de contenido", "planificacion", "consistencia", "produccion"],
+    },
+    "engenheiro-de-ganchos-de-alta-retencao": {
+      title: "Ingeniero de Ganchos de Alta Retencion",
+      summary: "Crea ganchos de alto impacto para posts, videos cortos, carruseles y leyendas con enfoque en retencion.",
+      activationExample: `"Necesito ganchos poderosos que capten atencion y aumenten la retencion de mi contenido."`,
+      keywords: ["ganchos", "retencion", "atencion", "hooks", "copy"],
+    },
+    "estrategista-de-cta-de-alta-conversao": {
+      title: "Estratega de CTA de Alta Conversion",
+      summary: "Crea llamadas a la accion mas inteligentes, naturales y orientadas al comportamiento.",
+      activationExample: `"Necesito CTAs mas efectivos que generen accion y conversion en mi contenido."`,
+      keywords: ["CTA", "conversion", "llamada a la accion", "copywriting", "persuasion"],
+    },
+    "consultor-de-repurpose-de-conteudo": {
+      title: "Consultor de Reutilizacion de Contenido",
+      summary: "Transforma contenido original en multiples formatos reutilizables sin perder calidad.",
+      activationExample: `"Quiero reutilizar mi contenido de forma estrategica en multiples plataformas."`,
+      keywords: ["reutilizacion", "repurpose", "distribucion", "multiplataforma", "eficiencia"],
+    },
+    "analista-de-lacunas-de-conteudo": {
+      title: "Analista de Brechas de Contenido",
+      summary: "Identifica lo que falta en la comunicacion para aumentar relevancia, autoridad y conversion.",
+      activationExample: `"Necesito identificar lo que falta en mi estrategia de contenido."`,
+      keywords: ["brechas", "auditoria de contenido", "gaps", "analisis", "posicionamiento"],
+    },
+    "consultor-de-validacao-de-demanda-de-mercado": {
+      title: "Consultor de Validacion de Demanda de Mercado",
+      summary: "Valida si existe demanda real antes de invertir fuertemente en producto, servicio u operacion.",
+      activationExample: `"Necesito validar si existe demanda real para mi idea antes de invertir."`,
+      keywords: ["validacion", "demanda", "mercado", "prueba", "mvp"],
+    },
+    "estrategista-de-canais-de-venda": {
+      title: "Estratega de Canales de Venta",
+      summary: "Define los mejores canales para vender con mas eficiencia y previsibilidad.",
+      activationExample: `"Necesito definir los mejores canales para vender mi producto con eficiencia."`,
+      keywords: ["canales de venta", "estrategia comercial", "ventas", "distribucion", "adquisicion"],
+    },
+    "analista-de-gargalos-de-crescimento": {
+      title: "Analista de Cuellos de Botella de Crecimiento",
+      summary: "Identifica lo que esta bloqueando el crecimiento de una operacion.",
+      activationExample: `"Necesito identificar lo que esta bloqueando el crecimiento de mi negocio."`,
+      keywords: ["cuellos de botella", "crecimiento", "operacion", "escalabilidad", "analisis"],
+    },
+    "consultor-de-estruturacao-de-oferta-comercial": {
+      title: "Consultor de Estructuracion de Oferta Comercial",
+      summary: "Construye una oferta comercial mas clara, vendible y competitiva.",
+      activationExample: `"Necesito estructurar una oferta comercial mas clara y vendible."`,
+      keywords: ["oferta comercial", "propuesta de valor", "estructura", "conversion", "ventas"],
+    },
+    "estrategista-de-modelo-de-receita": {
+      title: "Estratega de Modelo de Ingresos",
+      summary: "Define o revisa la forma en que el negocio gana dinero.",
+      activationExample: `"Necesito definir o revisar el modelo de ingresos de mi negocio."`,
+      keywords: ["modelo de ingresos", "monetizacion", "sostenibilidad", "financiero", "estrategia"],
+    },
+    "consultor-de-alinhamento-entre-perfil-e-carreira": {
+      title: "Consultor de Alineacion entre Perfil y Carrera",
+      summary: "Ayuda a entender si la carrera actual coincide con perfil, ambiciones y estilo de vida.",
+      activationExample: `"Quiero entender si mi carrera actual esta alineada con mi perfil y objetivos."`,
+      keywords: ["alineacion", "perfil", "carrera", "autoconocimiento", "estrategia profesional"],
+    },
+    "arquiteto-de-linha-editorial-autoral": {
+      title: "Arquitecto de Linea Editorial Autoral",
+      summary: "Define una linea editorial unica que diferencie el perfil a largo plazo.",
+      activationExample: `"Necesito definir una linea editorial unica que diferencie mi perfil."`,
+      keywords: ["linea editorial", "posicionamiento", "branding", "diferenciacion", "identidad"],
+    },
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": {
+      title: "Ingeniero de Estructura de Posts de Alta Retencion",
+      summary: "Crea estructura ideal de posts que mantiene atencion de inicio a fin.",
+      activationExample: `"Necesito crear una estructura de posts que mantenga la atencion de inicio a fin."`,
+      keywords: ["estructura de posts", "retencion", "atencion", "progresion", "formato"],
+    },
+    "estrategista-de-series-de-conteudo": {
+      title: "Estratega de Series de Contenido",
+      summary: "Crea series de contenido para aumentar retencion y recurrencia.",
+      activationExample: `"Quiero crear una serie de contenido para aumentar retencion y recurrencia."`,
+      keywords: ["series de contenido", "continuidad", "narrativa", "recurrencia", "estrategia"],
+    },
+    "consultor-de-conteudo-para-conversao": {
+      title: "Consultor de Contenido para Conversion",
+      summary: "Transforma contenido en herramienta de venta conectando con oferta.",
+      activationExample: `"Necesito transformar mi contenido en herramienta de venta."`,
+      keywords: ["contenido para conversion", "ventas", "viaje del cliente", "estrategia", "oferta"],
+    },
+    "analista-de-performance-de-conteudo": {
+      title: "Analista de Rendimiento de Contenido",
+      summary: "Analiza lo que esta funcionando y lo que no en el contenido basado en datos.",
+      activationExample: `"Necesito analizar lo que esta funcionando y lo que no en mi contenido."`,
+      keywords: ["analisis de contenido", "rendimiento", "metricas", "patrones", "mejoras"],
+    },
+    "consultor-de-estrutura-de-produto-digital": {
+      title: "Consultor de Estructura de Producto Digital",
+      summary: "Organiza un producto digital de forma clara y vendible.",
+      activationExample: `"Necesito organizar mi producto digital de forma clara y vendible."`,
+      keywords: ["producto digital", "infoproducto", "estructura", "modulos", "claridad"],
+    },
+    "analista-de-problemas-de-vendas": {
+      title: "Analista de Problemas de Ventas",
+      summary: "Identifica por que el negocio no esta vendiendo separando causa de sintoma.",
+      activationExample: `"Necesito identificar por que mi negocio no esta vendiendo."`,
+      keywords: ["problemas de ventas", "conversion", "embudo", "diagnostico", "analisis"],
+    },
+    "estrategista-de-posicionamento-comercial": {
+      title: "Estratega de Posicionamiento Comercial",
+      summary: "Posiciona producto para vender mejor enfocandose en valor y diferenciacion.",
+      activationExample: `"Necesito posicionar mi producto para vender mejor."`,
+      keywords: ["posicionamiento comercial", "valor", "diferenciacion", "estrategia", "ventas"],
+    },
+    "consultor-de-clareza-profissional": {
+      title: "Consultor de Claridad Profesional",
+      summary: "Ayuda al usuario a entender lo que quiere profesionalmente generando claridad.",
+      activationExample: `"Necesito claridad sobre lo que quiero profesionalmente."`,
+      keywords: ["claridad profesional", "carrera", "direccion", "dudas", "decision"],
     },
   },
   fr: {
@@ -14284,6 +15960,186 @@ const PROMPT_TRANSLATIONS: Record<
       activationExample:
         `"Je veux sortir des idees evidentes de mon niche et creer du contenu qui se distingue vraiment pour mon public."`,
       keywords: ["contenu differencie", "idees de contenu", "retention", "niche", "public"],
+    },
+    "consultor-de-interpretacao-de-direitos-e-deveres": {
+      title: "Consultant en Interpretation des Droits et Devoirs",
+      summary: "Explique les droits et devoirs dans des situations juridiques specifiques basees sur la legislation.",
+      activationExample: `"J'ai besoin de comprendre mes droits et devoirs dans une situation juridique specifique."`,
+      keywords: ["droits", "devoirs", "legislation", "orientation juridique", "situation juridique"],
+    },
+    "analista-de-exposicao-a-processos-judiciais": {
+      title: "Analyste d'Exposition aux Litiges",
+      summary: "Evalue le risque de faire face a des litiges et cree des strategies de prevention.",
+      activationExample: `"Je veux evaluer mon risque de faire face a des litiges dans ma situation actuelle."`,
+      keywords: ["risque juridique", "litiges", "exposition", "prevention", "analyse"],
+    },
+    "consultor-de-seguranca-juridica-em-decisoes": {
+      title: "Consultant en Securite Juridique des Decisions",
+      summary: "Garantit que les decisions sont juridiquement securisees avec une analyse preventive des risques.",
+      activationExample: `"J'ai besoin d'evaluer si ma decision est juridiquement securisee avant de proceder."`,
+      keywords: ["securite juridique", "decisions", "prevention", "risques", "orientation"],
+    },
+    "consultor-de-organizacao-financeira-mensal": {
+      title: "Consultant en Organisation Financiere Mensuelle",
+      summary: "Cree une organisation financiere mois par mois axee sur le controle et la praticite.",
+      activationExample: `"J'ai besoin d'organiser mes finances mois par mois de maniere pratique et efficace."`,
+      keywords: ["organisation financiere", "controle mensuel", "finances personnelles", "planification", "routine"],
+    },
+    "analista-de-impacto-financeiro-de-decisoes": {
+      title: "Analyste d'Impact Financier des Decisions",
+      summary: "Evalue l'impact financier de decisions importantes en comparant scenarios et risques.",
+      activationExample: `"J'ai besoin d'evaluer l'impact financier d'une decision importante avant de la prendre."`,
+      keywords: ["impact financier", "decisions", "analyse", "scenarios", "recommandation"],
+    },
+    "consultor-de-direcao-estrategica-de-carreira": {
+      title: "Consultant en Direction Strategique de Carriere",
+      summary: "Definit une direction professionnelle strategique basee sur le profil et les objectifs.",
+      activationExample: `"J'ai besoin de definir une direction strategique claire pour ma carriere professionnelle."`,
+      keywords: ["carriere", "strategie", "direction professionnelle", "planification", "croissance"],
+    },
+    "analista-de-decisoes-de-carreira": {
+      title: "Analyste de Decisions de Carriere",
+      summary: "Aide a choisir entre des parcours professionnels en comparant options et scenarios.",
+      activationExample: `"J'ai besoin d'aide pour choisir entre differents parcours professionnels."`,
+      keywords: ["decision de carriere", "options", "analyse", "comparaison", "choix"],
+    },
+    "especialista-em-recuperacao-de-energia-mental": {
+      title: "Specialiste en Recuperation d'Energie Mentale",
+      summary: "Recupere la clarte mentale et reduit la fatigue avec un plan d'habitudes pratiques.",
+      activationExample: `"J'ai besoin de recuperer mon energie mentale et reduire la fatigue quotidienne."`,
+      keywords: ["energie mentale", "fatigue", "clarte", "recuperation", "habitudes"],
+    },
+    "consultor-de-rotina-saudavel-no-dia-a-dia": {
+      title: "Consultant en Routine Saine au Quotidien",
+      summary: "Cree une routine saine adaptee a la realite avec un accent sur la coherence.",
+      activationExample: `"Je veux creer une routine saine qui s'adapte a ma realite quotidienne."`,
+      keywords: ["routine saine", "habitudes", "coherence", "sante", "quotidien"],
+    },
+    "gerador-de-ideias-de-conteudo-estrategico": {
+      title: "Generateur d'Idees de Contenu Strategique",
+      summary: "Cree des idees de contenu avec un potentiel de croissance en se concentrant sur la valeur et la differenciation.",
+      activationExample: `"J'ai besoin d'idees de contenu strategique avec un potentiel de croissance pour mon niche."`,
+      keywords: ["idees de contenu", "strategie", "croissance", "valeur", "differenciation"],
+    },
+    "arquiteto-de-calendario-editorial-estrategico": {
+      title: "Architecte de Calendrier Editorial Strategique",
+      summary: "Cree un calendrier editorial qui organise la production de contenu avec une logique strategique, coherence et focus sur la croissance.",
+      activationExample: `"J'ai besoin de creer un calendrier editorial strategique pour organiser ma production de contenu."`,
+      keywords: ["calendrier editorial", "strategie de contenu", "planification", "coherence", "production"],
+    },
+    "engenheiro-de-ganchos-de-alta-retencao": {
+      title: "Ingenieur de Crochets a Haute Retention",
+      summary: "Cree des crochets a fort impact pour posts, videos courtes, carousels et legendes avec focus sur la retention.",
+      activationExample: `"J'ai besoin de crochets puissants qui captent l'attention et augmentent la retention de mon contenu."`,
+      keywords: ["crochets", "retention", "attention", "hooks", "copy"],
+    },
+    "estrategista-de-cta-de-alta-conversao": {
+      title: "Strategiste de CTA a Haute Conversion",
+      summary: "Cree des appels a l'action plus intelligents, naturels et orientes vers le comportement.",
+      activationExample: `"J'ai besoin de CTA plus efficaces qui generent action et conversion dans mon contenu."`,
+      keywords: ["CTA", "conversion", "appel a l'action", "copywriting", "persuasion"],
+    },
+    "consultor-de-repurpose-de-conteudo": {
+      title: "Consultant en Reutilisation de Contenu",
+      summary: "Transforme le contenu original en plusieurs formats reutilisables sans perdre en qualite.",
+      activationExample: `"Je veux reutiliser mon contenu de maniere strategique sur plusieurs plateformes."`,
+      keywords: ["reutilisation", "repurpose", "distribution", "multiplateforme", "efficacite"],
+    },
+    "analista-de-lacunas-de-conteudo": {
+      title: "Analyste de Lacunes de Contenu",
+      summary: "Identifie ce qui manque dans la communication pour augmenter pertinence, autorite et conversion.",
+      activationExample: `"J'ai besoin d'identifier ce qui manque dans ma strategie de contenu."`,
+      keywords: ["lacunes", "audit de contenu", "gaps", "analyse", "positionnement"],
+    },
+    "consultor-de-validacao-de-demanda-de-mercado": {
+      title: "Consultant en Validation de Demande de Marche",
+      summary: "Valide s'il existe une demande reelle avant d'investir massivement dans produit, service ou operation.",
+      activationExample: `"J'ai besoin de valider s'il existe une demande reelle pour mon idee avant d'investir."`,
+      keywords: ["validation", "demande", "marche", "test", "mvp"],
+    },
+    "estrategista-de-canais-de-venda": {
+      title: "Strategiste de Canaux de Vente",
+      summary: "Definit les meilleurs canaux pour vendre avec plus d'efficacite et de previsibilite.",
+      activationExample: `"J'ai besoin de definir les meilleurs canaux pour vendre mon produit efficacement."`,
+      keywords: ["canaux de vente", "strategie commerciale", "ventes", "distribution", "acquisition"],
+    },
+    "analista-de-gargalos-de-crescimento": {
+      title: "Analyste de Goulots d'Etranglement de Croissance",
+      summary: "Identifie ce qui bloque la croissance d'une operation.",
+      activationExample: `"J'ai besoin d'identifier ce qui bloque la croissance de mon entreprise."`,
+      keywords: ["goulots d'etranglement", "croissance", "operation", "evolutivite", "analyse"],
+    },
+    "consultor-de-estruturacao-de-oferta-comercial": {
+      title: "Consultant en Structuration d'Offre Commerciale",
+      summary: "Construit une offre commerciale plus claire, vendable et competitive.",
+      activationExample: `"J'ai besoin de structurer une offre commerciale plus claire et vendable."`,
+      keywords: ["offre commerciale", "proposition de valeur", "structure", "conversion", "ventes"],
+    },
+    "estrategista-de-modelo-de-receita": {
+      title: "Strategiste de Modele de Revenus",
+      summary: "Definit ou revise la facon dont l'entreprise gagne de l'argent.",
+      activationExample: `"J'ai besoin de definir ou reviser le modele de revenus de mon entreprise."`,
+      keywords: ["modele de revenus", "monetisation", "durabilite", "financier", "strategie"],
+    },
+    "consultor-de-alinhamento-entre-perfil-e-carreira": {
+      title: "Consultant en Alignement entre Profil et Carriere",
+      summary: "Aide a comprendre si la carriere actuelle correspond au profil, ambitions et style de vie.",
+      activationExample: `"Je veux comprendre si ma carriere actuelle est alignee avec mon profil et mes objectifs."`,
+      keywords: ["alignement", "profil", "carriere", "connaissance de soi", "strategie professionnelle"],
+    },
+    "arquiteto-de-linha-editorial-autoral": {
+      title: "Architecte de Ligne Editoriale Autoriale",
+      summary: "Definit une ligne editoriale unique qui differencie le profil a long terme.",
+      activationExample: `"J'ai besoin de definir une ligne editoriale unique qui differencie mon profil."`,
+      keywords: ["ligne editoriale", "positionnement", "branding", "differenciation", "identite"],
+    },
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": {
+      title: "Ingenieur de Structure de Posts a Haute Retention",
+      summary: "Cree une structure ideale de posts qui maintient l'attention du debut a la fin.",
+      activationExample: `"J'ai besoin de creer une structure de posts qui maintient l'attention du debut a la fin."`,
+      keywords: ["structure de posts", "retention", "attention", "progression", "format"],
+    },
+    "estrategista-de-series-de-conteudo": {
+      title: "Strategiste de Series de Contenu",
+      summary: "Cree des series de contenu pour augmenter retention et recurrence.",
+      activationExample: `"Je veux creer une serie de contenu pour augmenter retention et recurrence."`,
+      keywords: ["series de contenu", "continuite", "narrative", "recurrence", "strategie"],
+    },
+    "consultor-de-conteudo-para-conversao": {
+      title: "Consultant en Contenu pour Conversion",
+      summary: "Transforme le contenu en outil de vente en le connectant a l'offre.",
+      activationExample: `"J'ai besoin de transformer mon contenu en outil de vente."`,
+      keywords: ["contenu pour conversion", "ventes", "parcours client", "strategie", "offre"],
+    },
+    "analista-de-performance-de-conteudo": {
+      title: "Analyste de Performance de Contenu",
+      summary: "Analyse ce qui fonctionne et ce qui ne fonctionne pas dans le contenu base sur les donnees.",
+      activationExample: `"J'ai besoin d'analyser ce qui fonctionne et ce qui ne fonctionne pas dans mon contenu."`,
+      keywords: ["analyse de contenu", "performance", "metriques", "modeles", "ameliorations"],
+    },
+    "consultor-de-estrutura-de-produto-digital": {
+      title: "Consultant en Structure de Produit Digital",
+      summary: "Organise un produit digital de maniere claire et vendable.",
+      activationExample: `"J'ai besoin d'organiser mon produit digital de maniere claire et vendable."`,
+      keywords: ["produit digital", "infoproduit", "structure", "modules", "clarte"],
+    },
+    "analista-de-problemas-de-vendas": {
+      title: "Analyste de Problemes de Ventes",
+      summary: "Identifie pourquoi l'entreprise ne vend pas en separant cause et symptome.",
+      activationExample: `"J'ai besoin d'identifier pourquoi mon entreprise ne vend pas."`,
+      keywords: ["problemes de ventes", "conversion", "entonnoir", "diagnostic", "analyse"],
+    },
+    "estrategista-de-posicionamento-comercial": {
+      title: "Strategiste de Positionnement Commercial",
+      summary: "Positionne le produit pour mieux vendre en se concentrant sur la valeur et la differenciation.",
+      activationExample: `"J'ai besoin de positionner mon produit pour mieux vendre."`,
+      keywords: ["positionnement commercial", "valeur", "differenciation", "strategie", "ventes"],
+    },
+    "consultor-de-clareza-profissional": {
+      title: "Consultant en Clarte Professionnelle",
+      summary: "Aide l'utilisateur a comprendre ce qu'il veut professionnellement en generant de la clarte.",
+      activationExample: `"J'ai besoin de clarte sur ce que je veux professionnellement."`,
+      keywords: ["clarte professionnelle", "carriere", "direction", "doutes", "decision"],
     },
   },
 };

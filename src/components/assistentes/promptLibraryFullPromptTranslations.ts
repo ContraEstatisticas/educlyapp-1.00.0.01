@@ -3824,6 +3824,247 @@ Strategy
 Application
 
 Avoid cliches and prioritize clear differentiation.`,
+    "consultor-de-interpretacao-de-direitos-e-deveres": `Act as a lawyer.
+
+Data:
+Situation: [SITUATION]
+Location: [LOCATION]
+
+Explain rights and duties.`,
+    "analista-de-exposicao-a-processos-judiciais": `Act as a legal analyst.
+
+Data:
+Situation: [SITUATION]
+
+Assess litigation risk.`,
+    "consultor-de-seguranca-juridica-em-decisoes": `Act as a lawyer.
+
+Data:
+Decision: [DECISION]
+
+Assess legal security.`,
+    "consultor-de-organizacao-financeira-mensal": `Act as a financial consultant.
+
+Data:
+Income: [INCOME]
+Expenses: [EXPENSES]
+
+Create monthly plan.`,
+    "analista-de-impacto-financeiro-de-decisoes": `Act as a financial analyst.
+
+Data:
+Decision: [DECISION]
+Values: [VALUES]
+
+Assess financial impact.`,
+    "consultor-de-direcao-estrategica-de-carreira": `Act as a career consultant.
+
+Data:
+Profile: [PROFILE]
+Goal: [GOAL]
+
+Define strategic direction.`,
+    "analista-de-decisoes-de-carreira": `Act as a career analyst.
+
+Data:
+Options: [OPTIONS]
+Goal: [GOAL]
+
+Help with decision.`,
+    "especialista-em-recuperacao-de-energia-mental": `Act as a health specialist.
+
+Data:
+Symptoms: [SYMPTOMS]
+Routine: [ROUTINE]
+
+Create mental recovery plan.`,
+    "consultor-de-rotina-saudavel-no-dia-a-dia": `Act as a health specialist.
+
+Data:
+Routine: [ROUTINE]
+Goal: [GOAL]
+
+Create healthy routine.`,
+    "gerador-de-ideias-de-conteudo-estrategico": `Act as a content strategist.
+
+Data:
+Niche: [NICHE]
+Audience: [AUDIENCE]
+
+Create strategic ideas.`,
+    "arquiteto-de-calendario-editorial-estrategico": `Act as a Strategic Editorial Calendar Architect.
+
+Data:
+Platform: [PLATFORM]
+Niche: [NICHE]
+Goal: [GOAL]
+Production availability: [AVAILABILITY]
+
+Create a strategic editorial calendar that:
+organizes topics by priority
+balances formats
+maintains consistency
+and connects content with results.`,
+    "engenheiro-de-ganchos-de-alta-retencao": `Act as a High Retention Hook Engineer.
+
+Data:
+Topic: [TOPIC]
+Audience: [AUDIENCE]
+Format: [FORMAT]
+Goal: [GOAL]
+
+Create strategic hooks that:
+capture attention in the first seconds
+generate curiosity
+and increase retention.`,
+    "estrategista-de-cta-de-alta-conversao": `Act as a High Conversion CTA Strategist.
+
+Data:
+Goal: [GOAL]
+Audience: [AUDIENCE]
+Format: [FORMAT]
+Offer: [OFFER]
+
+Create CTAs that encourage the right action at the right time.`,
+    "consultor-de-repurpose-de-conteudo": `Act as a Content Repurpose Consultant.
+
+Data:
+Base content: [BASE_CONTENT]
+Platforms: [PLATFORMS]
+Goal: [GOAL]
+
+Transform this content into multiple strategic pieces for distribution.`,
+    "analista-de-lacunas-de-conteudo": `Act as a Content Gap Analyst.
+
+Data:
+Niche: [NICHE]
+Audience: [AUDIENCE]
+Current content: [CURRENT_CONTENT]
+Goal: [GOAL]
+
+Identify what is missing and create a strategic correction plan.`,
+    "consultor-de-validacao-de-demanda-de-mercado": `Act as a Market Demand Validation Consultant.
+
+Data:
+Idea: [IDEA]
+Audience: [AUDIENCE]
+Offer: [OFFER]
+Goal: [GOAL]
+
+Create a practical plan to validate real demand before investing more.`,
+    "estrategista-de-canais-de-venda": `Act as a Sales Channel Strategist.
+
+Data:
+Business: [BUSINESS]
+Audience: [AUDIENCE]
+Product: [PRODUCT]
+Goal: [GOAL]
+
+Define the most efficient sales channels and the logic for using each one.`,
+    "analista-de-gargalos-de-crescimento": `Act as a Growth Bottleneck Analyst.
+
+Data:
+Business: [BUSINESS]
+Problem: [PROBLEM]
+Current metrics: [METRICS]
+Goal: [GOAL]
+
+Identify what is blocking growth and propose prioritized corrections.`,
+    "consultor-de-estruturacao-de-oferta-comercial": `Act as a Commercial Offer Structuring Consultant.
+
+Data:
+Product: [PRODUCT]
+Audience: [AUDIENCE]
+Price: [PRICE]
+Goal: [GOAL]
+
+Create a clearer, more attractive and commercially strong offer.`,
+    "estrategista-de-modelo-de-receita": `Act as a Revenue Model Strategist.
+
+Data:
+Business: [BUSINESS]
+Product: [PRODUCT]
+Audience: [AUDIENCE]
+Goal: [GOAL]
+
+Analyze and recommend the most coherent revenue model.`,
+    "consultor-de-alinhamento-entre-perfil-e-carreira": `Act as a Profile and Career Alignment Consultant.
+
+Data:
+Profile: [PROFILE]
+Current career: [CURRENT_CAREER]
+Goal: [GOAL]
+Desired lifestyle: [LIFESTYLE]
+
+Analyze the alignment between profile and career and propose strategic adjustments.`,
+    "arquiteto-de-linha-editorial-autoral": `Act as an Editorial Line Architect.
+
+Data:
+Niche: [NICHE]
+Audience: [AUDIENCE]
+Goal: [GOAL]
+
+Create a strong and differentiated editorial line.`,
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": `Act as a post engineer.
+
+Data:
+Topic: [TOPIC]
+Format: [FORMAT]
+Audience: [AUDIENCE]
+
+Create high retention structure.`,
+    "estrategista-de-series-de-conteudo": `Act as a content strategist.
+
+Data:
+Niche: [NICHE]
+Audience: [AUDIENCE]
+Goal: [GOAL]
+
+Create a content series.`,
+    "consultor-de-conteudo-para-conversao": `Act as a content strategist.
+
+Data:
+Product: [PRODUCT]
+Audience: [AUDIENCE]
+Goal: [GOAL]
+
+Create content that converts.`,
+    "analista-de-performance-de-conteudo": `Act as a content analyst.
+
+Data:
+Content: [CONTENT]
+Metrics: [METRICS]
+
+Analyze and propose improvements.`,
+    "consultor-de-estrutura-de-produto-digital": `Act as a product consultant.
+
+Data:
+Product: [PRODUCT]
+Audience: [AUDIENCE]
+Goal: [GOAL]
+
+Create clear and sellable structure.`,
+    "analista-de-problemas-de-vendas": `Act as a sales analyst.
+
+Data:
+Business: [BUSINESS]
+Problem: [PROBLEM]
+
+Identify the problem and fix it.`,
+    "estrategista-de-posicionamento-comercial": `Act as a commercial strategist.
+
+Data:
+Product: [PRODUCT]
+Audience: [AUDIENCE]
+
+Create strong positioning.`,
+    "consultor-de-clareza-profissional": `Act as a career consultant.
+
+Data:
+Situation: [SITUATION]
+Doubts: [DOUBTS]
+
+Help generate clarity.`,
   },
   es: {
     "arquiteto-financeiro-pessoal-estrategico": `Actuaras como un Arquitecto Financiero Personal con mas de 15 anos de experiencia. Tu papel es analizar a fondo la situacion financiera del usuario y construir un plan estrategico completo.
@@ -7650,6 +7891,247 @@ Estrategia
 Aplicacion
 
 Evita cliches y prioriza una diferenciacion clara.`,
+    "consultor-de-interpretacao-de-direitos-e-deveres": `Actua como abogado.
+
+Datos:
+Situacion: [SITUACION]
+Local: [LOCAL]
+
+Explica derechos y deberes.`,
+    "analista-de-exposicao-a-processos-judiciais": `Actua como analista juridico.
+
+Datos:
+Situacion: [SITUACION]
+
+Evalua riesgo de proceso.`,
+    "consultor-de-seguranca-juridica-em-decisoes": `Actua como abogado.
+
+Datos:
+Decision: [DECISION]
+
+Evalua seguridad juridica.`,
+    "consultor-de-organizacao-financeira-mensal": `Actua como consultor financiero.
+
+Datos:
+Renta: [RENTA]
+Gastos: [GASTOS]
+
+Crea plan mensual.`,
+    "analista-de-impacto-financeiro-de-decisoes": `Actua como analista financiero.
+
+Datos:
+Decision: [DECISION]
+Valores: [VALORES]
+
+Evalua impacto financiero.`,
+    "consultor-de-direcao-estrategica-de-carreira": `Actua como consultor de carrera.
+
+Datos:
+Perfil: [PERFIL]
+Objetivo: [OBJETIVO]
+
+Define direccion estrategica.`,
+    "analista-de-decisoes-de-carreira": `Actua como analista de carrera.
+
+Datos:
+Opciones: [OPCIONES]
+Objetivo: [OBJETIVO]
+
+Ayuda en la decision.`,
+    "especialista-em-recuperacao-de-energia-mental": `Actua como especialista en salud.
+
+Datos:
+Sintomas: [SINTOMAS]
+Rutina: [RUTINA]
+
+Crea plan de recuperacion mental.`,
+    "consultor-de-rotina-saudavel-no-dia-a-dia": `Actua como especialista en salud.
+
+Datos:
+Rutina: [RUTINA]
+Objetivo: [OBJETIVO]
+
+Crea rutina saludable.`,
+    "gerador-de-ideias-de-conteudo-estrategico": `Actua como estratega de contenido.
+
+Datos:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+
+Crea ideas estrategicas.`,
+    "arquiteto-de-calendario-editorial-estrategico": `Actua como un Arquitecto de Calendario Editorial Estrategico.
+
+Datos:
+Plataforma: [PLATAFORMA]
+Nicho: [NICHO]
+Objetivo: [OBJETIVO]
+Disponibilidad de produccion: [DISPONIBILIDAD]
+
+Crea un calendario editorial estrategico que:
+organice temas por prioridad
+equilibre formatos
+mantenga consistencia
+y conecte contenido con resultados.`,
+    "engenheiro-de-ganchos-de-alta-retencao": `Actua como un Ingeniero de Ganchos de Alta Retencion.
+
+Datos:
+Tema: [TEMA]
+Publico: [PUBLICO]
+Formato: [FORMATO]
+Objetivo: [OBJETIVO]
+
+Crea ganchos estrategicos que:
+capten atencion en los primeros segundos
+generen curiosidad
+y aumenten retencion.`,
+    "estrategista-de-cta-de-alta-conversao": `Actua como un Estratega de CTA de Alta Conversion.
+
+Datos:
+Objetivo: [OBJETIVO]
+Publico: [PUBLICO]
+Formato: [FORMATO]
+Oferta: [OFERTA]
+
+Crea CTAs que incentiven la accion correcta en el momento correcto.`,
+    "consultor-de-repurpose-de-conteudo": `Actua como un Consultor de Reutilizacion de Contenido.
+
+Datos:
+Contenido base: [CONTENIDO_BASE]
+Plataformas: [PLATAFORMAS]
+Objetivo: [OBJETIVO]
+
+Transforma este contenido en multiples piezas estrategicas para distribucion.`,
+    "analista-de-lacunas-de-conteudo": `Actua como un Analista de Brechas de Contenido.
+
+Datos:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Contenido actual: [CONTENIDO_ACTUAL]
+Objetivo: [OBJETIVO]
+
+Identifica lo que falta y crea un plan de correccion estrategica.`,
+    "consultor-de-validacao-de-demanda-de-mercado": `Actua como un Consultor de Validacion de Demanda de Mercado.
+
+Datos:
+Idea: [IDEA]
+Publico: [PUBLICO]
+Oferta: [OFERTA]
+Objetivo: [OBJETIVO]
+
+Crea un plan practico para validar demanda real antes de invertir mas.`,
+    "estrategista-de-canais-de-venda": `Actua como un Estratega de Canales de Venta.
+
+Datos:
+Negocio: [NEGOCIO]
+Publico: [PUBLICO]
+Producto: [PRODUCTO]
+Objetivo: [OBJETIVO]
+
+Define los canales de venta mas eficientes y la logica de uso de cada uno.`,
+    "analista-de-gargalos-de-crescimento": `Actua como un Analista de Cuellos de Botella de Crecimiento.
+
+Datos:
+Negocio: [NEGOCIO]
+Problema: [PROBLEMA]
+Metricas actuales: [METRICAS]
+Objetivo: [OBJETIVO]
+
+Identifica lo que esta frenando el crecimiento y propone correcciones priorizadas.`,
+    "consultor-de-estruturacao-de-oferta-comercial": `Actua como un Consultor de Estructuracion de Oferta Comercial.
+
+Datos:
+Producto: [PRODUCTO]
+Publico: [PUBLICO]
+Precio: [PRECIO]
+Objetivo: [OBJETIVO]
+
+Crea una oferta mas clara, atractiva y comercialmente fuerte.`,
+    "estrategista-de-modelo-de-receita": `Actua como un Estratega de Modelo de Ingresos.
+
+Datos:
+Negocio: [NEGOCIO]
+Producto: [PRODUCTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Analiza y recomienda el modelo de ingresos mas coherente.`,
+    "consultor-de-alinhamento-entre-perfil-e-carreira": `Actua como un Consultor de Alineacion entre Perfil y Carrera.
+
+Datos:
+Perfil: [PERFIL]
+Carrera actual: [CARRERA_ACTUAL]
+Objetivo: [OBJETIVO]
+Estilo de vida deseado: [ESTILO_DE_VIDA]
+
+Analiza la alineacion entre perfil y carrera y propone ajustes estrategicos.`,
+    "arquiteto-de-linha-editorial-autoral": `Actua como Arquitecto de Linea Editorial.
+
+Datos:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crea una linea editorial fuerte y diferenciada.`,
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": `Actua como ingeniero de posts.
+
+Datos:
+Tema: [TEMA]
+Formato: [FORMATO]
+Publico: [PUBLICO]
+
+Crea estructura de alta retencion.`,
+    "estrategista-de-series-de-conteudo": `Actua como estratega de contenido.
+
+Datos:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crea una serie de contenido.`,
+    "consultor-de-conteudo-para-conversao": `Actua como estratega de contenido.
+
+Datos:
+Producto: [PRODUCTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crea contenido que convierte.`,
+    "analista-de-performance-de-conteudo": `Actua como analista de contenido.
+
+Datos:
+Contenido: [CONTENIDO]
+Metricas: [METRICAS]
+
+Analiza y propone mejoras.`,
+    "consultor-de-estrutura-de-produto-digital": `Actua como consultor de producto.
+
+Datos:
+Producto: [PRODUCTO]
+Publico: [PUBLICO]
+Objetivo: [OBJETIVO]
+
+Crea estructura clara y vendible.`,
+    "analista-de-problemas-de-vendas": `Actua como analista de ventas.
+
+Datos:
+Negocio: [NEGOCIO]
+Problema: [PROBLEMA]
+
+Identifica el problema y corrigelo.`,
+    "estrategista-de-posicionamento-comercial": `Actua como estratega comercial.
+
+Datos:
+Producto: [PRODUCTO]
+Publico: [PUBLICO]
+
+Crea posicionamiento fuerte.`,
+    "consultor-de-clareza-profissional": `Actua como consultor de carrera.
+
+Datos:
+Situacion: [SITUACION]
+Dudas: [DUDAS]
+
+Ayuda a generar claridad.`,
   },
   fr: {
     "arquiteto-financeiro-pessoal-estrategico": `Tu agiras comme un Architecte Financier Personnel avec plus de 15 ans d'experience. Ton role est d'analyser en profondeur la situation financiere de l'utilisateur et de construire un plan strategique complet.
@@ -11476,5 +11958,246 @@ Strategie
 Application
 
 Evite les cliches et priorise une differenciation claire.`,
+    "consultor-de-interpretacao-de-direitos-e-deveres": `Agis comme un avocat.
+
+Donnees:
+Situation: [SITUATION]
+Lieu: [LIEU]
+
+Explique les droits et devoirs.`,
+    "analista-de-exposicao-a-processos-judiciais": `Agis comme un analyste juridique.
+
+Donnees:
+Situation: [SITUATION]
+
+Evalue le risque de litige.`,
+    "consultor-de-seguranca-juridica-em-decisoes": `Agis comme un avocat.
+
+Donnees:
+Decision: [DECISION]
+
+Evalue la securite juridique.`,
+    "consultor-de-organizacao-financeira-mensal": `Agis comme un consultant financier.
+
+Donnees:
+Revenu: [REVENU]
+Depenses: [DEPENSES]
+
+Cree un plan mensuel.`,
+    "analista-de-impacto-financeiro-de-decisoes": `Agis comme un analyste financier.
+
+Donnees:
+Decision: [DECISION]
+Valeurs: [VALEURS]
+
+Evalue l'impact financier.`,
+    "consultor-de-direcao-estrategica-de-carreira": `Agis comme un consultant de carriere.
+
+Donnees:
+Profil: [PROFIL]
+Objectif: [OBJECTIF]
+
+Definis la direction strategique.`,
+    "analista-de-decisoes-de-carreira": `Agis comme un analyste de carriere.
+
+Donnees:
+Options: [OPTIONS]
+Objectif: [OBJECTIF]
+
+Aide a la decision.`,
+    "especialista-em-recuperacao-de-energia-mental": `Agis comme un specialiste de la sante.
+
+Donnees:
+Symptomes: [SYMPTOMES]
+Routine: [ROUTINE]
+
+Cree un plan de recuperation mentale.`,
+    "consultor-de-rotina-saudavel-no-dia-a-dia": `Agis comme un specialiste de la sante.
+
+Donnees:
+Routine: [ROUTINE]
+Objectif: [OBJECTIF]
+
+Cree une routine saine.`,
+    "gerador-de-ideias-de-conteudo-estrategico": `Agis comme un strategiste de contenu.
+
+Donnees:
+Niche: [NICHE]
+Public: [PUBLIC]
+
+Cree des idees strategiques.`,
+    "arquiteto-de-calendario-editorial-estrategico": `Agis comme un Architecte de Calendrier Editorial Strategique.
+
+Donnees:
+Plateforme: [PLATEFORME]
+Niche: [NICHE]
+Objectif: [OBJECTIF]
+Disponibilite de production: [DISPONIBILITE]
+
+Cree un calendrier editorial strategique qui:
+organise les themes par priorite
+equilibre les formats
+maintient la coherence
+et connecte le contenu aux resultats.`,
+    "engenheiro-de-ganchos-de-alta-retencao": `Agis comme un Ingenieur de Crochets a Haute Retention.
+
+Donnees:
+Theme: [THEME]
+Public: [PUBLIC]
+Format: [FORMAT]
+Objectif: [OBJECTIF]
+
+Cree des crochets strategiques qui:
+captent l'attention dans les premieres secondes
+generent la curiosite
+et augmentent la retention.`,
+    "estrategista-de-cta-de-alta-conversao": `Agis comme un Strategiste de CTA a Haute Conversion.
+
+Donnees:
+Objectif: [OBJECTIF]
+Public: [PUBLIC]
+Format: [FORMAT]
+Offre: [OFFRE]
+
+Cree des CTA qui encouragent la bonne action au bon moment.`,
+    "consultor-de-repurpose-de-conteudo": `Agis comme un Consultant en Reutilisation de Contenu.
+
+Donnees:
+Contenu de base: [CONTENU_BASE]
+Plateformes: [PLATEFORMES]
+Objectif: [OBJECTIF]
+
+Transforme ce contenu en plusieurs pieces strategiques pour la distribution.`,
+    "analista-de-lacunas-de-conteudo": `Agis comme un Analyste de Lacunes de Contenu.
+
+Donnees:
+Niche: [NICHE]
+Public: [PUBLIC]
+Contenu actuel: [CONTENU_ACTUEL]
+Objectif: [OBJECTIF]
+
+Identifie ce qui manque et cree un plan de correction strategique.`,
+    "consultor-de-validacao-de-demanda-de-mercado": `Agis comme un Consultant en Validation de Demande de Marche.
+
+Donnees:
+Idee: [IDEE]
+Public: [PUBLIC]
+Offre: [OFFRE]
+Objectif: [OBJECTIF]
+
+Cree un plan pratique pour valider la demande reelle avant d'investir davantage.`,
+    "estrategista-de-canais-de-venda": `Agis comme un Strategiste de Canaux de Vente.
+
+Donnees:
+Entreprise: [ENTREPRISE]
+Public: [PUBLIC]
+Produit: [PRODUIT]
+Objectif: [OBJECTIF]
+
+Definis les canaux de vente les plus efficaces et la logique d'utilisation de chacun.`,
+    "analista-de-gargalos-de-crescimento": `Agis comme un Analyste de Goulots d'Etranglement de Croissance.
+
+Donnees:
+Entreprise: [ENTREPRISE]
+Probleme: [PROBLEME]
+Metriques actuelles: [METRIQUES]
+Objectif: [OBJECTIF]
+
+Identifie ce qui bloque la croissance et propose des corrections priorisees.`,
+    "consultor-de-estruturacao-de-oferta-comercial": `Agis comme un Consultant en Structuration d'Offre Commerciale.
+
+Donnees:
+Produit: [PRODUIT]
+Public: [PUBLIC]
+Prix: [PRIX]
+Objectif: [OBJECTIF]
+
+Cree une offre plus claire, plus attrayante et commercialement forte.`,
+    "estrategista-de-modelo-de-receita": `Agis comme un Strategiste de Modele de Revenus.
+
+Donnees:
+Entreprise: [ENTREPRISE]
+Produit: [PRODUIT]
+Public: [PUBLIC]
+Objectif: [OBJECTIF]
+
+Analyse et recommande le modele de revenus le plus coherent.`,
+    "consultor-de-alinhamento-entre-perfil-e-carreira": `Agis comme un Consultant en Alignement entre Profil et Carriere.
+
+Donnees:
+Profil: [PROFIL]
+Carriere actuelle: [CARRIERE_ACTUELLE]
+Objectif: [OBJECTIF]
+Style de vie souhaite: [STYLE_DE_VIE]
+
+Analyse l'alignement entre profil et carriere et propose des ajustements strategiques.`,
+    "arquiteto-de-linha-editorial-autoral": `Agis comme Architecte de Ligne Editoriale.
+
+Donnees:
+Niche: [NICHE]
+Public: [PUBLIC]
+Objectif: [OBJECTIF]
+
+Cree une ligne editoriale forte et differenciee.`,
+    "engenheiro-de-estrutura-de-posts-de-alta-retencao": `Agis comme ingenieur de posts.
+
+Donnees:
+Theme: [THEME]
+Format: [FORMAT]
+Public: [PUBLIC]
+
+Cree une structure a haute retention.`,
+    "estrategista-de-series-de-conteudo": `Agis comme strategiste de contenu.
+
+Donnees:
+Niche: [NICHE]
+Public: [PUBLIC]
+Objectif: [OBJECTIF]
+
+Cree une serie de contenu.`,
+    "consultor-de-conteudo-para-conversao": `Agis comme strategiste de contenu.
+
+Donnees:
+Produit: [PRODUIT]
+Public: [PUBLIC]
+Objectif: [OBJECTIF]
+
+Cree du contenu qui convertit.`,
+    "analista-de-performance-de-conteudo": `Agis comme analyste de contenu.
+
+Donnees:
+Contenu: [CONTENU]
+Metriques: [METRIQUES]
+
+Analyse et propose des ameliorations.`,
+    "consultor-de-estrutura-de-produto-digital": `Agis comme consultant de produit.
+
+Donnees:
+Produit: [PRODUIT]
+Public: [PUBLIC]
+Objectif: [OBJECTIF]
+
+Cree une structure claire et vendable.`,
+    "analista-de-problemas-de-vendas": `Agis comme analyste de ventes.
+
+Donnees:
+Entreprise: [ENTREPRISE]
+Probleme: [PROBLEME]
+
+Identifie le probleme et corrige-le.`,
+    "estrategista-de-posicionamento-comercial": `Agis comme strategiste commercial.
+
+Donnees:
+Produit: [PRODUIT]
+Public: [PUBLIC]
+
+Cree un positionnement fort.`,
+    "consultor-de-clareza-profissional": `Agis comme consultant de carriere.
+
+Donnees:
+Situation: [SITUATION]
+Doutes: [DOUTES]
+
+Aide a generer de la clarte.`,
   },
 };
