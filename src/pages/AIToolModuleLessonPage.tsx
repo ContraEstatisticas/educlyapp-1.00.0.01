@@ -449,6 +449,12 @@ const AIToolModuleLessonPage = () => {
     }
 
     if (step.type === "practical" && step.correctOrder?.[guideStepIndex]) {
+      // No primeiro passo, limpar userWords e restaurar availableWords
+      if (guideStepIndex === 0) {
+        setUserWords([]);
+        setAvailableWords(step.initialWords || []);
+      }
+
       const nextWord = step.correctOrder[guideStepIndex];
 
       setAvailableWords((prev) => removeFirstOccurrence(prev, nextWord));

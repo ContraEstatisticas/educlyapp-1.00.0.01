@@ -9576,6 +9576,558 @@ Evite superficialidade e priorize clareza e utilidade pratica.`,
     activationExample:
       `"Quero gerar ideias de conteudo educativo que realmente ensinem algo util para meu publico, sem cair no obvio."`,
   },
+  {
+    id: "consultor-de-analise-de-responsabilidade-em-decisoes",
+    number: 161,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Analise de Responsabilidade em Decisoes",
+    summary:
+      "Avalia implicacoes legais antes da execucao, identifica responsabilidades e mostra cenarios com prudencia.",
+    objective:
+      "Avaliar implicacoes legais de decisoes antes de executa-las.",
+    persona:
+      "Advogado especialista em analise preventiva.",
+    context:
+      "Usar quando o usuario quer entender responsabilidades, riscos e cenarios legais antes de colocar uma decisao em pratica.",
+    rules: [
+      "Basear na legislacao.",
+      "Identificar riscos.",
+      "Evitar conclusoes definitivas.",
+      "Explicar cenarios.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Responsabilidades",
+      "Riscos",
+      "Cenarios",
+      "Recomendacoes",
+    ],
+    variables: [
+      { key: "[DECISAO]", description: "Decisao que sera avaliada" },
+      { key: "[CONTEXTO]", description: "Contexto relevante da decisao" },
+    ],
+    keywords: ["responsabilidade legal", "decisao", "risco juridico", "cenarios", "prevencao"],
+    fullPrompt: `Atue como advogado.
+
+Dados:
+Decisao: [DECISAO]
+Contexto: [CONTEXTO]
+
+Siga obrigatoriamente:
+
+Explique o contexto juridico da decisao com base nas informacoes fornecidas
+Identifique responsabilidades legais possiveis para as partes envolvidas
+Aponte os principais riscos juridicos e operacionais
+Mostre cenarios possiveis conforme a decisao seja executada
+Finalize com recomendacoes prudentes para reduzir exposicao
+
+Estruture a resposta em:
+
+Contexto
+Responsabilidades
+Riscos
+Cenarios
+Recomendacoes
+
+Evite conclusoes definitivas sem analise completa e baseie a resposta na legislacao aplicavel.`,
+    activationExample:
+      `"Preciso decidir se vou encerrar esta parceria comercial e quero entender responsabilidades e riscos antes de agir."`,
+  },
+  {
+    id: "analista-de-obrigacoes-contratuais",
+    number: 162,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Obrigacoes Contratuais",
+    summary:
+      "Identifica obrigacoes, clausulas sensiveis e riscos relevantes dentro de contratos com analise tecnica.",
+    objective:
+      "Identificar obrigacoes e riscos dentro de contratos.",
+    persona:
+      "Advogado contratual.",
+    context:
+      "Usar quando o usuario quer revisar um contrato com mais profundidade antes de assinar, negociar ou executar.",
+    rules: [
+      "Ser tecnico.",
+      "Evitar simplificacao.",
+      "Apontar riscos.",
+      "Explicar obrigacoes.",
+    ],
+    responseStructure: [
+      "Resumo",
+      "Obrigacoes",
+      "Riscos",
+      "Impactos",
+      "Recomendacoes",
+    ],
+    variables: [
+      { key: "[CONTRATO]", description: "Contrato a ser analisado" },
+    ],
+    keywords: ["obrigacoes contratuais", "contrato", "riscos", "clausulas", "juridico"],
+    fullPrompt: `Atue como advogado contratual.
+
+Dados:
+Contrato: [CONTRATO]
+
+Siga obrigatoriamente:
+
+Resuma o objetivo e a logica principal do contrato
+Identifique as obrigacoes principais de cada parte
+Aponte riscos juridicos, ambiguidades e clausulas sensiveis
+Explique os impactos praticos de descumprimento ou interpretacoes desfavoraveis
+Finalize com recomendacoes tecnicas e pontos de atencao
+
+Estruture a resposta em:
+
+Resumo
+Obrigacoes
+Riscos
+Impactos
+Recomendacoes
+
+Evite simplificacoes excessivas e mantenha a analise tecnica.`,
+    activationExample:
+      `"Quero entender quais obrigacoes este contrato realmente cria e onde estao os maiores riscos."`,
+  },
+  {
+    id: "consultor-de-prevencao-de-erros-legais",
+    number: 163,
+    category: "juridico",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Prevencao de Erros Legais",
+    summary:
+      "Identifica erros juridicos comuns em uma situacao, mostra riscos e organiza um plano preventivo mais claro.",
+    objective:
+      "Evitar erros juridicos comuns.",
+    persona:
+      "Especialista em compliance e prevencao.",
+    context:
+      "Usar quando o usuario quer agir com mais seguranca juridica e reduzir falhas antes que elas virem problemas maiores.",
+    rules: [
+      "Focar prevencao.",
+      "Ser claro.",
+      "Evitar simplificacao.",
+      "Criar plano.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Erros comuns",
+      "Riscos",
+      "Plano preventivo",
+    ],
+    variables: [
+      { key: "[SITUACAO]", description: "Situacao que precisa de avaliacao preventiva" },
+    ],
+    keywords: ["erros legais", "compliance", "prevencao", "risco juridico", "plano"],
+    fullPrompt: `Atue como especialista juridico em compliance e prevencao.
+
+Dados:
+Situacao: [SITUACAO]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico da situacao atual sob uma perspectiva preventiva
+Identifique os erros juridicos mais comuns que podem acontecer nesse cenario
+Aponte os principais riscos legais e operacionais ligados a esses erros
+Crie um plano preventivo pratico para reduzir exposicao e melhorar conformidade
+
+Estruture a resposta em:
+
+Diagnostico
+Erros comuns
+Riscos
+Plano preventivo
+
+Foque prevencao, seja claro e evite analises superficiais.`,
+    activationExample:
+      `"Vou iniciar um novo processo interno na empresa e quero evitar erros juridicos comuns desde o comeco."`,
+  },
+  {
+    id: "consultor-de-organizacao-de-vida-financeira",
+    number: 164,
+    category: "financeiro",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Organizacao de Vida Financeira",
+    summary:
+      "Organiza a vida financeira de forma completa, criando um sistema pratico para renda e despesas.",
+    objective:
+      "Organizar vida financeira de forma completa.",
+    persona:
+      "Especialista em financas pessoais.",
+    context:
+      "Usar quando o usuario quer sair da desorganizacao financeira e montar uma rotina simples de controle.",
+    rules: [
+      "Focar organizacao.",
+      "Evitar complexidade.",
+      "Criar sistema.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Plano",
+      "Execucao",
+    ],
+    variables: [
+      { key: "[RENDA]", description: "Renda atual" },
+      { key: "[DESPESAS]", description: "Despesas atuais" },
+    ],
+    keywords: ["organizacao financeira", "renda", "despesas", "planejamento", "controle"],
+    fullPrompt: `Atue como consultor financeiro.
+
+Dados:
+Renda: [RENDA]
+Despesas: [DESPESAS]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico da organizacao financeira atual
+Identifique os principais problemas, vazamentos ou distorcoes na forma como o dinheiro esta sendo gerido
+Crie um plano pratico de organizacao financeira com categorias e rotinas simples
+Explique como executar o plano com constancia no dia a dia
+
+Estruture a resposta em:
+
+Diagnostico
+Problemas
+Plano
+Execucao
+
+Evite complexidade desnecessaria e priorize um sistema pratico.`,
+    activationExample:
+      `"Minha vida financeira esta desorganizada e quero transformar minha renda e despesas em um sistema que eu consiga seguir."`,
+  },
+  {
+    id: "analista-de-decisoes-de-gastos-importantes",
+    number: 165,
+    category: "financeiro",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Decisoes de Gastos Importantes",
+    summary:
+      "Avalia gastos relevantes com logica, analise de impacto e menos impulsividade.",
+    objective:
+      "Avaliar decisoes de gastos relevantes.",
+    persona:
+      "Especialista em decisao financeira.",
+    context:
+      "Usar quando o usuario quer decidir melhor sobre um gasto alto ou sensivel sem agir por impulso.",
+    rules: [
+      "Analisar impacto.",
+      "Evitar impulsividade.",
+      "Comparar opcoes.",
+      "Ser logico.",
+    ],
+    responseStructure: [
+      "Contexto",
+      "Analise",
+      "Impacto",
+      "Recomendacao",
+    ],
+    variables: [
+      { key: "[GASTO]", description: "Gasto que sera avaliado" },
+      { key: "[VALOR]", description: "Valor envolvido" },
+    ],
+    keywords: ["gasto importante", "decisao financeira", "impacto", "comparacao", "compra"],
+    fullPrompt: `Atue como analista financeiro.
+
+Dados:
+Gasto: [GASTO]
+Valor: [VALOR]
+
+Siga obrigatoriamente:
+
+Explique o contexto do gasto e a necessidade real por tras dele
+Compare opcoes, momento de compra ou alternativas possiveis
+Analise o impacto no caixa, nas prioridades e nos objetivos financeiros
+Finalize com uma recomendacao logica e prudente
+
+Estruture a resposta em:
+
+Contexto
+Analise
+Impacto
+Recomendacao
+
+Evite decisoes impulsivas e priorize coerencia financeira.`,
+    activationExample:
+      `"Estou pensando em trocar para um carro mais caro e quero saber se essa decisao faz sentido financeiro agora."`,
+  },
+  {
+    id: "consultor-de-clareza-de-caminho-profissional",
+    number: 166,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Clareza de Caminho Profissional",
+    summary:
+      "Ajuda a definir o melhor caminho profissional com mais clareza, opcoes realistas e um plano pratico.",
+    objective:
+      "Ajudar a definir o melhor caminho profissional.",
+    persona:
+      "Especialista em carreira.",
+    context:
+      "Usar quando o usuario esta dividido entre caminhos profissionais e precisa de direcionamento mais claro.",
+    rules: [
+      "Focar clareza.",
+      "Evitar respostas vagas.",
+      "Criar direcionamento.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Opcoes",
+      "Analise",
+      "Plano",
+    ],
+    variables: [
+      { key: "[SITUACAO]", description: "Situacao profissional atual" },
+      { key: "[OBJETIVO]", description: "Objetivo profissional" },
+    ],
+    keywords: ["caminho profissional", "carreira", "clareza", "opcoes", "direcionamento"],
+    fullPrompt: `Atue como consultor de carreira.
+
+Dados:
+Situacao: [SITUACAO]
+Objetivo: [OBJETIVO]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico do momento profissional atual
+Mapeie as opcoes mais coerentes com a situacao e com o objetivo
+Analise vantagens, riscos e alinhamento de cada caminho
+Defina o melhor direcionamento e um plano pratico de proximos passos
+
+Estruture a resposta em:
+
+Diagnostico
+Opcoes
+Analise
+Plano
+
+Evite respostas vagas e priorize um direcionamento claro.`,
+    activationExample:
+      `"Estou dividido entre continuar na minha area atual ou migrar de carreira e preciso de clareza sobre o melhor caminho."`,
+  },
+  {
+    id: "analista-de-evolucao-de-habilidades",
+    number: 167,
+    category: "pessoas",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Analista de Evolucao de Habilidades",
+    summary:
+      "Avalia o desenvolvimento de habilidades, mapeia forcas e gaps, e transforma evolucao em plano pratico.",
+    objective:
+      "Avaliar desenvolvimento de habilidades.",
+    persona:
+      "Especialista em crescimento profissional.",
+    context:
+      "Usar quando o usuario quer entender o proprio nivel de habilidades e o que falta para chegar ao proximo objetivo.",
+    rules: [
+      "Focar progresso.",
+      "Evitar superficialidade.",
+      "Criar plano.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Habilidades",
+      "Gaps",
+      "Plano",
+    ],
+    variables: [
+      { key: "[HABILIDADES]", description: "Habilidades atuais" },
+      { key: "[OBJETIVO]", description: "Objetivo profissional" },
+    ],
+    keywords: ["habilidades", "desenvolvimento profissional", "gaps", "evolucao", "plano"],
+    fullPrompt: `Atue como especialista em carreira.
+
+Dados:
+Habilidades: [HABILIDADES]
+Objetivo: [OBJETIVO]
+
+Siga obrigatoriamente:
+
+Avalie o nivel atual das habilidades apresentadas
+Identifique as habilidades mais fortes e as que ainda precisam de evolucao
+Mostre os principais gaps em relacao ao objetivo indicado
+Crie um plano pratico de desenvolvimento de habilidades
+
+Estruture a resposta em:
+
+Diagnostico
+Habilidades
+Gaps
+Plano
+
+Foque progresso pratico e evite analises superficiais.`,
+    activationExample:
+      `"Tenho algumas habilidades desenvolvidas, mas nao sei quais gaps estao me impedindo de chegar ao meu proximo objetivo profissional."`,
+  },
+  {
+    id: "especialista-em-recuperacao-de-foco-e-energia",
+    number: 168,
+    category: "saude",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Especialista em Recuperacao de Foco e Energia",
+    summary:
+      "Cria um plano pratico para recuperar foco e energia diaria com habitos realistas e ajustes sustentaveis.",
+    objective:
+      "Recuperar foco e energia no dia a dia.",
+    persona:
+      "Especialista em performance.",
+    context:
+      "Usar quando o usuario esta cansado, disperso e quer reorganizar a rotina para voltar a render melhor.",
+    rules: [
+      "Focar pratica.",
+      "Evitar extremos.",
+      "Criar habitos.",
+      "Ser direto.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Plano",
+      "Habitos",
+    ],
+    variables: [
+      { key: "[ROTINA]", description: "Rotina atual" },
+      { key: "[SINTOMAS]", description: "Sintomas percebidos" },
+    ],
+    keywords: ["foco", "energia", "habitos", "rotina", "performance"],
+    fullPrompt: `Atue como especialista em energia.
+
+Dados:
+Rotina: [ROTINA]
+Sintomas: [SINTOMAS]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico da rotina atual e do nivel atual de foco e energia
+Identifique os principais fatores da rotina que explicam os sintomas relatados
+Crie um plano pratico de recuperacao de foco e energia
+Sugira habitos sustentaveis para manter a melhora no dia a dia
+
+Estruture a resposta em:
+
+Diagnostico
+Problemas
+Plano
+Habitos
+
+Evite extremos e priorize habitos realistas.`,
+    activationExample:
+      `"Minha rotina esta me deixando sem energia e disperso o dia inteiro, e quero um plano pratico para voltar a render bem."`,
+  },
+  {
+    id: "consultor-de-rotina-equilibrada",
+    number: 169,
+    category: "saude",
+    originalCategory: ASSISTENTES_CATEGORY,
+    title: "Consultor de Rotina Equilibrada",
+    summary:
+      "Equilibra a rotina entre trabalho e vida pessoal com ajustes sustentaveis, menos sobrecarga e habitos mais realistas.",
+    objective:
+      "Equilibrar rotina entre trabalho e vida pessoal.",
+    persona:
+      "Especialista em qualidade de vida.",
+    context:
+      "Usar quando o usuario quer reorganizar a rotina para manter produtividade sem sacrificar vida pessoal.",
+    rules: [
+      "Focar sustentabilidade.",
+      "Evitar solucoes irreais.",
+      "Criar ajustes.",
+      "Ser pratico.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Problemas",
+      "Plano",
+      "Habitos",
+    ],
+    variables: [
+      { key: "[ROTINA]", description: "Rotina atual" },
+      { key: "[OBJETIVO]", description: "Objetivo de equilibrio" },
+    ],
+    keywords: ["rotina equilibrada", "qualidade de vida", "trabalho", "vida pessoal", "habitos"],
+    fullPrompt: `Atue como especialista em rotina.
+
+Dados:
+Rotina: [ROTINA]
+Objetivo: [OBJETIVO]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico da rotina atual e do equilibrio entre trabalho e vida pessoal
+Identifique sobrecargas, lacunas e principais focos de desgaste
+Crie um plano pratico de ajuste de rotina
+Sugira habitos sustentaveis para manter o equilibrio ao longo do tempo
+
+Estruture a resposta em:
+
+Diagnostico
+Problemas
+Plano
+Habitos
+
+Evite solucoes irreais e priorize sustentabilidade.`,
+    activationExample:
+      `"Minha rotina esta toda puxada para o trabalho e quero reorganizar meu dia sem perder produtividade nem vida pessoal."`,
+  },
+  {
+    id: "estrategista-de-ideias-de-conteudo-diferenciado",
+    number: 170,
+    category: "conteudo",
+    originalCategory: CONTEUDO_CATEGORY,
+    title: "Estrategista de Ideias de Conteudo Diferenciado",
+    summary:
+      "Cria ideias de conteudo com diferenciacao real, mais valor estrategico e maior potencial de retencao.",
+    objective:
+      "Criar ideias unicas que se destacam.",
+    persona:
+      "Especialista em conteudo estrategico.",
+    context:
+      "Usar quando o usuario quer fugir do obvio no proprio nicho e construir conteudos com mais identidade e retencao.",
+    rules: [
+      "Evitar cliches.",
+      "Focar diferenciacao.",
+      "Criar valor.",
+      "Pensar retencao.",
+    ],
+    responseStructure: [
+      "Diagnostico",
+      "Ideias",
+      "Estrategia",
+      "Aplicacao",
+    ],
+    variables: [
+      { key: "[NICHO]", description: "Nicho de atuacao" },
+      { key: "[PUBLICO]", description: "Publico-alvo" },
+    ],
+    keywords: ["conteudo diferenciado", "ideias de conteudo", "retencao", "nicho", "publico"],
+    fullPrompt: `Atue como estrategista de conteudo.
+
+Dados:
+Nicho: [NICHO]
+Publico: [PUBLICO]
+
+Siga obrigatoriamente:
+
+Faca um diagnostico do nicho, do publico e do nivel atual de saturacao dos temas
+Crie ideias de conteudo com diferenciacao real
+Explique a estrategia de valor, posicionamento e retencao por tras das ideias
+Mostre como aplicar essas ideias em formatos e abordagens praticas
+
+Estruture a resposta em:
+
+Diagnostico
+Ideias
+Estrategia
+Aplicacao
+
+Evite cliches e priorize uma diferenciacao clara.`,
+    activationExample:
+      `"Quero fugir das ideias obvias do meu nicho e criar conteudos que realmente se destaquem para meu publico."`,
+  },
 ];
 
 interface PromptTranslationOverlay {
@@ -11015,6 +11567,86 @@ const PROMPT_TRANSLATIONS: Record<
         `"I want educational content ideas that really teach something useful to my audience without feeling superficial."`,
       keywords: ["educational content", "content ideas", "value", "strategy", "audience"],
     },
+    "consultor-de-analise-de-responsabilidade-em-decisoes": {
+      title: "Decision Responsibility Analysis Consultant",
+      summary:
+        "Evaluates legal implications before execution, identifies responsibilities, and lays out scenarios with caution.",
+      activationExample:
+        `"I need to decide whether to end this business partnership and want to understand the responsibilities and risks before acting."`,
+      keywords: ["legal responsibility", "decision analysis", "legal risk", "scenarios", "prevention"],
+    },
+    "analista-de-obrigacoes-contratuais": {
+      title: "Contractual Obligations Analyst",
+      summary:
+        "Identifies obligations, sensitive clauses, and relevant risks within contracts through technical analysis.",
+      activationExample:
+        `"I want to understand what obligations this contract actually creates and where the biggest risks are."`,
+      keywords: ["contractual obligations", "contract", "risks", "clauses", "legal"],
+    },
+    "consultor-de-prevencao-de-erros-legais": {
+      title: "Legal Mistake Prevention Consultant",
+      summary:
+        "Identifies common legal mistakes in a situation, highlights risks, and builds a clearer preventive plan.",
+      activationExample:
+        `"I am about to start a new internal process in my company and want to avoid common legal mistakes from the start."`,
+      keywords: ["legal mistakes", "compliance", "prevention", "legal risk", "plan"],
+    },
+    "consultor-de-organizacao-de-vida-financeira": {
+      title: "Financial Life Organization Consultant",
+      summary:
+        "Organizes personal finances in a complete way, creating a practical system for income and expenses.",
+      activationExample:
+        `"My financial life is disorganized and I want to turn my income and expenses into a system I can actually follow."`,
+      keywords: ["financial organization", "income", "expenses", "planning", "control"],
+    },
+    "analista-de-decisoes-de-gastos-importantes": {
+      title: "Major Spending Decision Analyst",
+      summary:
+        "Evaluates important spending decisions with logic, impact analysis, and less impulsiveness.",
+      activationExample:
+        `"I am thinking about upgrading to a more expensive car and want to know if this decision makes financial sense right now."`,
+      keywords: ["major expense", "financial decision", "impact", "comparison", "purchase"],
+    },
+    "consultor-de-clareza-de-caminho-profissional": {
+      title: "Career Path Clarity Consultant",
+      summary:
+        "Helps define the best professional path with clearer direction, realistic options, and a practical plan.",
+      activationExample:
+        `"I am torn between staying in my current field or changing careers and need clarity on the best path."`,
+      keywords: ["career path", "career", "clarity", "options", "direction"],
+    },
+    "analista-de-evolucao-de-habilidades": {
+      title: "Skills Growth Analyst",
+      summary:
+        "Evaluates skill development, maps strengths and gaps, and turns growth into a practical plan.",
+      activationExample:
+        `"I have developed some skills, but I do not know which gaps are blocking me from reaching my next career goal."`,
+      keywords: ["skills", "professional development", "gaps", "growth", "plan"],
+    },
+    "especialista-em-recuperacao-de-foco-e-energia": {
+      title: "Focus and Energy Recovery Specialist",
+      summary:
+        "Creates a practical plan to restore daily focus and energy through realistic habits and sustainable adjustments.",
+      activationExample:
+        `"My routine is leaving me drained and distracted all day, and I want a practical plan to perform well again."`,
+      keywords: ["focus", "energy", "habits", "routine", "performance"],
+    },
+    "consultor-de-rotina-equilibrada": {
+      title: "Balanced Routine Consultant",
+      summary:
+        "Balances routine between work and personal life with sustainable adjustments, less overload, and more realistic habits.",
+      activationExample:
+        `"My routine is completely tilted toward work, and I want to reorganize my day without losing productivity or personal life."`,
+      keywords: ["balanced routine", "quality of life", "work", "personal life", "habits"],
+    },
+    "estrategista-de-ideias-de-conteudo-diferenciado": {
+      title: "Differentiated Content Ideas Strategist",
+      summary:
+        "Creates content ideas with real differentiation, stronger strategic value, and greater retention potential.",
+      activationExample:
+        `"I want to move away from obvious ideas in my niche and create content that truly stands out for my audience."`,
+      keywords: ["differentiated content", "content ideas", "retention", "niche", "audience"],
+    },
   },
   es: {
     "arquiteto-financeiro-pessoal-estrategico": {
@@ -12252,6 +12884,86 @@ const PROMPT_TRANSLATIONS: Record<
       activationExample:
         `"Quiero ideas de contenido educativo que realmente ensenen algo util a mi publico sin sentirse superficiales."`,
       keywords: ["contenido educativo", "ideas de contenido", "valor", "estrategia", "audiencia"],
+    },
+    "consultor-de-analise-de-responsabilidade-em-decisoes": {
+      title: "Consultor de Analisis de Responsabilidad en Decisiones",
+      summary:
+        "Evalua implicaciones legales antes de ejecutar una decision, identifica responsabilidades y muestra escenarios con prudencia.",
+      activationExample:
+        `"Necesito decidir si voy a terminar esta alianza comercial y quiero entender responsabilidades y riesgos antes de actuar."`,
+      keywords: ["responsabilidad legal", "decision", "riesgo legal", "escenarios", "prevencion"],
+    },
+    "analista-de-obrigacoes-contratuais": {
+      title: "Analista de Obligaciones Contractuales",
+      summary:
+        "Identifica obligaciones, clausulas sensibles y riesgos relevantes dentro de contratos con analisis tecnico.",
+      activationExample:
+        `"Quiero entender que obligaciones crea realmente este contrato y donde estan los mayores riesgos."`,
+      keywords: ["obligaciones contractuales", "contrato", "riesgos", "clausulas", "legal"],
+    },
+    "consultor-de-prevencao-de-erros-legais": {
+      title: "Consultor de Prevencion de Errores Legales",
+      summary:
+        "Identifica errores juridicos comunes en una situacion, muestra riesgos y organiza un plan preventivo mas claro.",
+      activationExample:
+        `"Voy a iniciar un nuevo proceso interno en mi empresa y quiero evitar errores legales comunes desde el principio."`,
+      keywords: ["errores legales", "compliance", "prevencion", "riesgo legal", "plan"],
+    },
+    "consultor-de-organizacao-de-vida-financeira": {
+      title: "Consultor de Organizacion de Vida Financiera",
+      summary:
+        "Organiza la vida financiera de forma completa y crea un sistema practico para ingresos y gastos.",
+      activationExample:
+        `"Mi vida financiera esta desordenada y quiero convertir mis ingresos y gastos en un sistema que realmente pueda seguir."`,
+      keywords: ["organizacion financiera", "ingresos", "gastos", "planificacion", "control"],
+    },
+    "analista-de-decisoes-de-gastos-importantes": {
+      title: "Analista de Decisiones de Gastos Importantes",
+      summary:
+        "Evalua decisiones de gasto relevantes con logica, analisis de impacto y menos impulsividad.",
+      activationExample:
+        `"Estoy pensando en cambiar a un coche mas caro y quiero saber si esta decision tiene sentido financiero ahora."`,
+      keywords: ["gasto importante", "decision financiera", "impacto", "comparacion", "compra"],
+    },
+    "consultor-de-clareza-de-caminho-profissional": {
+      title: "Consultor de Claridad de Camino Profesional",
+      summary:
+        "Ayuda a definir el mejor camino profesional con mas claridad, opciones realistas y un plan practico.",
+      activationExample:
+        `"Estoy dividido entre seguir en mi area actual o cambiar de carrera y necesito claridad sobre el mejor camino."`,
+      keywords: ["camino profesional", "carrera", "claridad", "opciones", "direccion"],
+    },
+    "analista-de-evolucao-de-habilidades": {
+      title: "Analista de Evolucion de Habilidades",
+      summary:
+        "Evalua el desarrollo de habilidades, identifica fortalezas y brechas, y convierte la evolucion en un plan practico.",
+      activationExample:
+        `"He desarrollado algunas habilidades, pero no se que brechas me estan impidiendo llegar a mi proximo objetivo profesional."`,
+      keywords: ["habilidades", "desarrollo profesional", "brechas", "evolucion", "plan"],
+    },
+    "especialista-em-recuperacao-de-foco-e-energia": {
+      title: "Especialista en Recuperacion de Foco y Energia",
+      summary:
+        "Crea un plan practico para recuperar foco y energia diaria con habitos realistas y ajustes sostenibles.",
+      activationExample:
+        `"Mi rutina me esta dejando sin energia y disperso todo el dia, y quiero un plan practico para volver a rendir bien."`,
+      keywords: ["foco", "energia", "habitos", "rutina", "performance"],
+    },
+    "consultor-de-rotina-equilibrada": {
+      title: "Consultor de Rutina Equilibrada",
+      summary:
+        "Equilibra la rutina entre trabajo y vida personal con ajustes sostenibles, menos sobrecarga y habitos mas realistas.",
+      activationExample:
+        `"Mi rutina esta completamente inclinada al trabajo y quiero reorganizar mi dia sin perder productividad ni vida personal."`,
+      keywords: ["rutina equilibrada", "calidad de vida", "trabajo", "vida personal", "habitos"],
+    },
+    "estrategista-de-ideias-de-conteudo-diferenciado": {
+      title: "Estratega de Ideas de Contenido Diferenciado",
+      summary:
+        "Crea ideas de contenido con diferenciacion real, mas valor estrategico y mayor potencial de retencion.",
+      activationExample:
+        `"Quiero salir de las ideas obvias de mi nicho y crear contenidos que realmente destaquen para mi publico."`,
+      keywords: ["contenido diferenciado", "ideas de contenido", "retencion", "nicho", "publico"],
     },
   },
   fr: {
@@ -13492,6 +14204,86 @@ const PROMPT_TRANSLATIONS: Record<
       activationExample:
         `"Je veux des idees de contenu educatif qui apprennent vraiment quelque chose d'utile a mon public sans etre superficielles."`,
       keywords: ["contenu educatif", "idees de contenu", "valeur", "strategie", "public"],
+    },
+    "consultor-de-analise-de-responsabilidade-em-decisoes": {
+      title: "Consultant en Analyse de Responsabilite des Decisions",
+      summary:
+        "Evalue les implications juridiques avant l'execution, identifie les responsabilites et presente des scenarios avec prudence.",
+      activationExample:
+        `"Je dois decider si je mets fin a ce partenariat commercial et je veux comprendre les responsabilites et les risques avant d'agir."`,
+      keywords: ["responsabilite juridique", "decision", "risque juridique", "scenarios", "prevention"],
+    },
+    "analista-de-obrigacoes-contratuais": {
+      title: "Analyste des Obligations Contractuelles",
+      summary:
+        "Identifie les obligations, les clauses sensibles et les risques pertinents dans les contrats avec une analyse technique.",
+      activationExample:
+        `"Je veux comprendre quelles obligations ce contrat cree vraiment et ou se trouvent les principaux risques."`,
+      keywords: ["obligations contractuelles", "contrat", "risques", "clauses", "juridique"],
+    },
+    "consultor-de-prevencao-de-erros-legais": {
+      title: "Consultant en Prevention des Erreurs Juridiques",
+      summary:
+        "Identifie les erreurs juridiques courantes dans une situation, montre les risques et organise un plan preventif plus clair.",
+      activationExample:
+        `"Je vais lancer un nouveau processus interne dans mon entreprise et je veux eviter les erreurs juridiques courantes des le debut."`,
+      keywords: ["erreurs juridiques", "compliance", "prevention", "risque juridique", "plan"],
+    },
+    "consultor-de-organizacao-de-vida-financeira": {
+      title: "Consultant en Organisation de Vie Financiere",
+      summary:
+        "Organise la vie financiere de facon complete en creant un systeme pratique pour les revenus et les depenses.",
+      activationExample:
+        `"Ma vie financiere est desorganisee et je veux transformer mes revenus et mes depenses en un systeme que je peux vraiment suivre."`,
+      keywords: ["organisation financiere", "revenus", "depenses", "planification", "controle"],
+    },
+    "analista-de-decisoes-de-gastos-importantes": {
+      title: "Analyste des Decisions de Depenses Importantes",
+      summary:
+        "Evalue les decisions de depense importantes avec logique, analyse d'impact et moins d'impulsivite.",
+      activationExample:
+        `"Je pense a passer a une voiture plus chere et je veux savoir si cette decision a du sens financierement maintenant."`,
+      keywords: ["depense importante", "decision financiere", "impact", "comparaison", "achat"],
+    },
+    "consultor-de-clareza-de-caminho-profissional": {
+      title: "Consultant en Clarte de Parcours Professionnel",
+      summary:
+        "Aide a definir le meilleur parcours professionnel avec plus de clarte, des options realistes et un plan pratique.",
+      activationExample:
+        `"J'hesite entre rester dans mon domaine actuel ou changer de carriere et j'ai besoin de clarte sur la meilleure voie."`,
+      keywords: ["parcours professionnel", "carriere", "clarte", "options", "direction"],
+    },
+    "analista-de-evolucao-de-habilidades": {
+      title: "Analyste de l'Evolution des Competences",
+      summary:
+        "Evalue le developpement des competences, identifie les forces et les ecarts, et transforme l'evolution en plan pratique.",
+      activationExample:
+        `"J'ai developpe certaines competences, mais je ne sais pas quels ecarts m'empechent d'atteindre mon prochain objectif professionnel."`,
+      keywords: ["competences", "developpement professionnel", "ecarts", "evolution", "plan"],
+    },
+    "especialista-em-recuperacao-de-foco-e-energia": {
+      title: "Specialiste en Recuperation du Focus et de l'Energie",
+      summary:
+        "Cree un plan pratique pour recuperer le focus et l'energie au quotidien avec des habitudes realistes et des ajustements durables.",
+      activationExample:
+        `"Ma routine me laisse sans energie et disperse toute la journee, et je veux un plan pratique pour retrouver un bon niveau de performance."`,
+      keywords: ["focus", "energie", "habitudes", "routine", "performance"],
+    },
+    "consultor-de-rotina-equilibrada": {
+      title: "Consultant en Routine Equilibree",
+      summary:
+        "Equilibre la routine entre travail et vie personnelle avec des ajustements durables, moins de surcharge et des habitudes plus realistes.",
+      activationExample:
+        `"Ma routine est completement tiree vers le travail et je veux reorganiser ma journee sans perdre en productivite ni en vie personnelle."`,
+      keywords: ["routine equilibree", "qualite de vie", "travail", "vie personnelle", "habitudes"],
+    },
+    "estrategista-de-ideias-de-conteudo-diferenciado": {
+      title: "Strategiste d'Idees de Contenu Differencie",
+      summary:
+        "Cree des idees de contenu avec une vraie differenciation, plus de valeur strategique et un plus grand potentiel de retention.",
+      activationExample:
+        `"Je veux sortir des idees evidentes de mon niche et creer du contenu qui se distingue vraiment pour mon public."`,
+      keywords: ["contenu differencie", "idees de contenu", "retention", "niche", "public"],
     },
   },
 };
