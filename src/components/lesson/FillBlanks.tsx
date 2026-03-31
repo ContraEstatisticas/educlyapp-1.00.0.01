@@ -325,9 +325,6 @@ export const FillBlanks = ({
                       ? tUi(t, i18n.language, "lesson.ediGuide.fillBlanks.summary")
                       : tUi(t, i18n.language, "lesson.fillBlanks.tryAgainHint")}
                   </p>
-                  {explanation && (
-                    <p className="text-sm text-muted-foreground/80 mt-1 italic">{explanation}</p>
-                  )}
                 </>
               )}
               {explanation && isCorrect && (

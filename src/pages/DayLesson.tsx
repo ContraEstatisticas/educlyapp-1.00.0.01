@@ -886,7 +886,9 @@ const DayLesson = () => {
                       )}
                     </div>
                     <p className="text-foreground/70 leading-relaxed text-base">
-                      {stepAnswer.isCorrect ? tUi(t, i18n.language, "lesson.quiz.masteredConcept") : step.explanation}
+                      {stepAnswer.isCorrect
+                        ? tUi(t, i18n.language, "lesson.quiz.masteredConcept")
+                        : tUi(t, i18n.language, "lesson.quiz.reviewAndTryAgain")}
                     </p>
                     {!stepAnswer.isCorrect && (
                       <>

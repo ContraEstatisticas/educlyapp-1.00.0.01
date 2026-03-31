@@ -855,7 +855,7 @@ const AIToolModuleLessonPage = () => {
                     <p className="text-foreground/70 leading-relaxed text-base">
                       {stepAnswer.isCorrect
                         ? tUi(t, i18n.language, "lesson.quiz.masteredConcept")
-                        : step.explanation}
+                        : tUi(t, i18n.language, "lesson.quiz.reviewAndTryAgain")}
                     </p>
 
                     {!stepAnswer.isCorrect ? (
@@ -867,7 +867,7 @@ const AIToolModuleLessonPage = () => {
                           <p className="text-foreground/70 text-sm">
                             {wrongAttempts === 1
                               ? tUi(t, i18n.language, "lesson.quiz.hintReread")
-                              : step.explanation}
+                              : tUi(t, i18n.language, "lesson.quiz.hintReview")}
                           </p>
                         </div>
                         <div className="mt-4">

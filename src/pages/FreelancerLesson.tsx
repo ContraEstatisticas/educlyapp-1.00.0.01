@@ -485,7 +485,7 @@ const FreelancerLesson = () => {
                     })}
                   </div>
 
-                  {showExplanation[index] && step.explanation && (
+                  {showExplanation[index] && quizResults[index] && step.explanation && (
                     <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-[16px] text-[#475569] leading-relaxed italic">
                       {renderFormattedText(step.explanation)}
                     </div>
