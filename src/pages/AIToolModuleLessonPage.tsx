@@ -840,21 +840,21 @@ const AIToolModuleLessonPage = () => {
                           <div className="w-10 h-10 rounded-full bg-success flex items-center justify-center">
                             <CheckCircle2 className="w-6 h-6 text-white" />
                           </div>
-                          <span>{t("lesson.quiz.excellent", "Excelente!")}</span>
+                          <span>{tUi(t, i18n.language, "lesson.quiz.excellent")}</span>
                         </>
                       ) : (
                         <>
                           <div className="w-10 h-10 rounded-full bg-destructive flex items-center justify-center">
                             <XCircle className="w-6 h-6 text-white" />
                           </div>
-                          <span>{t("lesson.quiz.almostThere", "Quase la!")}</span>
+                          <span>{tUi(t, i18n.language, "lesson.quiz.almostThere")}</span>
                         </>
                       )}
                     </div>
 
                     <p className="text-foreground/70 leading-relaxed text-base">
                       {stepAnswer.isCorrect
-                        ? t("lesson.quiz.masteredConcept", "Voce dominou essa etapa.")
+                        ? tUi(t, i18n.language, "lesson.quiz.masteredConcept")
                         : step.explanation}
                     </p>
 
@@ -862,11 +862,11 @@ const AIToolModuleLessonPage = () => {
                       <>
                         <div className="mt-4 p-4 rounded-xl bg-orange-100 border border-orange-200">
                           <p className="text-orange-600 text-sm font-semibold mb-1">
-                            {t("lesson.quiz.hint", "Pista")} {wrongAttempts}:
+                            {tUi(t, i18n.language, "lesson.quiz.hint")} {wrongAttempts}:
                           </p>
                           <p className="text-foreground/70 text-sm">
                             {wrongAttempts === 1
-                              ? t("lesson.quiz.hintReread", "Volte um pouco e releia os conceitos.")
+                              ? tUi(t, i18n.language, "lesson.quiz.hintReread")
                               : step.explanation}
                           </p>
                         </div>
@@ -874,7 +874,7 @@ const AIToolModuleLessonPage = () => {
                           <div className="flex items-center gap-2 text-destructive">
                             <RotateCcw className="w-4 h-4" />
                             <span className="text-sm font-semibold">
-                              {t("lesson.quiz.getCorrectToContinue", "Acerte para continuar")}
+                              {tUi(t, i18n.language, "lesson.quiz.getCorrectToContinue")}
                             </span>
                           </div>
                         </div>

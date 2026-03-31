@@ -4,6 +4,7 @@ import { useQuizSounds } from "@/hooks/useQuizSounds";
 import { useTranslation } from "react-i18next";
 import { Check, RotateCcw, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { tUi } from "@/lib/supplementalUiTranslations";
 
 interface WordSearchProps {
   title: string;
@@ -82,7 +83,7 @@ const generateGrid = (words: string[], size: number): string[][] => {
 };
 
 export const WordSearch = ({ title, words, gridSize = 8, onComplete }: WordSearchProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { playCorrect, playIncorrect } = useQuizSounds();
   
   const normalizedWords = useMemo(() => words.map(w => w.toUpperCase()), [words]);
@@ -183,7 +184,7 @@ export const WordSearch = ({ title, words, gridSize = 8, onComplete }: WordSearc
       </div>
       
       <p className="text-sm text-muted-foreground mb-4">
-        {t('lesson.wordSearch.instructions', 'Encontre as palavras escondidas arrastando sobre as letras!')}
+        {tUi(t, i18n.language, "lesson.wordSearch.instructions")}
       </p>
       
       {/* Words to find */}
@@ -243,7 +244,7 @@ export const WordSearch = ({ title, words, gridSize = 8, onComplete }: WordSearc
       
       {/* Progress */}
       <div className="mt-4 text-sm text-muted-foreground">
-        {foundWords.size} / {normalizedWords.length} {t('lesson.wordSearch.found', 'palavras encontradas')}
+        {foundWords.size} / {normalizedWords.length} {tUi(t, i18n.language, "lesson.wordSearch.found")}
       </div>
       
       {/* Actions */}
@@ -256,7 +257,7 @@ export const WordSearch = ({ title, words, gridSize = 8, onComplete }: WordSearc
         ) : (
           <Button variant="outline" onClick={handleReset} className="w-full h-12">
             <RotateCcw className="w-4 h-4 mr-2" />
-            {t('lesson.wordSearch.reset', 'Recomeçar')}
+            {tUi(t, i18n.language, "lesson.wordSearch.reset")}
           </Button>
         )}
       </div>

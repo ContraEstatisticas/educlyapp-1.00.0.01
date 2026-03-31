@@ -874,38 +874,38 @@ const DayLesson = () => {
                           <div className="w-10 h-10 rounded-full bg-success flex items-center justify-center">
                             <CheckCircle2 className="w-6 h-6 text-white" />
                           </div>
-                          <span>{t("lesson.quiz.excellent")} 🎉</span>
+                          <span>{tUi(t, i18n.language, "lesson.quiz.excellent")} 🎉</span>
                         </>
                       ) : (
                         <>
                           <div className="w-10 h-10 rounded-full bg-destructive flex items-center justify-center">
                             <XCircle className="w-6 h-6 text-white" />
                           </div>
-                          <span>{t("lesson.quiz.almostThere")}</span>
+                          <span>{tUi(t, i18n.language, "lesson.quiz.almostThere")}</span>
                         </>
                       )}
                     </div>
                     <p className="text-foreground/70 leading-relaxed text-base">
-                      {stepAnswer.isCorrect ? t("lesson.quiz.masteredConcept") : step.explanation}
+                      {stepAnswer.isCorrect ? tUi(t, i18n.language, "lesson.quiz.masteredConcept") : step.explanation}
                     </p>
                     {!stepAnswer.isCorrect && (
                       <>
                         <div className="mt-4 p-4 rounded-xl bg-orange-100 border border-orange-200">
                           <p className="text-orange-600 text-sm font-semibold mb-1">
-                            {t("lesson.quiz.hint")} {wrongAttempts}:
+                            {tUi(t, i18n.language, "lesson.quiz.hint")} {wrongAttempts}:
                           </p>
                           <p className="text-foreground/70 text-sm">
                             {wrongAttempts === 1
                               ? step.type === "quiz"
-                                ? t("lesson.quiz.hintReread")
-                                : t("lesson.quiz.hintOrder")
-                              : t("lesson.quiz.hintReview")}
+                                ? tUi(t, i18n.language, "lesson.quiz.hintReread")
+                                : tUi(t, i18n.language, "lesson.quiz.hintOrder")
+                              : tUi(t, i18n.language, "lesson.quiz.hintReview")}
                           </p>
                         </div>
                         <div className="mt-4">
                           <div className="flex items-center gap-2 text-destructive">
                             <RotateCcw className="w-4 h-4" />
-                            <span className="text-sm font-semibold">{t("lesson.quiz.getCorrectToContinue")}</span>
+                            <span className="text-sm font-semibold">{tUi(t, i18n.language, "lesson.quiz.getCorrectToContinue")}</span>
                           </div>
                         </div>
                       </>

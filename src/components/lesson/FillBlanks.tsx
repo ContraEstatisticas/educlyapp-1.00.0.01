@@ -315,8 +315,8 @@ export const FillBlanks = ({
             <div>
               <p className={cn("font-medium", isCorrect ? "text-success" : "text-destructive")}>
                 {isCorrect
-                  ? t("lesson.quiz.excellent", "Excelente!")
-                  : t("lesson.quiz.tryAgain", "Quase la!")}
+                  ? tUi(t, i18n.language, "lesson.quiz.excellent")
+                  : tUi(t, i18n.language, "lesson.quiz.tryAgain")}
               </p>
               {!isCorrect && (
                 <>
@@ -342,7 +342,7 @@ export const FillBlanks = ({
         {!showResult ? (
           <Button onClick={handleCheck} disabled={!allFilled} className="w-full h-12">
             <Check className="w-4 h-4 mr-2" />
-            {t("lesson.quiz.checkAnswer", "Verificar Resposta")}
+            {tUi(t, i18n.language, "lesson.quiz.checkAnswer")}
           </Button>
         ) : isCorrect ? (
           <Button onClick={onComplete} className="w-full h-12">
@@ -352,7 +352,7 @@ export const FillBlanks = ({
         ) : (
           <Button onClick={handleReset} className="w-full h-12">
             <RotateCcw className="w-4 h-4 mr-2" />
-            {t("lesson.quiz.tryAgainButton", "Tentar Novamente")}
+            {tUi(t, i18n.language, "lesson.quiz.tryAgainButton")}
           </Button>
         )}
       </div>

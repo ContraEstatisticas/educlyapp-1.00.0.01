@@ -296,7 +296,7 @@
         "type": "text",
         "title": "🔎 ChatGPT as an investigation tool",
         "content": "ChatGPT isn't just for generating texts. It can be used as a strategic investigation tool.\n\nWhen properly directed, it helps organize complex problems, raise hypotheses, compare scenarios, and identify hidden risks. Instead of just delivering an answer, it structures reasoning.\n\nThe secret lies in how you ask.",
-        "image": "https://dqlcxpbfemhzzetwaxsa.supabase.co/storage/v1/object/public/lesson-images/investigacaoIngles.png"
+        "image": "/images/investigacao-ingles.png"
       },
       {
         "type": "text",
@@ -2748,7 +2748,7 @@
       {
         "type": "text",
         "title": "🤖 From Cartoon to Human: Levels of Realism",
-        "content": "There are three main types of avatars you can use:\n\n1. 🎨 **Stylized (Cartoon):** Great for educational videos, quick tutorials, or children's content.\n2. 🎭 **Semi-realistic:** A balance between art and reality. Widely used in digital marketing.\n3. 🌟 **Hyper-realistic:** Almost indistinguishable from a real person. Ideal for premium courses and high-value ads.\n\n[Image comparing cartoon vs. hyper-realistic AI avatars]"
+        "content": "There are three main types of avatars you can use:\n\n1. 🎨 **Stylized (Cartoon):** Great for educational videos, quick tutorials, or children's content.\n2. 🎭 **Semi-realistic:** A balance between art and reality. Widely used in digital marketing.\n3. 🌟 **Hyper-realistic:** Almost indistinguishable from a real person. Ideal for premium courses and high-value ads."
       },
       {
         "type": "text",

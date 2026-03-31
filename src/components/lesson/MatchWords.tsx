@@ -185,7 +185,7 @@ export const MatchWords = ({
     const nextWrongAttempts = wrongAttempts + 1;
     setWrongAttempts(nextWrongAttempts);
     setWrongAttempt({ left, right });
-    setWrongFeedback(t("lesson.matchWords.wrongHint", "Tente outra combinacao!"));
+    setWrongFeedback(tUi(t, i18n.language, "lesson.matchWords.wrongHint"));
 
     if (ediHelpEnabled && nextWrongAttempts >= 3) {
       const remainingPairs = pairs.filter((currentPair) => !matchedPairs.has(currentPair.left));
@@ -295,7 +295,7 @@ export const MatchWords = ({
       {description && <p className="text-sm text-muted-foreground mb-4">{description}</p>}
 
       <p className="text-sm text-muted-foreground mb-4">
-        {t("lesson.matchWords.instructions", "Conecte cada item da esquerda com seu par correto a direita!")}
+        {tUi(t, i18n.language, "lesson.matchWords.instructions")}
       </p>
 
       <div ref={containerRef} className="relative grid grid-cols-2 gap-6 sm:gap-8">
@@ -406,7 +406,7 @@ export const MatchWords = ({
 
       <div className="mt-4 flex items-center justify-between">
         <span className="text-sm text-muted-foreground">
-          {matchedPairs.size} / {pairs.length} {t("lesson.matchWords.matched", "pares conectados")}
+          {matchedPairs.size} / {pairs.length} {tUi(t, i18n.language, "lesson.matchWords.matched")}
         </span>
 
         <div className="h-2 flex-1 mx-4 bg-muted rounded-full overflow-hidden">
@@ -426,7 +426,7 @@ export const MatchWords = ({
         ) : (
           <Button variant="outline" onClick={handleReset} className="w-full h-12">
             <RotateCcw className="w-4 h-4 mr-2" />
-            {t("lesson.matchWords.reset", "Recomecar")}
+            {tUi(t, i18n.language, "lesson.matchWords.reset")}
           </Button>
         )}
       </div>

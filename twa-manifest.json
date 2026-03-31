@@ -1,0 +1,58 @@
+{
+  "packageId": "br.com.educly",
+  "host": "SEU_DOMINIO_AQUI",
+  "name": "Educly - Formando Líderes em IA",
+  "launcherName": "Educly",
+  "display": "standalone",
+  "themeColor": "#0D2837",
+  "backgroundColor": "#FFFFFF",
+  "startUrl": "/dashboard",
+  "iconUrl": "https://SEU_DOMINIO_AQUI/pwa-512x512.png",
+  "maskableIconUrl": "https://SEU_DOMINIO_AQUI/pwa-maskable-512x512.png",
+  "monochromeIconUrl": "",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./educly-release-key.keystore",
+    "alias": "educly"
+  },
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "url": "/dashboard",
+      "icon": "https://SEU_DOMINIO_AQUI/pwa-192x192.png"
+    },
+    {
+      "name": "Desafios",
+      "short_name": "Desafios",
+      "url": "/challenges",
+      "icon": "https://SEU_DOMINIO_AQUI/pwa-192x192.png"
+    },
+    {
+      "name": "Assistentes IA",
+      "short_name": "IA",
+      "url": "/assistentes",
+      "icon": "https://SEU_DOMINIO_AQUI/pwa-192x192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://SEU_DOMINIO_AQUI/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableNotifications": true,
+  "isChromeOSOnly": false,
+  "minSdkVersion": 21,
+  "targetSdkVersion": 33
+}
