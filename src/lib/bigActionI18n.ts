@@ -25,8 +25,10 @@ type AreaValue =
 
 interface BigActionUiCopy {
   active: {
+    allStepsCompleted: string;
     areaHint: string;
     areaPlaceholder: string;
+    areaQuickSelectHint: string;
     areaQuestion: string;
     backToDashboard: string;
     completeButton: string;
@@ -50,7 +52,9 @@ interface BigActionUiCopy {
     promptCopiedDescription: string;
     promptCopiedTitle: string;
     promptDescription: string;
+    promptHideButton: string;
     promptLabel: string;
+    promptShowButton: string;
     promptUnavailableDescription: string;
     promptUnavailableTitle: string;
     regenerateDescription: string;
@@ -65,9 +69,15 @@ interface BigActionUiCopy {
     saveAreaErrorDescription: string;
     saveAreaErrorTitle: string;
     saveAreaTitle: string;
+    stepCounterLabel: string;
+    stepDoneButton: string;
+    stepProgressLabel: string;
+    stepRedoButton: string;
     titleFallback: string;
     whatToCreateFallback: string;
     whatToCreateLabel: string;
+    nextStepButton: string;
+    previousStepButton: string;
   };
   areaLabels: Record<AreaValue, string>;
   featureName: string;
@@ -114,8 +124,10 @@ interface BigActionUiCopy {
 
 const PT_UI: BigActionUiCopy = {
   active: {
+    allStepsCompleted: "Todos os passos foram marcados. Se quiser, agora voce pode concluir sua Big Acao.",
     areaHint: "Sua resposta sera salva no perfil e usada para personalizar as proximas Big Acoes, sem te perguntar tudo de novo.",
     areaPlaceholder: "Escolha uma categoria",
+    areaQuickSelectHint: "Toque na area que mais combina com seu trabalho hoje.",
     areaQuestion: "Com o que voce trabalha hoje?",
     backToDashboard: "Voltar ao dashboard",
     completeButton: "Concluir Big Acao",
@@ -139,7 +151,9 @@ const PT_UI: BigActionUiCopy = {
     promptCopiedDescription: "Agora e so colar no GPT, Claude ou na IA que preferir.",
     promptCopiedTitle: "Prompt copiado",
     promptDescription: "Copie e cole no GPT, Claude ou na IA que preferir para executar a atividade.",
+    promptHideButton: "Esconder prompt",
     promptLabel: "Prompt pronto",
+    promptShowButton: "Ver prompt completo",
     promptUnavailableDescription: "Ainda nao existe um prompt pronto para copiar nesta Big Acao.",
     promptUnavailableTitle: "Prompt indisponivel",
     regenerateDescription: "Sua atividade personalizada foi atualizada.",
@@ -154,9 +168,15 @@ const PT_UI: BigActionUiCopy = {
     saveAreaErrorDescription: "Nao foi possivel salvar sua area agora.",
     saveAreaErrorTitle: "Erro ao salvar area",
     saveAreaTitle: "Area salva",
+    stepCounterLabel: "Passo",
+    stepDoneButton: "Marcar passo como feito",
+    stepProgressLabel: "Progresso dos passos",
+    stepRedoButton: "Marcar passo como pendente",
     titleFallback: "Sua Big Acao personalizada esta pronta",
     whatToCreateFallback: "Algo pratico e aplicavel ao seu trabalho",
     whatToCreateLabel: "O que voce vai criar hoje",
+    nextStepButton: "Proximo passo",
+    previousStepButton: "Passo anterior",
   },
   areaLabels: {
     Atendimento: "Atendimento",
@@ -248,8 +268,10 @@ const PT_UI: BigActionUiCopy = {
 
 const EN_UI: BigActionUiCopy = {
   active: {
+    allStepsCompleted: "All steps are checked off. If you want, you can complete your Big Action now.",
     areaHint: "Your answer will be saved to your profile and reused to personalize future Big Actions without asking again.",
     areaPlaceholder: "Choose a category",
+    areaQuickSelectHint: "Tap the area that best matches what you do today.",
     areaQuestion: "What do you work with today?",
     backToDashboard: "Back to dashboard",
     completeButton: "Complete Big Action",
@@ -273,7 +295,9 @@ const EN_UI: BigActionUiCopy = {
     promptCopiedDescription: "Now just paste it into GPT, Claude, or your preferred AI.",
     promptCopiedTitle: "Prompt copied",
     promptDescription: "Copy and paste it into GPT, Claude, or whichever AI you prefer to run the activity.",
+    promptHideButton: "Hide prompt",
     promptLabel: "Ready prompt",
+    promptShowButton: "View full prompt",
     promptUnavailableDescription: "There is no ready prompt to copy for this Big Action yet.",
     promptUnavailableTitle: "Prompt unavailable",
     regenerateDescription: "Your personalized activity has been refreshed.",
@@ -288,9 +312,15 @@ const EN_UI: BigActionUiCopy = {
     saveAreaErrorDescription: "We could not save your area right now.",
     saveAreaErrorTitle: "Error saving area",
     saveAreaTitle: "Area saved",
+    stepCounterLabel: "Step",
+    stepDoneButton: "Mark step as done",
+    stepProgressLabel: "Step progress",
+    stepRedoButton: "Mark step as pending",
     titleFallback: "Your personalized Big Action is ready",
     whatToCreateFallback: "Something practical and useful for your work",
     whatToCreateLabel: "What you are going to create today",
+    nextStepButton: "Next step",
+    previousStepButton: "Previous step",
   },
   areaLabels: {
     Atendimento: "Customer Support",
@@ -382,8 +412,10 @@ const EN_UI: BigActionUiCopy = {
 
 const ES_UI: BigActionUiCopy = {
   active: {
+    allStepsCompleted: "Todos los pasos ya estan marcados. Si quieres, ahora puedes completar tu Big Action.",
     areaHint: "Tu respuesta se guardara en tu perfil y se usara para personalizar las proximas Big Actions sin volver a preguntarlo.",
     areaPlaceholder: "Elige una categoria",
+    areaQuickSelectHint: "Toca el area que mejor representa tu trabajo hoy.",
     areaQuestion: "A que te dedicas hoy?",
     backToDashboard: "Volver al dashboard",
     completeButton: "Completar Big Action",
@@ -407,7 +439,9 @@ const ES_UI: BigActionUiCopy = {
     promptCopiedDescription: "Ahora solo tienes que pegarlo en GPT, Claude o en la IA que prefieras.",
     promptCopiedTitle: "Prompt copiado",
     promptDescription: "Copialo y pegalo en GPT, Claude o en la IA que prefieras para ejecutar la actividad.",
+    promptHideButton: "Ocultar prompt",
     promptLabel: "Prompt listo",
+    promptShowButton: "Ver prompt completo",
     promptUnavailableDescription: "Todavia no hay un prompt listo para copiar en esta Big Action.",
     promptUnavailableTitle: "Prompt no disponible",
     regenerateDescription: "Tu actividad personalizada fue actualizada.",
@@ -422,9 +456,15 @@ const ES_UI: BigActionUiCopy = {
     saveAreaErrorDescription: "No pudimos guardar tu area ahora mismo.",
     saveAreaErrorTitle: "Error al guardar el area",
     saveAreaTitle: "Area guardada",
+    stepCounterLabel: "Paso",
+    stepDoneButton: "Marcar paso como hecho",
+    stepProgressLabel: "Progreso de pasos",
+    stepRedoButton: "Marcar paso como pendiente",
     titleFallback: "Tu Big Action personalizada esta lista",
     whatToCreateFallback: "Algo practico y util para tu trabajo",
     whatToCreateLabel: "Lo que vas a crear hoy",
+    nextStepButton: "Siguiente paso",
+    previousStepButton: "Paso anterior",
   },
   areaLabels: {
     Atendimento: "Atencion al cliente",
@@ -516,8 +556,10 @@ const ES_UI: BigActionUiCopy = {
 
 const FR_UI: BigActionUiCopy = {
   active: {
+    allStepsCompleted: "Toutes les etapes sont cochees. Si vous voulez, vous pouvez maintenant terminer votre Big Action.",
     areaHint: "Ta reponse sera enregistree dans ton profil et reutilisee pour personnaliser les prochaines Big Actions sans redemander.",
     areaPlaceholder: "Choisis une categorie",
+    areaQuickSelectHint: "Touchez le domaine qui correspond le mieux a ce que vous faites aujourd'hui.",
     areaQuestion: "Dans quel domaine travailles-tu aujourd'hui ?",
     backToDashboard: "Retour au dashboard",
     completeButton: "Terminer la Big Action",
@@ -541,7 +583,9 @@ const FR_UI: BigActionUiCopy = {
     promptCopiedDescription: "Il ne reste plus qu'a le coller dans GPT, Claude ou l'IA de ton choix.",
     promptCopiedTitle: "Prompt copie",
     promptDescription: "Copie-le et colle-le dans GPT, Claude ou l'IA de ton choix pour executer l'activite.",
+    promptHideButton: "Masquer le prompt",
     promptLabel: "Prompt pret",
+    promptShowButton: "Voir le prompt complet",
     promptUnavailableDescription: "Aucun prompt pret a copier n'est encore disponible pour cette Big Action.",
     promptUnavailableTitle: "Prompt indisponible",
     regenerateDescription: "Ton activite personnalisee a ete mise a jour.",
@@ -556,9 +600,15 @@ const FR_UI: BigActionUiCopy = {
     saveAreaErrorDescription: "Nous n'avons pas pu enregistrer ton domaine pour le moment.",
     saveAreaErrorTitle: "Erreur lors de l'enregistrement",
     saveAreaTitle: "Domaine enregistre",
+    stepCounterLabel: "Etape",
+    stepDoneButton: "Marquer l'etape comme faite",
+    stepProgressLabel: "Progression des etapes",
+    stepRedoButton: "Remettre l'etape en attente",
     titleFallback: "Ta Big Action personnalisee est prete",
     whatToCreateFallback: "Quelque chose de pratique et utile pour ton travail",
     whatToCreateLabel: "Ce que tu vas creer aujourd'hui",
+    nextStepButton: "Etape suivante",
+    previousStepButton: "Etape precedente",
   },
   areaLabels: {
     Atendimento: "Service client",

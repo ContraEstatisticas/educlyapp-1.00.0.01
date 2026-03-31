@@ -1,9 +1,12 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+﻿import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   BriefcaseBusiness,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Clipboard,
   Compass,
@@ -25,10 +28,12 @@ import {
   getLocalizedBigActionSourceCopy,
   getLocalizedProfessionalArea,
 } from "@/lib/bigActionI18n";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 
 const OTHER_AREA_VALUE = "Outro";
@@ -51,6 +56,9 @@ const BigActionPage = () => {
 
   const [selectedArea, setSelectedArea] = useState("");
   const [customArea, setCustomArea] = useState("");
+  const [completedStepIndexes, setCompletedStepIndexes] = useState<number[]>([]);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [isPromptExpanded, setIsPromptExpanded] = useState(false);
   const activeBigActionId = activeBigAction?.id;
   const activeBigActionStatus = activeBigAction?.status;
   const language = i18n.resolvedLanguage || i18n.language;
@@ -102,8 +110,51 @@ const BigActionPage = () => {
   const challengeProgressPercent = Math.round((challengeProgressCount / BIG_ACTION_TRAILS_PER_CYCLE) * 100);
   const specializedProgressCount = Math.min(BIG_ACTION_TRAILS_PER_CYCLE, specializedModuleProgress?.sinceBaseline || 0);
   const specializedProgressPercent = Math.round((specializedProgressCount / BIG_ACTION_TRAILS_PER_CYCLE) * 100);
+  const totalSteps = steps.length;
+  const completedStepsCount = completedStepIndexes.length;
+  const currentStep = steps[currentStepIndex] || steps[0] || "";
+  const currentStepCompleted = completedStepIndexes.includes(currentStepIndex);
+  const allStepsCompleted = totalSteps > 0 && completedStepsCount === totalSteps;
+  const stepProgressPercent = totalSteps ? Math.round((completedStepsCount / totalSteps) * 100) : 0;
   const formatUnit = (count: number, singular: string, plural: string) =>
     `${count} ${count === 1 ? singular : plural}`;
+  const status = activeBigAction?.status;
+  const isAwaitingArea = status === "needs_area";
+  const isGeneratingState = status === "pending_generation";
+  const hasGenerationError = status === "generation_error";
+  const isReady = status === "ready";
+
+  useEffect(() => {
+    setCompletedStepIndexes([]);
+    setCurrentStepIndex(0);
+    setIsPromptExpanded(false);
+  }, [activeBigActionId]);
+
+  useEffect(() => {
+    if (!totalSteps) {
+      setCurrentStepIndex(0);
+      return;
+    }
+
+    setCurrentStepIndex((currentIndex) => Math.min(currentIndex, totalSteps - 1));
+    setCompletedStepIndexes((currentIndexes) => currentIndexes.filter((index) => index < totalSteps));
+  }, [totalSteps]);
+
+  const toggleStepCompletion = (index: number) => {
+    const stepWasCompleted = completedStepIndexes.includes(index);
+
+    setCompletedStepIndexes((currentIndexes) => {
+      if (stepWasCompleted) {
+        return currentIndexes.filter((currentIndex) => currentIndex !== index);
+      }
+
+      return [...currentIndexes, index].sort((firstIndex, secondIndex) => firstIndex - secondIndex);
+    });
+
+    if (!stepWasCompleted && index < totalSteps - 1) {
+      setCurrentStepIndex(index + 1);
+    }
+  };
 
   const handleSaveArea = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -314,12 +365,6 @@ const BigActionPage = () => {
     );
   }
 
-  const status = activeBigAction.status;
-  const isAwaitingArea = status === "needs_area";
-  const isGeneratingState = status === "pending_generation";
-  const hasGenerationError = status === "generation_error";
-  const isReady = status === "ready";
-
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6">
@@ -379,21 +424,48 @@ const BigActionPage = () => {
             {isAwaitingArea ? (
               <form onSubmit={handleSaveArea} className="space-y-5">
                 <div className="space-y-2">
-                  <label htmlFor="big-action-area" className="text-sm font-semibold text-foreground">
+                  <label className="text-sm font-semibold text-foreground">
                     {ui.active.areaQuestion}
+                    <span className="mt-2 block text-sm font-normal leading-6 text-muted-foreground">
+                      {ui.active.areaQuickSelectHint}
+                    </span>
                   </label>
-                  <Select value={selectedArea} onValueChange={setSelectedArea}>
-                    <SelectTrigger id="big-action-area" className="h-12 text-sm">
-                      <SelectValue placeholder={ui.active.areaPlaceholder} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {BIG_ACTION_AREA_SUGGESTIONS.map((area) => (
-                        <SelectItem key={area} value={area}>
-                          {getLocalizedProfessionalArea(area, language)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {BIG_ACTION_AREA_SUGGESTIONS.map((area) => {
+                      const isSelected = selectedArea === area;
+
+                      return (
+                        <button
+                          key={area}
+                          type="button"
+                          onClick={() => setSelectedArea(area)}
+                          className={cn(
+                            "rounded-2xl border px-4 py-4 text-left transition-all",
+                            isSelected
+                              ? "border-primary bg-primary/10 shadow-sm"
+                              : "border-border bg-background/60 hover:border-primary/30 hover:bg-background",
+                          )}
+                        >
+                          <span className="flex items-center justify-between gap-3">
+                            <span className="text-sm font-semibold text-foreground">
+                              {getLocalizedProfessionalArea(area, language)}
+                            </span>
+                            <span
+                              className={cn(
+                                "inline-flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold transition-colors",
+                                isSelected
+                                  ? "border-primary bg-primary text-primary-foreground"
+                                  : "border-border bg-background text-muted-foreground",
+                              )}
+                            >
+                              {isSelected ? <CheckCircle2 className="h-3.5 w-3.5" /> : null}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {selectedArea === OTHER_AREA_VALUE ? (
@@ -467,45 +539,172 @@ const BigActionPage = () => {
                   </p>
                 </section>
 
-                <section className="rounded-2xl border border-border bg-background/80 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    {ui.active.guidedStepsLabel}
-                  </p>
-                  <div className="mt-4 space-y-3">
-                    {steps.map((step, index) => (
-                      <div key={`${activeBigAction.id}-step-${index}`} className="flex gap-3 rounded-2xl border border-border/70 bg-card px-4 py-4">
-                        <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
-                          {index + 1}
-                        </span>
-                        <p className="text-sm leading-7 text-foreground">{step}</p>
+                {steps.length ? (
+                  <section className="rounded-2xl border border-border bg-background/80 p-5">
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          {ui.active.guidedStepsLabel}
+                        </p>
+                        <p className="mt-3 text-2xl font-bold text-foreground">
+                          {ui.active.stepCounterLabel} {currentStepIndex + 1}/{steps.length}
+                        </p>
                       </div>
-                    ))}
-                  </div>
-                </section>
 
-                <section className="rounded-2xl border border-border bg-background/80 p-5">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                        {ui.active.promptLabel}
-                      </p>
-                      <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                        {ui.active.promptDescription}
-                      </p>
+                      <div className="w-full rounded-2xl border border-border/70 bg-card/90 p-4 lg:max-w-xs">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                            {ui.active.stepProgressLabel}
+                          </p>
+                          <p className="text-sm font-semibold text-foreground">
+                            {completedStepsCount}/{steps.length}
+                          </p>
+                        </div>
+                        <Progress className="mt-3 h-2" value={stepProgressPercent} />
+                      </div>
                     </div>
 
-                    <Button variant="outline" onClick={handleCopyPrompt} className="sm:self-start">
-                      <Clipboard className="mr-2 h-4 w-4" />
-                      {ui.active.copyPromptButton}
-                    </Button>
-                  </div>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {steps.map((_, index) => {
+                        const isCurrentStep = index === currentStepIndex;
+                        const isCompletedStep = completedStepIndexes.includes(index);
 
-                  <Textarea
-                    className="mt-4 min-h-[220px] resize-none bg-card font-mono text-xs leading-6"
-                    readOnly
-                    value={activeBigAction.ready_prompt || ""}
-                  />
-                </section>
+                        return (
+                          <button
+                            key={`${activeBigAction.id}-step-pill-${index}`}
+                            type="button"
+                            onClick={() => setCurrentStepIndex(index)}
+                            className={cn(
+                              "inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-all",
+                              isCurrentStep
+                                ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                : isCompletedStep
+                                  ? "border-primary/30 bg-primary/10 text-primary"
+                                  : "border-border bg-card text-muted-foreground hover:border-primary/20 hover:text-foreground",
+                            )}
+                          >
+                            <span
+                              className={cn(
+                                "inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold",
+                                isCurrentStep
+                                  ? "bg-primary-foreground/15 text-primary-foreground"
+                                  : isCompletedStep
+                                    ? "bg-primary/15 text-primary"
+                                    : "bg-muted text-foreground",
+                              )}
+                            >
+                              {isCompletedStep ? <CheckCircle2 className="h-4 w-4" /> : index + 1}
+                            </span>
+                            {ui.active.stepCounterLabel} {index + 1}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="mt-5 rounded-3xl border border-border/70 bg-card p-5 shadow-sm">
+                      <div className="flex items-start gap-4">
+                        <button
+                          type="button"
+                          onClick={() => toggleStepCompletion(currentStepIndex)}
+                          className={cn(
+                            "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border transition-all",
+                            currentStepCompleted
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border bg-background text-muted-foreground hover:border-primary/30 hover:text-primary",
+                          )}
+                        >
+                          <CheckCircle2 className="h-5 w-5" />
+                        </button>
+
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                            {ui.active.stepCounterLabel} {currentStepIndex + 1}
+                          </p>
+                          <p className="mt-3 text-base leading-7 text-foreground">
+                            {currentStep}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStepIndex((currentIndex) => Math.max(0, currentIndex - 1))}
+                          disabled={currentStepIndex === 0}
+                          className="sm:flex-1"
+                        >
+                          <ChevronLeft className="mr-2 h-4 w-4" />
+                          {ui.active.previousStepButton}
+                        </Button>
+
+                        <Button
+                          type="button"
+                          variant={currentStepCompleted ? "outline" : "default"}
+                          onClick={() => toggleStepCompletion(currentStepIndex)}
+                          className="sm:flex-1"
+                        >
+                          <CheckCircle2 className="mr-2 h-4 w-4" />
+                          {currentStepCompleted ? ui.active.stepRedoButton : ui.active.stepDoneButton}
+                        </Button>
+
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStepIndex((currentIndex) => Math.min(steps.length - 1, currentIndex + 1))}
+                          disabled={currentStepIndex === steps.length - 1}
+                          className="sm:flex-1"
+                        >
+                          {ui.active.nextStepButton}
+                          <ChevronRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {allStepsCompleted ? (
+                      <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm font-medium text-foreground">
+                        {ui.active.allStepsCompleted}
+                      </div>
+                    ) : null}
+                  </section>
+                ) : null}
+
+                <Collapsible open={isPromptExpanded} onOpenChange={setIsPromptExpanded}>
+                  <section className="rounded-2xl border border-border bg-background/80 p-5">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          {ui.active.promptLabel}
+                        </p>
+                        <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                          {ui.active.promptDescription}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col gap-3 sm:flex-row sm:self-start">
+                        <Button variant="outline" onClick={handleCopyPrompt}>
+                          <Clipboard className="mr-2 h-4 w-4" />
+                          {ui.active.copyPromptButton}
+                        </Button>
+
+                        <CollapsibleTrigger asChild>
+                          <Button variant="ghost">
+                            <ChevronDown className={cn("mr-2 h-4 w-4 transition-transform", isPromptExpanded && "rotate-180")} />
+                            {isPromptExpanded ? ui.active.promptHideButton : ui.active.promptShowButton}
+                          </Button>
+                        </CollapsibleTrigger>
+                      </div>
+                    </div>
+
+                    <CollapsibleContent className="overflow-hidden">
+                      <Textarea
+                        className="mt-4 min-h-[220px] resize-none bg-card font-mono text-xs leading-6"
+                        readOnly
+                        value={activeBigAction.ready_prompt || ""}
+                      />
+                    </CollapsibleContent>
+                  </section>
+                </Collapsible>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button onClick={handleComplete} disabled={isCompleting} className="h-12 px-6 text-sm font-semibold">
@@ -527,3 +726,5 @@ const BigActionPage = () => {
 };
 
 export default BigActionPage;
+
+
