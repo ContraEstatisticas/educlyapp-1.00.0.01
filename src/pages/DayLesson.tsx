@@ -765,7 +765,7 @@ const DayLesson = () => {
                     >
                       {(isCurrent ? userWords : stepAnswer.userWords).length === 0 && (
                         <span className="text-muted-foreground italic w-full text-center text-sm">
-                          👆 Toque nas palavras abaixo para montar a frase
+                          {t("lesson.practical.instructions", "Clique nas palavras para montar o prompt correto:")}
                         </span>
                       )}
                       {(isCurrent ? userWords : stepAnswer.userWords).map((word, i) => (
