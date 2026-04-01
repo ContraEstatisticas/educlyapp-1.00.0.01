@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, Suspense, lazy } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { X, CheckCircle2, XCircle, RotateCcw, Star } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { GradualTextDisplay, GradualTextDisplayRef } from "@/components/lesson/GradualTextDisplay";
@@ -28,6 +28,7 @@ import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
 import {
   DEFAULT_DAY1_EXPERIMENT_VARIANT,
   type Day1ExperimentVariant,
+  isDay1ExperimentVariant,
   normalizeDay1ExperimentVariant,
 } from "@/lib/day1Experiment";
 
@@ -40,6 +41,9 @@ const FindPromptError = lazy(() => import("@/components/lesson/FindPromptError")
 const SelectIncorrect = lazy(() => import("@/components/lesson/SelectIncorrect").then((m) => ({ default: m.SelectIncorrect })));
 // REGISTRO DO LAZY LOAD ADICIONADO ABAIXO
 const AppPromo = lazy(() => import("@/components/AppPromo").then((m) => ({ default: m.AppPromo })));
+const GuilhermeDay1Journey = lazy(() =>
+  import("@/components/lesson/GuilhermeDay1Journey").then((m) => ({ default: m.default }))
+);
 
 // Import Edi Motivation components
 import { EdiMotivation, useEdiMotivation } from "@/components/lesson/EdiMotivation";
@@ -64,6 +68,8 @@ const getComponent = (componentName: string): React.LazyExoticComponent<React.Co
       return SelectIncorrect;
     case "AppPromo": // CASO ADICIONADO PARA RECONHECER O COMPONENTE
       return AppPromo;
+    case "GuilhermeDay1Journey":
+      return GuilhermeDay1Journey;
     default:
       return null;
   }
@@ -278,6 +284,7 @@ const DayLesson = () => {
   const { t, i18n } = useTranslation();
   const { dayId } = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { toast } = useToast();
   const { playCorrect, playIncorrect, playContinue } = useQuizSounds();
   const { ai_hub: hasAiHub } = useProductAccess();
@@ -398,6 +405,12 @@ const DayLesson = () => {
 
   // Hook for translated lesson content
   const { getLessonContent, currentLanguage, contentLanguage, isLoading: isTranslationLoading } = useTranslatedLessonContent();
+  const previewDay1VariantParam = searchParams.get("preview_day1_variant") ?? searchParams.get("preview_variant");
+  const previewDay1Variant =
+    previewDay1VariantParam && isDay1ExperimentVariant(previewDay1VariantParam)
+      ? normalizeDay1ExperimentVariant(previewDay1VariantParam)
+      : null;
+  const isDay1PreviewMode = Boolean(dayInfo?.dayNumber === 1 && previewDay1Variant);
 
   // Carregar Conteúdo - wait for translations to be ready AND content language to match
   useEffect(() => {
@@ -427,36 +440,44 @@ const DayLesson = () => {
           let resolvedDay1Variant = DEFAULT_DAY1_EXPERIMENT_VARIANT;
           let savedDay1Feedback: { starRating: number; opinionText: string } | null = null;
 
-          if (user && dayData.day_number === 1) {
-            const { data: profile, error: profileError } = await supabase
-              .from("profiles")
-              .select("challenge_day1_variant")
-              .eq("id", user.id)
-              .maybeSingle();
+          if (dayData.day_number === 1) {
+            if (user) {
+              const { data: profile, error: profileError } = await supabase
+                .from("profiles")
+                .select("challenge_day1_variant")
+                .eq("id", user.id)
+                .maybeSingle();
 
-            if (profileError) {
-              console.error("[DayLesson] Failed to load Day 1 variant:", profileError);
+              if (profileError) {
+                console.error("[DayLesson] Failed to load Day 1 variant:", profileError);
+              }
+
+              resolvedDay1Variant = normalizeDay1ExperimentVariant(profile?.challenge_day1_variant);
             }
 
-            resolvedDay1Variant = normalizeDay1ExperimentVariant(profile?.challenge_day1_variant);
-
-            const { data: feedback, error: feedbackError } = await supabase
-              .from("challenge_day_feedback")
-              .select("star_rating, opinion_text")
-              .eq("user_id", user.id)
-              .eq("challenge_day_id", dayId)
-              .eq("day_variant", resolvedDay1Variant)
-              .maybeSingle();
-
-            if (feedbackError) {
-              console.error("[DayLesson] Failed to load Day 1 feedback:", feedbackError);
+            if (previewDay1Variant) {
+              resolvedDay1Variant = previewDay1Variant;
             }
 
-            if (feedback) {
-              savedDay1Feedback = {
-                starRating: feedback.star_rating,
-                opinionText: feedback.opinion_text,
-              };
+            if (user && !previewDay1Variant) {
+              const { data: feedback, error: feedbackError } = await supabase
+                .from("challenge_day_feedback")
+                .select("star_rating, opinion_text")
+                .eq("user_id", user.id)
+                .eq("challenge_day_id", dayId)
+                .eq("day_variant", resolvedDay1Variant)
+                .maybeSingle();
+
+              if (feedbackError) {
+                console.error("[DayLesson] Failed to load Day 1 feedback:", feedbackError);
+              }
+
+              if (feedback) {
+                savedDay1Feedback = {
+                  starRating: feedback.star_rating,
+                  opinionText: feedback.opinion_text,
+                };
+              }
             }
           }
 
@@ -467,6 +488,11 @@ const DayLesson = () => {
           setDay1FeedbackOpinion(savedDay1Feedback?.opinionText ?? "");
           setShowDay1FeedbackDialog(false);
           setIsSavingDay1Feedback(false);
+          setCurrentStepIndex(0);
+          setStepAnswers({});
+          setWrongAttempts(0);
+          setAvailableWords([]);
+          setEdiAssistState(null);
           // Always use translated content from JSON files - no hardcoded fallback
           const translatedSteps = getLessonContent(dayData.day_number, resolvedDay1Variant);
           console.log(`📚 Day ${dayData.day_number} - Carregando ${translatedSteps.length} steps para idioma: ${contentLanguage}`);
@@ -479,7 +505,7 @@ const DayLesson = () => {
       }
     };
     fetchDayContent();
-  }, [dayId, currentLanguage, contentLanguage, getLessonContent, isTranslationLoading]);
+  }, [dayId, currentLanguage, contentLanguage, getLessonContent, isTranslationLoading, previewDay1Variant]);
 
   // Inicializar estados do step atual (não resetar - apenas inicializar se não existir)
   useEffect(() => {
@@ -666,6 +692,16 @@ const DayLesson = () => {
       setIsCompletingDay(true);
 
       try {
+        if (isDay1PreviewMode) {
+          setIsCompletingDay(false);
+          toast({
+            title: "Pré-visualização finalizada",
+            description: "Nada foi salvo porque você está vendo a trilha em modo de teste.",
+          });
+          navigate("/dashboard");
+          return;
+        }
+
         const {
           data: { user },
         } = await supabase.auth.getUser();
@@ -890,13 +926,22 @@ const DayLesson = () => {
   const exitDialogUi = getExitDialogUi(i18n.resolvedLanguage || i18n.language);
   const correctCelebrationUi = getCorrectCelebrationUi(i18n.resolvedLanguage || i18n.language);
   const day1FeedbackUi = getDay1FeedbackUi(i18n.resolvedLanguage || i18n.language);
+  const isGuilhermeJourneyStep =
+    currentStep.type === "component" && currentStep.componentName === "GuilhermeDay1Journey";
+  const useWideGuilhermeLayout = day1Variant === "guilherme" && isGuilhermeJourneyStep;
+  const lessonContentWidthClass = useWideGuilhermeLayout
+    ? "max-w-2xl md:max-w-[1280px] xl:max-w-[1560px] 2xl:max-w-[1680px] md:px-8 xl:px-10"
+    : "max-w-2xl";
+  const lessonBannerWidthClass = useWideGuilhermeLayout
+    ? "max-w-2xl md:max-w-[1280px] xl:max-w-[1560px] 2xl:max-w-[1680px]"
+    : "max-w-2xl";
   const canExitWithoutConfirmation =
     isCompletingDay || showPracticeModal || showMilestoneUpsell;
 
   // Só pede verificação se for Quiz ou Prática. Chat avança direto.
   const needsVerification = (currentStep.type === "quiz" || currentStep.type === "practical") && !isAnswerChecked;
   const moduleSummary = lessonSteps
-    .map((s) => [s.title, s.question, s.content].filter(Boolean).join(": "))
+    .map((s) => [s.title, s.question, s.content, typeof s.props?.summary === "string" ? s.props.summary : undefined].filter(Boolean).join(": "))
     .join("\n");
 
   const handleCloseLesson = () => {
@@ -910,6 +955,19 @@ const DayLesson = () => {
     }
 
     setShowExitDialog(true);
+  };
+
+  const handleEnableGuilhermePreview = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set("preview_day1_variant", "guilherme");
+    setSearchParams(nextParams);
+  };
+
+  const handleDisableDay1Preview = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("preview_day1_variant");
+    nextParams.delete("preview_variant");
+    setSearchParams(nextParams);
   };
 
   return (
@@ -940,9 +998,59 @@ const DayLesson = () => {
       </div>
 
       {/* MAIN CONTENT AREA - Scroll contínuo suave */}
+      {dayInfo?.dayNumber === 1 && (
+        <div
+          className={cn(
+            "border-b px-4 py-3",
+            isDay1PreviewMode ? "border-amber-200 bg-amber-50/80" : "border-sky-200 bg-sky-50/80"
+          )}
+        >
+          <div className={cn(
+            "mx-auto flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",
+            lessonBannerWidthClass
+          )}>
+            <div>
+              <p
+                className={cn(
+                  "text-xs font-black uppercase tracking-[0.28em]",
+                  isDay1PreviewMode ? "text-amber-700" : "text-sky-700"
+                )}
+              >
+                Botao provisorio
+              </p>
+              <p className="mt-1 text-sm text-foreground/80">
+                {isDay1PreviewMode
+                  ? "Voce esta visualizando a versao Guilherme sem tag. Nada sera salvo nesse modo."
+                  : "Quer ver a versao Guilherme sem trocar a tag do usuario? Use o preview provisorio abaixo."}
+              </p>
+            </div>
+
+            {isDay1PreviewMode ? (
+              <Button
+                type="button"
+                variant="outline"
+                className="shrink-0 border-amber-300 bg-white text-amber-800 hover:bg-amber-100"
+                onClick={handleDisableDay1Preview}
+              >
+                Voltar para a versao normal
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                variant="outline"
+                className="shrink-0 border-sky-300 bg-white text-sky-800 hover:bg-sky-100"
+                onClick={handleEnableGuilhermePreview}
+              >
+                Visualizar versao Guilherme
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="flex-1 flex overflow-hidden">
       <div ref={containerRef} className="flex-1 overflow-y-auto flex justify-center bg-background scroll-smooth">
-        <div className="w-full max-w-2xl px-6 py-8 pb-32 space-y-12">
+        <div className={cn("w-full px-6 py-8 pb-32 space-y-12", lessonContentWidthClass)}>
           {/* Renderiza todos os steps até o atual */}
           {lessonSteps.map((step, stepIndex) => {
             // Só renderiza steps até o atual
