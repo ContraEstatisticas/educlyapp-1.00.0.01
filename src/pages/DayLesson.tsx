@@ -1,8 +1,17 @@
 import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { X, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { GradualTextDisplay, GradualTextDisplayRef } from "@/components/lesson/GradualTextDisplay";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
@@ -118,6 +127,47 @@ const THEME = {
   mutedText: "text-muted-foreground",
 };
 
+const cryingEdiAnimationSrc =
+  "https://lottie.host/4cec2358-38d2-4bce-8aa7-5fe16d133111/UTv5lU5shS.lottie";
+
+const EXIT_DIALOG_UI = {
+  pt: {
+    title: "Tem certeza que deseja sair?",
+    description: "Se voce sair agora, a licao do dia vai ficar incompleta e o EDI vai ficar tristinho.",
+    stay: "Continuar licao",
+    leave: "Sair mesmo assim",
+    imageAlt: "Coruja EDI chorando",
+  },
+  en: {
+    title: "Are you sure you want to leave?",
+    description: "If you leave now, today's lesson will stay incomplete and EDI will be sad.",
+    stay: "Keep studying",
+    leave: "Leave anyway",
+    imageAlt: "Crying EDI owl",
+  },
+  es: {
+    title: "¿Seguro que quieres salir?",
+    description: "Si sales ahora, la leccion del dia quedara incompleta y EDI se pondra triste.",
+    stay: "Seguir estudiando",
+    leave: "Salir de todos modos",
+    imageAlt: "Buho EDI llorando",
+  },
+  fr: {
+    title: "Voulez-vous vraiment quitter ?",
+    description: "Si vous partez maintenant, la lecon du jour restera inachevee et EDI sera triste.",
+    stay: "Continuer la lecon",
+    leave: "Quitter quand meme",
+    imageAlt: "Hibou EDI en train de pleurer",
+  },
+} as const;
+
+type ExitDialogLanguage = keyof typeof EXIT_DIALOG_UI;
+
+const getExitDialogUi = (language?: string) => {
+  const base = language?.split("-")[0]?.toLowerCase() as ExitDialogLanguage | undefined;
+  return EXIT_DIALOG_UI[base || "en"] || EXIT_DIALOG_UI.en;
+};
+
 const DayLesson = () => {
   const { t, i18n } = useTranslation();
   const { dayId } = useParams();
@@ -135,6 +185,7 @@ const DayLesson = () => {
   const [isCompletingDay, setIsCompletingDay] = useState(false);
   const [pendingMilestoneDay, setPendingMilestoneDay] = useState<number | null>(null);
   const [showMilestoneUpsell, setShowMilestoneUpsell] = useState(false);
+  const [showExitDialog, setShowExitDialog] = useState(false);
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
@@ -581,6 +632,8 @@ const DayLesson = () => {
     );
 
   const progress = ((currentStepIndex + 1) / (lessonSteps.length || 1)) * 100;
+  const exitDialogUi = getExitDialogUi(i18n.resolvedLanguage || i18n.language);
+  const canExitWithoutConfirmation = isCompletingDay || showPracticeModal || showMilestoneUpsell;
 
   // Só pede verificação se for Quiz ou Prática. Chat avança direto.
   const needsVerification = (currentStep.type === "quiz" || currentStep.type === "practical") && !isAnswerChecked;
@@ -588,12 +641,25 @@ const DayLesson = () => {
     .map((s) => [s.title, s.question, s.content].filter(Boolean).join(": "))
     .join("\n");
 
+  const handleCloseLesson = () => {
+    navigate("/dashboard");
+  };
+
+  const handleAttemptCloseLesson = () => {
+    if (canExitWithoutConfirmation) {
+      handleCloseLesson();
+      return;
+    }
+
+    setShowExitDialog(true);
+  };
+
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col" onContextMenu={handleContextMenu}>
       {/* HEADER - Clean white style */}
       <div className="px-4 pb-3 pt-[calc(env(safe-area-inset-top,0px)+0.75rem)] flex items-center gap-3 bg-background border-b border-border">
         <button
-          onClick={() => navigate("/dashboard")}
+          onClick={handleAttemptCloseLesson}
           className="-ml-2 p-2.5 hover:bg-muted rounded-xl transition-all duration-200 group"
           type="button"
           aria-label="Fechar"
@@ -1012,6 +1078,52 @@ const DayLesson = () => {
         language={i18n.language}
         moduleSummary={moduleSummary}
       />
+
+      <Dialog open={showExitDialog} onOpenChange={setShowExitDialog}>
+        <DialogContent className="max-w-md overflow-hidden rounded-3xl border-border bg-card p-0">
+          <div className="bg-gradient-to-b from-primary/8 via-background to-background p-6">
+            <div
+              className="mx-auto mb-5 flex max-w-[220px] justify-center overflow-hidden rounded-2xl border border-border/60 bg-muted/30"
+              role="img"
+              aria-label={exitDialogUi.imageAlt}
+            >
+              <DotLottieReact
+                src={cryingEdiAnimationSrc}
+                loop
+                autoplay
+                className="h-auto w-full"
+              />
+            </div>
+
+            <DialogHeader className="space-y-3 text-center">
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                {exitDialogUi.title}
+              </DialogTitle>
+              <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
+                {exitDialogUi.description}
+              </DialogDescription>
+            </DialogHeader>
+
+            <DialogFooter className="mt-6 flex-col gap-3 sm:flex-col">
+              <Button
+                type="button"
+                className="h-12 w-full rounded-xl font-semibold"
+                onClick={() => setShowExitDialog(false)}
+              >
+                {exitDialogUi.stay}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="h-12 w-full rounded-xl font-semibold"
+                onClick={handleCloseLesson}
+              >
+                {exitDialogUi.leave}
+              </Button>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
