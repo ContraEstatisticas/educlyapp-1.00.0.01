@@ -16,6 +16,7 @@ import { useAiTrailProgress } from "@/hooks/useAiTrailProgress";
 import { useUserLevel, XP_REWARDS } from "@/hooks/useUserLevel";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
+import { CorrectAnswerCelebration } from "@/components/lesson/CorrectAnswerCelebration";
 
 const FillBlanks = lazy(() => import("@/components/lesson/FillBlanks").then((module) => ({ default: module.FillBlanks })));
 
@@ -834,6 +835,10 @@ const AIToolModuleLessonPage = () => {
                         : "bg-destructive/10 border-destructive text-destructive",
                     )}
                   >
+                    {stepAnswer.isCorrect ? (
+                      <CorrectAnswerCelebration language={i18n.resolvedLanguage || i18n.language} />
+                    ) : null}
+
                     <div className="font-bold text-xl mb-3 flex items-center gap-3">
                       {stepAnswer.isCorrect ? (
                         <>
