@@ -2163,7 +2163,8 @@
     "trailSection": "Desafio 28 Dias",
     "trailDesc": "Medalhas conquistadas no desafio de 28 dias",
     "earnedOn": "Conquistada em",
-    "locked": "Bloqueada"
+    "locked": "Bloqueada",
+    "notificationTitle": "Nova Medalha Conquistada!"
   },
   "progress": {
     "title": "Seu progresso na Educly",

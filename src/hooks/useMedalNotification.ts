@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useToast } from "@/hooks/use-toast";
 import { useSoundSettings } from "@/contexts/SoundSettingsContext";
 import medalSound from "@/assets/sounds/medal-earned.mp3";
@@ -6,6 +7,7 @@ import medalSound from "@/assets/sounds/medal-earned.mp3";
 export const useMedalNotification = () => {
   const { toast } = useToast();
   const { soundEnabled, volume } = useSoundSettings();
+  const { t } = useTranslation();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -29,15 +31,22 @@ export const useMedalNotification = () => {
   }, [soundEnabled, volume]);
 
   const showMedalNotification = useCallback(
-    (medalName: string, medalDescription: string) => {
+    (medalSlug: string | undefined, medalName: string, medalDescription: string) => {
+      const localizedMedalName = medalSlug
+        ? t(`medal_names.${medalSlug}`, medalName)
+        : medalName;
+      const localizedMedalDescription = medalSlug
+        ? t(`medal_defs.${medalSlug}`, medalDescription)
+        : medalDescription;
+
       playMedalSound();
       toast({
-        title: `🏅 Nova Medalha Conquistada!`,
-        description: `${medalName}: ${medalDescription}`,
+        title: `🏅 ${t("medals.notificationTitle", "New medal earned!")}`,
+        description: `${localizedMedalName}: ${localizedMedalDescription}`,
         duration: 5000,
       });
     },
-    [playMedalSound, toast]
+    [playMedalSound, t, toast]
   );
 
   return { showMedalNotification, playMedalSound };

@@ -4262,7 +4262,8 @@
     "trailSection": "Desafío 28 Días",
     "trailDesc": "Medallas conseguidas en el desafío de 28 días",
     "earnedOn": "Conseguida el",
-    "locked": "Bloqueada"
+    "locked": "Bloqueada",
+    "notificationTitle": "¡Nueva medalla conseguida!"
   },
   "medal_names": {
     "first_step": "Primer Paso",

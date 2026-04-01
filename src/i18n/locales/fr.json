@@ -1352,6 +1352,7 @@
     "continue": "CONTINUER",
     "verify": "VÉRIFIER",
     "tryAgain": "RÉESSAYER",
+    "stepCompleted": "Étape terminée",
     "stepTypes": {
       "learn": "📚 Apprendre",
       "quiz": "❓ Quiz",
@@ -3329,7 +3330,8 @@
     "trailSection": "Défi 28 Jours",
     "trailDesc": "Médailles obtenues dans le défi de 28 jours",
     "earnedOn": "Obtenue le",
-    "locked": "Verrouillée"
+    "locked": "Verrouillée",
+    "notificationTitle": "Nouvelle médaille obtenue !"
   },
   "medal_names": {
     "first_step": "Premier Pas",

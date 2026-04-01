@@ -4651,7 +4651,8 @@
     "trailSection": "28-Day Challenge",
     "trailDesc": "Medals earned in the 28-day challenge",
     "earnedOn": "Earned on",
-    "locked": "Locked"
+    "locked": "Locked",
+    "notificationTitle": "New medal earned!"
   },
   "medal_names": {
     "first_step": "First Step",

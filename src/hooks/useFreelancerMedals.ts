@@ -154,7 +154,7 @@ export const useFreelancerMedals = () => {
         queryClient.invalidateQueries({ queryKey: ["user-all-medals"] });
         const medal = allMedals?.find((m) => m.id === medalId);
         if (medal) {
-          showMedalNotification(medal.name, medal.description);
+          showMedalNotification(medal.slug, medal.name, medal.description);
         }
       }
     },
