@@ -18,6 +18,13 @@ function normalizeEmail(raw: string): string {
   return raw.toLowerCase().trim().replace(/\.+$/, '');
 }
 
+function normalizeDay1Variant(raw: unknown): 'atual' | 'guilherme' | 'sidney' {
+  if (typeof raw !== 'string') return 'atual';
+  const normalized = raw.trim().toLowerCase();
+  if (normalized === 'guilherme' || normalized === 'sidney') return normalized;
+  return 'atual';
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
@@ -28,7 +35,7 @@ serve(async (req) => {
   );
 
   try {
-    const { email: rawEmail, buyer_name, language } = await req.json();
+    const { email: rawEmail, buyer_name, language, day1_variant, challenge_day1_variant } = await req.json();
     if (!rawEmail) {
       return new Response(JSON.stringify({ error: 'email is required' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -40,9 +47,14 @@ serve(async (req) => {
     const usedFallbackName = normalizedBuyerName.length === 0;
     const name = normalizedBuyerName || 'Aluno';
     const lang = (language || 'es').toLowerCase().split('-')[0];
+    const rawDay1Variant = day1_variant ?? challenge_day1_variant;
+    const hasExplicitDay1Variant = typeof rawDay1Variant === 'string' && rawDay1Variant.trim().length > 0;
+    const resolvedDay1Variant = normalizeDay1Variant(rawDay1Variant);
     const redirectTo = 'https://educly.app/auth';
 
-    console.log(`[auto-create-account] Processing: email=${email}, name=${name}, lang=${lang}`);
+    console.log(
+      `[auto-create-account] Processing: email=${email}, name=${name}, lang=${lang}, day1_variant=${hasExplicitDay1Variant ? resolvedDay1Variant : 'default'}`
+    );
 
     // 1. Check if user already exists
     let existingUserId: string | null = null;
@@ -65,14 +77,29 @@ serve(async (req) => {
       // User already exists — just generate magic link
       userId = existingUserId;
       console.log(`[auto-create-account] User already exists: ${userId}`);
+
+      if (hasExplicitDay1Variant) {
+        await supabase
+          .from('profiles')
+          .update({ challenge_day1_variant: resolvedDay1Variant })
+          .eq('id', userId);
+      }
     } else {
       // 2. Create account with random password
       generatedPassword = generateSecurePassword();
+      const userMetadata: Record<string, string> = {
+        full_name: name,
+      };
+
+      if (hasExplicitDay1Variant) {
+        userMetadata.challenge_day1_variant = resolvedDay1Variant;
+      }
+
       const { data: createData, error: createError } = await supabase.auth.admin.createUser({
         email,
         password: generatedPassword,
         email_confirm: true,
-        user_metadata: { full_name: name },
+        user_metadata: userMetadata,
       });
 
       if (createError) {
@@ -91,10 +118,16 @@ serve(async (req) => {
       console.log(`[auto-create-account] User created: ${userId}`);
 
       // Update profile with language and whether the name already came from the buyer data
-      await supabase.from('profiles').update({
+      const profileUpdates: Record<string, string | boolean> = {
         preferred_language: lang,
         name_confirmation_completed: !usedFallbackName,
-      }).eq('id', userId);
+      };
+
+      if (hasExplicitDay1Variant) {
+        profileUpdates.challenge_day1_variant = resolvedDay1Variant;
+      }
+
+      await supabase.from('profiles').update(profileUpdates).eq('id', userId);
     }
 
     // 3. Process pending billing events

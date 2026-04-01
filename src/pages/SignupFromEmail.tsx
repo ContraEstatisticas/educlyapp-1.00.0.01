@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { createPurchasedAccount } from "@/lib/purchasedSignup";
+import { normalizeDay1ExperimentVariant } from "@/lib/day1Experiment";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -28,6 +29,13 @@ const SignupFromEmail = () => {
   const rawEmailParam = searchParams.get("email") || "";
   const emailParam = isValidEmail(rawEmailParam) ? rawEmailParam : "";
   const langParam = searchParams.get("lang");
+  const rawDay1VariantParam =
+    searchParams.get("day1_variant") ||
+    searchParams.get("variant") ||
+    searchParams.get("tag");
+  const day1VariantParam = rawDay1VariantParam
+    ? normalizeDay1ExperimentVariant(rawDay1VariantParam)
+    : undefined;
 
   const [fullName, setFullName] = useState("");
   const [email] = useState(emailParam);
@@ -121,6 +129,7 @@ const SignupFromEmail = () => {
       password,
       fullName: fullName.trim(),
       preferredLanguage: currentLanguage,
+      day1Variant: day1VariantParam,
     });
 
     if (!signupResult.ok) {

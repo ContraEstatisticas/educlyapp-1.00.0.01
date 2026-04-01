@@ -1,12 +1,14 @@
 import { FunctionsHttpError } from "@supabase/supabase-js";
 
 import { supabase } from "@/integrations/supabase/client";
+import type { Day1ExperimentVariant } from "@/lib/day1Experiment";
 
 type PurchasedSignupParams = {
   email: string;
   password: string;
   fullName: string;
   preferredLanguage?: string | null;
+  day1Variant?: Day1ExperimentVariant | null;
 };
 
 type AccountCreationResult =
@@ -28,6 +30,7 @@ export async function createPurchasedAccount(
         password: params.password,
         full_name: params.fullName,
         preferred_language: normalizeLanguage(params.preferredLanguage),
+        day1_variant: params.day1Variant ?? undefined,
       },
     });
 
@@ -73,6 +76,7 @@ export async function createPendingAccount(
         password: params.password,
         full_name: params.fullName,
         preferred_language: normalizeLanguage(params.preferredLanguage),
+        day1_variant: params.day1Variant ?? undefined,
       },
     });
 

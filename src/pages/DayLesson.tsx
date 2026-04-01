@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, Suspense, lazy } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { X, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
+import { X, CheckCircle2, XCircle, RotateCcw, Star } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { GradualTextDisplay, GradualTextDisplayRef } from "@/components/lesson/GradualTextDisplay";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -18,11 +19,17 @@ import { useTranslation } from "react-i18next";
 
 import { useTranslatedLessonContent } from "@/hooks/useTranslatedLessonContent";
 import { useQuizSounds } from "@/hooks/useQuizSounds";
+import { useToast } from "@/hooks/use-toast";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { TrailChat } from "@/components/trail/TrailChat";
 import { MilestoneUpsellModal, MILESTONE_DAYS } from "@/components/lesson/MilestoneUpsellModal";
 import { useProductAccess } from "@/hooks/useProductAccess";
 import { useFreelancerMedals } from "@/hooks/useFreelancerMedals";
+import {
+  DEFAULT_DAY1_EXPERIMENT_VARIANT,
+  type Day1ExperimentVariant,
+  normalizeDay1ExperimentVariant,
+} from "@/lib/day1Experiment";
 
 // Interactive lesson components - lazy loaded for performance
 // PromptTrainer removido
@@ -201,10 +208,77 @@ const getCorrectCelebrationUi = (language?: string) => {
   return CORRECT_CELEBRATION_UI[base || "en"] || CORRECT_CELEBRATION_UI.en;
 };
 
+const DAY1_FEEDBACK_UI = {
+  pt: {
+    title: "Como foi esse Dia 1?",
+    description: "Sua resposta nos ajuda a comparar as versoes do conteudo e melhorar a trilha.",
+    ratingLabel: "Quantas estrelas voce da para esse Dia 1?",
+    opinionLabel: "Como esse conteudo foi util para voce e o que voce achou dele?",
+    placeholder: "Escreva aqui sua opiniao sobre esse Dia 1.",
+    submit: "Enviar feedback",
+    ratingHelper: "Selecione de 1 a 5 estrelas para continuar.",
+    opinionHelper: "Escreva sua opiniao para concluir o Dia 1.",
+    successTitle: "Feedback salvo",
+    successDescription: "Obrigado. Sua resposta ja foi registrada.",
+    errorTitle: "Nao foi possivel salvar",
+    errorDescription: "Tente novamente em alguns instantes.",
+  },
+  en: {
+    title: "How was Day 1 for you?",
+    description: "Your answer helps us compare content versions and improve the trail.",
+    ratingLabel: "How many stars would you give this Day 1?",
+    opinionLabel: "How was this content useful to you and what did you think of it?",
+    placeholder: "Write your opinion about this Day 1 here.",
+    submit: "Send feedback",
+    ratingHelper: "Select 1 to 5 stars to continue.",
+    opinionHelper: "Write your opinion to finish Day 1.",
+    successTitle: "Feedback saved",
+    successDescription: "Thanks. Your answer has been recorded.",
+    errorTitle: "Could not save feedback",
+    errorDescription: "Please try again in a moment.",
+  },
+  es: {
+    title: "Como fue este Dia 1?",
+    description: "Tu respuesta nos ayuda a comparar las versiones del contenido y mejorar la ruta.",
+    ratingLabel: "Cuantas estrellas le das a este Dia 1?",
+    opinionLabel: "Como te ayudo este contenido y que te parecio?",
+    placeholder: "Escribe aqui tu opinion sobre este Dia 1.",
+    submit: "Enviar feedback",
+    ratingHelper: "Selecciona de 1 a 5 estrellas para continuar.",
+    opinionHelper: "Escribe tu opinion para terminar el Dia 1.",
+    successTitle: "Feedback guardado",
+    successDescription: "Gracias. Tu respuesta ya fue registrada.",
+    errorTitle: "No se pudo guardar",
+    errorDescription: "Intentalo de nuevo en unos instantes.",
+  },
+  fr: {
+    title: "Comment etait ce Jour 1 ?",
+    description: "Votre reponse nous aide a comparer les versions du contenu et a ameliorer le parcours.",
+    ratingLabel: "Combien d'etoiles donnez-vous a ce Jour 1 ?",
+    opinionLabel: "En quoi ce contenu vous a-t-il aide et qu'en avez-vous pense ?",
+    placeholder: "Ecrivez ici votre avis sur ce Jour 1.",
+    submit: "Envoyer le feedback",
+    ratingHelper: "Choisissez de 1 a 5 etoiles pour continuer.",
+    opinionHelper: "Ecrivez votre avis pour terminer le Jour 1.",
+    successTitle: "Feedback enregistre",
+    successDescription: "Merci. Votre reponse a bien ete enregistree.",
+    errorTitle: "Impossible d'enregistrer",
+    errorDescription: "Reessayez dans quelques instants.",
+  },
+} as const;
+
+type Day1FeedbackLanguage = keyof typeof DAY1_FEEDBACK_UI;
+
+const getDay1FeedbackUi = (language?: string) => {
+  const base = language?.split("-")[0]?.toLowerCase() as Day1FeedbackLanguage | undefined;
+  return DAY1_FEEDBACK_UI[base || "en"] || DAY1_FEEDBACK_UI.en;
+};
+
 const DayLesson = () => {
   const { t, i18n } = useTranslation();
   const { dayId } = useParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { playCorrect, playIncorrect, playContinue } = useQuizSounds();
   const { ai_hub: hasAiHub } = useProductAccess();
   const { syncEarnableMedals } = useFreelancerMedals();
@@ -219,6 +293,15 @@ const DayLesson = () => {
   const [pendingMilestoneDay, setPendingMilestoneDay] = useState<number | null>(null);
   const [showMilestoneUpsell, setShowMilestoneUpsell] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
+  const [showDay1FeedbackDialog, setShowDay1FeedbackDialog] = useState(false);
+  const [isSavingDay1Feedback, setIsSavingDay1Feedback] = useState(false);
+  const [day1Variant, setDay1Variant] = useState<Day1ExperimentVariant>(DEFAULT_DAY1_EXPERIMENT_VARIANT);
+  const [existingDay1Feedback, setExistingDay1Feedback] = useState<{
+    starRating: number;
+    opinionText: string;
+  } | null>(null);
+  const [day1FeedbackRating, setDay1FeedbackRating] = useState(0);
+  const [day1FeedbackOpinion, setDay1FeedbackOpinion] = useState("");
 
   // Estados de Quiz/Prática - armazena respostas por step para permitir scroll
   const [stepAnswers, setStepAnswers] = useState<Record<number, StepAnswerState>>({});
@@ -332,15 +415,60 @@ const DayLesson = () => {
         // Refresh token on lesson entry for 4h validity
         const { refreshSession } = await import("@/hooks/useRefreshSession");
         await refreshSession();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
         const { data: dayData } = await supabase
           .from("challenge_days")
           .select("day_number, title, challenge_id")
           .eq("id", dayId)
           .single();
         if (dayData) {
+          let resolvedDay1Variant = DEFAULT_DAY1_EXPERIMENT_VARIANT;
+          let savedDay1Feedback: { starRating: number; opinionText: string } | null = null;
+
+          if (user && dayData.day_number === 1) {
+            const { data: profile, error: profileError } = await supabase
+              .from("profiles")
+              .select("challenge_day1_variant")
+              .eq("id", user.id)
+              .maybeSingle();
+
+            if (profileError) {
+              console.error("[DayLesson] Failed to load Day 1 variant:", profileError);
+            }
+
+            resolvedDay1Variant = normalizeDay1ExperimentVariant(profile?.challenge_day1_variant);
+
+            const { data: feedback, error: feedbackError } = await supabase
+              .from("challenge_day_feedback")
+              .select("star_rating, opinion_text")
+              .eq("user_id", user.id)
+              .eq("challenge_day_id", dayId)
+              .eq("day_variant", resolvedDay1Variant)
+              .maybeSingle();
+
+            if (feedbackError) {
+              console.error("[DayLesson] Failed to load Day 1 feedback:", feedbackError);
+            }
+
+            if (feedback) {
+              savedDay1Feedback = {
+                starRating: feedback.star_rating,
+                opinionText: feedback.opinion_text,
+              };
+            }
+          }
+
           setDayInfo({ dayNumber: dayData.day_number, title: dayData.title, challengeId: dayData.challenge_id });
+          setDay1Variant(resolvedDay1Variant);
+          setExistingDay1Feedback(savedDay1Feedback);
+          setDay1FeedbackRating(savedDay1Feedback?.starRating ?? 0);
+          setDay1FeedbackOpinion(savedDay1Feedback?.opinionText ?? "");
+          setShowDay1FeedbackDialog(false);
+          setIsSavingDay1Feedback(false);
           // Always use translated content from JSON files - no hardcoded fallback
-          const translatedSteps = getLessonContent(dayData.day_number);
+          const translatedSteps = getLessonContent(dayData.day_number, resolvedDay1Variant);
           console.log(`📚 Day ${dayData.day_number} - Carregando ${translatedSteps.length} steps para idioma: ${contentLanguage}`);
           setLessonSteps(translatedSteps);
         }
@@ -382,6 +510,103 @@ const DayLesson = () => {
       }, 150);
     }
   }, [currentStepIndex]);
+
+  const openPostLessonFlow = () => {
+    setIsCompletingDay(false);
+
+    if (
+      dayInfo &&
+      (MILESTONE_DAYS as readonly number[]).includes(dayInfo.dayNumber) &&
+      !hasAiHub
+    ) {
+      setPendingMilestoneDay(dayInfo.dayNumber);
+    }
+
+    setShowPracticeModal(true);
+  };
+
+  const handleSaveDay1Feedback = async () => {
+    const feedbackUi = getDay1FeedbackUi(i18n.resolvedLanguage || i18n.language);
+    const trimmedOpinion = day1FeedbackOpinion.trim();
+
+    if (!dayInfo || !dayId || dayInfo.dayNumber !== 1) {
+      setShowDay1FeedbackDialog(false);
+      openPostLessonFlow();
+      return;
+    }
+
+    if (day1FeedbackRating < 1 || day1FeedbackRating > 5) {
+      toast({
+        title: feedbackUi.errorTitle,
+        description: feedbackUi.ratingHelper,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!trimmedOpinion) {
+      toast({
+        title: feedbackUi.errorTitle,
+        description: feedbackUi.opinionHelper,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSavingDay1Feedback(true);
+
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
+      const now = new Date().toISOString();
+      const { error } = await supabase
+        .from("challenge_day_feedback")
+        .upsert({
+          user_id: user.id,
+          challenge_id: dayInfo.challengeId,
+          challenge_day_id: dayId,
+          challenge_day_number: dayInfo.dayNumber,
+          day_variant: day1Variant,
+          star_rating: day1FeedbackRating,
+          opinion_text: trimmedOpinion,
+          updated_at: now,
+        }, {
+          onConflict: "user_id,challenge_day_id,day_variant",
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      setExistingDay1Feedback({
+        starRating: day1FeedbackRating,
+        opinionText: trimmedOpinion,
+      });
+      setDay1FeedbackOpinion(trimmedOpinion);
+      setShowDay1FeedbackDialog(false);
+      toast({
+        title: feedbackUi.successTitle,
+        description: feedbackUi.successDescription,
+      });
+
+      openPostLessonFlow();
+    } catch (error) {
+      console.error("[DayLesson] Failed to save Day 1 feedback:", error);
+      toast({
+        title: feedbackUi.errorTitle,
+        description: feedbackUi.errorDescription,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSavingDay1Feedback(false);
+    }
+  };
 
 
   // --- CALLBACK PARA COMPONENTES INTERATIVOS ---
@@ -490,16 +715,13 @@ const DayLesson = () => {
           }
         }
 
-          // Mark milestone for showing AFTER TrailChat closes (only for non-AI-Hub users)
-          if (
-            dayInfo &&
-            (MILESTONE_DAYS as readonly number[]).includes(dayInfo.dayNumber) &&
-            !hasAiHub
-          ) {
-            setPendingMilestoneDay(dayInfo.dayNumber);
-          }
+        if (dayInfo?.dayNumber === 1 && !existingDay1Feedback) {
+          setIsCompletingDay(false);
+          setShowDay1FeedbackDialog(true);
+          return;
+        }
 
-        setShowPracticeModal(true);
+        openPostLessonFlow();
       } catch (error) {
         setIsCompletingDay(false);
         console.error("Error saving progress:", error);
@@ -667,7 +889,9 @@ const DayLesson = () => {
   const progress = ((currentStepIndex + 1) / (lessonSteps.length || 1)) * 100;
   const exitDialogUi = getExitDialogUi(i18n.resolvedLanguage || i18n.language);
   const correctCelebrationUi = getCorrectCelebrationUi(i18n.resolvedLanguage || i18n.language);
-  const canExitWithoutConfirmation = isCompletingDay || showPracticeModal || showMilestoneUpsell;
+  const day1FeedbackUi = getDay1FeedbackUi(i18n.resolvedLanguage || i18n.language);
+  const canExitWithoutConfirmation =
+    isCompletingDay || showPracticeModal || showMilestoneUpsell;
 
   // Só pede verificação se for Quiz ou Prática. Chat avança direto.
   const needsVerification = (currentStep.type === "quiz" || currentStep.type === "practical") && !isAnswerChecked;
@@ -1127,6 +1351,90 @@ const DayLesson = () => {
           }}
         />
       )}
+
+      <Dialog open={showDay1FeedbackDialog}>
+        <DialogContent
+          className="max-w-lg overflow-hidden rounded-3xl border-border bg-card p-0"
+          onEscapeKeyDown={(event) => event.preventDefault()}
+          onInteractOutside={(event) => event.preventDefault()}
+        >
+          <div className="bg-gradient-to-b from-primary/8 via-background to-background p-6">
+            <DialogHeader className="space-y-3 text-left">
+              <DialogTitle className="text-2xl font-bold text-foreground">
+                {day1FeedbackUi.title}
+              </DialogTitle>
+              <DialogDescription className="text-sm leading-relaxed text-muted-foreground">
+                {day1FeedbackUi.description}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="mt-6 space-y-5">
+              <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
+                <p className="text-sm font-semibold text-foreground">
+                  {day1FeedbackUi.ratingLabel}
+                </p>
+                <div className="mt-4 flex items-center justify-center gap-2">
+                  {[1, 2, 3, 4, 5].map((value) => {
+                    const isActive = value <= day1FeedbackRating;
+
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setDay1FeedbackRating(value)}
+                        className={cn(
+                          "rounded-full border p-3 transition-all",
+                          isActive
+                            ? "border-amber-300 bg-amber-50 text-amber-500"
+                            : "border-border bg-card text-muted-foreground hover:border-amber-200 hover:text-amber-400"
+                        )}
+                        aria-label={`${value} estrela${value > 1 ? "s" : ""}`}
+                      >
+                        <Star
+                          className={cn("h-6 w-6", isActive && "fill-current")}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+                {day1FeedbackRating === 0 ? (
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
+                    {day1FeedbackUi.ratingHelper}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
+                <p className="text-sm font-semibold text-foreground">
+                  {day1FeedbackUi.opinionLabel}
+                </p>
+                <Textarea
+                  value={day1FeedbackOpinion}
+                  onChange={(event) => setDay1FeedbackOpinion(event.target.value)}
+                  placeholder={day1FeedbackUi.placeholder}
+                  className="mt-4 min-h-[140px] resize-none"
+                  maxLength={1200}
+                />
+                <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+                  <span>{day1FeedbackUi.opinionHelper}</span>
+                  <span>{day1FeedbackOpinion.trim().length}/1200</span>
+                </div>
+              </div>
+            </div>
+
+            <DialogFooter className="mt-6 flex-col gap-3 sm:flex-col">
+              <Button
+                type="button"
+                className="h-12 w-full rounded-xl font-semibold"
+                disabled={isSavingDay1Feedback}
+                onClick={handleSaveDay1Feedback}
+              >
+                {isSavingDay1Feedback ? t("lesson.loading", "Carregando...") : day1FeedbackUi.submit}
+              </Button>
+            </DialogFooter>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <TrailChat
         isOpen={showPracticeModal}

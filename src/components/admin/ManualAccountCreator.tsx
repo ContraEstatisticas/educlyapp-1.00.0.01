@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import type { Day1ExperimentVariant } from "@/lib/day1Experiment";
 
 export const ManualAccountCreator = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [language, setLanguage] = useState("es");
+  const [day1Variant, setDay1Variant] = useState<Day1ExperimentVariant>("atual");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
@@ -35,7 +37,12 @@ export const ManualAccountCreator = () => {
       const createResp = await fetch(`${base}/functions/v1/auto-create-account`, {
         method: "POST",
         headers,
-        body: JSON.stringify({ email: email.trim(), buyer_name: name.trim() || "Aluno", language }),
+        body: JSON.stringify({
+          email: email.trim(),
+          buyer_name: name.trim() || "Aluno",
+          language,
+          day1_variant: day1Variant,
+        }),
       });
       const createData = await createResp.json();
 
@@ -136,6 +143,18 @@ export const ManualAccountCreator = () => {
               <option value="fr">Français</option>
             </select>
           </div>
+        </div>
+        <div>
+          <Label className="text-xs">Variante Dia 1</Label>
+          <select
+            value={day1Variant}
+            onChange={(e) => setDay1Variant(e.target.value as Day1ExperimentVariant)}
+            className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          >
+            <option value="atual">Atual</option>
+            <option value="guilherme">Guilherme</option>
+            <option value="sidney">Sidney</option>
+          </select>
         </div>
         <Button onClick={handleCreate} disabled={loading || !email.trim()} className="w-full">
           {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <UserPlus className="h-4 w-4 mr-2" />}

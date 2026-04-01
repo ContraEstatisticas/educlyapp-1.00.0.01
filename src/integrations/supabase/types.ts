@@ -376,6 +376,60 @@ export type Database = {
           },
         ]
       }
+      challenge_day_feedback: {
+        Row: {
+          challenge_day_id: string
+          challenge_day_number: number
+          challenge_id: string
+          created_at: string
+          day_variant: string
+          id: string
+          opinion_text: string
+          star_rating: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          challenge_day_id: string
+          challenge_day_number: number
+          challenge_id: string
+          created_at?: string
+          day_variant: string
+          id?: string
+          opinion_text: string
+          star_rating: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          challenge_day_id?: string
+          challenge_day_number?: number
+          challenge_id?: string
+          created_at?: string
+          day_variant?: string
+          id?: string
+          opinion_text?: string
+          star_rating?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_day_feedback_challenge_day_id_fkey"
+            columns: ["challenge_day_id"]
+            isOneToOne: false
+            referencedRelation: "challenge_days"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "challenge_day_feedback_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       challenges: {
         Row: {
           challenge_type: string
@@ -1012,6 +1066,8 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          challenge_day1_variant: string
+          challenge_day1_variant_assigned_at: string | null
           cover_url: string | null
           created_at: string | null
           full_name: string | null
@@ -1029,6 +1085,8 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          challenge_day1_variant?: string
+          challenge_day1_variant_assigned_at?: string | null
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null
@@ -1046,6 +1104,8 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          challenge_day1_variant?: string
+          challenge_day1_variant_assigned_at?: string | null
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null

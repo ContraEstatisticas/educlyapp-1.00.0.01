@@ -25,6 +25,12 @@ const normalizeLanguage = (value: unknown) => {
   return normalized || "en";
 };
 
+const normalizeDay1Variant = (value: unknown) => {
+  if (typeof value !== "string") return "atual";
+  const normalized = value.trim().toLowerCase();
+  return normalized === "guilherme" || normalized === "sidney" ? normalized : "atual";
+};
+
 // deno-lint-ignore no-explicit-any
 async function findUserByEmail(supabaseAdmin: any, email: string) {
   let page = 1;
@@ -69,6 +75,9 @@ Deno.serve(async (req) => {
     const password = typeof body?.password === "string" ? body.password : "";
     const fullName = typeof body?.full_name === "string" ? body.full_name.trim() : "";
     const preferredLanguage = normalizeLanguage(body?.preferred_language);
+    const rawDay1Variant = body?.day1_variant ?? body?.challenge_day1_variant;
+    const hasExplicitDay1Variant = typeof rawDay1Variant === "string" && rawDay1Variant.trim().length > 0;
+    const day1Variant = normalizeDay1Variant(rawDay1Variant);
 
     if (!email || !password || !fullName) {
       return jsonResponse({ error: "email, password and full_name are required", code: "INVALID_INPUT" }, 400);
@@ -98,13 +107,19 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: "User already registered", code: "ALREADY_EXISTS" }, 409);
     }
 
+    const userMetadata: Record<string, string> = {
+      full_name: fullName,
+    };
+
+    if (hasExplicitDay1Variant) {
+      userMetadata.challenge_day1_variant = day1Variant;
+    }
+
     const { data: createdUserData, error: createUserError } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
       email_confirm: true,
-      user_metadata: {
-        full_name: fullName,
-      },
+      user_metadata: userMetadata,
     });
 
     if (createUserError || !createdUserData.user) {
@@ -114,9 +129,17 @@ Deno.serve(async (req) => {
 
     const userId = createdUserData.user.id;
 
+    const profileUpdates: Record<string, string> = {
+      preferred_language: preferredLanguage,
+    };
+
+    if (hasExplicitDay1Variant) {
+      profileUpdates.challenge_day1_variant = day1Variant;
+    }
+
     const { error: profileError } = await supabaseAdmin
       .from("profiles")
-      .update({ preferred_language: preferredLanguage })
+      .update(profileUpdates)
       .eq("id", userId);
 
     if (profileError) {

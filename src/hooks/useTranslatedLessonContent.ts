@@ -5,6 +5,11 @@ import {
   normalizeContentLanguage,
   resolveLessonContentLanguage,
 } from "@/lib/contentLanguage";
+import {
+  DEFAULT_DAY1_EXPERIMENT_VARIANT,
+  type Day1ExperimentVariant,
+  normalizeDay1ExperimentVariant,
+} from "@/lib/day1Experiment";
 
 // Get the build version for cache-busting
 declare const __APP_VERSION__: string;
@@ -37,6 +42,20 @@ registerCacheClear(() => {
 
 // Normalize language code (pt-BR â†’ pt)
 const normalizeLanguage = (lang: string): string => normalizeContentLanguage(lang);
+
+const resolveDayContentKeys = (
+  dayNumber: number,
+  dayVariant?: Day1ExperimentVariant | null,
+) => {
+  const baseKey = `day${dayNumber}`;
+  const normalizedVariant = normalizeDay1ExperimentVariant(dayVariant);
+
+  if (dayNumber !== 1 || normalizedVariant === DEFAULT_DAY1_EXPERIMENT_VARIANT) {
+    return [baseKey];
+  }
+
+  return [`${baseKey}_${normalizedVariant}`, baseKey];
+};
 
 // Lazy load lesson content by language using fetch (avoids TS-Go compiler issues)
 const loadLessonContent = async (lang: string): Promise<Record<string, { steps: LessonStep[] }> | null> => {
@@ -158,7 +177,10 @@ export const useTranslatedLessonContent = () => {
     loadContent();
   }, [i18n.language, ready]);
 
-  const getLessonContent = useCallback((dayNumber: number): LessonStep[] => {
+  const getLessonContent = useCallback((
+    dayNumber: number,
+    dayVariant?: Day1ExperimentVariant | null,
+  ): LessonStep[] => {
     const currentLang = normalizeLanguage(i18n.language);
     
     // Don't return stale content from wrong language
@@ -167,14 +189,25 @@ export const useTranslatedLessonContent = () => {
       return [];
     }
 
-    const dayKey = `day${dayNumber}`;
-    const dayData = lessonContent[dayKey];
+    const dayKeys = resolveDayContentKeys(dayNumber, dayVariant);
+    const resolvedDayKey = dayKeys.find((dayKey) => {
+      const dayData = lessonContent[dayKey];
+      return Boolean(dayData && dayData.steps && Array.isArray(dayData.steps));
+    });
+
+    if (!resolvedDayKey) {
+      return [];
+    }
+
+    const dayData = lessonContent[resolvedDayKey];
 
     if (!dayData || !dayData.steps || !Array.isArray(dayData.steps)) {
       return [];
     }
 
-    console.log(`ðŸ“š Day ${dayNumber} - Retornando ${dayData.steps.length} steps para idioma: ${contentLanguage}`);
+    console.log(
+      `ðŸ“š Day ${dayNumber} (${resolvedDayKey}) - Retornando ${dayData.steps.length} steps para idioma: ${contentLanguage}`
+    );
 
     return dayData.steps.map((step) => {
       const baseStep: LessonStep = {
