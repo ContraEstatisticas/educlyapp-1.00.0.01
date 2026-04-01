@@ -22,6 +22,7 @@ import { getAiTrailLocalizedMeta, getAiTrailUiCopy } from "@/lib/aiTrailI18n";
 import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
+import { GuidePreferenceDialog } from "@/components/dashboard/GuidePreferenceDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
 import { clearStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
 
@@ -193,6 +194,29 @@ const Dashboard = () => {
     },
   });
 
+  const { data: guidePreferenceData } = useQuery({
+    queryKey: ["dashboard-guide-preference"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("guide_preference_completed, preferred_guide")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      return {
+        userId: user.id,
+        preferredGuide:
+          profile?.preferred_guide === "robot" || profile?.preferred_guide === "edi"
+            ? profile.preferred_guide
+            : null,
+        needsConfirmation: profile ? !profile.guide_preference_completed : false,
+      };
+    },
+  });
+
   useEffect(() => {
     if (languageConfirmationData?.preferredLanguage && !languageConfirmationData?.needsConfirmation) {
       const preferredLanguage = normalizeAppLanguage(languageConfirmationData.preferredLanguage);
@@ -324,7 +348,9 @@ const Dashboard = () => {
         />
       ) : null}
 
-      {languageConfirmationData?.needsConfirmation && !nameConfirmationData?.needsConfirmation ? (
+      {languageConfirmationData?.needsConfirmation &&
+      nameConfirmationData !== undefined &&
+      !nameConfirmationData?.needsConfirmation ? (
         <LanguageSelectionDialog
           open={languageConfirmationData.needsConfirmation}
           userId={languageConfirmationData.userId}
@@ -333,6 +359,26 @@ const Dashboard = () => {
             queryClient.setQueryData(["dashboard-language-confirmation"], {
               ...languageConfirmationData,
               preferredLanguage: lang,
+              needsConfirmation: false,
+            });
+            queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+          }}
+        />
+      ) : null}
+
+      {guidePreferenceData?.needsConfirmation &&
+      nameConfirmationData !== undefined &&
+      languageConfirmationData !== undefined &&
+      !nameConfirmationData?.needsConfirmation &&
+      !languageConfirmationData?.needsConfirmation ? (
+        <GuidePreferenceDialog
+          open={guidePreferenceData.needsConfirmation}
+          userId={guidePreferenceData.userId}
+          defaultGuide={guidePreferenceData.preferredGuide}
+          onCompleted={(selectedGuide) => {
+            queryClient.setQueryData(["dashboard-guide-preference"], {
+              ...guidePreferenceData,
+              preferredGuide: selectedGuide,
               needsConfirmation: false,
             });
             queryClient.invalidateQueries({ queryKey: ["user-profile"] });

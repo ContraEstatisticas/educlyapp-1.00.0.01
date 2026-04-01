@@ -3906,6 +3906,23 @@
     "errorTitle": "No fue posible guardar",
     "errorDescription": "Vuelve a intentarlo en unos instantes."
   },
+  "guidePreference": {
+    "badge": "Encuesta rapida",
+    "title": "Quien deberia ser tu guia en Educly?",
+    "description": "Queremos entender que estilo de guia prefieres dentro de la plataforma.",
+    "helper": "Tu respuesta se guardara para analizar la preferencia de los usuarios y decidir el futuro guia oficial del sistema.",
+    "robotName": "Robot",
+    "robotDescription": "Mas tecnologico, directo y con una energia futurista.",
+    "ediName": "Buho EDI",
+    "ediDescription": "Mas calido, con aire de profesor y companero de viaje.",
+    "confirmButton": "Confirmar eleccion",
+    "savingButton": "Guardando...",
+    "selectedLabel": "Elegido",
+    "successTitle": "Preferencia guardada",
+    "successDescription": "Gracias! Tu respuesta fue registrada correctamente.",
+    "errorTitle": "No fue posible guardar",
+    "errorDescription": "Intentalo de nuevo en unos instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudiante",

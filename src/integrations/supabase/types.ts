@@ -1015,11 +1015,14 @@ export type Database = {
           cover_url: string | null
           created_at: string | null
           full_name: string | null
+          guide_preference_completed: boolean
+          guide_preference_updated_at: string | null
           id: string
           language_confirmation_completed: boolean
           name_confirmation_completed: boolean
           onboarding_quiz_completed: boolean | null
           personalized_trail_quiz_completed: boolean | null
+          preferred_guide: string | null
           preferred_language: string | null
           updated_at: string | null
         }
@@ -1029,11 +1032,14 @@ export type Database = {
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null
+          guide_preference_completed?: boolean
+          guide_preference_updated_at?: string | null
           id: string
           language_confirmation_completed?: boolean
           name_confirmation_completed?: boolean
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
+          preferred_guide?: string | null
           preferred_language?: string | null
           updated_at?: string | null
         }
@@ -1043,11 +1049,14 @@ export type Database = {
           cover_url?: string | null
           created_at?: string | null
           full_name?: string | null
+          guide_preference_completed?: boolean
+          guide_preference_updated_at?: string | null
           id?: string
           language_confirmation_completed?: boolean
           name_confirmation_completed?: boolean
           onboarding_quiz_completed?: boolean | null
           personalized_trail_quiz_completed?: boolean | null
+          preferred_guide?: string | null
           preferred_language?: string | null
           updated_at?: string | null
         }

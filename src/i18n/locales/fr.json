@@ -2974,6 +2974,23 @@
     "errorTitle": "Impossible d'enregistrer",
     "errorDescription": "Veuillez reessayer dans quelques instants."
   },
+  "guidePreference": {
+    "badge": "Sondage rapide",
+    "title": "Qui devrait etre votre guide sur Educly ?",
+    "description": "Nous voulons comprendre quel style de guide vous preferez dans la plateforme.",
+    "helper": "Votre reponse sera enregistree pour analyser la preference des utilisateurs et decider du futur guide officiel du systeme.",
+    "robotName": "Robot",
+    "robotDescription": "Plus technologique, direct et avec une energie futuriste.",
+    "ediName": "Hibou EDI",
+    "ediDescription": "Plus chaleureux, avec une presence de professeur et de compagnon de route.",
+    "confirmButton": "Confirmer le choix",
+    "savingButton": "Enregistrement...",
+    "selectedLabel": "Choisi",
+    "successTitle": "Preference enregistree",
+    "successDescription": "Merci ! Votre reponse a bien ete enregistree.",
+    "errorTitle": "Impossible d'enregistrer",
+    "errorDescription": "Veuillez reessayer dans quelques instants."
+  },
   "profile": {
     "title": "Profil",
     "defaultName": "Étudiant",

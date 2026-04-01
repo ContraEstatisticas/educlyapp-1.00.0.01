@@ -4312,6 +4312,23 @@
     "errorTitle": "Could not save your name",
     "errorDescription": "Please try again in a moment."
   },
+  "guidePreference": {
+    "badge": "Quick poll",
+    "title": "Who should be your guide on Educly?",
+    "description": "We want to understand which guide style you prefer inside the platform.",
+    "helper": "Your answer will be saved so we can analyze user preference and decide the future official guide of the system.",
+    "robotName": "Robot",
+    "robotDescription": "More technological, direct and with a futuristic vibe.",
+    "ediName": "EDI Owl",
+    "ediDescription": "Warmer, with a teacher feel and a companion energy for the journey.",
+    "confirmButton": "Confirm choice",
+    "savingButton": "Saving...",
+    "selectedLabel": "Selected",
+    "successTitle": "Preference saved",
+    "successDescription": "Thanks! Your answer has been recorded successfully.",
+    "errorTitle": "Could not save your answer",
+    "errorDescription": "Please try again in a moment."
+  },
   "profile": {
     "title": "Profile",
     "defaultName": "Student",

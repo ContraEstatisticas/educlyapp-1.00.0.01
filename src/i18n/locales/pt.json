@@ -3471,6 +3471,23 @@
     "errorTitle": "Nao foi possivel salvar",
     "errorDescription": "Tente novamente em alguns instantes."
   },
+  "guidePreference": {
+    "badge": "Enquete rapida",
+    "title": "Quem deve ser o seu guia na Educly?",
+    "description": "Queremos entender qual estilo de guia voce prefere dentro da plataforma.",
+    "helper": "Sua resposta sera salva para analisarmos a preferencia dos usuarios e decidir o futuro guia oficial do sistema.",
+    "robotName": "Robo",
+    "robotDescription": "Mais tecnologico, direto e com uma energia futurista.",
+    "ediName": "Coruja EDI",
+    "ediDescription": "Mais acolhedora, com vibe de professora e companheira de jornada.",
+    "confirmButton": "Confirmar escolha",
+    "savingButton": "Salvando...",
+    "selectedLabel": "Escolhido",
+    "successTitle": "Preferencia salva",
+    "successDescription": "Obrigado! Sua resposta foi registrada com sucesso.",
+    "errorTitle": "Nao foi possivel salvar",
+    "errorDescription": "Tente novamente em alguns instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudante",
