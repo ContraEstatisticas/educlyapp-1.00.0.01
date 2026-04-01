@@ -23,7 +23,7 @@ import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
-import { getStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
+import { clearStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
 
 import mountainBackground from "../../assets/mountainBackground.png";
 import mountainPerson from "../../assets/mountainPerson.png";
@@ -193,29 +193,16 @@ const Dashboard = () => {
     },
   });
 
-  // The dropdown can override the UI language locally without changing the
-  // persisted preferred language in the profile.
   useEffect(() => {
-    const localLanguageOverride = getStoredLanguageOverride();
-
-    if (localLanguageOverride) {
-      const normalizedCurrentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
-
-      if (normalizedCurrentLanguage !== localLanguageOverride) {
-        void i18n.changeLanguage(localLanguageOverride);
-        localStorage.setItem("i18nextLng", localLanguageOverride);
-      }
-
-      return;
-    }
-
     if (languageConfirmationData?.preferredLanguage && !languageConfirmationData?.needsConfirmation) {
       const preferredLanguage = normalizeAppLanguage(languageConfirmationData.preferredLanguage);
       const normalizedCurrentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
 
+      clearStoredLanguageOverride();
+      localStorage.setItem("i18nextLng", preferredLanguage);
+
       if (normalizedCurrentLanguage !== preferredLanguage) {
         void i18n.changeLanguage(preferredLanguage);
-        localStorage.setItem("i18nextLng", preferredLanguage);
       }
     }
   }, [languageConfirmationData?.preferredLanguage, languageConfirmationData?.needsConfirmation, i18n]);
@@ -345,6 +332,7 @@ const Dashboard = () => {
           onCompleted={(lang) => {
             queryClient.setQueryData(["dashboard-language-confirmation"], {
               ...languageConfirmationData,
+              preferredLanguage: lang,
               needsConfirmation: false,
             });
             queryClient.invalidateQueries({ queryKey: ["user-profile"] });

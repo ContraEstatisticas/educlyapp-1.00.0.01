@@ -1370,6 +1370,18 @@
       "yourAnswer": "Votre réponse :",
       "available": "Mots disponibles :"
     },
+    "textParts": {
+      "part": "Partie",
+      "of": "sur",
+      "counter": "Partie {{current}} sur {{total}}",
+      "nextPart": "Partie suivante",
+      "previousPart": "Partie précédente",
+      "partsHint": "Touchez pour continuer la lecture ({{current}}/{{total}})",
+      "continuation": "Suite...",
+      "showPrevious": "Voir les parties précédentes",
+      "hidePrevious": "Masquer les parties précédentes",
+      "allRead": "Tout le contenu a été lu"
+    },
     "chat": {
       "aiReady": "Prêt à aider",
       "sendPlaceholder": "Tapez votre message...",

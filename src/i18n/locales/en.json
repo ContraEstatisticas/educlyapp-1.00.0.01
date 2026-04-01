@@ -3048,8 +3048,11 @@
     "textParts": {
       "part": "Part",
       "of": "of",
+      "counter": "Part {{current}} of {{total}}",
       "nextPart": "Next part",
       "previousPart": "Previous part",
+      "partsHint": "Tap to continue reading ({{current}}/{{total}})",
+      "continuation": "Continuation...",
       "showPrevious": "Show previous parts",
       "hidePrevious": "Hide previous parts",
       "allRead": "All content read"

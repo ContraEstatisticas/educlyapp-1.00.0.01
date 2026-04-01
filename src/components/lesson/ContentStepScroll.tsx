@@ -14,29 +14,34 @@ interface ContentStepScrollProps {
   isActive: boolean;
 }
 
-export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActive }: ContentStepScrollProps) => {
+export const ContentStepScroll = ({
+  title,
+  content,
+  imageUrl,
+  onContinue,
+  isActive,
+}: ContentStepScrollProps) => {
   const { t } = useTranslation();
   const [currentPart, setCurrentPart] = useState(0);
   const [isRevealing, setIsRevealing] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const partsContainerRef = useRef<HTMLDivElement>(null);
 
-  // Dividir o conteúdo em partes (máximo 500 caracteres por parte)
   const splitContentIntoParts = (text: string, maxChars = 500) => {
     const parts: string[] = [];
-    let currentPart = "";
+    let currentChunk = "";
     const paragraphs = text.split("\n");
 
     for (const paragraph of paragraphs) {
-      if ((currentPart + paragraph).length <= maxChars) {
-        currentPart += (currentPart ? "\n" : "") + paragraph;
+      if ((currentChunk + paragraph).length <= maxChars) {
+        currentChunk += (currentChunk ? "\n" : "") + paragraph;
       } else {
-        if (currentPart) parts.push(currentPart);
-        currentPart = paragraph;
+        if (currentChunk) parts.push(currentChunk);
+        currentChunk = paragraph;
       }
     }
 
-    if (currentPart) parts.push(currentPart);
+    if (currentChunk) parts.push(currentChunk);
     return parts;
   };
 
@@ -44,7 +49,6 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
   const isLastPart = currentPart >= parts.length - 1;
   const isFirstPart = currentPart === 0;
 
-  // Reset quando o conteúdo muda
   useEffect(() => {
     setCurrentPart(0);
   }, [content]);
@@ -53,11 +57,9 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
     if (currentPart < parts.length - 1) {
       setIsRevealing(true);
 
-      // Anima a transição
       setTimeout(() => {
         setCurrentPart((prev) => prev + 1);
 
-        // Scroll suave para o novo conteúdo
         setTimeout(() => {
           if (contentRef.current) {
             contentRef.current.scrollIntoView({
@@ -69,7 +71,6 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
         }, 300);
       }, 300);
     } else {
-      // Última parte - vai para próximo step
       onContinue();
     }
   };
@@ -93,11 +94,9 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
 
   return (
     <div className="bg-background space-y-6" ref={partsContainerRef}>
-      {/* Title - mantém fixo durante as partes */}
       <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm pb-4 pt-2 border-b border-border/50">
         <h1 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">{title}</h1>
 
-        {/* Progress indicator - Parts */}
         {parts.length > 1 && (
           <div className="flex items-center gap-3 mt-2">
             <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
@@ -107,13 +106,16 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
               />
             </div>
             <span className="text-xs font-medium text-muted-foreground">
-              Parte {currentPart + 1} de {parts.length}
+              {t("lesson.textParts.counter", {
+                current: currentPart + 1,
+                total: parts.length,
+                defaultValue: "Part {{current}} of {{total}}",
+              })}
             </span>
           </div>
         )}
       </div>
 
-      {/* Text content container with staggered reveal */}
       <div
         ref={contentRef}
         className={cn(
@@ -121,7 +123,6 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
           isRevealing ? "opacity-40 scale-[0.98]" : "opacity-100 scale-100",
         )}
       >
-        {/* Renderiza todas as partes até a atual */}
         {parts.slice(0, currentPart + 1).map((part, index) => {
           const isCurrent = index === currentPart;
           const isPrevious = index < currentPart;
@@ -137,17 +138,17 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
                 animationDelay: isCurrent ? `${index * 100}ms` : "0ms",
               }}
             >
-              {/* Indicador visual da parte (exceto primeira) */}
               {index > 0 && (
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-xs font-semibold text-primary uppercase tracking-wide">Continuação...</span>
+                  <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                    {t("lesson.textParts.continuation", "Continuation...")}
+                  </span>
                 </div>
               )}
 
-              {/* Conteúdo da parte */}
               <div
                 className={cn(
                   "prose prose-lg max-w-none text-foreground/85 leading-relaxed rounded-xl p-4",
@@ -160,7 +161,6 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
           );
         })}
 
-        {/* Image aparece apenas na última parte */}
         {imageUrl && isLastPart && (
           <div className="rounded-xl overflow-hidden shadow-sm border border-border animate-in fade-in slide-in-from-bottom-4 duration-500">
             <img src={imageUrl} alt={title} className="w-full h-auto object-cover" />
@@ -168,10 +168,8 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
         )}
       </div>
 
-      {/* Navigation buttons */}
       {isActive && (
         <div className="sticky bottom-0 bg-background/80 backdrop-blur-sm pt-4 border-t border-border/50 space-y-3">
-          {/* Previous part button (só aparece se não for primeira parte) */}
           {!isFirstPart && (
             <Button
               onClick={revealPreviousPart}
@@ -180,11 +178,10 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
               disabled={isRevealing}
             >
               <ChevronUp className="w-4 h-4 mr-2" />
-              {t("lesson.previousPart", "Ver parte anterior")}
+              {t("lesson.textParts.previousPart", "Previous part")}
             </Button>
           )}
 
-          {/* Next/Continue button */}
           <Button
             onClick={revealNextPart}
             className={cn(
@@ -196,10 +193,8 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
             size="lg"
             disabled={isRevealing}
           >
-            {/* Animated background effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
 
-            {/* Button content */}
             <div className="relative flex items-center justify-center gap-2">
               {isLastPart ? (
                 <>
@@ -208,17 +203,20 @@ export const ContentStepScroll = ({ title, content, imageUrl, onContinue, isActi
                 </>
               ) : (
                 <>
-                  <span>{t("lesson.nextPart", "Próxima parte")}</span>
+                  <span>{t("lesson.textParts.nextPart", "Next part")}</span>
                   <ChevronDown className={cn("w-5 h-5", isRevealing ? "animate-pulse" : "animate-bounce")} />
                 </>
               )}
             </div>
           </Button>
 
-          {/* Instructions */}
           {!isLastPart && (
             <p className="text-center text-xs text-muted-foreground">
-              {t("lesson.partsHint", `Clique para continuar lendo (${currentPart + 1}/${parts.length})`)}
+              {t("lesson.textParts.partsHint", {
+                current: currentPart + 1,
+                total: parts.length,
+                defaultValue: "Tap to continue reading ({{current}}/{{total}})",
+              })}
             </p>
           )}
         </div>

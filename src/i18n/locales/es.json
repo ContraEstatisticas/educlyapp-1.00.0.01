@@ -1415,6 +1415,18 @@
       "yourAnswer": "Tu respuesta:",
       "available": "Palabras disponibles:"
     },
+    "textParts": {
+      "part": "Parte",
+      "of": "de",
+      "counter": "Parte {{current}} de {{total}}",
+      "nextPart": "Siguiente parte",
+      "previousPart": "Parte anterior",
+      "partsHint": "Toca para seguir leyendo ({{current}}/{{total}})",
+      "continuation": "Continuación...",
+      "showPrevious": "Ver partes anteriores",
+      "hidePrevious": "Ocultar partes anteriores",
+      "allRead": "Todo el contenido leído"
+    },
     "chat": {
       "aiReady": "Listo para ayudar",
       "sendPlaceholder": "Escribe tu mensaje...",

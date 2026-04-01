@@ -1727,8 +1727,11 @@
     "textParts": {
       "part": "Parte",
       "of": "de",
+      "counter": "Parte {{current}} de {{total}}",
       "nextPart": "Próxima parte",
       "previousPart": "Parte anterior",
+      "partsHint": "Toque para continuar lendo ({{current}}/{{total}})",
+      "continuation": "Continuação...",
       "showPrevious": "Ver partes anteriores",
       "hidePrevious": "Ocultar partes anteriores",
       "allRead": "Todo conteúdo lido"

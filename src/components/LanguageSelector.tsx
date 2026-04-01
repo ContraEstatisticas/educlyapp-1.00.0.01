@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQueryClient } from "@tanstack/react-query";
 import { Globe } from "lucide-react";
 
 import {
@@ -9,7 +10,12 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { normalizeAppLanguage, setStoredLanguageOverride } from "@/lib/languagePreference";
+import {
+  clearStoredLanguageOverride,
+  normalizeAppLanguage,
+  setStoredLanguageOverride,
+} from "@/lib/languagePreference";
+import { supabase } from "@/integrations/supabase/client";
 
 const languages = [
   { code: "pt", name: "Português", shortName: "PT", flag: "🇧🇷" },
@@ -27,6 +33,7 @@ interface LanguageSelectorProps {
 
 export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
+  const queryClient = useQueryClient();
 
   const currentLanguageCode = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
   const [selectedLanguageCode, setSelectedLanguageCode] = useState(currentLanguageCode);
@@ -44,18 +51,56 @@ export const LanguageSelector = ({ className }: LanguageSelectorProps) => {
     if (normalizedLanguage === previousLanguage) return;
 
     setSelectedLanguageCode(normalizedLanguage);
-    setStoredLanguageOverride(normalizedLanguage);
-
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = normalizedLanguage;
-    }
 
     try {
-      await i18n.changeLanguage(normalizedLanguage);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-      if (typeof window !== "undefined") {
-        window.location.reload();
+      if (user) {
+        const { error } = await supabase
+          .from("profiles")
+          .update({
+            preferred_language: normalizedLanguage,
+            language_confirmation_completed: true,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", user.id);
+
+        if (error) throw error;
+
+        clearStoredLanguageOverride();
+        localStorage.setItem("i18nextLng", normalizedLanguage);
+
+        queryClient.setQueryData(
+          ["dashboard-language-confirmation"],
+          (current:
+            | {
+                userId: string;
+                preferredLanguage: string | null;
+                needsConfirmation: boolean;
+              }
+            | null
+            | undefined) =>
+            current
+              ? {
+                  ...current,
+                  preferredLanguage: normalizedLanguage,
+                  needsConfirmation: false,
+                }
+              : current,
+        );
+        queryClient.invalidateQueries({ queryKey: ["dashboard-language-confirmation"] });
+        queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+      } else {
+        setStoredLanguageOverride(normalizedLanguage);
       }
+
+      if (typeof document !== "undefined") {
+        document.documentElement.lang = normalizedLanguage;
+      }
+
+      await i18n.changeLanguage(normalizedLanguage);
     } catch (error) {
       console.error("[LanguageSelector] Failed to change language:", error);
       setSelectedLanguageCode(previousLanguage);

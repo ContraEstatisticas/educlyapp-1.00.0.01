@@ -35,16 +35,44 @@ const LanguagePreferenceSync = () => {
       return;
     }
 
+    let isActive = true;
+
     const syncDocumentLanguage = (language: string) => {
       document.documentElement.lang = normalizeAppLanguage(language);
     };
 
     const syncStoredLanguage = async () => {
+      const currentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
       const storedOverride = getStoredLanguageOverride();
       const storedDetectorLanguage = window.localStorage.getItem("i18nextLng");
-      const targetLanguage =
+      let targetLanguage =
         storedOverride || (storedDetectorLanguage ? normalizeAppLanguage(storedDetectorLanguage) : null);
-      const currentLanguage = normalizeAppLanguage(i18n.resolvedLanguage || i18n.language);
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("preferred_language")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (error) {
+          console.error("[LanguagePreferenceSync] Failed to load preferred language:", error);
+        }
+
+        if (profile?.preferred_language) {
+          targetLanguage = normalizeAppLanguage(profile.preferred_language);
+          window.localStorage.setItem("i18nextLng", targetLanguage);
+          window.localStorage.removeItem(LANGUAGE_OVERRIDE_STORAGE_KEY);
+        }
+      }
+
+      if (!isActive) {
+        return;
+      }
 
       syncDocumentLanguage(targetLanguage || currentLanguage);
 
@@ -69,11 +97,19 @@ const LanguagePreferenceSync = () => {
       void syncStoredLanguage();
     };
 
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
+      void syncStoredLanguage();
+    });
+
     void syncStoredLanguage();
     i18n.on("languageChanged", handleLanguageChanged);
     window.addEventListener("storage", handleStorage);
 
     return () => {
+      isActive = false;
+      subscription.unsubscribe();
       i18n.off("languageChanged", handleLanguageChanged);
       window.removeEventListener("storage", handleStorage);
     };

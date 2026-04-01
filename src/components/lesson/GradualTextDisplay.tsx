@@ -135,7 +135,11 @@ export const GradualTextDisplay = forwardRef<GradualTextDisplayRef, GradualTextD
         {/* Progress indicator */}
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-muted-foreground">
-            {t("lesson.textParts.part", "Parte")} {currentPartIndex + 1} {t("lesson.textParts.of", "de")} {totalParts}
+            {t("lesson.textParts.counter", {
+              current: currentPartIndex + 1,
+              total: totalParts,
+              defaultValue: "Part {{current}} of {{total}}",
+            })}
           </span>
           {/* Progress dots */}
           <div className="flex items-center gap-1.5">
