@@ -105,6 +105,42 @@
       }
     ]
   },
+  "day1_guilherme": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "GuilhermeDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Modulo 01. Antes que nada: olvida lo que te dijeron sobre IA. Diferencia entre un prompt vago y uno especifico. Los 5 grandes resultados que entrega la IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "GuilhermeDay1Journey",
+        "props": {
+          "section": "personalize",
+          "summary": "Personalizacion practica de ChatGPT y Claude con pantallas simuladas, memoria, proyectos, estilos de respuesta y una plantilla lista para copiar."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "GuilhermeDay1Journey",
+        "props": {
+          "section": "map",
+          "summary": "Mapa de IAs: ChatGPT, Claude, Gemini, Copilot, DeepSeek, Perplexity, Lovable, Nano Banana y Veo. Puntos fuertes y cuando usar cada una."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "GuilhermeDay1Journey",
+        "props": {
+          "section": "practice",
+          "summary": "Ejercicios practicos del Dia 1, mision para personalizar tu IA principal y boton temporal para terminar y probar esta ruta."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

@@ -303,6 +303,7 @@ const DayLesson = () => {
   const [showDay1FeedbackDialog, setShowDay1FeedbackDialog] = useState(false);
   const [isSavingDay1Feedback, setIsSavingDay1Feedback] = useState(false);
   const [day1Variant, setDay1Variant] = useState<Day1ExperimentVariant>(DEFAULT_DAY1_EXPERIMENT_VARIANT);
+  const [currentLearnerName, setCurrentLearnerName] = useState("Aluno");
   const [existingDay1Feedback, setExistingDay1Feedback] = useState<{
     starRating: number;
     opinionText: string;
@@ -315,11 +316,15 @@ const DayLesson = () => {
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [ediAssistState, setEdiAssistState] = useState<EdiAssistState | null>(null);
 
+  const shouldEnableEdiMotivation =
+    !(dayInfo?.dayNumber === 1 && day1Variant === "guilherme");
+
   // Edi Motivation system - shows motivational messages at progress milestones
   const { activeMotivation, closeMotivation } = useEdiMotivation(
     currentStepIndex + 1, 
     lessonSteps.length,
-    dayInfo?.dayNumber || 1
+    dayInfo?.dayNumber || 1,
+    shouldEnableEdiMotivation
   );
 
   // Refs para scroll suave
@@ -431,6 +436,35 @@ const DayLesson = () => {
         const {
           data: { user },
         } = await supabase.auth.getUser();
+        let profileData: {
+          challenge_day1_variant?: string | null;
+          full_name?: string | null;
+        } | null = null;
+        let resolvedLearnerName =
+          user?.user_metadata?.full_name?.trim() ||
+          user?.email?.split("@")[0] ||
+          "Aluno";
+
+        if (user) {
+          const { data: profile, error: profileError } = await supabase
+            .from("profiles")
+            .select("challenge_day1_variant, full_name")
+            .eq("id", user.id)
+            .maybeSingle();
+
+          if (profileError) {
+            console.error("[DayLesson] Failed to load profile info:", profileError);
+          }
+
+          profileData = profile;
+
+          if (profile?.full_name?.trim()) {
+            resolvedLearnerName = profile.full_name.trim();
+          }
+        }
+
+        setCurrentLearnerName(resolvedLearnerName);
+
         const { data: dayData } = await supabase
           .from("challenge_days")
           .select("day_number, title, challenge_id")
@@ -441,19 +475,9 @@ const DayLesson = () => {
           let savedDay1Feedback: { starRating: number; opinionText: string } | null = null;
 
           if (dayData.day_number === 1) {
-            if (user) {
-              const { data: profile, error: profileError } = await supabase
-                .from("profiles")
-                .select("challenge_day1_variant")
-                .eq("id", user.id)
-                .maybeSingle();
-
-              if (profileError) {
-                console.error("[DayLesson] Failed to load Day 1 variant:", profileError);
-              }
-
-              resolvedDay1Variant = normalizeDay1ExperimentVariant(profile?.challenge_day1_variant);
-            }
+            resolvedDay1Variant = normalizeDay1ExperimentVariant(
+              profileData?.challenge_day1_variant
+            );
 
             if (previewDay1Variant) {
               resolvedDay1Variant = previewDay1Variant;
@@ -531,10 +555,30 @@ const DayLesson = () => {
       setTimeout(() => {
         stepRefs.current[currentStepIndex]?.scrollIntoView({ 
           behavior: 'smooth', 
-          block: 'center'
+          block: 'start'
         });
       }, 150);
     }
+  }, [currentStepIndex]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const currentStepElement = stepRefs.current[currentStepIndex];
+
+    if (!container || !currentStepElement) return;
+
+    const timeoutId = window.setTimeout(() => {
+      const containerRect = container.getBoundingClientRect();
+      const stepRect = currentStepElement.getBoundingClientRect();
+      const targetTop = stepRect.top - containerRect.top + container.scrollTop;
+
+      container.scrollTo({
+        top: Math.max(targetTop, 0),
+        behavior: "smooth",
+      });
+    }, 220);
+
+    return () => window.clearTimeout(timeoutId);
   }, [currentStepIndex]);
 
   const openPostLessonFlow = () => {
@@ -576,6 +620,21 @@ const DayLesson = () => {
         description: feedbackUi.opinionHelper,
         variant: "destructive",
       });
+      return;
+    }
+
+    if (isDay1PreviewMode) {
+      setExistingDay1Feedback({
+        starRating: day1FeedbackRating,
+        opinionText: trimmedOpinion,
+      });
+      setDay1FeedbackOpinion(trimmedOpinion);
+      setShowDay1FeedbackDialog(false);
+      toast({
+        title: "Pré-visualização concluída",
+        description: "O modal foi exibido normalmente, mas nada foi salvo porque você está em modo de teste.",
+      });
+      openPostLessonFlow();
       return;
     }
 
@@ -693,6 +752,12 @@ const DayLesson = () => {
 
       try {
         if (isDay1PreviewMode) {
+          if (dayInfo?.dayNumber === 1) {
+            setIsCompletingDay(false);
+            setShowDay1FeedbackDialog(true);
+            return;
+          }
+
           setIsCompletingDay(false);
           toast({
             title: "Pré-visualização finalizada",
@@ -751,7 +816,7 @@ const DayLesson = () => {
           }
         }
 
-        if (dayInfo?.dayNumber === 1 && !existingDay1Feedback) {
+        if (dayInfo?.dayNumber === 1) {
           setIsCompletingDay(false);
           setShowDay1FeedbackDialog(true);
           return;
@@ -932,9 +997,6 @@ const DayLesson = () => {
   const lessonContentWidthClass = useWideGuilhermeLayout
     ? "max-w-2xl md:max-w-[1280px] xl:max-w-[1560px] 2xl:max-w-[1680px] md:px-8 xl:px-10"
     : "max-w-2xl";
-  const lessonBannerWidthClass = useWideGuilhermeLayout
-    ? "max-w-2xl md:max-w-[1280px] xl:max-w-[1560px] 2xl:max-w-[1680px]"
-    : "max-w-2xl";
   const canExitWithoutConfirmation =
     isCompletingDay || showPracticeModal || showMilestoneUpsell;
 
@@ -955,19 +1017,6 @@ const DayLesson = () => {
     }
 
     setShowExitDialog(true);
-  };
-
-  const handleEnableGuilhermePreview = () => {
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.set("preview_day1_variant", "guilherme");
-    setSearchParams(nextParams);
-  };
-
-  const handleDisableDay1Preview = () => {
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.delete("preview_day1_variant");
-    nextParams.delete("preview_variant");
-    setSearchParams(nextParams);
   };
 
   return (
@@ -998,56 +1047,6 @@ const DayLesson = () => {
       </div>
 
       {/* MAIN CONTENT AREA - Scroll contínuo suave */}
-      {dayInfo?.dayNumber === 1 && (
-        <div
-          className={cn(
-            "border-b px-4 py-3",
-            isDay1PreviewMode ? "border-amber-200 bg-amber-50/80" : "border-sky-200 bg-sky-50/80"
-          )}
-        >
-          <div className={cn(
-            "mx-auto flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",
-            lessonBannerWidthClass
-          )}>
-            <div>
-              <p
-                className={cn(
-                  "text-xs font-black uppercase tracking-[0.28em]",
-                  isDay1PreviewMode ? "text-amber-700" : "text-sky-700"
-                )}
-              >
-                Botao provisorio
-              </p>
-              <p className="mt-1 text-sm text-foreground/80">
-                {isDay1PreviewMode
-                  ? "Voce esta visualizando a versao Guilherme sem tag. Nada sera salvo nesse modo."
-                  : "Quer ver a versao Guilherme sem trocar a tag do usuario? Use o preview provisorio abaixo."}
-              </p>
-            </div>
-
-            {isDay1PreviewMode ? (
-              <Button
-                type="button"
-                variant="outline"
-                className="shrink-0 border-amber-300 bg-white text-amber-800 hover:bg-amber-100"
-                onClick={handleDisableDay1Preview}
-              >
-                Voltar para a versao normal
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                variant="outline"
-                className="shrink-0 border-sky-300 bg-white text-sky-800 hover:bg-sky-100"
-                onClick={handleEnableGuilhermePreview}
-              >
-                Visualizar versao Guilherme
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
-
       <div className="flex-1 flex overflow-hidden">
       <div ref={containerRef} className="flex-1 overflow-y-auto flex justify-center bg-background scroll-smooth">
         <div className={cn("w-full px-6 py-8 pb-32 space-y-12", lessonContentWidthClass)}>
@@ -1148,7 +1147,12 @@ const DayLesson = () => {
                         {(() => {
                           const DynamicComponent = getComponent(step.componentName!);
                           if (!DynamicComponent) return null;
-                          const componentProps = step.props || {};
+                          const componentProps = {
+                            ...(step.props || {}),
+                            ...(step.componentName === "GuilhermeDay1Journey"
+                              ? { learnerName: currentLearnerName }
+                              : {}),
+                          };
                           return (
                             <DynamicComponent
                               {...componentProps}
@@ -1477,6 +1481,12 @@ const DayLesson = () => {
             </DialogHeader>
 
             <div className="mt-6 space-y-5">
+              {isDay1PreviewMode ? (
+                <div className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-7 text-amber-900">
+                  Você está vendo esse modal em modo de teste. As respostas não serão salvas no banco.
+                </div>
+              ) : null}
+
               <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
                 <p className="text-sm font-semibold text-foreground">
                   {day1FeedbackUi.ratingLabel}

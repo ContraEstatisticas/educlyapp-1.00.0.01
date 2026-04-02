@@ -119,16 +119,16 @@
         "type": "component",
         "componentName": "GuilhermeDay1Journey",
         "props": {
-          "section": "map",
-          "summary": "Mapa das IAs: ChatGPT, Claude, Gemini, Copilot, DeepSeek, Perplexity, Lovable, Nano Banana e Veo. Pontos fortes e quando usar cada uma."
+          "section": "personalize",
+          "summary": "Personalização prática do ChatGPT e Claude com telas simuladas, memória, projetos, estilos de resposta e template pronto para copiar."
         }
       },
       {
         "type": "component",
         "componentName": "GuilhermeDay1Journey",
         "props": {
-          "section": "personalize",
-          "summary": "Personalização prática do ChatGPT e Claude com telas simuladas, memória, projetos, estilos de resposta e template pronto para copiar."
+          "section": "map",
+          "summary": "Mapa das IAs: ChatGPT, Claude, Gemini, Copilot, DeepSeek, Perplexity, Lovable, Nano Banana e Veo. Pontos fortes e quando usar cada uma."
         }
       },
       {

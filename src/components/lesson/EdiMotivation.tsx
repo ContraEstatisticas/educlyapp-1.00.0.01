@@ -93,6 +93,10 @@ export const EdiMotivation = ({
 
   // Auto-close
   useEffect(() => {
+    if (!enabled) {
+      setActiveMotivation(null);
+      return;
+    }
     if (autoCloseSeconds > 0) {
       const timer = setTimeout(() => {
         handleClose();
@@ -186,7 +190,8 @@ export const EdiMotivation = ({
 export const useEdiMotivation = (
   currentStep: number,
   totalSteps: number,
-  dayNumber: number = 1
+  dayNumber: number = 1,
+  enabled: boolean = true
 ) => {
   const { t } = useTranslation();
   const [shownTypes, setShownTypes] = useState<Set<string>>(new Set());
@@ -282,7 +287,7 @@ export const useEdiMotivation = (
       setActiveMotivation({ type: "final_stretch", show: true, customMessage });
       return;
     }
-  }, [progress, shownTypes, generateCustomMessage]);
+  }, [enabled, progress, shownTypes, generateCustomMessage]);
 
   const closeMotivation = () => {
     setActiveMotivation(null);

@@ -1,20 +1,32 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
+  Bell,
   Bot,
   Brain,
+  CircleHelp,
   Check,
+  ChevronDown,
   ChevronRight,
+  Compass,
+  Database,
   FileText,
+  Heart,
   Images,
   LayoutDashboard,
   Map,
   PencilRuler,
+  Plus,
+  Search,
   Settings2,
+  Shield,
   Sparkles,
   Star,
   Target,
+  UserRound,
+  UsersRound,
   WandSparkles,
   X,
   Zap,
@@ -32,12 +44,14 @@ import veoLogo from "@/assets/ai-logos/veo.png";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getGuilhermeDay1JourneyCopy, resolveGuilhermeJourneyLocale } from "@/components/lesson/guilhermeDay1JourneyCopy";
 import { cn } from "@/lib/utils";
 
 type SectionKey = "intro" | "map" | "personalize" | "practice";
 
 interface GuilhermeDay1JourneyProps {
   section: SectionKey;
+  learnerName?: string;
   onComplete: () => void;
 }
 
@@ -252,6 +266,17 @@ const chatGptPanels = {
   },
 } as const;
 
+const chatGptSettingsMenu = [
+  { id: "geral", label: "Geral", icon: Settings2 },
+  { id: "notificacoes", label: "Notificações", icon: Bell },
+  { id: "personalizacao", label: "Personalização", icon: Sparkles },
+  { id: "apps", label: "Apps", icon: LayoutDashboard },
+  { id: "dados", label: "Controles de dados", icon: Database },
+  { id: "seguranca", label: "Segurança", icon: Shield },
+  { id: "parental", label: "Controles parentais", icon: UsersRound },
+  { id: "conta", label: "Conta", icon: UserRound },
+] as const;
+
 const claudePanels = {
   perfil: {
     title: "Preferências de perfil",
@@ -294,11 +319,11 @@ const exerciseOneOptions = [
 ] as const;
 
 const exerciseThreeLegend = [
-  "A. Textos longos e análise de documentos",
-  "B. Geração de vídeos a partir de texto",
-  "C. Pesquisa com fontes em tempo real",
-  "D. Edição de imagens por comandos de texto",
-  "E. Criação de sites e apps sem programar",
+  { id: "A", label: "Textos longos e análise de documentos" },
+  { id: "B", label: "Geração de vídeos a partir de texto" },
+  { id: "C", label: "Pesquisa com fontes em tempo real" },
+  { id: "D", label: "Edição de imagens por comandos de texto" },
+  { id: "E", label: "Criação de sites e apps sem programar" },
 ] as const;
 
 const exerciseThreePairs = [
@@ -324,6 +349,597 @@ const templateLines = [
   "- Evite: [jargão técnico, respostas longas demais, etc.]",
   "- Sempre: [dê exemplos práticos, pergunte antes de assumir, etc.]",
 ] as const;
+
+const SIMULATED_UI_COPY = {
+  pt: {
+    chatgpt: {
+      homeScreen: "Tela inicial",
+      sidebarItems: ["Novo chat", "Procurar chats", "Imagens", "Apps", "Investigar a fundo", "Saúde"],
+      plans: "Ver planos e preços",
+      settings: "Definições",
+      help: "Ajuda",
+      simulationBadge: "Simulacao guiada",
+      simulationTitle: "Esta tela e uma simulacao.",
+      simulationDescription:
+        "Use esta demonstracao para entender o caminho. Depois, repita esses passos no seu proprio ChatGPT.",
+      personalizedAnswersTitle: "Obtenha respostas personalizadas",
+      personalizedAnswersDescription:
+        "Clique para abrir as definições e configurar o ChatGPT do seu jeito.",
+      signIn: "Iniciar sessão",
+      signUp: "Aderir gratuitamente",
+      homeTitle: "Por onde devemos começar?",
+      askAnything: "Pergunte qualquer coisa",
+      voice: "Voz",
+      settingsHint:
+        "Isto e uma simulacao guiada. Clique em Definicoes aqui para entender o fluxo e depois faca o mesmo no seu proprio ChatGPT.",
+      footerTerms:
+        "Ao enviar mensagens ao ChatGPT, um chatbot de IA, concorda com os termos e com a política de privacidade.",
+      settingsTitle: "Personalização",
+      settingsMenu: [
+        "Geral",
+        "Notificações",
+        "Personalização",
+        "Apps",
+        "Controles de dados",
+        "Segurança",
+        "Controles parentais",
+        "Conta",
+      ],
+      traits: ["Simpático", "Entusiasta", "Cabeçalhos e listas", "Emoji"],
+      preset: "Predefinição",
+      customInstructionsLabel: "Instruções personalizadas",
+      customInstructionsValue: "Preferências adicionais de comportamento, estilo e tom",
+      aboutYouTitle: "Sobre si",
+      edit: "Editar",
+      nicknameLabel: "Alcunha",
+      nicknameValue: "Como deve o ChatGPT dirigir-se a si?",
+      professionLabel: "Profissão",
+      professionValue: "Advogado de direito da família",
+      moreAboutYouLabel: "Mais sobre si",
+      moreAboutYouValue: "Interesses, valores ou preferências a ter em conta",
+      manage: "Gerir",
+      memoryItems: [
+        {
+          title: "Fazer referência a memórias guardadas",
+          description: "Permite que o ChatGPT guarde e use memórias ao responder.",
+        },
+        {
+          title: "Fazer referência ao histórico de chat",
+          description: "Permitir que o ChatGPT faça referência a conversas recentes ao responder.",
+        },
+      ],
+      tip:
+        "Dica: personalize uma vez e depois teste um pedido real. A diferença costuma aparecer logo na primeira resposta.",
+    },
+    claude: {
+      sideActions: ["Novo", "Buscar", "Escrever", "Aprender", "Apps", "Código"],
+      freePlan: "plano Gratuito",
+      upgrade: "Fazer Upgrade",
+      promptPlaceholder: "Como posso ajudar você hoje?",
+      shortcuts: ["Escrever", "Aprender", "Código", "Assuntos pessoais", "Do Drive"],
+      simulationBadge: "Simulacao guiada",
+      simulationTitle: "Esta tela e uma simulacao.",
+      simulationDescription:
+        "Use esta demonstracao apenas como referencia visual. Depois, abra o seu proprio Claude e repita esse processo por la.",
+      profileHint:
+        "Isto e uma simulacao guiada. Clique no perfil aqui para entender o fluxo e depois repita isso no seu proprio Claude.",
+      settingsOpenedFromProfile: "Configurações abertas a partir do perfil.",
+      profileMenu: ["Preferências de perfil", "Projetos", "Estilos de resposta"],
+      flowLabel: (title: string) => `Fluxo: Perfil → Configurações → ${title}`,
+      profileEyebrow: "Perfil",
+      profileFields: {
+        whoAreYouLabel: "Quem é você",
+        whoAreYouValue: "Sou professor de história, trabalho com ensino médio.",
+        preferredLanguageLabel: "Idioma preferido",
+        preferredLanguageValue: "Português do Brasil",
+        responseLabel: "Como quer as respostas",
+        responseValue:
+          "Prefiro respostas claras, com exemplos do cotidiano, em português. Sem formalidade excessiva.",
+        profileTip:
+          "Exemplo prático: conte sua área, seu público, seu idioma e o tom ideal das respostas. Isso já deixa o Claude muito mais alinhado com a sua rotina.",
+      },
+      projectCards: [
+        {
+          title: "Projeto trabalho",
+          description: "Tudo o que você conversar aqui segue regras fixas para sua rotina profissional.",
+        },
+        {
+          title: "Projeto pessoal",
+          description: "Separe hobbies, estudos e tarefas pessoais com outro contexto e outro estilo.",
+        },
+      ],
+      projectsTip:
+        "Ideal para separar trabalho pessoal de profissional. Cada projeto pode guardar instruções fixas para você não repetir contexto toda hora.",
+      styleOptions: ["Formal", "Conciso", "Explicativo", "Personalizado"],
+      select: "Selecionar",
+      customStyleValue:
+        "Crie seu próprio estilo: respostas claras, objetivas, com exemplos e sem excesso de formalidade.",
+      stylesTip:
+        "Dica: ajuste uma dessas áreas e depois faça um teste real no Claude. Você vai perceber rapidamente a diferença no tom e no formato das respostas.",
+    },
+  },
+  en: {
+    chatgpt: {
+      homeScreen: "Home screen",
+      sidebarItems: ["New chat", "Search chats", "Images", "Apps", "Deep research", "Health"],
+      plans: "View plans and pricing",
+      settings: "Settings",
+      help: "Help",
+      simulationBadge: "Guided simulation",
+      simulationTitle: "This screen is a simulation.",
+      simulationDescription:
+        "Use this demo to understand the path. Then repeat these steps in your own ChatGPT account.",
+      personalizedAnswersTitle: "Get personalized answers",
+      personalizedAnswersDescription:
+        "Click to open settings and configure ChatGPT your way.",
+      signIn: "Log in",
+      signUp: "Sign up for free",
+      homeTitle: "Where should we begin?",
+      askAnything: "Ask anything",
+      voice: "Voice",
+      settingsHint:
+        "This is a guided simulation. Click Settings here to understand the flow, then do the same in your own ChatGPT.",
+      footerTerms:
+        "By sending messages to ChatGPT, an AI chatbot, you agree to the terms and privacy policy.",
+      settingsTitle: "Personalization",
+      settingsMenu: [
+        "General",
+        "Notifications",
+        "Personalization",
+        "Apps",
+        "Data controls",
+        "Security",
+        "Parental controls",
+        "Account",
+      ],
+      traits: ["Friendly", "Enthusiastic", "Headings and lists", "Emoji"],
+      preset: "Preset",
+      customInstructionsLabel: "Custom instructions",
+      customInstructionsValue: "Additional behavior, style, and tone preferences",
+      aboutYouTitle: "About you",
+      edit: "Edit",
+      nicknameLabel: "Nickname",
+      nicknameValue: "How should ChatGPT address you?",
+      professionLabel: "Profession",
+      professionValue: "Family law attorney",
+      moreAboutYouLabel: "More about you",
+      moreAboutYouValue: "Interests, values, or preferences to keep in mind",
+      manage: "Manage",
+      memoryItems: [
+        {
+          title: "Reference saved memories",
+          description: "Allows ChatGPT to store and use memories while responding.",
+        },
+        {
+          title: "Reference chat history",
+          description: "Allows ChatGPT to reference recent conversations when responding.",
+        },
+      ],
+      tip:
+        "Tip: personalize once and then test a real request. The difference usually appears in the very first answer.",
+    },
+    claude: {
+      sideActions: ["New", "Search", "Write", "Learn", "Apps", "Code"],
+      freePlan: "Free plan",
+      upgrade: "Upgrade",
+      promptPlaceholder: "How can I help you today?",
+      shortcuts: ["Write", "Learn", "Code", "Personal", "From Drive"],
+      simulationBadge: "Guided simulation",
+      simulationTitle: "This screen is a simulation.",
+      simulationDescription:
+        "Use this demo only as a visual guide. Then open your own Claude account and repeat the same process there.",
+      profileHint:
+        "This is a guided simulation. Click the profile here to understand the flow, then repeat it in your own Claude.",
+      settingsOpenedFromProfile: "Settings opened from the profile.",
+      profileMenu: ["Profile preferences", "Projects", "Response styles"],
+      flowLabel: (title: string) => `Flow: Profile -> Settings -> ${title}`,
+      profileEyebrow: "Profile",
+      profileFields: {
+        whoAreYouLabel: "Who are you",
+        whoAreYouValue: "I am a history teacher working with high school students.",
+        preferredLanguageLabel: "Preferred language",
+        preferredLanguageValue: "English",
+        responseLabel: "How you want answers",
+        responseValue:
+          "I prefer clear answers, with everyday examples, in English. No excessive formality.",
+        profileTip:
+          "Practical example: tell Claude your field, your audience, your language, and your ideal tone. That already makes it much more aligned with your routine.",
+      },
+      projectCards: [
+        {
+          title: "Work project",
+          description: "Everything you discuss here follows fixed rules for your professional routine.",
+        },
+        {
+          title: "Personal project",
+          description: "Separate hobbies, studies, and personal tasks with another context and another style.",
+        },
+      ],
+      projectsTip:
+        "Ideal for separating personal and professional work. Each project can keep fixed instructions so you do not have to repeat context all the time.",
+      styleOptions: ["Formal", "Concise", "Explanatory", "Custom"],
+      select: "Select",
+      customStyleValue:
+        "Create your own style: clear, objective answers with examples and without too much formality.",
+      stylesTip:
+        "Tip: adjust one of these areas and then run a real test in Claude. You will quickly notice the difference in tone and format.",
+    },
+  },
+  es: {
+    chatgpt: {
+      homeScreen: "Pantalla inicial",
+      sidebarItems: ["Nuevo chat", "Buscar chats", "Imagenes", "Apps", "Investigacion profunda", "Salud"],
+      plans: "Ver planes y precios",
+      settings: "Configuracion",
+      help: "Ayuda",
+      simulationBadge: "Simulacion guiada",
+      simulationTitle: "Esta pantalla es una simulacion.",
+      simulationDescription:
+        "Usa esta demostracion para entender el camino. Despues, repite estos pasos en tu propio ChatGPT.",
+      personalizedAnswersTitle: "Obten respuestas personalizadas",
+      personalizedAnswersDescription:
+        "Haz clic para abrir la configuracion y adaptar ChatGPT a tu manera.",
+      signIn: "Iniciar sesion",
+      signUp: "Registrarse gratis",
+      homeTitle: "Por donde empezamos?",
+      askAnything: "Pregunta lo que quieras",
+      voice: "Voz",
+      settingsHint:
+        "Esto es una simulacion guiada. Haz clic en Configuracion aqui para entender el flujo y luego haz lo mismo en tu propio ChatGPT.",
+      footerTerms:
+        "Al enviar mensajes a ChatGPT, un chatbot de IA, aceptas los terminos y la politica de privacidad.",
+      settingsTitle: "Personalizacion",
+      settingsMenu: [
+        "General",
+        "Notificaciones",
+        "Personalizacion",
+        "Apps",
+        "Controles de datos",
+        "Seguridad",
+        "Controles parentales",
+        "Cuenta",
+      ],
+      traits: ["Amable", "Entusiasta", "Titulos y listas", "Emoji"],
+      preset: "Predefinido",
+      customInstructionsLabel: "Instrucciones personalizadas",
+      customInstructionsValue: "Preferencias adicionales de comportamiento, estilo y tono",
+      aboutYouTitle: "Sobre ti",
+      edit: "Editar",
+      nicknameLabel: "Apodo",
+      nicknameValue: "Como debe dirigirse ChatGPT a ti?",
+      professionLabel: "Profesion",
+      professionValue: "Abogado de derecho de familia",
+      moreAboutYouLabel: "Mas sobre ti",
+      moreAboutYouValue: "Intereses, valores o preferencias a tener en cuenta",
+      manage: "Gestionar",
+      memoryItems: [
+        {
+          title: "Usar recuerdos guardados",
+          description: "Permite que ChatGPT guarde y use recuerdos al responder.",
+        },
+        {
+          title: "Usar historial del chat",
+          description: "Permite que ChatGPT haga referencia a conversaciones recientes al responder.",
+        },
+      ],
+      tip:
+        "Consejo: personalizalo una vez y luego prueba una solicitud real. La diferencia suele aparecer desde la primera respuesta.",
+    },
+    claude: {
+      sideActions: ["Nuevo", "Buscar", "Escribir", "Aprender", "Apps", "Codigo"],
+      freePlan: "Plan gratuito",
+      upgrade: "Mejorar plan",
+      promptPlaceholder: "Como puedo ayudarte hoy?",
+      shortcuts: ["Escribir", "Aprender", "Codigo", "Temas personales", "Desde Drive"],
+      simulationBadge: "Simulacion guiada",
+      simulationTitle: "Esta pantalla es una simulacion.",
+      simulationDescription:
+        "Usa esta demostracion solo como referencia visual. Despues, abre tu propio Claude y repite alli el mismo proceso.",
+      profileHint:
+        "Esto es una simulacion guiada. Haz clic aqui en el perfil para entender el flujo y luego repitelo en tu propio Claude.",
+      settingsOpenedFromProfile: "Configuracion abierta desde el perfil.",
+      profileMenu: ["Preferencias de perfil", "Proyectos", "Estilos de respuesta"],
+      flowLabel: (title: string) => `Flujo: Perfil -> Configuracion -> ${title}`,
+      profileEyebrow: "Perfil",
+      profileFields: {
+        whoAreYouLabel: "Quien eres",
+        whoAreYouValue: "Soy profesor de historia y trabajo con secundaria.",
+        preferredLanguageLabel: "Idioma preferido",
+        preferredLanguageValue: "Espanol",
+        responseLabel: "Como quieres las respuestas",
+        responseValue:
+          "Prefiero respuestas claras, con ejemplos cotidianos, en espanol y sin demasiada formalidad.",
+        profileTip:
+          "Ejemplo practico: cuentale tu area, tu publico, tu idioma y el tono ideal. Eso ya deja a Claude mucho mas alineado con tu rutina.",
+      },
+      projectCards: [
+        {
+          title: "Proyecto de trabajo",
+          description: "Todo lo que hables aqui sigue reglas fijas para tu rutina profesional.",
+        },
+        {
+          title: "Proyecto personal",
+          description: "Separa hobbies, estudios y tareas personales con otro contexto y otro estilo.",
+        },
+      ],
+      projectsTip:
+        "Ideal para separar el trabajo personal del profesional. Cada proyecto puede guardar instrucciones fijas para no repetir contexto todo el tiempo.",
+      styleOptions: ["Formal", "Conciso", "Explicativo", "Personalizado"],
+      select: "Seleccionar",
+      customStyleValue:
+        "Crea tu propio estilo: respuestas claras, objetivas, con ejemplos y sin exceso de formalidad.",
+      stylesTip:
+        "Consejo: ajusta una de estas areas y luego haz una prueba real en Claude. Notaras rapidamente la diferencia en el tono y en el formato.",
+    },
+  },
+  fr: {
+    chatgpt: {
+      homeScreen: "Ecran d'accueil",
+      sidebarItems: ["Nouveau chat", "Rechercher", "Images", "Apps", "Recherche avancee", "Sante"],
+      plans: "Voir les offres et tarifs",
+      settings: "Parametres",
+      help: "Aide",
+      simulationBadge: "Simulation guidee",
+      simulationTitle: "Cet ecran est une simulation.",
+      simulationDescription:
+        "Utilise cette demonstration pour comprendre le parcours. Ensuite, refais ces etapes dans ton propre ChatGPT.",
+      personalizedAnswersTitle: "Obtiens des reponses personnalisees",
+      personalizedAnswersDescription:
+        "Clique pour ouvrir les parametres et adapter ChatGPT a ta facon de travailler.",
+      signIn: "Se connecter",
+      signUp: "S'inscrire gratuitement",
+      homeTitle: "Par ou commence-t-on ?",
+      askAnything: "Pose n'importe quelle question",
+      voice: "Voix",
+      settingsHint:
+        "Ceci est une simulation guidee. Clique ici sur Parametres pour comprendre le flux, puis refais la meme chose dans ton propre ChatGPT.",
+      footerTerms:
+        "En envoyant des messages a ChatGPT, un chatbot d'IA, tu acceptes les conditions et la politique de confidentialite.",
+      settingsTitle: "Personnalisation",
+      settingsMenu: [
+        "General",
+        "Notifications",
+        "Personnalisation",
+        "Apps",
+        "Controles des donnees",
+        "Securite",
+        "Controles parentaux",
+        "Compte",
+      ],
+      traits: ["Sympathique", "Enthousiaste", "Titres et listes", "Emoji"],
+      preset: "Predefinition",
+      customInstructionsLabel: "Instructions personnalisees",
+      customInstructionsValue: "Preferences supplementaires de comportement, style et ton",
+      aboutYouTitle: "A propos de toi",
+      edit: "Modifier",
+      nicknameLabel: "Surnom",
+      nicknameValue: "Comment ChatGPT doit-il s'adresser a toi ?",
+      professionLabel: "Profession",
+      professionValue: "Avocat en droit de la famille",
+      moreAboutYouLabel: "Plus sur toi",
+      moreAboutYouValue: "Interets, valeurs ou preferences a garder en tete",
+      manage: "Gerer",
+      memoryItems: [
+        {
+          title: "Utiliser les souvenirs enregistres",
+          description: "Permet a ChatGPT de stocker et d'utiliser des souvenirs pendant ses reponses.",
+        },
+        {
+          title: "Utiliser l'historique du chat",
+          description: "Permet a ChatGPT de faire reference aux conversations recentes quand il repond.",
+        },
+      ],
+      tip:
+        "Conseil : personnalise-le une fois puis teste une vraie demande. La difference apparait souvent des la premiere reponse.",
+    },
+    claude: {
+      sideActions: ["Nouveau", "Rechercher", "Ecrire", "Apprendre", "Apps", "Code"],
+      freePlan: "Forfait gratuit",
+      upgrade: "Passer a l'offre superieure",
+      promptPlaceholder: "Comment puis-je t'aider aujourd'hui ?",
+      shortcuts: ["Ecrire", "Apprendre", "Code", "Sujets perso", "Depuis Drive"],
+      simulationBadge: "Simulation guidee",
+      simulationTitle: "Cet ecran est une simulation.",
+      simulationDescription:
+        "Utilise cette demonstration uniquement comme repere visuel. Ensuite, ouvre ton propre Claude et refais ce processus la-bas.",
+      profileHint:
+        "Ceci est une simulation guidee. Clique ici sur le profil pour comprendre le flux, puis refais-le dans ton propre Claude.",
+      settingsOpenedFromProfile: "Parametres ouverts depuis le profil.",
+      profileMenu: ["Preferences de profil", "Projets", "Styles de reponse"],
+      flowLabel: (title: string) => `Parcours : Profil -> Parametres -> ${title}`,
+      profileEyebrow: "Profil",
+      profileFields: {
+        whoAreYouLabel: "Qui es-tu",
+        whoAreYouValue: "Je suis professeur d'histoire et je travaille avec des lyceens.",
+        preferredLanguageLabel: "Langue preferee",
+        preferredLanguageValue: "Francais",
+        responseLabel: "Comment tu veux les reponses",
+        responseValue:
+          "Je prefere des reponses claires, avec des exemples du quotidien, en francais et sans formalite excessive.",
+        profileTip:
+          "Exemple pratique : indique ton domaine, ton public, ta langue et le ton ideal. Claude devient alors beaucoup plus aligne avec ton quotidien.",
+      },
+      projectCards: [
+        {
+          title: "Projet travail",
+          description: "Tout ce que tu ecris ici suit des regles fixes pour ta routine professionnelle.",
+        },
+        {
+          title: "Projet personnel",
+          description: "Separe loisirs, etudes et taches personnelles avec un autre contexte et un autre style.",
+        },
+      ],
+      projectsTip:
+        "Ideal pour separer le personnel du professionnel. Chaque projet peut garder des instructions fixes pour eviter de repeter ton contexte.",
+      styleOptions: ["Formel", "Concis", "Explicatif", "Personnalise"],
+      select: "Choisir",
+      customStyleValue:
+        "Cree ton propre style : des reponses claires, directes, avec des exemples et sans trop de formalite.",
+      stylesTip:
+        "Conseil : ajuste l'une de ces zones puis fais un vrai test dans Claude. Tu verras vite la difference de ton et de format.",
+    },
+  },
+} as const;
+
+const JOURNEY_SECTION_UI_COPY = {
+  pt: {
+    chatgptTitle: "Como personalizar no ChatGPT",
+    chatgptDescription:
+      "Acesse Configuracoes e depois Personalizacao. Voce vai preencher caixas para definir estilo, contexto e o formato ideal das respostas.",
+    claudeTitle: "Como personalizar no Claude",
+    claudeDescription:
+      "Acesse o icone do seu perfil, depois Configuracoes e depois Perfil. Preencha o campo de preferencias com informacoes sobre voce e como quer as respostas.",
+  },
+  en: {
+    chatgptTitle: "How to customize ChatGPT",
+    chatgptDescription:
+      "Open Settings and then Personalization. You will fill in fields to define style, context, and the ideal response format.",
+    claudeTitle: "How to customize Claude",
+    claudeDescription:
+      "Open your profile icon, then Settings, then Profile. Fill in the preferences field with information about yourself and how you want the answers.",
+  },
+  es: {
+    chatgptTitle: "Como personalizar en ChatGPT",
+    chatgptDescription:
+      "Abre Configuracion y luego Personalizacion. Vas a completar campos para definir el estilo, el contexto y el formato ideal de las respuestas.",
+    claudeTitle: "Como personalizar en Claude",
+    claudeDescription:
+      "Abre el icono de tu perfil, luego Configuracion y despues Perfil. Completa el campo de preferencias con informacion sobre ti y sobre como quieres las respuestas.",
+  },
+  fr: {
+    chatgptTitle: "Comment personnaliser ChatGPT",
+    chatgptDescription:
+      "Ouvre les Parametres puis la Personnalisation. Tu vas remplir des champs pour definir le style, le contexte et le format ideal des reponses.",
+    claudeTitle: "Comment personnaliser Claude",
+    claudeDescription:
+      "Ouvre l'icone de ton profil, puis Parametres, puis Profil. Renseigne les preferences avec des informations sur toi et sur la facon dont tu veux les reponses.",
+  },
+} as const;
+
+const LOCALIZED_CHAT_GPT_PANELS = {
+  pt: chatGptPanels,
+  en: {
+    estilo: {
+      title: "Base style and tone",
+      description:
+        "This is where the person chooses the overall conversation style. Example: more direct, more creative, more didactic, or more professional.",
+    },
+    caracteristicas: {
+      title: "Traits",
+      description:
+        "This is where they explain who they are, what they do, their experience level, and what they use ChatGPT for. That helps AI answer in a way that is more aligned with their reality.",
+    },
+    respostas: {
+      title: "How you want answers",
+      description:
+        "Define tone, format, and preferences. Example: answer directly, without fluff, use practical examples, and organize in short bullet points when possible.",
+    },
+    memoria: {
+      title: "Memory",
+      description:
+        "ChatGPT also has a memory feature that learns about you across conversations. You can view and edit what it remembers in Settings > Personalization > Memory.",
+    },
+  },
+  es: {
+    estilo: {
+      title: "Estilo y tono base",
+      description:
+        "Aqui la persona elige el estilo general de la conversacion. Por ejemplo: mas directo, mas creativo, mas didactico o mas profesional.",
+    },
+    caracteristicas: {
+      title: "Caracteristicas",
+      description:
+        "Aqui cuenta quien es, a que se dedica, su nivel de experiencia y para que usa ChatGPT. Eso ayuda a la IA a responder de forma mas alineada con su realidad.",
+    },
+    respostas: {
+      title: "Como quieres las respuestas",
+      description:
+        "Define el tono, el formato y las preferencias. Por ejemplo: responde de forma directa, sin rodeos, con ejemplos practicos y, cuando se pueda, en puntos cortos.",
+    },
+    memoria: {
+      title: "Memoria",
+      description:
+        "ChatGPT tambien tiene una funcion de memoria que aprende sobre ti a lo largo de las conversaciones. Puedes ver y editar lo que recuerda en Configuracion > Personalizacion > Memoria.",
+    },
+  },
+  fr: {
+    estilo: {
+      title: "Style et ton de base",
+      description:
+        "C'est ici que la personne choisit le style general de la conversation. Par exemple : plus direct, plus creatif, plus pedagogique ou plus professionnel.",
+    },
+    caracteristicas: {
+      title: "Caracteristiques",
+      description:
+        "C'est ici qu'elle explique qui elle est, ce qu'elle fait, son niveau d'experience et a quoi elle utilise ChatGPT. Cela aide l'IA a repondre de facon plus alignee avec sa realite.",
+    },
+    respostas: {
+      title: "Comment tu veux les reponses",
+      description:
+        "Definis le ton, le format et les preferences. Par exemple : reponds de facon directe, sans bla-bla, avec des exemples concrets et, si possible, en points courts.",
+    },
+    memoria: {
+      title: "Memoire",
+      description:
+        "ChatGPT dispose aussi d'une fonction memoire qui apprend a te connaitre au fil des conversations. Tu peux voir et modifier ce qu'il retient dans Parametres > Personnalisation > Memoire.",
+    },
+  },
+} as const;
+
+const LOCALIZED_CLAUDE_PANELS = {
+  pt: claudePanels,
+  en: {
+    perfil: {
+      title: "Profile preferences",
+      description:
+        "Describe who you are, your field, preferred language, and how you want Claude to respond. Example: I am a history teacher working with high school students. I prefer clear answers with everyday examples.",
+    },
+    projetos: {
+      title: "Projects",
+      description:
+        "In Claude, you can create Projects with fixed instructions. Everything you discuss inside a project already follows the rules you defined. It is ideal for separating personal and professional work.",
+    },
+    estilos: {
+      title: "Response styles",
+      description:
+        "Claude lets you choose among different writing styles such as formal, concise, and explanatory. You can also create your own custom style.",
+    },
+  },
+  es: {
+    perfil: {
+      title: "Preferencias de perfil",
+      description:
+        "Describe quien eres, tu area, tu idioma preferido y como quieres que Claude responda. Ejemplo: soy profesor de historia y trabajo con secundaria. Prefiero respuestas claras y con ejemplos cotidianos.",
+    },
+    projetos: {
+      title: "Proyectos",
+      description:
+        "En Claude puedes crear Proyectos con instrucciones fijas. Todo lo que hables dentro de un proyecto ya sigue las reglas que definiste. Es ideal para separar el trabajo personal del profesional.",
+    },
+    estilos: {
+      title: "Estilos de respuesta",
+      description:
+        "Claude te permite elegir entre distintos estilos de escritura, como formal, conciso o explicativo. Tambien puedes crear tu propio estilo personalizado.",
+    },
+  },
+  fr: {
+    perfil: {
+      title: "Preferences de profil",
+      description:
+        "Decris qui tu es, ton domaine, ta langue preferee et la facon dont tu veux que Claude reponde. Exemple : je suis professeur d'histoire et je travaille avec des lyceens. Je prefere des reponses claires avec des exemples concrets.",
+    },
+    projetos: {
+      title: "Projets",
+      description:
+        "Dans Claude, tu peux creer des Projets avec des instructions fixes. Tout ce que tu ecris dans un projet suit deja les regles que tu as definies. C'est ideal pour separer vie perso et vie pro.",
+    },
+    estilos: {
+      title: "Styles de reponse",
+      description:
+        "Claude te permet de choisir entre plusieurs styles d'ecriture, comme formel, concis ou explicatif. Tu peux aussi creer ton propre style personnalise.",
+    },
+  },
+} as const;
 
 const sectionShellClasses =
   "relative overflow-hidden rounded-[32px] border border-[#eadfce] bg-[linear-gradient(180deg,#fffcf7_0%,#fff8ef_100%)] p-5 shadow-[0_24px_60px_rgba(89,57,18,0.08)] sm:p-6 md:p-8";
@@ -429,23 +1045,74 @@ const ContinueFooter = ({
   </div>
 );
 
-const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps) => {
+const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay1JourneyProps) => {
+  const { i18n } = useTranslation();
+  const journeyLocale = resolveGuilhermeJourneyLocale(i18n.resolvedLanguage || i18n.language);
+  const copy = getGuilhermeDay1JourneyCopy(i18n.resolvedLanguage || i18n.language);
+  const simulatedUi = SIMULATED_UI_COPY[journeyLocale];
+  const journeyUi = JOURNEY_SECTION_UI_COPY[journeyLocale];
+  const localizedChatGptPanels = LOCALIZED_CHAT_GPT_PANELS[journeyLocale];
+  const localizedClaudePanels = LOCALIZED_CLAUDE_PANELS[journeyLocale];
+  const localizedOutcomeCards = outcomeCards.map((card, index) => ({
+    ...card,
+    title: copy.intro.outcomeCards[index]?.title ?? card.title,
+    description: copy.intro.outcomeCards[index]?.description ?? card.description,
+  }));
+  const localizedAiToolCards = aiToolCards.map((card, index) => ({
+    ...card,
+    name: copy.map.tools[index]?.name ?? card.name,
+    bullets: copy.map.tools[index]?.bullets ?? card.bullets,
+  }));
+  const localizedExerciseOneOptions = exerciseOneOptions.map((option, index) => ({
+    ...option,
+    text: copy.practice.exercise1.options[index] ?? option.text,
+  }));
+  const localizedExerciseThreeLegend = exerciseThreeLegend.map((option, index) => ({
+    ...option,
+    label: copy.practice.exercise3.legend[index] ?? option.label,
+  }));
+  const localizedTemplateLines = copy.personalize.templateLines ?? templateLines;
   const [chatGptPanel, setChatGptPanel] = useState<keyof typeof chatGptPanels>("estilo");
+  const [chatGptScreen, setChatGptScreen] = useState<"home" | "settings">("home");
   const [claudePanel, setClaudePanel] = useState<keyof typeof claudePanels>("perfil");
+  const [claudeScreen, setClaudeScreen] = useState<"home" | "profile">("home");
   const [exerciseOneChoice, setExerciseOneChoice] = useState<string | null>(null);
   const [exerciseTwoInput, setExerciseTwoInput] = useState("");
   const [exerciseTwoChecked, setExerciseTwoChecked] = useState(false);
   const [exerciseThreeAnswers, setExerciseThreeAnswers] = useState<Record<string, string>>({});
+  const [activeExerciseThreePairId, setActiveExerciseThreePairId] = useState<string | null>(null);
+  const [exerciseThreeFeedback, setExerciseThreeFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const [exerciseThreeBoardSize, setExerciseThreeBoardSize] = useState({ width: 0, height: 0 });
+  const [exerciseThreeLines, setExerciseThreeLines] = useState<
+    Array<{
+      pairId: string;
+      answerId: string;
+      isCorrect: boolean;
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+    }>
+  >([]);
   const [activeMapToolIndex, setActiveMapToolIndex] = useState(0);
   const [visibleMapBulletCount, setVisibleMapBulletCount] = useState(0);
+  const exerciseThreeBoardRef = useRef<HTMLDivElement | null>(null);
+  const exerciseThreeLeftDotRefs = useRef<Record<string, HTMLSpanElement | null>>({});
+  const exerciseThreeRightDotRefs = useRef<Record<string, HTMLSpanElement | null>>({});
 
-  const exerciseOneSelected = exerciseOneOptions.find((option) => option.id === exerciseOneChoice);
+  const exerciseOneSelected = localizedExerciseOneOptions.find((option) => option.id === exerciseOneChoice);
   const isExerciseOneCorrect = exerciseOneSelected?.isCorrect ?? false;
   const isExerciseTwoCorrect =
     exerciseTwoChecked && exerciseTwoInput.trim().toLowerCase() === "prompt";
   const areAllExerciseThreeAnswered = exerciseThreePairs.every((pair) => exerciseThreeAnswers[pair.id]);
   const isExerciseThreeCorrect = exerciseThreePairs.every(
     (pair) => exerciseThreeAnswers[pair.id] === pair.correct
+  );
+  const activeExerciseThreePair = exerciseThreePairs.find(
+    (pair) => pair.id === activeExerciseThreePairId
   );
   const unlockedFinalButton =
     isExerciseOneCorrect && isExerciseTwoCorrect && areAllExerciseThreeAnswered && isExerciseThreeCorrect;
@@ -455,11 +1122,44 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
     completed:
       Number(isExerciseOneCorrect) + Number(isExerciseTwoCorrect) + Number(isExerciseThreeCorrect),
   };
-  const currentMapTool = aiToolCards[activeMapToolIndex];
-  const nextMapTool = aiToolCards[activeMapToolIndex + 1];
-  const isLastMapTool = activeMapToolIndex === aiToolCards.length - 1;
+  const currentMapTool = localizedAiToolCards[activeMapToolIndex];
+  const nextMapTool = localizedAiToolCards[activeMapToolIndex + 1];
+  const isLastMapTool = activeMapToolIndex === localizedAiToolCards.length - 1;
   const areAllCurrentMapBulletsVisible =
     visibleMapBulletCount >= currentMapTool.bullets.length;
+  const learnerNameParts = learnerName?.trim().split(/\s+/).filter(Boolean) ?? [];
+  const claudeGreetingName = learnerNameParts[0] ?? "";
+  const claudeProfileInitials =
+    learnerNameParts.length === 0
+      ? "A"
+      : learnerNameParts.length === 1
+        ? learnerNameParts[0].charAt(0).toUpperCase()
+        : `${learnerNameParts[0].charAt(0)}${learnerNameParts[learnerNameParts.length - 1].charAt(0)}`.toUpperCase();
+  const claudeGreetingTitle =
+    journeyLocale === "pt"
+      ? claudeGreetingName
+        ? `Bom dia, ${claudeGreetingName}`
+        : "Bom dia"
+      : journeyLocale === "es"
+        ? claudeGreetingName
+          ? `Buenos días, ${claudeGreetingName}`
+          : "Buenos días"
+        : journeyLocale === "fr"
+          ? claudeGreetingName
+            ? `Bonjour, ${claudeGreetingName}`
+            : "Bonjour"
+          : claudeGreetingName
+            ? `Good morning, ${claudeGreetingName}`
+            : "Good morning";
+
+  useEffect(() => {
+    if (section !== "personalize") return;
+
+    setChatGptScreen("home");
+    setChatGptPanel("estilo");
+    setClaudeScreen("home");
+    setClaudePanel("perfil");
+  }, [section]);
 
   useEffect(() => {
     if (section !== "map") return;
@@ -487,22 +1187,163 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
     return () => window.clearTimeout(timeout);
   }, [currentMapTool, section, visibleMapBulletCount]);
 
+  useEffect(() => {
+    if (section !== "practice") return;
+
+    const updateExerciseThreeLines = () => {
+      const board = exerciseThreeBoardRef.current;
+      if (!board) {
+        setExerciseThreeBoardSize({ width: 0, height: 0 });
+        setExerciseThreeLines([]);
+        return;
+      }
+
+      const boardRect = board.getBoundingClientRect();
+      setExerciseThreeBoardSize({ width: boardRect.width, height: boardRect.height });
+      const nextLines = exerciseThreePairs.flatMap((pair) => {
+        const answerId = exerciseThreeAnswers[pair.id];
+        if (!answerId) return [];
+
+        const leftDot = exerciseThreeLeftDotRefs.current[pair.id];
+        const rightDot = exerciseThreeRightDotRefs.current[answerId];
+        if (!leftDot || !rightDot) return [];
+
+        const leftRect = leftDot.getBoundingClientRect();
+        const rightRect = rightDot.getBoundingClientRect();
+
+        return [
+          {
+            pairId: pair.id,
+            answerId,
+            isCorrect: answerId === pair.correct,
+            x1: leftRect.left + leftRect.width / 2 - boardRect.left,
+            y1: leftRect.top + leftRect.height / 2 - boardRect.top,
+            x2: rightRect.left + rightRect.width / 2 - boardRect.left,
+            y2: rightRect.top + rightRect.height / 2 - boardRect.top,
+          },
+        ];
+      });
+
+      setExerciseThreeLines(nextLines);
+    };
+
+    const frame = window.requestAnimationFrame(updateExerciseThreeLines);
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateExerciseThreeLines) : null;
+
+    if (resizeObserver && exerciseThreeBoardRef.current) {
+      resizeObserver.observe(exerciseThreeBoardRef.current);
+    }
+
+    window.addEventListener("resize", updateExerciseThreeLines);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", updateExerciseThreeLines);
+    };
+  }, [exerciseThreeAnswers, section]);
+
   const handleContinueMapTool = () => {
     if (isLastMapTool) {
       onComplete();
       return;
     }
 
-    setActiveMapToolIndex((current) => Math.min(current + 1, aiToolCards.length - 1));
+    setActiveMapToolIndex((current) => Math.min(current + 1, localizedAiToolCards.length - 1));
+  };
+
+  const handleOpenChatGptSettings = (panel: keyof typeof chatGptPanels = "estilo") => {
+    setChatGptPanel(panel);
+    setChatGptScreen("settings");
+  };
+
+  const handleOpenClaudeProfile = (panel: keyof typeof claudePanels = "perfil") => {
+    setClaudePanel(panel);
+    setClaudeScreen("profile");
+  };
+
+  const handleSelectExerciseThreePair = (pairId: string) => {
+    setExerciseThreeFeedback(null);
+    setActiveExerciseThreePairId((current) => (current === pairId ? null : pairId));
+  };
+
+  const handleConnectExerciseThreePair = (answerId: string) => {
+    if (!activeExerciseThreePairId) {
+      const pairedItem = exerciseThreePairs.find((pair) => exerciseThreeAnswers[pair.id] === answerId);
+      if (pairedItem) {
+        setActiveExerciseThreePairId(pairedItem.id);
+        setExerciseThreeFeedback(null);
+        return;
+      }
+
+      setExerciseThreeFeedback({
+        type: "error",
+        message: copy.practice.exercise3.selectPairFirst,
+      });
+      return;
+    }
+
+    const activePair = exerciseThreePairs.find((pair) => pair.id === activeExerciseThreePairId);
+    const selectedOption = localizedExerciseThreeLegend.find((option) => option.id === answerId);
+
+    if (!activePair || !selectedOption) return;
+
+    if (answerId !== activePair.correct) {
+      setExerciseThreeAnswers((current) => {
+        const next = { ...current };
+        delete next[activePair.id];
+        return next;
+      });
+
+      setExerciseThreeFeedback({
+        type: "error",
+        message: copy.practice.exercise3.feedbackWrong(
+          activePair.label,
+          selectedOption.id,
+          selectedOption.label
+        ),
+      });
+      return;
+    }
+
+    setExerciseThreeAnswers((current) => {
+      const next = { ...current };
+
+      for (const [pairId, selectedAnswerId] of Object.entries(next)) {
+        if (selectedAnswerId === answerId) {
+          delete next[pairId];
+        }
+      }
+
+      next[activeExerciseThreePairId] = answerId;
+      return next;
+    });
+
+    setExerciseThreeFeedback({
+      type: "success",
+      message: copy.practice.exercise3.feedbackCorrect(
+        activePair.label,
+        selectedOption.id,
+        selectedOption.label
+      ),
+    });
+    setActiveExerciseThreePairId(null);
+  };
+
+  const handleClearExerciseThreeConnections = () => {
+    setExerciseThreeAnswers({});
+    setActiveExerciseThreePairId(null);
+    setExerciseThreeFeedback(null);
   };
 
   if (section === "intro") {
     return (
       <SectionWrapper>
         <SectionIntro
-          eyebrow="Módulo 01"
-          title="Antes de tudo: esquece o que te falaram sobre IA"
-          description="Você já deve ter ouvido falar do ChatGPT. Talvez até já tenha testado. Abriu a ferramenta, digitou qualquer coisa e achou que a IA é mais ou menos. Normal. Todo mundo começa assim."
+          eyebrow={copy.intro.eyebrow}
+          title={copy.intro.title}
+          description={copy.intro.description}
         />
 
         <motion.div
@@ -512,13 +1353,10 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
           className="mt-6 space-y-5 text-[1.04rem] leading-8 text-[#303648]"
         >
           <motion.p variants={fadeUp}>
-            <span className="font-semibold text-[#ff6a00]">Mas o problema nunca foi a IA.</span>{" "}
-            O problema é que ninguém ensinou você a pedir do jeito certo e muito menos a configurar a IA pra
-            funcionar do seu jeito.
+            <span className="font-semibold text-[#ff6a00]">{copy.intro.leadHighlight}</span>{" "}
+            {copy.intro.leadBody}
           </motion.p>
-          <motion.p variants={fadeUp}>
-            Nesse desafio de 28 dias, você não vai aprender o ChatGPT nem decorar menus. Você vai aprender a fazer coisas reais com inteligência artificial: gerar imagens, escrever textos profissionais, montar planilhas e criar apresentações. A ferramenta é só o meio. O resultado é seu.
-          </motion.p>
+          <motion.p variants={fadeUp}>{copy.intro.body}</motion.p>
         </motion.div>
 
         <motion.div
@@ -549,13 +1387,13 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#ffd0b2] bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-[0.28em] text-[#c45f17] shadow-sm">
                   <Sparkles className="h-4 w-4" />
-                  Virada de chave
+                  {copy.intro.keyShiftBadge}
                 </div>
                 <h4 className="mt-4 font-serif text-[1.95rem] leading-tight text-[#1f2434]">
-                  Quanto melhor o seu contexto, melhor a resposta que a IA devolve.
+                  {copy.intro.keyShiftTitle}
                 </h4>
                 <p className="mt-4 max-w-lg text-sm leading-7 text-[#6b5b4f]">
-                  A IA não é um truque. Ela é um assistente extremamente capaz que fica muito mais útil quando você entrega intenção, direção e formato logo no pedido.
+                  {copy.intro.keyShiftDescription}
                 </p>
               </div>
 
@@ -565,8 +1403,8 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
                   animate={{ y: [0, -8, 0], rotate: [0, -2, 0] }}
                   transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#c45f17]">Você entrega</p>
-                  <p className="mt-2 text-sm font-semibold text-[#2f3445]">Contexto + objetivo + tom + formato</p>
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#c45f17]">{copy.intro.youDeliverLabel}</p>
+                  <p className="mt-2 text-sm font-semibold text-[#2f3445]">{copy.intro.youDeliverText}</p>
                 </motion.div>
 
                 <motion.div
@@ -604,10 +1442,10 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e8fff1] text-[#16a34a]">
                       <Check className="h-4 w-4" />
                     </span>
-                    <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#16803c]">A resposta vem</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#16803c]">{copy.intro.responseBadge}</p>
                   </div>
                   <p className="mt-3 text-sm font-semibold leading-7 text-[#2f3445]">
-                    Mais útil, mais clara e muito mais próxima do que você realmente queria.
+                    {copy.intro.responseText}
                   </p>
                 </motion.div>
               </div>
@@ -620,16 +1458,16 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
           >
             <div className="flex items-center gap-3 text-[#1f2434]">
               <Zap className="h-5 w-5 text-[#ff6a00]" />
-              <p className="font-black uppercase tracking-[0.25em] text-[#d35f12]">Resultado real</p>
+              <p className="font-black uppercase tracking-[0.25em] text-[#d35f12]">{copy.intro.realResultBadge}</p>
             </div>
             <p className="mt-4 font-serif text-[1.5rem] leading-tight text-[#1f2434]">
-              O que a IA generativa realmente faz
+              {copy.intro.realResultTitle}
             </p>
             <p className="mt-4 text-sm leading-7 text-[#4b5563]">
-              A inteligência artificial generativa cria conteúdo novo a partir das suas instruções. Você descreve o que quer, e ela entrega texto, imagem, planilha, código, áudio ou vídeo.
+              {copy.intro.realResultFirst}
             </p>
             <p className="mt-4 text-sm leading-7 text-[#4b5563]">
-              O nome técnico da instrução que você dá é <span className="font-semibold text-[#ff6a00]">prompt</span>. Pense no prompt como um pedido feito a um assistente extremamente capaz, mas que precisa de clareza.
+              {copy.intro.realResultSecond}
             </p>
           </motion.div>
         </motion.div>
@@ -649,30 +1487,30 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
             <div className="grid overflow-hidden rounded-2xl border border-[#f2c9c3] md:grid-cols-[170px_1fr]">
               <div className="flex items-center justify-center gap-2 bg-[#ef5350] px-4 py-4 text-sm font-black uppercase tracking-[0.2em] text-white">
                 <X className="h-4 w-4" />
-                Vago
+                {copy.intro.vagueLabel}
               </div>
-              <div className="bg-[#fff1ee] px-5 py-4 text-[1.02rem] text-[#2f3445]">“Me fala sobre vendas”</div>
+              <div className="bg-[#fff1ee] px-5 py-4 text-[1.02rem] text-[#2f3445]">{copy.intro.vaguePrompt}</div>
             </div>
 
             <div className="grid overflow-hidden rounded-2xl border border-[#c7e7cf] md:grid-cols-[170px_1fr]">
               <div className="flex items-center justify-center gap-2 bg-[#24a148] px-4 py-4 text-sm font-black uppercase tracking-[0.2em] text-white">
                 <Check className="h-4 w-4" />
-                Específico
+                {copy.intro.specificLabel}
               </div>
               <div className="bg-[#eefbf1] px-5 py-4 text-[1.02rem] leading-7 text-[#2f3445]">
-                “Crie um e-mail de follow-up para um cliente que pediu orçamento de consultoria em marketing digital há 3 dias e não respondeu. Tom profissional e empático, máximo 150 palavras.”
+                {copy.intro.specificPrompt}
               </div>
             </div>
 
             <div className="rounded-2xl border border-[#ffe1cb] bg-[#fff6ef] p-4 text-[1rem] leading-7 text-[#41485c]">
-              💡 Essa diferença entre os dois prompts é o que separa quem acha a IA mediana de quem a usa pra trabalhar de verdade. Nos próximos 27 dias você vai dominar essa habilidade.
+              {copy.intro.promptDifference}
             </div>
           </motion.div>
         </motion.div>
 
-        <EditorialHeading icon={<Target className="h-5 w-5" />} title="Os 5 grandes resultados que a IA entrega" />
+        <EditorialHeading icon={<Target className="h-5 w-5" />} title={copy.intro.resultsTitle} />
         <p className="mt-4 text-[1.04rem] leading-8 text-[#41485c]">
-          Tudo o que a IA faz de útil se encaixa em uma dessas cinco categorias. Cada semana do desafio foca em uma delas:
+          {copy.intro.resultsDescription}
         </p>
 
         <motion.div
@@ -681,7 +1519,7 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
           variants={stagger}
           className="mt-6 space-y-4"
         >
-          {outcomeCards.map((card) => {
+          {localizedOutcomeCards.map((card) => {
             const Icon = card.icon;
 
             return (
@@ -706,8 +1544,8 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
         </motion.div>
 
         <ContinueFooter
-          label="Continuar para o mapa das IAs"
-          helper="Primeiro você entendeu a lógica. Agora vamos para a parte prática de qual ferramenta usar em cada situação."
+          label={copy.intro.continueLabel}
+          helper={copy.intro.continueHelper}
           onComplete={onComplete}
         />
       </SectionWrapper>
@@ -718,14 +1556,14 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
     return (
       <SectionWrapper>
         <SectionIntro
-          eyebrow="Mapa das IAs"
-          title="Pontos fortes de cada uma"
-          description="Existe mais de uma IA disponível hoje e cada uma tem seus pontos fortes. O segredo não é escolher a melhor, mas saber qual usar para cada situação."
+          eyebrow={copy.map.eyebrow}
+          title={copy.map.title}
+          description={copy.map.description}
         />
 
         <div className="mt-6 rounded-[28px] border border-[#eadfce] bg-white/90 p-5 shadow-sm">
           <p className="text-sm leading-7 text-[#4b5563]">
-            Aqui está o mapa completo com as IAs mais usadas e quando cada uma brilha. Os pontos fortes entram um por vez e, quando terminar, você avança manualmente para a próxima IA.
+            {copy.map.intro}
           </p>
         </div>
 
@@ -745,14 +1583,11 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-white/70 bg-white/75 px-4 py-3">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.28em] text-[#d35f12]">
-                    IA {activeMapToolIndex + 1} de {aiToolCards.length}
+                    {copy.map.aiCounter(activeMapToolIndex + 1, localizedAiToolCards.length)}
                   </p>
                   <p className="mt-2 text-sm text-[#4b5563]">
-                    Veja esta ferramenta e, quando terminar, avance para a próxima.
+                    {copy.map.aiHint}
                   </p>
-                </div>
-                <div className="min-w-[160px] rounded-full bg-white/90 px-4 py-3 text-center text-sm font-semibold text-[#1f2434] shadow-sm">
-                  {visibleMapBulletCount}/{currentMapTool.bullets.length} pontos visíveis
                 </div>
               </div>
 
@@ -805,15 +1640,13 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
                         className="h-12 rounded-2xl bg-[#1f2434] px-6 text-base font-semibold text-white hover:bg-[#111726]"
                       >
                         {isLastMapTool && !nextMapTool
-                          ? "Continuar para a personalização"
-                          : `Continuar para ${nextMapTool?.name ?? "a próxima IA"}`}
+                          ? copy.map.continueToExercises
+                          : copy.map.continueToNext(nextMapTool?.name ?? "")}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </motion.div>
                   ) : (
-                    <div className="rounded-2xl border border-white/80 bg-white/70 px-4 py-3 text-sm text-[#4b5563]">
-                      Os pontos desta IA estão entrando na tela. Assim que todos aparecerem, o botão para a próxima ferramenta é liberado.
-                    </div>
+                    null
                   )}
                 </div>
               </div>
@@ -829,10 +1662,10 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
         >
           <div className="flex items-center gap-3">
             <Star className="h-5 w-5 text-[#a76b00]" />
-            <p className="text-xs font-black uppercase tracking-[0.32em] text-[#b57a05]">Dica de ouro</p>
+            <p className="text-xs font-black uppercase tracking-[0.32em] text-[#b57a05]">{copy.map.goldTipBadge}</p>
           </div>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#55411f]">
-            Você não precisa pagar todas. Comece com uma gratuita, como ChatGPT, Gemini ou DeepSeek, aprenda a usar bem e depois explore as outras conforme precisar. Durante o desafio, vamos indicar a melhor ferramenta para cada tipo de tarefa.
+            {copy.map.goldTipText}
           </p>
         </motion.div>
       </SectionWrapper>
@@ -843,9 +1676,9 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
     return (
       <SectionWrapper>
         <SectionIntro
-          eyebrow="Personalização"
-          title="Deixe a IA com a sua cara: personalização na prática"
-          description="Essa é a parte que quase ninguém faz e que muda completamente a experiência. As principais IAs permitem que você configure instruções permanentes sobre quem você é, como trabalha e o que espera das respostas."
+          eyebrow={copy.personalize.eyebrow}
+          title={copy.personalize.title}
+          description={copy.personalize.description}
         />
 
         <motion.div
@@ -855,7 +1688,7 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
           className="mt-6 space-y-5 text-[1.02rem] leading-8 text-[#374151]"
         >
           <motion.p variants={fadeUp}>
-            É como contratar um assistente e, no primeiro dia, sentar com ele e explicar: eu trabalho com tal coisa, gosto que me respondam assim, e preciso desses tipos de resultado. Depois disso, toda resposta já vem calibrada pra você.
+            {copy.personalize.lead}
           </motion.p>
 
           <motion.div
@@ -867,32 +1700,28 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#ffd9bf] bg-white/80 px-4 py-2 text-[11px] font-black uppercase tracking-[0.28em] text-[#c45f17] shadow-sm">
                   <WandSparkles className="h-4 w-4" />
-                  Resposta calibrada
+                  {copy.personalize.responseBadge}
                 </div>
                 <h4 className="font-serif text-[1.8rem] leading-tight text-[#1f2434]">
-                  Quando você personaliza, a IA já começa entendendo quem você é.
+                  {copy.personalize.responseTitle}
                 </h4>
                 <p className="max-w-lg text-sm leading-7 text-[#4b5563]">
-                  Em vez de responder do zero toda vez, ela passa a considerar o seu contexto, o seu jeito de trabalhar e o formato que você prefere receber.
+                  {copy.personalize.responseDescription}
                 </p>
               </div>
 
               <div className="relative min-h-[240px]">
-                {[
-                  { label: "Quem sou eu", top: "top-0", delay: 0 },
-                  { label: "Como trabalho", top: "top-[72px]", delay: 0.15 },
-                  { label: "Como responder", top: "top-[144px]", delay: 0.3 },
-                ].map((item, index) => (
+                {copy.personalize.responseInputCards.map((label: string, index: number) => (
                   <motion.div
-                    key={item.label}
+                    key={label}
                     className={cn(
                       "absolute left-0 w-[210px] rounded-[22px] border border-[#ffd9bf] bg-white/92 px-4 py-3 shadow-sm",
-                      item.top
+                      ["top-0", "top-[72px]", "top-[144px]"][index]
                     )}
                     animate={{ x: [0, 10, 0], y: [0, index % 2 === 0 ? -6 : 8, 0] }}
-                    transition={{ duration: 4 + index * 0.4, repeat: Infinity, ease: "easeInOut", delay: item.delay }}
+                    transition={{ duration: 4 + index * 0.4, repeat: Infinity, ease: "easeInOut", delay: index * 0.15 }}
                   >
-                    <p className="text-sm font-semibold text-[#2f3445]">{item.label}</p>
+                    <p className="text-sm font-semibold text-[#2f3445]">{label}</p>
                   </motion.div>
                 ))}
 
@@ -920,12 +1749,12 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
                       <Sparkles className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[#16803c]">Saída final</p>
-                      <p className="text-sm font-semibold text-[#1f2434]">Resposta mais útil</p>
+                      <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[#16803c]">{copy.personalize.responseOutputBadge}</p>
+                      <p className="text-sm font-semibold text-[#1f2434]">{copy.personalize.responseOutputTitle}</p>
                     </div>
                   </div>
                   <div className="mt-4 space-y-2">
-                    {["Direta", "Com exemplos", "Sem enrolação"].map((item) => (
+                    {copy.personalize.responseOutputItems.map((item: string) => (
                       <div key={item} className="rounded-2xl border border-[#e6f5ea] bg-[#f7fff9] px-3 py-2 text-sm font-medium text-[#33523c]">
                         {item}
                       </div>
@@ -935,216 +1764,777 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               </div>
             </div>
             <p className="relative mt-6 max-w-xl text-sm leading-7 text-[#4b5563]">
-              Personalizar a IA leva 3 minutos e economiza horas. Toda resposta que ela der a partir de agora vai ser mais útil, mais rápida e mais alinhada com o que você realmente precisa.
+              {copy.personalize.responseFooter}
             </p>
           </motion.div>
         </motion.div>
 
         <div className="mt-10">
-          <h3 className="text-[1.7rem] font-black leading-tight text-[#ff6a00]">Como personalizar no ChatGPT</h3>
+          <h3 className="text-[1.7rem] font-black leading-tight text-[#ff6a00]">
+            {journeyUi.chatgptTitle}
+          </h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            Acesse Configurações e depois Personalização. Você vai preencher caixas para definir estilo, contexto e o formato ideal das respostas.
+            {journeyUi.chatgptDescription}
           </p>
 
-          <div className="mt-5 overflow-hidden rounded-[30px] border border-[#d7dde6] bg-[#f7f9fc] shadow-sm">
-            <div className="grid md:grid-cols-[220px_1fr]">
-              <div className="border-b border-[#d7dde6] bg-[#111827] p-4 text-white md:border-b-0 md:border-r">
-                <div className="flex items-center gap-3 rounded-2xl bg-white/10 px-3 py-3">
-                  <img src={chatgptLogo} alt="ChatGPT" className="h-8 w-8 rounded-full bg-white object-contain p-1" />
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-emerald-200">ChatGPT</p>
-                    <p className="text-sm text-slate-200">Tela inicial simulada</p>
-                  </div>
-                </div>
-
-                <div className="mt-4 space-y-2">
-                  {[
-                    { id: "estilo", label: "Personalização" },
-                    { id: "memoria", label: "Memória" },
-                    { id: "caracteristicas", label: "Características" },
-                    { id: "respostas", label: "Como quer as respostas" },
-                  ].map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => setChatGptPanel(item.id as keyof typeof chatGptPanels)}
-                      className={cn(
-                        "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm transition-all",
-                        chatGptPanel === item.id
-                          ? "bg-emerald-500 text-white shadow-sm"
-                          : "bg-white/5 text-slate-200 hover:bg-white/10"
-                      )}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight className="h-4 w-4" />
-                    </button>
-                  ))}
+          <div className="mt-5 overflow-hidden rounded-[32px] border border-[#2b2b2b] bg-[#212121] shadow-[0_28px_80px_rgba(15,15,15,0.34)]">
+            <div className="border-b border-white/8 bg-[#181818] px-5 py-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
+                <span className="inline-flex w-fit rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-amber-200">
+                  {simulatedUi.chatgpt.simulationBadge}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-white">{simulatedUi.chatgpt.simulationTitle}</p>
+                  <p className="mt-1 text-xs leading-6 text-[#a9abb3]">
+                    {simulatedUi.chatgpt.simulationDescription}
+                  </p>
                 </div>
               </div>
-
-              <div className="space-y-4 p-5">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.3em] text-[#0f766e]">Configurações</p>
-                    <h4 className="mt-2 font-serif text-[1.6rem] text-[#1f2937]">
-                      {chatGptPanels[chatGptPanel].title}
-                    </h4>
+            </div>
+            <div className="grid min-h-[680px] md:grid-cols-[208px_1fr]">
+              <div className="flex flex-col border-b border-white/10 bg-[#171717] p-4 text-white md:border-b-0 md:border-r">
+                <div className="flex items-center justify-between">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5">
+                    <img src={chatgptLogo} alt="ChatGPT" className="h-5 w-5 object-contain" />
                   </div>
                   <button
                     type="button"
-                    onClick={() =>
-                      setChatGptPanel((current) => (current === "memoria" ? "estilo" : "memoria"))
-                    }
-                    className="inline-flex items-center gap-2 rounded-full border border-[#d7dde6] bg-white px-4 py-2 text-sm font-medium text-[#334155]"
+                    onClick={() => setChatGptScreen("home")}
+                    className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-[#bcc1ca] transition hover:bg-white/10"
                   >
-                    <Settings2 className="h-4 w-4" />
-                    Clicar em Configurações
+                    {simulatedUi.chatgpt.homeScreen}
                   </button>
                 </div>
 
-                <div className="rounded-[24px] border border-[#d7dde6] bg-white p-5 shadow-sm">
-                  <p className="text-sm leading-7 text-[#475569]">{chatGptPanels[chatGptPanel].description}</p>
+                <div className="mt-5 space-y-1.5">
+                  {simulatedUi.chatgpt.sidebarItems.map((label, index) => {
+                    const item = [
+                      { icon: Plus },
+                      { icon: Search },
+                      { icon: Images },
+                      { icon: LayoutDashboard },
+                      { icon: Compass },
+                      { icon: Heart },
+                    ][index];
+                    const Icon = item.icon;
 
-                  <div className="mt-5 grid gap-3 md:grid-cols-3">
-                    {["Estilo e tom", "Características", "Formato ideal"].map((label, index) => (
+                    return (
                       <button
                         key={label}
                         type="button"
-                        onClick={() =>
-                          setChatGptPanel(
-                            (["estilo", "caracteristicas", "respostas"][index] ??
-                              "estilo") as keyof typeof chatGptPanels
-                          )
-                        }
-                        className="rounded-[20px] border border-[#d7dde6] bg-[#f8fafc] p-4 text-left transition-all hover:border-emerald-300 hover:bg-emerald-50"
+                        onClick={() => setChatGptScreen("home")}
+                        className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-[#edf0f5] transition hover:bg-white/8"
                       >
-                        <p className="text-sm font-bold text-[#1f2937]">{label}</p>
-                        <p className="mt-2 text-xs leading-6 text-[#64748b]">
-                          Clique para simular uma navegação dentro da personalização do ChatGPT.
-                        </p>
+                        <Icon className="h-4 w-4 text-[#cfd4dc]" />
+                        <span>{label}</span>
                       </button>
-                    ))}
+                    );
+                  })}
+                </div>
+
+                <div className="mt-auto space-y-2">
+                  <button
+                    type="button"
+                    onClick={() => setChatGptScreen("home")}
+                  className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-[#c8cdd5] transition hover:bg-white/8"
+                >
+                  <Star className="h-4 w-4" />
+                  <span>{simulatedUi.chatgpt.plans}</span>
+                </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleOpenChatGptSettings()}
+                    className={cn(
+                      "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition",
+                      chatGptScreen === "settings"
+                        ? "bg-white/12 text-[#ffffff]"
+                        : "text-[#d7dbe2] hover:bg-white/8"
+                    )}
+                  >
+                    <Settings2 className="h-4 w-4" />
+                    <span>{simulatedUi.chatgpt.settings}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setChatGptScreen("home")}
+                    className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-[#c8cdd5] transition hover:bg-white/8"
+                >
+                  <CircleHelp className="h-4 w-4" />
+                  <span>{simulatedUi.chatgpt.help}</span>
+                </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleOpenChatGptSettings("caracteristicas")}
+                    className="w-full rounded-[22px] border border-white/10 bg-[#1f1f1f] px-4 py-4 text-left shadow-inner"
+                  >
+                    <p className="text-sm font-semibold text-white">{simulatedUi.chatgpt.personalizedAnswersTitle}</p>
+                    <p className="mt-2 text-xs leading-6 text-[#a9abb3]">
+                      {simulatedUi.chatgpt.personalizedAnswersDescription}
+                    </p>
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative flex min-h-[680px] flex-col overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/8 px-6 py-4 text-white">
+                  <button
+                    type="button"
+                    onClick={() => setChatGptScreen("home")}
+                    className="text-sm font-semibold text-[#f3f5f8] transition hover:text-white"
+                  >
+                    ChatGPT
+                  </button>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      className="rounded-full border border-white/10 bg-white px-4 py-2 text-sm font-semibold text-[#1f1f1f]"
+                    >
+                      {simulatedUi.chatgpt.signIn}
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-full border border-white/12 bg-transparent px-4 py-2 text-sm font-semibold text-white"
+                    >
+                      {simulatedUi.chatgpt.signUp}
+                    </button>
                   </div>
                 </div>
 
-                <p className="rounded-[22px] border border-[#d6f3ec] bg-[#effcf8] p-4 text-sm leading-7 text-[#116149]">
-                  Memória: o ChatGPT também pode lembrar preferências ao longo das conversas. Você pode revisar esse histórico e limpar o que quiser.
-                </p>
+                <div className="flex flex-1 flex-col items-center justify-center px-6 pb-20 pt-10 text-white">
+                  <div className="w-full max-w-[760px] text-center">
+                    <h4 className="text-[2rem] font-medium tracking-[-0.03em] text-white sm:text-[2.35rem]">
+                      {simulatedUi.chatgpt.homeTitle}
+                    </h4>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenChatGptSettings()}
+                      className="mx-auto mt-8 flex w-full max-w-[620px] items-center justify-between rounded-[28px] border border-white/8 bg-[#303030] px-4 py-4 text-left shadow-[0_18px_42px_rgba(0,0,0,0.18)] transition hover:bg-[#343434]"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/7 text-[#e3e6eb]">
+                          <Plus className="h-4 w-4" />
+                        </span>
+                        <span className="text-sm text-[#b5b7be]">{simulatedUi.chatgpt.askAnything}</span>
+                      </div>
+
+                      <span className="rounded-full bg-white/8 px-4 py-2 text-sm font-semibold text-[#f0f2f6]">
+                        {simulatedUi.chatgpt.voice}
+                      </span>
+                    </button>
+
+                    <p className="mt-5 text-sm leading-7 text-[#a8abb2]">
+                      {simulatedUi.chatgpt.settingsHint}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="border-t border-white/8 px-6 py-3 text-center text-[11px] leading-6 text-[#9da0a8]">
+                  {simulatedUi.chatgpt.footerTerms}
+                </div>
+
+                <AnimatePresence>
+                  {chatGptScreen === "settings" ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 z-10 bg-black/62 backdrop-blur-[2px]"
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                        <motion.div
+                          initial={{ opacity: 0, y: 22, scale: 0.985 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 18, scale: 0.985 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="flex h-[min(620px,100%)] w-full max-w-[860px] overflow-hidden rounded-[24px] border border-white/8 bg-[#212121] shadow-[0_36px_90px_rgba(0,0,0,0.46)]"
+                        >
+                          <div className="w-[178px] shrink-0 border-r border-white/6 bg-[#1f1f1f] p-4">
+                            <button
+                              type="button"
+                              onClick={() => setChatGptScreen("home")}
+                              className="flex h-9 w-9 items-center justify-center rounded-full text-[#e6e9ee] transition hover:bg-white/8"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
+
+                            <div className="mt-5 space-y-1.5">
+                              {chatGptSettingsMenu.map((item, index) => {
+                                const Icon = item.icon;
+                                const isActive = item.id === "personalizacao";
+
+                                return (
+                                  <button
+                                    key={item.id}
+                                    type="button"
+                                    onClick={() => {
+                                      if (item.id === "personalizacao") {
+                                        setChatGptPanel("estilo");
+                                      }
+                                    }}
+                                    className={cn(
+                                      "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition",
+                                      isActive
+                                        ? "bg-white/10 text-[#ffffff]"
+                                        : "text-[#d8dce3] hover:bg-white/6"
+                                    )}
+                                  >
+                                    <Icon className="h-4 w-4" />
+                                    <span>{simulatedUi.chatgpt.settingsMenu[index] ?? item.label}</span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-6">
+                            <div className="mx-auto max-w-[560px]">
+                              <h4 className="text-[1.85rem] font-medium tracking-[-0.03em] text-white">
+                                {simulatedUi.chatgpt.settingsTitle}
+                              </h4>
+                              <div className="mt-4 border-t border-white/10" />
+
+                              <div
+                                className={cn(
+                                  "mt-6 rounded-[20px] border p-4 transition",
+                                  chatGptPanel === "estilo"
+                                    ? "border-white/16 bg-white/[0.04]"
+                                    : "border-transparent bg-transparent"
+                                )}
+                              >
+                                <button
+                                  type="button"
+                                  onClick={() => setChatGptPanel("estilo")}
+                                  className="flex w-full items-center justify-between gap-4 text-left"
+                                >
+                                  <div>
+                                    <p className="text-[1.05rem] font-semibold text-white">
+                                      {localizedChatGptPanels.estilo.title}
+                                    </p>
+                                    <p className="mt-2 text-sm leading-7 text-[#a9adb5]">
+                                      {localizedChatGptPanels.estilo.description}
+                                    </p>
+                                  </div>
+
+                                  <div className="flex items-center gap-2 text-sm font-medium text-[#f1f3f6]">
+                                    <span>{simulatedUi.chatgpt.preset}</span>
+                                    <ChevronDown className="h-4 w-4" />
+                                  </div>
+                                </button>
+                              </div>
+
+                              <div
+                                className={cn(
+                                  "mt-6 rounded-[20px] border p-4 transition",
+                                  chatGptPanel === "caracteristicas"
+                                    ? "border-white/16 bg-white/[0.04]"
+                                    : "border-transparent bg-transparent"
+                                )}
+                              >
+                                <button
+                                  type="button"
+                                  onClick={() => setChatGptPanel("caracteristicas")}
+                                  className="w-full text-left"
+                                >
+                                  <p className="text-[1.05rem] font-semibold text-white">
+                                    {localizedChatGptPanels.caracteristicas.title}
+                                  </p>
+                                  <p className="mt-1 text-sm leading-7 text-[#a9adb5]">
+                                    {localizedChatGptPanels.caracteristicas.description}
+                                  </p>
+                                </button>
+
+                                <div className="mt-5 space-y-1.5">
+                                  {simulatedUi.chatgpt.traits.map((item) => (
+                                    <button
+                                      key={item}
+                                      type="button"
+                                      onClick={() => setChatGptPanel("caracteristicas")}
+                                      className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left transition hover:bg-white/5"
+                                    >
+                                      <span className="text-[1.02rem] text-white">{item}</span>
+                                      <span className="flex items-center gap-2 text-sm text-[#eff2f6]">
+                                        {simulatedUi.chatgpt.preset}
+                                        <ChevronDown className="h-4 w-4" />
+                                      </span>
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div
+                                className={cn(
+                                  "mt-4 rounded-[20px] border p-4 transition",
+                                  chatGptPanel === "respostas"
+                                    ? "border-white/16 bg-white/[0.04]"
+                                    : "border-transparent bg-transparent"
+                                )}
+                              >
+                                <button
+                                  type="button"
+                                  onClick={() => setChatGptPanel("respostas")}
+                                  className="w-full text-left"
+                                >
+                                  <p className="text-[1.02rem] font-semibold text-white">{simulatedUi.chatgpt.customInstructionsLabel}</p>
+                                  <p className="mt-2 text-sm leading-7 text-[#a9adb5]">
+                                    {localizedChatGptPanels.respostas.description}
+                                  </p>
+                                </button>
+
+                                <textarea
+                                  readOnly
+                                  onFocus={() => setChatGptPanel("respostas")}
+                                  className="mt-3 min-h-[78px] w-full resize-none rounded-[12px] border border-white/12 bg-[#303030] px-4 py-3 text-sm text-[#d8dbe2] outline-none"
+                                  value={simulatedUi.chatgpt.customInstructionsValue}
+                                />
+                              </div>
+
+                              <div
+                                className={cn(
+                                  "mt-8 rounded-[20px] border p-4 transition",
+                                  chatGptPanel === "caracteristicas"
+                                    ? "border-white/16 bg-white/[0.04]"
+                                    : "border-transparent bg-transparent"
+                                )}
+                              >
+                                <div className="flex items-center justify-between gap-3">
+                                  <h5 className="text-[1.15rem] font-medium text-white">{simulatedUi.chatgpt.aboutYouTitle}</h5>
+                                  <button
+                                    type="button"
+                                    onClick={() => setChatGptPanel("caracteristicas")}
+                                    className="rounded-full border border-white/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#c9ced6] transition hover:bg-white/6"
+                                  >
+                                    {simulatedUi.chatgpt.edit}
+                                  </button>
+                                </div>
+                                <div className="mt-4 border-t border-white/10" />
+
+                                <div className="mt-4 space-y-5">
+                                  <div>
+                                    <p className="text-sm font-medium text-white">{simulatedUi.chatgpt.nicknameLabel}</p>
+                                    <Input
+                                      readOnly
+                                      onFocus={() => setChatGptPanel("caracteristicas")}
+                                      value={simulatedUi.chatgpt.nicknameValue}
+                                      className="mt-2 h-11 rounded-[10px] border-white/12 bg-[#303030] text-[#d8dbe2]"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <p className="text-sm font-medium text-white">{simulatedUi.chatgpt.professionLabel}</p>
+                                    <Input
+                                      readOnly
+                                      onFocus={() => setChatGptPanel("caracteristicas")}
+                                      value={simulatedUi.chatgpt.professionValue}
+                                      className="mt-2 h-11 rounded-[10px] border-white/12 bg-[#303030] text-[#d8dbe2]"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <p className="text-sm font-medium text-white">{simulatedUi.chatgpt.moreAboutYouLabel}</p>
+                                    <Input
+                                      readOnly
+                                      onFocus={() => setChatGptPanel("caracteristicas")}
+                                      value={simulatedUi.chatgpt.moreAboutYouValue}
+                                      className="mt-2 h-11 rounded-[10px] border-white/12 bg-[#303030] text-[#d8dbe2]"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                className={cn(
+                                  "mt-6 rounded-[20px] border p-4 transition",
+                                  chatGptPanel === "memoria"
+                                    ? "border-white/16 bg-white/[0.04]"
+                                    : "border-transparent bg-transparent"
+                                )}
+                              >
+                                <div className="flex items-center justify-between gap-3">
+                                  <div className="flex items-center gap-2">
+                                    <h5 className="text-[1.15rem] font-medium text-white">
+                                      {localizedChatGptPanels.memoria.title}
+                                    </h5>
+                                    <CircleHelp className="h-4 w-4 text-[#949aa5]" />
+                                  </div>
+
+                                  <button
+                                    type="button"
+                                    onClick={() => setChatGptPanel("memoria")}
+                                    className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm font-medium text-[#f0f2f6] transition hover:bg-white/10"
+                                  >
+                                    {simulatedUi.chatgpt.manage}
+                                  </button>
+                                </div>
+                                <div className="mt-4 border-t border-white/10" />
+
+                                <div className="mt-4 space-y-1">
+                                  {simulatedUi.chatgpt.memoryItems.map((item) => (
+                                    <button
+                                      key={item.title}
+                                      type="button"
+                                      onClick={() => setChatGptPanel("memoria")}
+                                      className="flex w-full items-start justify-between gap-4 rounded-xl px-1 py-3 text-left transition hover:bg-white/4"
+                                    >
+                                      <div>
+                                        <p className="text-[1.02rem] font-medium text-white">{item.title}</p>
+                                        <p className="mt-1 text-sm leading-7 text-[#a9adb5]">{item.description}</p>
+                                      </div>
+                                      <span className="mt-1 inline-flex h-7 w-12 shrink-0 items-center rounded-full bg-[#0a84ff] px-1">
+                                        <span className="ml-auto h-5 w-5 rounded-full bg-white" />
+                                      </span>
+                                    </button>
+                                  ))}
+                                </div>
+
+                                <div className="mt-3 border-t border-white/10 pt-4 text-sm leading-7 text-[#a9adb5]">
+                                  {localizedChatGptPanels.memoria.description}
+                                </div>
+                              </div>
+
+                              <div className="mt-6 rounded-[18px] border border-[#244438] bg-[#173226] px-4 py-3 text-sm leading-7 text-[#cbefdd]">
+                                {simulatedUi.chatgpt.tip}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-10">
-          <h3 className="text-[1.7rem] font-black leading-tight text-[#d97706]">Como personalizar no Claude</h3>
+          <h3 className="text-[1.7rem] font-black leading-tight text-[#d97706]">
+            {journeyUi.claudeTitle}
+          </h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            Acesse o ícone do seu perfil, depois Configurações e depois Perfil. Preencha o campo de preferências com informações sobre você e como quer as respostas.
+            {journeyUi.claudeDescription}
           </p>
 
-          <div className="mt-5 overflow-hidden rounded-[30px] border border-[#e6d8c3] bg-[#fbf7f0] shadow-sm">
-            <div className="grid md:grid-cols-[220px_1fr]">
-              <div className="border-b border-[#e6d8c3] bg-[#f3ece1] p-4 md:border-b-0 md:border-r">
-                <div className="flex items-center gap-3 rounded-2xl bg-white px-3 py-3 shadow-sm">
-                  <img src={claudeLogo} alt="Claude" className="h-8 w-8 rounded-full bg-white object-contain p-1" />
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-[#b45309]">Claude</p>
-                    <p className="text-sm text-[#6b4d1f]">Tela inicial simulada</p>
-                  </div>
+          <div className="mt-5 overflow-hidden rounded-[32px] border border-[#433d35] bg-[#262522] shadow-[0_28px_80px_rgba(26,22,18,0.34)]">
+            <div className="border-b border-[#3f3932] bg-[#211f1c] px-5 py-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
+                <span className="inline-flex w-fit rounded-full border border-[#c28b5a]/20 bg-[#c28b5a]/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-[#efc9a2]">
+                  {simulatedUi.claude.simulationBadge}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#f5eadb]">{simulatedUi.claude.simulationTitle}</p>
+                  <p className="mt-1 text-xs leading-6 text-[#c7b8a8]">
+                    {simulatedUi.claude.simulationDescription}
+                  </p>
                 </div>
-
-                <div className="mt-4 space-y-2">
-                  {[
-                    { id: "perfil", label: "Preferências de perfil" },
-                    { id: "projetos", label: "Projetos" },
-                    { id: "estilos", label: "Estilos de resposta" },
-                  ].map((item) => (
+              </div>
+            </div>
+            <div className="grid min-h-[720px] md:grid-cols-[36px_1fr]">
+              <div className="border-r border-[#3a352f] bg-[#23211f]">
+                <div className="flex h-full flex-col items-center justify-between py-4">
+                  <div className="space-y-4">
                     <button
-                      key={item.id}
                       type="button"
-                      onClick={() => setClaudePanel(item.id as keyof typeof claudePanels)}
-                      className={cn(
-                        "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm transition-all",
-                        claudePanel === item.id
-                          ? "bg-[#dd7a00] text-white shadow-sm"
-                          : "bg-white/70 text-[#6b4d1f] hover:bg-white"
-                      )}
+                      onClick={() => setClaudeScreen("home")}
+                      className="flex h-7 w-7 items-center justify-center rounded-md border border-[#4b433a] text-[#d9d1c4] transition hover:bg-white/5"
                     >
-                      <span>{item.label}</span>
-                      <ChevronRight className="h-4 w-4" />
+                      <div className="grid gap-0.5">
+                        <span className="h-0.5 w-3 rounded-full bg-current" />
+                        <span className="h-0.5 w-3 rounded-full bg-current" />
+                      </div>
                     </button>
-                  ))}
+
+                    {simulatedUi.claude.sideActions.map((label, index) => {
+                      const item = [
+                        { icon: Plus },
+                        { icon: Search },
+                        { icon: FileText },
+                        { icon: Brain },
+                        { icon: LayoutDashboard },
+                        { icon: Bot },
+                      ][index];
+                      const Icon = item.icon;
+
+                      return (
+                        <button
+                          key={label}
+                          type="button"
+                          onClick={() => setClaudeScreen("home")}
+                          className="flex h-7 w-7 items-center justify-center rounded-md text-[#c8bdaa] transition hover:bg-white/5 hover:text-[#efe3d0]"
+                        >
+                          <Icon className="h-4 w-4" />
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      onClick={() => setClaudeScreen("home")}
+                      className="flex h-7 w-7 items-center justify-center rounded-md text-[#c8bdaa] transition hover:bg-white/5 hover:text-[#efe3d0]"
+                    >
+                      <Map className="h-4 w-4" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenClaudeProfile()}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#5b544b] bg-[#d9d5d1] text-sm font-black text-[#4a4136] shadow-sm transition hover:scale-[1.03]"
+                    >
+                      {claudeProfileInitials}
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4 p-5">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.3em] text-[#b45309]">Perfil</p>
-                    <h4 className="mt-2 font-serif text-[1.6rem] text-[#2c2518]">
-                      {claudePanels[claudePanel].title}
-                    </h4>
+              <div className="relative flex min-h-[720px] flex-col overflow-hidden bg-[#262522]">
+                <button
+                  type="button"
+                  onClick={() => handleOpenClaudeProfile()}
+                  className="absolute right-4 top-4 z-[1] flex h-8 min-w-[2rem] items-center justify-center rounded-full border border-[#4f4941] bg-[#2e2c29] px-2 text-[11px] font-black text-[#e9dfd3] transition hover:bg-[#35332f]"
+                >
+                  {claudeProfileInitials}
+                </button>
+
+                <div className="flex flex-1 flex-col items-center justify-center px-6 pb-20 pt-12">
+                  <div className="w-full max-w-[780px] text-center">
+                    <div className="inline-flex items-center gap-2 rounded-lg border border-[#4c433a] bg-[#1f1d1b] px-3 py-1.5 text-sm text-[#d0c4b6]">
+                      <span>{simulatedUi.claude.freePlan}</span>
+                      <span className="text-[#8e7b65]">•</span>
+                      <span className="text-[#d9ae7b]">{simulatedUi.claude.upgrade}</span>
+                    </div>
+
+                    <div className="mt-8 flex items-center justify-center gap-3 text-[#e7d8c8]">
+                      <Sparkles className="h-7 w-7 text-[#dd8458]" />
+                      <h4 className="font-serif text-[2.5rem] leading-tight tracking-[-0.03em]">
+                        {claudeGreetingTitle}
+                      </h4>
+                    </div>
+
+                    <div className="mx-auto mt-8 max-w-[560px] rounded-[24px] border border-[#474139] bg-[#302e2a] p-4 shadow-[0_18px_42px_rgba(0,0,0,0.16)]">
+                      <div className="min-h-[34px] text-left text-[1.02rem] text-[#bdb3a7]">
+                        {simulatedUi.claude.promptPlaceholder}
+                      </div>
+
+                      <div className="mt-5 flex items-center justify-between text-sm text-[#d8cfc4]">
+                        <button
+                          type="button"
+                          onClick={() => setClaudeScreen("home")}
+                          className="flex h-8 w-8 items-center justify-center rounded-full text-[#cbbda9] transition hover:bg-white/5"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </button>
+
+                        <div className="flex items-center gap-4">
+                          <span>Sonnet 4.6</span>
+                          <span className="tracking-[0.35em] text-[#a79b8d]">|||</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                      {simulatedUi.claude.shortcuts.map((item) => (
+                        <button
+                          key={item}
+                          type="button"
+                          onClick={() => handleOpenClaudeProfile(item === simulatedUi.claude.shortcuts[2] ? "estilos" : "perfil")}
+                          className="rounded-full border border-[#4c463e] bg-[#24221f] px-4 py-2 text-sm text-[#ddd2c6] transition hover:bg-[#2c2925]"
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+
+                    <p className="mx-auto mt-5 max-w-[620px] rounded-full border border-[#4c463e] bg-[#24221f] px-4 py-3 text-sm leading-7 text-[#d0c7bb]">
+                      {simulatedUi.claude.profileHint}
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setClaudePanel((current) => (current === "perfil" ? "projetos" : "perfil"))
-                    }
-                    className="inline-flex items-center gap-2 rounded-full border border-[#e6d8c3] bg-white px-4 py-2 text-sm font-medium text-[#5b4632]"
-                  >
-                    <WandSparkles className="h-4 w-4" />
-                    Clicar no perfil
-                  </button>
                 </div>
 
-                <div className="rounded-[24px] border border-[#e6d8c3] bg-white p-5 shadow-sm">
-                  <p className="text-sm leading-7 text-[#5b4632]">{claudePanels[claudePanel].description}</p>
+                <AnimatePresence>
+                  {claudeScreen === "profile" ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 z-10 bg-black/62 backdrop-blur-[2px]"
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+                        <motion.div
+                          initial={{ opacity: 0, y: 18, scale: 0.985 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 18, scale: 0.985 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="flex h-[min(620px,100%)] w-full max-w-[860px] overflow-hidden rounded-[24px] border border-[#4c443c] bg-[#262522] shadow-[0_36px_90px_rgba(0,0,0,0.46)]"
+                        >
+                          <div className="w-[220px] shrink-0 border-r border-[#3b362f] bg-[#23211f] p-4">
+                            <button
+                              type="button"
+                              onClick={() => setClaudeScreen("home")}
+                              className="flex h-9 w-9 items-center justify-center rounded-full text-[#e6dbcf] transition hover:bg-white/6"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
 
-                  <div className="mt-5 grid gap-3 md:grid-cols-3">
-                    {[
-                      { label: "Perfil", id: "perfil" },
-                      { label: "Projetos", id: "projetos" },
-                      { label: "Estilos", id: "estilos" },
-                    ].map((tab) => (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setClaudePanel(tab.id as keyof typeof claudePanels)}
-                        className={cn(
-                          "rounded-[20px] border p-4 text-left transition-all",
-                          claudePanel === tab.id
-                            ? "border-[#dd7a00] bg-[#fff4e8]"
-                            : "border-[#ece2d3] bg-[#faf7f2] hover:border-[#f1c38a]"
-                        )}
-                      >
-                        <p className="text-sm font-bold text-[#2c2518]">{tab.label}</p>
-                        <p className="mt-2 text-xs leading-6 text-[#7c6752]">
-                          Clique para alternar entre as áreas principais do Claude.
-                        </p>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                            <div className="mt-5 rounded-[18px] border border-[#4b443b] bg-[#2b2824] px-4 py-3">
+                              <p className="text-xs font-black uppercase tracking-[0.28em] text-[#b89d80]">Claude</p>
+                              <p className="mt-2 text-sm leading-6 text-[#eadfce]">
+                                {simulatedUi.claude.settingsOpenedFromProfile}
+                              </p>
+                            </div>
+
+                            <div className="mt-5 space-y-2">
+                              {[
+                                { id: "perfil", label: simulatedUi.claude.profileMenu[0] },
+                                { id: "projetos", label: simulatedUi.claude.profileMenu[1] },
+                                { id: "estilos", label: simulatedUi.claude.profileMenu[2] },
+                              ].map((item) => (
+                                <button
+                                  key={item.id}
+                                  type="button"
+                                  onClick={() => setClaudePanel(item.id as keyof typeof claudePanels)}
+                                  className={cn(
+                                    "flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm transition-all",
+                                    claudePanel === item.id
+                                      ? "bg-[#3a3530] text-[#fff5ea]"
+                                      : "text-[#d7cbbd] hover:bg-white/6"
+                                  )}
+                                >
+                                  <span>{item.label}</span>
+                                  <ChevronRight className="h-4 w-4" />
+                                </button>
+                              ))}
+                            </div>
+
+                            <div className="mt-6 rounded-[18px] border border-[#4b443b] bg-[#2b2824] p-4 text-sm leading-7 text-[#cdbfad]">
+                              {simulatedUi.claude.flowLabel(localizedClaudePanels[claudePanel].title)}
+                            </div>
+                          </div>
+
+                          <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-6">
+                            <div className="mx-auto max-w-[560px]">
+                              <p className="text-xs font-black uppercase tracking-[0.28em] text-[#b89d80]">
+                                {simulatedUi.claude.profileEyebrow}
+                              </p>
+                              <h4 className="mt-3 font-serif text-[2rem] leading-tight text-[#f5eadb]">
+                                {localizedClaudePanels[claudePanel].title}
+                              </h4>
+                              <p className="mt-3 text-sm leading-7 text-[#cabfaf]">
+                                {localizedClaudePanels[claudePanel].description}
+                              </p>
+                              <div className="mt-4 border-t border-[#3d3832]" />
+
+                              {claudePanel === "perfil" ? (
+                                <div className="mt-6 space-y-5">
+                                  <div>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.whoAreYouLabel}</p>
+                                    <Input
+                                      readOnly
+                                      value={simulatedUi.claude.profileFields.whoAreYouValue}
+                                      className="mt-2 h-11 rounded-[10px] border-[#4e473f] bg-[#302d29] text-[#eadfce]"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.preferredLanguageLabel}</p>
+                                    <Input
+                                      readOnly
+                                      value={simulatedUi.claude.profileFields.preferredLanguageValue}
+                                      className="mt-2 h-11 rounded-[10px] border-[#4e473f] bg-[#302d29] text-[#eadfce]"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.responseLabel}</p>
+                                    <textarea
+                                      readOnly
+                                      className="mt-2 min-h-[132px] w-full resize-none rounded-[16px] border border-[#4e473f] bg-[#302d29] px-4 py-3 text-sm leading-7 text-[#eadfce] outline-none"
+                                      value={simulatedUi.claude.profileFields.responseValue}
+                                    />
+                                  </div>
+
+                                  <div className="rounded-[18px] border border-[#51463b] bg-[#2d2925] p-4 text-sm leading-7 text-[#d7c9ba]">
+                                    {simulatedUi.claude.profileFields.profileTip}
+                                  </div>
+                                </div>
+                              ) : null}
+
+                              {claudePanel === "projetos" ? (
+                                <div className="mt-6 space-y-4">
+                                  {simulatedUi.claude.projectCards.map((item) => (
+                                    <button
+                                      key={item.title}
+                                      type="button"
+                                      className="w-full rounded-[20px] border border-[#4e473f] bg-[#2f2b27] p-4 text-left transition hover:bg-[#35312c]"
+                                    >
+                                      <p className="text-[1.02rem] font-semibold text-[#f5eadb]">{item.title}</p>
+                                      <p className="mt-2 text-sm leading-7 text-[#cbbfad]">{item.description}</p>
+                                    </button>
+                                  ))}
+
+                                  <div className="rounded-[18px] border border-[#51463b] bg-[#2d2925] p-4 text-sm leading-7 text-[#d7c9ba]">
+                                    {simulatedUi.claude.projectsTip}
+                                  </div>
+                                </div>
+                              ) : null}
+
+                              {claudePanel === "estilos" ? (
+                                <div className="mt-6 space-y-4">
+                                  {simulatedUi.claude.styleOptions.map((item) => (
+                                    <button
+                                      key={item}
+                                      type="button"
+                                      className="flex w-full items-center justify-between rounded-[20px] border border-[#4e473f] bg-[#2f2b27] px-4 py-4 text-left transition hover:bg-[#35312c]"
+                                    >
+                                      <span className="text-[1.02rem] font-semibold text-[#f5eadb]">{item}</span>
+                                      <span className="text-sm text-[#d3c6b7]">{simulatedUi.claude.select}</span>
+                                    </button>
+                                  ))}
+
+                                  <textarea
+                                    readOnly
+                                    className="min-h-[132px] w-full resize-none rounded-[16px] border border-[#4e473f] bg-[#302d29] px-4 py-3 text-sm leading-7 text-[#eadfce] outline-none"
+                                    value={simulatedUi.claude.customStyleValue}
+                                  />
+                                </div>
+                              ) : null}
+
+                              <div className="mt-6 rounded-[18px] border border-[#7f5a34] bg-[#3b2c1e] px-4 py-3 text-sm leading-7 text-[#f4ddc6]">
+                                {simulatedUi.claude.stylesTip}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-10 rounded-[30px] border border-[#ffd8c0] bg-white/90 p-5 shadow-sm">
-          <h3 className="font-serif text-[2rem] leading-tight text-[#26438f]">Modelo pronto para copiar e colar</h3>
+          <h3 className="font-serif text-[2rem] leading-tight text-[#26438f]">{copy.personalize.templateTitle}</h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            Use este template como ponto de partida. Copie, adapte com suas informações e cole nas configurações da sua IA favorita:
+            {copy.personalize.templateDescription}
           </p>
 
           <div className="mt-5 overflow-x-auto rounded-[24px] border border-[#ffd9b5] bg-[#fff8f0] p-5">
             <pre className="font-mono text-sm leading-7 text-[#6c370d]">
-              {templateLines.join("\n")}
+              {localizedTemplateLines.join("\n")}
             </pre>
           </div>
         </div>
 
         <ContinueFooter
-          label="Ir para os exercícios e missão final"
-          helper="Você já viu a lógica, o mapa e a personalização. Agora é hora de praticar e liberar o botão de teste."
+          label={copy.personalize.continueLabel}
+          helper={copy.personalize.continueHelper}
           onComplete={onComplete}
         />
       </SectionWrapper>
@@ -1154,21 +2544,21 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
   return (
     <SectionWrapper>
       <SectionIntro
-        eyebrow="Exercícios práticos"
-        title="Agora é hora de colocar em prática"
-        description="Faça os três exercícios abaixo. Depois disso, personalize a sua IA principal e use o botão provisório para concluir e testar esta trilha do Dia 1."
+        eyebrow={copy.practice.eyebrow}
+        title={copy.practice.title}
+        description={copy.practice.description}
       />
 
       <div className="mt-8 space-y-6">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="rounded-[28px] border border-[#dbe7ff] bg-white/90 p-5 shadow-sm">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#2563eb]">Exercício 1</p>
-          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">Múltipla escolha</h3>
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#2563eb]">{copy.practice.exercise1.eyebrow}</p>
+          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">{copy.practice.exercise1.title}</h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            Qual é a principal diferença entre dar um prompt vago e um prompt específico para a IA?
+            {copy.practice.exercise1.question}
           </p>
 
           <div className="mt-5 space-y-3">
-            {exerciseOneOptions.map((option) => (
+            {localizedExerciseOneOptions.map((option) => (
               <button
                 key={option.id}
                 type="button"
@@ -1200,17 +2590,17 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               )}
             >
               {isExerciseOneCorrect
-                ? "Resposta correta: c. O prompt específico dá contexto e detalhes, então a IA consegue entregar uma resposta muito mais útil."
-                : "Quase lá. A resposta correta é c, porque contexto e detalhes fazem a IA responder com mais qualidade e precisão."}
+                ? copy.practice.exercise1.correct
+                : copy.practice.exercise1.incorrect}
             </div>
           ) : null}
         </motion.div>
 
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="rounded-[28px] border border-[#dcefdc] bg-white/90 p-5 shadow-sm">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#15803d]">Exercício 2</p>
-          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">Complete a frase</h3>
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#15803d]">{copy.practice.exercise2.eyebrow}</p>
+          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">{copy.practice.exercise2.title}</h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            A instrução que você digita para a IA gerar uma resposta se chama ________, e quanto mais contexto ela tiver, melhor será o resultado.
+            {copy.practice.exercise2.question}
           </p>
 
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -1220,7 +2610,7 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
                 setExerciseTwoInput(event.target.value);
                 setExerciseTwoChecked(false);
               }}
-              placeholder="Digite a palavra"
+              placeholder={copy.practice.exercise2.placeholder}
               className="h-12 rounded-2xl border-[#d9e4d9]"
             />
             <Button
@@ -1228,7 +2618,7 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               onClick={() => setExerciseTwoChecked(true)}
               className="h-12 rounded-2xl bg-[#1f2434] px-6 hover:bg-[#111726]"
             >
-              Verificar
+              {copy.practice.exercise2.verify}
             </Button>
           </div>
 
@@ -1242,55 +2632,196 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               )}
             >
               {isExerciseTwoCorrect
-                ? "Perfeito. A palavra correta é prompt."
-                : "Ainda não. A resposta correta é prompt."}
+                ? copy.practice.exercise2.correct
+                : copy.practice.exercise2.incorrect}
             </div>
           ) : null}
         </motion.div>
 
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="rounded-[28px] border border-[#f0dec4] bg-white/90 p-5 shadow-sm">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#b45309]">Exercício 3</p>
-          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">Ligue os termos</h3>
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#b45309]">{copy.practice.exercise3.eyebrow}</p>
+          <h3 className="mt-2 font-serif text-[1.75rem] text-[#1f2434]">{copy.practice.exercise3.title}</h3>
           <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-            Ligue cada IA ao seu ponto forte principal usando as letras abaixo.
+            {copy.practice.exercise3.question}
           </p>
 
           <div className="mt-5 rounded-[22px] border border-[#f5e5d2] bg-[#fff8f1] p-4">
-            <div className="grid gap-2 md:grid-cols-2">
-              {exerciseThreeLegend.map((item) => (
-                <p key={item} className="text-sm leading-7 text-[#6b4d1f]">
-                  {item}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-[#6b4d1f]">
+                  {activeExerciseThreePair
+                    ? copy.practice.exercise3.activePrompt(activeExerciseThreePair.label)
+                    : copy.practice.exercise3.idlePrompt}
                 </p>
-              ))}
+                <p className="mt-1 text-sm leading-7 text-[#8b5e28]">
+                  {copy.practice.exercise3.secondaryPrompt}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="rounded-full border border-[#efd9bf] bg-white px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b14]">
+                  {copy.practice.exercise3.connectionsCount(Object.keys(exerciseThreeAnswers).length, exerciseThreePairs.length)}
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleClearExerciseThreeConnections}
+                  className="h-10 rounded-2xl border-[#e7ccb0] bg-white px-4 text-sm text-[#7c4b16] hover:bg-[#fff3e3]"
+                >
+                  {copy.practice.exercise3.clearButton}
+                </Button>
+              </div>
             </div>
           </div>
 
-          <div className="mt-5 space-y-3">
-            {exerciseThreePairs.map((pair) => (
-              <div
-                key={pair.id}
-                className="grid gap-3 rounded-[22px] border border-[#ece5dc] bg-[#fcfaf7] p-4 md:grid-cols-[1fr_120px]"
-              >
-                <div className="text-sm font-semibold leading-7 text-[#2f3445]">{pair.label}</div>
-                <select
-                  value={exerciseThreeAnswers[pair.id] || ""}
-                  onChange={(event) =>
-                    setExerciseThreeAnswers((current) => ({
-                      ...current,
-                      [pair.id]: event.target.value,
-                    }))
-                  }
-                  className="h-11 rounded-2xl border border-[#dad5cd] bg-white px-4 text-sm text-[#2f3445] outline-none focus:border-[#dd7a00]"
-                >
-                  <option value="">Escolha</option>
-                  {["A", "B", "C", "D", "E"].map((letter) => (
-                    <option key={letter} value={letter}>
-                      {letter}
-                    </option>
-                  ))}
-                </select>
+          {exerciseThreeFeedback ? (
+            <div
+              className={cn(
+                "mt-4 rounded-[22px] border p-4 text-sm leading-7",
+                exerciseThreeFeedback.type === "success"
+                  ? "border-emerald-300 bg-emerald-50 text-emerald-800"
+                  : "border-rose-300 bg-rose-50 text-rose-800"
+              )}
+            >
+              {exerciseThreeFeedback.message}
+            </div>
+          ) : null}
+
+          <div
+            ref={exerciseThreeBoardRef}
+            className="relative mt-5 overflow-hidden rounded-[28px] border border-[#ece5dc] bg-[linear-gradient(135deg,#fcfaf7_0%,#fff7ef_100%)] p-4 sm:p-5"
+          >
+            <svg
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+              viewBox={`0 0 ${Math.max(exerciseThreeBoardSize.width, 1)} ${Math.max(exerciseThreeBoardSize.height, 1)}`}
+              preserveAspectRatio="none"
+            >
+              {exerciseThreeLines.map((line) => {
+                const curveOffset = Math.max(40, Math.abs(line.x2 - line.x1) / 2);
+                const stroke = line.isCorrect ? "#10b981" : "#f59e0b";
+
+                return (
+                  <g key={`${line.pairId}-${line.answerId}`}>
+                    <motion.path
+                      d={`M ${line.x1} ${line.y1} C ${line.x1 + curveOffset} ${line.y1}, ${line.x2 - curveOffset} ${line.y2}, ${line.x2} ${line.y2}`}
+                      fill="none"
+                      stroke={stroke}
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                    />
+                    <circle cx={line.x1} cy={line.y1} r="5" fill={stroke} />
+                    <circle cx={line.x2} cy={line.y2} r="5" fill={stroke} />
+                  </g>
+                );
+              })}
+            </svg>
+
+            <div className="relative z-10 grid grid-cols-[minmax(0,1fr)_32px_minmax(0,1fr)] gap-3 sm:grid-cols-[minmax(0,1fr)_88px_minmax(0,1fr)] sm:gap-5">
+              <div>
+                <p className="mb-3 text-xs font-black uppercase tracking-[0.26em] text-[#b45309]">{copy.practice.exercise3.leftColumn}</p>
+                <div className="space-y-3">
+                  {exerciseThreePairs.map((pair) => {
+                    const assignedAnswer = exerciseThreeAnswers[pair.id];
+                    const isActive = activeExerciseThreePairId === pair.id;
+
+                    return (
+                      <button
+                        key={pair.id}
+                        type="button"
+                        onClick={() => handleSelectExerciseThreePair(pair.id)}
+                        className={cn(
+                          "relative w-full rounded-[22px] border bg-white p-4 pr-12 text-left shadow-sm transition-all",
+                          isActive
+                            ? "border-[#ff8f35] ring-2 ring-[#ffd4ae]"
+                            : "border-[#e8ddd2] hover:border-[#f2c08e] hover:bg-[#fffdf9]"
+                        )}
+                      >
+                        <span
+                          ref={(node) => {
+                            exerciseThreeLeftDotRefs.current[pair.id] = node;
+                          }}
+                          className={cn(
+                            "absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white shadow-sm",
+                            assignedAnswer ? "bg-[#ff8f35]" : "bg-[#d7d0c8]"
+                          )}
+                        />
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-sm font-semibold leading-7 text-[#1f2434]">{pair.label}</span>
+                          {assignedAnswer ? (
+                            <span className="rounded-full bg-[#fff0df] px-2.5 py-1 text-xs font-bold text-[#b45309]">
+                              {assignedAnswer}
+                            </span>
+                          ) : null}
+                        </div>
+
+                        <p className="mt-2 text-xs leading-6 text-[#6b7280]">
+                          {assignedAnswer
+                            ? copy.practice.exercise3.rowConnected
+                            : copy.practice.exercise3.rowIdle}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            ))}
+
+              <div className="flex items-center justify-center">
+                <div className="h-full w-px bg-[linear-gradient(180deg,rgba(251,191,36,0.12)_0%,rgba(217,119,6,0.35)_40%,rgba(251,191,36,0.12)_100%)]" />
+              </div>
+
+              <div>
+                <p className="mb-3 text-xs font-black uppercase tracking-[0.26em] text-[#b45309]">{copy.practice.exercise3.rightColumn}</p>
+                <div className="space-y-3">
+                  {localizedExerciseThreeLegend.map((option) => {
+                    const linkedPair = exerciseThreePairs.find(
+                      (pair) => exerciseThreeAnswers[pair.id] === option.id
+                    );
+
+                    return (
+                      <button
+                        key={option.id}
+                        type="button"
+                        onClick={() => handleConnectExerciseThreePair(option.id)}
+                        className={cn(
+                          "relative w-full rounded-[22px] border bg-white p-4 pl-12 text-left shadow-sm transition-all",
+                          linkedPair
+                            ? "border-[#f1c48d] bg-[#fffdf8]"
+                            : "border-[#e8ddd2] hover:border-[#f2c08e] hover:bg-[#fffdf9]",
+                          activeExerciseThreePairId ? "ring-1 ring-[#ffe1bf]" : ""
+                        )}
+                      >
+                        <span
+                          ref={(node) => {
+                            exerciseThreeRightDotRefs.current[option.id] = node;
+                          }}
+                          className={cn(
+                            "absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white shadow-sm",
+                            linkedPair ? "bg-[#ff8f35]" : "bg-[#d7d0c8]"
+                          )}
+                        />
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="rounded-full bg-[#fff3e3] px-2.5 py-1 text-xs font-black text-[#b45309]">
+                            {option.id}
+                          </span>
+                          {linkedPair ? (
+                            <span className="rounded-full bg-[#eff6ff] px-2.5 py-1 text-xs font-bold text-[#1d4ed8]">
+                              {linkedPair.label}
+                            </span>
+                          ) : null}
+                        </div>
+
+                        <p className="mt-2 text-sm leading-7 text-[#2f3445]">{option.label}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
 
           {areAllExerciseThreeAnswered ? (
@@ -1303,8 +2834,8 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
               )}
             >
               {isExerciseThreeCorrect
-                ? "Gabarito correto: 1-C, 2-A, 3-E, 4-B, 5-D."
-                : "Confira o gabarito: 1-C, 2-A, 3-E, 4-B, 5-D."}
+                ? copy.practice.exercise3.allCorrect
+                : copy.practice.exercise3.allReview}
             </div>
           ) : null}
         </motion.div>
@@ -1313,21 +2844,15 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
       <div className="mt-8 rounded-[30px] border border-[#eadfce] bg-white/90 p-5 shadow-sm">
         <div className="flex items-center gap-3">
           <Map className="h-5 w-5 text-[#ff6a00]" />
-          <p className="text-xs font-black uppercase tracking-[0.32em] text-[#d35f12]">Missão</p>
+          <p className="text-xs font-black uppercase tracking-[0.32em] text-[#d35f12]">{copy.practice.mission.badge}</p>
         </div>
-        <h3 className="mt-3 font-serif text-[1.85rem] leading-tight text-[#1f2434]">Personalize a sua IA</h3>
+        <h3 className="mt-3 font-serif text-[1.85rem] leading-tight text-[#1f2434]">{copy.practice.mission.title}</h3>
         <p className="mt-3 text-[1.02rem] leading-8 text-[#374151]">
-          Esse é o exercício mais importante de hoje. Não pule.
+          {copy.practice.mission.description}
         </p>
 
         <div className="mt-5 space-y-3">
-          {[
-            "Escolha sua IA principal (ChatGPT, Claude, Gemini ou outra).",
-            "Abra as configurações de personalização.",
-            "Preencha com suas informações usando o template acima.",
-            "Faça um pedido teste e veja a diferença.",
-            "Se quiser, repita o processo em uma segunda IA.",
-          ].map((item, index) => (
+          {copy.practice.mission.steps.map((item: string, index: number) => (
             <div key={item} className="flex items-start gap-3 rounded-[20px] border border-[#ece5dc] bg-[#fcfaf7] p-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2434] text-sm font-black text-white">
                 {index + 1}
@@ -1341,26 +2866,26 @@ const GuilhermeDay1Journey = ({ section, onComplete }: GuilhermeDay1JourneyProps
       <div className="mt-8 rounded-[30px] border border-[#d7ead8] bg-[linear-gradient(135deg,#edfdf1_0%,#f7fff9_100%)] p-5 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.32em] text-[#15803d]">Status</p>
+            <p className="text-xs font-black uppercase tracking-[0.32em] text-[#15803d]">{copy.practice.status.badge}</p>
             <h3 className="mt-2 font-serif text-[1.85rem] leading-tight text-[#164e2c]">
-              Parabéns! Dia 1 concluído.
+              {copy.practice.status.title}
             </h3>
             <p className="mt-3 text-[1.02rem] leading-8 text-[#2d5b3d]">
-              Amanhã no Dia 2: escrever prompts que funcionam.
+              {copy.practice.status.description}
             </p>
           </div>
 
           <div className="rounded-[20px] border border-[#cce7cf] bg-white/80 px-4 py-3 text-sm font-semibold text-[#2d5b3d]">
-            {progressSummary.completed}/{progressSummary.total} exercícios liberados
+            {copy.practice.status.progress(progressSummary.completed, progressSummary.total)}
           </div>
         </div>
 
         <ContinueFooter
-          label="Botão provisório: concluir e testar este Dia 1"
+          label={copy.practice.status.continueLabel}
           helper={
             unlockedFinalButton
-              ? "Tudo certo. Este botão provisório finaliza a versão do Guilherme e abre o fluxo normal de conclusão."
-              : "Resolva corretamente os 3 exercícios para liberar o botão provisório de teste."
+              ? copy.practice.status.continueReady
+              : copy.practice.status.continueLocked
           }
           onComplete={onComplete}
           disabled={!unlockedFinalButton}
