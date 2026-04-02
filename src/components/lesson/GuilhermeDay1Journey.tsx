@@ -1049,10 +1049,12 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
   const { i18n } = useTranslation();
   const journeyLocale = resolveGuilhermeJourneyLocale(i18n.resolvedLanguage || i18n.language);
   const copy = getGuilhermeDay1JourneyCopy(i18n.resolvedLanguage || i18n.language);
-  const simulatedUi = SIMULATED_UI_COPY[journeyLocale];
-  const journeyUi = JOURNEY_SECTION_UI_COPY[journeyLocale];
-  const localizedChatGptPanels = LOCALIZED_CHAT_GPT_PANELS[journeyLocale];
-  const localizedClaudePanels = LOCALIZED_CLAUDE_PANELS[journeyLocale];
+  const simulatedUi = SIMULATED_UI_COPY[journeyLocale] ?? SIMULATED_UI_COPY.pt;
+  const journeyUi = JOURNEY_SECTION_UI_COPY[journeyLocale] ?? JOURNEY_SECTION_UI_COPY.pt;
+  const localizedChatGptPanels =
+    LOCALIZED_CHAT_GPT_PANELS[journeyLocale] ?? LOCALIZED_CHAT_GPT_PANELS.pt;
+  const localizedClaudePanels =
+    LOCALIZED_CLAUDE_PANELS[journeyLocale] ?? LOCALIZED_CLAUDE_PANELS.pt;
   const localizedOutcomeCards = outcomeCards.map((card, index) => ({
     ...card,
     title: copy.intro.outcomeCards[index]?.title ?? card.title,
@@ -1122,11 +1124,27 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
     completed:
       Number(isExerciseOneCorrect) + Number(isExerciseTwoCorrect) + Number(isExerciseThreeCorrect),
   };
-  const currentMapTool = localizedAiToolCards[activeMapToolIndex];
+  const currentMapTool = localizedAiToolCards[activeMapToolIndex] ?? localizedAiToolCards[0];
   const nextMapTool = localizedAiToolCards[activeMapToolIndex + 1];
   const isLastMapTool = activeMapToolIndex === localizedAiToolCards.length - 1;
   const areAllCurrentMapBulletsVisible =
-    visibleMapBulletCount >= currentMapTool.bullets.length;
+    visibleMapBulletCount >= (currentMapTool?.bullets?.length ?? 0);
+  const activeChatGptPanel = localizedChatGptPanels[chatGptPanel] ?? localizedChatGptPanels.estilo;
+  const activeClaudePanel = localizedClaudePanels[claudePanel] ?? localizedClaudePanels.perfil;
+  const chatGptUi = simulatedUi.chatgpt ?? SIMULATED_UI_COPY.pt.chatgpt;
+  const claudeUi = simulatedUi.claude ?? SIMULATED_UI_COPY.pt.claude;
+  const personalizeInputCards = copy.personalize.responseInputCards ?? [];
+  const personalizeOutputItems = copy.personalize.responseOutputItems ?? [];
+  const chatGptSidebarItems = chatGptUi.sidebarItems ?? [];
+  const chatGptSettingsLabels = chatGptUi.settingsMenu ?? [];
+  const chatGptTraits = chatGptUi.traits ?? [];
+  const chatGptMemoryItems = chatGptUi.memoryItems ?? [];
+  const claudeSideActions = claudeUi.sideActions ?? [];
+  const claudeShortcuts = claudeUi.shortcuts ?? [];
+  const claudeProfileMenu = claudeUi.profileMenu ?? [];
+  const claudeProfileFields = claudeUi.profileFields ?? SIMULATED_UI_COPY.pt.claude.profileFields;
+  const claudeProjectCards = claudeUi.projectCards ?? [];
+  const claudeStyleOptions = claudeUi.styleOptions ?? [];
   const learnerNameParts = learnerName?.trim().split(/\s+/).filter(Boolean) ?? [];
   const claudeGreetingName = learnerNameParts[0] ?? "";
   const claudeProfileInitials =
@@ -1711,7 +1729,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
               </div>
 
               <div className="relative min-h-[240px]">
-                {copy.personalize.responseInputCards.map((label: string, index: number) => (
+                {personalizeInputCards.map((label: string, index: number) => (
                   <motion.div
                     key={label}
                     className={cn(
@@ -1754,7 +1772,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                     </div>
                   </div>
                   <div className="mt-4 space-y-2">
-                    {copy.personalize.responseOutputItems.map((item: string) => (
+                    {personalizeOutputItems.map((item: string) => (
                       <div key={item} className="rounded-2xl border border-[#e6f5ea] bg-[#f7fff9] px-3 py-2 text-sm font-medium text-[#33523c]">
                         {item}
                       </div>
@@ -1807,7 +1825,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                 </div>
 
                 <div className="mt-5 space-y-1.5">
-                  {simulatedUi.chatgpt.sidebarItems.map((label, index) => {
+                  {chatGptSidebarItems.map((label, index) => {
                     const item = [
                       { icon: Plus },
                       { icon: Search },
@@ -1815,7 +1833,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                       { icon: LayoutDashboard },
                       { icon: Compass },
                       { icon: Heart },
-                    ][index];
+                    ][index] ?? { icon: Search };
                     const Icon = item.icon;
 
                     return (
@@ -1984,7 +2002,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                                     )}
                                   >
                                     <Icon className="h-4 w-4" />
-                                    <span>{simulatedUi.chatgpt.settingsMenu[index] ?? item.label}</span>
+                                    <span>{chatGptSettingsLabels[index] ?? item.label}</span>
                                   </button>
                                 );
                               })}
@@ -2049,7 +2067,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                                 </button>
 
                                 <div className="mt-5 space-y-1.5">
-                                  {simulatedUi.chatgpt.traits.map((item) => (
+                                  {chatGptTraits.map((item) => (
                                     <button
                                       key={item}
                                       type="button"
@@ -2173,7 +2191,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                                 <div className="mt-4 border-t border-white/10" />
 
                                 <div className="mt-4 space-y-1">
-                                  {simulatedUi.chatgpt.memoryItems.map((item) => (
+                                  {chatGptMemoryItems.map((item) => (
                                     <button
                                       key={item.title}
                                       type="button"
@@ -2248,7 +2266,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                       </div>
                     </button>
 
-                    {simulatedUi.claude.sideActions.map((label, index) => {
+                    {claudeSideActions.map((label, index) => {
                       const item = [
                         { icon: Plus },
                         { icon: Search },
@@ -2256,7 +2274,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                         { icon: Brain },
                         { icon: LayoutDashboard },
                         { icon: Bot },
-                      ][index];
+                      ][index] ?? { icon: Bot };
                       const Icon = item.icon;
 
                       return (
@@ -2338,11 +2356,11 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                     </div>
 
                     <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-                      {simulatedUi.claude.shortcuts.map((item) => (
+                      {claudeShortcuts.map((item) => (
                         <button
                           key={item}
                           type="button"
-                          onClick={() => handleOpenClaudeProfile(item === simulatedUi.claude.shortcuts[2] ? "estilos" : "perfil")}
+                          onClick={() => handleOpenClaudeProfile(item === claudeShortcuts[2] ? "estilos" : "perfil")}
                           className="rounded-full border border-[#4c463e] bg-[#24221f] px-4 py-2 text-sm text-[#ddd2c6] transition hover:bg-[#2c2925]"
                         >
                           {item}
@@ -2390,9 +2408,9 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
 
                             <div className="mt-5 space-y-2">
                               {[
-                                { id: "perfil", label: simulatedUi.claude.profileMenu[0] },
-                                { id: "projetos", label: simulatedUi.claude.profileMenu[1] },
-                                { id: "estilos", label: simulatedUi.claude.profileMenu[2] },
+                                { id: "perfil", label: claudeProfileMenu[0] ?? activeClaudePanel.title },
+                                { id: "projetos", label: claudeProfileMenu[1] ?? localizedClaudePanels.projetos.title },
+                                { id: "estilos", label: claudeProfileMenu[2] ?? localizedClaudePanels.estilos.title },
                               ].map((item) => (
                                 <button
                                   key={item.id}
@@ -2412,7 +2430,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                             </div>
 
                             <div className="mt-6 rounded-[18px] border border-[#4b443b] bg-[#2b2824] p-4 text-sm leading-7 text-[#cdbfad]">
-                              {simulatedUi.claude.flowLabel(localizedClaudePanels[claudePanel].title)}
+                              {simulatedUi.claude.flowLabel(activeClaudePanel.title)}
                             </div>
                           </div>
 
@@ -2422,51 +2440,51 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
                                 {simulatedUi.claude.profileEyebrow}
                               </p>
                               <h4 className="mt-3 font-serif text-[2rem] leading-tight text-[#f5eadb]">
-                                {localizedClaudePanels[claudePanel].title}
+                                {activeClaudePanel.title}
                               </h4>
                               <p className="mt-3 text-sm leading-7 text-[#cabfaf]">
-                                {localizedClaudePanels[claudePanel].description}
+                                {activeClaudePanel.description}
                               </p>
                               <div className="mt-4 border-t border-[#3d3832]" />
 
                               {claudePanel === "perfil" ? (
                                 <div className="mt-6 space-y-5">
                                   <div>
-                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.whoAreYouLabel}</p>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{claudeProfileFields.whoAreYouLabel}</p>
                                     <Input
                                       readOnly
-                                      value={simulatedUi.claude.profileFields.whoAreYouValue}
+                                      value={claudeProfileFields.whoAreYouValue}
                                       className="mt-2 h-11 rounded-[10px] border-[#4e473f] bg-[#302d29] text-[#eadfce]"
                                     />
                                   </div>
 
                                   <div>
-                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.preferredLanguageLabel}</p>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{claudeProfileFields.preferredLanguageLabel}</p>
                                     <Input
                                       readOnly
-                                      value={simulatedUi.claude.profileFields.preferredLanguageValue}
+                                      value={claudeProfileFields.preferredLanguageValue}
                                       className="mt-2 h-11 rounded-[10px] border-[#4e473f] bg-[#302d29] text-[#eadfce]"
                                     />
                                   </div>
 
                                   <div>
-                                    <p className="text-sm font-medium text-[#f5eadb]">{simulatedUi.claude.profileFields.responseLabel}</p>
+                                    <p className="text-sm font-medium text-[#f5eadb]">{claudeProfileFields.responseLabel}</p>
                                     <textarea
                                       readOnly
                                       className="mt-2 min-h-[132px] w-full resize-none rounded-[16px] border border-[#4e473f] bg-[#302d29] px-4 py-3 text-sm leading-7 text-[#eadfce] outline-none"
-                                      value={simulatedUi.claude.profileFields.responseValue}
+                                      value={claudeProfileFields.responseValue}
                                     />
                                   </div>
 
                                   <div className="rounded-[18px] border border-[#51463b] bg-[#2d2925] p-4 text-sm leading-7 text-[#d7c9ba]">
-                                    {simulatedUi.claude.profileFields.profileTip}
+                                    {claudeProfileFields.profileTip}
                                   </div>
                                 </div>
                               ) : null}
 
                               {claudePanel === "projetos" ? (
                                 <div className="mt-6 space-y-4">
-                                  {simulatedUi.claude.projectCards.map((item) => (
+                                  {claudeProjectCards.map((item) => (
                                     <button
                                       key={item.title}
                                       type="button"
@@ -2485,7 +2503,7 @@ const GuilhermeDay1Journey = ({ section, learnerName, onComplete }: GuilhermeDay
 
                               {claudePanel === "estilos" ? (
                                 <div className="mt-6 space-y-4">
-                                  {simulatedUi.claude.styleOptions.map((item) => (
+                                  {claudeStyleOptions.map((item) => (
                                     <button
                                       key={item}
                                       type="button"

@@ -1,4 +1,10 @@
-export const DAY1_EXPERIMENT_VARIANTS = ["atual", "guilherme", "sidney"] as const;
+export const DAY1_EXPERIMENT_VARIANTS = [
+  "atual",
+  "guilherme",
+  "sidney_texto",
+  "sidney_video_edi",
+  "sidney_video_sidney",
+] as const;
 
 export type Day1ExperimentVariant = (typeof DAY1_EXPERIMENT_VARIANTS)[number];
 
@@ -11,6 +17,10 @@ export const normalizeDay1ExperimentVariant = (
   value?: string | null,
 ): Day1ExperimentVariant => {
   const normalized = String(value ?? "").trim().toLowerCase();
+
+  if (normalized === "sidney") {
+    return "sidney_texto";
+  }
 
   return isDay1ExperimentVariant(normalized)
     ? normalized

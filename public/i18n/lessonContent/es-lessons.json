@@ -141,6 +141,126 @@
       }
     ]
   },
+  "day1_sidney": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Dia 1 en accion. Hoy no estudias primero: creas un video, un flyer, una presentacion y un sitio completo con IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparacion del video. Genera los frames clave del personaje antes de convertir eso en el video completo."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creacion 1 con Grok. Elige un prompt de video, genera la escena hablada y revela el render final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creacion 2 con ChatGPT. Genera un flyer motivacional listo para Instagram desde el prompt elegido."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creacion 3 con Gamma. Construye una presentacion con estructura, texto y visual ya organizados."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creacion 4 con Claude. Pide un sitio entero y mira una interfaz completa aparecer desde un solo prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Cierre del Dia 1 de Sidney: recapitulacion de las cuatro creaciones y boton final para terminar la ruta."
+        }
+      }
+    ]
+  },
+  "day1_sidney_texto": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Dia 1 en practica. Hoy no vas a estudiar primero: vas a crear un video, un flyer, una presentacion y un sitio completo con IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparacion del video. Genera los frames clave del personaje antes de convertir eso en el video completo."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creacion 1 con Grok. Elige un prompt de video, genera la escena hablada y revela el resultado final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creacion 2 con ChatGPT. Genera un flyer motivacional listo para Instagram a partir del prompt que elegiste."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creacion 3 con Gamma. Monta una presentacion completa con estructura, textos y direccion visual ya listos."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creacion 4 con Claude. Pide un sitio completo y mira como aparece una interfaz terminada desde un solo prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Cierre del Dia 1 de Sidney: repaso de las cuatro creaciones y boton final para terminar la ruta."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

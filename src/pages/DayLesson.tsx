@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Suspense, lazy } from "react";
+import { Component, type ErrorInfo, type ReactNode, useState, useEffect, useRef, Suspense, lazy } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { X, CheckCircle2, XCircle, RotateCcw, Star } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
@@ -44,6 +44,9 @@ const AppPromo = lazy(() => import("@/components/AppPromo").then((m) => ({ defau
 const GuilhermeDay1Journey = lazy(() =>
   import("@/components/lesson/GuilhermeDay1Journey").then((m) => ({ default: m.default }))
 );
+const SidneyDay1Journey = lazy(() =>
+  import("@/components/lesson/SidneyDay1Journey").then((m) => ({ default: m.default }))
+);
 
 // Import Edi Motivation components
 import { EdiMotivation, useEdiMotivation } from "@/components/lesson/EdiMotivation";
@@ -70,6 +73,8 @@ const getComponent = (componentName: string): React.LazyExoticComponent<React.Co
       return AppPromo;
     case "GuilhermeDay1Journey":
       return GuilhermeDay1Journey;
+    case "SidneyDay1Journey":
+      return SidneyDay1Journey;
     default:
       return null;
   }
@@ -279,6 +284,67 @@ const getDay1FeedbackUi = (language?: string) => {
   const base = language?.split("-")[0]?.toLowerCase() as Day1FeedbackLanguage | undefined;
   return DAY1_FEEDBACK_UI[base || "en"] || DAY1_FEEDBACK_UI.en;
 };
+
+interface ComponentRenderBoundaryProps {
+  componentName?: string;
+  resetKey: string;
+  children: ReactNode;
+}
+
+interface ComponentRenderBoundaryState {
+  hasError: boolean;
+}
+
+class ComponentRenderBoundary extends Component<
+  ComponentRenderBoundaryProps,
+  ComponentRenderBoundaryState
+> {
+  state: ComponentRenderBoundaryState = {
+    hasError: false,
+  };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("[DayLesson] Interactive component render failed:", {
+      componentName: this.props.componentName,
+      error,
+      errorInfo,
+    });
+  }
+
+  componentDidUpdate(prevProps: ComponentRenderBoundaryProps) {
+    if (prevProps.resetKey !== this.props.resetKey && this.state.hasError) {
+      this.setState({ hasError: false });
+    }
+  }
+
+  render() {
+    if (!this.state.hasError) {
+      return this.props.children;
+    }
+
+    return (
+      <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-left shadow-sm">
+        <p className="text-sm font-semibold text-destructive">
+          Houve um problema ao carregar esta etapa interativa.
+        </p>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">
+          Tente recarregar esta etapa. Se o erro persistir, agora ele fica isolado aqui sem derrubar a aula inteira.
+        </p>
+        <Button
+          type="button"
+          onClick={() => this.setState({ hasError: false })}
+          className="mt-4 h-10 rounded-xl bg-primary px-4 hover:bg-primary/90"
+        >
+          Recarregar etapa
+        </Button>
+      </div>
+    );
+  }
+}
 
 const DayLesson = () => {
   const { t, i18n } = useTranslation();
@@ -991,10 +1057,11 @@ const DayLesson = () => {
   const exitDialogUi = getExitDialogUi(i18n.resolvedLanguage || i18n.language);
   const correctCelebrationUi = getCorrectCelebrationUi(i18n.resolvedLanguage || i18n.language);
   const day1FeedbackUi = getDay1FeedbackUi(i18n.resolvedLanguage || i18n.language);
-  const isGuilhermeJourneyStep =
-    currentStep.type === "component" && currentStep.componentName === "GuilhermeDay1Journey";
-  const useWideGuilhermeLayout = day1Variant === "guilherme" && isGuilhermeJourneyStep;
-  const lessonContentWidthClass = useWideGuilhermeLayout
+  const isImmersiveJourneyStep =
+    currentStep.type === "component" &&
+    (currentStep.componentName === "GuilhermeDay1Journey" ||
+      currentStep.componentName === "SidneyDay1Journey");
+  const lessonContentWidthClass = isImmersiveJourneyStep
     ? "max-w-2xl md:max-w-[1280px] xl:max-w-[1560px] 2xl:max-w-[1680px] md:px-8 xl:px-10"
     : "max-w-2xl";
   const canExitWithoutConfirmation =
@@ -1153,12 +1220,19 @@ const DayLesson = () => {
                               ? { learnerName: currentLearnerName }
                               : {}),
                           };
+                          const componentRenderKey = `${step.componentName}-${currentStepIndex}-${String(step.props?.section ?? "")}`;
                           return (
-                            <DynamicComponent
-                              {...componentProps}
-                              onComplete={handleComponentComplete}
-                              ediHelpEnabled
-                            />
+                            <ComponentRenderBoundary
+                              componentName={step.componentName}
+                              resetKey={componentRenderKey}
+                            >
+                              <DynamicComponent
+                                key={componentRenderKey}
+                                {...componentProps}
+                                onComplete={handleComponentComplete}
+                                ediHelpEnabled
+                              />
+                            </ComponentRenderBoundary>
                           );
                         })()}
                       </Suspense>

@@ -16,6 +16,7 @@ interface FillBlanksProps {
   explanation?: string;
   onComplete: () => void;
   ediHelpEnabled?: boolean;
+  showCorrectSentenceOnError?: boolean;
 }
 
 export const FillBlanks = ({
@@ -27,6 +28,7 @@ export const FillBlanks = ({
   explanation,
   onComplete,
   ediHelpEnabled = false,
+  showCorrectSentenceOnError = false,
 }: FillBlanksProps) => {
   const { t, i18n } = useTranslation();
   const { playCorrect, playIncorrect } = useQuizSounds();
@@ -35,6 +37,16 @@ export const FillBlanks = ({
   const blanks = normalizedSentence.split("___");
   const actualAnswers = answers || correctAnswers || [];
   const numBlanks = blanks.length - 1;
+  const correctSentenceWithHighlights = blanks.map((part, index) => (
+    <span key={`correct-sentence-${index}`}>
+      {part}
+      {index < actualAnswers.length ? (
+        <strong className="font-bold text-foreground">
+          {actualAnswers[index]}
+        </strong>
+      ) : null}
+    </span>
+  ));
 
   const optionItems = useMemo(
     () =>
@@ -252,7 +264,7 @@ export const FillBlanks = ({
       </p>
 
       <div className="p-4 bg-muted/30 rounded-lg mb-4">
-        <p className="text-base sm:text-lg leading-relaxed">
+        <p className="text-base leading-relaxed whitespace-pre-wrap break-words sm:text-lg">
           {blanks.map((part, index) => (
             <span key={index}>
               {part}
@@ -325,6 +337,16 @@ export const FillBlanks = ({
                       ? tUi(t, i18n.language, "lesson.ediGuide.fillBlanks.summary")
                       : tUi(t, i18n.language, "lesson.fillBlanks.tryAgainHint")}
                   </p>
+                  {showCorrectSentenceOnError ? (
+                    <div className="mt-3 rounded-lg border border-border/70 bg-background/70 p-3">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        Resposta correta
+                      </p>
+                      <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-7 text-foreground">
+                        {correctSentenceWithHighlights}
+                      </p>
+                    </div>
+                  ) : null}
                 </>
               )}
               {explanation && isCorrect && (

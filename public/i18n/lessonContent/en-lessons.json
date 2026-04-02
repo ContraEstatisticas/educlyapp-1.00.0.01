@@ -141,6 +141,126 @@
       }
     ]
   },
+  "day1_sidney": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Day 1 in action. Today you do not study first: you create a video, a flyer, a slide deck, and a complete website with AI."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Video preparation. Generate the key frames for the character before turning that into the full video."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 with Grok. Choose a video prompt, generate the spoken scene, and reveal the finished render."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 with ChatGPT. Generate an Instagram-ready motivational flyer from the prompt you picked."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 with Gamma. Build a full slide presentation with structure, copy, and visual direction already in place."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 with Claude. Ask for a full website and watch a complete interface appear from one prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Sidney Day 1 wrap-up: recap of the four creations and the final button to finish the track."
+        }
+      }
+    ]
+  },
+  "day1_sidney_texto": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Day 1 in action. Today you do not study first: you create a video, a flyer, a slide deck, and a complete website with AI."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Video preparation. Generate the key frames for the character before turning that into the full video."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 with Grok. Choose a video prompt, generate the spoken scene, and reveal the finished render."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 with ChatGPT. Generate an Instagram-ready motivational flyer from the prompt you picked."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 with Gamma. Build a full slide presentation with structure, copy, and visual direction already in place."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 with Claude. Ask for a full website and watch a complete interface appear from one prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Sidney Day 1 wrap-up: recap of the four creations and the final button to finish the track."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

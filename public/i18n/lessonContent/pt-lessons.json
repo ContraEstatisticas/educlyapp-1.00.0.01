@@ -141,6 +141,126 @@
       }
     ]
   },
+  "day1_sidney": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Dia 1 na pratica. Hoje voce nao vai estudar: vai criar um video, um flyer, uma apresentacao e um site completo com IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparacao do video. Gere os frames da personagem antes de transformar isso em um video completo."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Criacao 1 com Grok. Escolha um prompt de video, gere a cena com fala e revele o resultado."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Criacao 2 com ChatGPT. Gere um flyer motivacional pronto para Instagram a partir do prompt escolhido."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Criacao 3 com Gamma. Monte uma apresentacao em slides com estrutura, texto e visual prontos."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Criacao 4 com Claude. Peça um site inteiro e veja uma interface pronta aparecer a partir de um unico prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Fechamento do Dia 1 do Sidney: recapitulacao das 4 criacoes e botao final para concluir a trilha."
+        }
+      }
+    ]
+  },
+  "day1_sidney_texto": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Dia 1 na pratica. Hoje voce nao vai estudar: vai criar um video, um flyer, uma apresentacao e um site completo com IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparacao do video. Gere os frames da personagem antes de transformar isso em um video completo."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Criacao 1 com Grok. Escolha um prompt de video, gere a cena com fala e revele o resultado."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Criacao 2 com ChatGPT. Gere um flyer motivacional pronto para Instagram a partir do prompt escolhido."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Criacao 3 com Gamma. Monte uma apresentacao em slides com estrutura, texto e visual prontos."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Criacao 4 com Claude. Peca um site inteiro e veja uma interface pronta aparecer a partir de um unico prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Fechamento do Dia 1 do Sidney: recapitulacao das 4 criacoes e botao final para concluir a trilha."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

@@ -141,6 +141,126 @@
       }
     ]
   },
+  "day1_sidney": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Jour 1 en action. Aujourd'hui, tu ne commences pas par etudier : tu crees une video, un flyer, une presentation et un site complet avec l'IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparation de la video. Genere les frames cles du personnage avant de transformer cela en video complete."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 avec Grok. Choisis un prompt video, genere la scene parlee et revele le rendu final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 avec ChatGPT. Genere un flyer motivation pret pour Instagram a partir du prompt choisi."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 avec Gamma. Construis une presentation avec structure, texte et direction visuelle deja organises."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 avec Claude. Demande un site entier et vois une interface complete apparaitre depuis un seul prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des quatre creations et bouton final pour terminer la piste."
+        }
+      }
+    ]
+  },
+  "day1_sidney_texto": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Jour 1 en pratique. Aujourd'hui tu ne vas pas d'abord etudier : tu vas creer une video, un flyer, une presentation et un site complet avec l'IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparation de la video. Genere les frames cles du personnage avant de transformer cela en video complete."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 avec Grok. Choisis un prompt video, genere la scene parlee, puis revele le rendu final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 avec ChatGPT. Genere un flyer motivation pret pour Instagram a partir du prompt choisi."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 avec Gamma. Monte une presentation complete avec structure, textes et direction visuelle deja en place."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 avec Claude. Demande un site complet et regarde une interface terminee apparaitre a partir d'un seul prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des quatre creations et bouton final pour terminer le parcours."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {
