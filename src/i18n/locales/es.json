@@ -3923,6 +3923,27 @@
     "errorTitle": "No fue posible guardar",
     "errorDescription": "Intentalo de nuevo en unos instantes."
   },
+  "aiExperienceLevel": {
+    "badge": "Pregunta rapida",
+    "title": "Cual es tu nivel de familiaridad con la IA?",
+    "description": "Queremos entender mejor a cada estudiante para adaptar la experiencia de la plataforma y analizar el perfil de nuestra comunidad.",
+    "helper": "Esta respuesta es obligatoria para continuar y solo te llevara unos segundos.",
+    "noneTitle": "No se nada sobre IA",
+    "noneDescription": "Estoy empezando ahora y todavia no he tenido contacto practico con herramientas de IA.",
+    "someTitle": "Ya use ChatGPT u otra IA algunas veces",
+    "someDescription": "Ya hice pruebas y pedidos simples, pero todavia estoy descubriendo como usarla mejor.",
+    "intermediateTitle": "Intermedio",
+    "intermediateDescription": "Uso IA con frecuencia para estudiar, trabajar o acelerar tareas del dia a dia.",
+    "advancedTitle": "Avanzado",
+    "advancedDescription": "Ya domino herramientas, tecnicas de prompting y flujos mas estrategicos con IA.",
+    "confirmButton": "Continuar",
+    "savingButton": "Guardando...",
+    "selectedLabel": "Seleccionado",
+    "successTitle": "Respuesta guardada",
+    "successDescription": "Gracias! Tu nivel de familiaridad con la IA fue registrado.",
+    "errorTitle": "No fue posible guardar",
+    "errorDescription": "Intentalo de nuevo en unos instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudiante",

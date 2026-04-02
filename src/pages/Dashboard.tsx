@@ -23,7 +23,9 @@ import { isAiTrailLive } from "@/lib/aiTrailContent";
 import { NameConfirmationDialog } from "@/components/dashboard/NameConfirmationDialog";
 import { LanguageSelectionDialog } from "@/components/dashboard/LanguageSelectionDialog";
 import { GuidePreferenceDialog } from "@/components/dashboard/GuidePreferenceDialog";
+import { AiExperienceLevelDialog } from "@/components/dashboard/AiExperienceLevelDialog";
 import { shouldPromptForNameConfirmation } from "@/lib/nameConfirmation";
+import { isAiExperienceLevel } from "@/lib/aiExperienceLevel";
 import { clearStoredLanguageOverride, normalizeAppLanguage } from "@/lib/languagePreference";
 
 import mountainBackground from "../../assets/mountainBackground.png";
@@ -217,6 +219,30 @@ const Dashboard = () => {
     },
   });
 
+  const { data: aiExperienceLevelData } = useQuery({
+    queryKey: ["dashboard-ai-experience-level"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("ai_experience_level")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const level = isAiExperienceLevel(profile?.ai_experience_level)
+        ? profile.ai_experience_level
+        : null;
+
+      return {
+        userId: user.id,
+        level,
+        needsConfirmation: profile ? !level : false,
+      };
+    },
+  });
+
   useEffect(() => {
     if (languageConfirmationData?.preferredLanguage && !languageConfirmationData?.needsConfirmation) {
       const preferredLanguage = normalizeAppLanguage(languageConfirmationData.preferredLanguage);
@@ -379,6 +405,28 @@ const Dashboard = () => {
             queryClient.setQueryData(["dashboard-guide-preference"], {
               ...guidePreferenceData,
               preferredGuide: selectedGuide,
+              needsConfirmation: false,
+            });
+            queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+          }}
+        />
+      ) : null}
+
+      {aiExperienceLevelData?.needsConfirmation &&
+      nameConfirmationData !== undefined &&
+      languageConfirmationData !== undefined &&
+      guidePreferenceData !== undefined &&
+      !nameConfirmationData?.needsConfirmation &&
+      !languageConfirmationData?.needsConfirmation &&
+      !guidePreferenceData?.needsConfirmation ? (
+        <AiExperienceLevelDialog
+          open={aiExperienceLevelData.needsConfirmation}
+          userId={aiExperienceLevelData.userId}
+          defaultLevel={aiExperienceLevelData.level}
+          onCompleted={(selectedLevel) => {
+            queryClient.setQueryData(["dashboard-ai-experience-level"], {
+              ...aiExperienceLevelData,
+              level: selectedLevel,
               needsConfirmation: false,
             });
             queryClient.invalidateQueries({ queryKey: ["user-profile"] });

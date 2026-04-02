@@ -1010,6 +1010,8 @@ export type Database = {
       }
       profiles: {
         Row: {
+          ai_experience_level: string | null
+          ai_experience_level_updated_at: string | null
           avatar_url: string | null
           bio: string | null
           cover_url: string | null
@@ -1027,6 +1029,8 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          ai_experience_level?: string | null
+          ai_experience_level_updated_at?: string | null
           avatar_url?: string | null
           bio?: string | null
           cover_url?: string | null
@@ -1044,6 +1048,8 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          ai_experience_level?: string | null
+          ai_experience_level_updated_at?: string | null
           avatar_url?: string | null
           bio?: string | null
           cover_url?: string | null

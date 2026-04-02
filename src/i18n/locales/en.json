@@ -4329,6 +4329,27 @@
     "errorTitle": "Could not save your answer",
     "errorDescription": "Please try again in a moment."
   },
+  "aiExperienceLevel": {
+    "badge": "Quick question",
+    "title": "What is your level of familiarity with AI?",
+    "description": "We want to better understand each student so we can adapt the platform experience and analyze our community profile.",
+    "helper": "This answer is required to continue and only takes a few seconds.",
+    "noneTitle": "I do not know anything about AI",
+    "noneDescription": "I am just getting started and have not had practical contact with AI tools yet.",
+    "someTitle": "I have used ChatGPT or another AI a few times",
+    "someDescription": "I have already tried simple prompts and experiments, but I am still learning how to use it better.",
+    "intermediateTitle": "Intermediate",
+    "intermediateDescription": "I use AI frequently to study, work, or speed up day-to-day tasks.",
+    "advancedTitle": "Advanced",
+    "advancedDescription": "I already master tools, prompting techniques, and more strategic AI workflows.",
+    "confirmButton": "Continue",
+    "savingButton": "Saving...",
+    "selectedLabel": "Selected",
+    "successTitle": "Answer saved",
+    "successDescription": "Thanks! Your AI familiarity level has been recorded.",
+    "errorTitle": "Could not save your answer",
+    "errorDescription": "Please try again in a moment."
+  },
   "profile": {
     "title": "Profile",
     "defaultName": "Student",

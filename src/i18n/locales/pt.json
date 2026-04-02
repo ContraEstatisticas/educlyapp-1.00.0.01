@@ -3488,6 +3488,27 @@
     "errorTitle": "Nao foi possivel salvar",
     "errorDescription": "Tente novamente em alguns instantes."
   },
+  "aiExperienceLevel": {
+    "badge": "Pergunta rapida",
+    "title": "Qual o seu nivel de familiaridade com IA?",
+    "description": "Queremos entender melhor cada aluno para adaptar a experiencia da plataforma e analisar o perfil da nossa comunidade.",
+    "helper": "Essa resposta e obrigatoria para continuar e leva apenas alguns segundos.",
+    "noneTitle": "Nao sei nada de IA",
+    "noneDescription": "Estou comecando agora e ainda nao tive contato pratico com ferramentas de IA.",
+    "someTitle": "Ja usei ChatGPT ou outra IA algumas vezes",
+    "someDescription": "Ja fiz testes e pedidos simples, mas ainda estou descobrindo como usar melhor.",
+    "intermediateTitle": "Intermediario",
+    "intermediateDescription": "Uso IA com frequencia para estudar, trabalhar ou acelerar tarefas do dia a dia.",
+    "advancedTitle": "Avancado",
+    "advancedDescription": "Ja domino ferramentas, tecnicas de prompting e fluxos mais estrategicos com IA.",
+    "confirmButton": "Continuar",
+    "savingButton": "Salvando...",
+    "selectedLabel": "Selecionado",
+    "successTitle": "Resposta salva",
+    "successDescription": "Obrigado! Seu nivel de familiaridade com IA foi registrado.",
+    "errorTitle": "Nao foi possivel salvar",
+    "errorDescription": "Tente novamente em alguns instantes."
+  },
   "profile": {
     "title": "Perfil",
     "defaultName": "Estudante",

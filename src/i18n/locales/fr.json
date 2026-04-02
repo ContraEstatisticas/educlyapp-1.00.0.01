@@ -2991,6 +2991,27 @@
     "errorTitle": "Impossible d'enregistrer",
     "errorDescription": "Veuillez reessayer dans quelques instants."
   },
+  "aiExperienceLevel": {
+    "badge": "Question rapide",
+    "title": "Quel est votre niveau de familiarite avec l'IA ?",
+    "description": "Nous voulons mieux comprendre chaque eleve afin d'adapter l'experience de la plateforme et d'analyser le profil de notre communaute.",
+    "helper": "Cette reponse est obligatoire pour continuer et ne prend que quelques secondes.",
+    "noneTitle": "Je ne connais rien a l'IA",
+    "noneDescription": "Je commence tout juste et je n'ai pas encore eu de contact pratique avec des outils d'IA.",
+    "someTitle": "J'ai deja utilise ChatGPT ou une autre IA quelques fois",
+    "someDescription": "J'ai deja fait quelques essais et demandes simples, mais je suis encore en train d'apprendre a mieux l'utiliser.",
+    "intermediateTitle": "Intermediaire",
+    "intermediateDescription": "J'utilise l'IA regulierement pour etudier, travailler ou accelerer mes taches quotidiennes.",
+    "advancedTitle": "Avance",
+    "advancedDescription": "Je maitrise deja les outils, les techniques de prompting et des usages plus strategiques de l'IA.",
+    "confirmButton": "Continuer",
+    "savingButton": "Enregistrement...",
+    "selectedLabel": "Selectionne",
+    "successTitle": "Reponse enregistree",
+    "successDescription": "Merci ! Votre niveau de familiarite avec l'IA a bien ete enregistre.",
+    "errorTitle": "Impossible d'enregistrer",
+    "errorDescription": "Veuillez reessayer dans quelques instants."
+  },
   "profile": {
     "title": "Profil",
     "defaultName": "Étudiant",
