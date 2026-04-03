@@ -143,7 +143,7 @@ const PT_COPY = {
     eyebrow: "Dia 1 na pratica",
     title: "Hoje voce nao vai estudar. Vai criar.",
     description:
-      "Hoje voce vai criar 4 entregas visiveis com IA: frames, um video, uma apresentacao e um site real. Nao precisa saber nada antes. So siga os passos, escolha um prompt e veja o resultado.",
+      "Hoje voce vai criar 5 entregas visiveis com IA: frames, um video, um flyer, uma apresentacao e um site real. Nao precisa saber nada antes. So siga os passos, escolha um prompt e veja o resultado.",
     supporting:
       "Vamos esclarecer de acordo com o que voce avanca na trilha.",
     cards: [
@@ -154,6 +154,7 @@ const PT_COPY = {
         time: "~3 min",
       },
       { icon: "video", title: "Um video", tool: "Grok", time: "~3 min" },
+      { icon: "flyer", title: "Um flyer", tool: "ChatGPT", time: "~3 min" },
       {
         icon: "slides",
         title: "Uma apresentacao",
@@ -169,7 +170,7 @@ const PT_COPY = {
     ],
     kickoffTitle: "Tudo comecando pela pratica",
     kickoffBody:
-      "Primeiro voce cria os frames do video, depois transforma isso em um video falado, em seguida ve uma apresentacao completa surgir na tela e fecha a experiencia vendo um site real aparecer. A ideia aqui e te fazer sentir a IA trabalhando na pratica antes da teoria.",
+      "Primeiro voce cria os frames do video, depois transforma isso em um video falado, em seguida gera um flyer, depois ve uma apresentacao completa surgir na tela e fecha a experiencia vendo um site real aparecer. A ideia aqui e te fazer sentir a IA trabalhando na pratica antes da teoria.",
     continueLabel: "Comecar pelos frames do video",
     continueHelper:
       "Antes do video, vamos criar as imagens-chave que vao dar o clima da cena.",
@@ -178,7 +179,7 @@ const PT_COPY = {
     frames: {
       eyebrow: "Preparacao do video",
       title: "Crie frames para o seu video",
-      tool: "Ferramenta: ChatGPT",
+      tool: "Ferramenta: Gemini",
       description:
         "Antes de gerar o video, vamos criar as imagens-chave (frames). A IA gera os quadros e depois voce usa eles para montar o video.",
       steps: [
@@ -303,7 +304,7 @@ const PT_COPY = {
         {
           id: "A",
           label: "Prompt A",
-          name: "Praia ao entardecer",
+          name: "Boas-vindas entusiasmada",
           prompt: VIDEO_PROMPTS.A,
           exercise: promptExercise(
             "Complete o prompt do video feliz",
@@ -328,7 +329,7 @@ const PT_COPY = {
         {
           id: "B",
           label: "Prompt B",
-          name: "Cidade a noite",
+          name: "Mensagem emotiva",
           prompt: VIDEO_PROMPTS.B,
           exercise: promptExercise(
             "Complete o prompt do video emotivo",
@@ -353,7 +354,7 @@ const PT_COPY = {
         {
           id: "C",
           label: "Prompt C",
-          name: "Amanhecer nas montanhas",
+          name: "Convite firme",
           prompt: VIDEO_PROMPTS.C,
           exercise: promptExercise(
             "Complete o prompt do video firme",
@@ -379,9 +380,9 @@ const PT_COPY = {
       resultTitle: "Seu video esta pronto",
       resultDescription:
         "A cena foi montada a partir do prompt que voce escolheu. Agora observe como a emocao da personagem muda o impacto do video.",
-      continueLabel: "Continuar para a apresentacao",
+      continueLabel: "Continuar para o flyer",
       continueHelper:
-        "Agora voce vai ver uma apresentacao completa em slides, pronta para navegar.",
+        "Agora voce vai transformar a ideia do video em uma arte pronta para divulgar.",
     },
     flyer: {
       eyebrow: "Criacao 2",
@@ -518,7 +519,7 @@ Design [BLANK], elegante e com aparencia profissional.`,
         "Agora voce vai sair da imagem e ver uma apresentacao inteira sendo estruturada em poucos segundos.",
     },
     slides: {
-      eyebrow: "Criacao 2",
+      eyebrow: "Criacao 3",
       title: "Crie uma apresentacao em slides",
       tool: "Ferramenta: Gamma",
       description:
@@ -634,7 +635,7 @@ Design [BLANK], elegante e com aparencia profissional.`,
         "Fechando o Dia 1, voce vai pedir um site inteiro e ver uma pagina pronta surgir a partir de um unico prompt.",
     },
     site: {
-      eyebrow: "Criacao 3",
+      eyebrow: "Criacao 4",
       title: "Crie um site completo",
       tool: "Ferramenta: Claude",
       description:
@@ -754,17 +755,29 @@ Design [BLANK], elegante e com aparencia profissional.`,
     eyebrow: "Fechamento",
     title: "O que voce acabou de criar",
     description:
-      "Frames para um video, um video falado, uma apresentacao em slides e um site completo. Tudo em poucos minutos, com prompts prontos e sem precisar entender teoria antes.",
+      "Frames para um video, um video falado, um flyer, uma apresentacao em slides e um site completo. Tudo em poucos minutos, com prompts prontos e sem precisar entender teoria antes.",
     items: [
       "Frames para o video",
       "Um video",
+      "Um flyer",
       "Uma apresentacao",
       "Um site completo",
     ],
     finalLine:
       "Agora imagina quando voce aprender a criar os seus proprios prompts do zero.",
     nextDay:
-      "Amanha: como a IA funciona e como fazer ela trabalhar do seu jeito.",
+      "A partir de amanha, vamos te ajudar a entender e aprender cada uma dessas IAs para que voce consiga fazer tudo isso sozinho.",
+    toolsEyebrow: "IAs usadas hoje",
+    toolsTitle: "As ferramentas que voce acabou de experimentar",
+    toolsDescription:
+      "Nos proximos dias vamos te ajudar a aprender Gemini, Grok, ChatGPT, Gamma e Claude para que voce consiga criar tudo isso sozinho, sem depender de prompt pronto.",
+    tools: [
+      { icon: "frames", name: "Gemini", focus: "Frames para o video" },
+      { icon: "video", name: "Grok", focus: "Video falado" },
+      { icon: "flyer", name: "ChatGPT", focus: "Flyer" },
+      { icon: "slides", name: "Gamma", focus: "Apresentacao" },
+      { icon: "site", name: "Claude", focus: "Site completo" },
+    ],
     continueLabel: "Concluir Dia 1",
     continueHelper:
       "Conclua para abrir o fluxo normal do fim do Dia 1 e registrar sua avaliacao.",

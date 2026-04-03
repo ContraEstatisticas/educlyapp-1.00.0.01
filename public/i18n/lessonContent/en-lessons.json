@@ -148,7 +148,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "intro",
-          "summary": "Day 1 in action. Today you do not study first: you create frames, a video, a presentation, and a complete website with AI."
+          "summary": "Day 1 in action. Today you do not study first: you create frames, a video, a flyer, a presentation, and a complete website with AI."
         }
       },
       {
@@ -171,8 +171,16 @@
         "type": "component",
         "componentName": "SidneyDay1Journey",
         "props": {
+          "section": "flyer",
+          "summary": "Creation 2 with ChatGPT. Choose a flyer prompt, generate the visual, and reveal the final artwork."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
           "section": "slides",
-          "summary": "Creation 2 with Gamma. Choose a presentation prompt, generate the deck, and browse the finished slides."
+          "summary": "Creation 3 with Gamma. Choose a presentation prompt, generate the deck, and browse the finished slides."
         }
       },
       {
@@ -180,7 +188,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "site",
-          "summary": "Creation 3 with Claude. Ask for a full website and watch a real interface appear from one prompt."
+          "summary": "Creation 4 with Claude. Ask for a full website and watch a real interface appear from one prompt."
         }
       },
       {
@@ -188,7 +196,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "summary",
-          "summary": "Sidney Day 1 wrap-up: recap of the frames, the video, the presentation, and the website with the final button to finish the track."
+          "summary": "Sidney Day 1 wrap-up: recap of the frames, the video, the flyer, the presentation, and the website with the final button to finish the track."
         }
       }
     ]
@@ -200,7 +208,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "intro",
-          "summary": "Day 1 in action. Today you do not study first: you create frames, a video, a presentation, and a complete website with AI."
+          "summary": "Day 1 in action. Today you do not study first: you create frames, a video, a flyer, a presentation, and a complete website with AI."
         }
       },
       {
@@ -223,8 +231,16 @@
         "type": "component",
         "componentName": "SidneyDay1Journey",
         "props": {
+          "section": "flyer",
+          "summary": "Creation 2 with ChatGPT. Choose a flyer prompt, generate the visual, and reveal the final artwork."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
           "section": "slides",
-          "summary": "Creation 2 with Gamma. Choose a presentation prompt, generate the deck, and browse the finished slides."
+          "summary": "Creation 3 with Gamma. Choose a presentation prompt, generate the deck, and browse the finished slides."
         }
       },
       {
@@ -232,7 +248,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "site",
-          "summary": "Creation 3 with Claude. Ask for a full website and watch a real interface appear from one prompt."
+          "summary": "Creation 4 with Claude. Ask for a full website and watch a real interface appear from one prompt."
         }
       },
       {
@@ -240,7 +256,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "summary",
-          "summary": "Sidney Day 1 wrap-up: recap of the frames, the video, the presentation, and the website with the final button to finish the track."
+          "summary": "Sidney Day 1 wrap-up: recap of the frames, the video, the flyer, the presentation, and the website with the final button to finish the track."
         }
       }
     ]

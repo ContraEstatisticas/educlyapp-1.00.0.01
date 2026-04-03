@@ -45,7 +45,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
     eyebrow: "Day 1 in action",
     title: "Today you are not going to study. You are going to create.",
     description:
-      "Today you will create 4 visible deliverables with AI: frames, a video, a presentation, and a real website. You do not need prior knowledge. Just follow the steps, choose a prompt, and watch the result.",
+      "Today you will create 5 visible deliverables with AI: frames, a video, a flyer, a presentation, and a real website. You do not need prior knowledge. Just follow the steps, choose a prompt, and watch the result.",
     supporting:
       "We will clarify the theory as you move through the trail.",
     cards: [
@@ -56,6 +56,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
         time: "~3 min",
       },
       { icon: "video", title: "A video", tool: "Grok", time: "~3 min" },
+      { icon: "flyer", title: "A flyer", tool: "ChatGPT", time: "~3 min" },
       {
         icon: "slides",
         title: "A presentation",
@@ -71,7 +72,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
     ],
     kickoffTitle: "Everything starts with practice",
     kickoffBody:
-      "First you create the frames for the video, then you turn that into a spoken video, then you watch a full presentation appear on screen, and you finish by seeing a real website show up. The goal here is for you to feel AI working in practice before the theory.",
+      "First you create the frames for the video, then you turn that into a spoken video, then you generate a flyer, then you watch a full presentation appear on screen, and you finish by seeing a real website show up. The goal here is for you to feel AI working in practice before the theory.",
     continueLabel: "Start with the video frames",
     continueHelper:
       "Before the video, let's create the key images that will define the mood of the scene.",
@@ -80,7 +81,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
     frames: {
       eyebrow: "Video preparation",
       title: "Create frames for your video",
-      tool: "Tool: ChatGPT",
+      tool: "Tool: Gemini",
       description:
         "Before generating the video, let's create the key images first. The AI generates the frames and then you use them to assemble the video.",
       steps: [
@@ -216,7 +217,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
       options: [
         {
           id: "A",
-          name: "Sunset beach",
+          name: "Enthusiastic welcome",
           prompt: `A Latina woman in her mid 20s, with long dark hair, wearing modern casual clothes in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a big welcoming smile, bright and lively eyes. She speaks in English, with an enthusiastic and happy tone: "Welcome. Joining Educly was one of the best decisions of your life. You chose education, and that changes everything." Realistic style, soft lighting, chest-up framing. No music. Natural lip sync.`,
           exercise: {
             title: "Complete the happy video prompt",
@@ -246,7 +247,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
         },
         {
           id: "B",
-          name: "City at night",
+          name: "Emotional message",
           prompt: `A Latina woman in her mid 20s, with long dark hair, wearing modern casual clothes in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a soft, emotional, and melancholic expression, slightly teary eyes, as if she were genuinely moved. She speaks in English, with a slow and sincere tone: "Joining Educly was not just any decision... but you chose education. And that... that is one of the most valuable things there is." Realistic style, soft lighting, chest-up framing. No music. Natural lip sync.`,
           exercise: {
             title: "Complete the emotional video prompt",
@@ -276,7 +277,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
         },
         {
           id: "C",
-          name: "Mountain sunrise",
+          name: "Firm invitation",
           prompt: `A Latina woman in her mid 20s, with long dark hair, wearing modern casual clothes in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a strong and determined expression, slightly furrowed brows, and a serious tone. She speaks in English, with a strong and passionate tone: "Welcome to Educly. You chose education, and that is no small thing. Now it is time to act, because people who study do not get left behind." Realistic style, soft lighting, chest-up framing. No music. Natural lip sync.`,
           exercise: {
             title: "Complete the firm video prompt",
@@ -310,12 +311,12 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
       resultTitle: "Your video is ready",
       resultDescription:
         "The scene was built from the prompt you chose. Now notice how the character's emotion changes the impact of the video.",
-      continueLabel: "Continue to the presentation",
+      continueLabel: "Continue to the flyer",
       continueHelper:
-        "Now you will see a full slide presentation, ready to browse.",
+        "Now you will turn the idea of the video into a ready-to-share visual.",
     },
     flyer: {
-      eyebrow: "Creation 2",
+      eyebrow: "Creation 3",
       title: "Create a motivational flyer",
       tool: "Tool: ChatGPT",
       description:
@@ -490,7 +491,7 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
         "To close Day 1, you will ask for a whole site and watch a finished page appear from a single prompt.",
     },
     site: {
-      eyebrow: "Creation 3",
+      eyebrow: "Creation 4",
       title: "Create a complete website",
       tool: "Tool: Claude",
       description:
@@ -616,17 +617,29 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
     eyebrow: "Wrap-up",
     title: "What you just created",
     description:
-      "Frames for a video, a spoken video, a slide presentation, and a complete website. All in a few minutes, with ready prompts and without needing to understand theory first.",
+      "Frames for a video, a spoken video, a flyer, a slide presentation, and a complete website. All in a few minutes, with ready prompts and without needing to understand theory first.",
     items: [
       "Frames for the video",
       "A video",
+      "A flyer",
       "A presentation",
       "A complete website",
     ],
     finalLine:
       "Now imagine what happens when you learn to create your own prompts from scratch.",
     nextDay:
-      "Tomorrow: how AI works and how to make it work your way.",
+      "Starting tomorrow, we will help you understand and learn each of these AI tools so you can do all of this on your own.",
+    toolsEyebrow: "AI tools used today",
+    toolsTitle: "The tools you just experienced",
+    toolsDescription:
+      "Over the next days, we will help you learn Gemini, Grok, ChatGPT, Gamma, and Claude so you can create all of this on your own, without relying on ready-made prompts.",
+    tools: [
+      { icon: "frames", name: "Gemini", focus: "Frames for the video" },
+      { icon: "video", name: "Grok", focus: "Spoken video" },
+      { icon: "flyer", name: "ChatGPT", focus: "Flyer" },
+      { icon: "slides", name: "Gamma", focus: "Presentation" },
+      { icon: "site", name: "Claude", focus: "Complete website" },
+    ],
     continueLabel: "Finish Day 1",
     continueHelper:
       "Finish to open the normal end-of-Day-1 flow and record your feedback.",

@@ -1201,6 +1201,36 @@ const SidneyDay1Journey = ({
           </div>
         </div>
 
+        <div className="mt-7 rounded-[24px] border border-black/5 bg-white/85 p-4 shadow-sm sm:rounded-[28px] sm:p-6">
+          <div className="max-w-3xl">
+            <div className={cn("inline-flex rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.22em]", theme.accentSoft)}>
+              {copy.summary.toolsEyebrow}
+            </div>
+            <h3 className="mt-4 text-[1.5rem] font-semibold leading-tight text-[#1f2434] sm:text-[1.9rem]">
+              {copy.summary.toolsTitle}
+            </h3>
+            <p className="mt-3 text-base leading-7 text-[#586174] sm:text-[1.02rem] sm:leading-8">
+              {copy.summary.toolsDescription}
+            </p>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+            {copy.summary.tools.map((tool: any) => {
+              const Icon = overviewIcons[tool.icon as keyof typeof overviewIcons] ?? Sparkles;
+
+              return (
+                <div key={`${tool.name}-${tool.focus}`} className="rounded-[22px] border border-[#e8edf3] bg-[#fbfcfe] p-4 shadow-sm">
+                  <div className={cn("flex h-11 w-11 items-center justify-center rounded-2xl", theme.accentSoft)}>
+                    <Icon className={cn("h-5 w-5", theme.accent)} />
+                  </div>
+                  <p className="mt-4 text-lg font-semibold text-[#1f2434]">{tool.name}</p>
+                  <p className="mt-2 text-sm leading-7 text-[#64748b]">{tool.focus}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         <ContinueFooter
           label={copy.summary.continueLabel}
           helper={copy.summary.continueHelper}

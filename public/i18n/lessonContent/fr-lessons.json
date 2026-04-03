@@ -148,7 +148,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "intro",
-          "summary": "Jour 1 en action. Aujourd'hui, tu ne commences pas par etudier : tu crees des frames, une video, une presentation et un site complet avec l'IA."
+          "summary": "Jour 1 en action. Aujourd'hui, tu ne commences pas par etudier : tu crees des frames, une video, un flyer, une presentation et un site complet avec l'IA."
         }
       },
       {
@@ -171,8 +171,16 @@
         "type": "component",
         "componentName": "SidneyDay1Journey",
         "props": {
+          "section": "flyer",
+          "summary": "Creation 2 avec ChatGPT. Choisis un prompt de flyer, genere le visuel et revele l'art final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
           "section": "slides",
-          "summary": "Creation 2 avec Gamma. Choisis un prompt de presentation, genere le deck et parcours les slides finaux."
+          "summary": "Creation 3 avec Gamma. Choisis un prompt de presentation, genere le deck et parcours les slides finaux."
         }
       },
       {
@@ -180,7 +188,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "site",
-          "summary": "Creation 3 avec Claude. Demande un site entier et vois une vraie interface apparaitre depuis un seul prompt."
+          "summary": "Creation 4 avec Claude. Demande un site entier et vois une vraie interface apparaitre depuis un seul prompt."
         }
       },
       {
@@ -188,7 +196,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "summary",
-          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des frames, de la video, de la presentation et du site avec bouton final pour terminer la piste."
+          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des frames, de la video, du flyer, de la presentation et du site avec bouton final pour terminer la piste."
         }
       }
     ]
@@ -200,7 +208,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "intro",
-          "summary": "Jour 1 en pratique. Aujourd'hui tu ne vas pas d'abord etudier : tu vas creer des frames, une video, une presentation et un site complet avec l'IA."
+          "summary": "Jour 1 en pratique. Aujourd'hui tu ne vas pas d'abord etudier : tu vas creer des frames, une video, un flyer, une presentation et un site complet avec l'IA."
         }
       },
       {
@@ -223,8 +231,16 @@
         "type": "component",
         "componentName": "SidneyDay1Journey",
         "props": {
+          "section": "flyer",
+          "summary": "Creation 2 avec ChatGPT. Choisis un prompt de flyer, genere le visuel et revele l'art final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
           "section": "slides",
-          "summary": "Creation 2 avec Gamma. Choisis un prompt de presentation, genere le deck et parcours les slides finaux."
+          "summary": "Creation 3 avec Gamma. Choisis un prompt de presentation, genere le deck et parcours les slides finaux."
         }
       },
       {
@@ -232,7 +248,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "site",
-          "summary": "Creation 3 avec Claude. Demande un site complet et regarde une vraie interface apparaitre a partir d'un seul prompt."
+          "summary": "Creation 4 avec Claude. Demande un site complet et regarde une vraie interface apparaitre a partir d'un seul prompt."
         }
       },
       {
@@ -240,7 +256,7 @@
         "componentName": "SidneyDay1Journey",
         "props": {
           "section": "summary",
-          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des frames, de la video, de la presentation et du site avec bouton final pour terminer le parcours."
+          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des frames, de la video, du flyer, de la presentation et du site avec bouton final pour terminer le parcours."
         }
       }
     ]

@@ -45,7 +45,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
     eyebrow: "Dia 1 en accion",
     title: "Hoy no vas a estudiar. Vas a crear.",
     description:
-      "Hoy vas a crear 4 entregas visibles con IA: frames, un video, una presentacion y un sitio real. No necesitas saber nada antes. Solo sigue los pasos, elige un prompt y mira el resultado.",
+      "Hoy vas a crear 5 entregas visibles con IA: frames, un video, un flyer, una presentacion y un sitio real. No necesitas saber nada antes. Solo sigue los pasos, elige un prompt y mira el resultado.",
     supporting:
       "La teoria se ira aclarando a medida que avances en la ruta.",
     cards: [
@@ -56,6 +56,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
         time: "~3 min",
       },
       { icon: "video", title: "Un video", tool: "Grok", time: "~3 min" },
+      { icon: "flyer", title: "Un flyer", tool: "ChatGPT", time: "~3 min" },
       {
         icon: "slides",
         title: "Una presentacion",
@@ -71,7 +72,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
     ],
     kickoffTitle: "Todo empieza por la practica",
     kickoffBody:
-      "Primero creas los frames del video, despues los conviertes en un video hablado, luego ves una presentacion completa montarse en pantalla y cierras la experiencia viendo un sitio real aparecer. La idea es que sientas a la IA trabajando en la practica antes de entrar en teoria.",
+      "Primero creas los frames del video, despues los conviertes en un video hablado, luego generas un flyer, despues ves una presentacion completa montarse en pantalla y cierras la experiencia viendo un sitio real aparecer. La idea es que sientas a la IA trabajando en la practica antes de entrar en teoria.",
     continueLabel: "Empezar por los frames del video",
     continueHelper:
       "Antes del video, vamos a crear las imagenes clave que van a definir el clima de la escena.",
@@ -80,7 +81,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
     frames: {
       eyebrow: "Preparacion del video",
       title: "Crea frames para tu video",
-      tool: "Herramienta: ChatGPT",
+      tool: "Herramienta: Gemini",
       description:
         "Antes de generar el video, vamos a crear las imagenes clave. La IA genera los cuadros y despues los usas para montar el video.",
       steps: [
@@ -220,7 +221,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
       options: [
         {
           id: "A",
-          name: "Playa al atardecer",
+          name: "Bienvenida entusiasta",
           prompt: `Una mujer latina de unos 20 y tantos anos, con cabello largo oscuro, usando ropa casual moderna en tonos azul claro y blanco, de pie frente a un fondo blanco limpio. Mira directamente a la camara con una sonrisa grande y acogedora, ojos brillantes y animados. Habla en espanol, con un tono entusiasta y feliz: "Bienvenida. Tomaste una de las mejores decisiones de tu vida al entrar a Educly. Elegiste la educacion, y eso lo cambia todo." Estilo realista, iluminacion suave, encuadre del busto hacia arriba. Sin musica. Lip sync natural.`,
           exercise: {
             title: "Completa el prompt del video feliz",
@@ -252,7 +253,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
         },
         {
           id: "B",
-          name: "Ciudad de noche",
+          name: "Mensaje emotivo",
           prompt: `Una mujer latina de unos 20 y tantos anos, con cabello largo oscuro, usando ropa casual moderna en tonos azul claro y blanco, de pie frente a un fondo blanco limpio. Mira directamente a la camara con una expresion suave, emotiva y melancolica, ojos levemente llorosos, como si de verdad estuviera conmovida. Habla en espanol, con un tono lento y sincero: "Entrar a Educly no fue una decision cualquiera... pero elegiste la educacion. Y eso... eso es una de las cosas mas valiosas que existen." Estilo realista, iluminacion suave, encuadre del busto hacia arriba. Sin musica. Lip sync natural.`,
           exercise: {
             title: "Completa el prompt del video emotivo",
@@ -284,7 +285,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
         },
         {
           id: "C",
-          name: "Amanecer en las montanas",
+          name: "Invitacion firme",
           prompt: `Una mujer latina de unos 20 y tantos anos, con cabello largo oscuro, usando ropa casual moderna en tonos azul claro y blanco, de pie frente a un fondo blanco limpio. Mira directamente a la camara con una expresion fuerte y decidida, cejas levemente fruncidas y tono serio. Habla en espanol, con un tono fuerte y apasionado: "Bienvenida a Educly. Elegiste la educacion y eso no es poca cosa. Ahora es momento de actuar, porque quien estudia no se queda atras." Estilo realista, iluminacion suave, encuadre del busto hacia arriba. Sin musica. Lip sync natural.`,
           exercise: {
             title: "Completa el prompt del video firme",
@@ -318,12 +319,12 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
       resultTitle: "Tu video esta listo",
       resultDescription:
         "La escena fue construida a partir del prompt que elegiste. Ahora observa como la emocion del personaje cambia el impacto del video.",
-      continueLabel: "Continuar a la presentacion",
+      continueLabel: "Continuar al flyer",
       continueHelper:
-        "Ahora vas a ver una presentacion completa en slides, ya montada y lista para recorrer.",
+        "Ahora vas a convertir la idea del video en una pieza visual lista para divulgar.",
     },
     flyer: {
-      eyebrow: "Creacion 2",
+      eyebrow: "Creacion 3",
       title: "Crea un flyer motivacional",
       tool: "Herramienta: ChatGPT",
       description:
@@ -498,7 +499,7 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
         "Para cerrar el Dia 1, vas a pedir un sitio entero y ver una pagina lista aparecer a partir de un solo prompt.",
     },
     site: {
-      eyebrow: "Creacion 3",
+      eyebrow: "Creacion 4",
       title: "Crea un sitio completo",
       tool: "Herramienta: Claude",
       description:
@@ -624,17 +625,29 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
     eyebrow: "Cierre",
     title: "Lo que acabas de crear",
     description:
-      "Frames para un video, un video hablado, una presentacion en slides y un sitio completo. Todo en pocos minutos, con prompts listos y sin necesitar teoria primero.",
+      "Frames para un video, un video hablado, un flyer, una presentacion en slides y un sitio completo. Todo en pocos minutos, con prompts listos y sin necesitar teoria primero.",
     items: [
       "Frames para el video",
       "Un video",
+      "Un flyer",
       "Una presentacion",
       "Un sitio completo",
     ],
     finalLine:
       "Ahora imagina lo que pasa cuando aprendes a crear tus propios prompts desde cero.",
     nextDay:
-      "Manana: como funciona la IA y como hacer que trabaje a tu manera.",
+      "Desde manana, vamos a ayudarte a entender y aprender cada una de estas IAs para que puedas hacer todo esto por tu cuenta.",
+    toolsEyebrow: "IAs usadas hoy",
+    toolsTitle: "Las herramientas que acabas de probar",
+    toolsDescription:
+      "En los proximos dias vamos a ayudarte a aprender Gemini, Grok, ChatGPT, Gamma y Claude para que puedas crear todo esto por tu cuenta, sin depender de prompts listos.",
+    tools: [
+      { icon: "frames", name: "Gemini", focus: "Frames para el video" },
+      { icon: "video", name: "Grok", focus: "Video hablado" },
+      { icon: "flyer", name: "ChatGPT", focus: "Flyer" },
+      { icon: "slides", name: "Gamma", focus: "Presentacion" },
+      { icon: "site", name: "Claude", focus: "Sitio completo" },
+    ],
     continueLabel: "Concluir Dia 1",
     continueHelper:
       "Concluye para abrir el flujo normal del final del Dia 1 y registrar tu evaluacion.",
