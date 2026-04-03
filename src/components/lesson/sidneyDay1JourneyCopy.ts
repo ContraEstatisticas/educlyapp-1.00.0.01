@@ -1,3 +1,7 @@
+import { EN_SIDNEY_DAY1_JOURNEY_COPY } from "@/components/lesson/sidneyDay1JourneyCopy.en";
+import { ES_SIDNEY_DAY1_JOURNEY_COPY } from "@/components/lesson/sidneyDay1JourneyCopy.es";
+import { FR_SIDNEY_DAY1_JOURNEY_COPY } from "@/components/lesson/sidneyDay1JourneyCopy.fr";
+
 export type SidneyJourneyLocale = "pt" | "en" | "es" | "fr";
 
 export type SidneyJourneySectionKey =
@@ -26,16 +30,51 @@ export const resolveSidneyJourneyLocale = (
   return base && SUPPORTED_SIDNEY_JOURNEY_LOCALES.has(base) ? base : "pt";
 };
 
+const mergeLocalizedOptions = (
+  baseOptions: any[] = [],
+  localizedOptions?: any[],
+) =>
+  baseOptions.map((baseOption) => {
+    const localizedOption = localizedOptions?.find(
+      (option) => option.id === baseOption.id,
+    );
+
+    if (!localizedOption) {
+      return baseOption;
+    }
+
+    return {
+      ...baseOption,
+      ...localizedOption,
+      previewTags: localizedOption.previewTags ?? baseOption.previewTags,
+      exercise:
+        baseOption.exercise || localizedOption.exercise
+          ? {
+              ...(baseOption.exercise || {}),
+              ...(localizedOption.exercise || {}),
+            }
+          : undefined,
+    };
+  });
+
+const mergeLocalizedSection = (baseSection: any, localizedSection?: any) => ({
+  ...baseSection,
+  ...(localizedSection || {}),
+  steps: localizedSection?.steps ?? baseSection.steps,
+  loadingLines: localizedSection?.loadingLines ?? baseSection.loadingLines,
+  options: mergeLocalizedOptions(baseSection.options, localizedSection?.options),
+});
+
 const FRAME_PROMPTS = {
-  A: "FELIZ Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, sonrisa amplia, mirada directa a la camara, fondo blanco limpio, encuadre del busto hacia arriba, iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
-  B: "TRISTE Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, expresion triste y desanimada, ojos ligeramente bajos, fondo blanco limpio, encuadre del busto hacia arriba, iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
-  C: "SERIA Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, expresion seria y firme, mirada directa a la camara sin sonrisa, fondo blanco limpio, encuadre del busto hacia arriba, iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
+  A: "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, sorriso amplo, olhar direto para a camera, fundo branco limpo, enquadramento do busto para cima, iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
+  B: "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, expressao triste e desanimada, olhos levemente baixos, fundo branco limpo, enquadramento do busto para cima, iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
+  C: "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, expressao seria e firme, olhar direto para a camera sem sorrir, fundo branco limpo, enquadramento do busto para cima, iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
 } as const;
 
 const VIDEO_PROMPTS = {
-  A: `FELIZ A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a big warm smile, eyes bright and excited. She speaks in Spanish with an enthusiastic and happy tone: "Bienvenida. Tomaste la mejor decision de tu vida al unirte a Educly. Elegiste la educacion y eso lo cambia todo." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
-  B: `TRISTE A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a soft, emotional and melancholic expression, eyes slightly watery, as if genuinely moved. She speaks in Spanish with a slow and heartfelt tone: "Suscribirse a Educly no fue facil... pero elegiste la educacion. Y eso... eso es lo mas valioso que existe." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
-  C: `BRAVA A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with a fierce and determined expression, eyebrows slightly furrowed, serious tone. She speaks in Spanish with a strong and passionate tone: "Bienvenida a Educly. Elegiste la educacion y eso no es cualquier cosa. Ahora a trabajar, porque el que estudia no se queda atras." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
+  A: `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com um sorriso grande e acolhedor, olhos brilhantes e animados. Ela fala em portugues, com um tom entusiasmado e feliz: "Bem-vinda. Voce tomou uma das melhores decisoes da sua vida ao entrar na Educly. Voce escolheu a educacao, e isso muda tudo." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
+  B: `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com uma expressao suave, emotiva e melancolica, olhos levemente marejados, como se estivesse realmente tocada. Ela fala em portugues, com um tom lento e sincero: "Entrar na Educly nao foi uma decisao qualquer... mas voce escolheu a educacao. E isso... isso e uma das coisas mais valiosas que existem." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
+  C: `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com uma expressao forte e determinada, sobrancelhas levemente franzidas, tom serio. Ela fala em portugues, com um tom forte e apaixonado: "Bem-vinda a Educly. Voce escolheu a educacao e isso nao e pouca coisa. Agora e hora de agir, porque quem estuda nao fica para tras." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
 } as const;
 
 const promptExercise = (
@@ -80,12 +119,31 @@ const PT_COPY = {
     readyToContinue:
       "Tudo certo. Agora voce pode seguir para a proxima criacao.",
     loadingProgress: (value: number) => `${value}% concluido`,
+    pipelineLabel: "pipeline de IA",
+    generatedResultBadge: "resultado da geracao",
+    finalAssetLabel: "asset final",
+    videoAssetPending:
+      "O video gerado vai aparecer aqui assim que os assets forem conectados.",
+    frameAssetPending:
+      "O frame gerado vai aparecer aqui assim que os assets forem conectados.",
+    protectedResultLabel: "resultado protegido",
+    hiddenVideoLabel: "video oculto",
+    hiddenFrameLabel: "frame oculto",
+    hiddenVideoHint:
+      "Escolha a opcao que quiser e clique em gerar agora. O video real aparece somente depois do suspense e da tela de loading.",
+    hiddenFramesHint:
+      "Escolha a opcao que quiser e clique em gerar agora. Os frames reais aparecem somente depois do suspense e da tela de loading.",
+    generatedVideoLabel: "video gerado",
+    generatedFrameLabel: "frame gerado",
+    flyerCtaLabel: "Reserve agora",
+    promptPanelLabel: "Prompt",
+    dayLabel: "Dia 1",
   },
   intro: {
     eyebrow: "Dia 1 na pratica",
     title: "Hoje voce nao vai estudar. Vai criar.",
     description:
-      "Hoje voce vai criar 4 coisas reais com IA. Nao precisa saber nada. Nao precisa entender como funciona. So siga os passos, escolha um prompt e veja o resultado.",
+      "Hoje voce vai criar 4 entregas visiveis com IA: frames, um video, uma apresentacao e um site real. Nao precisa saber nada antes. So siga os passos, escolha um prompt e veja o resultado.",
     supporting:
       "Vamos esclarecer de acordo com o que voce avanca na trilha.",
     cards: [
@@ -97,14 +155,8 @@ const PT_COPY = {
       },
       { icon: "video", title: "Um video", tool: "Grok", time: "~3 min" },
       {
-        icon: "flyer",
-        title: "Um flyer de motivacao",
-        tool: "ChatGPT",
-        time: "~3 min",
-      },
-      {
         icon: "slides",
-        title: "Uma apresentacao em slides",
+        title: "Uma apresentacao",
         tool: "Gamma",
         time: "~3 min",
       },
@@ -117,7 +169,7 @@ const PT_COPY = {
     ],
     kickoffTitle: "Tudo comecando pela pratica",
     kickoffBody:
-      "Primeiro voce cria os frames do video, depois transforma isso em video, imagem, slides e site. A ideia aqui e te fazer sentir a IA trabalhando na pratica antes da teoria.",
+      "Primeiro voce cria os frames do video, depois transforma isso em um video falado, em seguida ve uma apresentacao completa surgir na tela e fecha a experiencia vendo um site real aparecer. A ideia aqui e te fazer sentir a IA trabalhando na pratica antes da teoria.",
     continueLabel: "Comecar pelos frames do video",
     continueHelper:
       "Antes do video, vamos criar as imagens-chave que vao dar o clima da cena.",
@@ -147,19 +199,19 @@ const PT_COPY = {
         {
           id: "A",
           label: "Prompt A",
-          name: "Mujer Feliz",
+          name: "Mulher Feliz",
           prompt: FRAME_PROMPTS.A,
           exercise: promptExercise(
             "Complete o prompt da mulher feliz",
-            "FELIZ Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, sonrisa amplia, mirada directa a la camara, [BLANK], encuadre [BLANK], iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
-            ["fondo blanco limpio", "del busto hacia arriba"],
+            "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, sorriso amplo, olhar direto para a camera, [BLANK], enquadramento [BLANK], iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
+            ["fundo branco limpo", "do busto para cima"],
             [
-              "fondo blanco limpio",
-              "fondo con ciudad neon",
-              "del busto hacia arriba",
-              "de cuerpo entero",
-              "mirada hacia abajo",
-              "sin iluminacion suave",
+              "fundo branco limpo",
+              "fundo com cidade neon",
+              "do busto para cima",
+              "de corpo inteiro",
+              "olhando para baixo",
+              "sem iluminacao suave",
             ],
             "Perfeito. Agora o prompt completo da mulher feliz foi liberado.",
           ),
@@ -172,18 +224,18 @@ const PT_COPY = {
         {
           id: "B",
           label: "Prompt B",
-          name: "Mujer Triste",
+          name: "Mulher Triste",
           prompt: FRAME_PROMPTS.B,
           exercise: promptExercise(
             "Complete o prompt da mulher triste",
-            "TRISTE Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, expresion triste y desanimada, [BLANK], [BLANK], encuadre del busto hacia arriba, iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
-            ["ojos ligeramente bajos", "fondo blanco limpio"],
+            "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, expressao triste e desanimada, [BLANK], [BLANK], enquadramento do busto para cima, iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
+            ["olhos levemente baixos", "fundo branco limpo"],
             [
-              "ojos ligeramente bajos",
-              "sonrisa amplia",
-              "fondo blanco limpio",
-              "fondo de escenario oscuro",
-              "mirada desafiante",
+              "olhos levemente baixos",
+              "sorriso amplo",
+              "fundo branco limpo",
+              "fundo de cenario escuro",
+              "olhar desafiador",
               "luz neon azul",
             ],
             "Boa. Agora o prompt completo da mulher triste esta liberado.",
@@ -197,19 +249,19 @@ const PT_COPY = {
         {
           id: "C",
           label: "Prompt C",
-          name: "Mujer Seria",
+          name: "Mulher Seria",
           prompt: FRAME_PROMPTS.C,
           exercise: promptExercise(
             "Complete o prompt da mulher seria",
-            "SERIA Mujer latina de unos 30 anos, cabello largo oscuro, ropa casual moderna en tonos azul claro y blanco, expresion [BLANK], [BLANK] [BLANK], fondo blanco limpio, encuadre del busto hacia arriba, iluminacion suave. Estilo mascota de app movil. Alta resolucion, sin texto.",
-            ["seria y firme", "mirada directa a la camara", "sin sonrisa"],
+            "Mulher latina de cerca de 30 anos, cabelo longo escuro, roupa casual moderna em tons de azul claro e branco, expressao [BLANK], [BLANK] [BLANK], fundo branco limpo, enquadramento do busto para cima, iluminacao suave. Estilo mascote de app mobile. Alta resolucao, sem texto.",
+            ["seria e firme", "olhar direto para a camera", "sem sorrir"],
             [
-              "seria y firme",
-              "alegre y relajada",
-              "mirada directa a la camara",
-              "mirada al suelo",
-              "sin sonrisa",
-              "con una gran risa",
+              "seria e firme",
+              "alegre e relaxada",
+              "olhar direto para a camera",
+              "olhando para o chao",
+              "sem sorrir",
+              "com uma grande risada",
             ],
             "Perfeito. O prompt mais firme agora esta destravado.",
           ),
@@ -251,19 +303,19 @@ const PT_COPY = {
         {
           id: "A",
           label: "Prompt A",
-          name: "Playa al atardecer",
+          name: "Praia ao entardecer",
           prompt: VIDEO_PROMPTS.A,
           exercise: promptExercise(
             "Complete o prompt do video feliz",
-            `FELIZ A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with [BLANK]. She speaks in [BLANK] with an [BLANK] and happy tone: "Bienvenida. Tomaste la mejor decision de tu vida al unirte a Educly. Elegiste la educacion y eso lo cambia todo." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
-            ["a big warm smile, eyes bright and excited", "Spanish", "enthusiastic"],
+            `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com [BLANK]. Ela fala em [BLANK], com um tom [BLANK] e feliz: "Bem-vinda. Voce tomou uma das melhores decisoes da sua vida ao entrar na Educly. Voce escolheu a educacao, e isso muda tudo." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
+            ["um sorriso grande e acolhedor, olhos brilhantes e animados", "portugues", "entusiasmado"],
             [
-              "a big warm smile, eyes bright and excited",
-              "slightly watery eyes and a melancholic look",
-              "Spanish",
-              "English",
-              "enthusiastic",
-              "slow and heartfelt",
+              "um sorriso grande e acolhedor, olhos brilhantes e animados",
+              "olhos levemente marejados e um olhar melancolico",
+              "portugues",
+              "ingles",
+              "entusiasmado",
+              "lento e sincero",
             ],
             "Certo. Agora o prompt do video feliz pode ser usado na geracao.",
           ),
@@ -276,19 +328,19 @@ const PT_COPY = {
         {
           id: "B",
           label: "Prompt B",
-          name: "Ciudad de noche",
+          name: "Cidade a noite",
           prompt: VIDEO_PROMPTS.B,
           exercise: promptExercise(
             "Complete o prompt do video emotivo",
-            `TRISTE A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with [BLANK]. She speaks in [BLANK] with a [BLANK] tone: "Suscribirse a Educly no fue facil... pero elegiste la educacion. Y eso... eso es lo mas valioso que existe." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
-            ["a soft, emotional and melancholic expression, eyes slightly watery, as if genuinely moved", "Spanish", "slow and heartfelt"],
+            `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com [BLANK]. Ela fala em [BLANK], com um tom [BLANK]: "Entrar na Educly nao foi uma decisao qualquer... mas voce escolheu a educacao. E isso... isso e uma das coisas mais valiosas que existem." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
+            ["uma expressao suave, emotiva e melancolica, olhos levemente marejados, como se estivesse realmente tocada", "portugues", "lento e sincero"],
             [
-              "a soft, emotional and melancholic expression, eyes slightly watery, as if genuinely moved",
-              "a fierce and determined expression",
-              "Spanish",
-              "French",
-              "slow and heartfelt",
-              "strong and passionate",
+              "uma expressao suave, emotiva e melancolica, olhos levemente marejados, como se estivesse realmente tocada",
+              "uma expressao forte e determinada",
+              "portugues",
+              "frances",
+              "lento e sincero",
+              "forte e apaixonado",
             ],
             "Perfeito. O prompt do video emocional ja esta destravado.",
           ),
@@ -301,19 +353,19 @@ const PT_COPY = {
         {
           id: "C",
           label: "Prompt C",
-          name: "Amanecer en las montanas",
+          name: "Amanhecer nas montanhas",
           prompt: VIDEO_PROMPTS.C,
           exercise: promptExercise(
             "Complete o prompt do video firme",
-            `BRAVA A Latin woman in her late 20s, long dark hair, wearing a casual modern outfit in light blue and white tones, standing in front of a clean white background. She looks directly at the camera with [BLANK]. She speaks in [BLANK] with a [BLANK] tone: "Bienvenida a Educly. Elegiste la educacion y eso no es cualquier cosa. Ahora a trabajar, porque el que estudia no se queda atras." Realistic style, soft lighting, bust up framing. No music. Natural lip sync.`,
-            ["a fierce and determined expression, eyebrows slightly furrowed, serious tone", "Spanish", "strong and passionate"],
+            `Uma mulher latina na faixa dos 20 e poucos anos, com cabelo longo escuro, usando uma roupa casual moderna em tons de azul claro e branco, em pe diante de um fundo branco limpo. Ela olha diretamente para a camera com [BLANK]. Ela fala em [BLANK], com um tom [BLANK]: "Bem-vinda a Educly. Voce escolheu a educacao e isso nao e pouca coisa. Agora e hora de agir, porque quem estuda nao fica para tras." Estilo realista, iluminacao suave, enquadramento do busto para cima. Sem musica. Lip sync natural.`,
+            ["uma expressao forte e determinada, sobrancelhas levemente franzidas, tom serio", "portugues", "forte e apaixonado"],
             [
-              "a fierce and determined expression, eyebrows slightly furrowed, serious tone",
-              "a soft emotional expression with watery eyes",
-              "Spanish",
-              "Portuguese",
-              "strong and passionate",
-              "light and casual",
+              "uma expressao forte e determinada, sobrancelhas levemente franzidas, tom serio",
+              "uma expressao suave e emotiva, com olhos marejados",
+              "portugues",
+              "espanhol",
+              "forte e apaixonado",
+              "leve e casual",
             ],
             "Boa. Agora o prompt do video firme esta liberado para gerar.",
           ),
@@ -327,9 +379,9 @@ const PT_COPY = {
       resultTitle: "Seu video esta pronto",
       resultDescription:
         "A cena foi montada a partir do prompt que voce escolheu. Agora observe como a emocao da personagem muda o impacto do video.",
-      continueLabel: "Continuar para o flyer de motivacao",
+      continueLabel: "Continuar para a apresentacao",
       continueHelper:
-        "Agora voce vai gerar uma arte motivacional pronta para publicar e comparar estilos criativos diferentes.",
+        "Agora voce vai ver uma apresentacao completa em slides, pronta para navegar.",
     },
     flyer: {
       eyebrow: "Criacao 2",
@@ -466,7 +518,7 @@ Design [BLANK], elegante e com aparencia profissional.`,
         "Agora voce vai sair da imagem e ver uma apresentacao inteira sendo estruturada em poucos segundos.",
     },
     slides: {
-      eyebrow: "Criacao 3",
+      eyebrow: "Criacao 2",
       title: "Crie uma apresentacao em slides",
       tool: "Ferramenta: Gamma",
       description:
@@ -489,81 +541,89 @@ Design [BLANK], elegante e com aparencia profissional.`,
         {
           id: "A",
           label: "Apresentacao opcao 1",
-          name: "Jornada de transformacao",
+          name: "Apresentacao premium",
           prompt:
-            "Capa com uma frase que gere identificacao. Apresentacao da pessoa e sua rotina dificil. Principais dores (cansaco, falta de tempo, dificuldade com tecnologia). Momento de descoberta de uma solucao simples. Explicacao de como a solucao funciona de forma pratica. Primeiros resultados percebidos. Mudancas na rotina e qualidade de vida. Beneficios concretos (mais tempo, mais organizacao, menos estresse). Mensagem de que qualquer pessoa pode conseguir o mesmo. Slide final com convite claro para comecar. Use linguagem humana, proxima e facil de entender. Frases curtas, impacto emocional leve e visual acolhedor.",
+            "Crie uma apresentacao profissional de alto nivel sobre [tema], com um enfoque estrategico e visual premium. Gere entre 10 e 12 slides bem estruturados com: capa impactante, contexto do problema, analise da situacao atual, oportunidades, proposta de solucao, plano de acao, beneficios claros, diferenciais e conclusao. Utilize uma linguagem executiva, clara e persuasiva, evitando termos desnecessariamente tecnicos. O design deve ser moderno, elegante e minimalista, com cores sobrias (preto, branco, tons neutros) e tipografia sofisticada. Inclua sugestoes visuais para cada slide (graficos, icones, esquemas) e mantenha os textos curtos e de alto impacto.",
           exercise: promptExercise(
-            "Complete o prompt da apresentacao de transformacao",
-            "Capa com uma frase que gere identificacao. Apresentacao da pessoa e sua [BLANK]. Principais dores (cansaco, falta de tempo, dificuldade com tecnologia). Momento de descoberta de uma solucao simples. Explicacao de como a solucao funciona de forma pratica. Primeiros resultados percebidos. Mudancas na rotina e qualidade de vida. Beneficios concretos (mais tempo, mais organizacao, menos estresse). Mensagem de que qualquer pessoa pode conseguir o mesmo. Slide final com [BLANK]. Use linguagem [BLANK] e facil de entender. Frases curtas, impacto emocional leve e visual acolhedor.",
-            ["rotina dificil", "humana e proxima", "um convite claro para comecar"],
+            "Complete o prompt da apresentacao premium",
+            "Crie uma apresentacao profissional de alto nivel sobre [tema], com um enfoque [BLANK]. Gere entre 10 e 12 slides bem estruturados com: capa impactante, contexto do problema, analise da situacao atual, oportunidades, proposta de solucao, [BLANK], beneficios claros, diferenciais e conclusao. O design deve ser moderno, elegante e minimalista, com [BLANK] e tipografia sofisticada.",
             [
-              "rotina dificil",
-              "produto tecnico sem historia",
-              "humana e proxima",
-              "robotica e fria",
-              "um convite claro para comecar",
-              "um final sem chamada",
+              "estrategico e visual premium",
+              "plano de acao",
+              "cores sobrias (preto, branco, tons neutros)",
             ],
-            "Perfeito. O prompt completo da jornada de transformacao foi liberado.",
+            [
+              "estrategico e visual premium",
+              "informal e improvisado",
+              "plano de acao",
+              "piadas no meio",
+              "cores sobrias (preto, branco, tons neutros)",
+              "cores neon saturadas",
+            ],
+            "Perfeito. O prompt da apresentacao premium agora esta pronto.",
           ),
-          previewTitle: "Apresentacao com historia e evolucao",
+          previewTitle: "Deck executivo com visual premium",
           previewDescription:
-            "Uma sequencia pensada para gerar identificacao, alivio e vontade de comecar.",
-          previewTags: ["Historia", "Humana", "Conversao"],
+            "Uma apresentacao estrategica, elegante e persuasiva para temas corporativos ou de alto nivel.",
+          previewTags: ["Executiva", "Premium", "Estrategica"],
         },
         {
           id: "B",
           label: "Apresentacao opcao 2",
-          name: "Explicacao simples",
+          name: "Apresentacao dinamica",
           prompt:
-            "Capa com titulo claro e direto. Explicacao simples do conceito (sem termos tecnicos). Comparacao com algo do dia a dia para facilitar entendimento. Exemplos praticos de uso na vida real. Situacoes onde isso pode ajudar (trabalho, organizacao, rotina). Beneficios claros e faceis de perceber. Quebra de objecoes (mostrar que nao e dificil). Passo a passo basico para comecar. Reforco de que qualquer pessoa pode aprender. Slide final com incentivo para dar o primeiro passo. Use linguagem didatica, acolhedora e simples. Visual leve, organizado e com foco em facilitar o entendimento.",
+            "Crie uma apresentacao dinamica e atrativa sobre [tema], com um enfoque moderno e facil de conectar com a audiencia. Estruture entre 8 e 10 slides em formato storytelling: inicio chamativo, contexto do problema, situacoes do dia a dia, descoberta de uma solucao, como funciona na pratica, beneficios reais e conclusao com chamada para a acao. Use linguagem proxima, clara e facil de entender, evitando excesso de formalidade. O design deve ser visual, moderno e limpo, com cores suaves, boa hierarquia visual e imagens que transmitam situacoes reais. Inclua textos curtos, frases de impacto e sugestoes visuais para cada slide.",
           exercise: promptExercise(
-            "Complete o prompt da apresentacao didatica",
-            "Capa com [BLANK]. Explicacao simples do conceito (sem termos tecnicos). Comparacao com algo do dia a dia para facilitar entendimento. Exemplos praticos de uso na vida real. Situacoes onde isso pode ajudar (trabalho, organizacao, rotina). Beneficios claros e faceis de perceber. Quebra de objecoes (mostrar que nao e dificil). Passo a passo basico para comecar. Reforco de que qualquer pessoa pode aprender. Slide final com incentivo para [BLANK]. Use linguagem [BLANK]. Visual leve, organizado e com foco em facilitar o entendimento.",
-            ["titulo claro e direto", "didatica e simples", "dar o primeiro passo"],
+            "Complete o prompt da apresentacao dinamica",
+            "Crie uma apresentacao dinamica e atrativa sobre [tema], com um enfoque [BLANK]. Estruture entre 8 e 10 slides em formato storytelling: inicio chamativo, contexto do problema, situacoes do dia a dia, [BLANK], como funciona na pratica, beneficios reais e conclusao com chamada para a acao. O design deve ser visual, moderno e limpo, com [BLANK], boa hierarquia visual e imagens que transmitam situacoes reais.",
             [
-              "titulo claro e direto",
-              "titulo abstrato e confuso",
-              "didatica e simples",
-              "tecnica e distante",
-              "dar o primeiro passo",
-              "encerrar sem acao",
+              "moderno e facil de conectar com a audiencia",
+              "descoberta de uma solucao",
+              "cores suaves",
             ],
-            "Boa. Agora o prompt da apresentacao didatica esta pronto.",
+            [
+              "moderno e facil de conectar com a audiencia",
+              "frio e distante",
+              "descoberta de uma solucao",
+              "um fechamento sem direcao",
+              "cores suaves",
+              "tons agressivos e pesados",
+            ],
+            "Boa. O prompt da apresentacao dinamica agora esta pronto.",
           ),
-          previewTitle: "Deck didatico e facil de seguir",
+          previewTitle: "Storytelling visual e envolvente",
           previewDescription:
-            "Estrutura clara, visual leve e ritmo natural para quem esta vendo o assunto pela primeira vez.",
-          previewTags: ["Didatico", "Leve", "Passo a passo"],
+            "Uma estrutura moderna, leve e conectada a situacoes reais para prender a atencao da audiencia.",
+          previewTags: ["Dinamica", "Storytelling", "Conexao"],
         },
         {
           id: "C",
           label: "Apresentacao opcao 3",
-          name: "Rotina dificil para rotina melhor",
+          name: "Produtividade no trabalho",
           prompt:
-            "Capa com uma frase que gere identificacao. Apresentacao da pessoa e sua rotina dificil. Principais dores (cansaco, falta de tempo, dificuldade com tecnologia). Momento de descoberta de uma solucao simples. Explicacao de como a solucao funciona de forma pratica. Primeiros resultados percebidos. Mudancas na rotina e qualidade de vida. Beneficios concretos (mais tempo, mais organizacao, menos estresse). Mensagem de que qualquer pessoa pode conseguir o mesmo. Slide final com convite claro para comecar. Use linguagem humana, proxima e facil de entender. Frases curtas, impacto emocional leve e visual acolhedor.",
+            "Crie uma apresentacao profissional sobre produtividade no trabalho. Gere entre 8 e 12 slides com a seguinte estrutura: introducao, situacao atual, principais desafios, solucoes praticas, beneficios e conclusao. Use linguagem clara, direta e facil de entender em um contexto profissional. Inclua titulos curtos, pontos organizados e sugestoes visuais para cada slide.",
           exercise: promptExercise(
-            "Complete o prompt da apresentacao acolhedora",
-            "Capa com [BLANK]. Apresentacao da pessoa e sua rotina dificil. Principais dores (cansaco, falta de tempo, dificuldade com tecnologia). Momento de descoberta de uma solucao simples. Explicacao de como a solucao funciona de forma pratica. Primeiros resultados percebidos. Mudancas na rotina e qualidade de vida. Beneficios concretos (mais tempo, mais organizacao, menos estresse). Mensagem de que [BLANK]. Slide final com convite claro para comecar. Use linguagem humana, proxima e facil de entender. Frases curtas, [BLANK] e visual acolhedor.",
+            "Complete o prompt da apresentacao de produtividade",
+            "Crie uma apresentacao profissional sobre [BLANK]. Gere entre 8 e 12 slides com a seguinte estrutura: introducao, situacao atual, principais desafios, [BLANK], beneficios e conclusao. Use [BLANK] em um contexto profissional.",
             [
-              "uma frase que gere identificacao",
-              "impacto emocional leve",
-              "qualquer pessoa pode conseguir o mesmo",
+              "produtividade no trabalho",
+              "solucoes praticas",
+              "linguagem clara, direta e facil de entender",
             ],
             [
-              "uma frase que gere identificacao",
-              "um grafico tecnico frio",
-              "impacto emocional leve",
-              "linguagem dura e agressiva",
-              "qualquer pessoa pode conseguir o mesmo",
-              "so especialistas podem fazer isso",
+              "produtividade no trabalho",
+              "moda de luxo",
+              "solucoes praticas",
+              "historias sem aplicacao",
+              "linguagem clara, direta e facil de entender",
+              "uma linguagem rebuscada e confusa",
             ],
-            "Perfeito. Esse prompt acolhedor agora esta destravado.",
+            "Perfeito. O prompt da apresentacao de produtividade agora esta pronto.",
           ),
-          previewTitle: "Slides com antes e depois da rotina",
+          previewTitle: "Apresentacao profissional e objetiva",
           previewDescription:
-            "A IA organiza a narrativa e entrega uma apresentacao pronta para emocao e clareza ao mesmo tempo.",
-          previewTags: ["Rotina", "Antes e depois", "Clareza"],
+            "Um deck claro e pratico sobre produtividade, com estrutura corporativa e foco em aplicacao.",
+          previewTags: ["Produtividade", "Profissional", "Clareza"],
         },
       ],
       resultTitle: "Sua apresentacao esta pronta",
@@ -574,7 +634,7 @@ Design [BLANK], elegante e com aparencia profissional.`,
         "Fechando o Dia 1, voce vai pedir um site inteiro e ver uma pagina pronta surgir a partir de um unico prompt.",
     },
     site: {
-      eyebrow: "Criacao 4",
+      eyebrow: "Criacao 3",
       title: "Crie um site completo",
       tool: "Ferramenta: Claude",
       description:
@@ -694,11 +754,11 @@ Design [BLANK], elegante e com aparencia profissional.`,
     eyebrow: "Fechamento",
     title: "O que voce acabou de criar",
     description:
-      "Um video, um flyer motivacional, uma apresentacao em slides e um site completo. Tudo em poucos minutos, com prompts prontos e sem precisar entender teoria antes.",
+      "Frames para um video, um video falado, uma apresentacao em slides e um site completo. Tudo em poucos minutos, com prompts prontos e sem precisar entender teoria antes.",
     items: [
+      "Frames para o video",
       "Um video",
-      "Um flyer motivacional",
-      "Uma apresentacao em slides",
+      "Uma apresentacao",
       "Um site completo",
     ],
     finalLine:
@@ -711,15 +771,11 @@ Design [BLANK], elegante e com aparencia profissional.`,
   },
 } as const;
 
-const EN_COPY = {} as const;
-const ES_COPY = {} as const;
-const FR_COPY = {} as const;
-
 export const SIDNEY_DAY1_JOURNEY_COPY: Record<SidneyJourneyLocale, any> = {
   pt: PT_COPY,
-  en: EN_COPY,
-  es: ES_COPY,
-  fr: FR_COPY,
+  en: EN_SIDNEY_DAY1_JOURNEY_COPY,
+  es: ES_SIDNEY_DAY1_JOURNEY_COPY,
+  fr: FR_SIDNEY_DAY1_JOURNEY_COPY,
 };
 
 export const getSidneyDay1JourneyCopy = (language?: string) => {
@@ -738,26 +794,26 @@ export const getSidneyDay1JourneyCopy = (language?: string) => {
       ...(localizedCopy?.intro || {}),
     },
     sections: {
-      frames: {
-        ...PT_COPY.sections.frames,
-        ...(localizedCopy?.sections?.frames || {}),
-      },
-      video: {
-        ...PT_COPY.sections.video,
-        ...(localizedCopy?.sections?.video || {}),
-      },
-      flyer: {
-        ...PT_COPY.sections.flyer,
-        ...(localizedCopy?.sections?.flyer || {}),
-      },
-      slides: {
-        ...PT_COPY.sections.slides,
-        ...(localizedCopy?.sections?.slides || {}),
-      },
-      site: {
-        ...PT_COPY.sections.site,
-        ...(localizedCopy?.sections?.site || {}),
-      },
+      frames: mergeLocalizedSection(
+        PT_COPY.sections.frames,
+        localizedCopy?.sections?.frames,
+      ),
+      video: mergeLocalizedSection(
+        PT_COPY.sections.video,
+        localizedCopy?.sections?.video,
+      ),
+      flyer: mergeLocalizedSection(
+        PT_COPY.sections.flyer,
+        localizedCopy?.sections?.flyer,
+      ),
+      slides: mergeLocalizedSection(
+        PT_COPY.sections.slides,
+        localizedCopy?.sections?.slides,
+      ),
+      site: mergeLocalizedSection(
+        PT_COPY.sections.site,
+        localizedCopy?.sections?.site,
+      ),
     },
     summary: {
       ...PT_COPY.summary,

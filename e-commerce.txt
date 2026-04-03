@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FORMA — Moda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafaf9;
+  --surface:#ffffff;
+  --ink:#111110;
+  --muted:#888884;
+  --border:#e8e7e4;
+  --accent:#111110;
+  --tag-bg:#f2f1ee;
+  --overlay:rgba(17,17,16,0.46);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+
+/* ---- NAV ---- */
+nav{position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:22px;letter-spacing:0.03em;cursor:pointer}
+.nav-center{display:flex;gap:28px}
+.nav-link{font-size:13px;color:var(--muted);cursor:pointer;transition:color .2s;background:none;border:none;padding:0;font-family:inherit}
+.nav-link:hover,.nav-link.active{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.search-wrap{position:relative;display:flex;align-items:center}
+.search-input{width:0;padding:0;border:none;outline:none;background:transparent;font-family:inherit;font-size:13px;color:var(--ink);transition:width .3s,padding .3s,border .3s}
+.search-input.open{width:180px;padding:6px 12px 6px 32px;border:1px solid var(--border);border-radius:20px}
+.search-icon{position:absolute;left:10px;opacity:0;transition:opacity .2s;pointer-events:none}
+.search-input.open~.search-icon,.search-icon.show{opacity:1}
+.icon-btn{background:none;border:none;cursor:pointer;color:var(--ink);display:flex;align-items:center;padding:4px;border-radius:6px;transition:background .2s;position:relative}
+.icon-btn:hover{background:var(--tag-bg)}
+.cart-badge{position:absolute;top:-2px;right:-2px;background:var(--ink);color:#fff;font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:500;opacity:0;transition:opacity .2s}
+.cart-badge.show{opacity:1}
+
+/* ---- HERO ---- */
+.hero{height:480px;background:linear-gradient(135deg,#1a1917 0%,#2e2c28 100%);display:flex;align-items:flex-end;padding:60px 48px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px)}
+.hero-content{position:relative;z-index:2;max-width:520px}
+.hero-tag{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(42px,6vw,72px);color:#fff;line-height:1;margin-bottom:24px}
+.hero-title em{font-style:italic;color:#c8bfa8}
+.hero-btn{display:inline-block;padding:12px 32px;background:#fff;color:var(--ink);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:background .2s,transform .2s}
+.hero-btn:hover{background:#e8e7e4;transform:translateY(-1px)}
+
+/* ---- FILTERS ---- */
+.filters-bar{display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:1px solid var(--border);gap:16px;flex-wrap:wrap}
+.filters-left{display:flex;gap:8px;flex-wrap:wrap}
+.filter-chip{padding:7px 16px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .2s;white-space:nowrap}
+.filter-chip:hover{border-color:#aaa;color:var(--ink)}
+.filter-chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.filters-right{display:flex;align-items:center;gap:12px}
+.sort-select{border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:12px;font-family:inherit;color:var(--ink);background:var(--surface);cursor:pointer;outline:none}
+.count-label{font-size:12px;color:var(--muted)}
+
+/* ---- GRID ---- */
+.products-section{padding:32px 48px 64px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px}
+.product-card{background:var(--surface);cursor:pointer;transition:transform .25s;position:relative;overflow:hidden}
+.product-card:hover{transform:translateY(-4px);z-index:2;box-shadow:0 12px 32px rgba(0,0,0,0.1)}
+.product-img{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden}
+.product-img-fill{width:100%;height:100%;transition:transform .5s}
+.product-card:hover .product-img-fill{transform:scale(1.04)}
+.product-actions{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:8px;opacity:0;transform:translateY(8px);transition:all .25s}
+.product-card:hover .product-actions{opacity:1;transform:translateY(0)}
+.pa-btn{flex:1;padding:10px;background:rgba(250,250,249,0.95);border:none;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:background .2s}
+.pa-btn:hover{background:#fff}
+.pa-btn.dark{background:rgba(17,17,16,0.88);color:#fff}
+.pa-btn.dark:hover{background:var(--ink)}
+.product-info{padding:14px 16px}
+.product-name{font-size:13px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+.product-price{font-size:14px;font-weight:500}
+.product-price-old{font-size:12px;color:var(--muted);text-decoration:line-through;margin-left:8px}
+.badge{position:absolute;top:12px;left:12px;padding:4px 10px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500}
+.badge-new{background:#fff;color:var(--ink)}
+.badge-sale{background:var(--ink);color:#fff}
+
+/* ---- PRODUCT MODAL ---- */
+.modal-overlay{position:fixed;inset:0;background:var(--overlay);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surface);width:90%;max-width:900px;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.modal-img{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden}
+.modal-img-fill{width:100%;height:100%}
+.modal-body{padding:40px 36px;display:flex;flex-direction:column;gap:20px}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--surface);border:1px solid var(--border);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:18px;line-height:1;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--tag-bg);color:var(--ink)}
+.modal-tag{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.modal-name{font-family:'DM Serif Display',serif;font-size:28px;line-height:1.2}
+.modal-price{font-size:22px;font-weight:500}
+.modal-price span{font-size:14px;color:var(--muted);text-decoration:line-through;margin-left:8px;font-weight:400}
+.modal-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.size-label{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size-btn{width:42px;height:42px;border:1px solid var(--border);background:var(--surface);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}
+.size-btn:hover{border-color:var(--ink)}
+.size-btn.selected{background:var(--ink);color:#fff;border-color:var(--ink)}
+.color-label{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.colors{display:flex;gap:8px}
+.color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
+.color-dot.selected{border-color:var(--ink)}
+.color-dot.selected::after{content:'';position:absolute;inset:-4px;border:1px solid var(--ink);border-radius:50%}
+.add-cart-btn{padding:16px;background:var(--ink);color:#fff;border:none;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:background .2s,transform .2s;margin-top:auto}
+.add-cart-btn:hover{background:#333;transform:translateY(-1px)}
+.add-cart-btn:disabled{background:#ccc;cursor:default;transform:none}
+
+/* ---- CART DRAWER ---- */
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:380px;background:var(--surface);z-index:600;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-left:1px solid var(--border)}
+.cart-drawer.open{transform:translateX(0)}
+.cart-overlay{position:fixed;inset:0;background:var(--overlay);z-index:590;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-title{font-size:16px;font-weight:500}
+.cart-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;line-height:1;padding:4px}
+.cart-close:hover{color:var(--ink)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:16px}
+.cart-empty{text-align:center;padding:60px 0;color:var(--muted);font-size:13px}
+.cart-item{display:flex;gap:12px;align-items:flex-start}
+.cart-item-img{width:72px;height:90px;flex-shrink:0;overflow:hidden}
+.cart-item-img-fill{width:100%;height:100%}
+.cart-item-info{flex:1;display:flex;flex-direction:column;gap:4px}
+.cart-item-name{font-size:13px;font-weight:500}
+.cart-item-meta{font-size:12px;color:var(--muted)}
+.cart-item-price{font-size:13px;font-weight:500}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:var(--muted);font-size:18px;line-height:1;padding:2px;transition:color .2s}
+.cart-item-remove:hover{color:var(--ink)}
+.cart-qty{display:flex;align-items:center;gap:8px;margin-top:4px}
+.qty-btn{width:24px;height:24px;border:1px solid var(--border);background:none;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.qty-btn:hover{background:var(--tag-bg)}
+.qty-num{font-size:13px;min-width:20px;text-align:center}
+.cart-footer{padding:20px 24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:12px}
+.cart-subtotal{display:flex;justify-content:space-between;font-size:13px}
+.cart-subtotal strong{font-weight:500}
+.cart-checkout{padding:15px;background:var(--ink);color:#fff;border:none;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:background .2s}
+.cart-checkout:hover{background:#333}
+.cart-continue{background:none;border:1px solid var(--border);padding:11px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-family:inherit;cursor:pointer;color:var(--muted);transition:all .2s}
+.cart-continue:hover{border-color:var(--ink);color:var(--ink)}
+
+/* ---- NO RESULTS ---- */
+.no-results{padding:80px 48px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ---- TOAST ---- */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 24px;font-size:12px;letter-spacing:0.1em;z-index:700;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:700px){
+  nav{padding:0 20px}
+  .nav-center{display:none}
+  .hero,.filters-bar,.products-section{padding-left:20px;padding-right:20px}
+  .modal{grid-template-columns:1fr}
+  .modal-img{aspect-ratio:4/3}
+  .cart-drawer{width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showView('home')">FORMA</div>
+  <div class="nav-center">
+    <button class="nav-link active" onclick="filterCategory('todos',this)">Todos</button>
+    <button class="nav-link" onclick="filterCategory('tops',this)">Tops</button>
+    <button class="nav-link" onclick="filterCategory('calcas',this)">Calças</button>
+    <button class="nav-link" onclick="filterCategory('vestidos',this)">Vestidos</button>
+    <button class="nav-link" onclick="filterCategory('acessorios',this)">Acessórios</button>
+  </div>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <input class="search-input" id="searchInput" type="text" placeholder="Buscar..." oninput="doSearch(this.value)"/>
+      <svg class="search-icon" id="searchIconInner" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <button class="icon-btn" onclick="toggleSearch()" title="Buscar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5L13 13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <button class="icon-btn" onclick="openCart()" title="Carrinho">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2.5H3.5L5 10H12L13.5 5H4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="12.5" r="1" fill="currentColor"/><circle cx="11" cy="12.5" r="1" fill="currentColor"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="heroSection">
+  <div class="hero-content">
+    <div class="hero-tag">Nova coleção / Primavera 2025</div>
+    <h1 class="hero-title">Veste quem<br>você <em>é.</em></h1>
+    <button class="hero-btn" onclick="scrollToGrid()">Ver coleção</button>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar" id="filtersBar">
+  <div class="filters-left">
+    <button class="filter-chip active" onclick="filterSort('todos',this)">Todos</button>
+    <button class="filter-chip" onclick="filterSort('novo',this)">Novidades</button>
+    <button class="filter-chip" onclick="filterSort('sale',this)">Promoção</button>
+    <button class="filter-chip" onclick="filterSort('menor',this)">Menor preço</button>
+    <button class="filter-chip" onclick="filterSort('maior',this)">Maior preço</button>
+  </div>
+  <div class="filters-right">
+    <span class="count-label" id="countLabel">24 produtos</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products-section" id="productsSection">
+  <div class="products-grid" id="productsGrid"></div>
+  <div class="no-results" id="noResults" style="display:none">Nenhum produto encontrado para "<span id="noQuery"></span>"</div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-img">
+      <div class="modal-img-fill" id="modalImgFill"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <h2 class="modal-name" id="modalName"></h2>
+      <div class="modal-price" id="modalPrice"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div>
+        <div class="size-label">Tamanho</div>
+        <div class="sizes" id="modalSizes"></div>
+      </div>
+      <div>
+        <div class="color-label">Cor</div>
+        <div class="colors" id="modalColors"></div>
+      </div>
+      <button class="add-cart-btn" id="addCartBtn" onclick="addToCart()">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <span class="cart-title">Carrinho</span>
+    <button class="cart-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal"><span>Subtotal</span><strong id="cartTotal">R$ 0,00</strong></div>
+    <button class="cart-checkout" onclick="showToast('Em breve: checkout disponível!')">Finalizar compra</button>
+    <button class="cart-continue" onclick="closeCart()">Continuar comprando</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  {id:1,name:'Blazer Estruturado',sub:'Tops',category:'tops',price:489,badge:'novo',desc:'Corte reto com ombros definidos. Tecido crepe de alta gramatura com forro parcial.',sizes:['P','M','G','GG'],colors:['#1a1917','#c8bfa8','#8b7355'],gradient:'linear-gradient(145deg,#2a2824,#3d3830)'},
+  {id:2,name:'Calça Wide Leg',sub:'Calças',category:'calcas',price:359,badge:null,desc:'Modelagem ampla com cós alto e pregas frontais. Queda perfeita do quadril ao tornozelo.',sizes:['34','36','38','40','42'],colors:['#1a1917','#5c5248','#c0bab0'],gradient:'linear-gradient(155deg,#1e1c1a,#2e2c28)'},
+  {id:3,name:'Vestido Midi Slip',sub:'Vestidos',category:'vestidos',price:429,badge:'sale',oldPrice:619,desc:'Tecido acetinado com textura sedosa. Alças finas reguláveis e comprimento midi.',sizes:['P','M','G'],colors:['#b8a898','#1a1917','#2d4a3e'],gradient:'linear-gradient(130deg,#3a2e28,#4e3e34)'},
+  {id:4,name:'Camiseta Essential',sub:'Tops',category:'tops',price:129,badge:null,desc:'Algodão 100% pima com caimento relaxado. Básica que eleva qualquer look.',sizes:['P','M','G','GG','XG'],colors:['#fafaf9','#1a1917','#c8bfa8','#8b7355'],gradient:'linear-gradient(160deg,#e8e4de,#d4cec6)'},
+  {id:5,name:'Saia Assimétrica',sub:'Calcas',category:'calcas',price:299,badge:'novo',desc:'Barra diagonal com variação de comprimento. Tecido fluido de crepe italiano.',sizes:['P','M','G'],colors:['#1a1917','#c8bfa8'],gradient:'linear-gradient(140deg,#282420,#3c3832)'},
+  {id:6,name:'Jaqueta Oversize',sub:'Tops',category:'tops',price:679,badge:null,desc:'Corte masculinizado com botões de pressão ocultos. Algodão thick-gauge importado.',sizes:['P','M','G','GG'],colors:['#1a1917','#3d3830','#5c5248'],gradient:'linear-gradient(145deg,#1a1917,#2e2c28)'},
+  {id:7,name:'Calça Alfaiataria',sub:'Calças',category:'calcas',price:419,badge:'sale',oldPrice:559,desc:'Tecido blend lã-poliéster. Bolsos embutidos e cós com passantes finos.',sizes:['36','38','40','42','44'],colors:['#1a1917','#4a4640','#c0bab0'],gradient:'linear-gradient(150deg,#2a2624,#3e3c38)'},
+  {id:8,name:'Vestido Chemise',sub:'Vestidos',category:'vestidos',price:389,badge:'novo',desc:'Botões perolados ao longo do decote. Cinto incluso para marcar ou soltar a silhueta.',sizes:['P','M','G','GG'],colors:['#fafaf9','#b8a898','#1a1917'],gradient:'linear-gradient(135deg,#d4cec6,#e8e4de)'},
+  {id:9,name:'Brinco Geométrico',sub:'Acessórios',category:'acessorios',price:149,badge:null,desc:'Liga de zinco com banho de ouro 18k. Comprimento 6cm com movimento pendente.',sizes:['único'],colors:['#b8860b','#c0c0c0'],gradient:'linear-gradient(145deg,#3a3628,#4e4a40)'},
+  {id:10,name:'Bolsa Tote',sub:'Acessórios',category:'acessorios',price:549,badge:'novo',desc:'Couro vegetal com costuras à vista. Capacidade para notebook 13". Alça ajustável.',sizes:['único'],colors:['#1a1917','#8b7355','#c8bfa8'],gradient:'linear-gradient(155deg,#2a2420,#3e3632)'},
+  {id:11,name:'Top Cropped Canelado',sub:'Tops',category:'tops',price:189,badge:'sale',oldPrice:249,desc:'Malha canelada com elastano. Decote redondo e comprimento cropped acima do umbigo.',sizes:['P','M','G'],colors:['#1a1917','#fafaf9','#8b7355','#2d4a3e'],gradient:'linear-gradient(160deg,#1e1c1a,#32302c)'},
+  {id:12,name:'Vestido Longo Drapeado',sub:'Vestidos',category:'vestidos',price:729,badge:null,desc:'Seda natural com drapeado na lateral. Fechamento invisível no lateral esquerdo.',sizes:['P','M','G'],colors:['#c8bfa8','#1a1917','#2d4a3e'],gradient:'linear-gradient(135deg,#2e2820,#443c30)'},
+];
+
+let cart = [];
+let activeCategory = 'todos';
+let activeSort = 'todos';
+let searchQuery = '';
+let currentProduct = null;
+let selectedSize = null;
+let selectedColor = null;
+
+function getFiltered(){
+  let list = [...products];
+  if(activeCategory!=='todos') list=list.filter(p=>p.category===activeCategory);
+  if(searchQuery) list=list.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase())||p.sub.toLowerCase().includes(searchQuery.toLowerCase()));
+  if(activeSort==='novo') list=list.filter(p=>p.badge==='novo');
+  if(activeSort==='sale') list=list.filter(p=>p.badge==='sale');
+  if(activeSort==='menor') list=list.sort((a,b)=>a.price-b.price);
+  if(activeSort==='maior') list=list.sort((a,b)=>b.price-a.price);
+  return list;
+}
+
+function renderGrid(){
+  const list=getFiltered();
+  const grid=document.getElementById('productsGrid');
+  const noRes=document.getElementById('noResults');
+  const count=document.getElementById('countLabel');
+  count.textContent=list.length+' produto'+(list.length!==1?'s':'');
+  if(!list.length){grid.innerHTML='';noRes.style.display='block';document.getElementById('noQuery').textContent=searchQuery;return;}
+  noRes.style.display='none';
+  grid.innerHTML=list.map(p=>`
+    <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="product-img">
+        <div class="product-img-fill" style="background:${p.gradient}"></div>
+        ${p.badge?`<div class="badge badge-${p.badge}">${p.badge==='novo'?'Novo':'Sale'}</div>`:''}
+        <div class="product-actions">
+          <button class="pa-btn" onclick="event.stopPropagation();quickAdd(${p.id})">Adicionar</button>
+          <button class="pa-btn dark" onclick="event.stopPropagation();openProduct(${p.id})">Ver mais</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-sub">${p.sub}</div>
+        <div>
+          <span class="product-price">R$ ${p.price.toLocaleString('pt-BR',{minimumFractionDigits:0})}</span>
+          ${p.oldPrice?`<span class="product-price-old">R$ ${p.oldPrice.toLocaleString('pt-BR',{minimumFractionDigits:0})}</span>`:''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCategory(cat,btn){
+  activeCategory=cat;
+  document.querySelectorAll('.nav-center .nav-link').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function filterSort(sort,btn){
+  activeSort=sort;
+  document.querySelectorAll('.filter-chip').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function doSearch(q){
+  searchQuery=q;
+  renderGrid();
+}
+
+function toggleSearch(){
+  const inp=document.getElementById('searchInput');
+  const icon=document.getElementById('searchIconInner');
+  if(inp.classList.contains('open')){inp.classList.remove('open');icon.classList.remove('show');inp.value='';searchQuery='';renderGrid();}
+  else{inp.classList.add('open');icon.classList.add('show');inp.focus();}
+}
+
+function scrollToGrid(){
+  document.getElementById('filtersBar').scrollIntoView({behavior:'smooth'});
+}
+
+function openProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  currentProduct=p; selectedSize=null; selectedColor=null;
+  document.getElementById('modalImgFill').style.background=p.gradient;
+  document.getElementById('modalTag').textContent=p.sub;
+  document.getElementById('modalName').textContent=p.name;
+  document.getElementById('modalPrice').innerHTML='R$ '+p.price.toLocaleString('pt-BR',{minimumFractionDigits:0})+(p.oldPrice?`<span>R$ ${p.oldPrice.toLocaleString('pt-BR',{minimumFractionDigits:0})}</span>`:'');
+  document.getElementById('modalDesc').textContent=p.desc;
+  document.getElementById('modalSizes').innerHTML=p.sizes.map(s=>`<button class="size-btn" onclick="selectSize('${s}',this)">${s}</button>`).join('');
+  document.getElementById('modalColors').innerHTML=p.colors.map(c=>`<div class="color-dot" style="background:${c}" onclick="selectColor('${c}',this)"></div>`).join('');
+  document.getElementById('addCartBtn').disabled=false;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function selectSize(s,btn){
+  selectedSize=s;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectColor(c,dot){
+  selectedColor=c;
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));
+  dot.classList.add('selected');
+}
+
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+
+function addToCart(){
+  if(!currentProduct)return;
+  if(!selectedSize){showToast('Selecione um tamanho');return;}
+  const existing=cart.find(i=>i.id===currentProduct.id&&i.size===selectedSize&&i.color===selectedColor);
+  if(existing){existing.qty++;}
+  else{cart.push({...currentProduct,size:selectedSize,color:selectedColor||currentProduct.colors[0],qty:1});}
+  updateCartBadge();
+  closeModal();
+  showToast(currentProduct.name+' adicionado ao carrinho');
+  renderCart();
+}
+
+function quickAdd(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  const existing=cart.find(i=>i.id===p.id);
+  if(existing){existing.qty++;}
+  else{cart.push({...p,size:p.sizes[0],color:p.colors[0],qty:1});}
+  updateCartBadge();
+  showToast(p.name+' adicionado');
+  renderCart();
+}
+
+function updateCartBadge(){
+  const total=cart.reduce((s,i)=>s+i.qty,0);
+  const badge=document.getElementById('cartBadge');
+  badge.textContent=total;
+  badge.classList.toggle('show',total>0);
+}
+
+function openCart(){
+  renderCart();
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function removeFromCart(idx){
+  cart.splice(idx,1);
+  updateCartBadge();
+  renderCart();
+}
+
+function changeQty(idx,delta){
+  cart[idx].qty+=delta;
+  if(cart[idx].qty<=0){cart.splice(idx,1);}
+  updateCartBadge();
+  renderCart();
+}
+
+function renderCart(){
+  const el=document.getElementById('cartItems');
+  const footer=document.getElementById('cartFooter');
+  if(!cart.length){
+    el.innerHTML='<div class="cart-empty">Seu carrinho está vazio.<br>Explore a coleção e adicione peças.</div>';
+    footer.style.display='none';
+    return;
+  }
+  footer.style.display='flex';
+  el.innerHTML=cart.map((item,i)=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><div class="cart-item-img-fill" style="background:${item.gradient}"></div></div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.size} &middot; <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${item.color};border:1px solid rgba(0,0,0,0.1);vertical-align:middle"></span></div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        </div>
+        <div class="cart-item-price">R$ ${(item.price*item.qty).toLocaleString('pt-BR',{minimumFractionDigits:0})}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${i})">×</button>
+    </div>
+  `).join('');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartTotal').textContent='R$ '+total.toLocaleString('pt-BR',{minimumFractionDigits:2});
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+renderGrid();
+</script>
+</body>
+</html>

@@ -253,18 +253,18 @@ export const FillBlanks = ({
   }));
 
   return (
-    <div className="bg-card rounded-xl p-4 sm:p-6 border border-border">
-      <div className="flex items-center gap-2 mb-2">
-        <PenLine className="w-5 h-5 text-primary" />
-        <h3 className="text-lg font-bold text-foreground">{title}</h3>
+    <div className="rounded-[24px] border border-border bg-card p-4 sm:rounded-[28px] sm:p-6">
+      <div className="mb-2 flex items-start gap-2">
+        <PenLine className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+        <h3 className="text-base font-bold leading-snug text-foreground sm:text-lg">{title}</h3>
       </div>
 
-      <p className="text-sm text-muted-foreground mb-4">
+      <p className="mb-4 text-sm leading-6 text-muted-foreground sm:leading-7">
         {tUi(t, i18n.language, "lesson.fillBlanks.instructions")}
       </p>
 
-      <div className="p-4 bg-muted/30 rounded-lg mb-4">
-        <p className="text-base leading-relaxed whitespace-pre-wrap break-words sm:text-lg">
+      <div className="mb-4 rounded-[20px] bg-muted/30 p-3 sm:rounded-[22px] sm:p-4">
+        <p className="whitespace-pre-wrap break-words text-[15px] leading-8 sm:text-lg sm:leading-relaxed">
           {blanks.map((part, index) => (
             <span key={index}>
               {part}
@@ -273,9 +273,9 @@ export const FillBlanks = ({
                   onClick={() => handleBlankClick(index)}
                   disabled={showResult}
                   className={cn(
-                    "inline-flex items-center justify-center min-w-[100px] mx-1 px-3 py-1",
+                    "mx-0.5 my-1 inline-flex min-h-10 max-w-full min-w-[72px] items-center justify-center px-2.5 py-1.5 align-middle sm:mx-1 sm:min-w-[100px] sm:px-3",
                     "rounded-lg border-2 border-dashed transition-all",
-                    "text-sm font-medium",
+                    "text-center text-xs font-medium leading-5 whitespace-normal break-words sm:text-sm",
                     showResult
                       ? filledAnswers[index] === actualAnswers[index]
                         ? "bg-success/20 border-success text-success"
@@ -296,14 +296,14 @@ export const FillBlanks = ({
       </div>
 
       {!showResult && (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 grid gap-2 sm:flex sm:flex-wrap">
           {shuffledOptions.map((option) => (
             <button
               key={option.id}
               onClick={() => handleOptionClick(option)}
               disabled={usedOptions.has(option.id)}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                "flex min-h-11 w-full items-center justify-start rounded-xl px-4 py-2.5 text-left text-sm font-medium leading-5 whitespace-normal break-words transition-all sm:min-h-10 sm:w-auto sm:justify-center sm:rounded-lg sm:px-4 sm:py-2",
                 "border border-border",
                 usedOptions.has(option.id)
                   ? "bg-muted/30 text-muted-foreground/50 cursor-not-allowed"
@@ -317,7 +317,7 @@ export const FillBlanks = ({
       )}
 
       {showResult && (
-        <div className={cn("p-4 rounded-lg mb-4", isCorrect ? "bg-success/10" : "bg-destructive/10")}>
+        <div className={cn("mb-4 rounded-[20px] p-3 sm:rounded-[22px] sm:p-4", isCorrect ? "bg-success/10" : "bg-destructive/10")}>
           <div className="flex items-start gap-2">
             {isCorrect ? (
               <Check className="w-5 h-5 text-success mt-0.5" />
@@ -340,7 +340,7 @@ export const FillBlanks = ({
                   {showCorrectSentenceOnError ? (
                     <div className="mt-3 rounded-lg border border-border/70 bg-background/70 p-3">
                       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                        Resposta correta
+                        {tUi(t, i18n.language, "lesson.fillBlanks.correctAnswerLabel")}
                       </p>
                       <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-7 text-foreground">
                         {correctSentenceWithHighlights}

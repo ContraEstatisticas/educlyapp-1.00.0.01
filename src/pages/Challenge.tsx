@@ -17,6 +17,24 @@ import confetti from "canvas-confetti";
 import { ChallengeTutorial } from "@/components/onboarding";
 import { tUi } from "@/lib/supplementalUiTranslations";
 import { getAiTrailUiCopy } from "@/lib/aiTrailI18n";
+import { normalizeDay1ExperimentVariant } from "@/lib/day1Experiment";
+
+const SIDNEY_DAY1_CARD_TITLES = {
+  pt: "Criacao Completa com IA",
+  en: "Complete AI Creation",
+  es: "Creacion Completa con IA",
+  fr: "Creation IA Complete",
+} as const;
+
+const getSidneyDay1CardTitle = (language?: string) => {
+  const baseLanguage = language?.split("-")[0]?.toLowerCase();
+
+  if (baseLanguage === "pt") return SIDNEY_DAY1_CARD_TITLES.pt;
+  if (baseLanguage === "es") return SIDNEY_DAY1_CARD_TITLES.es;
+  if (baseLanguage === "fr") return SIDNEY_DAY1_CARD_TITLES.fr;
+
+  return SIDNEY_DAY1_CARD_TITLES.en;
+};
 
 const GoldenTrophyCard = ({ challengeName, completedCount, totalDays, t, language }: any) => {
   const progress = totalDays > 0 ? Math.round((completedCount / totalDays) * 100) : 0;
@@ -153,6 +171,24 @@ const Challenge = () => {
   });
 
   const completedDayIds = useMemo(() => completedDaysData?.map((d) => d.challenge_day_id) || [], [completedDaysData]);
+  const { data: profileDay1Variant } = useQuery({
+    queryKey: ["challenge-day1-variant"],
+    queryFn: async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return null;
+
+      const { data } = await supabase
+        .from("profiles")
+        .select("challenge_day1_variant")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      return data?.challenge_day1_variant ?? null;
+    },
+  });
 
   const calculatedCurrentDay = useMemo(() => {
     if (!challengeDays || !completedDayIds.length) return userProgress?.current_day || 1;
@@ -162,6 +198,8 @@ const Challenge = () => {
     }, 0);
     return Math.max(maxCompletedNumber + 1, userProgress?.current_day || 1);
   }, [challengeDays, completedDayIds, userProgress]);
+
+  const normalizedDay1Variant = normalizeDay1ExperimentVariant(profileDay1Variant);
 
   const handleDayClick = async (dayId: string) => {
     // Refresh token before starting lesson to ensure 4h validity
@@ -395,6 +433,10 @@ const Challenge = () => {
                   const isCurrent = day.day_number === calculatedCurrentDay;
                   const isLocked = day.day_number > calculatedCurrentDay;
                   const isLeft = index % 2 === 0;
+                  const displayTitle =
+                    day.day_number === 1 && normalizedDay1Variant.startsWith("sidney")
+                      ? getSidneyDay1CardTitle(i18n.resolvedLanguage || i18n.language)
+                      : (dayTranslations as any)?.[day.id]?.title || getDayTitle(slug!, day.day_number, toolSlug, day.title);
 
                   return (
                     <div
@@ -439,7 +481,7 @@ const Challenge = () => {
                         (isCurrent || isCompleted) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                       )}>
                         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{t("challenge.day")} {day.day_number}</p>
-                        <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">{(dayTranslations as any)?.[day.id]?.title || getDayTitle(slug!, day.day_number, toolSlug, day.title)}</p>
+                        <p className="text-xs font-bold text-foreground leading-tight line-clamp-2">{displayTitle}</p>
                       </div>
                     </div>
                   );

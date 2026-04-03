@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RAIZ — Nutrição & Vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --sage:#4a5e44;
+  --sage-light:#7a9672;
+  --sage-pale:#d4e0ce;
+  --cream:#f7f4ee;
+  --warm:#efe9dc;
+  --terra:#8b5e3c;
+  --terra-light:#c4916a;
+  --ink:#1e1c18;
+  --muted:#7a7568;
+  --border:#e0d9cd;
+  --surface:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Epilogue',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* CURSOR */
+.cur{position:fixed;width:10px;height:10px;background:var(--sage);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+.cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid var(--sage-light);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.6}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,244,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 52px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;letter-spacing:.04em;color:var(--sage);cursor:pointer}
+.nav-logo span{color:var(--terra);font-style:italic}
+.nav-links{display:flex;gap:32px}
+.nav-a{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit;transition:color .2s;padding:0}
+.nav-a:hover,.nav-a.on{color:var(--sage)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-sub-btn{padding:9px 22px;background:var(--sage);color:#fff;border:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-family:inherit;cursor:pointer;border-radius:20px;transition:background .2s,transform .2s}
+.nav-sub-btn:hover{background:var(--sage-light);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:64px;overflow:hidden}
+.hero-left{padding:80px 52px 60px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.hero-left::after{content:'';position:absolute;right:0;top:10%;bottom:10%;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 20%,var(--border) 80%,transparent)}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--terra);margin-bottom:32px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--terra)}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(52px,6vw,88px);line-height:.95;font-weight:700;margin-bottom:32px;color:var(--ink)}
+.hero-h1 em{font-style:italic;color:var(--sage)}
+.hero-h1 .block-terra{display:block;color:var(--terra)}
+.hero-desc{font-family:'Lora',serif;font-size:16px;line-height:1.8;color:var(--muted);max-width:400px;margin-bottom:48px}
+.hero-actions{display:flex;gap:20px;align-items:center}
+.btn-sage{padding:14px 36px;background:var(--sage);color:#fff;border:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-family:inherit;cursor:pointer;border-radius:2px;transition:all .25s}
+.btn-sage:hover{background:var(--sage-light);transform:translateY(-2px)}
+.btn-link{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit;display:flex;align-items:center;gap:10px;transition:color .2s}
+.btn-link:hover{color:var(--sage)}
+.btn-link svg{transition:transform .2s}
+.btn-link:hover svg{transform:translateX(4px)}
+.hero-right{position:relative;overflow:hidden;background:var(--warm)}
+.hero-right-inner{width:100%;height:100%;position:relative}
+/* Organic botanical art */
+.botanical{position:absolute;inset:0;overflow:hidden}
+.leaf{position:absolute;border-radius:50% 0;transform-origin:bottom center}
+/* stat pills on hero */
+.hero-stats{position:absolute;bottom:40px;left:40px;display:flex;flex-direction:column;gap:12px;z-index:10}
+.stat-pill{background:rgba(247,244,238,.9);backdrop-filter:blur(8px);border:1px solid var(--border);padding:10px 18px;border-radius:30px;display:flex;align-items:center;gap:10px}
+.stat-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--sage);line-height:1}
+.stat-txt{font-size:11px;color:var(--muted);letter-spacing:.05em}
+
+/* FEATURED STRIP */
+.strip{background:var(--sage);padding:16px 52px;display:flex;gap:48px;overflow:hidden;position:relative}
+.strip-item{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);white-space:nowrap;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.strip-dot{width:4px;height:4px;border-radius:50%;background:var(--terra-light)}
+
+/* SECTION BASE */
+.section{padding:96px 52px}
+.sec-tag{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--terra);margin-bottom:20px}
+.sec-tag::before{content:'';display:block;width:24px;height:1px;background:var(--terra)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,56px);font-weight:700;line-height:1.05;color:var(--ink)}
+.sec-title em{font-style:italic;color:var(--sage)}
+
+/* FEATURED POSTS */
+.featured-section{background:var(--cream)}
+.featured-grid{margin-top:56px;display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:2px}
+.post-card{position:relative;overflow:hidden;cursor:pointer;background:var(--warm)}
+.post-card:first-child{grid-row:1/3}
+.post-img{width:100%;height:100%;min-height:300px;position:relative;overflow:hidden;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.post-card:hover .post-img{transform:scale(1.03)}
+.post-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,.75) 0%,rgba(30,28,24,.1) 50%,transparent 100%);z-index:1}
+.post-content{position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:2}
+.post-cat{display:inline-block;padding:4px 12px;background:var(--terra);color:#fff;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;border-radius:2px}
+.post-cat.sage{background:var(--sage)}
+.post-cat.muted{background:rgba(255,255,255,.2);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.3)}
+.post-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.25;color:#fff;margin-bottom:8px}
+.post-card:first-child .post-title{font-size:clamp(26px,3vw,38px)}
+.post-meta{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.08em}
+.post-meta span{color:rgba(255,255,255,.4)}
+
+/* CARD COLORS (botanical CSS art) */
+.c1{background:linear-gradient(155deg,#2d4a2a 0%,#3d6438 40%,#2a3d26 100%)}
+.c2{background:linear-gradient(140deg,#5e3020 0%,#8b5e3c 50%,#4a2418 100%)}
+.c3{background:linear-gradient(150deg,#2e3e28 0%,#4a5e44 50%,#283420 100%)}
+.c4{background:linear-gradient(130deg,#3e2e1c 0%,#6b4a2a 60%,#4a3422 100%)}
+.c5{background:linear-gradient(160deg,#1e3028 0%,#2e4a3c 50%,#1a2820 100%)}
+.c6{background:linear-gradient(145deg,#4a3a20 0%,#7a6238 50%,#3a2e18 100%)}
+
+/* botanical overlays */
+.c1::before,.c2::before,.c3::before,.c4::before,.c5::before,.c6::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(ellipse 60% 80% at 70% 30%,rgba(255,255,255,.06) 0%,transparent 70%);
+}
+
+/* ARTICLES LIST */
+.articles-section{background:var(--warm)}
+.articles-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.see-all{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit;display:flex;align-items:center;gap:8px;transition:color .2s;padding:0}
+.see-all:hover{color:var(--sage)}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.article-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.article-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(74,94,68,.1)}
+.article-img{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative}
+.article-img-fill{width:100%;height:100%;transition:transform .5s}
+.article-card:hover .article-img-fill{transform:scale(1.05)}
+.article-body{padding:22px}
+.article-tags{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{padding:3px 10px;background:var(--sage-pale);color:var(--sage);font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-radius:10px}
+.tag.terra{background:#eeddd2;color:var(--terra)}
+.article-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1.3;margin-bottom:10px;color:var(--ink)}
+.article-excerpt{font-family:'Lora',serif;font-size:13px;line-height:1.7;color:var(--muted);margin-bottom:16px}
+.article-footer{display:flex;align-items:center;justify-content:space-between}
+.author-row{display:flex;align-items:center;gap:10px}
+.author-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#fff;flex-shrink:0}
+.av1{background:var(--sage)}
+.av2{background:var(--terra)}
+.av3{background:#4a7a6a}
+.author-name{font-size:11px;color:var(--muted);letter-spacing:.05em}
+.read-time{font-size:11px;color:var(--muted)}
+
+/* RECIPE HIGHLIGHT */
+.recipe-section{background:var(--ink);padding:96px 52px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.recipe-section .sec-tag{color:var(--terra-light)}
+.recipe-section .sec-tag::before{background:var(--terra-light)}
+.recipe-section .sec-title{color:var(--cream)}
+.recipe-section .sec-title em{color:var(--sage-light)}
+.recipe-desc{font-family:'Lora',serif;font-size:15px;line-height:1.8;color:rgba(247,244,238,.55);margin-top:20px;margin-bottom:36px}
+.recipe-meta{display:flex;gap:28px;margin-bottom:36px}
+.recipe-stat{text-align:center}
+.recipe-stat-num{font-family:'Playfair Display',serif;font-size:28px;color:var(--sage-light);line-height:1}
+.recipe-stat-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,238,.4);margin-top:4px}
+.recipe-divider{width:1px;background:rgba(255,255,255,.08)}
+.recipe-btn{display:inline-block;padding:14px 36px;border:1px solid rgba(255,255,255,.2);color:var(--cream);font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-family:inherit;cursor:pointer;background:transparent;border-radius:2px;transition:all .25s}
+.recipe-btn:hover{background:var(--sage);border-color:var(--sage);transform:translateY(-1px)}
+.recipe-visual{position:relative;height:460px}
+.recipe-card-main{position:absolute;top:0;left:0;right:40px;bottom:40px;background:linear-gradient(145deg,#2a3e28,#3d5e3a);overflow:hidden}
+.recipe-card-main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 40%,rgba(122,150,114,.2) 0%,transparent 70%)}
+.recipe-card-accent{position:absolute;bottom:0;right:0;width:160px;height:160px;background:var(--terra);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.recipe-card-accent strong{font-family:'Playfair Display',serif;font-size:36px;color:#fff;font-weight:700;line-height:1}
+.recipe-card-accent span{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.recipe-badge{position:absolute;top:24px;right:60px;background:var(--cream);padding:8px 16px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sage);border-radius:2px}
+
+/* NEWSLETTER */
+.newsletter-section{background:var(--sage-pale);padding:80px 52px;text-align:center}
+.newsletter-section .sec-title{max-width:600px;margin:0 auto 12px}
+.nl-sub{font-family:'Lora',serif;font-size:15px;color:var(--muted);margin-bottom:36px}
+.nl-form{display:flex;max-width:480px;margin:0 auto;gap:0;border:1px solid var(--border);background:var(--surface);overflow:hidden}
+.nl-input{flex:1;padding:14px 20px;border:none;outline:none;font-family:inherit;font-size:13px;color:var(--ink);background:transparent}
+.nl-input::placeholder{color:var(--muted)}
+.nl-btn{padding:14px 28px;background:var(--sage);color:#fff;border:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:background .2s;white-space:nowrap}
+.nl-btn:hover{background:var(--sage-light)}
+
+/* CATEGORIES SIDEBAR feel = horizontal */
+.cats-section{background:var(--surface);padding:64px 52px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cats-row{display:flex;gap:0;margin-top:40px;overflow:hidden}
+.cat-item{flex:1;padding:32px 24px;border-right:1px solid var(--border);text-align:center;cursor:pointer;transition:background .25s}
+.cat-item:last-child{border-right:none}
+.cat-item:hover{background:var(--cream)}
+.cat-icon{width:48px;height:48px;margin:0 auto 16px;position:relative}
+.cat-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.cat-count{font-size:11px;letter-spacing:.1em;color:var(--muted)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:64px 52px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.footer-brand .nav-logo{display:block;font-size:28px;margin-bottom:16px;cursor:default}
+.footer-about{font-family:'Lora',serif;font-size:13px;line-height:1.7;color:rgba(247,244,238,.45);margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.soc-btn{width:36px;height:36px;border:1px solid rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:12px;cursor:pointer;transition:all .2s}
+.soc-btn:hover{border-color:var(--sage-light);color:var(--sage-light)}
+.footer-col-title{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,244,238,.3);margin-bottom:20px}
+.footer-links{display:flex;flex-direction:column;gap:12px}
+.footer-link{font-size:13px;color:rgba(247,244,238,.55);cursor:pointer;transition:color .2s;background:none;border:none;font-family:inherit;text-align:left;padding:0}
+.footer-link:hover{color:var(--sage-light)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);margin:40px -52px 0;padding:24px 52px 0;display:flex;justify-content:space-between;grid-column:1/5;align-items:center}
+.footer-copy{font-size:12px;color:rgba(247,244,238,.25);letter-spacing:.05em}
+
+/* SINGLE POST VIEW */
+.post-view{display:none;padding-top:64px}
+.post-view.active{display:block}
+.main-view{display:block}
+.main-view.hidden{display:none}
+.post-hero{height:55vh;position:relative;overflow:hidden}
+.post-hero-img{width:100%;height:100%}
+.post-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,28,24,.8) 0%,rgba(30,28,24,.2) 60%,transparent 100%)}
+.post-hero-content{position:absolute;bottom:0;left:0;right:0;padding:52px;max-width:860px}
+.post-body{max-width:720px;margin:0 auto;padding:64px 24px}
+.post-body-tag{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.post-body-tag .post-cat{font-size:11px}
+.post-date{font-size:12px;color:var(--muted)}
+.post-headline{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:24px}
+.post-lede{font-family:'Lora',serif;font-size:18px;line-height:1.7;color:var(--muted);margin-bottom:40px;border-left:3px solid var(--sage);padding-left:20px}
+.post-text{font-family:'Lora',serif;font-size:16px;line-height:1.85;color:#3a3830}
+.post-text p{margin-bottom:24px}
+.post-text h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--ink);margin:40px 0 16px;font-weight:700}
+.post-text ul{margin:0 0 24px 20px}
+.post-text li{margin-bottom:10px;font-family:'Lora',serif;font-size:15px;line-height:1.7;color:#3a3830}
+.post-text .highlight{background:var(--sage-pale);border-left:3px solid var(--sage);padding:16px 20px;margin:32px 0;font-family:'Lora',serif;font-style:italic;color:var(--sage);font-size:16px}
+.back-btn{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:none;border:none;font-family:inherit;padding:24px 52px;transition:color .2s}
+.back-btn:hover{color:var(--sage)}
+.back-btn svg{transition:transform .2s}
+.back-btn:hover svg{transform:translateX(-4px)}
+
+/* REVEAL ANIM */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}
+.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}
+.reveal.d4{transition-delay:.4s}
+
+/* HERO ENTRY */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-left > *{animation:fadeUp .9s ease both}
+.hero-eyebrow{animation-delay:.1s}
+.hero-h1{animation-delay:.22s}
+.hero-desc{animation-delay:.34s}
+.hero-actions{animation-delay:.46s}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sage);color:#fff;padding:12px 28px;font-size:12px;letter-spacing:.12em;z-index:800;opacity:0;transition:all .3s;border-radius:2px;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;height:auto}
+  .hero-right{height:320px}
+  .hero-left{padding:60px 20px 40px}
+  .section,.featured-section,.articles-section,.recipe-section,.newsletter-section,.cats-section{padding:64px 20px}
+  .featured-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .post-card:first-child{grid-row:auto}
+  .articles-grid{grid-template-columns:1fr}
+  .recipe-section{grid-template-columns:1fr}
+  .recipe-visual{height:280px}
+  footer{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-bottom{grid-column:1/3}
+  .cats-row{flex-wrap:wrap}
+  .cat-item{flex:0 0 50%;border-bottom:1px solid var(--border)}
+  .back-btn{padding:20px}
+  .post-hero-content{padding:24px}
+  .post-body{padding:40px 20px}
+  body{cursor:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showMain()">RAI<span>Z</span></div>
+  <div class="nav-links">
+    <button class="nav-a on" onclick="showMain()">Início</button>
+    <button class="nav-a" onclick="filterTag('receitas')">Receitas</button>
+    <button class="nav-a" onclick="filterTag('nutricao')">Nutrição</button>
+    <button class="nav-a" onclick="filterTag('bem-estar')">Bem-estar</button>
+    <button class="nav-a" onclick="filterTag('guias')">Guias</button>
+  </div>
+  <div class="nav-right">
+    <button class="nav-sub-btn" onclick="focusNewsletter()">Newsletter</button>
+  </div>
+</nav>
+
+<!-- MAIN VIEW -->
+<div class="main-view" id="mainView">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Nutrição consciente</div>
+    <h1 class="hero-h1">
+      Comer bem<br>
+      é um ato de<br>
+      <em>amor-próprio.</em>
+    </h1>
+    <p class="hero-desc">Receitas, ciência e filosofia alimentar para quem quer viver com mais leveza, energia e intenção.</p>
+    <div class="hero-actions">
+      <button class="btn-sage" onclick="scrollToFeatured()">Explorar artigos</button>
+      <button class="btn-link" onclick="focusNewsletter()">
+        Receber por e-mail
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5H14M14 5L10 1M14 5L10 9" stroke="currentColor" stroke-width="1.3"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner c5">
+      <div class="botanical" id="botanical"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(122,150,114,.18) 0%,transparent 70%)"></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-pill">
+        <div>
+          <div class="stat-num">240+</div>
+          <div class="stat-txt">Receitas</div>
+        </div>
+      </div>
+      <div class="stat-pill">
+        <div>
+          <div class="stat-num">18k</div>
+          <div class="stat-txt">Leitores</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><div class="strip-dot"></div>Dieta anti-inflamatória</div>
+  <div class="strip-item"><div class="strip-dot"></div>Gut health</div>
+  <div class="strip-item"><div class="strip-dot"></div>Receitas plant-based</div>
+  <div class="strip-item"><div class="strip-dot"></div>Nutrição esportiva</div>
+  <div class="strip-item"><div class="strip-dot"></div>Mindful eating</div>
+  <div class="strip-item"><div class="strip-dot"></div>Saúde hormonal</div>
+  <div class="strip-item"><div class="strip-dot"></div>Fermentados</div>
+  <div class="strip-item"><div class="strip-dot"></div>Superalimentos</div>
+  <div class="strip-item"><div class="strip-dot"></div>Jejum intermitente</div>
+</div>
+
+<!-- FEATURED POSTS -->
+<div class="featured-section section" id="featuredSection">
+  <div class="sec-tag reveal">Em destaque</div>
+  <h2 class="sec-title reveal d1">Leituras <em>essenciais</em></h2>
+  <div class="featured-grid reveal d2">
+    <div class="post-card" onclick="openPost(0)">
+      <div class="post-img c1" style="min-height:500px"></div>
+      <div class="post-overlay"></div>
+      <div class="post-content">
+        <span class="post-cat">Nutrição</span>
+        <div class="post-title">O guia completo sobre inflamação crônica e como sua alimentação pode reverter esse quadro</div>
+        <div class="post-meta">Dra. Ana Luz <span>·</span> 12 min de leitura <span>·</span> 14 mar 2025</div>
+      </div>
+    </div>
+    <div class="post-card" onclick="openPost(1)">
+      <div class="post-img c2" style="min-height:240px"></div>
+      <div class="post-overlay"></div>
+      <div class="post-content">
+        <span class="post-cat sage">Receita</span>
+        <div class="post-title">Bowl de quinoa com legumes assados e molho tahine de limão</div>
+        <div class="post-meta">Carla Moura <span>·</span> 8 min <span>·</span> 10 mar 2025</div>
+      </div>
+    </div>
+    <div class="post-card" onclick="openPost(2)">
+      <div class="post-img c3" style="min-height:240px"></div>
+      <div class="post-overlay"></div>
+      <div class="post-content">
+        <span class="post-cat muted">Bem-estar</span>
+        <div class="post-title">Microbiota intestinal: o que a ciência diz sobre o eixo intestino-cérebro</div>
+        <div class="post-meta">Prof. Marcos Viana <span>·</span> 15 min <span>·</span> 6 mar 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<div class="articles-section section">
+  <div class="articles-header">
+    <div>
+      <div class="sec-tag reveal">Artigos recentes</div>
+      <h2 class="sec-title reveal d1">Mais <em>lidos</em></h2>
+    </div>
+    <button class="see-all" onclick="showToast('Em breve: todos os artigos')">
+      Ver todos
+      <svg width="14" height="8" viewBox="0 0 14 8" fill="none"><path d="M0 4H12M12 4L9 1M12 4L9 7" stroke="currentColor" stroke-width="1.2"/></svg>
+    </button>
+  </div>
+  <div class="articles-grid" id="articlesGrid">
+    <div class="article-card reveal" onclick="openPost(3)">
+      <div class="article-img"><div class="article-img-fill c4"></div></div>
+      <div class="article-body">
+        <div class="article-tags"><span class="tag">Receita</span><span class="tag terra">Plant-based</span></div>
+        <div class="article-title">Pão de fermentação natural: passo a passo para o seu primeiro levain</div>
+        <div class="article-excerpt">Fazer pão em casa é um ritual. Entenda a ciência por trás da fermentação natural e por que ela muda tudo no sabor e na digestibilidade.</div>
+        <div class="article-footer">
+          <div class="author-row"><div class="author-avatar av1">CL</div><div class="author-name">Carla Lima</div></div>
+          <div class="read-time">10 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="article-card reveal d1" onclick="openPost(4)">
+      <div class="article-img"><div class="article-img-fill c5"></div></div>
+      <div class="article-body">
+        <div class="article-tags"><span class="tag">Guia</span></div>
+        <div class="article-title">Como montar uma despensa funcional com 20 itens essenciais</div>
+        <div class="article-excerpt">Uma despensa bem montada é a diferença entre comer bem toda semana ou depender de delivery. Veja a lista definitiva.</div>
+        <div class="article-footer">
+          <div class="author-row"><div class="author-avatar av2">RM</div><div class="author-name">Rafael Melo</div></div>
+          <div class="read-time">7 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="article-card reveal d2" onclick="openPost(5)">
+      <div class="article-img"><div class="article-img-fill c6"></div></div>
+      <div class="article-body">
+        <div class="article-tags"><span class="tag">Nutrição</span><span class="tag terra">Hormônios</span></div>
+        <div class="article-title">Alimentos que regulam o cortisol e reduzem o estresse crônico</div>
+        <div class="article-excerpt">O cortisol elevado impacta desde o sono até o peso. Saiba quais nutrientes têm evidência científica para equilibrá-lo.</div>
+        <div class="article-footer">
+          <div class="author-row"><div class="author-avatar av3">DS</div><div class="author-name">Dra. Sofia</div></div>
+          <div class="read-time">11 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECIPE HIGHLIGHT -->
+<div class="recipe-section">
+  <div>
+    <div class="sec-tag reveal">Receita da semana</div>
+    <h2 class="sec-title reveal d1">Ceviche de<br>manga com <em>coentro</em><br>e pimenta.</h2>
+    <p class="recipe-desc">Uma releitura tropical do clássico peruano. Fresco, ácido, com um toque de calor que abre o apetite e nutre o corpo.</p>
+    <div class="recipe-meta reveal d2">
+      <div class="recipe-stat">
+        <div class="recipe-stat-num">20'</div>
+        <div class="recipe-stat-lbl">Preparo</div>
+      </div>
+      <div class="recipe-divider"></div>
+      <div class="recipe-stat">
+        <div class="recipe-stat-num">2</div>
+        <div class="recipe-stat-lbl">Porções</div>
+      </div>
+      <div class="recipe-divider"></div>
+      <div class="recipe-stat">
+        <div class="recipe-stat-num">180</div>
+        <div class="recipe-stat-lbl">kcal</div>
+      </div>
+    </div>
+    <button class="recipe-btn" onclick="openPost(6)">Ver receita completa</button>
+  </div>
+  <div class="recipe-visual reveal d2">
+    <div class="recipe-card-main">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 40% 50%,rgba(196,145,106,.15) 0%,transparent 70%)"></div>
+    </div>
+    <div class="recipe-card-accent">
+      <strong>5★</strong>
+      <span>avaliação</span>
+    </div>
+    <div class="recipe-badge">Sem glúten</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cats-section">
+  <div class="sec-tag reveal">Categorias</div>
+  <h2 class="sec-title reveal d1">Encontre pelo <em>tema</em></h2>
+  <div class="cats-row reveal d2">
+    <div class="cat-item" onclick="filterTag('receitas')">
+      <div class="cat-icon">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48"><circle cx="24" cy="24" r="18" stroke="#4a5e44" stroke-width="1.5"/><path d="M16 28c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#4a5e44" stroke-width="1.5"/><circle cx="24" cy="18" r="2" fill="#4a5e44"/></svg>
+      </div>
+      <div class="cat-name">Receitas</div>
+      <div class="cat-count">128 artigos</div>
+    </div>
+    <div class="cat-item" onclick="filterTag('nutricao')">
+      <div class="cat-icon">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48"><path d="M24 8C16 8 10 16 10 24c0 8.8 6.3 16 14 16s14-7.2 14-16c0-8-6-16-14-16z" stroke="#8b5e3c" stroke-width="1.5"/><path d="M24 14v10l6 4" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cat-name">Nutrição</div>
+      <div class="cat-count">64 artigos</div>
+    </div>
+    <div class="cat-item" onclick="filterTag('bem-estar')">
+      <div class="cat-icon">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48"><path d="M24 36s-12-8-12-18c0-5 4-8 8-8 2 0 3.5.8 4 2 .5-1.2 2-2 4-2 4 0 8 3 8 8 0 10-12 18-12 18z" stroke="#4a7a6a" stroke-width="1.5"/></svg>
+      </div>
+      <div class="cat-name">Bem-estar</div>
+      <div class="cat-count">42 artigos</div>
+    </div>
+    <div class="cat-item" onclick="filterTag('guias')">
+      <div class="cat-icon">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48"><rect x="12" y="10" width="24" height="28" rx="2" stroke="#4a5e44" stroke-width="1.5"/><line x1="18" y1="18" x2="30" y2="18" stroke="#4a5e44" stroke-width="1.5"/><line x1="18" y1="24" x2="30" y2="24" stroke="#4a5e44" stroke-width="1.5"/><line x1="18" y1="30" x2="25" y2="30" stroke="#4a5e44" stroke-width="1.5"/></svg>
+      </div>
+      <div class="cat-name">Guias</div>
+      <div class="cat-count">36 artigos</div>
+    </div>
+    <div class="cat-item" onclick="filterTag('ciencia')">
+      <div class="cat-icon">
+        <svg viewBox="0 0 48 48" fill="none" width="48" height="48"><path d="M20 10v10L12 36h24L28 20V10" stroke="#8b5e3c" stroke-width="1.5" stroke-linejoin="round"/><line x1="18" y1="10" x2="30" y2="10" stroke="#8b5e3c" stroke-width="1.5"/><circle cx="24" cy="30" r="3" fill="#8b5e3c" opacity=".4"/></svg>
+      </div>
+      <div class="cat-name">Ciência</div>
+      <div class="cat-count">28 artigos</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section" id="nlSection">
+  <div class="sec-tag reveal" style="justify-content:center">Newsletter</div>
+  <h2 class="sec-title reveal d1">Toda semana na sua<br><em>caixa de entrada.</em></h2>
+  <p class="nl-sub reveal d2">Receitas, descobertas da ciência e reflexões sobre alimentação consciente. Sem spam, só conteúdo que vale a pena.</p>
+  <div class="nl-form reveal d3">
+    <input class="nl-input" type="email" id="nlInput" placeholder="seu@email.com"/>
+    <button class="nl-btn" onclick="subscribe()">Quero receber</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo">RAI<span>Z</span></div>
+    <p class="footer-about">Um espaço para quem acredita que a comida é muito mais do que combustível. É cultura, afeto e saúde.</p>
+    <div class="footer-social">
+      <div class="soc-btn" onclick="showToast('Instagram em breve')">ig</div>
+      <div class="soc-btn" onclick="showToast('YouTube em breve')">yt</div>
+      <div class="soc-btn" onclick="showToast('Spotify em breve')">sp</div>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Conteúdo</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="filterTag('receitas')">Receitas</button>
+      <button class="footer-link" onclick="filterTag('nutricao')">Nutrição</button>
+      <button class="footer-link" onclick="filterTag('bem-estar')">Bem-estar</button>
+      <button class="footer-link" onclick="filterTag('guias')">Guias</button>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Sobre</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showToast('Em breve')">Nossa equipe</button>
+      <button class="footer-link" onclick="showToast('Em breve')">Metodologia</button>
+      <button class="footer-link" onclick="showToast('Em breve')">Parceiros</button>
+      <button class="footer-link" onclick="showToast('Em breve')">Contato</button>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Legal</div>
+    <div class="footer-links">
+      <button class="footer-link" onclick="showToast('Em breve')">Política de privacidade</button>
+      <button class="footer-link" onclick="showToast('Em breve')">Termos de uso</button>
+      <button class="footer-link" onclick="showToast('Em breve')">Cookies</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 RAIZ — Nutrição & Vida. Todos os direitos reservados.</div>
+    <div class="footer-copy">Feito com intenção.</div>
+  </div>
+</footer>
+
+</div><!-- /main-view -->
+
+<!-- POST VIEW -->
+<div class="post-view" id="postView">
+  <button class="back-btn" onclick="showMain()">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M14 5H2M2 5L6 1M2 5L6 9" stroke="currentColor" stroke-width="1.3"/></svg>
+    Voltar
+  </button>
+  <div class="post-hero">
+    <div class="post-hero-img" id="postHeroImg"></div>
+    <div class="post-hero-overlay"></div>
+    <div class="post-hero-content">
+      <span class="post-cat" id="postCat">Nutrição</span>
+      <div style="font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,52px);color:#fff;line-height:1.1;margin-top:12px;max-width:700px;font-weight:700" id="postHeroTitle"></div>
+    </div>
+  </div>
+  <div class="post-body">
+    <div class="post-body-tag">
+      <span class="post-cat" id="postCat2">Nutrição</span>
+      <span class="post-date" id="postDate"></span>
+    </div>
+    <h1 class="post-headline" id="postTitle"></h1>
+    <p class="post-lede" id="postLede"></p>
+    <div class="post-text" id="postContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const posts = [
+  {
+    id:0,cat:'Nutrição',catClass:'',gradient:'c1',
+    title:'O guia completo sobre inflamação crônica e como sua alimentação pode reverter esse quadro',
+    date:'14 de março, 2025',author:'Dra. Ana Luz',readTime:'12 min',
+    lede:'A inflamação crônica silenciosa está por trás de praticamente todas as doenças modernas. A boa notícia: o prato tem mais poder do que qualquer remédio.',
+    content:`<h3>O que é inflamação crônica?</h3>
+<p>Diferente da inflamação aguda, que é uma resposta saudável do sistema imunológico a uma agressão pontual, a inflamação crônica é um estado de alerta permanente do organismo. Ela é silenciosa, de baixo grau, e pode durar anos sem que a pessoa perceba.</p>
+<p>Estudos publicados no <em>Nature Medicine</em> associam esse estado inflamatório crônico a diabetes tipo 2, doenças cardiovasculares, Alzheimer, obesidade e até depressão. É o que os pesquisadores chamam de "inflammaging" — o envelhecimento acelerado pela inflamação.</p>
+<h3>Como a alimentação alimenta o fogo</h3>
+<p>Alimentos ultraprocessados, açúcar refinado, óleos vegetais industrializados e excesso de ômega-6 são os principais gatilhos alimentares da inflamação crônica. O intestino é o campo de batalha: uma microbiota desequilibrada produz lipopolissacarídeos (LPS) que cruzam a barreira intestinal e ativam o sistema imune de forma contínua.</p>
+<div class="highlight">"A cada garfada você está escolhendo entre apagar ou alimentar um incêndio no seu corpo." — Dr. Mark Hyman</div>
+<h3>Os alimentos mais anti-inflamatórios</h3>
+<ul>
+<li><strong>Cúrcuma com pimenta preta:</strong> a curcumina inibe a NF-kB, principal via inflamatória. A piperina aumenta a biodisponibilidade em 2000%.</li>
+<li><strong>Peixes gordurosos:</strong> EPA e DHA convertem-se em resolvinas e protectinas, moléculas que resolvem ativamente a inflamação.</li>
+<li><strong>Azeite de oliva extravirgem:</strong> o oleocanthal tem ação similar ao ibuprofeno em doses terapêuticas.</li>
+<li><strong>Vegetais crucíferos:</strong> brócolis, couve-flor e rúcula contêm sulforafano, que ativa o gene NRF2, o "maestro" antioxidante do organismo.</li>
+<li><strong>Frutas vermelhas:</strong> antocianinas reduzem marcadores inflamatórios como PCR e IL-6 em estudos clínicos.</li>
+</ul>
+<h3>Um protocolo simples para começar</h3>
+<p>Você não precisa mudar tudo de uma vez. Comece eliminando um ultraprocessado por semana e adicionando um alimento anti-inflamatório por dia. Em 30 dias, a mudança na microbiota já é mensurável. Em 90, os marcadores inflamatórios costumam cair de forma significativa.</p>
+<p>Lembre-se: o corpo tem uma capacidade extraordinária de se regenerar quando a gente para de sabotar e começa a apoiar.</p>`
+  },
+  {
+    id:1,cat:'Receita',catClass:'sage',gradient:'c2',
+    title:'Bowl de quinoa com legumes assados e molho tahine de limão',
+    date:'10 de março, 2025',author:'Carla Moura',readTime:'8 min',
+    lede:'Proteína completa, fibras, gorduras boas e uma explosão de sabor. Este bowl é o almoço perfeito para dias corridos sem abrir mão de nutrição de verdade.',
+    content:`<h3>Ingredientes (2 porções)</h3>
+<ul>
+<li>1 xícara de quinoa cozida</li>
+<li>1 cenoura média cortada em rodelas</li>
+<li>1 abobrinha em cubos</li>
+<li>1 xícara de grão-de-bico cozido</li>
+<li>2 colheres de sopa de azeite</li>
+<li>1 colher de chá de cúrcuma</li>
+<li>Sal, pimenta e cominho a gosto</li>
+</ul>
+<h3>Para o molho tahine</h3>
+<ul>
+<li>3 colheres de sopa de tahine</li>
+<li>Suco de 1 limão siciliano</li>
+<li>1 dente de alho pequeno ralado</li>
+<li>4 colheres de sopa de água gelada</li>
+<li>Sal e pimenta do reino</li>
+</ul>
+<h3>Modo de preparo</h3>
+<p>Preaqueça o forno a 220°C. Tempere os legumes e o grão-de-bico com azeite, cúrcuma, cominho, sal e pimenta. Espalhe em uma assadeira sem sobrepor e asse por 25 minutos, virando na metade do tempo. O segredo está no calor alto: ele carameliza os açúcares naturais e cria aquela crostinha dourada irresistível.</p>
+<p>Para o molho, misture todos os ingredientes e ajuste a consistência com a água. Deve ficar cremoso mas fluido o suficiente para regar o bowl.</p>
+<div class="highlight">A quinoa é um dos poucos alimentos de origem vegetal com perfil completo de aminoácidos essenciais. Junto ao grão-de-bico, este bowl oferece mais proteína do que um filé de frango.</div>
+<h3>Montagem</h3>
+<p>Monte o bowl com a quinoa como base, distribua os legumes assados e o grão-de-bico. Regue generosamente com o molho tahine e finalize com sementes de gergelim tostado, algumas folhas de hortelã e um fio extra de azeite. Sirva imediatamente.</p>`
+  },
+  {
+    id:2,cat:'Bem-estar',catClass:'muted',gradient:'c3',
+    title:'Microbiota intestinal: o que a ciência diz sobre o eixo intestino-cérebro',
+    date:'6 de março, 2025',author:'Prof. Marcos Viana',readTime:'15 min',
+    lede:'Seu intestino tem mais neurônios do que a medula espinhal. Descobrir que ele conversa diretamente com o seu cérebro muda a forma como você pensa sobre alimentação e saúde mental.',
+    content:`<h3>O segundo cérebro</h3>
+<p>O sistema nervoso entérico é composto por mais de 500 milhões de neurônios distribuídos ao longo do trato gastrointestinal. Ele é capaz de processar informações e agir de forma independente do cérebro — por isso os pesquisadores o chamam de "segundo cérebro".</p>
+<p>O nervo vago é a principal via de comunicação entre os dois. E o que mais surpreende: cerca de 90% das mensagens trafegam no sentido intestino → cérebro, e não o contrário.</p>
+<h3>Serotonina começa no intestino</h3>
+<p>Aproximadamente 95% da serotonina do corpo é produzida no intestino, não no cérebro. Essa molécula é fundamental para o humor, o sono, o apetite e a cognição. Uma microbiota desequilibrada compromete diretamente essa produção.</p>
+<div class="highlight">"Tratar ansiedade e depressão sem olhar para o intestino é como tentar acender uma lâmpada sem verificar se tem energia na tomada." — Prof. John Cryan, UCC</div>
+<h3>O que alimenta uma microbiota saudável</h3>
+<ul>
+<li><strong>Fibras prebióticas:</strong> alho, cebola, alho-poró, aspargos, banana verde e aveia alimentam as bactérias benéficas.</li>
+<li><strong>Alimentos fermentados:</strong> kefir, kombucha, kimchi, chucrute e iogurte natural introduzem cepas benéficas diretamente.</li>
+<li><strong>Polifenóis:</strong> cacau, chá verde, mirtilo e romã funcionam como fertilizante para as bactérias do bem.</li>
+<li><strong>Diversidade alimentar:</strong> estudos do Human Gut Project mostram que consumir 30 tipos diferentes de vegetais por semana é o preditor mais forte de microbiota diversificada.</li>
+</ul>`
+  },
+  {
+    id:3,cat:'Receita',catClass:'sage',gradient:'c4',
+    title:'Pão de fermentação natural: passo a passo para o seu primeiro levain',
+    date:'3 de março, 2025',author:'Carla Lima',readTime:'10 min',
+    lede:'Fazer pão de fermentação natural é uma prática milenar que voltou com força total. E com razão: é mais digestivo, nutritivo e saboroso que qualquer pão industrializado.',
+    content:`<h3>O que é o levain?</h3>
+<p>O levain, ou starter, é uma cultura viva de leveduras selvagens e bactérias lácticas que se alimentam de farinha e água. É ele quem faz o pão crescer e desenvolver aquele sabor levemente ácido característico. Criar o seu do zero leva de 5 a 7 dias, mas vale cada minuto.</p>
+<h3>Criando seu starter (dias 1 a 7)</h3>
+<ul>
+<li>Dia 1: misture 50g de farinha integral com 50g de água a 28°C em um pote de vidro. Cubra com pano úmido.</li>
+<li>Dias 2 a 5: descarte metade e alimente com 50g de farinha + 50g de água todo dia.</li>
+<li>Dia 6-7: o starter deve estar borbulhante, com cheiro levemente ácido e crescendo visivelmente após a alimentação. Está pronto.</li>
+</ul>
+<div class="highlight">A fermentação natural pré-digere o glúten e reduz o ácido fítico, tornando os minerais da farinha muito mais biodisponíveis. É nutrição real.</div>
+<h3>A receita básica</h3>
+<p>Misture 400g de farinha de trigo, 100g de farinha integral, 340g de água, 100g de starter ativo e 9g de sal. Faça dobras a cada 30 minutos por 4 horas. Forme o pão, coloque em banneton enfarinhado e leve à geladeira por 12-16 horas. Asse em panela de ferro a 250°C por 20 minutos tampado e mais 20 sem tampa.</p>`
+  },
+  {
+    id:4,cat:'Guia',catClass:'',gradient:'c5',
+    title:'Como montar uma despensa funcional com 20 itens essenciais',
+    date:'28 de fevereiro, 2025',author:'Rafael Melo',readTime:'7 min',
+    lede:'Uma despensa bem montada é a base de qualquer alimentação saudável consistente. Com esses 20 itens, você consegue montar refeições nutritivas em minutos qualquer dia da semana.',
+    content:`<h3>Grãos e cereais</h3>
+<ul>
+<li><strong>Quinoa:</strong> proteína completa, cozinha em 15 minutos.</li>
+<li><strong>Arroz integral:</strong> base versátil e fibras que sustentam.</li>
+<li><strong>Aveia em flocos:</strong> café da manhã, panquecas, granola caseira.</li>
+<li><strong>Lentilhas vermelhas:</strong> proteína vegetal que cozinha sem deixar de molho.</li>
+</ul>
+<h3>Oleaginosas e sementes</h3>
+<ul>
+<li><strong>Castanhas variadas:</strong> gorduras boas, magnésio, zinco.</li>
+<li><strong>Sementes de chia e linhaça:</strong> ômega-3 e fibra solúvel.</li>
+<li><strong>Tahine:</strong> cálcio concentrado e molhos incríveis.</li>
+</ul>
+<div class="highlight">A regra de ouro da despensa funcional: se você não consegue cozinhar algo nutritivo em menos de 20 minutos com o que tem em casa, sua despensa precisa de revisão.</div>
+<h3>Conservas e fermentados</h3>
+<ul>
+<li>Grão-de-bico em lata, tomates pelados, sardinha no azeite, vinagre de maçã e missô.</li>
+</ul>
+<h3>Temperos fundamentais</h3>
+<p>Azeite extravirgem, cúrcuma, cominho, pimenta-do-reino, alho, cebola e alho-poró seco. Com esses temperos e os itens acima, você tem uma matriz infinita de refeições possíveis.</p>`
+  },
+  {
+    id:5,cat:'Nutrição',catClass:'',gradient:'c6',
+    title:'Alimentos que regulam o cortisol e reduzem o estresse crônico',
+    date:'22 de fevereiro, 2025',author:'Dra. Sofia',readTime:'11 min',
+    lede:'O cortisol elevado cronicamente destrói músculo, acumula gordura abdominal, prejudica o sono e envelhece o cérebro. A dieta é uma das ferramentas mais poderosas para regulá-lo.',
+    content:`<h3>O cortisol e a cascata do estresse</h3>
+<p>O cortisol é um hormônio vital: ele mobiliza energia, regula o sistema imune e tem efeito anti-inflamatório em doses agudas. O problema é quando seu nível permanece cronicamente elevado por estresse psicológico, privação de sono, exercício excessivo ou dieta inadequada.</p>
+<h3>Nutrientes que modulam o eixo HPA</h3>
+<ul>
+<li><strong>Vitamina C:</strong> a glândula adrenal tem uma das maiores concentrações de vitamina C do corpo. Ela é consumida rapidamente em situações de estresse. Pimentão vermelho, goiaba e kiwi são as melhores fontes.</li>
+<li><strong>Magnésio:</strong> essencial para mais de 300 reações enzimáticas, incluindo a regulação do cortisol. Cacau, sementes de abóbora, amêndoas e folhas verdes escuras.</li>
+<li><strong>Ômega-3:</strong> EPA e DHA reduzem a reatividade do eixo HPA ao estresse em estudos controlados.</li>
+<li><strong>Adaptógenos:</strong> ashwagandha, rhodiola e ginseng têm evidências crescentes para redução de cortisol, mas devem ser usados com orientação.</li>
+</ul>
+<div class="highlight">Evitar picos e quedas de glicemia é tão importante quanto qualquer suplemento. Uma refeição rica em açúcar eleva o cortisol tão eficientemente quanto um evento estressante.</div>
+<h3>O que evitar</h3>
+<p>Cafeína em excesso (especialmente em jejum), álcool, açúcar refinado e jejuns prolongados sem preparo adequado são os maiores estimuladores do cortisol na dieta moderna.</p>`
+  },
+  {
+    id:6,cat:'Receita',catClass:'sage',gradient:'c2',
+    title:'Ceviche de manga com coentro e pimenta',
+    date:'18 de fevereiro, 2025',author:'Carla Moura',readTime:'5 min',
+    lede:'Uma releitura tropical do clássico peruano. Fresco, ácido, com um toque de calor que abre o apetite e nutre o corpo de forma leve e deliciosa.',
+    content:`<h3>Ingredientes (2 porções)</h3>
+<ul>
+<li>300g de tilápia ou linguado fresco, cortado em cubos</li>
+<li>1 manga tommy madura mas firme, em cubos</li>
+<li>Suco de 4 limões tahiti</li>
+<li>1/2 pimenta dedo-de-moça sem sementes</li>
+<li>1/2 cebola roxa em meia-lua fina</li>
+<li>1 maço de coentro</li>
+<li>Sal, pimenta e azeite</li>
+</ul>
+<h3>O leche de tigre</h3>
+<p>O "leche de tigre" é o líquido ácido que cura o peixe. Para intensificá-lo, bata no liquidificador o suco de limão com um pedaço de gengibre, uma folha de coentro, um pedaço de aipo e um dente de alho. Coe e reserve.</p>
+<div class="highlight">A técnica da cura ácida desnatura as proteínas do peixe de forma similar ao cozimento, sem usar calor. O resultado é uma textura única: firme por fora, sedosa por dentro.</div>
+<h3>Preparo</h3>
+<p>Marine o peixe no leche de tigre por exatamente 8 minutos. Não mais que isso ou a textura fica borrachenta. Escorra, misture com a manga, cebola e pimenta. Finalize com coentro fresco, um fio de azeite e flor de sal. Sirva imediatamente com chips de banana-da-terra.</p>`
+  }
+];
+
+let curX=0,curY=0,ringX=0,ringY=0;
+const curEl=document.getElementById('cur');
+const ringEl=document.getElementById('curRing');
+document.addEventListener('mousemove',e=>{
+  curX=e.clientX;curY=e.clientY;
+  curEl.style.left=curX+'px';curEl.style.top=curY+'px';
+});
+function animRing(){
+  ringX+=(curX-ringX)*.12;ringY+=(curY-ringY)*.12;
+  ringEl.style.left=ringX+'px';ringEl.style.top=ringY+'px';
+  requestAnimationFrame(animRing);
+}animRing();
+document.querySelectorAll('a,button,.post-card,.article-card,.cat-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ringEl.style.width='48px';ringEl.style.height='48px';ringEl.style.opacity='.3';});
+  el.addEventListener('mouseleave',()=>{ringEl.style.width='32px';ringEl.style.height='32px';ringEl.style.opacity='.6';});
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+
+function showMain(){
+  document.getElementById('mainView').classList.remove('hidden');
+  document.getElementById('postView').classList.remove('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openPost(id){
+  const p=posts.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById('postHeroImg').className='post-hero-img '+p.gradient;
+  document.getElementById('postHeroTitle').textContent=p.title;
+  document.getElementById('postCat').textContent=p.cat;
+  document.getElementById('postCat').className='post-cat'+(p.catClass?' '+p.catClass:'');
+  document.getElementById('postCat2').textContent=p.cat;
+  document.getElementById('postCat2').className='post-cat'+(p.catClass?' '+p.catClass:'');
+  document.getElementById('postDate').textContent=p.date+' · '+p.readTime+' de leitura · '+p.author;
+  document.getElementById('postTitle').textContent=p.title;
+  document.getElementById('postLede').textContent=p.lede;
+  document.getElementById('postContent').innerHTML=p.content;
+  document.getElementById('mainView').classList.add('hidden');
+  document.getElementById('postView').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function filterTag(tag){
+  showToast('Filtrando: '+tag);
+  scrollToFeatured();
+}
+
+function scrollToFeatured(){
+  document.getElementById('featuredSection').scrollIntoView({behavior:'smooth'});
+}
+
+function focusNewsletter(){
+  document.getElementById('nlSection').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>document.getElementById('nlInput').focus(),600);
+}
+
+function subscribe(){
+  const v=document.getElementById('nlInput').value;
+  if(!v||!v.includes('@')){showToast('Digite um e-mail válido');return;}
+  document.getElementById('nlInput').value='';
+  showToast('Bem-vindo ao RAIZ! Confirme no seu e-mail.');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2800);
+}
+</script>
+</body>
+</html>
