@@ -329,6 +329,75 @@
       }
     ]
   },
+  "day1_sidney_video_edi": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "onboarding",
+          "onboardingVideoSet": "edi",
+          "summary": "Video welcome. Watch a short onboarding before you enter Sidney's hands-on Day 1 experience."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Day 1 in action. Today you do not study first: you create frames, a video, a flyer, a presentation, and a complete website with AI."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Video preparation. Generate the key frames for the character before turning that into the full video."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 with Grok. Choose a video prompt, generate the spoken scene, and reveal the finished render."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 with ChatGPT. Choose a flyer prompt, generate the visual, and reveal the final artwork."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 with Gamma. Choose a presentation prompt, generate the deck, and browse the finished slides."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 with Claude. Ask for a full website and watch a real interface appear from one prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Sidney Day 1 wrap-up: recap of the frames, the video, the flyer, the presentation, and the website with the final button to finish the track."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

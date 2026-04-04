@@ -52,6 +52,10 @@ export const ES_SIDNEY_DAY1_JOURNEY_COPY = {
     playerTitle: "Introduccion rapida de la ruta",
     playerDescription:
       "Mira el video y entra a la experiencia entendiendo lo que vas a ver y construir a partir de aqui.",
+    videoBadge: "video real",
+    enableSoundLabel: "Activar sonido",
+    autoPlayHint:
+      "El video empieza automaticamente sin sonido. Toca 'Activar sonido' para escucharlo.",
     fallbackNotice:
       "Mientras llega el onboarding de este idioma, mostramos la version disponible mas cercana.",
     continueLabel: "Entrar a la experiencia practica",

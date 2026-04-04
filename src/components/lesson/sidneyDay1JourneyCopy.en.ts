@@ -52,6 +52,10 @@ export const EN_SIDNEY_DAY1_JOURNEY_COPY = {
     playerTitle: "Quick trail introduction",
     playerDescription:
       "Watch it and enter the experience knowing what you are about to see and build.",
+    videoBadge: "real video",
+    enableSoundLabel: "Turn sound on",
+    autoPlayHint:
+      "The video starts automatically without sound. Tap 'Turn sound on' to hear it.",
     fallbackNotice:
       "Until the onboarding for this language is ready, we are showing the closest available version.",
     continueLabel: "Enter the hands-on experience",

@@ -151,6 +151,10 @@ const PT_COPY = {
     playerTitle: "Introducao rapida da trilha",
     playerDescription:
       "Assista e entre na experiencia sabendo o que voce vai ver e construir daqui para frente.",
+    videoBadge: "video real",
+    enableSoundLabel: "Ativar som",
+    autoPlayHint:
+      "O video comeca automaticamente sem som. Toque em 'Ativar som' para ouvir.",
     fallbackNotice:
       "Enquanto o onboarding em portugues nao chega, estamos exibindo a versao mais proxima disponivel.",
     continueLabel: "Entrar na experiencia pratica",

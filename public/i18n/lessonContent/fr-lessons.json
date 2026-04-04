@@ -329,6 +329,75 @@
       }
     ]
   },
+  "day1_sidney_video_edi": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "onboarding",
+          "onboardingVideoSet": "edi",
+          "summary": "Bienvenue en video. Regarde un onboarding court avant d'entrer dans l'experience pratique du Jour 1 de Sidney."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Jour 1 en pratique. Aujourd'hui tu ne vas pas d'abord etudier : tu vas creer des frames, une video, un flyer, une presentation et un site complet avec l'IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparation de la video. Genere les frames cles du personnage avant de transformer cela en video complete."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Creation 1 avec Grok. Choisis un prompt video, genere la scene parlee, puis revele le rendu final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Creation 2 avec ChatGPT. Choisis un prompt de flyer, genere le visuel et revele l'art final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Creation 3 avec Gamma. Choisis un prompt de presentation, genere le deck et parcours les slides finaux."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Creation 4 avec Claude. Demande un site complet et regarde une vraie interface apparaitre a partir d'un seul prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Cloture du Jour 1 de Sidney : recapitulatif des frames, de la video, du flyer, de la presentation et du site avec bouton final pour terminer le parcours."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

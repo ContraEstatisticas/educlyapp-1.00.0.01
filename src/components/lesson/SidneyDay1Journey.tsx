@@ -12,8 +12,10 @@ import {
   Layers3,
   Loader2,
   Monitor,
+  Play,
   Sparkles,
   Smartphone,
+  Volume2,
   Wand2,
 } from "lucide-react";
 
@@ -36,7 +38,10 @@ import {
   getSidneySitePreviewUrl,
 } from "@/components/lesson/sidneySitePreviewHtml";
 import { getSidneyFlyerAsset } from "@/components/lesson/sidneyFlyerAssets";
-import { getSidneyOnboardingVideoAsset } from "@/components/lesson/sidneyOnboardingVideoAssets";
+import {
+  getSidneyOnboardingVideoAsset,
+  type SidneyOnboardingVideoSet,
+} from "@/components/lesson/sidneyOnboardingVideoAssets";
 import { getSidneySlidesDeck } from "@/components/lesson/sidneySlidesDeckAssets";
 import { cn } from "@/lib/utils";
 
@@ -45,6 +50,7 @@ type GeneratorPhase = "pick" | "loading" | "result";
 
 interface SidneyDay1JourneyProps {
   section: SidneyJourneySectionKey;
+  onboardingVideoSet?: SidneyOnboardingVideoSet;
   onComplete: () => void;
 }
 
@@ -269,11 +275,54 @@ const LoadingStage = ({
 const OnboardingVideoPanel = ({
   onboardingCopy,
   locale,
+  videoSet,
 }: {
   onboardingCopy: any;
   locale: SidneyJourneyLocale;
+  videoSet: SidneyOnboardingVideoSet;
 }) => {
-  const videoAsset = getSidneyOnboardingVideoAsset(locale);
+  const videoAsset = getSidneyOnboardingVideoAsset(locale, videoSet);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    if (!videoAsset?.src || !videoRef.current) {
+      return;
+    }
+
+    const player = videoRef.current;
+    player.muted = true;
+    player.volume = 1;
+    setIsMuted(true);
+
+    const playPromise = player.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => undefined);
+    }
+  }, [videoAsset?.src]);
+
+  const syncMutedState = () => {
+    if (!videoRef.current) {
+      return;
+    }
+
+    setIsMuted(videoRef.current.muted || videoRef.current.volume === 0);
+  };
+
+  const enableSound = () => {
+    if (!videoRef.current) {
+      return;
+    }
+
+    videoRef.current.muted = false;
+    videoRef.current.volume = 1;
+    setIsMuted(false);
+
+    const playPromise = videoRef.current.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => undefined);
+    }
+  };
 
   return (
     <div className="rounded-[26px] border border-white/10 bg-[#071a18] p-4 text-white shadow-2xl sm:rounded-[30px] sm:p-5">
@@ -299,11 +348,31 @@ const OnboardingVideoPanel = ({
 
       <div className="mt-5 overflow-hidden rounded-[24px] border border-white/10 bg-black/30">
         {videoAsset ? (
-          <div className="flex justify-center bg-black px-2 py-2 sm:px-3 sm:py-3">
+          <div className="relative flex justify-center bg-black px-2 py-2 sm:px-3 sm:py-3">
+            <div className="pointer-events-none absolute left-5 top-5 z-10 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-lg backdrop-blur">
+              <Play className="h-3.5 w-3.5" />
+              {onboardingCopy.videoBadge}
+            </div>
+            {isMuted ? (
+              <div className="absolute inset-x-4 bottom-4 z-10 flex justify-center">
+                <button
+                  type="button"
+                  onClick={enableSound}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-950 shadow-lg transition hover:scale-[1.02]"
+                >
+                  <Volume2 className="h-4 w-4" />
+                  {onboardingCopy.enableSoundLabel}
+                </button>
+              </div>
+            ) : null}
             <video
+              ref={videoRef}
               src={videoAsset.src}
               className="max-h-[70vh] w-auto max-w-full rounded-[18px] bg-black"
+              autoPlay
               controls
+              muted
+              onVolumeChange={syncMutedState}
               playsInline
               preload="metadata"
             />
@@ -322,6 +391,12 @@ const OnboardingVideoPanel = ({
           </div>
         )}
       </div>
+
+      {videoAsset ? (
+        <p className="mt-4 text-sm leading-7 text-white/70">
+          {onboardingCopy.autoPlayHint}
+        </p>
+      ) : null}
 
       {videoAsset?.isFallback ? (
         <p className="mt-4 text-sm leading-7 text-white/70">
@@ -1226,6 +1301,7 @@ const CreationWorkspace = ({
 
 const SidneyDay1Journey = ({
   section,
+  onboardingVideoSet = "sidney",
   onComplete,
 }: SidneyDay1JourneyProps) => {
   const { i18n } = useTranslation();
@@ -1269,6 +1345,7 @@ const SidneyDay1Journey = ({
           <OnboardingVideoPanel
             onboardingCopy={copy.onboarding}
             locale={locale}
+            videoSet={onboardingVideoSet}
           />
         </div>
 
