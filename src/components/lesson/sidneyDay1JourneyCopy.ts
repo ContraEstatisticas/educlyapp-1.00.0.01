@@ -5,6 +5,7 @@ import { FR_SIDNEY_DAY1_JOURNEY_COPY } from "@/components/lesson/sidneyDay1Journ
 export type SidneyJourneyLocale = "pt" | "en" | "es" | "fr";
 
 export type SidneyJourneySectionKey =
+  | "onboarding"
   | "intro"
   | "frames"
   | "video"
@@ -138,6 +139,23 @@ const PT_COPY = {
     flyerCtaLabel: "Reserve agora",
     promptPanelLabel: "Prompt",
     dayLabel: "Dia 1",
+  },
+  onboarding: {
+    eyebrow: "Boas-vindas em video",
+    title: "Veja o onboarding antes de comecar a criar",
+    description:
+      "Este video abre a experiencia do Sidney e te mostra rapidamente como o Dia 1 vai funcionar antes das geracoes com IA.",
+    supporting:
+      "Depois dele, a trilha segue igual ao sidney_texto: frames, video, flyer, apresentacao e site.",
+    playerEyebrow: "video de onboarding",
+    playerTitle: "Introducao rapida da trilha",
+    playerDescription:
+      "Assista e entre na experiencia sabendo o que voce vai ver e construir daqui para frente.",
+    fallbackNotice:
+      "Enquanto o onboarding em portugues nao chega, estamos exibindo a versao mais proxima disponivel.",
+    continueLabel: "Entrar na experiencia pratica",
+    continueHelper:
+      "Depois do onboarding, voce segue para a introducao normal do Dia 1.",
   },
   intro: {
     eyebrow: "Dia 1 na pratica",
@@ -422,16 +440,16 @@ Adicione um texto forte na imagem:
 Use tipografia grande, contraste alto e design profissional.`,
             [
               "uma pessoa treinando ou trabalhando com foco",
-              "Disciplina hoje. Resultado amanha.",
               "moderno",
+              "Disciplina hoje. Resultado amanha.",
             ],
             [
               "uma pessoa treinando ou trabalhando com foco",
               "uma praia vazia",
-              "Disciplina hoje. Resultado amanha.",
-              "Tudo vai dar certo sem esforco.",
               "moderno",
               "retro infantil",
+              "Disciplina hoje. Resultado amanha.",
+              "Tudo vai dar certo sem esforco.",
             ],
             "Certo. O prompt do flyer de disciplina agora esta pronto.",
           ),
@@ -801,6 +819,10 @@ export const getSidneyDay1JourneyCopy = (language?: string) => {
     common: {
       ...PT_COPY.common,
       ...(localizedCopy?.common || {}),
+    },
+    onboarding: {
+      ...PT_COPY.onboarding,
+      ...(localizedCopy?.onboarding || {}),
     },
     intro: {
       ...PT_COPY.intro,

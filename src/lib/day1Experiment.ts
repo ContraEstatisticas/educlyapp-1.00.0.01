@@ -22,6 +22,10 @@ export const normalizeDay1ExperimentVariant = (
     return "sidney_texto";
   }
 
+  if (normalized === "sidney_video") {
+    return "sidney_video_sidney";
+  }
+
   return isDay1ExperimentVariant(normalized)
     ? normalized
     : DEFAULT_DAY1_EXPERIMENT_VARIANT;

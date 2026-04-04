@@ -261,6 +261,74 @@
       }
     ]
   },
+  "day1_sidney_video_sidney": {
+    "steps": [
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "onboarding",
+          "summary": "Boas-vindas em video. Assista a um onboarding curto antes de entrar na experiencia pratica do Dia 1 do Sidney."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "intro",
+          "summary": "Dia 1 na pratica. Hoje voce nao vai estudar: vai criar frames, um video, um flyer, uma apresentacao e um site completo com IA."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "frames",
+          "summary": "Preparacao do video. Gere os frames da personagem antes de transformar isso em um video completo."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "video",
+          "summary": "Criacao 1 com Grok. Escolha um prompt de video, gere a cena com fala e revele o resultado."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "flyer",
+          "summary": "Criacao 2 com ChatGPT. Escolha um prompt de flyer, gere a arte e revele o visual final."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "slides",
+          "summary": "Criacao 3 com Gamma. Escolha um prompt de apresentacao, gere o deck e navegue pelos slides finais."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "site",
+          "summary": "Criacao 4 com Claude. Peca um site inteiro e veja uma interface real aparecer a partir de um unico prompt."
+        }
+      },
+      {
+        "type": "component",
+        "componentName": "SidneyDay1Journey",
+        "props": {
+          "section": "summary",
+          "summary": "Fechamento do Dia 1 do Sidney: recapitulacao dos frames, do video, do flyer, da apresentacao e do site com botao final para concluir a trilha."
+        }
+      }
+    ]
+  },
   "day2": {
     "steps": [
       {

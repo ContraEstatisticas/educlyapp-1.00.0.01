@@ -41,6 +41,23 @@ export const FR_SIDNEY_DAY1_JOURNEY_COPY = {
     promptPanelLabel: "Prompt",
     dayLabel: "Jour 1",
   },
+  onboarding: {
+    eyebrow: "Bienvenue en video",
+    title: "Regarde l'onboarding avant de commencer a creer",
+    description:
+      "Cette video ouvre l'experience de Sidney et te montre rapidement comment le Jour 1 va se passer avant les generations avec l'IA.",
+    supporting:
+      "Ensuite, le parcours suit le meme flux que sidney_texto : frames, video, flyer, presentation et site.",
+    playerEyebrow: "video d'onboarding",
+    playerTitle: "Introduction rapide du parcours",
+    playerDescription:
+      "Regarde-la pour entrer dans l'experience en sachant ce que tu vas voir et construire ensuite.",
+    fallbackNotice:
+      "En attendant l'onboarding de cette langue, nous affichons la version disponible la plus proche.",
+    continueLabel: "Entrer dans l'experience pratique",
+    continueHelper:
+      "Apres l'onboarding, tu continues vers l'introduction normale du Jour 1.",
+  },
   intro: {
     eyebrow: "Jour 1 en action",
     title: "Aujourd'hui tu ne vas pas etudier. Tu vas creer.",
@@ -347,6 +364,34 @@ export const FR_SIDNEY_DAY1_JOURNEY_COPY = {
         {
           id: "A",
           name: "Image option 1",
+          prompt:
+            `Cree un flyer motivation pour Instagram avec une personne en train de s'entrainer ou de travailler avec concentration, lumiere dramatique et style moderne.
+Ajoute un texte fort dans l'image :
+"Discipline aujourd'hui. Resultat demain."
+Utilise une grande typographie, un contraste eleve et un design professionnel.`,
+          exercise: {
+            title: "Complete le prompt du flyer discipline",
+            sentence:
+              `Cree un flyer motivation pour Instagram avec [BLANK], lumiere dramatique et style [BLANK].
+Ajoute un texte fort dans l'image :
+"[BLANK]"
+Utilise une grande typographie, un contraste eleve et un design professionnel.`,
+            answers: [
+              "une personne en train de s'entrainer ou de travailler avec concentration",
+              "moderne",
+              "Discipline aujourd'hui. Resultat demain.",
+            ],
+            options: [
+              "une personne en train de s'entrainer ou de travailler avec concentration",
+              "une plage vide",
+              "moderne",
+              "retro enfantin",
+              "Discipline aujourd'hui. Resultat demain.",
+              "Tout ira bien sans effort.",
+            ],
+            explanation:
+              "Parfait. Le prompt du flyer discipline est maintenant pret.",
+          },
           previewTitle: "Discipline aujourd'hui. Resultat demain.",
           previewDescription:
             "Un visuel fort, moderne et dramatique pour transmettre concentration et constance.",
@@ -355,6 +400,34 @@ export const FR_SIDNEY_DAY1_JOURNEY_COPY = {
         {
           id: "B",
           name: "Image option 2",
+          prompt:
+            `Cree un flyer motivation avec une personne marchant au lever du soleil, transmettant une sensation de nouveau depart et de progres.
+Ajoute ce texte :
+"Tu n'as pas besoin d'etre parfait. Tu ne peux pas t'arreter."
+Style cinematographique, couleurs chaudes et visuel inspirant.`,
+          exercise: {
+            title: "Complete le prompt du flyer nouveau depart",
+            sentence:
+              `Cree un flyer motivation avec [BLANK], transmettant une sensation de nouveau depart et de progres.
+Ajoute ce texte :
+"[BLANK]"
+Style [BLANK], couleurs chaudes et visuel inspirant.`,
+            answers: [
+              "une personne marchant au lever du soleil",
+              "Tu n'as pas besoin d'etre parfait. Tu ne peux pas t'arreter.",
+              "cinematographique",
+            ],
+            options: [
+              "une personne marchant au lever du soleil",
+              "une femme dans un bureau sombre",
+              "Tu n'as pas besoin d'etre parfait. Tu ne peux pas t'arreter.",
+              "Reste immobile et attends.",
+              "cinematographique",
+              "cartoon",
+            ],
+            explanation:
+              "Parfait. Le flyer le plus inspirant est maintenant debloque.",
+          },
           previewTitle: "Tu n'as pas besoin d'etre parfait",
           previewDescription:
             "Un visuel inspirant, chaleureux et cinematographique pour transmettre nouveau depart et constance.",
@@ -363,6 +436,34 @@ export const FR_SIDNEY_DAY1_JOURNEY_COPY = {
         {
           id: "C",
           name: "Image option 3",
+          prompt:
+            `Cree un flyer motivation avec une personne regardant vers l'horizon dans un environnement urbain ou naturel, symbolisant la croissance personnelle.
+Ajoute ce texte :
+"Chaque jour est une nouvelle chance d'evoluer."
+Design clean, elegant et aspect professionnel.`,
+          exercise: {
+            title: "Complete le prompt du flyer evolution",
+            sentence:
+              `Cree un flyer motivation avec [BLANK] dans un environnement urbain ou naturel, symbolisant la croissance personnelle.
+Ajoute ce texte :
+"[BLANK]"
+Design [BLANK], elegant et aspect professionnel.`,
+            answers: [
+              "une personne regardant vers l'horizon",
+              "Chaque jour est une nouvelle chance d'evoluer.",
+              "clean",
+            ],
+            options: [
+              "une personne regardant vers l'horizon",
+              "un groupe courant sur la plage",
+              "Chaque jour est une nouvelle chance d'evoluer.",
+              "Ne change jamais rien.",
+              "clean",
+              "plein de bruit visuel",
+            ],
+            explanation:
+              "Bien. Le prompt du flyer clean est maintenant complet.",
+          },
           previewTitle: "Chaque jour est une nouvelle chance d'evoluer",
           previewDescription:
             "Un visuel clean et elegant qui communique la croissance personnelle avec un message fort.",

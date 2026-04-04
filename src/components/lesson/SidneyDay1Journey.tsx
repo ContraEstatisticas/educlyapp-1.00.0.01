@@ -35,6 +35,8 @@ import {
   getSidneySitePreviewHtml,
   getSidneySitePreviewUrl,
 } from "@/components/lesson/sidneySitePreviewHtml";
+import { getSidneyFlyerAsset } from "@/components/lesson/sidneyFlyerAssets";
+import { getSidneyOnboardingVideoAsset } from "@/components/lesson/sidneyOnboardingVideoAssets";
 import { getSidneySlidesDeck } from "@/components/lesson/sidneySlidesDeckAssets";
 import { cn } from "@/lib/utils";
 
@@ -87,6 +89,15 @@ const sectionThemes: Record<
     buttonClass: string;
   }
 > = {
+  onboarding: {
+    accent: "text-[#0f766e]",
+    accentSoft: "bg-[#e8fbf8] text-[#0f766e]",
+    surfaceBorder: "border-[#ccefe8]",
+    surfaceGlow: "from-[#d6faf2]/45 via-white to-[#ebfdf8]",
+    darkPanel: "bg-[#071a18]",
+    darkBorder: "border-[#174c46]",
+    buttonClass: "bg-[#0f766e] hover:bg-[#0c5f59]",
+  },
   intro: {
     accent: "text-[#f97316]",
     accentSoft: "bg-[#fff0e4] text-[#d35f12]",
@@ -254,6 +265,72 @@ const LoadingStage = ({
     </div>
   </div>
 );
+
+const OnboardingVideoPanel = ({
+  onboardingCopy,
+  locale,
+}: {
+  onboardingCopy: any;
+  locale: SidneyJourneyLocale;
+}) => {
+  const videoAsset = getSidneyOnboardingVideoAsset(locale);
+
+  return (
+    <div className="rounded-[26px] border border-white/10 bg-[#071a18] p-4 text-white shadow-2xl sm:rounded-[30px] sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-white/55">
+            {onboardingCopy.playerEyebrow}
+          </p>
+          <h2 className="mt-3 text-xl font-semibold sm:text-2xl">
+            {onboardingCopy.playerTitle}
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-white/78">
+            {onboardingCopy.playerDescription}
+          </p>
+        </div>
+
+        {videoAsset ? (
+          <div className="self-start rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm font-black tracking-[0.18em] text-white/80">
+            {videoAsset.locale.toUpperCase()}
+          </div>
+        ) : null}
+      </div>
+
+      <div className="mt-5 overflow-hidden rounded-[24px] border border-white/10 bg-black/30">
+        {videoAsset ? (
+          <div className="flex justify-center bg-black px-2 py-2 sm:px-3 sm:py-3">
+            <video
+              src={videoAsset.src}
+              className="max-h-[70vh] w-auto max-w-full rounded-[18px] bg-black"
+              controls
+              playsInline
+              preload="metadata"
+            />
+          </div>
+        ) : (
+          <div className="flex aspect-video flex-col items-center justify-center px-6 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-[22px] bg-white/8">
+              <Clapperboard className="h-8 w-8 text-white/75" />
+            </div>
+            <p className="mt-5 text-xs font-black uppercase tracking-[0.24em] text-white/55">
+              {onboardingCopy.playerEyebrow}
+            </p>
+            <p className="mt-3 max-w-lg text-sm leading-7 text-white/78">
+              {onboardingCopy.fallbackNotice}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {videoAsset?.isFallback ? (
+        <p className="mt-4 text-sm leading-7 text-white/70">
+          {onboardingCopy.fallbackNotice}
+        </p>
+      ) : null}
+    </div>
+  );
+};
 
 const VideoPreview = ({ option, commonCopy }: { option: any; commonCopy: any }) => {
   const videos = (option.resultVideos ?? [{ alt: option.previewTitle }]).map(
@@ -444,7 +521,13 @@ const FramesPendingPreview = ({ option, commonCopy }: { option: any; commonCopy:
   </div>
 );
 
-const FlyerPreview = ({ option, commonCopy }: { option: any; commonCopy: any }) => {
+const FlyerPreviewFallback = ({
+  option,
+  commonCopy,
+}: {
+  option: any;
+  commonCopy: any;
+}) => {
   const posterClasses =
     option.id === "A"
       ? "from-[#c9efff] via-[#7dd3fc] to-[#ffffff] text-[#0f3b63]"
@@ -600,6 +683,54 @@ const SitePreview = ({
             {tag}
           </span>
         ))}
+      </div>
+    </div>
+  );
+};
+
+const FlyerPreview = ({
+  option,
+  commonCopy,
+  locale,
+}: {
+  option: any;
+  commonCopy: any;
+  locale: SidneyJourneyLocale;
+}) => {
+  const flyerAsset = getSidneyFlyerAsset(option.id, locale);
+
+  if (!flyerAsset) {
+    return <FlyerPreviewFallback option={option} commonCopy={commonCopy} />;
+  }
+
+  return (
+    <div className="rounded-[26px] border border-[#eef2f7] bg-white p-3 shadow-xl sm:rounded-[30px] sm:p-4">
+      <div className="overflow-hidden rounded-[22px] border border-[#eef2f7] bg-[#fafcff] sm:rounded-[26px]">
+        <div className="relative">
+          <img
+            src={flyerAsset.src}
+            alt={`${option.previewTitle} flyer`}
+            className="aspect-[4/5] w-full object-cover object-top"
+          />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/45 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/55 to-transparent" />
+          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-[#1f2434] shadow-sm sm:left-5 sm:top-5">
+            {option.label}
+          </div>
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5">
+            <div className="min-w-0">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-white/72">
+                {commonCopy.generatedResultBadge}
+              </p>
+              <h3 className="mt-2 max-w-[14rem] text-[1.35rem] font-black leading-tight text-white drop-shadow sm:max-w-[18rem] sm:text-[1.8rem]">
+                {option.previewTitle}
+              </h3>
+            </div>
+            <div className="rounded-full bg-white/90 px-3 py-2 text-xs font-bold text-[#083344] shadow-sm sm:px-4 sm:text-sm">
+              {commonCopy.flyerCtaLabel}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -848,9 +979,25 @@ const CreationWorkspace = ({
     if (sectionKey === "video" && phase !== "result") {
       return <VideoPendingPreview option={selectedOption} commonCopy={commonCopy} />;
     }
+    if (sectionKey === "flyer" && phase !== "result") {
+      return (
+        <FlyerPreviewFallback
+          option={selectedOption}
+          commonCopy={commonCopy}
+        />
+      );
+    }
     if (sectionKey === "frames") return <FramesPreview option={selectedOption} commonCopy={commonCopy} />;
     if (sectionKey === "video") return <VideoPreview option={selectedOption} commonCopy={commonCopy} />;
-    if (sectionKey === "flyer") return <FlyerPreview option={selectedOption} commonCopy={commonCopy} />;
+    if (sectionKey === "flyer") {
+      return (
+        <FlyerPreview
+          option={selectedOption}
+          commonCopy={commonCopy}
+          locale={locale}
+        />
+      );
+    }
     if (sectionKey === "slides") {
       return <SlidesPreview option={selectedOption} locale={locale} />;
     }
@@ -1091,12 +1238,49 @@ const SidneyDay1Journey = ({
     [i18n.language, i18n.resolvedLanguage],
   );
 
-  const resolvedSection = (["intro", "frames", "video", "flyer", "slides", "site", "summary"] as const).includes(
+  const resolvedSection = (["onboarding", "intro", "frames", "video", "flyer", "slides", "site", "summary"] as const).includes(
     section,
   )
     ? section
     : "intro";
   const theme = sectionThemes[resolvedSection];
+
+  if (resolvedSection === "onboarding") {
+    return (
+      <SectionContainer theme={theme}>
+        <div className="flex items-center gap-3">
+          <div
+            className={cn(
+              "rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.22em]",
+              theme.accentSoft,
+            )}
+          >
+            {copy.onboarding.eyebrow}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-6 xl:grid-cols-[1.02fr_0.98fr]">
+          <div>
+            <h1 className="font-serif text-[2.2rem] leading-[1.05] text-[#1f2434] sm:text-[3.2rem]">
+              {copy.onboarding.title}
+            </h1>
+          </div>
+
+          <OnboardingVideoPanel
+            onboardingCopy={copy.onboarding}
+            locale={locale}
+          />
+        </div>
+
+        <ContinueFooter
+          label={copy.onboarding.continueLabel}
+          helper={copy.onboarding.continueHelper}
+          onClick={onComplete}
+          className={theme.buttonClass}
+        />
+      </SectionContainer>
+    );
+  }
 
   if (resolvedSection === "intro") {
     return (
